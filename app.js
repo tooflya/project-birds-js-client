@@ -31,8 +31,6 @@
 
 (function() {
   App.run(false, {
-      width: 1920,
-      height: 1080,
       designed: {
         width: 1920,
         height: 1080
@@ -40,6 +38,6 @@
       orientation: 'height'
     }, [
   ], function() {
-    сс.Director.getInstance().replaceScene(LoadingScreen.create());
+    cc.Director.getInstance().replaceScene(LoadingScreen.sharedScreen());
   });
 })();
