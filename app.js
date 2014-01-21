@@ -41,7 +41,7 @@
     'Sources/Screens/Preloader.js',
     'Sources/Screens/Menu.js',
   ], function() {
-    Preloader.preload(g_resources, function() {
+    Preloader.preload(resources, function() {
       ScreenManager.sharedManager().replace(Menu);
     }, application);
   });

@@ -34,9 +34,9 @@ var s_LoadingBarBackground = "preloader-bar-background.png";
 var s_LoadingBar = "preloader-bar.png";
 var s_MenuBackground = "menu-background.png";
 
-g_resources.concat([
+var resources = [
   {src: s_PreloaderBackground},
   {src: s_LoadingBarBackground},
   {src: s_LoadingBar},
   {src: s_MenuBackground}
-]);
+];
