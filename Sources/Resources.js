@@ -29,20 +29,14 @@
  *
  */
 
-(function() {
-  App.run(false, {
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/resources.js',
-    'Sources/Screens/Preloader.js',
-    'Sources/Screens/Menu.js',
-  ], function() {
-    Preloader.preload(g_resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
-  });
-})();
+var s_PreloaderBackground = "preloader-background.png";
+var s_LoadingBarBackground = "preloader-bar-background.png";
+var s_LoadingBar = "preloader-bar.png";
+var s_MenuBackground = "menu-background.png";
+
+g_resources.concat([
+  {src: s_PreloaderBackground},
+  {src: s_LoadingBarBackground},
+  {src: s_LoadingBar},
+  {src: s_MenuBackground}
+]);

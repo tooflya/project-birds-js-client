@@ -29,20 +29,23 @@
  *
  */
 
-(function() {
-  App.run(false, {
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/resources.js',
-    'Sources/Screens/Preloader.js',
-    'Sources/Screens/Menu.js',
-  ], function() {
-    Preloader.preload(g_resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
-  });
-})();
+Menu = Screen.extend({
+  ctor: function() {
+    this._super();
+
+    Menu.instance = this;
+
+    this.m_Background = Entity.create(s_MenuBackground, this, true);
+  },
+  onEnter: function() {
+    this._super();
+  },
+  onExit: function() {
+    this._super();
+  }
+});
+
+Menu.instance = false;
+Menu.sharedScreen = function() {
+  return Menu.instance ? Menu.instance : new Menu();
+};
