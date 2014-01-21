@@ -37,7 +37,7 @@
       },
       orientation: 'height'
     }, [
-    'Sources/resources.js',
+    'Sources/Resources.js',
     'Sources/Screens/Preloader.js',
     'Sources/Screens/Menu.js',
   ], function() {
