@@ -36,11 +36,14 @@ Preloader = Screen.extend({
     Preloader.instance = this;
 
     this.m_Background = Entity.create(s_PreloaderBackground, this, true);
-    this.m_LoadingBar = Entity.create(s_LoadingBar, this);
     this.m_LoadingBarBackground = Entity.create(s_LoadingBarBackground, this);
+    this.m_LoadingBar = TiledEntity.create(s_LoadingBar, 1, 1, this);
 
     this.m_LoadingBarBackground.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(100));
     this.m_LoadingBar.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(100));
+
+    this.m_LoadingBar.setSize(577, 38);
+    this.m_LoadingBar.showPercentage(0);
   },
   /**
    * init with resources
@@ -61,6 +64,9 @@ Preloader = Screen.extend({
   },
   updatePercent: function() {
     var percent = cc.Loader.getInstance().getPercentage();
+
+    this.m_LoadingBar.showPercentage(percent);
+    this.m_LoadingBar.setCenterPosition(Camera.sharedCamera().center.x +  this.m_LoadingBar.getTextureRect().getWidth() / 2 - this.m_LoadingBar.getWidth() / 2, Camera.sharedCamera().coord(100));
 
     if(percent >= 100) {
       this.unschedule(this.updatePercent);
