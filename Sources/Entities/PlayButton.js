@@ -28,8 +28,21 @@
  */
 
 PlayButton = Button.extend({
+  m_DecorationAnimationTime: 0,
+  m_DecorationAnimationTimeElapsed: 0,
   ctor: function(parent) {
       this._super(s_PlayButton, 6, 2, parent);
+  },
+  update: function(time) {
+    this._super(time);
+
+    this.m_DecorationAnimationTimeElapsed += time;
+
+    if(this.m_DecorationAnimationTimeElapsed >= this.m_DecorationAnimationTime) {
+      this.m_DecorationAnimationTimeElapsed = 0;
+
+      //this.animate(0.1, 1);
+    }
   }
 });
 

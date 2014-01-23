@@ -39,6 +39,7 @@
       orientation: 'height'
     }, [
     'Sources/Resources.js',
+    'Sources/Entities/PlayButton.js',
     'Sources/Screens/Preloader.js',
     'Sources/Screens/Menu.js',
   ], function() {
