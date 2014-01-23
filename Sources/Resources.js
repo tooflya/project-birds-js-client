@@ -33,10 +33,16 @@ var s_PreloaderBackground = "preloader-background.png";
 var s_LoadingBarBackground = "preloader-bar-background.png";
 var s_LoadingBar = "preloader-bar.png";
 var s_MenuBackground = "menu-background.png";
+var s_ButtonsSprite = "buttons-sprite.png";
+var s_PlayButton = "play-button.png";
+var s_CircleDecoration = "circle-decoration.png";
 
 var resources = [
   {src: s_PreloaderBackground},
   {src: s_LoadingBarBackground},
   {src: s_LoadingBar},
-  {src: s_MenuBackground}
+  {src: s_MenuBackground},
+  {src: s_ButtonsSprite},
+  {src: s_PlayButton},
+  {src: s_CircleDecoration}
 ];
