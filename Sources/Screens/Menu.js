@@ -35,13 +35,57 @@ Menu = Screen.extend({
 
     Menu.instance = this;
 
+    this.m_PlayButtonDecorations = new Array();
+
     this.m_Background = Entity.create(s_MenuBackground, this, true);
+    this.m_PlayButtonDecorations[0] = Entity.create(s_CircleDecoration, this);
+    this.m_PlayButtonDecorations[1] = Entity.create(s_CircleDecoration, this);
+    this.m_PlayButton = PlayButton.create(this);
+    this.m_SettingsButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_VKButton = Button.create(s_ButtonsSprite, 3, 3, this);
+
+    this.m_SettingsButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+    this.m_PlayButtonDecorations[0].create().setCenterPosition(Camera.sharedCamera().center.x+ Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
+    this.m_PlayButtonDecorations[1].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
+    this.m_PlayButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(20), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
+    this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
+    this.m_VKButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+    this.m_TwitterButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(270), Camera.sharedCamera().coord(100));
+
+    this.m_SettingsButton.setCurrentFrameIndex(6);
+    this.m_ShopButton.setCurrentFrameIndex(2);
+    this.m_VKButton.setCurrentFrameIndex(3);
+    this.m_TwitterButton.setCurrentFrameIndex(0);
+
+    this.m_PlayButtonDecorations[0].setColor(cc.RED);
+    this.m_PlayButtonDecorations[1].setColor(cc.RED);
+
+    this.m_SettingsButton.setTouchHandler(function() {
+      ScreenManager.sharedManager().replace(Settings);
+    });
+    this.m_ShopButton.setTouchHandler(function() {
+      //
+    });
+    this.m_VKButton.setTouchHandler(function() {
+      //
+    });
+    this.m_TwitterButton.setTouchHandler(function() {
+      //
+    });
   },
   onEnter: function() {
     this._super();
   },
   onExit: function() {
     this._super();
+  },
+  update: function(time) {
+    this._super(time);
+
+    this.m_PlayButtonDecorations[0].setRotation(this.m_PlayButtonDecorations[0].getRotation() - 10 * time);
+    this.m_PlayButtonDecorations[1].setRotation(this.m_PlayButtonDecorations[1].getRotation() + 10 * time);
   }
 });
 
