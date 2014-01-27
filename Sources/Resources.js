@@ -36,6 +36,21 @@ var s_MenuBackground = "menu-background.png";
 var s_ButtonsSprite = "buttons-sprite.png";
 var s_PlayButton = "play-button.png";
 var s_CircleDecoration = "circle-decoration.png";
+var s_ThirdPartyBackground = "third-party-background.png";
+var s_LongButton = "long-button.png";
+var s_SfxButtonsSprite = "sfx-social-buttons.png";
+var s_BackgroundDecoration1 = "background-decoration-1.png";
+var s_BackgroundDecoration2 = "background-decoration-2.png";
+var s_BackgroundDecoration3 = "background-decoration-3.png";
+var s_SmallFlags = "small-flags-sprite.png";
+var s_LargeFlags = "large-flags-sprite.png";
+var s_FlagNotAvailable = "flag-not-avaliable.png";
+var s_Checker = "checker.png";
+var s_Lock = "lock.png";
+var s_ShopPanel = "shop-panel.png";
+var s_LoadingBackground = "loading-background.png";
+var s_LoadingDecoration = "loading-decoration.png";
+var s_LoadingWave = "loading-wave.png";
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -44,5 +59,20 @@ var resources = [
   {src: s_MenuBackground},
   {src: s_ButtonsSprite},
   {src: s_PlayButton},
-  {src: s_CircleDecoration}
+  {src: s_CircleDecoration},
+  {src: s_ThirdPartyBackground},
+  {src: s_LongButton},
+  {src: s_SfxButtonsSprite},
+  {src: s_BackgroundDecoration1},
+  {src: s_BackgroundDecoration2},
+  {src: s_BackgroundDecoration3},
+  {src: s_LargeFlags},
+  {src: s_SmallFlags},
+  {src: s_FlagNotAvailable},
+  {src: s_Checker},
+  {src: s_Lock},
+  {src: s_ShopPanel},
+  {src: s_LoadingBackground},
+  {src: s_LoadingDecoration},
+  {src: s_LoadingWave}
 ];
