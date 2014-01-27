@@ -29,32 +29,35 @@
  *
  */
 
-(function() {
-  App.run(false, {
-      standalone: false,
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/Resources.js',
-    'Sources/Entities/Button.js',
-    'Sources/Entities/PlayButton.js',
-    'Sources/Entities/LoadingWave.js',
-    'Sources/Screens/Preloader.js',
-    'Sources/Screens/Menu.js',
-    'Sources/Screens/Settings.js',
-    'Sources/Screens/Credits.js',
-    'Sources/Screens/Languages.js',
-    'Sources/Screens/Mode.js',
-    'Sources/Screens/More.js',
-    'Sources/Screens/Reset.js',
-    'Sources/Screens/Shop.js',
-    'Sources/Screens/Loading.js',
-  ], function() {
-    Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
-  });
-})();
+Loading = Screen.extend({
+  m_WavesTime: 0.5,
+  m_WavesTimeElapsed: 0.5,
+  ctor: function() {
+    this._super();
+
+    Loading.instance = this;
+
+    this.m_Background = Entity.create(s_LoadingBackground, this, true);
+    this.m_BackgroundDecoration = Entity.create(s_LoadingDecoration, this, true);
+    this.m_BackgroundWaves = EntityManager.create(15, LoadingWave.create(), this.m_Background);
+  },
+  onShow: function() {
+    this.m_BackgroundWaves.clear();
+  },
+  update: function(time) {
+    this._super(time);
+
+    this.m_WavesTimeElapsed += time;
+
+    if(this.m_WavesTimeElapsed >= this.m_WavesTime) {
+      this.m_WavesTimeElapsed = 0;
+
+      this.m_BackgroundWaves.create();
+    }
+  }
+});
+
+Loading.instance = false;
+Loading.sharedScreen = function() {
+  return Loading.instance ? Loading.instance : new Loading();
+};

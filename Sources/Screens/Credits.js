@@ -29,32 +29,36 @@
  *
  */
 
-(function() {
-  App.run(false, {
-      standalone: false,
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/Resources.js',
-    'Sources/Entities/Button.js',
-    'Sources/Entities/PlayButton.js',
-    'Sources/Entities/LoadingWave.js',
-    'Sources/Screens/Preloader.js',
-    'Sources/Screens/Menu.js',
-    'Sources/Screens/Settings.js',
-    'Sources/Screens/Credits.js',
-    'Sources/Screens/Languages.js',
-    'Sources/Screens/Mode.js',
-    'Sources/Screens/More.js',
-    'Sources/Screens/Reset.js',
-    'Sources/Screens/Shop.js',
-    'Sources/Screens/Loading.js',
-  ], function() {
-    Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
-  });
-})();
+Credits = Screen.extend({
+  ctor: function() {
+    this._super();
+
+    Credits.instance = this;
+
+    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+
+    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+
+    this.m_BackButton.setCurrentFrameIndex(1);
+
+    this.m_BackButton.setTouchHandler('onBackEvent', Credits);
+  },
+  onBackEvent: function() {
+    ScreenManager.sharedManager().replace(Settings);
+  },
+  onEnter: function() {
+    this._super();
+  },
+  onExit: function() {
+    this._super();
+  },
+  update: function(time) {
+    this._super(time);
+  }
+});
+
+Credits.instance = false;
+Credits.sharedScreen = function() {
+  return Credits.instance ? Credits.instance : new Credits();
+};

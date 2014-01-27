@@ -29,32 +29,41 @@
  *
  */
 
-(function() {
-  App.run(false, {
-      standalone: false,
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/Resources.js',
-    'Sources/Entities/Button.js',
-    'Sources/Entities/PlayButton.js',
-    'Sources/Entities/LoadingWave.js',
-    'Sources/Screens/Preloader.js',
-    'Sources/Screens/Menu.js',
-    'Sources/Screens/Settings.js',
-    'Sources/Screens/Credits.js',
-    'Sources/Screens/Languages.js',
-    'Sources/Screens/Mode.js',
-    'Sources/Screens/More.js',
-    'Sources/Screens/Reset.js',
-    'Sources/Screens/Shop.js',
-    'Sources/Screens/Loading.js',
-  ], function() {
-    Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
-  });
-})();
+Reset = Screen.extend({
+  ctor: function() {
+    this._super();
+
+    Reset.instance = this;
+
+    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
+
+    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+    this.m_ResetButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(130));
+
+    this.m_BackButton.setCurrentFrameIndex(1);
+
+    this.m_BackButton.setTouchHandler('onBackEvent', Reset);
+    this.m_ResetButton.setTouchHandler('onResetEvent', Reset);
+  },
+  onBackEvent: function() {
+    ScreenManager.sharedManager().replace(Settings);
+  },
+  onResetEvent: function() {
+  },
+  onEnter: function() {
+    this._super();
+  },
+  onExit: function() {
+    this._super();
+  },
+  update: function(time) {
+    this._super(time);
+  }
+});
+
+Reset.instance = false;
+Reset.sharedScreen = function() {
+  return Reset.instance ? Reset.instance : new Reset();
+};

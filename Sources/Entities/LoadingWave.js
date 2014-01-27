@@ -29,32 +29,37 @@
  *
  */
 
-(function() {
-  App.run(false, {
-      standalone: false,
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/Resources.js',
-    'Sources/Entities/Button.js',
-    'Sources/Entities/PlayButton.js',
-    'Sources/Entities/LoadingWave.js',
-    'Sources/Screens/Preloader.js',
-    'Sources/Screens/Menu.js',
-    'Sources/Screens/Settings.js',
-    'Sources/Screens/Credits.js',
-    'Sources/Screens/Languages.js',
-    'Sources/Screens/Mode.js',
-    'Sources/Screens/More.js',
-    'Sources/Screens/Reset.js',
-    'Sources/Screens/Shop.js',
-    'Sources/Screens/Loading.js',
-  ], function() {
-    Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
-  });
-})();
+LoadingWave = Entity.extend({
+  ctor: function() {
+      this._super(s_LoadingWave);
+  },
+  onCreate: function() {
+    this._super();
+
+    this.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+    this.setScale(0);
+    this.setOpacity(255);
+    this.runRecognizeAction(false, {
+      name: "scale",
+      time: 5.0,
+      value: 5.0    
+    });
+    this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), {
+      name: "fade",
+      time: 5.0,
+      value: 0.0    
+    });
+  },
+  update: function(time) {
+    this._super(time);
+  },
+  deepCopy: function() {
+    return LoadingWave.create();
+  }
+});
+
+LoadingWave.create = function() {
+  var entity = new LoadingWave();
+
+  return entity;
+};

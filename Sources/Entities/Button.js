@@ -29,32 +29,32 @@
  *
  */
 
-(function() {
-  App.run(false, {
-      standalone: false,
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/Resources.js',
-    'Sources/Entities/Button.js',
-    'Sources/Entities/PlayButton.js',
-    'Sources/Entities/LoadingWave.js',
-    'Sources/Screens/Preloader.js',
-    'Sources/Screens/Menu.js',
-    'Sources/Screens/Settings.js',
-    'Sources/Screens/Credits.js',
-    'Sources/Screens/Languages.js',
-    'Sources/Screens/Mode.js',
-    'Sources/Screens/More.js',
-    'Sources/Screens/Reset.js',
-    'Sources/Screens/Shop.js',
-    'Sources/Screens/Loading.js',
-  ], function() {
-    Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
+Button.prototype.onStart = function() {
+  this.stopAllActions();
+
+  this.runRecognizeAction(false, {
+    name: 'scale',
+    time: 0.1,
+    value: 0.9
   });
-})();
+};
+
+Button.prototype.onCancel = function(callback) {
+  this.stopAllActions();
+
+  this.runRecognizeAction(callback, {
+    name: 'scale',
+    time: 0.1,
+    value: 1.0
+  });
+};
+
+Button.prototype.onTouch= function() {
+  this.onCancel(cc.CallFunc.create(this.onFinish, this, this));
+};
+
+Button.prototype.onHover = function() {
+};
+
+Button.prototype.onUnHover = function() {
+};
