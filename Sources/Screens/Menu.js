@@ -44,42 +44,46 @@ Menu = Screen.extend({
     this.m_SettingsButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_VKButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 3, this);
 
     this.m_SettingsButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_PlayButtonDecorations[0].create().setCenterPosition(Camera.sharedCamera().center.x+ Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_PlayButtonDecorations[1].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_PlayButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(20), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
-    this.m_VKButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+    this.m_FacebookButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_TwitterButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(270), Camera.sharedCamera().coord(100));
 
     this.m_SettingsButton.setCurrentFrameIndex(6);
     this.m_ShopButton.setCurrentFrameIndex(2);
-    this.m_VKButton.setCurrentFrameIndex(3);
+    this.m_FacebookButton.setCurrentFrameIndex(3);
     this.m_TwitterButton.setCurrentFrameIndex(0);
 
     this.m_PlayButtonDecorations[0].setColor(cc.RED);
     this.m_PlayButtonDecorations[1].setColor(cc.RED);
 
-    this.m_SettingsButton.setTouchHandler(function() {
-      ScreenManager.sharedManager().replace(Settings);
-    });
-    this.m_ShopButton.setTouchHandler(function() {
-      //
-    });
-    this.m_VKButton.setTouchHandler(function() {
-      //
-    });
-    this.m_TwitterButton.setTouchHandler(function() {
-      //
-    });
+    this.m_PlayButton.setTouchHandler('onPlayEvent', Menu);
+    this.m_SettingsButton.setTouchHandler('onSettingsEvent', Menu);
+    this.m_ShopButton.setTouchHandler('onShopEvent', Menu);
+    this.m_FacebookButton.setTouchHandler('onFacebookEvent', Menu);
+    this.m_TwitterButton.setTouchHandler('onTwitterEvent', Menu);
   },
-  onEnter: function() {
-    this._super();
+  onPlayEvent: function() {
+    ScreenManager.sharedManager().replace(Mode);
   },
-  onExit: function() {
-    this._super();
+  onSettingsEvent: function() {
+    ScreenManager.sharedManager().replace(Settings);
+  },
+  onShopEvent: function() {
+    ScreenManager.sharedManager().replace(Shop);
+  },
+  onFacebookEvent: function() {
+    openURL("http://www.facebook.com/tooflya");
+  },
+  onTwitterEvent: function() {
+    openURL("http://www.twitter.com/tooflya");
+  },
+  onShow: function() {
   },
   update: function(time) {
     this._super(time);
