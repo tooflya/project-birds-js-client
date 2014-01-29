@@ -51,6 +51,7 @@ Reset = Screen.extend({
     ScreenManager.sharedManager().replace(Settings);
   },
   onResetEvent: function() {
+    ResetProgress.sharedScreen(this).show();
   },
   onEnter: function() {
     this._super();

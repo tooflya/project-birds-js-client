@@ -84,6 +84,7 @@ Menu = Screen.extend({
     openURL("http://www.twitter.com/tooflya");
   },
   onShow: function() {
+    Rate.sharedScreen(this).show();
   },
   update: function(time) {
     this._super(time);
