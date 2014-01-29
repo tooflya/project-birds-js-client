@@ -29,37 +29,25 @@
  *
  */
 
-(function() {
-  App.run(true, {
-      standalone: false,
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/Resources.js',
-    'Sources/Entities/Button.js',
-    'Sources/Entities/PlayButton.js',
-    'Sources/Entities/LoadingWave.js',
-    'Sources/Entities/PopupShader.js',
-    'Sources/Screens/Screens/Preloader.js',
-    'Sources/Screens/Screens/Menu.js',
-    'Sources/Screens/Screens/Settings.js',
-    'Sources/Screens/Screens/Credits.js',
-    'Sources/Screens/Screens/Languages.js',
-    'Sources/Screens/Screens/Mode.js',
-    'Sources/Screens/Screens/More.js',
-    'Sources/Screens/Screens/Reset.js',
-    'Sources/Screens/Screens/Shop.js',
-    'Sources/Screens/Screens/Loading.js',
-    'Sources/Screens/Popups/ExtendedPopup.js',
-    'Sources/Screens/Popups/Rate.js',
-    'Sources/Screens/Popups/ResetProgress.js',
-    'Sources/Managers/PopupShaderManager.js',
-  ], function() {
-    Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
-  });
-})();
+Rate = ExtendedPopup.extend({
+  ctor: function(parent) {
+    this._super(parent);
+
+    this.m_Decoration = Entity.create(s_PopupDecoration2, this.m_Background);
+
+    this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(28), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
+
+    this.m_CloseButton.setTouchHandler('onCloseEvent', Rate);
+  }
+});
+
+Rate.instance = false;
+Rate.sharedScreen = function(parent) {
+  if(Rate.instance) {
+    Rate.instance.m_Parent = parent;
+  } else {
+    Rate.instance = new Rate(parent);
+  }
+
+  return Rate.instance;
+};

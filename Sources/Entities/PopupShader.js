@@ -29,37 +29,46 @@
  *
  */
 
-(function() {
-  App.run(true, {
-      standalone: false,
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/Resources.js',
-    'Sources/Entities/Button.js',
-    'Sources/Entities/PlayButton.js',
-    'Sources/Entities/LoadingWave.js',
-    'Sources/Entities/PopupShader.js',
-    'Sources/Screens/Screens/Preloader.js',
-    'Sources/Screens/Screens/Menu.js',
-    'Sources/Screens/Screens/Settings.js',
-    'Sources/Screens/Screens/Credits.js',
-    'Sources/Screens/Screens/Languages.js',
-    'Sources/Screens/Screens/Mode.js',
-    'Sources/Screens/Screens/More.js',
-    'Sources/Screens/Screens/Reset.js',
-    'Sources/Screens/Screens/Shop.js',
-    'Sources/Screens/Screens/Loading.js',
-    'Sources/Screens/Popups/ExtendedPopup.js',
-    'Sources/Screens/Popups/Rate.js',
-    'Sources/Screens/Popups/ResetProgress.js',
-    'Sources/Managers/PopupShaderManager.js',
-  ], function() {
-    Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
-    }, application);
-  });
-})();
+PopupShader = Entity.extend({
+  m_Index: false,
+  m_Speed: false,
+  ctor: function() {
+      this._super(s_PopupDecoration1);
+  },
+  onCreate: function() {
+    this._super();
+
+    this.setScale(0);
+    this.setRotation(0);
+    this.setOpacity(Random.sharedRandom().random(0, 255));
+  },
+  animate: function(x, y, scale, speed, time, index) {
+    this.setCenterPosition(x, y);
+    this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), [{
+      name: "scale",
+      time: time / 2,
+      value: scale 
+    }, {
+      name: "scale",
+      time: time / 2,
+      value: 0 
+    }]);
+
+    this.m_Index = index;
+    this.m_Speed = speed;
+  },
+  update: function(time) {
+    this._super(time);
+
+    this.setRotation(this.getRotation() + (this.m_Index == 1 ? this.m_Speed : -this.m_Speed) * time);
+  },
+  deepCopy: function() {
+    return PopupShader.create();
+  }
+});
+
+PopupShader.create = function() {
+  var entity = new PopupShader();
+
+  return entity;
+};
