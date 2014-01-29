@@ -51,6 +51,11 @@ var s_ShopPanel = "shop-panel.png";
 var s_LoadingBackground = "loading-background.png";
 var s_LoadingDecoration = "loading-decoration.png";
 var s_LoadingWave = "loading-wave.png";
+var s_PopupBackground = "popup-background.png";
+var s_PopupCloseButton = "popup-close-button.png";
+var s_PopupDecoration1 = "popup-decoration-1.png";
+var s_PopupDecoration2 = "popup-decoration-2.png";
+var s_PopupDecoration3= "popup-decoration-3.png";
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -74,5 +79,10 @@ var resources = [
   {src: s_ShopPanel},
   {src: s_LoadingBackground},
   {src: s_LoadingDecoration},
-  {src: s_LoadingWave}
+  {src: s_LoadingWave},
+  {src: s_PopupBackground},
+  {src: s_PopupCloseButton},
+  {src: s_PopupDecoration1},
+  {src: s_PopupDecoration2},
+  {src: s_PopupDecoration3}
 ];
