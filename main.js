@@ -37,6 +37,12 @@
   document.body.appendChild(script);
 })();
 
-setTimeout(function() {
-  launchGame();
-}, 100);
+function launcher() {
+  if(typeof launchGame == 'undefined') {
+    setTimeout(launcher, 100);
+  } else {
+      launchGame();
+  }
+};
+
+launcher();
