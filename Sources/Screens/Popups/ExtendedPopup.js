@@ -33,7 +33,7 @@ ExtendedPopup = Popup.extend({
   color: cc.c4(0, 0, 0, 0),
   m_Opacity: 200,
   m_ShowTime: 0.2,
-  m_HideTime: 0.2,
+  m_HideTime: 0.1,
   ctor: function(parent) {
     this._super(this.color, parent);
 
@@ -54,6 +54,10 @@ ExtendedPopup = Popup.extend({
     this.m_Decoration2.setScale(3);
   },
   show: function() {
+    if(!this.m_Parent) {
+      this.m_Parent = ScreenManager.sharedManager().getCurrentScreen();
+    }
+
     this._super();
 
     this.m_Background.setScale(0);
@@ -65,6 +69,10 @@ ExtendedPopup = Popup.extend({
       value: this.m_Opacity
     });
     this.m_Background.runRecognizeAction(cc.CallFunc.create(this.onShow, this), [{
+      name: 'scale',
+      time: this.m_ShowTime,
+      value: 1.2
+    }, {
       name: 'scale',
       time: this.m_ShowTime,
       value: {
@@ -83,11 +91,15 @@ ExtendedPopup = Popup.extend({
       time: this.m_HideTime,
       value: 0.0
     });
-    this.m_Background.runRecognizeAction(cc.CallFunc.create(this.onHide, this), {
+    this.m_Background.runRecognizeAction(cc.CallFunc.create(this.onHide, this), [{
+      name: 'scale',
+      time: this.m_HideTime,
+      value: 1.2
+    }, {
       name: 'scale',
       time: this.m_HideTime,
       value: 0.0
-    });
+    }]);
     this.m_Decoration1.runRecognizeAction(false, {
       name: 'fade',
       time: this.m_HideTime,
@@ -125,6 +137,15 @@ ExtendedPopup = Popup.extend({
   },
   onCloseEvent: function() {
     this.hide();
+  },
+  onEnter: function() {
+    this._super();
+  },
+  onExit: function() {
+    this._super();
+  },
+  prepare: function() {
+    this.onHide();
   },
   update: function(time) {
     this._super(time);

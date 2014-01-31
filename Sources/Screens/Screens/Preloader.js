@@ -72,14 +72,16 @@ Preloader = Screen.extend({
       this.unschedule(this.updatePercent);
     }
   },
-  onEnter: function() {
+  onShow: function() {
     this.schedule(this.startLoading, 1.0);
 
     this._super();
   },
-  onExit: function() {
+  onHide: function() {
     this._super();
-  },
+
+    Preloader.instance = false;
+  }
 });
 
 Preloader.preload = function(resources, selector, target) {

@@ -40,7 +40,7 @@ Menu = Screen.extend({
     this.m_Background = Entity.create(s_MenuBackground, this, true);
     this.m_PlayButtonDecorations[0] = Entity.create(s_CircleDecoration, this);
     this.m_PlayButtonDecorations[1] = Entity.create(s_CircleDecoration, this);
-    this.m_PlayButton = PlayButton.create(this);
+    this.m_PlayButton = Button.create(s_PlayButton, 6, 2, this);
     this.m_SettingsButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 3, this);
@@ -61,6 +61,8 @@ Menu = Screen.extend({
 
     this.m_PlayButtonDecorations[0].setColor(cc.RED);
     this.m_PlayButtonDecorations[1].setColor(cc.RED);
+
+    this.m_PlayButton.animate(0.06, 1, false, {start: 0, end: 5.0});
 
     this.m_PlayButton.setTouchHandler('onPlayEvent', Menu);
     this.m_SettingsButton.setTouchHandler('onSettingsEvent', Menu);
@@ -84,7 +86,12 @@ Menu = Screen.extend({
     openURL("http://www.twitter.com/tooflya");
   },
   onShow: function() {
-    Rate.sharedScreen(this).show();
+    this._super();
+  },
+  onHide: function() {
+    this._super();
+
+    Menu.instance = false;
   },
   update: function(time) {
     this._super(time);

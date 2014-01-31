@@ -33,7 +33,7 @@ Credits = Screen.extend({
   ctor: function() {
     this._super();
 
-    Credits.instance = this;
+    //Credits.instance = this;
 
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);

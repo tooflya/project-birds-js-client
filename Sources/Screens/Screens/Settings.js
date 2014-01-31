@@ -94,7 +94,14 @@ Settings = Screen.extend({
     this.updateSoundButtonsState();
   },
   onShow: function() {
+    this._super();
+
     this.updateSoundButtonsState();
+  },
+  onHide: function() {
+    this._super();
+
+    Settings.instance = false;
   },
   updateSoundButtonsState: function() {
     this.m_MusicButton.setCurrentFrameIndex(Music.sharedMusic().enabled ? 0 : 3);

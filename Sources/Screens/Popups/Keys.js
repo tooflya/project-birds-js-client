@@ -29,29 +29,26 @@
  *
  */
 
-Reset = Screen.extend({
-  ctor: function() {
-    this._super();
+Keys = ExtendedPopup.extend({
+  ctor: function(parent) {
+    this._super(parent);
 
-    Reset.instance = this;
+    this.m_Decoration = Entity.create(s_PopupDecoration7, this.m_Background);
+    this.m_CoinsButton1 = Button.create(s_GetKeysPopupButton1, 1, 1, this.m_Background);
+    this.m_CoinsButton2 = Button.create(s_GetKeysPopupButton2, 1, 1, this.m_Background);
 
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
+    this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(200));
 
-    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_ResetButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(130));
+    this.m_CoinsButton1.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
+    this.m_CoinsButton2.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
 
-    this.m_BackButton.setCurrentFrameIndex(1);
+    this.m_CoinsButton1.setTouchHandler('onActionEvent', Keys);
+    this.m_CoinsButton2.setTouchHandler('onActionEvent', Keys);
 
-    this.m_BackButton.setTouchHandler('onBackEvent', Reset);
-    this.m_ResetButton.setTouchHandler('onResetEvent', Reset);
+    this.m_CloseButton.setTouchHandler('onCloseEvent', Keys);
   },
-  onBackEvent: function() {
-    ScreenManager.sharedManager().replace(Settings);
-  },
-  onResetEvent: function() {
-    ResetProgress.sharedScreen(this).show();
+  onActionEvent: function() {
+    //
   },
   onShow: function() {
     this._super();
@@ -59,14 +56,17 @@ Reset = Screen.extend({
   onHide: function() {
     this._super();
 
-    Reset.instance = false;
-  },
-  update: function(time) {
-    this._super(time);
+    Keys.instance = false;
   }
 });
 
-Reset.instance = false;
-Reset.sharedScreen = function() {
-  return Reset.instance ? Reset.instance : new Reset();
+Keys.instance = false;
+Keys.sharedScreen = function(parent) {
+  if(Keys.instance) {
+    Keys.instance.m_Parent = parent;
+  } else {
+    Keys.instance = new Keys(parent);
+  }
+
+  return Keys.instance;
 };

@@ -29,44 +29,38 @@
  *
  */
 
-Reset = Screen.extend({
+Game = Screen.extend({
   ctor: function() {
     this._super();
 
-    Reset.instance = this;
+    Game.instance = this;
 
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
-
-    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_ResetButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(130));
-
-    this.m_BackButton.setCurrentFrameIndex(1);
-
-    this.m_BackButton.setTouchHandler('onBackEvent', Reset);
-    this.m_ResetButton.setTouchHandler('onResetEvent', Reset);
+    this.m_Background = Entity.create(s_GameBackground1, this, true);
   },
-  onBackEvent: function() {
-    ScreenManager.sharedManager().replace(Settings);
-  },
-  onResetEvent: function() {
-    ResetProgress.sharedScreen(this).show();
+  onPauseEvent: function() {
+    Pause.sharedScreen(this).show();
   },
   onShow: function() {
     this._super();
+
+    GamePanel.sharedScreen(this).show();
   },
   onHide: function() {
     this._super();
 
-    Reset.instance = false;
+    Game.instance = false;
+  },
+  onExitTransitionDidStart: function() {
+    GamePanel.sharedScreen(this).hide();
+
+    this._super();
   },
   update: function(time) {
     this._super(time);
   }
 });
 
-Reset.instance = false;
-Reset.sharedScreen = function() {
-  return Reset.instance ? Reset.instance : new Reset();
+Game.instance = false;
+Game.sharedScreen = function() {
+  return Game.instance ? Game.instance : new Game();
 };

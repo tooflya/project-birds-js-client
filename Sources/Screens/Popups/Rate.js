@@ -34,10 +34,24 @@ Rate = ExtendedPopup.extend({
     this._super(parent);
 
     this.m_Decoration = Entity.create(s_PopupDecoration2, this.m_Background);
+    this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(28), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
+    this.m_ActionButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Rate);
+    this.m_ActionButton.setTouchHandler('onActionEvent', Rate);
+  },
+  onActionEvent: function() {
+    //
+  },
+  onShow: function() {
+    this._super();
+  },
+  onHide: function() {
+    this._super();
+
+    Rate.instance = false;
   }
 });
 

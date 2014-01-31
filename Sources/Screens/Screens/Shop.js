@@ -39,7 +39,6 @@ Shop = Screen.extend({
 
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_Panel = Entity.create(s_ShopPanel, this);
 
     for(var i = 0; i < 3; i++) {
       for(var j = 0; j < this.m_ElementsCount[i]; j++) {
@@ -49,7 +48,6 @@ Shop = Screen.extend({
     }
 
     this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_Panel.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - this.m_Panel.getHeight() / 2);
 
     this.m_BackButton.setCurrentFrameIndex(1);
 
@@ -58,11 +56,15 @@ Shop = Screen.extend({
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Menu);
   },
-  onEnter: function() {
+  onShow: function() {
     this._super();
+
+    MenuPanel.sharedScreen(this).show();
   },
-  onExit: function() {
+  onHide: function() {
     this._super();
+
+    Shop.instance = false;
   },
   update: function(time) {
     this._super(time);

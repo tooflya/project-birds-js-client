@@ -69,11 +69,13 @@ More = Screen.extend({
   onPrivacyPolicyEvent: function() {
 
   },
-  onEnter: function() {
+  onShow: function() {
     this._super();
   },
-  onExit: function() {
+  onHide: function() {
     this._super();
+
+    Menu.instance = false;
   },
   update: function(time) {
     this._super(time);

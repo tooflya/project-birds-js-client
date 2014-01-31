@@ -29,29 +29,11 @@
  *
  */
 
-Reset = Screen.extend({
-  ctor: function() {
-    this._super();
+Achievements = ExtendedPopup.extend({
+  ctor: function(parent) {
+    this._super(parent);
 
-    Reset.instance = this;
-
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
-
-    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_ResetButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(130));
-
-    this.m_BackButton.setCurrentFrameIndex(1);
-
-    this.m_BackButton.setTouchHandler('onBackEvent', Reset);
-    this.m_ResetButton.setTouchHandler('onResetEvent', Reset);
-  },
-  onBackEvent: function() {
-    ScreenManager.sharedManager().replace(Settings);
-  },
-  onResetEvent: function() {
-    ResetProgress.sharedScreen(this).show();
+    this.m_CloseButton.setTouchHandler('onCloseEvent', Achievements);
   },
   onShow: function() {
     this._super();
@@ -59,14 +41,17 @@ Reset = Screen.extend({
   onHide: function() {
     this._super();
 
-    Reset.instance = false;
-  },
-  update: function(time) {
-    this._super(time);
+    Achievements.instance = false;
   }
 });
 
-Reset.instance = false;
-Reset.sharedScreen = function() {
-  return Reset.instance ? Reset.instance : new Reset();
+Achievements.instance = false;
+Achievements.sharedScreen = function(parent) {
+  if(Achievements.instance) {
+    Achievements.instance.m_Parent = parent;
+  } else {
+    Achievements.instance = new Achievements(parent);
+  }
+
+  return Achievements.instance;
 };

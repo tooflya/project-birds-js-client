@@ -29,29 +29,21 @@
  *
  */
 
-Reset = Screen.extend({
-  ctor: function() {
-    this._super();
+Exit = ExtendedPopup.extend({
+  ctor: function(parent) {
+    this._super(parent);
 
-    Reset.instance = this;
+    this.m_Decoration = Entity.create(s_PopupDecoration4, this.m_Background);
+    this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);
 
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
+    this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
+    this.m_ActionButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
 
-    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_ResetButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(130));
-
-    this.m_BackButton.setCurrentFrameIndex(1);
-
-    this.m_BackButton.setTouchHandler('onBackEvent', Reset);
-    this.m_ResetButton.setTouchHandler('onResetEvent', Reset);
+    this.m_CloseButton.setTouchHandler('onCloseEvent', Exit);
+    this.m_ActionButton.setTouchHandler('onActionEvent', Exit);
   },
-  onBackEvent: function() {
-    ScreenManager.sharedManager().replace(Settings);
-  },
-  onResetEvent: function() {
-    ResetProgress.sharedScreen(this).show();
+  onActionEvent: function() {
+    //
   },
   onShow: function() {
     this._super();
@@ -59,14 +51,17 @@ Reset = Screen.extend({
   onHide: function() {
     this._super();
 
-    Reset.instance = false;
-  },
-  update: function(time) {
-    this._super(time);
+    Exit.instance = false;
   }
 });
 
-Reset.instance = false;
-Reset.sharedScreen = function() {
-  return Reset.instance ? Reset.instance : new Reset();
+Exit.instance = false;
+Exit.sharedScreen = function(parent) {
+  if(Exit.instance) {
+    Exit.instance.m_Parent = parent;
+  } else {
+    Exit.instance = new Exit(parent);
+  }
+
+  return Exit.instance;
 };

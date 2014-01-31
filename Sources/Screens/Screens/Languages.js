@@ -93,8 +93,15 @@ Languages = Screen.extend({
 
   },
   onShow: function() {
+    this._super();
+
     this.m_Checker.removeFromParent();
     this.m_Flags[0].addChild(this.m_Checker); // TODO: Add child checker to the current language flag.
+  },
+  onHide: function() {
+    this._super();
+
+    Languages.instance = false;
   },
   update: function(time) {
     this._super(time);

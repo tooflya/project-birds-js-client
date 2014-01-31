@@ -32,6 +32,8 @@
 Loading = Screen.extend({
   m_WavesTime: 0.5,
   m_WavesTimeElapsed: 0.5,
+  m_LoadingTime: 3.0,
+  m_LoadingTimeElapsed: 0,
   ctor: function() {
     this._super();
 
@@ -42,17 +44,34 @@ Loading = Screen.extend({
     this.m_BackgroundWaves = EntityManager.create(15, LoadingWave.create(), this.m_Background);
   },
   onShow: function() {
+    this._super();
+
     this.m_BackgroundWaves.clear();
+  },
+  onHide: function() {
+    this._super();
+
+    Loading.instance = false;
+  },
+  onComplete: function() {
+    ScreenManager.sharedManager().replace(Game);
   },
   update: function(time) {
     this._super(time);
 
     this.m_WavesTimeElapsed += time;
+    this.m_LoadingTimeElapsed += time;
 
     if(this.m_WavesTimeElapsed >= this.m_WavesTime) {
       this.m_WavesTimeElapsed = 0;
 
       this.m_BackgroundWaves.create();
+    }
+
+    if(this.m_LoadingTimeElapsed >= this.m_LoadingTime) {
+      this.m_LoadingTimeElapsed = 0;
+
+      this.onComplete();
     }
   }
 });

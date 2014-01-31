@@ -29,29 +29,24 @@
  *
  */
 
-Reset = Screen.extend({
-  ctor: function() {
-    this._super();
+Lives = ExtendedPopup.extend({
+  ctor: function(parent) {
+    this._super(parent);
 
-    Reset.instance = this;
+    this.m_Decoration = Entity.create(s_PopupDecoration8, this.m_Background);
+    this.m_GetButton = Button.create(s_GetLivesPopupButton, 1, 1, this.m_Background);
 
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
+    this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
+    this.m_GetButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(80));
 
-    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_ResetButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(130));
-
-    this.m_BackButton.setCurrentFrameIndex(1);
-
-    this.m_BackButton.setTouchHandler('onBackEvent', Reset);
-    this.m_ResetButton.setTouchHandler('onResetEvent', Reset);
+    this.m_CloseButton.setTouchHandler('onCloseEvent', Lives);
+    this.m_GetButton.setTouchHandler('onGetEvent', Lives);
   },
-  onBackEvent: function() {
-    ScreenManager.sharedManager().replace(Settings);
+  onActionEvent: function() {
+    //
   },
-  onResetEvent: function() {
-    ResetProgress.sharedScreen(this).show();
+  onGetEvent: function() {
+    //
   },
   onShow: function() {
     this._super();
@@ -59,14 +54,17 @@ Reset = Screen.extend({
   onHide: function() {
     this._super();
 
-    Reset.instance = false;
-  },
-  update: function(time) {
-    this._super(time);
+    Lives.instance = false;
   }
 });
 
-Reset.instance = false;
-Reset.sharedScreen = function() {
-  return Reset.instance ? Reset.instance : new Reset();
+Lives.instance = false;
+Lives.sharedScreen = function(parent) {
+  if(Lives.instance) {
+    Lives.instance.m_Parent = parent;
+  } else {
+    Lives.instance = new Lives(parent);
+  }
+
+  return Lives.instance;
 };
