@@ -39,6 +39,7 @@
       orientation: 'height'
     }, [
     'Sources/Resources.js',
+    'Sources/Language.js',
     'Sources/Entities/Button.js',
     'Sources/Entities/LoadingWave.js',
     'Sources/Entities/PopupShader.js',

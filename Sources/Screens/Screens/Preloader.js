@@ -38,9 +38,11 @@ Preloader = Screen.extend({
     this.m_Background = Entity.create(s_PreloaderBackground, this, true);
     this.m_LoadingBarBackground = Entity.create(s_LoadingBarBackground, this);
     this.m_LoadingBar = TiledEntity.create(s_LoadingBar, 1, 1, this);
+    this.m_LoadingText = Text.create('loading', this);
 
     this.m_LoadingBarBackground.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(100));
     this.m_LoadingBar.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(100));
+    this.m_LoadingText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(100));
 
     this.m_LoadingBar.setSize(577, 38);
     this.m_LoadingBar.showPercentage(0);
