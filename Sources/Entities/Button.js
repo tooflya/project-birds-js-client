@@ -35,7 +35,7 @@ Button.prototype.onStart = function() {
   this.runRecognizeAction(false, {
     name: 'scale',
     time: 0.1,
-    value: 0.9
+    value: 0.95
   });
 };
 
