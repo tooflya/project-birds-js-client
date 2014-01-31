@@ -40,7 +40,6 @@
     }, [
     'Sources/Resources.js',
     'Sources/Entities/Button.js',
-    'Sources/Entities/PlayButton.js',
     'Sources/Entities/LoadingWave.js',
     'Sources/Entities/PopupShader.js',
     'Sources/Screens/Screens/Preloader.js',
@@ -53,10 +52,26 @@
     'Sources/Screens/Screens/Reset.js',
     'Sources/Screens/Screens/Shop.js',
     'Sources/Screens/Screens/Loading.js',
+    'Sources/Screens/Screens/Game.js',
     'Sources/Screens/Popups/ExtendedPopup.js',
     'Sources/Screens/Popups/Rate.js',
+    'Sources/Screens/Popups/Social.js',
+    'Sources/Screens/Popups/Exit.js',
     'Sources/Screens/Popups/ResetProgress.js',
+    'Sources/Screens/Popups/Coins.js',
+    'Sources/Screens/Popups/Keys.js',
+    'Sources/Screens/Popups/Lives.js',
+    'Sources/Screens/Popups/Moves.js',
+    'Sources/Screens/Popups/Gift.js',
+    'Sources/Screens/Popups/Help.js',
+    'Sources/Screens/Popups/Lock.js',
+    'Sources/Screens/Popups/Item.js',
+    'Sources/Screens/Popups/Rating.js',
+    'Sources/Screens/Popups/Pause.js',
+    'Sources/Screens/Popups/Achievements.js',
     'Sources/Managers/PopupShaderManager.js',
+    'Sources/Panels/MenuPanel.js',
+    'Sources/Panels/GamePanel.js'
   ], function() {
     Preloader.preload(resources, function() {
       ScreenManager.sharedManager().replace(Menu);
