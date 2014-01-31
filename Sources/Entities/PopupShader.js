@@ -30,19 +30,26 @@
  */
 
 PopupShader = Entity.extend({
-  m_Index: false,
   m_Speed: false,
   ctor: function() {
-      this._super(s_PopupDecoration1);
+      this._super(s_PopupDecoration11);
   },
   onCreate: function() {
     this._super();
 
+    var x = Random.sharedRandom().random(0, Camera.sharedCamera().width);
+    var y = Random.sharedRandom().random(0, Camera.sharedCamera().height);
+    var scale = Random.sharedRandom().random(0.1, 3.0);
+    var time = Random.sharedRandom().random(0.0, 1.0);
+    var speed = Random.sharedRandom().random(10, 100);
+
     this.setScale(0);
     this.setRotation(0);
     this.setOpacity(Random.sharedRandom().random(0, 255));
+
+    this.animate(x, y, scale, speed, time);
   },
-  animate: function(x, y, scale, speed, time, index) {
+  animate: function(x, y, scale, speed, time) {
     this.setCenterPosition(x, y);
     this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), [{
       name: "scale",
@@ -54,13 +61,12 @@ PopupShader = Entity.extend({
       value: 0 
     }]);
 
-    this.m_Index = index;
     this.m_Speed = speed;
   },
   update: function(time) {
     this._super(time);
 
-    this.setRotation(this.getRotation() + (this.m_Index == 1 ? this.m_Speed : -this.m_Speed) * time);
+    this.setRotation(this.getRotation() + (Random.sharedRandom().probably(50) ? this.m_Speed : -this.m_Speed) * time);
   },
   deepCopy: function() {
     return PopupShader.create();
