@@ -30,7 +30,7 @@
  */
 
 (function() {
-  App.run(true, {
+  App.run(false, {
       standalone: false,
       designed: {
         width: 1920,

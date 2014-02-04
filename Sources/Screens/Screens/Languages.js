@@ -51,16 +51,16 @@ Languages = Screen.extend({
       this.m_NotAvailableBackgrounds[i] = Entity.create(s_FlagNotAvailable, this.m_Flags[i]);
 
       if(i >= 2) {
-        /*var text = cc.Text.createWithText(cc.Languages.text_not_available, this.m_NotAvailableBackgrounds[i]);
+        var text = Text.create('language-not-available', this.m_NotAvailableBackgrounds[i]);
         text.setCenterPosition(this.m_NotAvailableBackgrounds[i].getWidth() / 2, this.m_NotAvailableBackgrounds[i].getHeight() / 2);
         text.disableShadow();
-        text.setColor(cc.c3(0, 0, 0));*/
+        text.setColor(cc.c3(0, 0, 0));
 
         this.m_NotAvailableBackgrounds[i].create().setCenterPosition(this.m_Flags[i].getWidth() / 2, Camera.sharedCamera().coord(50));
       } else {
         this.m_NotAvailableBackgrounds[i].destroy();
 
-        this.m_Flags[i].setTouchHandler('onLanguageEvent', Languages);
+        this.m_Flags[i].setTouchHandler('onLanguageEvent', Languages, {id: i});
       }
     }
 
@@ -89,14 +89,16 @@ Languages = Screen.extend({
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Settings);
   },
-  onLanguageEvent: function() {
+  onLanguageEvent: function(params) {
+    LanguagesManager.sharedManager().changeLanguage(params.id);
 
+    ScreenManager.sharedManager().replace(Settings);
   },
   onShow: function() {
     this._super();
 
     this.m_Checker.removeFromParent();
-    this.m_Flags[0].addChild(this.m_Checker); // TODO: Add child checker to the current language flag.
+    this.m_Flags[LanguagesManager.sharedManager().getLanguageId()].addChild(this.m_Checker); // TODO: Add child checker to the current language flag.
   },
   onHide: function() {
     this._super();

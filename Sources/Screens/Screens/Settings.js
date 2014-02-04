@@ -47,6 +47,11 @@ Settings = Screen.extend({
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration2, this);
     this.m_LanguageIndicator = TiledEntity.create(s_SmallFlags, 2, 5, this.m_LanguagesButton);
 
+    this.m_CreditsText = Text.create('about', this.m_CreditsButton);
+    this.m_ProgressText = Text.create('progress', this.m_ProgressButton);
+    this.m_MoreText = Text.create('more', this.m_MoreButton);
+    this.m_LanguagesText = Text.create('language', this.m_LanguagesButton);
+
     this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_CreditsButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(430));
     this.m_ProgressButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(230));
@@ -57,6 +62,11 @@ Settings = Screen.extend({
     this.m_BackgroundDecoration1.create().setCenterPosition(this.m_BackgroundDecoration1.getWidth() / 2, Camera.sharedCamera().height - this.m_BackgroundDecoration1.getHeight() / 2);
     this.m_BackgroundDecoration2.create().setCenterPosition(Camera.sharedCamera().width - this.m_BackgroundDecoration2.getWidth() / 2, this.m_BackgroundDecoration2.getHeight() / 2);
     this.m_LanguageIndicator.create().setCenterPosition(this.m_LanguagesButton.getWidth(), this.m_LanguagesButton.getHeight() / 2);
+
+    this.m_CreditsText.setCenterPosition(this.m_CreditsButton.getWidth() / 2, this.m_CreditsButton.getHeight() / 2);
+    this.m_ProgressText.setCenterPosition(this.m_ProgressButton.getWidth() / 2, this.m_ProgressButton.getHeight() / 2);
+    this.m_MoreText.setCenterPosition(this.m_MoreButton.getWidth() / 2, this.m_MoreButton.getHeight() / 2);
+    this.m_LanguagesText.setCenterPosition(this.m_LanguagesButton.getWidth() / 2, this.m_LanguagesButton.getHeight() / 2);
 
     this.m_BackButton.setCurrentFrameIndex(1);
 

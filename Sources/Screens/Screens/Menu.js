@@ -69,6 +69,8 @@ Menu = Screen.extend({
     this.m_ShopButton.setTouchHandler('onShopEvent', Menu);
     this.m_FacebookButton.setTouchHandler('onFacebookEvent', Menu);
     this.m_TwitterButton.setTouchHandler('onTwitterEvent', Menu);
+
+    Rate.sharedScreen(this).prepare();
   },
   onPlayEvent: function() {
     ScreenManager.sharedManager().replace(Mode);
@@ -87,6 +89,8 @@ Menu = Screen.extend({
   },
   onShow: function() {
     this._super();
+
+    Rate.sharedScreen(this).show();
   },
   onHide: function() {
     this._super();

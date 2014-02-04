@@ -35,9 +35,16 @@ Rate = ExtendedPopup.extend({
 
     this.m_Decoration = Entity.create(s_PopupDecoration2, this.m_Background);
     this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);
+    this.m_Text1 = Text.create('rate-popup-1', this.m_Background);
+    this.m_Text2 = Text.create('rate-popup-2', this.m_Background);
+    this.m_Text3 = Text.create('rate-popup-3', this.m_ActionButton);
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(28), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
     this.m_ActionButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
+
+    this.m_Text1.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(90));
+    this.m_Text2.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(280));
+    this.m_Text3.setCenterPosition(this.m_ActionButton.getWidth() / 2, this.m_ActionButton.getHeight() / 2);
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Rate);
     this.m_ActionButton.setTouchHandler('onActionEvent', Rate);

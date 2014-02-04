@@ -42,6 +42,9 @@ More = Screen.extend({
     this.m_PrivacyPolicyButton = Button.create(s_LongButton, 1, 1, this);
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration2, this);
+    this.m_VideoText = Text.create('video', this.m_VideoButton);
+    this.m_MoreGamesText = Text.create('more-games', this.m_MoreGamesButton);
+    this.m_PrivacyPolicyText = Text.create('privacy-policy', this.m_PrivacyPolicyButton);
 
     this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_VideoButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(330));
@@ -49,6 +52,10 @@ More = Screen.extend({
     this.m_PrivacyPolicyButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y  - Camera.sharedCamera().coord(190));
     this.m_BackgroundDecoration1.create().setCenterPosition(this.m_BackgroundDecoration1.getWidth() / 2, Camera.sharedCamera().height - this.m_BackgroundDecoration1.getHeight() / 2);
     this.m_BackgroundDecoration2.create().setCenterPosition(Camera.sharedCamera().width - this.m_BackgroundDecoration2.getWidth() / 2, this.m_BackgroundDecoration2.getHeight() / 2);
+
+    this.m_VideoText.setCenterPosition(this.m_VideoButton.getWidth() / 2, this.m_VideoButton.getHeight() / 2);
+    this.m_MoreGamesText.setCenterPosition(this.m_MoreGamesButton.getWidth() / 2, this.m_MoreGamesButton.getHeight() / 2);
+    this.m_PrivacyPolicyText.setCenterPosition(this.m_PrivacyPolicyButton.getWidth() / 2, this.m_PrivacyPolicyButton.getHeight() / 2);
 
     this.m_BackButton.setCurrentFrameIndex(1);
 

@@ -33,11 +33,21 @@ MenuPanel = Panel.extend({
   ctor: function(parent) {
     this._super(s_InterfacePanel, parent);
 
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], [s_PanelButton, 1, 1]);
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], [s_PanelButton, 1, 1]);
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], [s_PanelButton, 1, 1]);
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], [s_PanelButton, 1, 1]);
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon5, 3, 3]);
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], [s_PanelButton, 1, 1], function(e) {
+      e.ccsf([2150]);
+    });
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], [s_PanelButton, 1, 1], function(e) {
+      e.ccsf([0]);
+    });
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], [s_PanelButton, 1, 1], function(e) {
+      e.ccsf([0]);
+    });
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], [s_PanelButton, 1, 1], function(e) {
+      e.ccsf([0]);
+    });
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon5, 3, 3], false, function(e) {
+      e.ccsf([0]);
+    });
 
     this.getIcons()[0].animate(0.02);
     this.getIcons()[1].animate(0.02);

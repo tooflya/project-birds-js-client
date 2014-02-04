@@ -36,15 +36,17 @@ Keys = ExtendedPopup.extend({
     this.m_Decoration = Entity.create(s_PopupDecoration7, this.m_Background);
     this.m_CoinsButton1 = Button.create(s_GetKeysPopupButton1, 1, 1, this.m_Background);
     this.m_CoinsButton2 = Button.create(s_GetKeysPopupButton2, 1, 1, this.m_Background);
+    this.m_Text = Text.create('keys-popup', this.m_Background);
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(200));
 
     this.m_CoinsButton1.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
     this.m_CoinsButton2.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
 
+    this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(150));
+
     this.m_CoinsButton1.setTouchHandler('onActionEvent', Keys);
     this.m_CoinsButton2.setTouchHandler('onActionEvent', Keys);
-
     this.m_CloseButton.setTouchHandler('onCloseEvent', Keys);
   },
   onActionEvent: function() {

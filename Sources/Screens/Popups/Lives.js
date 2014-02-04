@@ -35,9 +35,12 @@ Lives = ExtendedPopup.extend({
 
     this.m_Decoration = Entity.create(s_PopupDecoration8, this.m_Background);
     this.m_GetButton = Button.create(s_GetLivesPopupButton, 1, 1, this.m_Background);
+    this.m_Text = Text.create('lives-popup-1', this.m_Background);
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
     this.m_GetButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(80));
+
+    this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Lives);
     this.m_GetButton.setTouchHandler('onGetEvent', Lives);

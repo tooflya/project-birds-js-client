@@ -47,6 +47,10 @@ Mode = Screen.extend({
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_HelpButton = Button.create(s_ButtonsSprite, 3, 3, this);
 
+    this.m_ProgressModeText = Text.create('progress-mode', this.m_ProgressMode);
+    this.m_ClassicModeText = Text.create('classic-mode', this.m_ClassicMode);
+    this.m_ArcadeModeText = Text.create('arcade-mode', this.m_ArcadeMode);
+
     this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_BackgroundDecoration1.create().setCenterPosition(this.m_BackgroundDecoration1.getWidth() / 2, Camera.sharedCamera().height - this.m_BackgroundDecoration1.getHeight() / 2);
     this.m_BackgroundDecoration2.create().setCenterPosition(Camera.sharedCamera().width - this.m_BackgroundDecoration2.getWidth() / 2, this.m_BackgroundDecoration2.getHeight() / 2);
@@ -62,6 +66,10 @@ Mode = Screen.extend({
     this.m_ShopButton.setCurrentFrameIndex(8);
     this.m_HelpButton.setCurrentFrameIndex(7);
     this.m_BackButton.setCurrentFrameIndex(1);
+
+    this.m_ProgressModeText.setCenterPosition(this.m_ProgressMode.getWidth() / 2, this.m_ProgressMode.getHeight() / 2);
+    this.m_ClassicModeText.setCenterPosition(this.m_ClassicMode.getWidth() / 2, this.m_ClassicMode.getHeight() / 2);
+    this.m_ArcadeModeText.setCenterPosition(this.m_ArcadeMode.getWidth() / 2, this.m_ArcadeMode.getHeight() / 2);
 
     this.m_BackButton.setTouchHandler('onBackEvent', Mode);
     this.m_ProgressMode.setTouchHandler('onGameEvent', Mode);

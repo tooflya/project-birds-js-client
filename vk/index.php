@@ -1,3 +1,5 @@
+<?
+
 /**
  * Tooflya Inc. Development
  *
@@ -29,48 +31,6 @@
  *
  */
 
-Item = ExtendedPopup.extend({
-  ctor: function(parent) {
-    this._super(parent);
+require('../../../config.php');
 
-    thisHolder1 = Entity.create(s_ListFixSmall, this.m_Background);
-    thisHolder2 = Entity.create(s_ListFixSmall, this.m_Background);
-    this.m_List = ItemList.create(this.m_Background);
-
-    thisHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(308));
-    thisHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(398));
-
-    thisHolder2.setScaleY(-1);
-
-    this.m_CloseButton.setTouchHandler('onCloseEvent', Item);
-  },
-  onShow: function() {
-    this._super();
-  },
-  onHide: function() {
-    this._super();
-
-    Item.instance = false;
-  }
-});
-
-ItemList = PatternList.extend({
-  ctor: function(parent) {
-    this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
-  }
-});
-
-Item.instance = false;
-Item.sharedScreen = function(parent) {
-  if(Item.instance) {
-    Item.instance.m_Parent = parent;
-  } else {
-    Item.instance = new Item(parent);
-  }
-
-  return Item.instance;
-};
-
-ItemList.create = function(parent) {
-  return new ItemList(parent);
-};
+echo file_get_contents('../vk.html');

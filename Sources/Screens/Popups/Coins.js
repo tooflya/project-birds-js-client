@@ -38,6 +38,7 @@ Coins = ExtendedPopup.extend({
     this.m_CoinsButton2 = Button.create(s_GetCoinsPopupButton, 2, 2, this.m_Background);
     this.m_CoinsButton3 = Button.create(s_GetCoinsPopupButton, 2, 2, this.m_Background);
     this.m_CoinsButton4 = Button.create(s_GetCoinsPopupButton, 2, 2, this.m_Background);
+    this.m_Text = Text.create('coins-popup', this.m_Background);
 
     this.m_CoinsButton1.setTextureRect(cc.rect(Camera.sharedCamera().coord(14), Camera.sharedCamera().coord(36), Camera.sharedCamera().coord(282), Camera.sharedCamera().coord(207)));
     this.m_CoinsButton2.setTextureRect(cc.rect(Camera.sharedCamera().coord(296), Camera.sharedCamera().coord(25), Camera.sharedCamera().coord(279), Camera.sharedCamera().coord(201)));
@@ -50,6 +51,8 @@ Coins = ExtendedPopup.extend({
     this.m_CoinsButton2.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(140));
     this.m_CoinsButton3.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
     this.m_CoinsButton4.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(345));
+
+    this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(60));
 
     this.m_CoinsButton1.setTouchHandler('onActionEvent', Coins);
     this.m_CoinsButton2.setTouchHandler('onActionEvent', Coins);

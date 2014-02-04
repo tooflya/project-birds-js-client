@@ -47,7 +47,7 @@ PopupShaderManager = EntityManager.extend({
   onEnter: function() {
     this._super();
 
-    this.clear();console.log(1);
+    this.clear();
   },
   onExit: function() {
     this._super();

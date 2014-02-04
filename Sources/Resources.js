@@ -86,6 +86,15 @@ var s_GetLivesPopupButton = "popup-lives-get.png";
 var s_GetCoinsPopupButton = "popup-coins-get.png";
 var s_GetKeysPopupButton1 = "popup-keys-get-1.png";
 var s_GetKeysPopupButton2 = "popup-keys-get-2.png";
+var s_ListFixLarge = "list-fix-large.png";
+var s_ListFixSmall = "list-fix-small.png";
+var s_ListScrollLarge = "list-scroll-large.png";
+var s_ListScrollSmall = "list-scroll-small.png";
+var s_CreditsCompanyName = "credits-company-name.png";
+var s_CreditsGameName = "credits-game-name.png";
+var s_ShopWheel = "shop-wheel.png";
+var s_ShopShelfs = "shop-shelfs.png";
+var s_ShopItems = "shop-items.png";
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -144,5 +153,14 @@ var resources = [
   {src: s_GetLivesPopupButton},
   {src: s_GetCoinsPopupButton},
   {src: s_GetKeysPopupButton1},
-  {src: s_GetKeysPopupButton2}
+  {src: s_GetKeysPopupButton2},
+  {src: s_ListFixLarge},
+  {src: s_ListFixSmall},
+  {src: s_ListScrollLarge},
+  {src: s_ListScrollSmall},
+  {src: s_CreditsGameName},
+  {src: s_CreditsCompanyName},
+  {src: s_ShopWheel},
+  {src: s_ShopShelfs},
+  {src: s_ShopItems}
 ];

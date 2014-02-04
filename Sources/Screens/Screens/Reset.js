@@ -38,14 +38,26 @@ Reset = Screen.extend({
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
+    this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
+    this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration1, this);
+    this.m_Text1 = Text.create('reset', this);
+    this.m_Text2 = Text.create('reset-button', this.m_ResetButton);
 
     this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_ResetButton.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(130));
+    this.m_BackgroundDecoration1.create().setCenterPosition(this.m_BackgroundDecoration1.getWidth() / 2, Camera.sharedCamera().height - this.m_BackgroundDecoration1.getHeight() / 2);
+    this.m_BackgroundDecoration2.create().setCenterPosition(Camera.sharedCamera().width - this.m_BackgroundDecoration2.getWidth() / 2, this.m_BackgroundDecoration2.getHeight() / 2);
+    this.m_Text1.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(200));
+    this.m_Text2.setCenterPosition(this.m_ResetButton.getWidth() / 2, this.m_ResetButton.getHeight() / 2);
 
     this.m_BackButton.setCurrentFrameIndex(1);
 
+    this.m_BackgroundDecoration2.setScale(-1);
+
     this.m_BackButton.setTouchHandler('onBackEvent', Reset);
     this.m_ResetButton.setTouchHandler('onResetEvent', Reset);
+
+    ResetProgress.sharedScreen(this).prepare();
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Settings);

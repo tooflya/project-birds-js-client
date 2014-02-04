@@ -67,6 +67,7 @@ Preloader = Screen.extend({
   updatePercent: function() {
     var percent = cc.Loader.getInstance().getPercentage();
 
+    this.m_LoadingText.ccsf([percent]);
     this.m_LoadingBar.showPercentage(percent);
     this.m_LoadingBar.setCenterPosition(Camera.sharedCamera().center.x +  this.m_LoadingBar.getTextureRect().getWidth() / 2 - this.m_LoadingBar.getWidth() / 2, Camera.sharedCamera().coord(100));
 
@@ -76,6 +77,8 @@ Preloader = Screen.extend({
   },
   onShow: function() {
     this.schedule(this.startLoading, 1.0);
+
+    this.m_LoadingText.ccsf([0]);
 
     this._super();
   },
