@@ -31,6 +31,6 @@
  *
  */
 
-require('../../../config.php');
+require('../../config.php');
 
-echo file_get_contents('../vk.html');
+echo file_get_contents('vk.html');
