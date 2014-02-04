@@ -31,7 +31,7 @@
 
 (function() {
   App.run(false, {
-      standalone: false,
+      standalone: true,
       designed: {
         width: 1920,
         height: 1080
