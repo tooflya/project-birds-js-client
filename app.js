@@ -72,7 +72,9 @@
     'Sources/Screens/Popups/Achievements.js',
     'Sources/Managers/PopupShaderManager.js',
     'Sources/Panels/MenuPanel.js',
-    'Sources/Panels/GamePanel.js'
+    'Sources/Panels/GamePanel.js',
+    'Sources/Lists/AboutList.js',
+    'Sources/Lists/ItemList.js'
   ], function() {
     Preloader.preload(resources, function() {
       ScreenManager.sharedManager().replace(Menu);

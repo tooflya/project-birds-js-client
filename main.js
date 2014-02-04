@@ -29,6 +29,8 @@
  *
  */
 
+var application;
+
 (function() {
   var script = document.createElement('script');
   script.src = 'cocos2dx-tooflya-sdk-html5/main.js';
@@ -38,6 +40,7 @@
 })();
 
 function launcher() {
+  if(application) return false;
   if(typeof launchGame == 'undefined') {
     setTimeout(launcher, 100);
   } else {

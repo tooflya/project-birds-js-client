@@ -49,6 +49,8 @@ Shop = Screen.extend({
     this.m_Items = new Array();
 
     for(var i = 0; i < 3; i++) {
+      var counter = 20 * i;
+
         this.m_Backgrounds[i] = BackgroundColor.create(cc.c4(0, 0, 0, 0), this, Camera.sharedCamera().width, Camera.sharedCamera().coord(280));
         this.m_Backgrounds[i].setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) + Camera.sharedCamera().coord(80));
 
@@ -89,8 +91,10 @@ Shop = Screen.extend({
 
         this.m_Items[i][j].create().setCurrentFrameIndex((20 * i) + j);
 
-        this.m_Items[i][j].setTouchHandler('show', Item, {id: 0});
+        this.m_Items[i][j].setTouchHandler('show', Item, {id: counter});
         this.m_Items[i][j].setZOrder(3);
+
+        counter++;
       }
     }
 

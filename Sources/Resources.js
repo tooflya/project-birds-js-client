@@ -95,6 +95,8 @@ var s_CreditsGameName = "credits-game-name.png";
 var s_ShopWheel = "shop-wheel.png";
 var s_ShopShelfs = "shop-shelfs.png";
 var s_ShopItems = "shop-items.png";
+var s_ItemsRating = "items-rating.png";
+var s_ItemsProperties = "items-properties.png";
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -162,5 +164,7 @@ var resources = [
   {src: s_CreditsCompanyName},
   {src: s_ShopWheel},
   {src: s_ShopShelfs},
-  {src: s_ShopItems}
+  {src: s_ShopItems},
+  {src: s_ItemsRating},
+  {src: s_ItemsProperties}
 ];
