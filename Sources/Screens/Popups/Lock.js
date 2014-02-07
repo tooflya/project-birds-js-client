@@ -30,25 +30,65 @@
  */
 
 Lock = ExtendedPopup.extend({
+  id: 0,
   ctor: function(parent) {
     this._super(parent);
 
     this.m_Decoration = Entity.create(s_PopupDecoration7, this.m_Background);
+    this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);
+    this.m_BackgroundText = Text.create('mode-unlock', this.m_Background);
+    this.m_ActionText = Text.create('unlock', this.m_ActionButton);
+
+    this.m_KeysDecoration1 = Entity.create(s_PopupDecoration1, this.m_Background);
+    this.m_KeysDecoration2 = Entity.create(s_PopupDecoration1, this.m_Background);
+
+    this.m_KeysDecoration1.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(270));
+    this.m_KeysDecoration2.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(270));
+
+    this.m_KeysDecoration1.setScale(0.7);
+    this.m_KeysDecoration2.setScale(0.7);
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
+    this.m_ActionButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
+    this.m_BackgroundText.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(100));
+    this.m_ActionText.setCenterPosition(this.m_ActionButton.getWidth() / 2, this.m_ActionButton.getHeight() / 2);
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Lock);
+    this.m_ActionButton.setTouchHandler('onActionEvent', Lock);
   },
   onActionEvent: function() {
-    //
+    this.m_ActionButton.action = true;
+
+    this.hide();
+  },
+  show: function(id) {
+    this._super();
+
+    this.id = id;
   },
   onShow: function() {
     this._super();
+
+    this.m_ActionButton.action = false;
   },
   onHide: function() {
+    if(this.m_ActionButton.action) {
+      if(true) {
+        this.getParent().unlock(this.id);
+      } else {
+        Keys.sharedScreen(this.m_Parent).show();
+      }
+    }
+
     this._super();
 
     Lock.instance = false;
+  },
+  update: function(time) {
+    this._super(time);
+
+    this.m_KeysDecoration1.setRotation(this.m_Decoration1.getRotation() + 10 * time);
+    this.m_KeysDecoration2.setRotation(this.m_Decoration2.getRotation() - 10 * time);
   }
 });
 

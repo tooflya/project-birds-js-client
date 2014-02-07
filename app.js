@@ -40,9 +40,14 @@
     }, [
     'Sources/Resources.js',
     'Sources/Language.js',
+    'Sources/Properties.js',
     'Sources/Entities/Button.js',
-    'Sources/Entities/LoadingWave.js',
+    'Sources/Entities/CircleDecoration1.js',
+    'Sources/Entities/CircleDecoration2.js',
     'Sources/Entities/PopupShader.js',
+    'Sources/Entities/Mark.js',
+    'Sources/Entities/Explosion.js',
+    'Sources/Entities/Bird.js',
     'Sources/Screens/Screens/Preloader.js',
     'Sources/Screens/Screens/Menu.js',
     'Sources/Screens/Screens/Settings.js',
@@ -52,6 +57,7 @@
     'Sources/Screens/Screens/More.js',
     'Sources/Screens/Screens/Reset.js',
     'Sources/Screens/Screens/Shop.js',
+    'Sources/Screens/Screens/Levels.js',
     'Sources/Screens/Screens/Loading.js',
     'Sources/Screens/Screens/Game.js',
     'Sources/Screens/Popups/ExtendedPopup.js',
@@ -67,17 +73,22 @@
     'Sources/Screens/Popups/Help.js',
     'Sources/Screens/Popups/Lock.js',
     'Sources/Screens/Popups/Item.js',
+    'Sources/Screens/Popups/Bought.js',
     'Sources/Screens/Popups/Rating.js',
     'Sources/Screens/Popups/Pause.js',
     'Sources/Screens/Popups/Achievements.js',
+    'Sources/Screens/Popups/Finish.js',
     'Sources/Managers/PopupShaderManager.js',
     'Sources/Panels/MenuPanel.js',
     'Sources/Panels/GamePanel.js',
     'Sources/Lists/AboutList.js',
-    'Sources/Lists/ItemList.js'
+    'Sources/Lists/ItemList.js',
+    'Sources/Lists/HelpList.js',
+    'Sources/Lists/AchievementsList.js',
+    'Sources/Lists/LeaderboardList.js'
   ], function() {
     Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
+      ScreenManager.sharedManager().replace(Game);
     }, application);
   });
 })();

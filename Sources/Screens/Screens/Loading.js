@@ -41,10 +41,16 @@ Loading = Screen.extend({
 
     this.m_Background = Entity.create(s_LoadingBackground, this, true);
     this.m_BackgroundDecoration = Entity.create(s_LoadingDecoration, this, true);
-    this.m_BackgroundWaves = EntityManager.create(15, LoadingWave.create(), this.m_Background);
+    this.m_BackgroundWaves = EntityManager.create(15, CircleDecoration1.create(), this.m_Background);
+
+    this.m_TipText = Text.create(false, this);
+    this.m_LoadingText = Text.create('loading', this);
   },
   onShow: function() {
     this._super();
+
+    this.m_TipText.setText('tip-0');// + Random.sharedRandom().random(0, 10, true));
+    this.m_TipText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(300) - this.m_TipText.getHeight() / 2);
 
     this.m_BackgroundWaves.clear();
   },
@@ -73,6 +79,9 @@ Loading = Screen.extend({
 
       this.onComplete();
     }
+
+    this.m_LoadingText.ccsf([Math.floor(this.m_LoadingTimeElapsed / this.m_LoadingTime * 100)]);
+    this.m_LoadingText.setCenterPosition(Camera.sharedCamera().width - this.m_LoadingText.getWidth() / 2 - Camera.sharedCamera().coord(32), Camera.sharedCamera().coord(50));
   }
 });
 

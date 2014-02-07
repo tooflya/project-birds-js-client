@@ -37,16 +37,16 @@ MenuPanel = Panel.extend({
       e.ccsf([2150]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([0]);
+      e.ccsf([150]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([0]);
+      e.ccsf([5]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([0]);
+      e.ccsf([150]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon5, 3, 3], false, function(e) {
-      e.ccsf([0]);
+      e.ccsf(['1047']);
     });
 
     this.getIcons()[0].animate(0.02);

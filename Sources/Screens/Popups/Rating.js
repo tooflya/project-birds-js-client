@@ -33,6 +33,16 @@ Rating = ExtendedPopup.extend({
   ctor: function(parent) {
     this._super(parent);
 
+    this.m_BackgroundHolder1 = Entity.create(s_ListFixSmall, this.m_Background);
+    this.m_BackgroundHolder2 = Entity.create(s_ListFixSmall, this.m_Background);
+
+    this.m_List = LeaderboardList.create(this.m_Background);
+
+    this.m_BackgroundHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(308));
+    this.m_BackgroundHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(398));
+
+    this.m_BackgroundHolder2.setScaleY(-1);
+
     this.m_CloseButton.setTouchHandler('onCloseEvent', Rating);
   },
   onShow: function() {

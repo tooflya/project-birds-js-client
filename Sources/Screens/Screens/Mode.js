@@ -35,6 +35,8 @@ Mode = Screen.extend({
 
     Mode.instance = this;
 
+    this.m_Lock = [];
+
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
@@ -46,6 +48,8 @@ Mode = Screen.extend({
     this.m_AchievementsButton = Button.create(s_SfxButtonsSprite, 3, 2, this);
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_HelpButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_Lock[0] = Entity.create(s_Lock, this.m_ClassicMode);
+    this.m_Lock[1] = Entity.create(s_Lock, this.m_ArcadeMode);
 
     this.m_ProgressModeText = Text.create('progress-mode', this.m_ProgressMode);
     this.m_ClassicModeText = Text.create('classic-mode', this.m_ClassicMode);
@@ -61,6 +65,8 @@ Mode = Screen.extend({
     this.m_AchievementsButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(110), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(320));
     this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(70));
     this.m_HelpButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(80), Camera.sharedCamera().height - Camera.sharedCamera().coord(70));
+    this.m_Lock[0].create().setCenterPosition(0, this.m_ClassicMode.getHeight() / 2);
+    this.m_Lock[1].create().setCenterPosition(0, this.m_ArcadeMode.getHeight() / 2);
     this.m_RatingButton.setCurrentFrameIndex(5);
     this.m_AchievementsButton.setCurrentFrameIndex(2);
     this.m_ShopButton.setCurrentFrameIndex(8);
@@ -72,9 +78,9 @@ Mode = Screen.extend({
     this.m_ArcadeModeText.setCenterPosition(this.m_ArcadeMode.getWidth() / 2, this.m_ArcadeMode.getHeight() / 2);
 
     this.m_BackButton.setTouchHandler('onBackEvent', Mode);
-    this.m_ProgressMode.setTouchHandler('onGameEvent', Mode);
-    this.m_ClassicMode.setTouchHandler('onGameEvent', Mode);
-    this.m_ArcadeMode.setTouchHandler('onGameEvent', Mode);
+    this.m_ProgressMode.setTouchHandler('onProgressEvent', Mode);
+    this.m_ClassicMode.setTouchHandler('onClassicEvent', Mode);
+    this.m_ArcadeMode.setTouchHandler('onArcadeEvent', Mode);
     this.m_RatingButton.setTouchHandler('onRatingEvent', Mode);
     this.m_AchievementsButton.setTouchHandler('onAchievementsEvent', Mode);
     this.m_ShopButton.setTouchHandler('onShopEvent', Mode);
@@ -83,12 +89,27 @@ Mode = Screen.extend({
     Help.sharedScreen(this).prepare();
     Rating.sharedScreen(this).prepare();
     Achievements.sharedScreen(this).prepare();
+    Lock.sharedScreen(this).prepare();
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Menu);
   },
-  onGameEvent: function() {
-    ScreenManager.sharedManager().replace(Loading);
+  onProgressEvent: function() {
+    ScreenManager.sharedManager().replace(Levels);
+  },
+  onClassicEvent: function() {
+    if(false) {
+      Lock.sharedScreen(this).show(0);
+    } else {
+      ScreenManager.sharedManager().replace(Loading);
+    }
+  },
+  onArcadeEvent: function() {
+    if(true) {
+      Lock.sharedScreen(this).show(1);
+    } else {
+      ScreenManager.sharedManager().replace(Loading);
+    }
   },
   onRatingEvent: function() {
     Rating.sharedScreen(this).show();
@@ -101,6 +122,34 @@ Mode = Screen.extend({
   },
   onHelpEvent: function() {
     Help.sharedScreen(this).show();
+  },
+  unlock: function(id) {
+    var line = Entity.create(s_ModeUnlockLine, this);
+
+    line.create().setCenterPosition(this.m_Lock[id].getParent().getCenterX(), this.m_Lock[id].getParent().getCenterY());
+    line.setOpacity(0);
+    line.setScaleY(5);
+    line.setScaleX(Camera.sharedCamera().width / line.getWidth());
+
+    this.m_Lock[id].runRecognizeAction(false, {
+      name: 'scale',
+      time: 1.0,
+      value: 3.0
+    });
+    this.m_Lock[id].runRecognizeAction(false, {
+      name: 'fade',
+      time: 1.0,
+      value: 0.0
+    });
+    line.runRecognizeAction(false, [{
+      name: 'fade',
+      time: 0.5,
+      value: 255.0
+    }, {
+      name: 'fade',
+      time: 0.5,
+      value: 0.0
+    }]);
   },
   onShow: function() {
     this._super();

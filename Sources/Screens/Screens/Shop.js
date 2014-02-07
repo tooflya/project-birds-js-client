@@ -43,6 +43,7 @@ Shop = Screen.extend({
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
 
     Item.sharedScreen(this).prepare();
+    Bought.sharedScreen(this).prepare();
 
     this.m_Wheels = new Array();
     this.m_Shelfs = new Array();
@@ -89,7 +90,7 @@ Shop = Screen.extend({
 
         this.m_Items[i][j].create().setCenterPosition(x, this.m_Items[i][j].getHeight() - Camera.sharedCamera().coord(42));
 
-        this.m_Items[i][j].create().setCurrentFrameIndex((20 * i) + j);
+        this.m_Items[i][j].setCurrentFrameIndex((20 * i) + j);
 
         this.m_Items[i][j].setTouchHandler('show', Item, {id: counter});
         this.m_Items[i][j].setZOrder(3);
