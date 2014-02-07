@@ -88,7 +88,7 @@
     'Sources/Lists/LeaderboardList.js'
   ], function() {
     Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Game);
+      ScreenManager.sharedManager().replace(Menu);
     }, application);
   });
 })();

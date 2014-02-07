@@ -49,9 +49,9 @@ Game = Screen.extend({
 
     this.m_PreviewBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
 
-    this.m_Marks = EntityManager.create(10, Mark.create(), this, 100);
-    this.m_Birds = EntityManager.create(10, Bird.create(false, this.getPhysicsWorld()), this, 105);
-    this.m_Explosions = EntityManager.create(10, Explosion.create(), this, 110);
+    this.m_Marks = EntityManager.create(1000, Mark.create(), this, 100);
+    this.m_Birds = EntityManager.create(30, Bird.create(false, this.getPhysicsWorld()), this, 105);
+    this.m_Explosions = EntityManager.create(30, Explosion.create(), this, 110);
 
     this.m_PreviewText = Text.create(false, this);
 
