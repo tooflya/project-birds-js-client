@@ -60,7 +60,7 @@ var g_language  = {
     ],
   'keys-popup': [
     {title: 'You need to buy \n some keys for unlock!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
-    {title: '', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
+    {title: 'Желаете купить несколько ключей?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
     ],
   'progress-mode': [
     {title: 'Progress', font: 'Comic Sans MS', size: 40, dimensions: false},
@@ -76,19 +76,19 @@ var g_language  = {
     ],
   'lives-popup-1': [
     {title: 'You have run out of extra lives! Restore them or wait until they recover.', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]},
-    {title: '', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]}
+    {title: 'У вас закончились экстра жизни! Восстановите их или подождите пока они восстановятся.', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]}
     ],
   'coins-popup': [
     {title: 'You need to buy some coins!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
-    {title: '', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
+    {title: 'Желаете купить несколько монет?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
     ],
   'rate-popup-1': [
     {title: 'Do you like our awesome game?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
-    {title: '', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
+    {title: 'Вам понравилась наша игра?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
     ],
   'rate-popup-2': [
     {title: 'Please rate it in the your social network!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
-    {title: '', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
+    {title: 'Пожалуйста оцените ее в магазине приложений!', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]}
     ],
   'rate-popup-3': [
     {title: 'Rate', font: 'Comic Sans MS', size: 48, dimensions: false},
@@ -96,11 +96,11 @@ var g_language  = {
     ],
   'reset-popup-1': [
     {title: 'Are you sure that you want to reset your progress?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
-    {title: '', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
+    {title: 'Вы уверены что хотите сбросить прогресс?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
     ],
   'reset-popup-2': [
     {title: 'You will start game from the first level!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
-    {title: '', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
+    {title: 'Вы начнете игру с первого уровня!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
     ],
   'reset-popup-3': [
     {title: 'Reset', font: 'Comic Sans MS', size: 48, dimensions: false},
@@ -108,7 +108,7 @@ var g_language  = {
     ],
   'reset': [
     {title: 'If you want to start game again you can completely reset your progress now.', font: 'Comic Sans MS', size: 48, dimensions: [800, 0]},
-    {title: '', font: 'Comic Sans MS', size: 48, dimensions: [800, 0]}
+    {title: 'Если вы хотите начать игру заново вы можете полностью сбросить прогресс игры.', font: 'Comic Sans MS', size: 48, dimensions: [800, 0]}
     ],
   'reset-button': [
     {title: 'Reset', font: 'Comic Sans MS', size: 48, dimensions: false},
@@ -193,6 +193,110 @@ var g_language  = {
   'item-already-bought': [
     {title: "Alredy bought", font: "Comic Sans MS", size: 32, dimensions: false},
     {title: "Уже куплено", font: "Comic Sans MS", size: 32, dimensions: false}
+    ],
+  'buy': [
+    {title: "Buy", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "Купить", font: "Comic Sans MS", size: 48, dimensions: false}
+    ],
+  'choose': [
+    {title: "Choose", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "Выбрать", font: "Comic Sans MS", size: 48, dimensions: false}
+    ],
+  'tap-to-continue': [
+    {title: "Tap to continue", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "Нажмите для продолжения", font: "Comic Sans MS", size: 48, dimensions: false}
+    ],
+  'unlocked': [
+    {title: "was unlocked", font: "Comic Sans MS", size: 62, dimensions: false},
+    {title: "было куплено", font: "Comic Sans MS", size: 62, dimensions: false}
+    ],
+  'unlock': [
+    {title: "Unlock", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "Открыть", font: "Comic Sans MS", size: 48, dimensions: false}
+    ],
+  'mode-unlock': [
+    {title: "You can unlock this game mode just for:", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Вы можете открыть этот игры всего за:", font: "Comic Sans MS", size: 48, dimensions: [450, 0]}
+    ],
+  'help-popup-1': [
+    {title: "About modes", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "О режимах", font: "Comic Sans MS", size: 48, dimensions: [450, 0]}
+    ],
+  'help-popup-2': [
+    {title: "Progress mode", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Режим прохождения", font: "Comic Sans MS", size: 36, dimensions: [450, 0]}
+    ],
+  'help-popup-3': [
+    {title: "Classic mode", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Классический режим", font: "Comic Sans MS", size: 36, dimensions: [450, 0]}
+    ],
+  'help-popup-4': [
+    {title: "Arcade modes", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Аркадный режим", font: "Comic Sans MS", size: 36, dimensions: [450, 0]}
+    ],
+  'help-popup-5': [
+    {title: "Progress mode - a special mode. Available to you 80 levels (update soon) with a variety of tasks. As you progress through levels you will unlock new opportunities that you can get to use in other game modes.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Прохождение - это особый режим. Вам доступно 80 уровней (обновления совсем скоро) с различными заданиями. По мере прохождения уровней вам будут открываться новые возможности, которые вы можте использовать в других режимах игры.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]}
+    ],
+  'help-popup-7': [
+    {title: "Classic mode - the game in which you have to compete with other players to earn coins, to increase its global ranking and use the bonus earned.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Классический режим - режим игры в котором вам предстоит соревноваться с другими игроками, зарабатывать монеты, увеличивать свой глобальный рейтинг и пользоваться заработанными бонусами.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]}
+    ],
+  'help-popup-6': [
+    {title: "Arcade mode - allow you to show what you can do in one minute! As the game progresses your skills increase and you are quite able to surpass its previous record!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Режим аркады - позволит вам показать на что вы способны за одну минуту! По мере прохождения игры ваши навыки увеличиваются и вы вполне в силах превзойти свой предыдущий рекорд!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]}
+    ],
+  'tip-0': [
+    {title: "Tip 0", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Каждая бонусная птица обладает уникальными способностями в каждом из режимов игры - посмотрите на что они способны!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]}
+    ],
+  'tip-1': [
+    {title: "Tip 1", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 1", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-2': [
+    {title: "Tip 2", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 2", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-3': [
+    {title: "Tip 3", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 3", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-4': [
+    {title: "Tip 4", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 4", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-5': [
+    {title: "Tip 5", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 5", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-6': [
+    {title: "Tip 6", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 6", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-7': [
+    {title: "Tip 7", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 7", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-8': [
+    {title: "Tip 8", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 8", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-9': [
+    {title: "Tip 9", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 9", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'tip-10': [
+    {title: "Tip 10", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Tip 10", font: "Comic Sans MS", size: 42, dimensions: [800, 0]}
+    ],
+  'game-preview-0': [
+    {title: "Ready?", font: "Comic Sans MS", size: 128, dimensions: false},
+    {title: "Готовы?", font: "Comic Sans MS", size: 128, dimensions: false}
+    ],
+  'game-preview-1': [
+    {title: "Go!", font: "Comic Sans MS", size: 128, dimensions: false},
+    {title: "Вперед!", font: "Comic Sans MS", size: 128, dimensions: false}
     ],
 
   'item-title-0': [
