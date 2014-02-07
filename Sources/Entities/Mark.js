@@ -28,3 +28,38 @@
  * @version of cocos2d-x is 2.1.4
  *
  */
+
+Mark = Entity.extend({
+  m_FadeTime: 1.0,
+  ctor: function() {
+      this._super(s_Mark);
+  },
+  onCreate: function() {
+    this._super();
+
+    this.setScale(1);
+    this.setOpacity(255);
+    this.runRecognizeAction(false, {
+      name: "scale",
+      time: this.m_FadeTime,
+      value: 0.0
+    });
+    this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), {
+      name: "fade",
+      time: this.m_FadeTime,
+      value: 0.0
+    });
+  },
+  update: function(time) {
+    this._super(time);
+  },
+  deepCopy: function() {
+    return Mark.create();
+  }
+});
+
+Mark.create = function() {
+  var entity = new Mark();
+
+  return entity;
+};
