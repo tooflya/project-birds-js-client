@@ -33,13 +33,20 @@ Bird = PhysicsEntity.extend({
     dongle: 1
   },
   m_Id: 0,
+  m_Lifes: 0,
+  m_Explosions: false,
   ctor: function(parent, world) {
       this._super(s_Birds, 14, 9, parent, world);
+
+      this.m_Explosions = EntityManager.create(5, BirdExplosion.create(), this);
   },
   onCreate: function() {
     this._super();
 
     this.m_Id = Random.sharedRandom().random(0, Bird.count, true) * this.getHorizontalFramesCount();
+    this.m_Lifes = 12; // TODO:
+
+    this.m_Explosions.clear();
 
     this.setCurrentFrameIndex(this.m_Id);
 
@@ -48,12 +55,16 @@ Bird = PhysicsEntity.extend({
   onDestroy: function() {
     this._super();
 
+    this.m_Explosions.clear();
+
     if(this.getCenterY() > -this.getHeight() / 2) {
       Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+    } else {
+      Game.sharedScreen().onLost(this);
     }
   },
-  onCollideStart: function(entity) {
-    this.destroy();
+  onCollideStart: function(entity, point) {
+    this.m_Explosions.create().setCenterPosition(point.x, point.y);
   },
   onCollideFinish: function(entity) {
   },
@@ -85,7 +96,7 @@ Bird = PhysicsEntity.extend({
     };
     values.force = {
       x: Random.sharedRandom().random(-Math.abs(Camera.sharedCamera().center.x - values.position.x), Math.abs(Camera.sharedCamera().center.x - values.position.x)),
-      y: Random.sharedRandom().random(30, 50) * -this.m_PhysicsWorld.GetGravity().y
+      y: Random.sharedRandom().random(30, 50) * -this.getCurrentPhysicsWorld().GetGravity().y
     };
 
     this.setLinearVelocity(values.force.x, values.force.y);
