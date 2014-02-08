@@ -48,6 +48,7 @@
     'Sources/Entities/Mark.js',
     'Sources/Entities/Explosion.js',
     'Sources/Entities/Bird.js',
+    'Sources/Entities/BirdExplosion.js',
     'Sources/Screens/Screens/Preloader.js',
     'Sources/Screens/Screens/Menu.js',
     'Sources/Screens/Screens/Settings.js',
@@ -85,10 +86,13 @@
     'Sources/Lists/ItemList.js',
     'Sources/Lists/HelpList.js',
     'Sources/Lists/AchievementsList.js',
-    'Sources/Lists/LeaderboardList.js'
+    'Sources/Lists/LeaderboardList.js',
+    'Sources/Game/Preview.js',
+    'Sources/Game/Events.js',
+    'Sources/Game/Thrower.js'
   ], function() {
     Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
+      ScreenManager.sharedManager().replace(Game);
     }, application);
   });
 })();
