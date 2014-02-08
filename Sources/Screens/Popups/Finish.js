@@ -44,6 +44,8 @@ Finish = Background.extend({
 
     this.m_Background1.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + this.m_Background1.getHeight() / 2);
     this.m_Background2.create().setCenterPosition(Camera.sharedCamera().center.x, -this.m_Background1.getHeight() / 2);
+
+    this.setZOrder(500);
   },
   show: function() {
     this.m_BackgroundSquare.setScale(3.0);
