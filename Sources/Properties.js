@@ -30,12 +30,48 @@
  */
 
 var weapon = 0;
+var purchase = {
+  coins: {
+    pack1: 0,
+    pack2: 1,
+    pack3: 2,
+    pack4: 3
+  },
+  keys: {
+    pack1: 4,
+    pack2: 5
+  }
+};
+var references = {
+  coins: {
+    gold: 1,
+    silver: 2,
+    keys: 3,
+    lives: 4
+  },
+  lock: {
+    modes: {
+      classic: 5,
+      arcade: 6
+    }
+  }
+};
+var unlock = {
+  modes: [
+    {
+      price: 25
+    },
+    {
+      price: 40
+    }
+  ]
+};
 var properties = {
   items: [
     {
       id: 0,
       popularity: 0,
-      properties: '?',
+      properties: '12',
       price: {
         gold: 0,
         silver: 0
@@ -44,91 +80,91 @@ var properties = {
     {
       id: 1,
       popularity: 0,
-      properties: '?',
+      properties: '22',
       price: {
-        gold: 520,
-        silver: 1348
+        gold: 0,
+        silver: 200
       }
     },
     {
       id: 2,
       popularity: 0,
-      properties: '?',
+      properties: '31',
       price: {
-        gold: 520,
-        silver: 520
+        gold: 0,
+        silver: 300
       }
     },
     {
       id: 3,
       popularity: 0,
-      properties: '?',
+      properties: '36',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 25,
+        silver: 400
       }
     },
     {
       id: 4,
       popularity: 0,
-      properties: '?',
+      properties: '42',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 35,
+        silver: 500
       }
     },
     {
       id: 5,
       popularity: 0,
-      properties: '?',
+      properties: '48',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 45,
+        silver: 600
       }
     },
     {
       id: 6,
       popularity: 0,
-      properties: '?',
+      properties: '52',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 100,
+        silver: 1500
       }
     },
     {
       id: 7,
       popularity: 0,
-      properties: '?',
+      properties: '61',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 200,
+        silver: 3000
       }
     },
     {
       id: 8,
       popularity: 0,
-      properties: '?',
+      properties: '68',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 300,
+        silver: 5000
       }
     },
     {
       id: 9,
       popularity: 0,
-      properties: '?',
+      properties: '75',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 350,
+        silver: 8000
       }
     },
     {
       id: 10,
       popularity: 0,
-      properties: '?',
+      properties: '88',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 600,
+        silver: 10000
       }
     },
     {
@@ -215,73 +251,73 @@ var properties = {
     {
       id: 20,
       popularity: 0,
-      properties: '?',
+      properties: '0:10',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 50,
+        silver: 2000
       }
     },
     {
       id: 21,
       popularity: 0,
-      properties: '?',
+      properties: '0:30',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 60,
+        silver: 2500
       }
     },
     {
       id: 22,
       popularity: 0,
-      properties: '?',
+      properties: '0:00',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 70,
+        silver: 3000
       }
     },
     {
       id: 23,
       popularity: 0,
-      properties: '?',
+      properties: '0:00',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 100,
+        silver: 5000
       }
     },
     {
       id: 24,
       popularity: 0,
-      properties: '?',
+      properties: '0:23',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 100,
+        silver: 7000
       }
     },
     {
       id: 25,
       popularity: 0,
-      properties: '?',
+      properties: '0:00',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 120,
+        silver: 8000
       }
     },
     {
       id: 26,
       popularity: 0,
-      properties: '?',
+      properties: '0:45',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 150,
+        silver: 9000
       }
     },
     {
       id: 27,
-      popularity: 0,
-      properties: '?',
+      popularity: 100,
+      properties: '0:00',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 150,
+        silver: 10000
       }
     },
     {
@@ -395,28 +431,28 @@ var properties = {
     {
       id: 40,
       popularity: 0,
-      properties: '?',
+      properties: '50%',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 100,
+        silver: 1000
       }
     },
     {
       id: 41,
       popularity: 0,
-      properties: '?',
+      properties: '1',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 100,
+        silver: 2000
       }
     },
     {
       id: 42,
       popularity: 0,
-      properties: '?',
+      properties: ' + 10',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 200,
+        silver: 2000
       }
     },
     {
@@ -424,8 +460,8 @@ var properties = {
       popularity: 0,
       properties: '?',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 150,
+        silver: 3000
       }
     },
     {
@@ -433,35 +469,35 @@ var properties = {
       popularity: 0,
       properties: '?',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 100,
+        silver: 2500
       }
     },
     {
       id: 45,
       popularity: 0,
-      properties: '?',
+      properties: 'x2',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 50,
+        silver: 5000
       }
     },
     {
       id: 46,
       popularity: 0,
-      properties: '?',
+      properties: 'x2',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 100,
+        silver: 5000
       }
     },
     {
       id: 47,
       popularity: 0,
-      properties: '?',
+      properties: 'x2',
       price: {
-        gold: 0,
-        silver: 0
+        gold: 100,
+        silver: 4000
       }
     },
     {

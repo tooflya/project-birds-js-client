@@ -30,23 +30,37 @@
  */
 
 MenuPanel = Panel.extend({
+  m_Keys: [
+    references.coins.gold,
+    references.coins.silver,
+    references.coins.lives,
+    references.coins.keys,
+    references.coins.rating,
+  ],
+  m_Fields: [
+    DataManager.sharedManager().get(references.coins.gold),
+    DataManager.sharedManager().get(references.coins.silver),
+    DataManager.sharedManager().get(references.coins.lives),
+    DataManager.sharedManager().get(references.coins.keys),
+    DataManager.sharedManager().get(references.rating)
+  ],
   ctor: function(parent) {
     this._super(s_InterfacePanel, parent);
 
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([2150]);
+      e.ccsf([MenuPanel.sharedScreen().m_Fields[0]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([150]);
+      e.ccsf([MenuPanel.sharedScreen().m_Fields[1]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([5]);
+      e.ccsf([MenuPanel.sharedScreen().m_Fields[2]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([150]);
+      e.ccsf([MenuPanel.sharedScreen().m_Fields[3]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon5, 3, 3], false, function(e) {
-      e.ccsf(['1047']);
+      e.ccsf([MenuPanel.sharedScreen().m_Fields[4]]);
     });
 
     this.getIcons()[0].animate(0.02);
@@ -89,6 +103,17 @@ MenuPanel = Panel.extend({
   },
   onExit: function() {
     this._super();
+  },
+  update: function(time) {
+    if(!MenuPanel.instance) return;
+
+    this._super(time);
+
+    for(var i = 0; i < 5; i++) {
+      if(this.m_Fields[i] != DataManager.sharedManager().get(this.m_Keys[i])) {
+        this.m_Fields[i] += this.m_Fields[i] > DataManager.sharedManager().get(this.m_Keys[i]) ? -1 : 1;
+      }
+    }
   }
 });
 

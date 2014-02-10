@@ -45,12 +45,24 @@ Keys = ExtendedPopup.extend({
 
     this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(150));
 
-    this.m_CoinsButton1.setTouchHandler('onActionEvent', Keys);
-    this.m_CoinsButton2.setTouchHandler('onActionEvent', Keys);
+    this.m_CoinsButton1.setTouchHandler('onActionEvent', Keys, {id: purchase.keys.pack1});
+    this.m_CoinsButton2.setTouchHandler('onActionEvent', Keys, {id: purchase.keys.pack2});
+
     this.m_CloseButton.setTouchHandler('onCloseEvent', Keys);
   },
-  onActionEvent: function() {
-    //
+  onActionEvent: function(params) {
+    this.hide(function() {
+      PurchaseManager.sharedManager(this.getParent()).show(params, function(id) {
+        switch(id) {
+          case purchase.keys.pack1:
+          DataManager.sharedManager().update(references.coins.keys, 50);
+          break;
+          case purchase.keys.pack2:
+          DataManager.sharedManager().update(references.coins.keys, 200);
+          break;
+        }
+      });
+    });
   },
   onShow: function() {
     this._super();

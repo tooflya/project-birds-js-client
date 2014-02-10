@@ -32,6 +32,18 @@
 GamePanel = Panel.extend({
   m_DecorationTime: 1.0,
   m_DecorationTimeElapsed: 0,
+  m_Keys: [
+    references.coins.gold,
+    references.coins.silver,
+    references.coins.lives,
+    references.coins.keys
+  ],
+  m_Fields: [
+    DataManager.sharedManager().get(references.coins.gold),
+    DataManager.sharedManager().get(references.coins.silver),
+    DataManager.sharedManager().get(references.coins.lives),
+    DataManager.sharedManager().get(references.coins.keys)
+  ],
   ctor: function(type, parent) {
     this._super(s_GamePanel, parent);
 
@@ -39,10 +51,10 @@ GamePanel = Panel.extend({
       e.ccsf([0]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([0]);
+      e.ccsf([GamePanel.sharedScreen().m_Fields[0]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([0]);
+      e.ccsf([GamePanel.sharedScreen().m_Fields[1]]);
     });
 
     var u=0;
@@ -52,16 +64,16 @@ GamePanel = Panel.extend({
         this.addItem(s_PanelItemsBackground2, [s_Star, 3, 2]);
         this.addItem(s_PanelItemsBackground2, [s_Star, 3, 2]);
 
-    this.getIcons()[3].setCurrentFrameIndex(0);
-    this.getIcons()[4].setCurrentFrameIndex(1);
-    this.getIcons()[5].setCurrentFrameIndex(2);
+        this.getIcons()[3].setCurrentFrameIndex(0);
+        this.getIcons()[4].setCurrentFrameIndex(1);
+        this.getIcons()[5].setCurrentFrameIndex(2);
 
-    this.getIcons()[3].setScale(0.3);
-    this.getIcons()[4].setScale(0.3);
-    this.getIcons()[5].setScale(0.3);
+        this.getIcons()[3].setScale(0.3);
+        this.getIcons()[4].setScale(0.3);
+        this.getIcons()[5].setScale(0.3);
 
-    this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
-    this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
+        this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
+        this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
 
         u=3;
       break;
@@ -70,18 +82,18 @@ GamePanel = Panel.extend({
         this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
         this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
 
-    this.getIcons()[3].setCurrentFrameIndex(1);
-    this.getIcons()[4].setCurrentFrameIndex(1);
-    this.getIcons()[5].setCurrentFrameIndex(1);
+        this.getIcons()[3].setCurrentFrameIndex(1);
+        this.getIcons()[4].setCurrentFrameIndex(1);
+        this.getIcons()[5].setCurrentFrameIndex(1);
 
-    this.getIcons()[3].setScale(0.95);
-    this.getIcons()[5].setScale(0.95);
+        this.getIcons()[3].setScale(0.95);
+        this.getIcons()[5].setScale(0.95);
 
-    this.getIcons()[3].setRotation(-5);
-    this.getIcons()[5].setRotation(5);
+        this.getIcons()[3].setRotation(-5);
+        this.getIcons()[5].setRotation(5);
 
-    this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
-    this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
+        this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
+        this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
 
         u=3;
       break;
@@ -90,28 +102,28 @@ GamePanel = Panel.extend({
         this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
         this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
 
-    this.getIcons()[3].setCurrentFrameIndex(1);
-    this.getIcons()[4].setCurrentFrameIndex(1);
-    this.getIcons()[5].setCurrentFrameIndex(1);
+        this.getIcons()[3].setCurrentFrameIndex(1);
+        this.getIcons()[4].setCurrentFrameIndex(1);
+        this.getIcons()[5].setCurrentFrameIndex(1);
 
-    this.getIcons()[3].setScale(0.95);
-    this.getIcons()[5].setScale(0.95);
+        this.getIcons()[3].setScale(0.95);
+        this.getIcons()[5].setScale(0.95);
 
-    this.getIcons()[3].setRotation(-5);
-    this.getIcons()[5].setRotation(5);
+        this.getIcons()[3].setRotation(-5);
+        this.getIcons()[5].setRotation(5);
 
-    this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
-    this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
+        this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
+        this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
 
         u=3;
       break;
     }
 
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([0]);
+      e.ccsf([GamePanel.sharedScreen().m_Fields[2]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], [s_PanelButton, 1, 1], function(e) {
-      e.ccsf([0]);
+      e.ccsf([GamePanel.sharedScreen().m_Fields[3]]);
     });
     this.addItem(s_PanelItemsBackground2, false, [s_PopupPauseButton, 1, 1]);
 
@@ -142,6 +154,13 @@ GamePanel = Panel.extend({
   },
   show: function() {
     this._super();
+
+    this.m_Fields = [
+      DataManager.sharedManager().get(references.coins.gold),
+      DataManager.sharedManager().get(references.coins.silver),
+      DataManager.sharedManager().get(references.coins.lives),
+      DataManager.sharedManager().get(references.coins.keys)
+    ];
   },
   hide: function() {
     this._super();
@@ -151,7 +170,7 @@ GamePanel = Panel.extend({
   onShow: function() {
     this._super();
 
-    //this.m_BackgroundCircleDecoration.clear();
+    this.m_BackgroundCircleDecoration.clear();
   },
   onHide: function() {
     this._super();
@@ -163,6 +182,8 @@ GamePanel = Panel.extend({
     this._super();
   },
   update: function(time) {
+    if(!GamePanel.instance) return;
+
     this._super(time);
 
     this.m_DecorationTimeElapsed += time;
@@ -171,6 +192,12 @@ GamePanel = Panel.extend({
       this.m_DecorationTimeElapsed = 0;
 
       this.m_BackgroundCircleDecoration.create().setCenterPosition(this.getTexts()[0].getCenterX(), this.getTexts()[0].getCenterY());
+    }
+
+    for(var i = 0; i < 4; i++) {
+      if(this.m_Fields[i] != DataManager.sharedManager().get(this.m_Keys[i])) {
+        this.m_Fields[i] += this.m_Fields[i] > DataManager.sharedManager().get(this.m_Keys[i]) ? -1 : 1;
+      }
     }
   }
 });

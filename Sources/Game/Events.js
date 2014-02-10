@@ -35,7 +35,7 @@ Game.prototype.onBlow = function(element) {
 
 Game.prototype.onLost = function(element) {
   if(!this.m_GameRunning) return false;
-return;
+
   switch(this.m_Type) {
     case this.m_Types.classic:
     GamePanel.sharedScreen(this.m_Type, this).getIcons()[3 + this.m_Lifes].setCurrentFrameIndex(0);
@@ -66,19 +66,16 @@ Game.prototype.onGameFinish = function() {
   this.m_GameRunning = false;
 
   Finish.sharedScreen(this).show();
+  GamePanel.sharedScreen().hide();
 };
 
 Game.prototype.onShow = function() {
-  this._super();
-
   GamePanel.sharedScreen(this.m_Type, this).show();
 
   this.startPreview();
 };
 
 Game.prototype.onHide = function() {
-  this._super();
-
   Game.instance = false;
 };
 
@@ -87,7 +84,7 @@ Game.prototype.onEnterTransitionDidFinish = function() {
 };
 
 Game.prototype.onExitTransitionDidStart = function() {
-  this._super();
+  Screen.prototype.onExitTransitionDidStart.call(this);
 
   GamePanel.sharedScreen(this.m_Type, this).hide();
 };

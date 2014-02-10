@@ -35,7 +35,7 @@ Game = Screen.extend({
     classic: 1,
     arcade: 2
   },
-  m_ThrowParams: [
+  m_ThrowParameters: [
     {
       time: 0.0,
       timeElapsed: 0.0,
@@ -81,7 +81,7 @@ Game = Screen.extend({
     Game.instance = this;
 
     this.m_Type = this.m_Types.classic;
-    this.m_ThrowParams = this.m_ThrowParams[this.m_Type];
+    this.m_ThrowParams = this.m_ThrowParameters[this.m_Type];
 
     this.m_Background = Entity.create(s_GameBackground1, this, true);
 

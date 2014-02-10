@@ -86,9 +86,12 @@ Item = ExtendedPopup.extend({
       var silver = properties.items[this.m_ActionButton.params.id].price.silver;
       var gold = properties.items[this.m_ActionButton.params.id].price.gold;
 
-      if(0 < silver || 1 < gold) {
+      if(DataManager.sharedManager().get(references.coins.silver) < silver || DataManager.sharedManager().get(references.coins.gold) < gold) {
         Coins.sharedScreen(this.m_Parent).show();
       } else {
+        DataManager.sharedManager().update(references.coins.gold, -gold);
+        DataManager.sharedManager().update(references.coins.silver, -silver);
+
         Bought.sharedScreen(this.m_Parent).show(this.m_ActionButton.params);
       }
     }

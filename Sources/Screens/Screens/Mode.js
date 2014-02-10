@@ -98,14 +98,14 @@ Mode = Screen.extend({
     ScreenManager.sharedManager().replace(Levels);
   },
   onClassicEvent: function() {
-    if(false) {
+    if(!DataManager.sharedManager().get(references.lock.modes.classic)) {
       Lock.sharedScreen(this).show(0);
     } else {
       ScreenManager.sharedManager().replace(Loading);
     }
   },
   onArcadeEvent: function() {
-    if(true) {
+    if(!DataManager.sharedManager().get(references.lock.modes.arcade)) {
       Lock.sharedScreen(this).show(1);
     } else {
       ScreenManager.sharedManager().replace(Loading);
@@ -124,37 +124,49 @@ Mode = Screen.extend({
     Help.sharedScreen(this).show();
   },
   unlock: function(id) {
-    var line = Entity.create(s_ModeUnlockLine, this);
+    if(DataManager.sharedManager().get(references.coins.keys) > unlock.modes[id].price) {
+      var mode = id == 0 ? references.lock.modes.classic : references.lock.modes.arcade;
 
-    line.create().setCenterPosition(this.m_Lock[id].getParent().getCenterX(), this.m_Lock[id].getParent().getCenterY());
-    line.setOpacity(0);
-    line.setScaleY(5);
-    line.setScaleX(Camera.sharedCamera().width / line.getWidth());
+      DataManager.sharedManager().save(mode, 1);
+      DataManager.sharedManager().update(references.coins.keys, -unlock.modes[id].price);
 
-    this.m_Lock[id].runRecognizeAction(false, {
-      name: 'scale',
-      time: 1.0,
-      value: 3.0
-    });
-    this.m_Lock[id].runRecognizeAction(false, {
-      name: 'fade',
-      time: 1.0,
-      value: 0.0
-    });
-    line.runRecognizeAction(false, [{
-      name: 'fade',
-      time: 0.5,
-      value: 255.0
-    }, {
-      name: 'fade',
-      time: 0.5,
-      value: 0.0
-    }]);
+      var line = Entity.create(s_ModeUnlockLine, this);
+
+      line.create().setCenterPosition(this.m_Lock[id].getParent().getCenterX(), this.m_Lock[id].getParent().getCenterY());
+      line.setOpacity(0);
+      line.setScaleY(5);
+      line.setScaleX(Camera.sharedCamera().width / line.getWidth());
+
+      this.m_Lock[id].runRecognizeAction(false, {
+        name: 'scale',
+        time: 1.0,
+        value: 3.0
+      });
+      this.m_Lock[id].runRecognizeAction(false, {
+        name: 'fade',
+        time: 1.0,
+        value: 0.0
+      });
+      line.runRecognizeAction(false, [{
+        name: 'fade',
+        time: 0.5,
+        value: 255.0
+      }, {
+        name: 'fade',
+        time: 0.5,
+        value: 0.0
+      }]);
+    } else {
+      Keys.sharedScreen(this).show();
+    }
   },
   onShow: function() {
     this._super();
 
     MenuPanel.sharedScreen(this).show();
+
+    if(DataManager.sharedManager().get(references.lock.modes.classic)) this.m_Lock[0].destroy();
+    if(DataManager.sharedManager().get(references.lock.modes.arcade)) this.m_Lock[1].destroy(); 
   },
   onHide: function() {
     this._super();

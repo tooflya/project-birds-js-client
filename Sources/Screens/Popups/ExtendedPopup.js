@@ -85,7 +85,9 @@ ExtendedPopup = Popup.extend({
       value: 1.0
     }]);
   },
-  hide: function() {
+  hide: function(callback) {
+    this._super(callback);
+
     this.runRecognizeAction(false, {
       name: 'fade',
       time: this.m_HideTime,
@@ -112,6 +114,8 @@ ExtendedPopup = Popup.extend({
     });
   },
   onShow: function() {
+    this._super();
+
     this.m_CloseButton.stopAllActions();
     this.m_CloseButton.runAction(
       cc.RepeatForever.create(
@@ -133,6 +137,8 @@ ExtendedPopup = Popup.extend({
     });
   },
   onHide: function() {
+    this._super();
+
     this.removeFromParent();
   },
   onCloseEvent: function() {

@@ -90,7 +90,7 @@ Menu = Screen.extend({
   onShow: function() {
     this._super();
 
-    Rate.sharedScreen(this).show();
+    //Rate.sharedScreen(this).show();
   },
   onHide: function() {
     this._super();

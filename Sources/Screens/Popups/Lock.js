@@ -42,6 +42,12 @@ Lock = ExtendedPopup.extend({
     this.m_KeysDecoration1 = Entity.create(s_PopupDecoration1, this.m_Background);
     this.m_KeysDecoration2 = Entity.create(s_PopupDecoration1, this.m_Background);
 
+    this.m_PriceText = Text.create(false, this.m_Background);
+    this.m_Key = Entity.create(s_UnlockKey, this.m_Background);
+
+    this.m_PriceText.setFontSize(Camera.sharedCamera().coord(50));
+    this.m_PriceText.setColor(cc.c3(255, 200, 15));
+
     this.m_KeysDecoration1.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(270));
     this.m_KeysDecoration2.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(270));
 
@@ -49,6 +55,7 @@ Lock = ExtendedPopup.extend({
     this.m_KeysDecoration2.setScale(0.7);
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
+    this.m_Key.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(270));
     this.m_ActionButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
     this.m_BackgroundText.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(100));
     this.m_ActionText.setCenterPosition(this.m_ActionButton.getWidth() / 2, this.m_ActionButton.getHeight() / 2);
@@ -63,6 +70,10 @@ Lock = ExtendedPopup.extend({
   },
   show: function(id) {
     this._super();
+
+    this.m_PriceText.ccsf([unlock.modes[id].price]);
+    this.m_PriceText.setCenterPosition(this.m_Background.getWidth() / 2 + this.m_PriceText.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(270));
+    this.m_Key.setCenterPosition(this.m_Background.getWidth() / 2 - this.m_PriceText.getWidth() / 2, this.m_Key.getCenterY());
 
     this.id = id;
   },

@@ -54,15 +54,36 @@ Coins = ExtendedPopup.extend({
 
     this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(60));
 
-    this.m_CoinsButton1.setTouchHandler('onActionEvent', Coins);
-    this.m_CoinsButton2.setTouchHandler('onActionEvent', Coins);
-    this.m_CoinsButton3.setTouchHandler('onActionEvent', Coins);
-    this.m_CoinsButton4.setTouchHandler('onActionEvent', Coins);
+    this.m_CoinsButton1.setTouchHandler('onActionEvent', Coins, {id: purchase.coins.pack1});
+    this.m_CoinsButton2.setTouchHandler('onActionEvent', Coins, {id: purchase.coins.pack2});
+    this.m_CoinsButton3.setTouchHandler('onActionEvent', Coins, {id: purchase.coins.pack3});
+    this.m_CoinsButton4.setTouchHandler('onActionEvent', Coins, {id: purchase.coins.pack4});
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Coins);
   },
-  onActionEvent: function() {
-    //
+  onActionEvent: function(params) {
+    this.hide(function() {
+      PurchaseManager.sharedManager(this.getParent()).show(params, function(id) {
+        switch(id) {
+          case purchase.coins.pack1:
+          DataManager.sharedManager().update(references.coins.gold, 25);
+          DataManager.sharedManager().update(references.coins.silver, 1000);
+          break;
+          case purchase.coins.pack2:
+          DataManager.sharedManager().update(references.coins.gold, 150);
+          DataManager.sharedManager().update(references.coins.silver, 5000);
+          break;
+          case purchase.coins.pack3:
+          DataManager.sharedManager().update(references.coins.gold, 500);
+          DataManager.sharedManager().update(references.coins.silver, 15000);
+          break;
+          case purchase.coins.pack4:
+          DataManager.sharedManager().update(references.coins.gold, 2000);
+          DataManager.sharedManager().update(references.coins.silver, 50000);
+          break;
+        }
+      });
+    });
   },
   onShow: function() {
     this._super();

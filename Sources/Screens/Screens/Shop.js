@@ -30,7 +30,7 @@
  */
 
 Shop = Screen.extend({
-  m_ElementsCount: [11, 10, 10],
+  m_ElementsCount: [11, 11, 11],
   m_Backgrounds: [],
   ctor: function() {
     this._super();
@@ -52,21 +52,25 @@ Shop = Screen.extend({
     for(var i = 0; i < 3; i++) {
       var counter = 20 * i;
 
-        this.m_Backgrounds[i] = BackgroundColor.create(cc.c4(0, 0, 0, 0), this, Camera.sharedCamera().width, Camera.sharedCamera().coord(280));
-        this.m_Backgrounds[i].setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) + Camera.sharedCamera().coord(80));
-
         this.m_Wheels[i] = new Array();
         this.m_Shelfs[i] = new Array();
         this.m_Items[i] = new Array();
 
       for(var j = 0; j < 3; j++) {
-        this.m_Wheels[i][j] = Entity.create(s_ShopWheel, this.m_Backgrounds[i]);
+        this.m_Wheels[i][j] = Entity.create(s_ShopWheel, this);
+
+        this.m_Wheels[i][j].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().center.x / 2 * (j - 1), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) - Camera.sharedCamera().coord(50));
+      }
+
+        this.m_Backgrounds[i] = List.create(1920, 280, 320, 0, this, 1);
+        this.m_Backgrounds[i].setListCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) + Camera.sharedCamera().coord(80));
+
+      for(var j = -3; j < 6; j++) {
         this.m_Shelfs[i][j] = TiledEntity.create(s_ShopShelfs, 1, 2, this.m_Backgrounds[i]);
 
-        this.m_Wheels[i][j].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().center.x / 2 * (j - 1), 0);
-        this.m_Shelfs[i][j].create().setCenterPosition(Camera.sharedCamera().center.x + this.m_Shelfs[i][j].getWidth() * (j - 1) + (j == 0 ? Camera.sharedCamera().coord(230) : (Camera.sharedCamera().coord(230) - Camera.sharedCamera().coord(40) * j)), Camera.sharedCamera().coord(25));
+        this.m_Shelfs[i][j].create().setCenterPosition(Camera.sharedCamera().center.x + this.m_Shelfs[i][j].getWidth() * (j - 1) + (j == 0 ? Camera.sharedCamera().coord(230) : (Camera.sharedCamera().coord(230) - Camera.sharedCamera().coord(40) * j)), Camera.sharedCamera().coord(35));
 
-        if(j > 0) {
+        if(j != 0) {
           this.m_Shelfs[i][j].setCurrentFrameIndex(1);
         } else {
 
@@ -77,7 +81,6 @@ Shop = Screen.extend({
           t.setCenterPosition(Camera.sharedCamera().coord(170), this.m_Shelfs[i][j].getHeight() / 2 + Camera.sharedCamera().coord(3));
         }
 
-        this.m_Wheels[i][j].setZOrder(1);
         this.m_Shelfs[i][j].setZOrder(2);
       }
 
@@ -88,7 +91,7 @@ Shop = Screen.extend({
 
         x += this.m_Items[i][j].getHeight() + Camera.sharedCamera().coord(25);
 
-        this.m_Items[i][j].create().setCenterPosition(x, this.m_Items[i][j].getHeight() - Camera.sharedCamera().coord(42));
+        this.m_Items[i][j].create().setCenterPosition(x, this.m_Items[i][j].getHeight() - Camera.sharedCamera().coord(35));
 
         this.m_Items[i][j].setCurrentFrameIndex((20 * i) + j);
 
@@ -121,6 +124,11 @@ Shop = Screen.extend({
     this._super();
 
     Shop.instance = false;
+  },
+  onExitTransitionDidStart: function() {
+    MenuPanel.sharedScreen(this).hide();
+
+    this._super();
   },
   update: function(time) {
     this._super(time);

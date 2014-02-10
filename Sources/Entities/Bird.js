@@ -35,8 +35,8 @@ Bird = PhysicsEntity.extend({
   m_Id: 0,
   m_Lifes: 0,
   m_Explosions: false,
-  ctor: function(parent, world) {
-      this._super(s_Birds, 14, 9, parent, world);
+  ctor: function(parent, world, file, horizontal, vertical) {
+      this._super(file || s_Birds, horizontal || 14, vertical || 9, parent, world);
 
       this.m_Explosions = EntityManager.create(5, BirdExplosion.create(), this);
   },
@@ -108,7 +108,9 @@ Bird = PhysicsEntity.extend({
   update: function(time) {
     this._super(time);
 
-    this.createMark();
+    if(this.getCurrentPhysicsWorld()) {
+      this.createMark();
+    }
   },
   deepCopy: function() {
     return Bird.create(this.getParent(), this.getCurrentPhysicsWorld());
