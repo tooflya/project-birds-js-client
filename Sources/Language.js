@@ -131,12 +131,12 @@ var g_language  = {
     {title: "Об игре", font: "Comic Sans MS", size: 56, dimensions: false}
     ],
   'text-credits-2': [
-    {title: "Version: early alpha", font: "Comic Sans MS", size: 36, dimensions: false},
-    {title: "Версия: глубокая яльфа", font: "Comic Sans MS", size: 36, dimensions: false}
+    {title: "Version: 1.0", font: "Comic Sans MS", size: 36, dimensions: false},
+    {title: "Версия: 1.0", font: "Comic Sans MS", size: 36, dimensions: false}
     ],
   'text-credits-3': [
-    {title: "Build: who cares?", font: "Comic Sans MS", size: 36, dimensions: false},
-    {title: "Сборка: не считаю еще", font: "Comic Sans MS", size: 36, dimensions: false}
+    {title: "Build: 1001", font: "Comic Sans MS", size: 36, dimensions: false},
+    {title: "Сборка: 1001", font: "Comic Sans MS", size: 36, dimensions: false}
     ],
   'text-credits-4': [
     {title: "Created by:", font: "Comic Sans MS", size: 36, dimensions: false},
@@ -216,7 +216,7 @@ var g_language  = {
     ],
   'mode-unlock': [
     {title: "You can unlock this game mode just for:", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "Вы можете открыть этот игры всего за:", font: "Comic Sans MS", size: 48, dimensions: [450, 0]}
+    {title: "Вы можете открыть этот режим всего за:", font: "Comic Sans MS", size: 42, dimensions: [450, 0]}
     ],
   'help-popup-1': [
     {title: "About modes", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -297,6 +297,10 @@ var g_language  = {
   'game-preview-1': [
     {title: "Go!", font: "Comic Sans MS", size: 128, dimensions: false},
     {title: "Вперед!", font: "Comic Sans MS", size: 128, dimensions: false}
+    ],
+  'connect-to-the-server': [
+    {title: "Now we trying to connect to the server...", font: "Comic Sans MS", size: 64, dimensions: false},
+    {title: "Мы сейчас подключаемся к серверу...", font: "Comic Sans MS", size: 64, dimensions: false}
     ],
 
   'item-title-0': [

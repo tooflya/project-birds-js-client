@@ -48,6 +48,7 @@
     'Sources/Entities/Mark.js',
     'Sources/Entities/Explosion.js',
     'Sources/Entities/Bird.js',
+    'Sources/Entities/BonusBird.js',
     'Sources/Entities/BirdExplosion.js',
     'Sources/Screens/Screens/Preloader.js',
     'Sources/Screens/Screens/Menu.js',
@@ -80,6 +81,7 @@
     'Sources/Screens/Popups/Achievements.js',
     'Sources/Screens/Popups/Finish.js',
     'Sources/Managers/PopupShaderManager.js',
+    'Sources/Managers/PurchaseManager.js',
     'Sources/Panels/MenuPanel.js',
     'Sources/Panels/GamePanel.js',
     'Sources/Lists/AboutList.js',
@@ -92,7 +94,16 @@
     'Sources/Game/Thrower.js'
   ], function() {
     Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Game);
+      ScreenManager.sharedManager().replace(Menu);
     }, application);
+  }, function() {
+    DataManager.sharedManager().save(references.language, -1);
+    DataManager.sharedManager().save(references.rating, 0); // TODO: Place?
+    DataManager.sharedManager().save(references.coins.gold, 0);
+    DataManager.sharedManager().save(references.coins.silver, 0);
+    DataManager.sharedManager().save(references.coins.keys, 0);
+    DataManager.sharedManager().save(references.coins.lives, 5);
+    DataManager.sharedManager().save(references.lock.modes.classic, 0);
+    DataManager.sharedManager().save(references.lock.modes.arcade, 0);
   });
 })();

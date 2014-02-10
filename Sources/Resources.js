@@ -110,6 +110,9 @@ var s_Explosion = "explosion-1.png";
 var s_ExplosionBackground = "explosion-2.png";
 var s_FinishBackground = "finish-background.png";
 var s_FinishBackgroundSquare = "finish-background-square.png";
+var s_FinishButtons = "finish-buttons.png";
+var s_UnlockKey = "unlock-key.png";
+var s_BonusBirds = "bonus-birds.png";
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -192,5 +195,8 @@ var resources = [
   {src: s_FinishBackground},
   {src: s_FinishBackgroundSquare},
   {src: s_Explosion},
-  {src: s_ExplosionBackground}
+  {src: s_ExplosionBackground},
+  {src: s_FinishButtons},
+  {src: s_UnlockKey},
+  {src: s_BonusBirds}
 ];
