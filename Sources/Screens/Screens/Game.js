@@ -72,6 +72,9 @@ Game = Screen.extend({
   ],
   m_GameRunning: false,
   m_GamePreviewRunning: false,
+  m_GameTimeElapsed: 0,
+  m_LevelTimeElapsed: 0,
+  m_LevelTime: 10.0,
   m_GamePreviewCount: 0,
   m_GamePreviewTime: 0.5,
   m_Lifes: 0,
@@ -105,6 +108,7 @@ Game = Screen.extend({
     this._super(time);
 
     this.updateThrower(time);
+    this.updateTimer(time);
   }
 });
 

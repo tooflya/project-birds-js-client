@@ -34,7 +34,7 @@ Game.prototype.onBlow = function(element) {
 };
 
 Game.prototype.onLost = function(element) {
-  if(!this.m_GameRunning) return false;
+  if(!this.m_GameRunning) return false;return;
 
   switch(this.m_Type) {
     case this.m_Types.classic:
@@ -50,13 +50,6 @@ Game.prototype.onLost = function(element) {
   }
 };
 
-Game.prototype.onPreviewStart = function() {
-};
-
-Game.prototype.onPreviewFinish = function() {
-  this.startGame();
-};
-
 Game.prototype.onGameStart = function() {
   this.m_GameRunning = true;
   this.m_Lifes = 0;
@@ -67,6 +60,25 @@ Game.prototype.onGameFinish = function() {
 
   Finish.sharedScreen(this).show();
   GamePanel.sharedScreen().hide();
+};
+
+Game.prototype.onPreviewStart = function() {
+};
+
+Game.prototype.onPreviewFinish = function() {
+  this.startGame();
+};
+
+Game.prototype.onUpdateLevelStart = function() {
+  this.m_LevelTimeElapsed = 0;
+};
+
+Game.prototype.onUpdateLevelFinish = function() {
+  this.m_LevelTimeElapsed = 0;
+};
+
+Game.prototype.onPauseEvent = function() {
+  Pause.sharedScreen(this).show();
 };
 
 Game.prototype.onShow = function() {
@@ -87,8 +99,4 @@ Game.prototype.onExitTransitionDidStart = function() {
   Screen.prototype.onExitTransitionDidStart.call(this);
 
   GamePanel.sharedScreen(this.m_Type, this).hide();
-};
-
-Game.prototype.onPauseEvent = function() {
-  Pause.sharedScreen(this).show();
 };

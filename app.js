@@ -91,10 +91,12 @@
     'Sources/Lists/LeaderboardList.js',
     'Sources/Game/Preview.js',
     'Sources/Game/Events.js',
-    'Sources/Game/Thrower.js'
+    'Sources/Game/Thrower.js',
+    'Sources/Game/Timer.js',
+    'Sources/Game/Level.js'
   ], function() {
     Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Menu);
+      ScreenManager.sharedManager().replace(Game);
     }, application);
   }, function() {
     DataManager.sharedManager().save(references.language, -1);
