@@ -93,7 +93,8 @@
     'Sources/Game/Events.js',
     'Sources/Game/Thrower.js',
     'Sources/Game/Timer.js',
-    'Sources/Game/Level.js'
+    'Sources/Game/Level.js',
+    'Sources/Layers/ConfettiBackground.js'
   ], function() {
     Preloader.preload(resources, function() {
       ScreenManager.sharedManager().replace(Game);

@@ -105,6 +105,8 @@ Game = Screen.extend({
     this.onGameFinish();
   },
   update: function(time) {
+    if(!this.m_GameRunning) return;
+
     this._super(time);
 
     this.updateThrower(time);

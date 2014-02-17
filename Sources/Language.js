@@ -302,6 +302,10 @@ var g_language  = {
     {title: "Now we trying to connect to the server...", font: "Comic Sans MS", size: 64, dimensions: false},
     {title: "Мы сейчас подключаемся к серверу...", font: "Comic Sans MS", size: 64, dimensions: false}
     ],
+  'game-level-update': [
+    {title: "Level complete!", font: "Comic Sans MS", size: 128, dimensions: false},
+    {title: "Уровень пройден!", font: "Comic Sans MS", size: 128, dimensions: false}
+    ],
 
   'item-title-0': [
     {title: "Bamboo truth", font: "Comic Sans MS", size: 42, dimensions: false},

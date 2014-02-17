@@ -29,22 +29,44 @@
  *
  */
 
-Game.prototype.updateLevel = function() {console.log('update level');
+Game.prototype.updateLevel = function() {
   this.startLevelUpdate();
 };
 
 Game.prototype.startLevelUpdate = function() {
   this.onUpdateLevelStart();
 
-  this.m_Background.runRecognizeAction(cc.CallFunc.create(this.finishLevelUpdate, this, this), [{
+  ConfettiBackground.sharedScreen(this).show();
+
+  this.m_PreviewBackground.runRecognizeAction(cc.CallFunc.create(this.finishLevelUpdate, this, this), [{
     name: 'fade',
     time: 0.5,
-    value: 255
+    value: 200
+  }, {
+    name: 'fade',
+    time: 0.5,
+    value: 200
+  }]);
+
+  this.m_PreviewText.runRecognizeAction(false, [{
+    name: 'scale',
+    time: 0.5,
+    value: 1.0
+  }, {
+    name: 'fade',
+    time: this.m_GamePreviewTime,
+    value: 0.5
   }]);
 };
 
 Game.prototype.finishLevelUpdate = function() {
-  this.m_Background.runRecognizeAction(cc.CallFunc.create(this.onUpdateLevelFinish, this, this), {
+  this.m_PreviewBackground.runRecognizeAction(cc.CallFunc.create(this.onUpdateLevelFinish, this, this), {
+    name: 'fade',
+    time: 0.5,
+    value: 0
+  });
+
+  this.m_PreviewText.runRecognizeAction(false, {
     name: 'fade',
     time: 0.5,
     value: 0

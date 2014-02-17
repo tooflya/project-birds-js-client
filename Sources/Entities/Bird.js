@@ -35,6 +35,10 @@ Bird = PhysicsEntity.extend({
   m_Id: 0,
   m_Lifes: 0,
   m_Explosions: false,
+  m_PreviousCenterPosition: {
+    x: 0,
+    y: 0
+  },
   ctor: function(parent, world, file, horizontal, vertical) {
       this._super(file || s_Birds, horizontal || 14, vertical || 9, parent, world);
 
@@ -42,6 +46,9 @@ Bird = PhysicsEntity.extend({
   },
   onCreate: function() {
     this._super();
+
+    this.setFlippedHorizontally(false);
+    this.setFlippedVertically(false);
 
     this.m_Id = Random.sharedRandom().random(0, Bird.count, true) * this.getHorizontalFramesCount();
     this.m_Lifes = 12; // TODO:
@@ -67,6 +74,7 @@ Bird = PhysicsEntity.extend({
     this.m_Explosions.create().setCenterPosition(point.x, point.y);
   },
   onCollideFinish: function(entity) {
+    this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
   },
   animate: function(type) {
     var repeat = Random.sharedRandom().random(0, 5, true);
@@ -101,6 +109,8 @@ Bird = PhysicsEntity.extend({
 
     this.setLinearVelocity(values.force.x, values.force.y);
     this.setCenterPosition(values.position.x, values.position.y);
+
+    this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
   },
   createMark: function() {
     Game.sharedScreen().m_Marks.create().setCenterPosition(this.getCenterX(), this.getCenterY());

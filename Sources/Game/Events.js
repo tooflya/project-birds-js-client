@@ -71,10 +71,17 @@ Game.prototype.onPreviewFinish = function() {
 
 Game.prototype.onUpdateLevelStart = function() {
   this.m_LevelTimeElapsed = 0;
+
+  this.m_PreviewText.setText('game-level-update');
+  this.m_PreviewText.setScale(0.5);
+  this.m_PreviewText.setOpacity(255);
+  this.m_PreviewText.setVisible(true);
 };
 
 Game.prototype.onUpdateLevelFinish = function() {
   this.m_LevelTimeElapsed = 0;
+
+  this.m_PreviewText.setVisible(false);
 };
 
 Game.prototype.onPauseEvent = function() {
