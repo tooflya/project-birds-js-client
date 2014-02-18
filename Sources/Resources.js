@@ -113,6 +113,8 @@ var s_FinishBackgroundSquare = "finish-background-square.png";
 var s_FinishButtons = "finish-buttons.png";
 var s_UnlockKey = "unlock-key.png";
 var s_BonusBirds = "bonus-birds.png";
+var s_StarParticle = "star-particle.png";
+var s_Feathers = "feathers.png";
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -198,5 +200,7 @@ var resources = [
   {src: s_ExplosionBackground},
   {src: s_FinishButtons},
   {src: s_UnlockKey},
-  {src: s_BonusBirds}
+  {src: s_BonusBirds},
+  {src: s_StarParticle},
+  {src: s_Feathers}
 ];

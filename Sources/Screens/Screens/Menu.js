@@ -90,7 +90,9 @@ Menu = Screen.extend({
   onShow: function() {
     this._super();
 
-    //Rate.sharedScreen(this).show();
+    if(DataManager.sharedManager().get(references.info.game) && !DataManager.sharedManager().get(references.info.rate)) {
+      Rate.sharedScreen(this).show();
+    }
   },
   onHide: function() {
     this._super();

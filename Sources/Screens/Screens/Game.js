@@ -35,66 +35,125 @@ Game = Screen.extend({
     classic: 1,
     arcade: 2
   },
-  m_ThrowParameters: [
-    {
-      time: 0.0,
-      timeElapsed: 0.0,
-      min: {
-        time: 0.0
+  m_ThrowParameters: {
+    birds: [
+      {
+        time: 0.0,
+        timeElapsed: 0.0,
+        min: {
+          time: 0.0
+        },
+        max: {
+          time: 1.0
+        }
       },
-      max: {
-        time: 1.0
-      }
-    },
-    {
-      count: 0,
-      time: 0.0,
-      timeElapsed: 0.0,
-      min: {
-        count: 1,
-        time: 0.0
+      {
+        count: 0,
+        time: 0.0,
+        timeElapsed: 0.0,
+        min: {
+          count: 1,
+          time: 0.0
+        },
+        max: {
+          count: 10,
+          time: 1.0
+        }
       },
-      max: {
-        count: 10,
-        time: 1.0
+      {
+        time: 0.0,
+        timeElapsed: 0.0,
+        min: {
+          time: 0.0
+        },
+        max: {
+          time: 1.0
+        }
       }
-    },
-    {
-      time: 0.0,
-      timeElapsed: 0.0,
-      min: {
-        time: 0.0
+    ],
+    flayers: [
+      {
+        time: 0.0,
+        timeElapsed: 0.0,
+        min: {
+          time: 5.0
+        },
+        max: {
+          time: 10.0
+        }
       },
-      max: {
-        time: 1.0
+      {
+        count: 0,
+        time: 0.0,
+        timeElapsed: 0.0,
+        min: {
+          count: 1,
+          time: 5.0
+        },
+        max: {
+          count: 10,
+          time: 10.0
+        }
+      },
+      {
+        time: 0.0,
+        timeElapsed: 0.0,
+        min: {
+          time: 0.0
+        },
+        max: {
+          time: 1.0
+        }
       }
-    }
-  ],
+    ]
+  },
   m_GameRunning: false,
   m_GamePreviewRunning: false,
+  m_GamePause: false,
   m_GameTimeElapsed: 0,
   m_LevelTimeElapsed: 0,
   m_LevelTime: 10.0,
   m_GamePreviewCount: 0,
   m_GamePreviewTime: 0.5,
   m_Lifes: 0,
+  m_Touch: {
+    point: {
+      x: 0,
+      y: 0
+    },
+    active: false
+  },
+  m_CurrentBlows: 0,
+  m_BestBlows: 0,
+  m_Level: 0,
+  m_SplashBackground : false,
   ctor: function() {
     this._super(true);
 
     Game.instance = this;
 
     this.m_Type = this.m_Types.classic;
-    this.m_ThrowParams = this.m_ThrowParameters[this.m_Type];
+    this.m_ThrowParams = {
+      birds: this.m_ThrowParameters.birds[this.m_Type],
+      flayers: this.m_ThrowParameters.flayers[this.m_Type]
+    };
 
     this.m_Background = Entity.create(s_GameBackground1, this, true);
 
     this.m_PreviewBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
+    this.m_SplashBackground = BackgroundColor.create(cc.c4(255, 255, 255, 0), this);
+
+    this.m_PreviewBackground.setZOrder(500);
+    this.m_SplashBackground.setZOrder(500);
 
     this.m_Marks = EntityManager.create(1500, Mark.create(), this, 100);
+    this.m_Stars = EntityManager.create(1500, Star.create(), this, 100);
     this.m_Birds = EntityManager.create(50, Bird.create(false, this.getPhysicsWorld()), this, 105);
+    this.m_FlayerBirds = EntityManager.create(10, FlayerBird.create(false, this.getPhysicsWorld()), this, 105);
+    this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 110);
     this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110);
 
-    this.m_PreviewText = Text.create(false, this);
+    this.m_PreviewText = Text.create(false, this.m_PreviewBackground);
 
     this.m_PreviewText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
   },
@@ -104,13 +163,29 @@ Game = Screen.extend({
   finishGame: function(){
     this.onGameFinish();
   },
+  addChild: function(child, zindex) {
+    this._super(child, zindex);
+
+    if(child instanceof Popup) {
+      this.pause();
+    }
+  },
+  removeChild: function(child) {
+    this._super(child);
+
+    if(child instanceof Popup) {
+      this.pause();
+    }
+  },
   update: function(time) {
-    if(!this.m_GameRunning) return;
+    if(this.m_GamePause) return;
 
     this._super(time);
 
     this.updateThrower(time);
     this.updateTimer(time);
+
+    this.m_Touch.active = this.m_WasTouched;
   }
 });
 

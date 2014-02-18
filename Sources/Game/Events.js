@@ -31,6 +31,12 @@
 
 Game.prototype.onBlow = function(element) {
   if(!this.m_GameRunning) return false;
+
+  if(element instanceof Bird) {
+    Game.sharedScreen().m_SplashBackground.runAction(cc.FadeOut.create(0.02));
+  } else if(false) {
+    //
+  }
 };
 
 Game.prototype.onLost = function(element) {
@@ -92,6 +98,12 @@ Game.prototype.onShow = function() {
   GamePanel.sharedScreen(this.m_Type, this).show();
 
   this.startPreview();
+
+  DataManager.sharedManager().save(references.info.game, 1);
+
+  this.m_Level = 1;
+  this.m_CurrentBlows = 0;
+  this.m_LevelTimeElapsed = 0;
 };
 
 Game.prototype.onHide = function() {

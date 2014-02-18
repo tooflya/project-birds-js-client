@@ -29,19 +29,42 @@
  *
  */
 
-Game.prototype.updateTimer = function(time) {
-  if(!this.m_GameRunning) return false;
+Star = Entity.extend({
+  m_FadeTime: 0.5,
+  ctor: function() {
+      this._super(s_StarParticle);
+  },
+  onCreate: function() {
+    this._super();
 
-  switch(this.m_Type) {
-    case this.m_Types.classic:
-      this.m_GameTimeElapsed += time;
-      this.m_LevelTimeElapsed += time;
-
-      if(this.m_LevelTimeElapsed >= this.m_LevelTime) {
-        this.m_LevelTimeElapsed = 0;
-
-        this.updateLevel();
-      }
-    break;
+    this.setScale(2.0);
+    this.setColor(Star.colors[Random.sharedRandom().random(0, 3, true)]);
+    this.runRecognizeAction(false, {
+      name: "rotate",
+      time: this.m_FadeTime,
+      value: Random.sharedRandom().random(-720, 720)
+    });
+    this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), {
+      name: "scale",
+      time: this.m_FadeTime,
+      value: 0.0
+    });
+  },
+  update: function(time) {
+    this._super(time);
+  },
+  deepCopy: function() {
+    return Star.create();
   }
+});
+
+Star.colors = [
+  cc.c3(255, 0, 0),
+  cc.c3(0, 255, 0),
+  cc.c3(0, 0, 255)
+];
+Star.create = function() {
+  var entity = new Star();
+
+  return entity;
 };

@@ -48,7 +48,7 @@ GamePanel = Panel.extend({
     this._super(s_GamePanel, parent);
 
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon6, 7, 1], false, function(e) {
-      e.ccsf([0]);
+      e.ccsf([Game.sharedScreen().m_CurrentBlows]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], [s_PanelButton, 1, 1], function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[0]]);

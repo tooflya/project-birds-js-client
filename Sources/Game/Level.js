@@ -57,6 +57,8 @@ Game.prototype.startLevelUpdate = function() {
     time: this.m_GamePreviewTime,
     value: 0.5
   }]);
+
+  this.m_Level++;
 };
 
 Game.prototype.finishLevelUpdate = function() {

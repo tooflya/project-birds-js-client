@@ -46,8 +46,11 @@
     'Sources/Entities/CircleDecoration2.js',
     'Sources/Entities/PopupShader.js',
     'Sources/Entities/Mark.js',
+    'Sources/Entities/Star.js',
+    'Sources/Entities/Feather.js',
     'Sources/Entities/Explosion.js',
     'Sources/Entities/Bird.js',
+    'Sources/Entities/FlayerBird.js',
     'Sources/Entities/BonusBird.js',
     'Sources/Entities/BirdExplosion.js',
     'Sources/Screens/Screens/Preloader.js',
@@ -94,6 +97,8 @@
     'Sources/Game/Thrower.js',
     'Sources/Game/Timer.js',
     'Sources/Game/Level.js',
+    'Sources/Game/Pause.js',
+    'Sources/Game/Touch.js',
     'Sources/Layers/ConfettiBackground.js'
   ], function() {
     Preloader.preload(resources, function() {

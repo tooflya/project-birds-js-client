@@ -29,19 +29,14 @@
  *
  */
 
-Game.prototype.updateTimer = function(time) {
-  if(!this.m_GameRunning) return false;
+Game.prototype.pause = function() {
+  this.m_GamePause = !this.m_GamePause;
 
-  switch(this.m_Type) {
-    case this.m_Types.classic:
-      this.m_GameTimeElapsed += time;
-      this.m_LevelTimeElapsed += time;
+  var pause = this.m_GamePause;
 
-      if(this.m_LevelTimeElapsed >= this.m_LevelTime) {
-        this.m_LevelTimeElapsed = 0;
-
-        this.updateLevel();
-      }
-    break;
-  }
+  this.getChildren().forEach(function(child) {
+    if(child instanceof EntityManager) {
+      pause ? child.unscheduleUpdate() : child.scheduleUpdate();
+    }
+  });
 };

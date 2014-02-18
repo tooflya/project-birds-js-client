@@ -32,28 +32,78 @@
 Game.prototype.updateThrower = function(time) {
   if(!this.m_GameRunning) return false;
 
-  this.m_ThrowParams.timeElapsed += time;
+  this.m_ThrowParams.birds.timeElapsed += time;
+  this.m_ThrowParams.flayers.timeElapsed += time;
 
-  if(this.m_ThrowParams.timeElapsed >= this.m_ThrowParams.time) {
-    this.m_ThrowParams.timeElapsed = 0;
+  if(this.m_ThrowParams.birds.timeElapsed >= this.m_ThrowParams.birds.time) {
+    this.m_ThrowParams.birds.timeElapsed = 0;
 
-    this.m_ThrowParams.count--;
+    this.m_ThrowParams.birds.count--;
 
-    if(this.m_ThrowParams.count <= 0) {
-      this.generateThrowTime();
-      this.generateThrowCount();
+    if(this.m_ThrowParams.birds.count <= 0) {
+      this.generateThrowTime(0);
+      this.generateThrowCount(0);
     } else {
-      this.m_ThrowParams.time = 0.5;
+      this.m_ThrowParams.birds.time = 0.5;
     }
 
-    this.m_Birds.create().throwup();
+    this.run(0);
+  }
+
+  if(this.m_ThrowParams.flayers.timeElapsed >= this.m_ThrowParams.flayers.time) {
+    this.m_ThrowParams.flayers.timeElapsed = 0;
+
+    this.generateThrowTime(1);
+    this.generateThrowCount(1);
+
+    this.run(1);
   }
 };
 
-Game.prototype.generateThrowTime = function() {
-  this.m_ThrowParams.time = Random.sharedRandom().random(this.m_ThrowParams.min.time, this.m_ThrowParams.max.time);
+Game.prototype.run = function(type) {
+  switch(type) {
+    case 0:
+    this.m_Birds.create().run();
+    break;
+    case 1:
+    var main;
+
+    for(var i = 0; i <  this.m_ThrowParams.flayers.count; i++) {
+      if(i == 0) {
+        this.m_FlayerBirds.create().run();
+
+        main = this.m_FlayerBirds.last();
+      } else {
+        var x = main.getCenterX() + (main.getWidth() * Random.sharedRandom().random(1, i, true)) * (main.getCenterX() > Camera.sharedCamera().center.x ? 1 : -1);
+        var y = main.getCenterY() + (main.getHeight() / 2 * Random.sharedRandom().random(-i, i, true));
+
+        this.m_FlayerBirds.create();
+        this.m_FlayerBirds.last().run();
+        this.m_FlayerBirds.last().setCenterPosition(x, y);
+      }
+    }
+    break;
+  }
 };
 
-Game.prototype.generateThrowCount = function() {
-  this.m_ThrowParams.count = Random.sharedRandom().random(this.m_ThrowParams.min.count, this.m_ThrowParams.max.count, true);
+Game.prototype.generateThrowTime = function(type) {
+  switch(type) {
+    case 0:
+    this.m_ThrowParams.birds.time = Random.sharedRandom().random(this.m_ThrowParams.birds.min.time, this.m_ThrowParams.birds.max.time);
+    break;
+    case 1:
+    this.m_ThrowParams.flayers.time = Random.sharedRandom().random(this.m_ThrowParams.flayers.min.time, this.m_ThrowParams.flayers.max.time);
+    break;
+  }
+};
+
+Game.prototype.generateThrowCount = function(type) {
+  switch(type) {
+    case 0:
+    this.m_ThrowParams.birds.count = Random.sharedRandom().random(this.m_ThrowParams.birds.min.count, this.m_ThrowParams.birds.max.count, true);
+    break;
+    case 1:
+    this.m_ThrowParams.flayers.count = Random.sharedRandom().random(this.m_ThrowParams.flayers.min.count, this.m_ThrowParams.flayers.max.count, true);
+    break;
+  }
 };

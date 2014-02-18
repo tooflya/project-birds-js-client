@@ -50,10 +50,14 @@ Rate = ExtendedPopup.extend({
     this.m_ActionButton.setTouchHandler('onActionEvent', Rate);
   },
   onActionEvent: function() {
-    //
+    this.hide(function() {
+      DataManager.sharedManager().save(references.info.rate, 1);
+    });
   },
   onShow: function() {
     this._super();
+
+    DataManager.sharedManager().save(references.info.game, 0);
   },
   onHide: function() {
     this._super();

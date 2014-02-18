@@ -43,16 +43,21 @@ var purchase = {
   }
 };
 var references = {
+  info: {
+    install: 1,
+    game: 2,
+    rate: 3
+  },
   coins: {
-    gold: 1,
-    silver: 2,
-    keys: 3,
-    lives: 4
+    gold: 4,
+    silver: 5,
+    keys: 6,
+    lives: 7
   },
   lock: {
     modes: {
-      classic: 5,
-      arcade: 6
+      classic: 8,
+      arcade: 9
     }
   }
 };

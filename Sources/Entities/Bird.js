@@ -33,14 +33,17 @@ Bird = PhysicsEntity.extend({
     dongle: 1
   },
   m_Id: 0,
-  m_Lifes: 0,
+  m_Lifes: {
+    base: 0,
+    current: 0
+  },
   m_Explosions: false,
   m_PreviousCenterPosition: {
     x: 0,
     y: 0
   },
-  ctor: function(parent, world, file, horizontal, vertical) {
-      this._super(file || s_Birds, horizontal || 14, vertical || 9, parent, world);
+  ctor: function(parent, world) {
+      this._super(s_Birds, 14, 9, parent, world);
 
       this.m_Explosions = EntityManager.create(5, BirdExplosion.create(), this);
   },
@@ -51,11 +54,10 @@ Bird = PhysicsEntity.extend({
     this.setFlippedVertically(false);
 
     this.m_Id = Random.sharedRandom().random(0, Bird.count, true) * this.getHorizontalFramesCount();
-    this.m_Lifes = 12; // TODO:
+    this.m_Lifes .base= 12 * Game.sharedScreen().m_Level;
+    this.m_Lifes .current = this.m_Lifes.base;
 
     this.m_Explosions.clear();
-
-    this.setCurrentFrameIndex(this.m_Id);
 
     this.animate(this.animations.fly);
   },
@@ -65,7 +67,13 @@ Bird = PhysicsEntity.extend({
     this.m_Explosions.clear();
 
     if(this.getCenterY() > -this.getHeight() / 2) {
-      Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.createExplosion();
+
+      if(Game.sharedScreen().m_GameRunning) {
+        Game.sharedScreen().m_CurrentBlows++;
+
+        Game.sharedScreen().onBlow(this);
+      }
     } else {
       Game.sharedScreen().onLost(this);
     }
@@ -94,7 +102,14 @@ Bird = PhysicsEntity.extend({
       break;
     }
   },
-  throwup: function() {
+  checkCollides: function() {
+    if(!Game.sharedScreen().m_Touch.active) return false;
+
+    if(this.collideWithPoint(Game.sharedScreen().m_Touch.point.x, Game.sharedScreen().m_Touch.point.y)) {
+      this.destroy();
+    }
+  },
+  run: function() {
     var values = {};
 
     // TODO: Correct force values.
@@ -115,12 +130,24 @@ Bird = PhysicsEntity.extend({
   createMark: function() {
     Game.sharedScreen().m_Marks.create().setCenterPosition(this.getCenterX(), this.getCenterY());
   },
+  createExplosion: function() {
+    Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+
+    for(var i = 0; i < 50; i++) {
+      Game.sharedScreen().m_Feathers.create();
+
+      Game.sharedScreen().m_Feathers.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+      Game.sharedScreen().m_Feathers.last().setCurrentFrameIndex(this.m_Id / this.getHorizontalFramesCount());
+    }
+  },
   update: function(time) {
     this._super(time);
 
     if(this.getCurrentPhysicsWorld()) {
       this.createMark();
     }
+
+    this.checkCollides();
   },
   deepCopy: function() {
     return Bird.create(this.getParent(), this.getCurrentPhysicsWorld());

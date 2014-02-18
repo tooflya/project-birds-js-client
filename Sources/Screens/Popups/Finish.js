@@ -198,7 +198,7 @@ Finish = Background.extend({
   },
   onMenuEvent: function() {
     this.hide(function() {
-      ScreenManager.sharedManager().replace(Loading);
+      ScreenManager.sharedManager().replace(Menu);
     });
   },
   onShopEvent: function() {

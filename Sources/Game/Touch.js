@@ -29,19 +29,9 @@
  *
  */
 
-Game.prototype.updateTimer = function(time) {
-  if(!this.m_GameRunning) return false;
-
-  switch(this.m_Type) {
-    case this.m_Types.classic:
-      this.m_GameTimeElapsed += time;
-      this.m_LevelTimeElapsed += time;
-
-      if(this.m_LevelTimeElapsed >= this.m_LevelTime) {
-        this.m_LevelTimeElapsed = 0;
-
-        this.updateLevel();
-      }
-    break;
+Game.prototype.onMouseDragged = function(e) {
+  if(Screen.prototype.onMouseDragged.call(this, e)) {
+    this.m_Touch.point.x = e.getLocation().x;
+    this.m_Touch.point.y = e.getLocation().y;
   }
 };
