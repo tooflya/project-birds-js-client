@@ -79,10 +79,14 @@ Bird = PhysicsEntity.extend({
     }
   },
   onCollideStart: function(entity, point) {
-    this.m_Explosions.create().setCenterPosition(point.x, point.y);
+    if(entity instanceof Bird) {
+      this.m_Explosions.create().setCenterPosition(point.x, point.y);
+    }
   },
   onCollideFinish: function(entity) {
-    this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
+    if(entity instanceof Bird) {
+      this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
+    }
   },
   animate: function(type) {
     var repeat = Random.sharedRandom().random(0, 5, true);

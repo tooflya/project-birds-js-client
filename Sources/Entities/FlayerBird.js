@@ -57,7 +57,9 @@ FlayerBird = Bird.extend({
     }
   },
   onCollideStart: function(entity, point) {
-    this.destroy();
+    if(entity instanceof Bird) {
+      this.destroy();
+    }
   },
   onCollideFinish: function(entity) {
   },
