@@ -143,8 +143,8 @@ Game = Screen.extend({
     this.m_PreviewBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
     this.m_SplashBackground = BackgroundColor.create(cc.c4(255, 255, 255, 0), this);
 
-    this.m_PreviewBackground.setZOrder(500);
-    this.m_SplashBackground.setZOrder(500);
+    this.m_PreviewBackground.setZOrder(200);
+    this.m_SplashBackground.setZOrder(200);
 
     this.m_Marks = EntityManager.create(1500, Mark.create(), this, 100);
     this.m_Stars = EntityManager.create(1500, Star.create(), this, 100);
