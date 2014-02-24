@@ -40,7 +40,8 @@ var purchase = {
   keys: {
     pack1: 4,
     pack2: 5
-  }
+  },
+  lives: 6
 };
 var references = {
   info: {

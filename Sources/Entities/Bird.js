@@ -43,9 +43,12 @@ Bird = PhysicsEntity.extend({
     y: 0
   },
   ctor: function(parent, world) {
-      this._super(s_Birds, 14, 9, parent, world);
+    this._super(s_Birds, 14, 9, parent, world);
 
-      this.m_Explosions = EntityManager.create(5, BirdExplosion.create(), this);
+    this.getPhysicsFixture().filter.categoryBits = 1;
+    this.getPhysicsFixture().filter.maskBits = 1;
+
+    this.m_Explosions = EntityManager.create(5, BirdExplosion.create(), this);
   },
   onCreate: function() {
     this._super();
@@ -123,7 +126,7 @@ Bird = PhysicsEntity.extend({
     };
     values.force = {
       x: Random.sharedRandom().random(-Math.abs(Camera.sharedCamera().center.x - values.position.x), Math.abs(Camera.sharedCamera().center.x - values.position.x)),
-      y: Random.sharedRandom().random(30, 50) * -this.getCurrentPhysicsWorld().GetGravity().y
+      y: Random.sharedRandom().random(40, 50) * -this.getCurrentPhysicsWorld().GetGravity().y
     };
 
     this.setLinearVelocity(values.force.x, values.force.y);

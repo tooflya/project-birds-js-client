@@ -40,7 +40,7 @@ Game.prototype.onBlow = function(element) {
 };
 
 Game.prototype.onLost = function(element) {
-  if(!this.m_GameRunning) return false;return;
+  if(!this.m_GameRunning) return false;
 
   switch(this.m_Type) {
     case this.m_Types.classic:
@@ -48,7 +48,7 @@ Game.prototype.onLost = function(element) {
     if(++this.m_Lifes >= 3) {
       this.finishGame();
 
-      this.m_Birds.clear();
+      //this.m_Birds.clear();
     } else {
 
     }

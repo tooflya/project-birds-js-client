@@ -29,25 +29,43 @@
  *
  */
 
-AchievementsList = PatternList.extend({
+ChallengeList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
 
     this.m_Text = [];
 
-    this.m_Text[1] = Text.create('achievements-popup-1', this);
+    this.m_Text[0] = Text.create('challenge-popup-1', this);
+    this.m_Text[1] = Text.create('challenge-popup-2', this);
 
-    this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
+    this.m_Text[0].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
 
-    this.m_Text[1].setColor(cc.c3(204.0, 102.0, 51.0));
+    this.m_Text[0].setColor(cc.c3(204.0, 102.0, 51.0));
+
+    this.m_Text[1].setColor(cc.c3(255.0, 130.0, 0.0));
   },
   onEnter: function() {
     this._super();
 
-    //this.m_ListMaxHeight = Math.abs(this.m_Text[7].getCenterY() - this.m_Text[7].getHeight() / 2 - Camera.sharedCamera().coord(50));
+    var randomFriend = DataManager.sharedManager().getAppFriends().random();
+
+    this.m_Text[1].ccsf([randomFriend.first_name + " " + randomFriend.last_name]);
+
+    var imageUrl = randomFriend.photo_big;
+    var image = new Image();
+    image.src = imageUrl;
+    var self = this;
+    image.addEventListener('load', function() {
+      cc.TextureCache.getInstance().cacheImage(imageUrl, image);
+      var photo = Entity.create(randomFriend.photo_big, self);
+
+      photo.create().setCenterPosition(self.getCenterX(), self.getCenterY() + Camera.sharedCamera().coord(100));
+
+      self.m_Text[1].setCenterPosition(self.getCenterX(), photo.getCenterY() - photo.getHeight() / 2 - self.m_Text[1].getHeight() / 2 - Camera.sharedCamera().coord(30));
+    }, false);
   }
 });
 
-AchievementsList.create = function(parent) {
-  return new AchievementsList(parent);
+ChallengeList.create = function(parent) {
+  return new ChallengeList(parent);
 };

@@ -35,8 +35,16 @@ var g_language  = {
     {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false}
     ],
   'loading': [
-    {title: 'Loading... $1%', font: 'Comic Sans MS', size: 36, dimensions: false},
-    {title: 'Загрузка... $1%', font: 'Comic Sans MS', size: 36, dimensions: false}
+    {title: 'Loading resources... $1%', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Загрузка ресурсов... $1%', font: 'Comic Sans MS', size: 36, dimensions: false}
+    ],
+  'connect': [
+    {title: 'Connecting to the server...', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Подключение к серверу...', font: 'Comic Sans MS', size: 36, dimensions: false}
+    ],
+  'connect-error': [
+    {title: 'Conection error', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Ошибка подключения', font: 'Comic Sans MS', size: 36, dimensions: false}
     ],
   'language-not-available': [
     {title: 'Not available', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -305,6 +313,26 @@ var g_language  = {
   'game-level-update': [
     {title: "Level complete!", font: "Comic Sans MS", size: 128, dimensions: false},
     {title: "Уровень пройден!", font: "Comic Sans MS", size: 128, dimensions: false}
+    ],
+  'leaderboard-popup-1': [
+    {title: "Leaderboard", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Рейтинг игроков", font: "Comic Sans MS", size: 48, dimensions: [450, 0]}
+    ],
+  'achievements-popup-1': [
+    {title: "Achievements", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Ваши достижения", font: "Comic Sans MS", size: 48, dimensions: [450, 0]}
+    ],
+  'challenge-popup-1': [
+    {title: "Challenge friend", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Пригласить друга", font: "Comic Sans MS", size: 48, dimensions: [450, 0]}
+    ],
+  'challenge-popup-2': [
+    {title: "$1 already play this game. Request a battle if you want. Or close this window by pressing a close button.", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "$1 уже играет в эту игру. Вызовите его на битву птиц, либо закройте это окно, нажав на крестик.", font: "Comic Sans MS", size: 36, dimensions: [450, 0]}
+    ],
+  'request-battle': [
+    {title: 'Request', font: 'Comic Sans MS', size: 48, dimensions: false},
+    {title: 'Пригласить', font: 'Comic Sans MS', size: 38, dimensions: false}
     ],
 
   'item-title-0': [

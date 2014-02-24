@@ -53,6 +53,8 @@ Loading = Screen.extend({
     this.m_TipText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(300) - this.m_TipText.getHeight() / 2);
 
     this.m_BackgroundWaves.clear();
+
+    Music.sharedMusic().stop();
   },
   onHide: function() {
     this._super();
@@ -61,6 +63,8 @@ Loading = Screen.extend({
   },
   onComplete: function() {
     ScreenManager.sharedManager().replace(Game);
+
+    Music.sharedMusic().play(s_Music2, true);
   },
   update: function(time) {
     this._super(time);

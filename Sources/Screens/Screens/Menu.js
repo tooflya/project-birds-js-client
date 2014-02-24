@@ -30,6 +30,7 @@
  */
 
 Menu = Screen.extend({
+  config: document['ccConfig'],
   ctor: function() {
     this._super();
 
@@ -44,19 +45,21 @@ Menu = Screen.extend({
     this.m_SettingsButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    if(this.config.params.platform == 'fb') this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    if(this.config.params.platform == 'vk') this.m_VkontakteButton = Button.create(s_VkontakteButton, 1, 1, this);
 
     this.m_SettingsButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_PlayButtonDecorations[0].create().setCenterPosition(Camera.sharedCamera().center.x+ Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_PlayButtonDecorations[1].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_PlayButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(20), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
-    this.m_FacebookButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+    if(this.config.params.platform == 'fb') this.m_FacebookButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+    if(this.config.params.platform == 'vk') this.m_VkontakteButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_TwitterButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(270), Camera.sharedCamera().coord(100));
 
     this.m_SettingsButton.setCurrentFrameIndex(6);
     this.m_ShopButton.setCurrentFrameIndex(2);
-    this.m_FacebookButton.setCurrentFrameIndex(3);
+    if(this.config.params.platform == 'fb') this.m_FacebookButton.setCurrentFrameIndex(3);
     this.m_TwitterButton.setCurrentFrameIndex(0);
 
     this.m_PlayButtonDecorations[0].setColor(cc.RED);
@@ -67,7 +70,8 @@ Menu = Screen.extend({
     this.m_PlayButton.setTouchHandler('onPlayEvent', Menu);
     this.m_SettingsButton.setTouchHandler('onSettingsEvent', Menu);
     this.m_ShopButton.setTouchHandler('onShopEvent', Menu);
-    this.m_FacebookButton.setTouchHandler('onFacebookEvent', Menu);
+    if(this.config.params.platform == 'fb') this.m_FacebookButton.setTouchHandler('onFacebookEvent', Menu);
+    if(this.config.params.platform == 'vk') this.m_VkontakteButton.setTouchHandler('onVkontakteEvent', Menu);
     this.m_TwitterButton.setTouchHandler('onTwitterEvent', Menu);
 
     Rate.sharedScreen(this).prepare();
@@ -84,6 +88,9 @@ Menu = Screen.extend({
   onFacebookEvent: function() {
     openURL("http://www.facebook.com/tooflya");
   },
+  onVkontakteEvent: function() {
+    openURL("http://www.vk.com/tooflya");
+  },
   onTwitterEvent: function() {
     openURL("http://www.twitter.com/tooflya");
   },
@@ -92,7 +99,11 @@ Menu = Screen.extend({
 
     if(DataManager.sharedManager().get(references.info.game) && !DataManager.sharedManager().get(references.info.rate)) {
       Rate.sharedScreen(this).show();
+    } else if(DataManager.sharedManager().getAppFriends().length > 0 && Random.sharedRandom().probably(100)) {
+      Challenge.sharedScreen(this).show();
     }
+
+    Music.sharedMusic().play(s_Music1, true);
   },
   onHide: function() {
     this._super();

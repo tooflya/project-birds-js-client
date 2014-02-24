@@ -40,7 +40,7 @@ Game.prototype.updateTimer = function(time) {
       if(this.m_LevelTimeElapsed >= this.m_LevelTime) {
         this.m_LevelTimeElapsed = 0;
 
-        this.updateLevel();
+        //this.updateLevel();
       }
     break;
   }

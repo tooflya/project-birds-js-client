@@ -52,7 +52,7 @@ Keys = ExtendedPopup.extend({
   },
   onActionEvent: function(params) {
     this.hide(function() {
-      PurchaseManager.sharedManager(this.getParent()).show(params, function(id) {
+      Purchase.sharedScreen(this.getParent()).show(params, function(id) {
         switch(id) {
           case purchase.keys.pack1:
           DataManager.sharedManager().update(references.coins.keys, 50);

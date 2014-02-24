@@ -32,6 +32,19 @@
 LeaderboardList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
+
+    this.m_Text = [];
+
+    this.m_Text[1] = Text.create('leaderboard-popup-1', this);
+
+    this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
+
+    this.m_Text[1].setColor(cc.c3(204.0, 102.0, 51.0));
+  },
+  onEnter: function() {
+    this._super();
+
+    //this.m_ListMaxHeight = Math.abs(this.m_Text[7].getCenterY() - this.m_Text[7].getHeight() / 2 - Camera.sharedCamera().coord(50));
   }
 });
 

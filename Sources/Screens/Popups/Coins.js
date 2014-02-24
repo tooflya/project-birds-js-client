@@ -63,7 +63,7 @@ Coins = ExtendedPopup.extend({
   },
   onActionEvent: function(params) {
     this.hide(function() {
-      PurchaseManager.sharedManager(this.getParent()).show(params, function(id) {
+      Purchase.sharedScreen(this.getParent()).show(params, function(id) {
         switch(id) {
           case purchase.coins.pack1:
           DataManager.sharedManager().update(references.coins.gold, 25);

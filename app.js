@@ -31,80 +31,87 @@
 
 (function() {
   App.run(false, {
-      standalone: true,
-      designed: {
-        width: 1920,
-        height: 1080
-      },
-      orientation: 'height'
-    }, [
-    'Sources/Resources.js',
-    'Sources/Language.js',
-    'Sources/Properties.js',
-    'Sources/Entities/Button.js',
-    'Sources/Entities/CircleDecoration1.js',
-    'Sources/Entities/CircleDecoration2.js',
-    'Sources/Entities/PopupShader.js',
-    'Sources/Entities/Mark.js',
-    'Sources/Entities/Star.js',
-    'Sources/Entities/Feather.js',
-    'Sources/Entities/Explosion.js',
-    'Sources/Entities/Bird.js',
-    'Sources/Entities/FlayerBird.js',
-    'Sources/Entities/BonusBird.js',
-    'Sources/Entities/BirdExplosion.js',
-    'Sources/Screens/Screens/Preloader.js',
-    'Sources/Screens/Screens/Menu.js',
-    'Sources/Screens/Screens/Settings.js',
-    'Sources/Screens/Screens/Credits.js',
-    'Sources/Screens/Screens/Languages.js',
-    'Sources/Screens/Screens/Mode.js',
-    'Sources/Screens/Screens/More.js',
-    'Sources/Screens/Screens/Reset.js',
-    'Sources/Screens/Screens/Shop.js',
-    'Sources/Screens/Screens/Levels.js',
-    'Sources/Screens/Screens/Loading.js',
-    'Sources/Screens/Screens/Game.js',
-    'Sources/Screens/Popups/ExtendedPopup.js',
-    'Sources/Screens/Popups/Rate.js',
-    'Sources/Screens/Popups/Social.js',
-    'Sources/Screens/Popups/Exit.js',
-    'Sources/Screens/Popups/ResetProgress.js',
-    'Sources/Screens/Popups/Coins.js',
-    'Sources/Screens/Popups/Keys.js',
-    'Sources/Screens/Popups/Lives.js',
-    'Sources/Screens/Popups/Moves.js',
-    'Sources/Screens/Popups/Gift.js',
-    'Sources/Screens/Popups/Help.js',
-    'Sources/Screens/Popups/Lock.js',
-    'Sources/Screens/Popups/Item.js',
-    'Sources/Screens/Popups/Bought.js',
-    'Sources/Screens/Popups/Rating.js',
-    'Sources/Screens/Popups/Pause.js',
-    'Sources/Screens/Popups/Achievements.js',
-    'Sources/Screens/Popups/Finish.js',
-    'Sources/Managers/PopupShaderManager.js',
-    'Sources/Managers/PurchaseManager.js',
-    'Sources/Panels/MenuPanel.js',
-    'Sources/Panels/GamePanel.js',
-    'Sources/Lists/AboutList.js',
-    'Sources/Lists/ItemList.js',
-    'Sources/Lists/HelpList.js',
-    'Sources/Lists/AchievementsList.js',
-    'Sources/Lists/LeaderboardList.js',
-    'Sources/Game/Preview.js',
-    'Sources/Game/Events.js',
-    'Sources/Game/Thrower.js',
-    'Sources/Game/Timer.js',
-    'Sources/Game/Level.js',
-    'Sources/Game/Pause.js',
-    'Sources/Game/Touch.js',
-    'Sources/Layers/ConfettiBackground.js'
+    standalone: true,
+    platform: 'vk',
+    designed: {
+    width: 1920,
+    height: 1080
+    },
+    orientation: 'height'
+  }, [
+  'Sources/Resources.js',
+  'Sources/Language.js',
+  'Sources/Properties.js',
+  'Sources/Entities/Button.js',
+  'Sources/Entities/CircleDecoration1.js',
+  'Sources/Entities/CircleDecoration2.js',
+  'Sources/Entities/PopupShader.js',
+  'Sources/Entities/Mark.js',
+  'Sources/Entities/Star.js',
+  'Sources/Entities/Feather.js',
+  'Sources/Entities/Explosion.js',
+  'Sources/Entities/Bird.js',
+  'Sources/Entities/FlayerBird.js',
+  'Sources/Entities/BonusBird.js',
+  'Sources/Entities/BirdExplosion.js',
+  'Sources/Screens/Screens/Preloader.js',
+  'Sources/Screens/Screens/Menu.js',
+  'Sources/Screens/Screens/Settings.js',
+  'Sources/Screens/Screens/Credits.js',
+  'Sources/Screens/Screens/Languages.js',
+  'Sources/Screens/Screens/Mode.js',
+  'Sources/Screens/Screens/More.js',
+  'Sources/Screens/Screens/Reset.js',
+  'Sources/Screens/Screens/Shop.js',
+  'Sources/Screens/Screens/Levels.js',
+  'Sources/Screens/Screens/Loading.js',
+  'Sources/Screens/Screens/Game.js',
+  'Sources/Screens/Popups/ExtendedPopup.js',
+  'Sources/Screens/Popups/Rate.js',
+  'Sources/Screens/Popups/Social.js',
+  'Sources/Screens/Popups/Exit.js',
+  'Sources/Screens/Popups/ResetProgress.js',
+  'Sources/Screens/Popups/Coins.js',
+  'Sources/Screens/Popups/Keys.js',
+  'Sources/Screens/Popups/Lives.js',
+  'Sources/Screens/Popups/Moves.js',
+  'Sources/Screens/Popups/Gift.js',
+  'Sources/Screens/Popups/Help.js',
+  'Sources/Screens/Popups/Lock.js',
+  'Sources/Screens/Popups/Item.js',
+  'Sources/Screens/Popups/Bought.js',
+  'Sources/Screens/Popups/Rating.js',
+  'Sources/Screens/Popups/Pause.js',
+  'Sources/Screens/Popups/Achievements.js',
+  'Sources/Screens/Popups/Finish.js',
+  'Sources/Screens/Popups/Challenge.js',
+  'Sources/Screens/Popups/Purchase.js',
+  'Sources/Managers/PopupShaderManager.js',
+  'Sources/Panels/MenuPanel.js',
+  'Sources/Panels/GamePanel.js',
+  'Sources/Lists/AboutList.js',
+  'Sources/Lists/ItemList.js',
+  'Sources/Lists/HelpList.js',
+  'Sources/Lists/AchievementsList.js',
+  'Sources/Lists/LeaderboardList.js',
+  'Sources/Lists/ChallengeList.js',
+  'Sources/Game/Preview.js',
+  'Sources/Game/Events.js',
+  'Sources/Game/Thrower.js',
+  'Sources/Game/Timer.js',
+  'Sources/Game/Level.js',
+  'Sources/Game/Pause.js',
+  'Sources/Game/Touch.js',
+  'Sources/Layers/ConfettiBackground.js'
   ], function() {
     Preloader.preload(resources, function() {
-      ScreenManager.sharedManager().replace(Game);
+      DataManager.sharedManager().getCurrentUser(function() {
+        ScreenManager.sharedManager().replace(Menu);
+      });
     }, application);
-  }, function() {
+  }, function(callback) {
+    console.log('Your are a new user - welcome!');
+
     DataManager.sharedManager().save(references.language, -1);
     DataManager.sharedManager().save(references.rating, 0); // TODO: Place?
     DataManager.sharedManager().save(references.coins.gold, 0);
@@ -113,5 +120,7 @@
     DataManager.sharedManager().save(references.coins.lives, 5);
     DataManager.sharedManager().save(references.lock.modes.classic, 0);
     DataManager.sharedManager().save(references.lock.modes.arcade, 0);
+
+    callback();
   });
 })();

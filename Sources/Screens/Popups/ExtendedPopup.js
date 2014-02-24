@@ -30,7 +30,9 @@
  */
 
 ExtendedPopup = Popup.extend({
+  config: document['ccConfig'],
   color: cc.c4(0, 0, 0, 0),
+
   m_Opacity: 200,
   m_ShowTime: 0.2,
   m_HideTime: 0.1,

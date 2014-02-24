@@ -34,6 +34,9 @@ Feather = PhysicsEntity.extend({
   },
   ctor: function(parent, world) {
     this._super(s_Feathers, 4, 2, parent, world);
+
+    this.getPhysicsFixture().filter.categoryBits = 2;
+    this.getPhysicsFixture().filter.maskBits = 2;
   },
   onCreate: function() {
     this._super();

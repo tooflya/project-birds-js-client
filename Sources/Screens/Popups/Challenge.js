@@ -29,31 +29,30 @@
  *
  */
 
-Lives = ExtendedPopup.extend({
+Challenge = ExtendedPopup.extend({
   ctor: function(parent) {
     this._super(parent);
 
-    this.m_Decoration = Entity.create(s_PopupDecoration8, this.m_Background);
-    this.m_GetButton = Button.create(s_GetLivesPopupButton, 1, 1, this.m_Background);
-    this.m_Text = Text.create('lives-popup-1', this.m_Background);
+    this.m_BackgroundHolder1 = Entity.create(s_ListFixSmall, this.m_Background);
+    this.m_BackgroundHolder2 = Entity.create(s_ListFixSmall, this.m_Background);
+    this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);
+    this.m_Text = Text.create('request-battle', this.m_ActionButton);
 
-    this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
-    this.m_GetButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(80));
+    this.m_List = ChallengeList.create(this.m_Background);
 
-    this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
+    this.m_BackgroundHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(308));
+    this.m_BackgroundHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(398));
+    this.m_ActionButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
+    this.m_Text.setCenterPosition(this.m_ActionButton.getWidth() / 2, this.m_ActionButton.getHeight() / 2);
 
-    this.m_CloseButton.setTouchHandler('onCloseEvent', Lives);
-    this.m_GetButton.setTouchHandler('onActionEvent', Lives, {id: purchase.lives});
+    this.m_BackgroundHolder2.setScaleY(-1);
+
+    this.m_CloseButton.setTouchHandler('onCloseEvent', Challenge);
+    this.m_ActionButton.setTouchHandler('onActionEvent', Challenge);
   },
-  onActionEvent: function(params) {
+  onActionEvent: function() {
     this.hide(function() {
-      Purchase.sharedScreen(this.getParent()).show(params, function(id) {
-        switch(id) {
-          case purchase.lives:
-          DataManager.sharedManager().save(references.coins.lives, 5);
-          break;
-        }
-      });
+      // TODO: Send a request.
     });
   },
   onShow: function() {
@@ -62,17 +61,17 @@ Lives = ExtendedPopup.extend({
   onHide: function() {
     this._super();
 
-    Lives.instance = false;
+    Challenge.instance = false;
   }
 });
 
-Lives.instance = false;
-Lives.sharedScreen = function(parent) {
-  if(Lives.instance) {
-    Lives.instance.m_Parent = parent;
+Challenge.instance = false;
+Challenge.sharedScreen = function(parent) {
+  if(Challenge.instance) {
+    Challenge.instance.m_Parent = parent;
   } else {
-    Lives.instance = new Lives(parent);
+    Challenge.instance = new Challenge(parent);
   }
 
-  return Lives.instance;
+  return Challenge.instance;
 };
