@@ -29,92 +29,98 @@
  *
  */
 
-var s_PreloaderBackground = "preloader-background.png";
-var s_LoadingBarBackground = "preloader-bar-background.png";
-var s_LoadingBar = "preloader-bar.png";
-var s_MenuBackground = "menu-background.png";
-var s_ButtonsSprite = "buttons-sprite.png";
-var s_PlayButton = "play-button.png";
-var s_CircleDecoration1 = "circle-decoration-1.png";
-var s_CircleDecoration2 = "circle-decoration-2.png";
-var s_CircleDecoration3 = "circle-decoration-3.png";
-var s_ThirdPartyBackground = "third-party-background.png";
-var s_LongButton = "long-button.png";
-var s_SfxButtonsSprite = "sfx-social-buttons.png";
-var s_BackgroundDecoration1 = "background-decoration-1.png";
-var s_BackgroundDecoration2 = "background-decoration-2.png";
-var s_BackgroundDecoration3 = "background-decoration-3.png";
-var s_SmallFlags = "small-flags-sprite.png";
-var s_LargeFlags = "large-flags-sprite.png";
-var s_FlagNotAvailable = "flag-not-avaliable.png";
-var s_Checker = "checker.png";
-var s_Lock = "lock.png";
-var s_InterfacePanel = "interface-panel.png";
-var s_GamePanel = "game-panel.png";
-var s_LoadingBackground = "loading-background.png";
-var s_LoadingDecoration = "loading-decoration.png";
-var s_PopupBackground = "popup-background.png";
-var s_PopupButton = "popup-button.png";
-var s_PopupFullscreenButton = "panel-button-fullscreen.png";
-var s_PopupCloseButton = "popup-close-button.png";
-var s_PopupPauseButton = "panel-button-pause.png";
-var s_PopupDecoration1 = "popup-decoration-1.png";
-var s_PopupDecoration2 = "popup-decoration-2.png";
-var s_PopupDecoration3 = "popup-decoration-3.png";
-var s_PopupDecoration4 = "popup-decoration-4.png";
-var s_PopupDecoration5 = "popup-decoration-5.png";
-var s_PopupDecoration6 = "popup-decoration-6.png";
-var s_PopupDecoration7 = "popup-decoration-7.png";
-var s_PopupDecoration8 = "popup-decoration-8.png";
-var s_PopupDecoration9 = "popup-decoration-9.png";
-var s_PopupDecoration10 = "popup-decoration-10.png";
-var s_PopupDecoration11 = "popup-decoration-11.png";
-var s_PopupDecoration12 = "popup-decoration-12.png";
-var s_PanelItemsBackground1 = "panel-item-background-1.png";
-var s_PanelItemsBackground2 = "panel-item-background-2.png";
-var s_PanelIcon1 = "panel-icon-1.png";
-var s_PanelIcon2 = "panel-icon-2.png";
-var s_PanelIcon3 = "panel-icon-3.png";
-var s_PanelIcon4 = "panel-icon-4.png";
-var s_PanelIcon5 = "panel-icon-5.png";
-var s_PanelIcon6 = "panel-icon-6.png";
-var s_PanelIcon7 = "panel-icon-7.png";
-var s_PanelButton = "panel-button.png";
-var s_GameBackground1 = "game-background-1.png";
-var s_GameBackground2 = "game-background-2.png";
-var s_GameBackground3 = "game-background-3.png";
-var s_GameBackground4 = "game-background-4.png";
-var s_GameBackground5 = "game-background-5.png";
-var s_GetLivesPopupButton = "popup-lives-get.png";
-var s_GetCoinsPopupButton = "popup-coins-get.png";
-var s_GetKeysPopupButton1 = "popup-keys-get-1.png";
-var s_GetKeysPopupButton2 = "popup-keys-get-2.png";
-var s_ListFixLarge = "list-fix-large.png";
-var s_ListFixSmall = "list-fix-small.png";
-var s_ListScrollLarge = "list-scroll-large.png";
-var s_ListScrollSmall = "list-scroll-small.png";
-var s_CreditsCompanyName = "credits-company-name.png";
-var s_CreditsGameName = "credits-game-name.png";
-var s_ShopWheel = "shop-wheel.png";
-var s_ShopShelfs = "shop-shelfs.png";
-var s_ShopItems = "shop-items.png";
-var s_ItemsRating = "items-rating.png";
-var s_ItemsProperties = "items-properties.png";
-var s_ModeUnlockLine = "unlock-line.png";
-var s_StarsPanel = "stars-panel.png";
-var s_Star = "star.png";
-var s_Mark = "mark.png";
-var s_Lamp = "lamp.png";
-var s_Birds = "birds.png";
-var s_Explosion = "explosion-1.png";
-var s_ExplosionBackground = "explosion-2.png";
-var s_FinishBackground = "finish-background.png";
-var s_FinishBackgroundSquare = "finish-background-square.png";
-var s_FinishButtons = "finish-buttons.png";
-var s_UnlockKey = "unlock-key.png";
-var s_BonusBirds = "bonus-birds.png";
-var s_StarParticle = "star-particle.png";
-var s_Feathers = "feathers.png";
+var s_PreloaderBackground = "Resources/Graphics/preloader-background.png";
+var s_LoadingBarBackground = "Resources/Graphics/preloader-bar-background.png";
+var s_LoadingBar = "Resources/Graphics/preloader-bar.png";
+var s_MenuBackground = "Resources/Graphics/menu-background.png";
+var s_ButtonsSprite = "Resources/Graphics/buttons-sprite.png";
+var s_PlayButton = "Resources/Graphics/play-button.png";
+var s_CircleDecoration1 = "Resources/Graphics/circle-decoration-1.png";
+var s_CircleDecoration2 = "Resources/Graphics/circle-decoration-2.png";
+var s_CircleDecoration3 = "Resources/Graphics/circle-decoration-3.png";
+var s_ThirdPartyBackground = "Resources/Graphics/third-party-background.png";
+var s_LongButton = "Resources/Graphics/long-button.png";
+var s_SfxButtonsSprite = "Resources/Graphics/sfx-social-buttons.png";
+var s_BackgroundDecoration1 = "Resources/Graphics/background-decoration-1.png";
+var s_BackgroundDecoration2 = "Resources/Graphics/background-decoration-2.png";
+var s_BackgroundDecoration3 = "Resources/Graphics/background-decoration-3.png";
+var s_SmallFlags = "Resources/Graphics/small-flags-sprite.png";
+var s_LargeFlags = "Resources/Graphics/large-flags-sprite.png";
+var s_FlagNotAvailable = "Resources/Graphics/flag-not-avaliable.png";
+var s_Checker = "Resources/Graphics/checker.png";
+var s_Lock = "Resources/Graphics/lock.png";
+var s_InterfacePanel = "Resources/Graphics/interface-panel.png";
+var s_GamePanel = "Resources/Graphics/game-panel.png";
+var s_LoadingBackground = "Resources/Graphics/loading-background.png";
+var s_LoadingDecoration = "Resources/Graphics/loading-decoration.png";
+var s_PopupBackground = "Resources/Graphics/popup-background.png";
+var s_PopupButton = "Resources/Graphics/popup-button.png";
+var s_PopupFullscreenButton = "Resources/Graphics/panel-button-fullscreen.png";
+var s_PopupCloseButton = "Resources/Graphics/popup-close-button.png";
+var s_PopupPauseButton = "Resources/Graphics/panel-button-pause.png";
+var s_PopupDecoration1 = "Resources/Graphics/popup-decoration-1.png";
+var s_PopupDecoration2 = "Resources/Graphics/popup-decoration-2.png";
+var s_PopupDecoration3 = "Resources/Graphics/popup-decoration-3.png";
+var s_PopupDecoration4 = "Resources/Graphics/popup-decoration-4.png";
+var s_PopupDecoration5 = "Resources/Graphics/popup-decoration-5.png";
+var s_PopupDecoration6 = "Resources/Graphics/popup-decoration-6.png";
+var s_PopupDecoration7 = "Resources/Graphics/popup-decoration-7.png";
+var s_PopupDecoration8 = "Resources/Graphics/popup-decoration-8.png";
+var s_PopupDecoration9 = "Resources/Graphics/popup-decoration-9.png";
+var s_PopupDecoration10 = "Resources/Graphics/popup-decoration-10.png";
+var s_PopupDecoration11 = "Resources/Graphics/popup-decoration-11.png";
+var s_PopupDecoration12 = "Resources/Graphics/popup-decoration-12.png";
+var s_PopupDecoration13 = "Resources/Graphics/popup-decoration-13.png";
+var s_PopupDecoration14 = "Resources/Graphics/popup-decoration-14.png";
+var s_PanelItemsBackground1 = "Resources/Graphics/panel-item-background-1.png";
+var s_PanelItemsBackground2 = "Resources/Graphics/panel-item-background-2.png";
+var s_PanelIcon1 = "Resources/Graphics/panel-icon-1.png";
+var s_PanelIcon2 = "Resources/Graphics/panel-icon-2.png";
+var s_PanelIcon3 = "Resources/Graphics/panel-icon-3.png";
+var s_PanelIcon4 = "Resources/Graphics/panel-icon-4.png";
+var s_PanelIcon5 = "Resources/Graphics/panel-icon-5.png";
+var s_PanelIcon6 = "Resources/Graphics/panel-icon-6.png";
+var s_PanelIcon7 = "Resources/Graphics/panel-icon-7.png";
+var s_PanelButton = "Resources/Graphics/panel-button.png";
+var s_GameBackground1 = "Resources/Graphics/game-background-1.png";
+var s_GameBackground2 = "Resources/Graphics/game-background-2.png";
+var s_GameBackground3 = "Resources/Graphics/game-background-3.png";
+var s_GameBackground4 = "Resources/Graphics/game-background-4.png";
+var s_GameBackground5 = "Resources/Graphics/game-background-5.png";
+var s_GetLivesPopupButton = "Resources/Graphics/popup-lives-get.png";
+var s_GetCoinsPopupButton = "Resources/Graphics/popup-coins-get.png";
+var s_GetKeysPopupButton1 = "Resources/Graphics/popup-keys-get-1.png";
+var s_GetKeysPopupButton2 = "Resources/Graphics/popup-keys-get-2.png";
+var s_ListFixLarge = "Resources/Graphics/list-fix-large.png";
+var s_ListFixSmall = "Resources/Graphics/list-fix-small.png";
+var s_ListScrollLarge = "Resources/Graphics/list-scroll-large.png";
+var s_ListScrollSmall = "Resources/Graphics/list-scroll-small.png";
+var s_CreditsCompanyName = "Resources/Graphics/credits-company-name.png";
+var s_CreditsGameName = "Resources/Graphics/credits-game-name.png";
+var s_ShopWheel = "Resources/Graphics/shop-wheel.png";
+var s_ShopShelfs = "Resources/Graphics/shop-shelfs.png";
+var s_ShopItems = "Resources/Graphics/shop-items.png";
+var s_ItemsRating = "Resources/Graphics/items-rating.png";
+var s_ItemsProperties = "Resources/Graphics/items-properties.png";
+var s_ModeUnlockLine = "Resources/Graphics/unlock-line.png";
+var s_StarsPanel = "Resources/Graphics/stars-panel.png";
+var s_Star = "Resources/Graphics/star.png";
+var s_Mark = "Resources/Graphics/mark.png";
+var s_Lamp = "Resources/Graphics/lamp.png";
+var s_Birds = "Resources/Graphics/birds.png";
+var s_Explosion = "Resources/Graphics/explosion-1.png";
+var s_ExplosionBackground = "Resources/Graphics/explosion-2.png";
+var s_FinishBackground = "Resources/Graphics/finish-background.png";
+var s_FinishBackgroundSquare = "Resources/Graphics/finish-background-square.png";
+var s_FinishButtons = "Resources/Graphics/finish-buttons.png";
+var s_UnlockKey = "Resources/Graphics/unlock-key.png";
+var s_BonusBirds = "Resources/Graphics/bonus-birds.png";
+var s_StarParticle = "Resources/Graphics/star-particle.png";
+var s_Feathers = "Resources/Graphics/feathers.png";
+var s_VkontakteButton = "Resources/Graphics/vk-button.png";
+
+var s_Music1 = "Resources/Music/music-1.mp3";
+var s_Music2 = "Resources/Music/music-2.mp3";
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -158,6 +164,8 @@ var resources = [
   {src: s_PopupDecoration10},
   {src: s_PopupDecoration11},
   {src: s_PopupDecoration12},
+  {src: s_PopupDecoration13},
+  {src: s_PopupDecoration14},
   {src: s_PanelItemsBackground1},
   {src: s_PanelItemsBackground2},
   {src: s_PanelIcon1},
@@ -202,5 +210,9 @@ var resources = [
   {src: s_UnlockKey},
   {src: s_BonusBirds},
   {src: s_StarParticle},
-  {src: s_Feathers}
+  {src: s_Feathers},
+  {src: s_VkontakteButton},
+
+  {src: s_Music1},
+  {src: s_Music2}
 ];
