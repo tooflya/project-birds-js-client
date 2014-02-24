@@ -1,3 +1,6 @@
 [submodule "cocos2dx-tooflya-sdk-html5"]
 	path = cocos2dx-tooflya-sdk-html5
 	url = git@github.com:IgorMats/cocos2dx-tooflya-sdk-html5.git
+[submodule "project-birds-js-server"]
+	path = project-birds-js-server
+	url = git@github.com:tooflya/project-birds-js-server.git
