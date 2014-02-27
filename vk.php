@@ -79,7 +79,7 @@ switch($_GET['type'])
         $response['response'] = array(
           'item_id' => 0,
           'title' => 'Coins Pack #1 (Test Mode)',
-          'photo_url' => 'http://blogs.watoday.com.au/digital-life/screenplay/Coin.jpg',
+          'photo_url' => 'http://www.tooflya.com/games/project-birds/Resources/Icons/vk-purchase-1.png',
           'price' => 5
         );
         break;
@@ -87,7 +87,7 @@ switch($_GET['type'])
         $response['response'] = array(
           'item_id' => 1,
           'title' => 'Coins Pack #2 (Test Mode)',
-          'photo_url' => 'http://blogs.watoday.com.au/digital-life/screenplay/Coin.jpg',
+          'photo_url' => 'http://www.tooflya.com/games/project-birds/Resources/Icons/vk-purchase-2.png',
           'price' => 5
         );
         break;
@@ -95,7 +95,7 @@ switch($_GET['type'])
         $response['response'] = array(
           'item_id' => 2,
           'title' => 'Coins Pack #3 (Test Mode)',
-          'photo_url' => 'http://blogs.watoday.com.au/digital-life/screenplay/Coin.jpg',
+          'photo_url' => 'http://www.tooflya.com/games/project-birds/Resources/Icons/vk-purchase-3.png',
           'price' => 5
         );
         break;
@@ -103,7 +103,7 @@ switch($_GET['type'])
         $response['response'] = array(
           'item_id' => 3,
           'title' => 'Coins Pack #4 (Test Mode)',
-          'photo_url' => 'http://blogs.watoday.com.au/digital-life/screenplay/Coin.jpg',
+          'photo_url' => 'http://www.tooflya.com/games/project-birds/Resources/Icons/vk-purchase-4.png',
           'price' => 5
         );
         break;
@@ -111,7 +111,7 @@ switch($_GET['type'])
         $response['response'] = array(
           'item_id' => 3,
           'title' => 'Keys Pack #1 (Test Mode)',
-          'photo_url' => 'http://blogs.watoday.com.au/digital-life/screenplay/Coin.jpg',
+          'photo_url' => 'http://www.tooflya.com/games/project-birds/Resources/Icons/vk-purchase-5.png',
           'price' => 5
         );
         break;
@@ -119,7 +119,7 @@ switch($_GET['type'])
         $response['response'] = array(
           'item_id' => 3,
           'title' => 'Keys Pack #2  (Test Mode)',
-          'photo_url' => 'http://blogs.watoday.com.au/digital-life/screenplay/Coin.jpg',
+          'photo_url' => 'http://www.tooflya.com/games/project-birds/Resources/Icons/vk-purchase-6.png',
           'price' => 5
         );
         break;
@@ -127,7 +127,7 @@ switch($_GET['type'])
         $response['response'] = array(
           'item_id' => 6,
           'title' => 'Restoring of gold lives (Test Mode)',
-          'photo_url' => 'http://blogs.watoday.com.au/digital-life/screenplay/Coin.jpg',
+          'photo_url' => 'http://www.tooflya.com/games/project-birds/Resources/Icons/vk-purchase-7.png',
           'price' => 5
         );
         break;
