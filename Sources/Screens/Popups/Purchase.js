@@ -32,16 +32,19 @@
 Purchase = ExtendedPopup.extend({
   m_PurchaseCallback: false,
   m_PurchaseParameters: false,
+  m_PauseTimeElapsed: 0,
+  m_PauseTime: 2.0,
   ctor: function(parent) {
     this._super(parent);
 
     this.m_Decoration = Entity.create(s_PopupDecoration13, this.m_Background);
-    this.m_CoinsButton4 = Button.create(s_GetCoinsPopupButton, 2, 2, this.m_Background);
-    this.m_Text = Text.create('coins-popup', this.m_Background);
+    this.m_Text1 = Text.create('purchase-popup-1', this.m_Background);
+    this.m_Text2 = Text.create('purchase-popup-2', this.m_Background);
 
-    this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(350));
+    this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
 
-    this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(60));
+    this.m_Text1.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(100));
+    this.m_Text2.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(300));
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Purchase);
   },
@@ -53,26 +56,6 @@ Purchase = ExtendedPopup.extend({
   },
   onShow: function() {
     this._super();
-
-    var params = this.m_PurchaseParameters;
-    var self = this;
-
-    switch(this.config.params.platform) {
-      default:
-      break;
-      case 'vk':
-      VK.callMethod('showOrderBox', {
-        type: 'item',
-        item: params.id
-      });
-      VK.addCallback('onOrderCancel', function() {
-        self.hide();
-      });
-      VK.addCallback('onOrderSuccess', function() {
-        self.hide(self.m_PurchaseCallback(params.id));
-      });
-      break;
-    }
   },
   onHide: function() {
     this._super();
@@ -81,6 +64,32 @@ Purchase = ExtendedPopup.extend({
   },
   update: function(time) {
     this._super(time);
+
+    this.m_PauseTimeElapsed += time;
+    if(this.m_PauseTimeElapsed >= this.m_PauseTime) {
+      this.m_PauseTimeElapsed = 0;
+
+      var params = this.m_PurchaseParameters;
+      var self = this;
+
+      switch(this.config.params.platform) {
+        default:
+        self.hide(self.m_PurchaseCallback(params.id));
+        break;
+        case 'vk':
+        VK.callMethod('showOrderBox', {
+          type: 'item',
+          item: params.id
+        });
+        VK.addCallback('onOrderCancel', function() {
+          self.hide();
+        });
+        VK.addCallback('onOrderSuccess', function() {
+          self.hide(self.m_PurchaseCallback(params.id));
+        });
+        break;
+      }
+    }
   }
 });
 

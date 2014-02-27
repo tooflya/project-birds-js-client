@@ -44,7 +44,38 @@ AchievementsList = PatternList.extend({
   onEnter: function() {
     this._super();
 
-    //this.m_ListMaxHeight = Math.abs(this.m_Text[7].getCenterY() - this.m_Text[7].getHeight() / 2 - Camera.sharedCamera().coord(50));
+    var x = Camera.sharedCamera().coord(100);
+    var y = this.getCenterY() + Camera.sharedCamera().coord(180);
+
+    var icon;
+    var name;
+    var descritption;
+    var locked
+
+    var self = this;
+    AchievementsManager.sharedManager().get().forEach(function(element) {
+      icon = Entity.create(element.icon, self);
+      name = Text.create(element.name, self, cc.TEXT_ALIGNMENT_LEFT);
+      descritption = Text.create(element.state <= 0 ? 'achievement-locked' : element.description, self, cc.TEXT_ALIGNMENT_LEFT);
+
+      if(element.state <= 0) {
+        locked = Entity.create(s_AchievementLocked, icon);
+        locked.create();
+        locked.setCenterPosition(icon.getWidth() / 2, icon.getHeight() / 2);
+      }
+
+      icon.create().setCenterPosition(x, y);
+
+      name.setCenterPosition(x + Camera.sharedCamera().coord(80) + name.getWidth() / 2, y + Camera.sharedCamera().coord(55));
+      descritption.setCenterPosition(x + Camera.sharedCamera().coord(80) + descritption.getWidth() / 2, name.getCenterY() - Camera.sharedCamera().coord(80));
+
+      name.setColor(cc.c3(204.0, 102.0, 51.0));
+      descritption.setColor(element.state <= 0 ? cc.c3(255.0, 50.0, 0.0) : cc.c3(255.0, 130.0, 0.0));
+
+      y -= Camera.sharedCamera().coord(170);
+    });
+
+    this.m_ListMaxHeight = Math.abs(icon.getCenterY() - icon.getHeight() / 2 - Camera.sharedCamera().coord(50));
   }
 });
 

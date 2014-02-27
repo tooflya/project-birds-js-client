@@ -90,6 +90,7 @@ Mode = Screen.extend({
     Rating.sharedScreen(this).prepare();
     Achievements.sharedScreen(this).prepare();
     Lock.sharedScreen(this).prepare();
+    Multiplayer.sharedScreen(this).prepare();
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Menu);
@@ -101,7 +102,8 @@ Mode = Screen.extend({
     if(!DataManager.sharedManager().get(references.lock.modes.classic)) {
       Lock.sharedScreen(this).show(0);
     } else {
-      ScreenManager.sharedManager().replace(Loading);
+      Multiplayer.sharedScreen(this).show();
+      //ScreenManager.sharedManager().replace(Loading);
     }
   },
   onArcadeEvent: function() {
@@ -156,6 +158,8 @@ Mode = Screen.extend({
         time: 0.5,
         value: 0.0
       }]);
+
+      AchievementsManager.sharedManager().unlock(id + 1);
     } else {
       Keys.sharedScreen(this).show();
     }

@@ -34,6 +34,14 @@ var g_language  = {
     {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false}
     ],
+  'game-center-welcome': [
+    {title: 'Welcome!', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: 'Добро пожаловать!', font: 'Times New Roman', size: 32, dimensions: false}
+    ],
+  'game-center-information': [
+    {title: "You have $1 from $2 unclocked achievements.", font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: 'Вами было достигнуто $1 из $2 достижений.', font: 'Times New Roman', size: 24, dimensions: [500, 0]}
+    ],
   'loading': [
     {title: 'Loading resources... $1%', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: 'Загрузка ресурсов... $1%', font: 'Comic Sans MS', size: 36, dimensions: false}
@@ -89,6 +97,14 @@ var g_language  = {
   'coins-popup': [
     {title: 'You need to buy some coins!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
     {title: 'Желаете купить несколько монет?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
+    ],
+  'purchase-popup-1': [
+    {title: '', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]},
+    {title: 'Ожидаем подключения к серверу...', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]}
+    ],
+  'purchase-popup-2': [
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [512, 0]},
+    {title: 'Данная операция может занять некоторое время.', font: 'Comic Sans MS', size: 32, dimensions: [512, 0]}
     ],
   'rate-popup-1': [
     {title: 'Do you like our awesome game?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
@@ -814,5 +830,371 @@ var g_language  = {
   'item-description-59': [
     {title: "Information not found.", font: "Comic Sans MS", size: 25, dimensions: [420, 0]},
     {title: "Информация не найдена.", font: "Comic Sans MS", size: 25, dimensions: [420, 0]}
+    ],
+  'achievement-locked': [
+    {title: "Achievement locked", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Недостигнутое достижение", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+
+  'achievement-name-1': [
+    {title: "Classic mode", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Классический режим", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-2': [
+    {title: "Arcade mode", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Режим аркады", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-3': [
+    {title: "Freezer bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Ледяная птица", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-4': [
+    {title: "Redskin bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Краснокожий", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-5': [
+    {title: "Mexican bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Мексиканец", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-6': [
+    {title: "Samurai bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Самурай", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-7': [
+    {title: "Pirate bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Пират", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-8': [
+    {title: "Robo bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Робооптица", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-9': [
+    {title: "Comando bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Командос", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-10': [
+    {title: "Zombie bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Зомби", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-11': [
+    {title: "Junior", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Новичок", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-12': [
+    {title: "Aviarist", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Птицевод", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-13': [
+    {title: "Killer", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Убийца", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-14': [
+    {title: "Lord of birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Повелитель птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-15': [
+    {title: "Triple kill", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Тройное убийство", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-16': [
+    {title: "Ultra kill", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Супер убийство", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-17': [
+    {title: "Rampage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Ярость", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-18': [
+    {title: "Fan of green birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Любитель зеленых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-19': [
+    {title: "Fan of yellow birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Любитель желтых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-20': [
+    {title: "Fan of azure birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Любитель голубых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-21': [
+    {title: "Fan of purple birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Любитель фиолетовых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-22': [
+    {title: "Fan of red birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Любитель красных птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-23': [
+    {title: "Fan of orange birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Любитель оранжевых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-24': [
+    {title: "Fan of blue birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Любитель синих птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-25': [
+    {title: "Killer of green birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Убийца зеленых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-26': [
+    {title: "Killer of yellow birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Убийца желтых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-27': [
+    {title: "Killer of azure birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Убийца голубых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-28': [
+    {title: "Killer of purple birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Убийца фиолетовых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-29': [
+    {title: "Killer of red birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Убийца красных птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-30': [
+    {title: "Killer of orange birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Убийца оранжевых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-31': [
+    {title: "Killer of blue birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Убийца синих птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-32': [
+    {title: "Hunter on green birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Охотник на зеленых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-33': [
+    {title: "Hunter on yellow birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Охотник на желтых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-34': [
+    {title: "Hunter on azure birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Охотник на голубых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-35': [
+    {title: "Hunter on purple birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Охотник на фиолетовых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-36': [
+    {title: "Hunter on red birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Охотник на красных птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-37': [
+    {title: "Hunter on orange birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Охотник на оранжевых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-38': [
+    {title: "Hunter on blue birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Охотник на синих птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-39': [
+    {title: "Lord of green birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Повелитель зеленых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-40': [
+    {title: "Lord of yellow birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Повелитель желтых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-41': [
+    {title: "Lord of azure birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Повелитель голубых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-42': [
+    {title: "Lord of purple birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Повелитель фиолетовых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-43': [
+    {title: "Lord of red birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Повелитель красных птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-44': [
+    {title: "Lord of orange birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Повелитель оранжевых птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-45': [
+    {title: "Lord of blue birds", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Повелитель синих птиц", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+
+  'achievement-description-1': [
+    {title: "You have open classic mode", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли классический режим", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-2': [
+    {title: "You have open arcade mode", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли режим аркады", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-3': [
+    {title: "You рфму earn ice bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы получили ледяную птицу", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-4': [
+    {title: "You earn redskin bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы получили птицу краснокожих", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-5': [
+    {title: "You earn mexican bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы получили птицу мексиканца", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-6': [
+    {title: "You earn samurai bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы получили птицу самурая", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-7': [
+    {title: "You earn pirate bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы получили птицу пирата", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-8': [
+    {title: "You earn robobird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы получили робоптицу", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-9': [
+    {title: "You earn comando bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы  получили птицу командос", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-10': [
+    {title: "You eran zombie bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы получили птицу зомби", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-11': [
+    {title: "You unlock junior bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-12': [
+    {title: "You unlock aviarist bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-13': [
+    {title: "You unlock keller bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-14': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-15': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-16': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-17': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-18': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-19': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-20': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-21': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-22': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-23': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-24': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-25': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-26': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-27': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-28': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-29': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-30': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-31': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-32': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-33': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-34': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-35': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-36': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-37': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-38': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-39': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-40': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-41': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-42': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-43': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-44': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-description-45': [
+    {title: "You unlock new bage", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Вы открыли новый бейдж", font: "Comic Sans MS", size: 25, dimensions: [280, 0]}
     ],
 };

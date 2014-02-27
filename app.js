@@ -31,8 +31,7 @@
 
 (function() {
   App.run(false, {
-    standalone: true,
-    platform: 'vk',
+    platform: 'standalone',
     designed: {
     width: 1920,
     height: 1080
@@ -86,6 +85,7 @@
   'Sources/Screens/Popups/Finish.js',
   'Sources/Screens/Popups/Challenge.js',
   'Sources/Screens/Popups/Purchase.js',
+  'Sources/Screens/Popups/Multiplayer.js',
   'Sources/Managers/PopupShaderManager.js',
   'Sources/Panels/MenuPanel.js',
   'Sources/Panels/GamePanel.js',
@@ -112,6 +112,55 @@
   }, function(callback) {
     console.log('Your are a new user - welcome!');
 
+    var achievements = [];
+
+    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon2, name: 'achievement-name-2', description: 'achievement-description-2', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon3, name: 'achievement-name-3', description: 'achievement-description-3', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon4, name: 'achievement-name-4', description: 'achievement-description-4', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon5, name: 'achievement-name-5', description: 'achievement-description-5', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon6, name: 'achievement-name-6', description: 'achievement-description-6', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon7, name: 'achievement-name-7', description: 'achievement-description-7', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon8, name: 'achievement-name-8', description: 'achievement-description-8', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon9, name: 'achievement-name-9', description: 'achievement-description-9', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon10, name: 'achievement-name-10', description: 'achievement-description-10', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon11, name: 'achievement-name-11', description: 'achievement-description-11', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon12, name: 'achievement-name-12', description: 'achievement-description-12', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon13, name: 'achievement-name-13', description: 'achievement-description-13', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon14, name: 'achievement-name-14', description: 'achievement-description-14', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon15, name: 'achievement-name-15', description: 'achievement-description-15', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon16, name: 'achievement-name-16', description: 'achievement-description-16', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon17, name: 'achievement-name-17', description: 'achievement-description-17', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon18, name: 'achievement-name-18', description: 'achievement-description-18', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon19, name: 'achievement-name-19', description: 'achievement-description-19', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon20, name: 'achievement-name-20', description: 'achievement-description-20', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon21, name: 'achievement-name-21', description: 'achievement-description-21', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon22, name: 'achievement-name-22', description: 'achievement-description-22', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon23, name: 'achievement-name-23', description: 'achievement-description-23', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon24, name: 'achievement-name-24', description: 'achievement-description-24', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon25, name: 'achievement-name-25', description: 'achievement-description-25', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon26, name: 'achievement-name-26', description: 'achievement-description-26', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon27, name: 'achievement-name-27', description: 'achievement-description-27', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon28, name: 'achievement-name-28', description: 'achievement-description-28', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon29, name: 'achievement-name-29', description: 'achievement-description-29', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon30, name: 'achievement-name-30', description: 'achievement-description-30', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon31, name: 'achievement-name-31', description: 'achievement-description-31', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon32, name: 'achievement-name-32', description: 'achievement-description-32', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon33, name: 'achievement-name-33', description: 'achievement-description-34', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon34, name: 'achievement-name-34', description: 'achievement-description-34', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon35, name: 'achievement-name-35', description: 'achievement-description-35', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon36, name: 'achievement-name-36', description: 'achievement-description-36', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon37, name: 'achievement-name-37', description: 'achievement-description-37', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon38, name: 'achievement-name-38', description: 'achievement-description-38', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon39, name: 'achievement-name-39', description: 'achievement-description-39', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon40, name: 'achievement-name-40', description: 'achievement-description-40', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon41, name: 'achievement-name-41', description: 'achievement-description-41', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon42, name: 'achievement-name-42', description: 'achievement-description-42', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon43, name: 'achievement-name-43', description: 'achievement-description-43', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon44, name: 'achievement-name-44', description: 'achievement-description-44', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon45, name: 'achievement-name-45', description: 'achievement-description-45', state: 0});
+
+    DataManager.sharedManager().save(references.info.install, 1);
     DataManager.sharedManager().save(references.language, -1);
     DataManager.sharedManager().save(references.rating, 0); // TODO: Place?
     DataManager.sharedManager().save(references.coins.gold, 0);
@@ -120,6 +169,8 @@
     DataManager.sharedManager().save(references.coins.lives, 5);
     DataManager.sharedManager().save(references.lock.modes.classic, 0);
     DataManager.sharedManager().save(references.lock.modes.arcade, 0);
+
+    AchievementsManager.sharedManager().install(achievements);
 
     callback();
   });

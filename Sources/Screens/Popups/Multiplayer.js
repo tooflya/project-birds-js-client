@@ -29,34 +29,36 @@
  *
  */
 
-Button.prototype.onStart = function() {
-  this.stopAllActions();
+Multiplayer = ExtendedPopup.extend({
+  ctor: function(parent) {
+    this._super(parent);
 
-  this.runRecognizeAction(false, {
-    name: 'scale',
-    time: 0.1,
-    value: 0.95
-  });
-};
+    this.m_Decoration = Entity.create(s_PopupDecoration15, this.m_Background);
 
-Button.prototype.onCancel = function(callback) {
-  this.stopAllActions();
+    this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
 
-  this.runRecognizeAction(callback, {
-    name: 'scale',
-    time: 0.1,
-    value: 1.0
-  });
-};
+    this.m_CloseButton.setTouchHandler('onCloseEvent', Multiplayer);
+  },
+  show: function() {
+    this._super();
+  },
+  onShow: function() {
+    this._super();
+  },
+  onHide: function() {
+    this._super();
 
-Button.prototype.onTouch= function() {
-  Sound.sharedSound().play(s_SoundButtonTouch);
+    Multiplayer.instance = false;
+  }
+});
 
-  this.onCancel(cc.CallFunc.create(this.onFinish, this, this));
-};
+Multiplayer.instance = false;
+Multiplayer.sharedScreen = function(parent) {
+  if(Multiplayer.instance) {
+    Multiplayer.instance.m_Parent = parent;
+  } else {
+    Multiplayer.instance = new Multiplayer(parent);
+  }
 
-Button.prototype.onHover = function() {
-};
-
-Button.prototype.onUnHover = function() {
+  return Multiplayer.instance;
 };

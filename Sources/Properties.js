@@ -60,6 +60,9 @@ var references = {
       classic: 8,
       arcade: 9
     }
+  },
+  achievements: {
+    count: 10
   }
 };
 var unlock = {
