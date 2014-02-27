@@ -72,6 +72,7 @@ var s_PopupDecoration11 = "Resources/Graphics/popup-decoration-11.png";
 var s_PopupDecoration12 = "Resources/Graphics/popup-decoration-12.png";
 var s_PopupDecoration13 = "Resources/Graphics/popup-decoration-13.png";
 var s_PopupDecoration14 = "Resources/Graphics/popup-decoration-14.png";
+var s_PopupDecoration15 = "Resources/Graphics/popup-decoration-15.png";
 var s_PanelItemsBackground1 = "Resources/Graphics/panel-item-background-1.png";
 var s_PanelItemsBackground2 = "Resources/Graphics/panel-item-background-2.png";
 var s_PanelIcon1 = "Resources/Graphics/panel-icon-1.png";
@@ -118,9 +119,56 @@ var s_BonusBirds = "Resources/Graphics/bonus-birds.png";
 var s_StarParticle = "Resources/Graphics/star-particle.png";
 var s_Feathers = "Resources/Graphics/feathers.png";
 var s_VkontakteButton = "Resources/Graphics/vk-button.png";
+var s_AchievementLocked = "Resources/Icons/achievements-locked.png";
+var s_AchievementIcon1 = "Resources/Icons/achievements-1.png";
+var s_AchievementIcon2 = "Resources/Icons/achievements-2.png";
+var s_AchievementIcon3 = "Resources/Icons/achievements-3.png";
+var s_AchievementIcon4 = "Resources/Icons/achievements-4.png";
+var s_AchievementIcon5 = "Resources/Icons/achievements-5.png";
+var s_AchievementIcon6 = "Resources/Icons/achievements-6.png";
+var s_AchievementIcon7 = "Resources/Icons/achievements-7.png";
+var s_AchievementIcon8 = "Resources/Icons/achievements-8.png";
+var s_AchievementIcon9 = "Resources/Icons/achievements-9.png";
+var s_AchievementIcon10 = "Resources/Icons/achievements-10.png";
+var s_AchievementIcon11 = "Resources/Icons/achievements-11.png";
+var s_AchievementIcon12 = "Resources/Icons/achievements-12.png";
+var s_AchievementIcon13 = "Resources/Icons/achievements-13.png";
+var s_AchievementIcon14 = "Resources/Icons/achievements-14.png";
+var s_AchievementIcon15 = "Resources/Icons/achievements-15.png";
+var s_AchievementIcon16 = "Resources/Icons/achievements-16.png";
+var s_AchievementIcon17 = "Resources/Icons/achievements-17.png";
+var s_AchievementIcon18 = "Resources/Icons/achievements-18.png";
+var s_AchievementIcon19 = "Resources/Icons/achievements-19.png";
+var s_AchievementIcon20 = "Resources/Icons/achievements-20.png";
+var s_AchievementIcon21 = "Resources/Icons/achievements-21.png";
+var s_AchievementIcon22 = "Resources/Icons/achievements-22.png";
+var s_AchievementIcon23 = "Resources/Icons/achievements-23.png";
+var s_AchievementIcon24 = "Resources/Icons/achievements-24.png";
+var s_AchievementIcon25 = "Resources/Icons/achievements-25.png";
+var s_AchievementIcon26 = "Resources/Icons/achievements-26.png";
+var s_AchievementIcon27 = "Resources/Icons/achievements-27.png";
+var s_AchievementIcon28 = "Resources/Icons/achievements-28.png";
+var s_AchievementIcon29 = "Resources/Icons/achievements-29.png";
+var s_AchievementIcon30 = "Resources/Icons/achievements-30.png";
+var s_AchievementIcon31 = "Resources/Icons/achievements-31.png";
+var s_AchievementIcon32 = "Resources/Icons/achievements-32.png";
+var s_AchievementIcon33 = "Resources/Icons/achievements-33.png";
+var s_AchievementIcon34 = "Resources/Icons/achievements-34.png";
+var s_AchievementIcon35 = "Resources/Icons/achievements-35.png";
+var s_AchievementIcon36 = "Resources/Icons/achievements-36.png";
+var s_AchievementIcon37 = "Resources/Icons/achievements-37.png";
+var s_AchievementIcon38 = "Resources/Icons/achievements-38.png";
+var s_AchievementIcon39 = "Resources/Icons/achievements-39.png";
+var s_AchievementIcon40 = "Resources/Icons/achievements-40.png";
+var s_AchievementIcon41 = "Resources/Icons/achievements-41.png";
+var s_AchievementIcon42 = "Resources/Icons/achievements-42.png";
+var s_AchievementIcon43 = "Resources/Icons/achievements-43.png";
+var s_AchievementIcon44 = "Resources/Icons/achievements-44.png";
+var s_AchievementIcon45 = "Resources/Icons/achievements-45.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
+var s_SoundButtonTouch = "Resources/Sound/button-touch.mp3";
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -166,6 +214,7 @@ var resources = [
   {src: s_PopupDecoration12},
   {src: s_PopupDecoration13},
   {src: s_PopupDecoration14},
+  {src: s_PopupDecoration15},
   {src: s_PanelItemsBackground1},
   {src: s_PanelItemsBackground2},
   {src: s_PanelIcon1},
@@ -212,7 +261,54 @@ var resources = [
   {src: s_StarParticle},
   {src: s_Feathers},
   {src: s_VkontakteButton},
+  {src: s_AchievementLocked},
+  {src: s_AchievementIcon1},
+  {src: s_AchievementIcon2},
+  {src: s_AchievementIcon3},
+  {src: s_AchievementIcon4},
+  {src: s_AchievementIcon5},
+  {src: s_AchievementIcon6},
+  {src: s_AchievementIcon7},
+  {src: s_AchievementIcon8},
+  {src: s_AchievementIcon9},
+  {src: s_AchievementIcon10},
+  {src: s_AchievementIcon11},
+  {src: s_AchievementIcon12},
+  {src: s_AchievementIcon13},
+  {src: s_AchievementIcon14},
+  {src: s_AchievementIcon15},
+  {src: s_AchievementIcon16},
+  {src: s_AchievementIcon17},
+  {src: s_AchievementIcon18},
+  {src: s_AchievementIcon19},
+  {src: s_AchievementIcon20},
+  {src: s_AchievementIcon21},
+  {src: s_AchievementIcon22},
+  {src: s_AchievementIcon23},
+  {src: s_AchievementIcon24},
+  {src: s_AchievementIcon25},
+  {src: s_AchievementIcon26},
+  {src: s_AchievementIcon27},
+  {src: s_AchievementIcon28},
+  {src: s_AchievementIcon29},
+  {src: s_AchievementIcon30},
+  {src: s_AchievementIcon31},
+  {src: s_AchievementIcon32},
+  {src: s_AchievementIcon33},
+  {src: s_AchievementIcon34},
+  {src: s_AchievementIcon35},
+  {src: s_AchievementIcon36},
+  {src: s_AchievementIcon37},
+  {src: s_AchievementIcon38},
+  {src: s_AchievementIcon39},
+  {src: s_AchievementIcon40},
+  {src: s_AchievementIcon41},
+  {src: s_AchievementIcon42},
+  {src: s_AchievementIcon43},
+  {src: s_AchievementIcon44},
+  {src: s_AchievementIcon45},
 
   {src: s_Music1},
-  {src: s_Music2}
+  {src: s_Music2},
+  {src: s_SoundButtonTouch}
 ];
