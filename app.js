@@ -106,6 +106,8 @@
   ], function() {
     Preloader.preload(resources, function() {
       DataManager.sharedManager().getCurrentUser(function() {
+        AchievementsManager.sharedManager();
+
         ScreenManager.sharedManager().replace(Menu);
       });
     }, application);
