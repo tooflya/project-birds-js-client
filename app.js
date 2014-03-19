@@ -33,8 +33,8 @@
   App.run(false, {
     platform: 'standalone',
     designed: {
-    width: 1920,
-    height: 1080
+      width: 980,
+      height: 551
     },
     orientation: 'height'
   }, [
