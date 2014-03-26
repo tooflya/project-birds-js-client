@@ -39,6 +39,8 @@ Loading = Screen.extend({
 
     Loading.instance = this;
 
+    this.name = "Loading screen";
+
     this.m_Background = Entity.create(s_LoadingBackground, this, true);
     this.m_BackgroundDecoration = Entity.create(s_LoadingDecoration, this, true);
     this.m_BackgroundWaves = EntityManager.create(15, CircleDecoration1.create(), this.m_Background);
@@ -79,12 +81,12 @@ Loading = Screen.extend({
     }
 
     if(this.m_LoadingTimeElapsed >= this.m_LoadingTime) {
-      this.m_LoadingTimeElapsed = 0;
-
       this.onComplete();
     }
 
-    this.m_LoadingText.ccsf([Math.floor(this.m_LoadingTimeElapsed / this.m_LoadingTime * 100)]);
+    var percent = Math.floor(this.m_LoadingTimeElapsed / this.m_LoadingTime * 100);
+
+    this.m_LoadingText.ccsf([percent <= 100 ? percent : 100]);
     this.m_LoadingText.setCenterPosition(Camera.sharedCamera().width - this.m_LoadingText.getWidth() / 2 - Camera.sharedCamera().coord(32), Camera.sharedCamera().coord(50));
   }
 });

@@ -50,7 +50,11 @@ ResetProgress = ExtendedPopup.extend({
     this.m_ActionButton.setTouchHandler('onActionEvent', ResetProgress);
   },
   onActionEvent: function() {
-    //
+    this.hide(function() {
+      this.config.install(function() {
+        ScreenManager.sharedManager().replace(Menu);
+      });
+    });
   },
   onShow: function() {
     this._super();

@@ -35,6 +35,8 @@ Reset = Screen.extend({
 
     Reset.instance = this;
 
+    this.name = "Reset screen";
+
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
@@ -75,6 +77,17 @@ Reset = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+        if(ResetProgress.sharedScreen().getParent()) {
+          ResetProgress.sharedScreen().hide();
+        } else {
+          ScreenManager.sharedManager().replace(Settings);
+        }
+      break;
+    }
   }
 });
 

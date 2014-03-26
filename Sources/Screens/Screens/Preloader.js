@@ -35,6 +35,8 @@ Preloader = Screen.extend({
 
     Preloader.instance = this;
 
+    this.name = "Preloader screen";
+
     this.m_Background = Entity.create(s_PreloaderBackground, this, true);
     this.m_LoadingBarBackground = Entity.create(s_LoadingBarBackground, this);
     this.m_LoadingBar = TiledEntity.create(s_LoadingBar, 1, 1, this);

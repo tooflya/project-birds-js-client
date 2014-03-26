@@ -35,6 +35,8 @@ Languages = Screen.extend({
 
     Languages.instance = this;
 
+    this.name = "Languages screen";
+
     this.m_Flags = new Array();
     this.m_NotAvailableBackgrounds = new Array();
 
@@ -50,7 +52,7 @@ Languages = Screen.extend({
 
       this.m_NotAvailableBackgrounds[i] = Entity.create(s_FlagNotAvailable, this.m_Flags[i]);
 
-      if(i >= 2) {
+      if(i >= 2 && this.config.params.vendor != 'ubi-nuri') {
         var text = Text.create('language-not-available', this.m_NotAvailableBackgrounds[i]);
         text.setCenterPosition(this.m_NotAvailableBackgrounds[i].getWidth() / 2, this.m_NotAvailableBackgrounds[i].getHeight() / 2);
         text.disableShadow();
@@ -69,16 +71,22 @@ Languages = Screen.extend({
     this.m_BackgroundDecoration2.create().setCenterPosition(Camera.sharedCamera().width - this.m_BackgroundDecoration2.getWidth() / 2, this.m_BackgroundDecoration2.getHeight() / 2);
     this.m_Checker.create().setCenterPosition(this.m_Flags[0].getWidth() - this.m_Checker.getWidth() / 2, this.m_Checker.getHeight());
 
-    this.m_Flags[0].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(400));
-    this.m_Flags[1].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(400));
-    this.m_Flags[2].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(200));
-    this.m_Flags[3].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(200));
-    this.m_Flags[4].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(0));
-    this.m_Flags[5].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(0));
-    this.m_Flags[6].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(200));
-    this.m_Flags[7].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(200));
-    this.m_Flags[8].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(400));
-    this.m_Flags[9].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(400));
+    if(this.config.params.vendor == 'ubi-nuri') {
+      this.m_Flags[0].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(0), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(250));
+      this.m_Flags[1].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(0), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(0));
+      this.m_Flags[7].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(0), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(250));
+    } else {
+      this.m_Flags[0].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(400));
+      this.m_Flags[1].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(400));
+      this.m_Flags[2].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(200));
+      this.m_Flags[3].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(200));
+      this.m_Flags[4].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(0));
+      this.m_Flags[5].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(0));
+      this.m_Flags[6].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(200));
+      this.m_Flags[7].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(200));
+      this.m_Flags[8].create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(400));
+      this.m_Flags[9].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(180), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(400));
+    }
 
     this.m_BackButton.setCurrentFrameIndex(1);
 
@@ -107,6 +115,13 @@ Languages = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+      ScreenManager.sharedManager().replace(Settings);
+      break;
+    }
   }
 });
 

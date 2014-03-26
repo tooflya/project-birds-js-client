@@ -123,7 +123,7 @@ var g_language  = {
     {title: 'Вы уверены что хотите сбросить прогресс?', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
     ],
   'reset-popup-2': [
-    {title: 'You will start game from the first level!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},
+    {title: 'You will start game from the first level!', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
     {title: 'Вы начнете игру с первого уровня!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]}
     ],
   'reset-popup-3': [
@@ -349,6 +349,26 @@ var g_language  = {
   'request-battle': [
     {title: 'Request', font: 'Comic Sans MS', size: 48, dimensions: false},
     {title: 'Пригласить', font: 'Comic Sans MS', size: 38, dimensions: false}
+    ],
+  'finish-text-1': [
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Поймано птиц: $1', font: 'Comic Sans MS', size: 32, dimensions: false}
+    ],
+  'finish-text-2': [
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Комбо ударов: $1', font: 'Comic Sans MS', size: 32, dimensions: false}
+    ],
+  'finish-text-3': [
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Поймано летчиков: $1', font: 'Comic Sans MS', size: 32, dimensions: false}
+    ],
+  'finish-text-4': [
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Всего монет заработано:', font: 'Comic Sans MS', size: 32, dimensions: false}
+    ],
+  'finish-total-coins': [
+    {title: '$1', font: 'Comic Sans MS', size: 48, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 48, dimensions: false}
     ],
 
   'item-title-0': [

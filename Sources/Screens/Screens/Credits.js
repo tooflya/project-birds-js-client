@@ -35,6 +35,8 @@ Credits = Screen.extend({
 
     Credits.instance = this;
 
+    this.name = "Credits screen";
+
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
 
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
@@ -74,6 +76,13 @@ Credits = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+      ScreenManager.sharedManager().replace(Settings);
+      break;
+    }
   }
 });
 

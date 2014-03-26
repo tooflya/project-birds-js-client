@@ -36,7 +36,10 @@
       width: 980,
       height: 551
     },
-    orientation: 'height'
+    orientation: 'height',
+    analytics: 0,
+    purchases: false,
+    vendor: 'ubi-nuri'
   }, [
   'Sources/Resources.js',
   'Sources/Language.js',
@@ -53,6 +56,7 @@
   'Sources/Entities/FlayerBird.js',
   'Sources/Entities/BonusBird.js',
   'Sources/Entities/BirdExplosion.js',
+  'Sources/Entities/SplashStar.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',

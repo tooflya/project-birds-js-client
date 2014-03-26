@@ -35,6 +35,8 @@ Settings = Screen.extend({
 
     Settings.instance = this;
 
+    this.name = "Settings screen";
+
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_CreditsButton = Button.create(s_LongButton, 1, 1, this);
@@ -119,6 +121,13 @@ Settings = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+      ScreenManager.sharedManager().replace(Menu);
+      break;
+    }
   }
 });
 

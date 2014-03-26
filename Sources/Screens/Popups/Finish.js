@@ -38,14 +38,20 @@ Finish = Background.extend({
 
     this.m_Background = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
     this.m_BackgroundSquare = Entity.create(s_FinishBackgroundSquare, this);
+    this.m_PrizeDecoration = TiledEntity.create(s_PrizeDecoration, 1, 2, this.m_BackgroundSquare);
 
     this.m_MenuButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
     this.m_RestartButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
     this.m_ContinueButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
     this.m_ShopButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
 
+    this.m_SplashStars = EntityManager.create(20, SplashStar.create(false, Game.sharedScreen().getPhysicsWorld()), this);
+
     this.m_Background1 = TiledEntity.create(s_FinishBackground, 1, 2, this.m_Background);
     this.m_Background2 = TiledEntity.create(s_FinishBackground, 1, 2, this.m_Background);
+
+    this.m_TextValue1 = Text.create('finish-text-1', this.m_BackgroundSquare);
+    this.m_TextValue2 = Text.create('finish-total-coins', this.m_BackgroundSquare);
 
     this.m_Background1.setCurrentFrameIndex(0);
     this.m_Background2.setCurrentFrameIndex(1);
@@ -58,6 +64,14 @@ Finish = Background.extend({
     this.m_BackgroundSquare.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(50));
     this.m_Background1.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + this.m_Background1.getHeight() / 2);
     this.m_Background2.create().setCenterPosition(Camera.sharedCamera().center.x, -this.m_Background1.getHeight() / 2);
+
+    this.m_TextValue1.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 - Camera.sharedCamera().coord(20));
+    this.m_TextValue2.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 - Camera.sharedCamera().coord(120));
+
+    this.m_TextValue1.ccsf([0]);
+    this.m_TextValue2.ccsf([0]);
+
+    this.m_BackgroundSquare.setCascadeOpacityEnabled(true);
 
     this.m_MenuButton.setTouchHandler('onMenuEvent', Finish);
     this.m_RestartButton.setTouchHandler('onRestartEvent', Finish);
@@ -156,6 +170,8 @@ Finish = Background.extend({
       this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
       this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
       this.m_ContinueButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
+
+      this.m_PrizeDecoration.create().setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(250));
       break;
       case types.arcade:
       break;
@@ -188,6 +204,31 @@ Finish = Background.extend({
   },
   onShow: function() {
     MenuPanel.sharedScreen(this).show();
+
+    var types = Game.sharedScreen().m_Types;
+    var type = Game.sharedScreen().m_Type;
+
+    switch(type) {
+      case types.progress:
+
+      break;
+      case types.classic:
+      case types.arcade:
+      if(true) {
+        this.m_PrizeDecoration.setCurrentFrameIndex(1);
+
+        for(var i = 0; i < 20; i++) {
+          this.m_SplashStars.create();
+        }
+      }
+      break;
+    }
+
+    this.m_TotalCoins = 0;
+    this.m_CountReference = 0;
+    this.m_CountReferences = [0, 0, 0, 0];
+
+    this.schedule(this.count, 0.01);
   },
   onHide: function() {
     this.removeFromParent();
@@ -223,6 +264,68 @@ Finish = Background.extend({
     this._super();
 
     Finish.instance = false;
+  },
+  onCountingResume: function() {
+    this.m_TextValue1.runRecognizeAction(false, {
+      name: 'fade',
+      time: 0.2,
+      value: 255
+    });
+
+    switch(++this.m_CountReference) {
+      default:
+      this.unschedule(this.count);
+      break;
+      case 1:
+      this.m_TextValue1.setText('finish-text-2');
+
+      this.schedule(this.count, 0.01, null, 0.2);
+      break;
+      case 2:
+      this.m_TextValue1.setText('finish-text-3');
+
+      this.schedule(this.count, 0.01, null, 0.2);
+      break;
+      case 3:
+      this.m_TextValue1.setText('finish-text-4');
+
+      this.schedule(this.count, 0.01, null, 0.2);
+      break;
+    }
+
+    this.m_TextValue1.ccsf([this.m_CountReferences[this.m_CountReference]]);
+  },
+  count: function() {
+    var reward = 0;
+
+    switch(this.m_CountReference) {
+      case 0:
+      case 1:
+      case 2:
+      reward = this.m_CountReference + 1; // TODO: Check data coins.
+
+      this.m_CountReferences[this.m_CountReference]++;
+      this.m_TotalCoins += reward;
+
+      this.m_TextValue1.ccsf([this.m_CountReferences[this.m_CountReference]]);
+      this.m_TextValue2.ccsf([this.m_TotalCoins]);
+
+      if(this.m_CountReferences[this.m_CountReference] >= 100) { // TODO: Change 100 to the real data.
+        this.m_TextValue1.runRecognizeAction(cc.CallFunc.create(this.onCountingResume, this, this), {
+          name: 'fade',
+          time: 0.2,
+          value: 0
+        });
+
+        this.unschedule(this.count);
+      }
+      break;
+      case 3:
+      this.unschedule(this.count);
+      break;
+    }
+
+    DataManager.sharedManager().update(references.coins.silver, reward);
   }
 });
 

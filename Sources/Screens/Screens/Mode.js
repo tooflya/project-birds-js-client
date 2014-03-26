@@ -35,6 +35,8 @@ Mode = Screen.extend({
 
     Mode.instance = this;
 
+    this.name = "Mode screen";
+
     this.m_Lock = [];
 
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
@@ -48,6 +50,7 @@ Mode = Screen.extend({
     this.m_AchievementsButton = Button.create(s_SfxButtonsSprite, 3, 2, this);
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_HelpButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_ComingSoon = Entity.create(s_ComingSoon, this.m_ProgressMode);
     this.m_Lock[0] = Entity.create(s_Lock, this.m_ClassicMode);
     this.m_Lock[1] = Entity.create(s_Lock, this.m_ArcadeMode);
 
@@ -65,6 +68,7 @@ Mode = Screen.extend({
     this.m_AchievementsButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(110), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(320));
     this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(70));
     this.m_HelpButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(80), Camera.sharedCamera().height - Camera.sharedCamera().coord(70));
+    this.m_ComingSoon.create().setCenterPosition(-Camera.sharedCamera().coord(20), this.m_ProgressMode.getHeight() / 2 + Camera.sharedCamera().coord(10));
     this.m_Lock[0].create().setCenterPosition(0, this.m_ClassicMode.getHeight() / 2);
     this.m_Lock[1].create().setCenterPosition(0, this.m_ArcadeMode.getHeight() / 2);
     this.m_RatingButton.setCurrentFrameIndex(5);
@@ -78,7 +82,7 @@ Mode = Screen.extend({
     this.m_ArcadeModeText.setCenterPosition(this.m_ArcadeMode.getWidth() / 2, this.m_ArcadeMode.getHeight() / 2);
 
     this.m_BackButton.setTouchHandler('onBackEvent', Mode);
-    this.m_ProgressMode.setTouchHandler('onProgressEvent', Mode);
+    //this.m_ProgressMode.setTouchHandler('onProgressEvent', Mode);
     this.m_ClassicMode.setTouchHandler('onClassicEvent', Mode);
     this.m_ArcadeMode.setTouchHandler('onArcadeEvent', Mode);
     this.m_RatingButton.setTouchHandler('onRatingEvent', Mode);
@@ -99,17 +103,19 @@ Mode = Screen.extend({
     ScreenManager.sharedManager().replace(Levels);
   },
   onClassicEvent: function() {
-    if(!DataManager.sharedManager().get(references.lock.modes.classic)) {
+    if(!DataManager.sharedManager().get(references.lock.modes.classic) && this.config.params.vendor != 'ubi-nuri') {
       Lock.sharedScreen(this).show(0);
     } else {
-      Multiplayer.sharedScreen(this).show();
-      //ScreenManager.sharedManager().replace(Loading);
+      //Multiplayer.sharedScreen(this).show();
+      Game.sharedScreen(1);
+      ScreenManager.sharedManager().replace(Loading);
     }
   },
   onArcadeEvent: function() {
     if(!DataManager.sharedManager().get(references.lock.modes.arcade)) {
       Lock.sharedScreen(this).show(1);
     } else {
+      Game.sharedScreen(2);
       ScreenManager.sharedManager().replace(Loading);
     }
   },
@@ -169,7 +175,7 @@ Mode = Screen.extend({
 
     MenuPanel.sharedScreen(this).show();
 
-    if(DataManager.sharedManager().get(references.lock.modes.classic)) this.m_Lock[0].destroy();
+    if(DataManager.sharedManager().get(references.lock.modes.classic) || this.config.params.vendor == 'ubi-nuri') this.m_Lock[0].destroy();
     if(DataManager.sharedManager().get(references.lock.modes.arcade)) this.m_Lock[1].destroy(); 
   },
   onHide: function() {
@@ -184,6 +190,23 @@ Mode = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+        if(Help.sharedScreen().getParent()) {
+          Help.sharedScreen().hide();
+        } else if(Rating.sharedScreen().getParent()) {
+          Rating.sharedScreen().hide();
+        } else if(Achievements.sharedScreen().getParent()) {
+          Achievements.sharedScreen().hide();
+        } else if(Multiplayer.sharedScreen().getParent()) {
+          Multiplayer.sharedScreen().hide();
+        } else {
+          ScreenManager.sharedManager().replace(Menu);
+        }
+      break;
+    }
   }
 });
 

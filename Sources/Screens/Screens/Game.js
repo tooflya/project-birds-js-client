@@ -127,18 +127,28 @@ Game = Screen.extend({
   m_BestBlows: 0,
   m_Level: 0,
   m_SplashBackground : false,
-  ctor: function() {
+  ctor: function(type) {
     this._super(true);
 
     Game.instance = this;
 
-    this.m_Type = this.m_Types.classic;
+    this.name = "Game screen";
+
+    this.m_Type = type;
     this.m_ThrowParams = {
       birds: this.m_ThrowParameters.birds[this.m_Type],
       flayers: this.m_ThrowParameters.flayers[this.m_Type]
     };
 
-    this.m_Background = Entity.create(s_GameBackground1, this, true);
+    var backgrounds = [
+      s_GameBackground1,
+      s_GameBackground2,
+      s_GameBackground3,
+      s_GameBackground4,
+      s_GameBackground5
+    ];
+
+    this.m_Background = Entity.create(backgrounds[Random.sharedRandom().random(0, backgrounds.length, true)], this, true);
 
     this.m_PreviewBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
     this.m_SplashBackground = BackgroundColor.create(cc.c4(255, 255, 255, 0), this);
@@ -186,10 +196,16 @@ Game = Screen.extend({
     this.updateTimer(time);
 
     this.m_Touch.active = this.m_WasTouched;
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+      break;
+    }
   }
 });
 
 Game.instance = false;
-Game.sharedScreen = function() {
-  return Game.instance ? Game.instance : new Game();
+Game.sharedScreen = function(type) {
+  return Game.instance ? Game.instance : new Game(type);
 };

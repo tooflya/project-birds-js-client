@@ -36,6 +36,8 @@ Menu = Screen.extend({
 
     Menu.instance = this;
 
+    this.name = "Menu screen";
+
     this.m_PlayButtonDecorations = new Array();
 
     this.m_Background = Entity.create(s_MenuBackground, this, true);
@@ -44,23 +46,35 @@ Menu = Screen.extend({
     this.m_PlayButton = Button.create(s_PlayButton, 6, 2, this);
     this.m_SettingsButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    if(this.config.params.platform == 'vk') this.m_VkontakteButton = Button.create(s_VkontakteButton, 1, 1, this);
+
+    if(this.config.params.vendor == 'ubi-nuri') {
+    } else {
+      this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 3, this);
+      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 3, this);
+      if(this.config.params.platform == 'vk') this.m_VkontakteButton = Button.create(s_VkontakteButton, 1, 1, this);
+    }
 
     this.m_SettingsButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_PlayButtonDecorations[0].create().setCenterPosition(Camera.sharedCamera().center.x+ Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_PlayButtonDecorations[1].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_PlayButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(20), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
-    if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    if(this.config.params.platform == 'vk') this.m_VkontakteButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_TwitterButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(270), Camera.sharedCamera().coord(100));
+    
+    if(this.config.params.vendor == 'ubi-nuri') {
+    } else {
+      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+      if(this.config.params.platform == 'vk') this.m_VkontakteButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+      this.m_TwitterButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(270), Camera.sharedCamera().coord(100));
+    }
 
     this.m_SettingsButton.setCurrentFrameIndex(6);
     this.m_ShopButton.setCurrentFrameIndex(2);
-    if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.setCurrentFrameIndex(3);
-    this.m_TwitterButton.setCurrentFrameIndex(0);
+
+    if(this.config.params.vendor == 'ubi-nuri') {
+    } else {
+      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.setCurrentFrameIndex(3);
+      this.m_TwitterButton.setCurrentFrameIndex(0);
+    }
 
     this.m_PlayButtonDecorations[0].setColor(cc.RED);
     this.m_PlayButtonDecorations[1].setColor(cc.RED);
@@ -70,9 +84,13 @@ Menu = Screen.extend({
     this.m_PlayButton.setTouchHandler('onPlayEvent', Menu);
     this.m_SettingsButton.setTouchHandler('onSettingsEvent', Menu);
     this.m_ShopButton.setTouchHandler('onShopEvent', Menu);
-    if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.setTouchHandler('onFacebookEvent', Menu);
-    if(this.config.params.platform == 'vk') this.m_VkontakteButton.setTouchHandler('onVkontakteEvent', Menu);
-    this.m_TwitterButton.setTouchHandler('onTwitterEvent', Menu);
+
+    if(this.config.params.vendor == 'ubi-nuri') {
+    } else {
+      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.setTouchHandler('onFacebookEvent', Menu);
+      if(this.config.params.platform == 'vk') this.m_VkontakteButton.setTouchHandler('onVkontakteEvent', Menu);
+      this.m_TwitterButton.setTouchHandler('onTwitterEvent', Menu);
+    }
 
     Rate.sharedScreen(this).prepare();
   },
@@ -104,6 +122,12 @@ Menu = Screen.extend({
     }
 
     Music.sharedMusic().play(s_Music1, true);
+
+    if(!Menu.gameCenterNotificationShowed) {
+      Menu.gameCenterNotificationShowed = true;
+
+      GameCenterNotification.sharedNotification().show();
+    }
   },
   onHide: function() {
     this._super();
@@ -115,9 +139,21 @@ Menu = Screen.extend({
 
     this.m_PlayButtonDecorations[0].setRotation(this.m_PlayButtonDecorations[0].getRotation() - 10 * time);
     this.m_PlayButtonDecorations[1].setRotation(this.m_PlayButtonDecorations[1].getRotation() + 10 * time);
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+        if(Rate.sharedScreen().getParent()) {
+          Rate.sharedScreen().hide();
+        } else {
+
+        }
+      break;
+    }
   }
 });
 
+Menu.gameCenterNotificationShowed = false;
 Menu.instance = false;
 Menu.sharedScreen = function() {
   return Menu.instance ? Menu.instance : new Menu();

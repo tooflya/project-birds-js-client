@@ -35,6 +35,8 @@ More = Screen.extend({
 
     More.instance = this;
 
+    this.name = "More screen";
+
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_VideoButton = Button.create(s_LongButton, 1, 1, this);
@@ -86,6 +88,13 @@ More = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+      ScreenManager.sharedManager().back();
+      break;
+    }
   }
 });
 

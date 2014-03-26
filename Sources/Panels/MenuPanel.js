@@ -47,16 +47,16 @@ MenuPanel = Panel.extend({
   ctor: function(parent) {
     this._super(s_InterfacePanel, parent);
 
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], [s_PanelButton, 1, 1], function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([MenuPanel.sharedScreen().m_Fields[0]]);
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], [s_PanelButton, 1, 1], function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([MenuPanel.sharedScreen().m_Fields[1]]);
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], [s_PanelButton, 1, 1], function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([MenuPanel.sharedScreen().m_Fields[2]]);
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], [s_PanelButton, 1, 1], function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([MenuPanel.sharedScreen().m_Fields[3]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon5, 3, 3], false, function(e) {
@@ -75,10 +75,12 @@ MenuPanel = Panel.extend({
     this.getIcons()[0].setRotation(-45);
     this.getIcons()[1].setRotation(-45);
 
-    this.getButtons()[0].setTouchHandler('show', Coins);
-    this.getButtons()[1].setTouchHandler('show', Coins);
-    this.getButtons()[2].setTouchHandler('show', Lives);
-    this.getButtons()[3].setTouchHandler('show', Keys);
+    if(this.config.params.purchases) {
+      this.getButtons()[0].setTouchHandler('show', Coins);
+      this.getButtons()[1].setTouchHandler('show', Coins);
+      this.getButtons()[2].setTouchHandler('show', Lives);
+      this.getButtons()[3].setTouchHandler('show', Keys);
+    }
 
     Coins.sharedScreen(this).prepare();
     Keys.sharedScreen(this).prepare();
@@ -100,6 +102,8 @@ MenuPanel = Panel.extend({
   },
   onEnter: function() {
     this._super();
+
+    this.updateData();
   },
   onExit: function() {
     this._super();
@@ -114,6 +118,15 @@ MenuPanel = Panel.extend({
         this.m_Fields[i] += this.m_Fields[i] > DataManager.sharedManager().get(this.m_Keys[i]) ? -1 : 1;
       }
     }
+  },
+  updateData: function() {
+    this.m_Fields = [
+      DataManager.sharedManager().get(references.coins.gold),
+      DataManager.sharedManager().get(references.coins.silver),
+      DataManager.sharedManager().get(references.coins.lives),
+      DataManager.sharedManager().get(references.coins.keys),
+      DataManager.sharedManager().get(references.rating)
+    ];
   }
 });
 

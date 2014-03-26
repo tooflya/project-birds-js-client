@@ -82,6 +82,7 @@ var s_PanelIcon4 = "Resources/Graphics/panel-icon-4.png";
 var s_PanelIcon5 = "Resources/Graphics/panel-icon-5.png";
 var s_PanelIcon6 = "Resources/Graphics/panel-icon-6.png";
 var s_PanelIcon7 = "Resources/Graphics/panel-icon-7.png";
+var s_PanelIcon8 = "Resources/Graphics/panel-icon-8.png";
 var s_PanelButton = "Resources/Graphics/panel-button.png";
 var s_GameBackground1 = "Resources/Graphics/game-background-1.png";
 var s_GameBackground2 = "Resources/Graphics/game-background-2.png";
@@ -119,6 +120,9 @@ var s_BonusBirds = "Resources/Graphics/bonus-birds.png";
 var s_StarParticle = "Resources/Graphics/star-particle.png";
 var s_Feathers = "Resources/Graphics/feathers.png";
 var s_VkontakteButton = "Resources/Graphics/vk-button.png";
+var s_ComingSoon = "Resources/Graphics/coming-soon.png";
+var s_PrizeDecoration = "Resources/Graphics/prize-decoration.png";
+var s_SplashStar = "Resources/Graphics/splash-star.png";
 var s_AchievementLocked = "Resources/Icons/achievements-locked.png";
 var s_AchievementIcon1 = "Resources/Icons/achievements-1.png";
 var s_AchievementIcon2 = "Resources/Icons/achievements-2.png";
@@ -224,6 +228,7 @@ var resources = [
   {src: s_PanelIcon5},
   {src: s_PanelIcon6},
   {src: s_PanelIcon7},
+  {src: s_PanelIcon8},
   {src: s_PanelButton},
   {src: s_GameBackground1},
   {src: s_GameBackground2},
@@ -261,6 +266,9 @@ var resources = [
   {src: s_StarParticle},
   {src: s_Feathers},
   {src: s_VkontakteButton},
+  {src: s_ComingSoon},
+  {src: s_PrizeDecoration},
+  {src: s_SplashStar},
   {src: s_AchievementLocked},
   {src: s_AchievementIcon1},
   {src: s_AchievementIcon2},

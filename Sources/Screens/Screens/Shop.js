@@ -37,6 +37,8 @@ Shop = Screen.extend({
 
     Shop.instance = this;
 
+    this.name = "Shop screen";
+
     this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration1, this);
@@ -62,8 +64,8 @@ Shop = Screen.extend({
         this.m_Wheels[i][j].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().center.x / 2 * (j - 1), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) - Camera.sharedCamera().coord(50));
       }
 
-        this.m_Backgrounds[i] = List.create(1920, 280, 320, 0, this, 1);
-        this.m_Backgrounds[i].setListCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) + Camera.sharedCamera().coord(80));
+      this.m_Backgrounds[i] = List.create(1920, 280, 320, 0, this, 1);
+      this.m_Backgrounds[i].setListCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) + Camera.sharedCamera().coord(80));
 
       for(var j = -3; j < 6; j++) {
         this.m_Shelfs[i][j] = TiledEntity.create(s_ShopShelfs, 1, 2, this.m_Backgrounds[i]);
@@ -73,7 +75,6 @@ Shop = Screen.extend({
         if(j != 0) {
           this.m_Shelfs[i][j].setCurrentFrameIndex(1);
         } else {
-
           var id;
           switch(i) { case 0: id = 'weapons'; break; case 1: id = 'birds'; break; case 2: id = 'bonuses'; break; }
           var t = Text.create(id, this.m_Shelfs[i][j]);
@@ -99,6 +100,30 @@ Shop = Screen.extend({
         this.m_Items[i][j].setZOrder(3);
 
         counter++;
+
+        // Under construction
+        switch(i) {
+          case 1:
+          switch(j) {
+            case 8:
+            case 9:
+            case 10:
+            this.m_Items[i][j].registerTouchable(false);
+            this.m_Items[i][j].setCurrentFrameIndex(59);
+            break;
+          }
+          break;
+          case 2:
+          switch(j) {
+            case 8:
+            case 9:
+            case 10:
+            this.m_Items[i][j].registerTouchable(false);
+            this.m_Items[i][j].setCurrentFrameIndex(59);
+            break;
+          }
+          break;
+        }
       }
     }
 
@@ -113,7 +138,7 @@ Shop = Screen.extend({
     this.m_BackButton.setTouchHandler('onBackEvent', Shop);
   },
   onBackEvent: function() {
-    ScreenManager.sharedManager().replace(Menu);
+    ScreenManager.sharedManager().back();
   },
   onShow: function() {
     this._super();
@@ -132,6 +157,19 @@ Shop = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+  },
+  onKeyDown: function(e) {
+    switch(e) {
+      case 27:
+        if(Item.sharedScreen().getParent()) {
+          Item.sharedScreen().hide();
+        } else if(Bought.sharedScreen().getParent()) {
+          Bought.sharedScreen().hide();
+        } else {
+          ScreenManager.sharedManager().back();
+        }
+      break;
+    }
   }
 });
 

@@ -50,14 +50,14 @@ GamePanel = Panel.extend({
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon6, 7, 1], false, function(e) {
       e.ccsf([Game.sharedScreen().m_CurrentBlows]);
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], [s_PanelButton, 1, 1], function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[0]]);
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], [s_PanelButton, 1, 1], function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[1]]);
     });
 
-    var u=0;
+    var u = 0;
     switch(type) {
       case 0:
         this.addItem(s_PanelItemsBackground2, [s_Star, 3, 2]);
@@ -75,7 +75,7 @@ GamePanel = Panel.extend({
         this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
         this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
 
-        u=3;
+        u = 3;
       break;
       case 1:
         this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
@@ -95,34 +95,21 @@ GamePanel = Panel.extend({
         this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
         this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
 
-        u=3;
+        u = 3;
       break;
       case 2:
-        this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
-        this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
-        this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
+        this.addItem(s_PanelItemsBackground1, [s_PanelIcon8, 1, 1], false, function(e) {
+          e.timeLeft(Game.sharedScreen().m_GameTimeElapsed, 60.0);
+        });
 
-        this.getIcons()[3].setCurrentFrameIndex(1);
-        this.getIcons()[4].setCurrentFrameIndex(1);
-        this.getIcons()[5].setCurrentFrameIndex(1);
-
-        this.getIcons()[3].setScale(0.95);
-        this.getIcons()[5].setScale(0.95);
-
-        this.getIcons()[3].setRotation(-5);
-        this.getIcons()[5].setRotation(5);
-
-        this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
-        this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
-
-        u=3;
+        u = 0;
       break;
     }
 
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], [s_PanelButton, 1, 1], function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[2]]);
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], [s_PanelButton, 1, 1], function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[3]]);
     });
     this.addItem(s_PanelItemsBackground2, false, [s_PopupPauseButton, 1, 1]);
@@ -139,11 +126,14 @@ GamePanel = Panel.extend({
     this.getIcons()[1].setRotation(-45);
     this.getIcons()[2].setRotation(-45);
 
-    this.getButtons()[0].setTouchHandler('show', Coins);
-    this.getButtons()[1].setTouchHandler('show', Coins);
-    this.getButtons()[2].setTouchHandler('show', Lives);
-    this.getButtons()[3].setTouchHandler('show', Keys);
-    this.getButtons()[4].setTouchHandler('onPauseEvent', Game);
+    if(this.config.params.purchases) {
+      this.getButtons()[0].setTouchHandler('show', Coins);
+      this.getButtons()[1].setTouchHandler('show', Coins);
+      this.getButtons()[2].setTouchHandler('show', Lives);
+      this.getButtons()[3].setTouchHandler('show', Keys);
+    }
+
+    this.getButtons()[this.config.params.purchases ? 4 : 0].setTouchHandler('onPauseEvent', Game);
 
     this.m_BackgroundCircleDecoration = EntityManager.create(5, CircleDecoration2.create(), this.getBackgrounds()[0], 0);
 
