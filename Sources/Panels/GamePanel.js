@@ -95,6 +95,12 @@ GamePanel = Panel.extend({
         this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
         this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
 
+        if(!this.config.params.purchases) {
+          for(var i = 3; i <= 5; i++) {
+            this.getIcons()[i].setCenterPosition(this.getIcons()[i].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[i].getCenterY());
+          }
+        }
+
         u = 3;
       break;
       case 2:

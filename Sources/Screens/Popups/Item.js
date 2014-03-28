@@ -87,7 +87,11 @@ Item = ExtendedPopup.extend({
       var gold = properties.items[this.m_ActionButton.params.id].price.gold;
 
       if(DataManager.sharedManager().get(references.coins.silver) < silver || DataManager.sharedManager().get(references.coins.gold) < gold) {
-        Coins.sharedScreen(this.m_Parent).show();
+        if(this.config.params.vendor == 'ubi-nuri') {
+          //Toast
+        } else {
+          Coins.sharedScreen(this.m_Parent).show();
+        }
       } else {
         DataManager.sharedManager().update(references.coins.gold, -gold);
         DataManager.sharedManager().update(references.coins.silver, -silver);

@@ -33,6 +33,15 @@ Game.prototype.onBlow = function(element) {
   if(!this.m_GameRunning) return false;
 
   if(element instanceof Bird) {
+    /*Game.sharedScreen().m_SplashEffect1.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+    Game.sharedScreen().m_SplashEffect1.setOpacity(255);
+    Game.sharedScreen().m_SplashEffect1.setColor(Bird.colors[element.m_Id / element.getHorizontalFramesCount()]);
+    Game.sharedScreen().m_SplashEffect1.runRecognizeAction(cc.CallFunc.create(Game.sharedScreen().m_SplashEffect1.destroy, Game.sharedScreen().m_SplashEffect1, Game.sharedScreen().m_SplashEffect1), {
+      name: 'fade',
+      time: 0.02,
+      value: 0.0
+    });*/
+
     Game.sharedScreen().m_SplashBackground.runAction(cc.FadeOut.create(0.02));
   } else if(false) {
     //

@@ -84,10 +84,14 @@ Lock = ExtendedPopup.extend({
   },
   onHide: function() {
     if(this.m_ActionButton.action) {
-      if(true) {
+      if(DataManager.sharedManager().get(references.coins.keys) >= 10) {
         this.getParent().unlock(this.id);
       } else {
-        Keys.sharedScreen(this.m_Parent).show();
+        if(this.config.params.vendor == 'ubi-nuri') {
+          //Toast
+        } else {
+          Keys.sharedScreen(this.m_Parent).show();
+        }
       }
     }
 

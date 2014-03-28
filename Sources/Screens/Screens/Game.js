@@ -44,7 +44,7 @@ Game = Screen.extend({
           time: 0.0
         },
         max: {
-          time: 1.0
+          time: 5.0
         }
       },
       {
@@ -152,9 +152,11 @@ Game = Screen.extend({
 
     this.m_PreviewBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
     this.m_SplashBackground = BackgroundColor.create(cc.c4(255, 255, 255, 0), this);
+    this.m_SplashEffect1 = Entity.create(s_ScreenEffect1, this);
 
     this.m_PreviewBackground.setZOrder(200);
     this.m_SplashBackground.setZOrder(200);
+    this.m_SplashEffect1.setZOrder(200);
 
     this.m_Marks = EntityManager.create(1500, Mark.create(), this, 100);
     this.m_Stars = EntityManager.create(1500, Star.create(), this, 100);
@@ -206,6 +208,9 @@ Game = Screen.extend({
 });
 
 Game.instance = false;
+Game.type = false;
 Game.sharedScreen = function(type) {
-  return Game.instance ? Game.instance : new Game(type);
+  Game.type = type ? type : Game.type;
+
+  return Game.instance ? Game.instance : new Game(Game.type);
 };

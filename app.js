@@ -178,6 +178,10 @@
 
     AchievementsManager.sharedManager().install(achievements);
 
+    if(LanguagesManager.sharedManager().config.params.vendor == 'ubi-nuri') {
+      LanguagesManager.sharedManager().changeLanguage(7);
+    }
+
     callback();
   });
 })();

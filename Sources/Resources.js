@@ -30,9 +30,11 @@
  */
 
 var s_PreloaderBackground = "Resources/Graphics/preloader-background.png";
+var s_PreloaderBackgroundJapan = "Resources/Graphics/preloader-background-japan.png";
 var s_LoadingBarBackground = "Resources/Graphics/preloader-bar-background.png";
 var s_LoadingBar = "Resources/Graphics/preloader-bar.png";
 var s_MenuBackground = "Resources/Graphics/menu-background.png";
+var s_MenuBackgroundJapan = "Resources/Graphics/menu-background-japan.png";
 var s_ButtonsSprite = "Resources/Graphics/buttons-sprite.png";
 var s_PlayButton = "Resources/Graphics/play-button.png";
 var s_CircleDecoration1 = "Resources/Graphics/circle-decoration-1.png";
@@ -169,6 +171,7 @@ var s_AchievementIcon42 = "Resources/Icons/achievements-42.png";
 var s_AchievementIcon43 = "Resources/Icons/achievements-43.png";
 var s_AchievementIcon44 = "Resources/Icons/achievements-44.png";
 var s_AchievementIcon45 = "Resources/Icons/achievements-45.png";
+var s_ScreenEffect1 = "Resources/Graphics/screen-effect-1.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
@@ -315,6 +318,7 @@ var resources = [
   {src: s_AchievementIcon43},
   {src: s_AchievementIcon44},
   {src: s_AchievementIcon45},
+  {src: s_ScreenEffect1},
 
   {src: s_Music1},
   {src: s_Music2},
