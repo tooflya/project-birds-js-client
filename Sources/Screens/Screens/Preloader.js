@@ -37,7 +37,7 @@ Preloader = Screen.extend({
 
     this.name = "Preloader screen";
 
-    this.m_Background = Entity.create(LanguagesManager.sharedManager().getLanguageId() == 3 ? s_PreloaderBackgroundJapan : s_PreloaderBackground, this, true);
+    this.m_Background = Entity.create(LanguagesManager.sharedManager().getLanguageId() == 7 ? s_PreloaderBackgroundJapan : s_PreloaderBackground, this, true);
     this.m_LoadingBarBackground = Entity.create(s_LoadingBarBackground, this);
     this.m_LoadingBar = TiledEntity.create(s_LoadingBar, 1, 1, this);
     this.m_LoadingText = Text.create('loading', this);

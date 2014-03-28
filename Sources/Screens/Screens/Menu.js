@@ -40,7 +40,7 @@ Menu = Screen.extend({
 
     this.m_PlayButtonDecorations = new Array();
 
-    this.m_Background = Entity.create(LanguagesManager.sharedManager().getLanguageId() == 3 ? s_MenuBackgroundJapan : s_MenuBackground, this, true);
+    this.m_Background = Entity.create(LanguagesManager.sharedManager().getLanguageId() == 7 ? s_MenuBackgroundJapan : s_MenuBackground, this, true);
     this.m_PlayButtonDecorations[0] = Entity.create(s_CircleDecoration1, this);
     this.m_PlayButtonDecorations[1] = Entity.create(s_CircleDecoration1, this);
     this.m_PlayButton = Button.create(s_PlayButton, 6, 2, this);
