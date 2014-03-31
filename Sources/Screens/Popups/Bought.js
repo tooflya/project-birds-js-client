@@ -50,6 +50,8 @@ Bought = ExtendedPopup.extend({
     this.m_ItemText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(300));
     this.m_UnlockText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(400));
 
+    this.m_BackgroundIcon.setZOrder(605);
+
     this.m_CloseButton.setTouchHandler('onCloseEvent', Bought);
   },
   show: function(params) {
@@ -158,6 +160,8 @@ Bought = ExtendedPopup.extend({
       time: this.m_ShowTime,
       value: 255.0
     });
+
+    ConfettiBackground.sharedScreen(this).show();
   },
   onHide: function() {
     this._super();

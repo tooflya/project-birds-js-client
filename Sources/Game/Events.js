@@ -78,6 +78,7 @@ Game.prototype.onGameFinish = function() {
 };
 
 Game.prototype.onPreviewStart = function() {
+  this.m_PreviewText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
 };
 
 Game.prototype.onPreviewFinish = function() {
@@ -88,9 +89,12 @@ Game.prototype.onUpdateLevelStart = function() {
   this.m_LevelTimeElapsed = 0;
 
   this.m_PreviewText.setText('game-level-update');
-  this.m_PreviewText.setScale(0.5);
+  this.m_PreviewText.setScale(1.0);
   this.m_PreviewText.setOpacity(255);
   this.m_PreviewText.setVisible(true);
+  this.m_PreviewText.setCenterPosition(this.m_PreviewText.getWidth() / 2 + Camera.sharedCamera().coord(20), this.m_PreviewText.getHeight() / 2 + Camera.sharedCamera().coord(20));
+
+  ConfettiBackground.sharedScreen(this).show();
 };
 
 Game.prototype.onUpdateLevelFinish = function() {

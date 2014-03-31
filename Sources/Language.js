@@ -281,8 +281,8 @@ var g_language  = {
     {title: 'リセット', font: 'Comic Sans MS', size: 48, dimensions: false}
     ],
   'reset': [
-    {title: 'If you want to start game again you can completely reset your progress now.', font: 'Comic Sans MS', size: 48, dimensions: [800, 0]},
-    {title: 'Если вы хотите начать игру заново вы можете полностью сбросить прогресс игры.', font: 'Comic Sans MS', size: 48, dimensions: [800, 0]},
+    {title: 'If you want to start game again you can completely reset your progress now.', font: 'Comic Sans MS', size: 48, dimensions: [1200, 0]},
+    {title: 'Если вы хотите начать игру заново вы можете полностью сбросить прогресс игры.', font: 'Comic Sans MS', size: 48, dimensions: [1200, 0]},
     {title: '', font: 'Comic Sans MS', size: 48, dimensions: [800, 0]},
     {title: '', font: 'Comic Sans MS', size: 48, dimensions: [800, 0]},
     {title: '', font: 'Comic Sans MS', size: 48, dimensions: [800, 0]},
@@ -322,7 +322,7 @@ var g_language  = {
     ],
   'privacy-policy': [
     {title: 'Privacy policy', font: 'Comic Sans MS', size: 40, dimensions: false},
-    {title: 'Политика конфиденциальности', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: 'Политика \n конфиденциальности', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
@@ -771,14 +771,14 @@ var g_language  = {
     {title: "我々は現在のサーバーに接続...", font: "Comic Sans MS", size: 64, dimensions: false}//
     ],
   'game-level-update': [
-    {title: "Level complete!", font: "Comic Sans MS", size: 128, dimensions: false},
-    {title: "Уровень пройден!", font: "Comic Sans MS", size: 128, dimensions: false},
+    {title: "Level - $1", font: "Comic Sans MS", size: 128, dimensions: false},
+    {title: "Уровень - $1", font: "Comic Sans MS", size: 36, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 128, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 128, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 128, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 128, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 128, dimensions: false},
-    {title: "レベルアップ！", font: "Comic Sans MS", size: 128, dimensions: false}
+    {title: "レベルアップ！", font: "Comic Sans MS", size: 128, dimensions: false} // Wrong text
     ],
   'leaderboard-popup-1': [
     {title: "Leaderboard", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},

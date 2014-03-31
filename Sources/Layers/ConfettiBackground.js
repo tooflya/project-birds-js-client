@@ -28,14 +28,33 @@
  */
 
 ConfettiBackground = BackgroundColor.extend({
-  m_zIndex: 500,
+  m_zIndex: 600,
+  m_Elements: false,
   ctor: function(parent) {
     this._super(cc.c4(0, 0, 0, 0));
 
     this.m_Parent = parent;
+    this.m_Elements = EntityManager.create(300, Confetti.create(), this);
   },
   show: function() {
+    this.removeFromParent();
+
     this.m_Parent.addChild(this, this.m_zIndex);
+
+    this.m_Elements.clear();
+
+    var size = Camera.sharedCamera().coord(64);
+
+    for(var i = 0; i < 5; i++) {
+      for(var j = 0; j < Camera.sharedCamera().width / size; j++) {
+        var random = {
+          x: Camera.sharedCamera().coord(Random.sharedRandom().random(-10, 10)),
+          y: Camera.sharedCamera().coord(Random.sharedRandom().random(-10, 10))
+        };
+
+        this.m_Elements.create().setCenterPosition(j * size + size / 2 + random.x, Camera.sharedCamera().height - i * size - size / 2 + random.y);
+      }
+    }
   },
   hide: function() {
 

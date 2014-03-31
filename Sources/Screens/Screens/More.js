@@ -73,10 +73,14 @@ More = Screen.extend({
 
   },
   onMoreGamesEvent: function() {
-
+    openURL("http://www.tooflya.com/projects/");
   },
   onPrivacyPolicyEvent: function() {
-
+    if(this.config.params.vendor == 'ubi-nuri') {
+      openURL("http://img.au-market.com/mapi/policy/7718380001454");
+    } else {
+      openURL("http://www.tooflya.com/privacy-policy");
+    }
   },
   onShow: function() {
     this._super();

@@ -41,24 +41,14 @@ Game.prototype.startLevelUpdate = function() {
   this.m_PreviewBackground.runRecognizeAction(cc.CallFunc.create(this.finishLevelUpdate, this, this), [{
     name: 'fade',
     time: 0.5,
-    value: 200
+    value: 150
   }, {
-    name: 'fade',
-    time: 0.5,
-    value: 200
-  }]);
-
-  this.m_PreviewText.runRecognizeAction(false, [{
     name: 'scale',
-    time: 0.5,
+    time: 2.0,
     value: 1.0
-  }, {
-    name: 'fade',
-    time: this.m_GamePreviewTime,
-    value: 0.5
   }]);
 
-  this.m_Level++;
+  this.m_PreviewText.ccsf([++this.m_Level]);
 };
 
 Game.prototype.finishLevelUpdate = function() {

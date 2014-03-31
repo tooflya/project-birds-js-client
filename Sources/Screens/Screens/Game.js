@@ -53,11 +53,11 @@ Game = Screen.extend({
         timeElapsed: 0.0,
         min: {
           count: 1,
-          time: 0.0
+          time: 1.0
         },
         max: {
-          count: 10,
-          time: 1.0
+          count: 5,
+          time: 5.0
         }
       },
       {
@@ -166,8 +166,6 @@ Game = Screen.extend({
     this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110);
 
     this.m_PreviewText = Text.create(false, this.m_PreviewBackground);
-
-    this.m_PreviewText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
   },
   startGame: function() {
     this.onGameStart();

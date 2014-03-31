@@ -57,6 +57,7 @@
   'Sources/Entities/BonusBird.js',
   'Sources/Entities/BirdExplosion.js',
   'Sources/Entities/SplashStar.js',
+  'Sources/Entities/Confetti.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',

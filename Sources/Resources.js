@@ -172,6 +172,7 @@ var s_AchievementIcon43 = "Resources/Icons/achievements-43.png";
 var s_AchievementIcon44 = "Resources/Icons/achievements-44.png";
 var s_AchievementIcon45 = "Resources/Icons/achievements-45.png";
 var s_ScreenEffect1 = "Resources/Graphics/screen-effect-1.png";
+var s_Confetti = "Resources/Graphics/confetti.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
@@ -319,6 +320,7 @@ var resources = [
   {src: s_AchievementIcon44},
   {src: s_AchievementIcon45},
   {src: s_ScreenEffect1},
+  {src: s_Confetti},
 
   {src: s_Music1},
   {src: s_Music2},

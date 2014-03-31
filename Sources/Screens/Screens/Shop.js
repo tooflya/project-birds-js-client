@@ -54,9 +54,9 @@ Shop = Screen.extend({
     for(var i = 0; i < 3; i++) {
       var counter = 20 * i;
 
-        this.m_Wheels[i] = new Array();
-        this.m_Shelfs[i] = new Array();
-        this.m_Items[i] = new Array();
+      this.m_Wheels[i] = new Array();
+      this.m_Shelfs[i] = new Array();
+      this.m_Items[i] = new Array();
 
       for(var j = 0; j < 3; j++) {
         this.m_Wheels[i][j] = Entity.create(s_ShopWheel, this);
@@ -137,6 +137,13 @@ Shop = Screen.extend({
 
     this.m_BackButton.setTouchHandler('onBackEvent', Shop);
   },
+  updateWheelsState: function() {
+    for(var i = 0; i < 3; i++) {
+      for(var j = 0; j < 3; j++) {
+        this.m_Wheels[i][j].setRotation(this.m_Backgrounds[i].m_Background.getPosition().x);
+      }
+    }
+  },
   onBackEvent: function() {
     ScreenManager.sharedManager().back();
   },
@@ -157,6 +164,8 @@ Shop = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+
+    this.updateWheelsState();
   },
   onKeyDown: function(e) {
     switch(e) {

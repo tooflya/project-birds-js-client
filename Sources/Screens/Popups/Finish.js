@@ -220,6 +220,8 @@ Finish = Background.extend({
         for(var i = 0; i < 20; i++) {
           this.m_SplashStars.create();
         }
+
+        ConfettiBackground.sharedScreen(this).show();
       }
       break;
     }
