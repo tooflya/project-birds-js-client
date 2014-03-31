@@ -109,6 +109,7 @@ Settings = Screen.extend({
     this._super();
 
     this.updateSoundButtonsState();
+    this.updateFlagIndicatorsState();
   },
   onHide: function() {
     this._super();
@@ -118,6 +119,9 @@ Settings = Screen.extend({
   updateSoundButtonsState: function() {
     this.m_MusicButton.setCurrentFrameIndex(Music.sharedMusic().enabled ? 0 : 3);
     this.m_SoundButton.setCurrentFrameIndex(Sound.sharedSound().enabled ? 1 : 4);
+  },
+  updateFlagIndicatorsState: function() {
+    this.m_LanguageIndicator.setCurrentFrameIndex(LanguagesManager.sharedManager().getLanguageId());
   },
   update: function(time) {
     this._super(time);
