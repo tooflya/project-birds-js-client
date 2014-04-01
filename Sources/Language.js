@@ -100,6 +100,26 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '制限時間は1分です！', font: 'Comic Sans MS', size: 32, dimensions: false}
     ],
+  'continue': [
+    {title: 'Continue', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: 'Продолжить', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '進む', font: 'Comic Sans MS', size: 40, dimensions: false}//
+    ],
+  'choose-mode': [
+    {title: 'Choose mode', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: 'Выбор режима', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
+    {title: '選択', font: 'Comic Sans MS', size: 40, dimensions: false}//
+    ],
   'about': [
     {title: 'About', font: 'Comic Sans MS', size: 40, dimensions: false},
     {title: 'Об игре', font: 'Comic Sans MS', size: 40, dimensions: false},

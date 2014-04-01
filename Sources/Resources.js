@@ -36,6 +36,7 @@ var s_LoadingBar = "Resources/Graphics/preloader-bar.png";
 var s_MenuBackground = "Resources/Graphics/menu-background.png";
 var s_MenuBackgroundJapan = "Resources/Graphics/menu-background-japan.png";
 var s_ButtonsSprite = "Resources/Graphics/buttons-sprite.png";
+var s_PauseButtonsSprite = "Resources/Graphics/pause-buttons-sprite.png";
 var s_PlayButton = "Resources/Graphics/play-button.png";
 var s_CircleDecoration1 = "Resources/Graphics/circle-decoration-1.png";
 var s_CircleDecoration2 = "Resources/Graphics/circle-decoration-2.png";
@@ -43,6 +44,7 @@ var s_CircleDecoration3 = "Resources/Graphics/circle-decoration-3.png";
 var s_ThirdPartyBackground = "Resources/Graphics/third-party-background.png";
 var s_LongButton = "Resources/Graphics/long-button.png";
 var s_SfxButtonsSprite = "Resources/Graphics/sfx-social-buttons.png";
+var s_PauseSfxButtonsSprite = "Resources/Graphics/pause-sfx-social-buttons.png";
 var s_BackgroundDecoration1 = "Resources/Graphics/background-decoration-1.png";
 var s_BackgroundDecoration2 = "Resources/Graphics/background-decoration-2.png";
 var s_BackgroundDecoration3 = "Resources/Graphics/background-decoration-3.png";
@@ -57,6 +59,7 @@ var s_LoadingBackground = "Resources/Graphics/loading-background.png";
 var s_LoadingDecoration = "Resources/Graphics/loading-decoration.png";
 var s_PopupBackground = "Resources/Graphics/popup-background.png";
 var s_PopupButton = "Resources/Graphics/popup-button.png";
+var s_PauseButton = "Resources/Graphics/pause-button.png";
 var s_PopupFullscreenButton = "Resources/Graphics/panel-button-fullscreen.png";
 var s_PopupCloseButton = "Resources/Graphics/popup-close-button.png";
 var s_PopupPauseButton = "Resources/Graphics/panel-button-pause.png";
@@ -184,6 +187,7 @@ var resources = [
   {src: s_LoadingBar},
   {src: s_MenuBackground},
   {src: s_ButtonsSprite},
+  {src: s_PauseButtonsSprite},
   {src: s_PlayButton},
   {src: s_CircleDecoration1},
   {src: s_CircleDecoration2},
@@ -191,6 +195,7 @@ var resources = [
   {src: s_ThirdPartyBackground},
   {src: s_LongButton},
   {src: s_SfxButtonsSprite},
+  {src: s_PauseSfxButtonsSprite},
   {src: s_BackgroundDecoration1},
   {src: s_BackgroundDecoration2},
   {src: s_BackgroundDecoration3},
@@ -205,6 +210,7 @@ var resources = [
   {src: s_LoadingDecoration},
   {src: s_PopupBackground},
   {src: s_PopupButton},
+  {src: s_PauseButton},
   {src: s_PopupFullscreenButton},
   {src: s_PopupCloseButton},
   {src: s_PopupPauseButton},
