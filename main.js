@@ -44,7 +44,7 @@ function launcher() {
   if(typeof launchGame == 'undefined') {
     setTimeout(launcher, 100);
   } else {
-      launchGame();
+    launchGame();
   }
 };
 
