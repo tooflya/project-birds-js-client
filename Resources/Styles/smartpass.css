@@ -8,6 +8,10 @@
   cursor: url('../Graphics/cursor.png'), -moz-zoom-in;
   font-family: RiiPopkk-R;
 }
+body {
+  background-color: #fff;
+  overflow: hidden;
+}
 div.canvas {
   margin: 0px auto;
 }
@@ -45,8 +49,11 @@ div.home a:hover {
   -webkit-transform: scale(1.2);
 }
 div.orientation {
-  width: 598px;
-  height: 680px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 900px;
   margin: 0 auto;
   text-align: center;
   color: #fff;
@@ -54,30 +61,32 @@ div.orientation {
 }
 div.orientation div.picture {
   background: transparent url('../Graphics/portrait-orientation.png') center no-repeat;
-  width: 598px;
-  height: 680px;
+  width: 600px;
+  height: 900px;
+  margin-top: -500px;
+  margin-left: -300px;
 }
 div.orientation p {
   padding-left: 50px;
-  padding-top: 20px;
+  padding-top: 950px;
 }
 
 @media (orientation: portrait) {
   div.canvas {
-    display: none;
+    visibility: hidden;
   }
   div.orientation {
-    display: block;
+    visibility: visible;
   }
 }
 @media (orientation: landscape) {
   div.canvas {
-    display: block;
+    visibility: visible;
   }
   div.orientation {
-    display: none;
+    visibility: hidden;
   }
   canvas {
-    display: block;
+    visibility: visible;
   }
 }
