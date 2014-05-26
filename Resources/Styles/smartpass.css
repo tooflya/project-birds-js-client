@@ -63,6 +63,7 @@ div.orientation p {
   padding-left: 50px;
   padding-top: 950px;
   font-family: RiiPopkk-R;
+  font-size: 22px;
 }
 
 @media (orientation: portrait) {
