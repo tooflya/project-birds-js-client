@@ -6,11 +6,12 @@
   margin: 0;
   padding: 0;
   cursor: url('../Graphics/cursor.png'), -moz-zoom-in;
-  font-family: RiiPopkk-R;
+}
+html, body {
+  overflow: hidden;
 }
 body {
   background-color: #fff;
-  overflow: hidden;
 }
 div.canvas {
   margin: 0px auto;
@@ -69,6 +70,7 @@ div.orientation div.picture {
 div.orientation p {
   padding-left: 50px;
   padding-top: 950px;
+  font-family: RiiPopkk-R;
 }
 
 @media (orientation: portrait) {
