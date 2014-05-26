@@ -7,9 +7,6 @@
   padding: 0;
   cursor: url('../Graphics/cursor.png'), -moz-zoom-in;
 }
-html, body {
-  overflow: hidden;
-}
 body {
   background-color: #fff;
 }
@@ -50,9 +47,6 @@ div.home a:hover {
   -webkit-transform: scale(1.2);
 }
 div.orientation {
-  position: absolute;
-  top: 50%;
-  left: 50%;
   width: 600px;
   height: 900px;
   margin: 0 auto;
@@ -64,8 +58,6 @@ div.orientation div.picture {
   background: transparent url('../Graphics/portrait-orientation.png') center no-repeat;
   width: 600px;
   height: 900px;
-  margin-top: -500px;
-  margin-left: -300px;
 }
 div.orientation p {
   padding-left: 50px;
@@ -75,20 +67,20 @@ div.orientation p {
 
 @media (orientation: portrait) {
   div.canvas {
-    visibility: hidden;
+    display: none;
   }
   div.orientation {
-    visibility: visible;
+    display: block;
   }
 }
 @media (orientation: landscape) {
   div.canvas {
-    visibility: visible;
+    display: block;
   }
   div.orientation {
-    visibility: hidden;
+    display: none;
   }
   canvas {
-    visibility: visible;
+    display: block;
   }
 }
