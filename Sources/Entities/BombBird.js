@@ -5,31 +5,55 @@
  * @copyright (c) 2013 by Igor Mats
  * http://www.tooflya.com/development/
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
-
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
-
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * License: Attribution NonCommercial NoDerivatives 4.0 International
+ *
+ * Creative Commons Corporation (“Creative Commons”) is not a law firm and does
+ * not provide legal services or legal advice. Distribution of Creative Commons
+ * public licenses does not create a lawyer-client or other relationship.
+ * Creative Commons makes its licenses and related information available on
+ * an “as-is” basis. Creative Commons gives no warranties regarding its licenses,
+ * any material licensed under their terms and conditions, or any related
+ * information. Creative Commons disclaims all liability for damages resulting
+ * from their use to the fullest extent possible.
+ *
+ * Creative Commons public licenses provide a standard set of terms and
+ * conditions that creators and other rights holders may use to share original
+ * works of authorship and other material subject to copyright and certain other
+ * rights specified in the public license below. The following considerations
+ * are for informational purposes only, are not exhaustive, and do not form part
+ * of our licenses.
+ *
+ * Creative Commons may be contacted at creativecommons.org.
  *
  * @version of cocos2d-x is 2.1.4
  *
  */
 
 BombBird = Bird.extend({
+  m_SoundFuseId: false,
   ctor: function(parent, world) {
-      this._super(parent, world);
+    this._super(parent, world);
+  },
+  onCreateSound: function() {
+    this.m_SoundFuseId = Sound.sharedSound().play(s_SoundThrowBombFuse);
+    Sound.sharedSound().play(s_SoundThrowBomb);
+  },
+  onDestroySound: function() {
+    Sound.sharedSound().play(s_SoundExplosion);
+  },
+  onCreate: function() {
+    this._super();
+
+    this.m_Id = 8 * this.getHorizontalFramesCount();
+
+    this.animate(this.animations.fly);
+  },
+  onDestroy: function() {
+    this._super();
+
+    Sound.sharedSound().stop(this.m_SoundFuseId);
+  },
+  onLost: function() {
   },
   deepCopy: function() {
     return BombBird.create(this.getParent(), this.getCurrentPhysicsWorld());

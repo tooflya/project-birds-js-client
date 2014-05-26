@@ -51,18 +51,13 @@ ChallengeList = PatternList.extend({
 
     this.m_Text[1].ccsf([randomFriend.first_name + " " + randomFriend.last_name]);
 
-    var imageUrl = randomFriend.photo_big;
-    var image = new Image();
-    image.src = imageUrl;
     var self = this;
-    image.addEventListener('load', function() {
-      cc.TextureCache.getInstance().cacheImage(imageUrl, image);
-      var photo = Entity.create(randomFriend.photo_big, self);
 
-      photo.create().setCenterPosition(self.getCenterX(), self.getCenterY() + Camera.sharedCamera().coord(100));
+    InternetEntity.create(randomFriend.photo_big, this, function(entity) {
+      entity.create().setCenterPosition(self.getCenterX(), self.getCenterY() + Camera.sharedCamera().coord(100));
 
-      self.m_Text[1].setCenterPosition(self.getCenterX(), photo.getCenterY() - photo.getHeight() / 2 - self.m_Text[1].getHeight() / 2 - Camera.sharedCamera().coord(30));
-    }, false);
+      self.m_Text[1].setCenterPosition(self.getCenterX(), entity.getCenterY() - entity.getHeight() / 2 - self.m_Text[1].getHeight() / 2 - Camera.sharedCamera().coord(30));
+    });
   }
 });
 

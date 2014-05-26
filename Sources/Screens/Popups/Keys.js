@@ -38,6 +38,27 @@ Keys = ExtendedPopup.extend({
     this.m_CoinsButton2 = Button.create(s_GetKeysPopupButton2, 1, 1, this.m_Background);
     this.m_Text = Text.create('keys-popup', this.m_Background);
 
+    var platformPriceText;
+
+    switch(this.config.params.platform) {
+      case 'vk':
+      platformPriceText = 'vk-price-text';
+      break;
+    }
+
+    this.m_PriceText1 = Text.create(platformPriceText, this.m_CoinsButton1);
+    this.m_PriceText2 = Text.create(platformPriceText, this.m_CoinsButton2);
+
+    switch(this.config.params.platform) {
+      case 'vk':
+      this.m_PriceText1.ccsf([5]);
+      this.m_PriceText2.ccsf([20]);
+      break;
+    }
+
+    this.m_PriceText1.setCenterPosition(this.m_CoinsButton1.getWidth() / 2, this.m_CoinsButton1.getHeight() / 2 - Camera.sharedCamera().coord(40));
+    this.m_PriceText2.setCenterPosition(this.m_CoinsButton2.getWidth() / 2, this.m_CoinsButton2.getHeight() / 2 - Camera.sharedCamera().coord(40));
+
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(200));
 
     this.m_CoinsButton1.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
@@ -66,6 +87,22 @@ Keys = ExtendedPopup.extend({
   },
   onShow: function() {
     this._super();
+
+    this.m_CoinsButton1.runAction(
+      cc.Sequence.create(
+      cc.ScaleTo.create(0.1, 0.8, 1.2),
+      cc.ScaleTo.create(0.1, 1.2, 0.8),
+      cc.ScaleTo.create(0.1, 1.0, 1.0)
+      )
+    );
+
+    this.m_CoinsButton2.runAction(
+    cc.Sequence.create(
+      cc.ScaleTo.create(0.1, 0.8, 1.2),
+      cc.ScaleTo.create(0.1, 1.2, 0.8),
+      cc.ScaleTo.create(0.1, 1.0, 1.0)
+      )
+    );
   },
   onHide: function() {
     this._super();

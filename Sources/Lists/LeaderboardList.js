@@ -30,8 +30,13 @@
  */
 
 LeaderboardList = PatternList.extend({
+  m_Loading: false,
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
+
+    this.m_Loading = Entity.create(s_Loading, this);
+
+    this.m_Loading.create().setCenterPosition(this.getCenterX(), this.getCenterY());
 
     this.m_Text = [];
 
@@ -40,11 +45,90 @@ LeaderboardList = PatternList.extend({
     this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
 
     this.m_Text[1].setColor(cc.c3(204.0, 102.0, 51.0));
+
+    this.m_Loading.runAction(
+      cc.RepeatForever.create(
+        cc.RotateTo.create(1.0, 720)
+        )
+      );
   },
   onEnter: function() {
     this._super();
 
-    //this.m_ListMaxHeight = Math.abs(this.m_Text[7].getCenterY() - this.m_Text[7].getHeight() / 2 - Camera.sharedCamera().coord(50));
+    var self = this;
+
+    DataManager.sharedManager().emit('leaderboard', {
+      id: 13712446
+    }, function(data) {
+      self.m_Loading.destroy();
+
+      VK.api("getProfiles", {
+        fields: [
+        "first_name",
+        "last_name",
+        "photo_medium"
+        ],
+        uids: data.player.id,
+        test_mode: 1
+      }, function(user) {
+        InternetEntity.create(user.response[0].photo_medium, self, function(entity) {
+          entity.create().setCenterPosition(Camera.sharedCamera().coord(100), self.getCenterY() + Camera.sharedCamera().coord(200));
+
+          var name = Text.create('leaderboard-name', self, cc.TEXT_ALIGNMENT_LEFT);
+          var score = Text.create('leaderboard-score', self);
+
+          name.ccsf([user.response[0].first_name + " " + user.response[0].last_name]);
+          score.ccsf([data.player.score]);
+
+          name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), self.getCenterY() + Camera.sharedCamera().coord(260) - name.getHeight() / 2);
+          score.setCenterPosition(score.getWidth() / 2 + Camera.sharedCamera().coord(160), self.getCenterY() + Camera.sharedCamera().coord(200));
+
+          name.setColor(cc.c3(255.0, 130.0, 0.0));
+          score.setColor(cc.c3(204.0, 102.0, 51.0));
+        });
+      });
+
+      VK.api("getProfiles", {
+        fields: [
+        "first_name",
+        "last_name",
+        "photo_medium"
+        ],
+        uids: data.players.id,
+        test_mode: 1
+      }, function(user) {
+        var y = self.getCenterY() + Camera.sharedCamera().coord(50);
+        var index = 0;
+
+        user.response.forEach(function(entry) {
+          if(entry.first_name == "DELETED") {
+            // Dead user.
+          } else {
+            InternetEntity.create(entry.photo_medium, self, function(entity) {
+              entity.create().setCenterPosition(Camera.sharedCamera().coord(100), y);
+
+              var name = Text.create('leaderboard-name', self, cc.TEXT_ALIGNMENT_LEFT);
+              var score = Text.create('leaderboard-score', self);
+
+              name.ccsf([entry.first_name + " " + entry.last_name]);
+              score.ccsf([data.players.score[index]]);
+
+              name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), y + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
+              score.setCenterPosition(score.getWidth() / 2 + Camera.sharedCamera().coord(160), y - Camera.sharedCamera().coord(0));
+
+              name.setColor(cc.c3(255.0, 130.0, 0.0));
+              score.setColor(cc.c3(204.0, 102.0, 51.0));
+
+              y -= Camera.sharedCamera().coord(120);
+
+              index++;
+
+              self.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));
+            });
+          }
+        });
+      });
+    });
   }
 });
 

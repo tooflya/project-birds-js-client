@@ -37,7 +37,7 @@ ConfettiBackground = BackgroundColor.extend({
     this.m_Elements = EntityManager.create(300, Confetti.create(), this);
   },
   show: function() {
-    this.removeFromParent();
+    ConfettiBackground.instance = false;
 
     this.m_Parent.addChild(this, this.m_zIndex);
 
@@ -57,7 +57,20 @@ ConfettiBackground = BackgroundColor.extend({
     }
   },
   hide: function() {
+    this.removeFromParent();
+  },
+  onEnter: function() {
+    this._super();
+  },
+  onExit: function() {
+    this._super();
+  },
+  update: function(time) {
+    this._super(time);
 
+    if(this.m_Elements.getCount() <= 0) {
+      this.hide();
+    }
   }
 });
 

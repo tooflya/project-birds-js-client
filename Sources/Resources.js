@@ -176,10 +176,34 @@ var s_AchievementIcon44 = "Resources/Icons/achievements-44.png";
 var s_AchievementIcon45 = "Resources/Icons/achievements-45.png";
 var s_ScreenEffect1 = "Resources/Graphics/screen-effect-1.png";
 var s_Confetti = "Resources/Graphics/confetti.png";
+var s_DailyMapBackground = "Resources/Graphics/daily-map-background.png";
+var s_DailyMapTitle = "Resources/Graphics/daily-map-title.png";
+var s_MapScroll = "Resources/Graphics/map-scroll.png";
+var s_DailyMapDayIcon1 = "Resources/Graphics/daily-map-icon-1.png";
+var s_DailyMapDayIcon2 = "Resources/Graphics/daily-map-icon-2.png";
+var s_DailyMapDayIcon3 = "Resources/Graphics/daily-map-icon-3.png";
+var s_DailyMapDayIcon4 = "Resources/Graphics/daily-map-icon-4.png";
+var s_DailyMapDayIcon5 = "Resources/Graphics/daily-map-icon-5.png";
+var s_Dust = "Resources/Graphics/dust.png";
+var s_Water = "Resources/Graphics/water-effect.png";
+var s_Prick = "Resources/Graphics/prick.png";
+var s_Loading = "Resources/Graphics/loading.png";
+var s_WeaponParticles = "Resources/Graphics/weapon-particles.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
 var s_SoundButtonTouch = "Resources/Sound/button-touch.mp3";
+var s_SoundEquipUnlock = "Resources/Sound/equip-unlock.mp3";
+var s_SoundEquipSword = "Resources/Sound/equip-sword.mp3";
+var s_SoundComplete = "Resources/Sound/complete.mp3";
+var s_SoundSlash = "Resources/Sound/slash.mp3";
+var s_SoundThrowBird = "Resources/Sound/throw-bird.mp3";
+var s_SoundThrowBomb = "Resources/Sound/throw-bomb.mp3";
+var s_SoundThrowBombFuse = "Resources/Sound/throw-bomb-fuse.mp3";
+var s_SoundExplosion = "Resources/Sound/explosion.mp3";
+var s_SoundBirdExplosion = "Resources/Sound/bird-explosion.mp3";
+var s_SoundLoseLife = "Resources/Sound/lose-life.mp3";
+var s_SoundBloom = ["Resources/Sound/bloom-1.mp3", "Resources/Sound/bloom-2.mp3", "Resources/Sound/bloom-3.mp3", "Resources/Sound/bloom-4.mp3"];
 
 var resources = [
   {src: s_PreloaderBackground},
@@ -327,8 +351,35 @@ var resources = [
   {src: s_AchievementIcon45},
   {src: s_ScreenEffect1},
   {src: s_Confetti},
+  {src: s_DailyMapBackground},
+  {src: s_DailyMapTitle},
+  {src: s_MapScroll},
+  {src: s_DailyMapDayIcon1},
+  {src: s_DailyMapDayIcon2},
+  {src: s_DailyMapDayIcon3},
+  {src: s_DailyMapDayIcon4},
+  {src: s_DailyMapDayIcon5},
+  {src: s_Dust},
+  {src: s_Water},
+  {src: s_Prick},
+  {src: s_Loading},
+  {src: s_WeaponParticles},
 
   {src: s_Music1},
   {src: s_Music2},
-  {src: s_SoundButtonTouch}
+  {src: s_SoundButtonTouch},
+  {src: s_SoundEquipUnlock},
+  {src: s_SoundEquipSword},
+  {src: s_SoundComplete},
+  {src: s_SoundSlash},
+  {src: s_SoundThrowBird},
+  {src: s_SoundThrowBomb},
+  {src: s_SoundThrowBombFuse},
+  {src: s_SoundExplosion},
+  {src: s_SoundBirdExplosion},
+  {src: s_SoundLoseLife},
+  {src: s_SoundBloom[0]},
+  {src: s_SoundBloom[1]},
+  {src: s_SoundBloom[2]},
+  {src: s_SoundBloom[3]}
 ];

@@ -153,7 +153,7 @@ ExtendedPopup = Popup.extend({
     this._super();
   },
   prepare: function() {
-    this.onHide();
+    this.onHide(false, true);
   },
   update: function(time) {
     this._super(time);

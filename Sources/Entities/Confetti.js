@@ -31,27 +31,19 @@
 
 Confetti = AnimatedEntity.extend({
   id: false,
-  m_MoveSpeed: {
-    x: 0,
-    y: 0,
-
-    min: 100.0,
-    max: 200.0
-  },
-  m_AlphaSpeed: {
-    x: 0.5,
-    y: 0,
-
-    min: 0.5,
-    max: 2.0
-  },
+  m_MoveSpeed: 0,
+  m_AlphaSpeed: 0,
+  m_MoveSpeedMax: 200,
+  m_MoveSpeedMin: 100,
+  m_AlphaSpeedMax: 2.0,
+  m_AlphaSpeedMin: 0.5,
   ctor: function() {
     this._super(s_Confetti, 20, 4);
   },
   onCreate: function() {
     this._super();
 
-    this.id = Random.sharedRandom().random(0, 3, true);
+    this.id = Random.sharedRandom().random(0, 4, true);
 
     var frames = {
       start: this.id * 20,
@@ -60,25 +52,25 @@ Confetti = AnimatedEntity.extend({
     this.animate(0.02, -1, frames);
     this.setCurrentFrameIndex(Random.sharedRandom().random(frames.start, frames.end, true));
 
-    this.m_MoveSpeed.y = Camera.sharedCamera().coord(Random.sharedRandom().random(this.m_MoveSpeed.min, this.m_MoveSpeed.max));
-    this.m_AlphaSpeed.y = Random.sharedRandom().random(this.m_AlphaSpeed.min, this.m_AlphaSpeed.max);
+    this.m_MoveSpeed = Camera.sharedCamera().coord(Random.sharedRandom().random(this.m_MoveSpeedMin, this.m_MoveSpeedMax));
+    this.m_AlphaSpeed = Random.sharedRandom().random(this.m_AlphaSpeedMin, this.m_AlphaSpeedMax);
 
     this.setRotation(Random.sharedRandom().random(0, 720));
     this.setOpacity(0);
-    this.runRecognizeAction(cc.CallFunc.create(AnimatedEntity.destroy, this, this), [{
+    this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), [{
       name: 'fade',
-      time: this.m_AlphaSpeed.x,
+      time: this.m_AlphaSpeed,
       value: 255
     }, {
       name: 'fade',
-      time: this.m_AlphaSpeed.y,
+      time: this.m_AlphaSpeed,
       value: 0
     }]);
   },
   update: function(time) {
     this._super(time);
 
-    this.setCenterPosition(this.getCenterX(), this.getCenterY() - this.m_MoveSpeed.y * time);
+    this.setCenterPosition(this.getCenterX(), this.getCenterY() - this.m_MoveSpeed * time);
   },
   deepCopy: function() {
     return Confetti.create();

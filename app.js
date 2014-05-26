@@ -58,6 +58,8 @@
   'Sources/Entities/BirdExplosion.js',
   'Sources/Entities/SplashStar.js',
   'Sources/Entities/Confetti.js',
+  'Sources/Entities/Dust.js',
+  'Sources/Entities/Water.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',
@@ -107,10 +109,15 @@
   'Sources/Game/Level.js',
   'Sources/Game/Pause.js',
   'Sources/Game/Touch.js',
-  'Sources/Layers/ConfettiBackground.js'
+  'Sources/Layers/ConfettiBackground.js',
+  'Sources/Layers/DustBackground.js',
+  'Sources/Layers/PurchasesBackground.js',
+  'Sources/Maps/Promotion.js'
   ], function() {
     Preloader.preload(resources, function() {
       DataManager.sharedManager().getCurrentUser(function() {
+        cc.canvas.style.cursor = "url('Resources/Graphics/cursor.png'), -moz-zoom-in";
+
         AchievementsManager.sharedManager();
 
         ScreenManager.sharedManager().replace(Menu);

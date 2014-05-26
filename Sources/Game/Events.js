@@ -42,7 +42,47 @@ Game.prototype.onBlow = function(element) {
       value: 0.0
     });*/
 
-    Game.sharedScreen().m_SplashBackground.runAction(cc.FadeOut.create(0.02));
+    if(element instanceof BombBird) {
+      this.onLost(element);
+
+      this.m_SplashBackground.stopAllActions();
+      this.m_SplashBackground.runAction(
+        cc.Sequence.create(
+          cc.FadeIn.create(0.1),
+          cc.DelayTime.create(0.5),
+          cc.FadeOut.create(1.0),
+          cc.CallFunc.create(this.onLost, this, element)
+          )
+        );
+
+      for(var i = 0; i < this.m_Birds.getCount(); i++) {
+        var bird = this.m_Birds.get(i);
+
+        if(bird.m_Id <= Bird.count * bird.getHorizontalFramesCount()) {
+          bird.destroy();
+        }
+      }
+
+      this.m_ThrowParams.birds.timeElapsed = -3.0;
+    } else {
+      this.m_SplashBackground.runAction(cc.FadeOut.create(0.02));
+      this.m_CurrentBlows++;
+    }
+
+    switch(element.m_Id / element.getHorizontalFramesCount()) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      this.m_Results.birds++;
+      break;
+      case 7:
+      this.m_Results.flayers++;
+      break;
+    }
   } else if(false) {
     //
   }
@@ -50,6 +90,8 @@ Game.prototype.onBlow = function(element) {
 
 Game.prototype.onLost = function(element) {
   if(!this.m_GameRunning) return false;
+
+  Sound.sharedSound().play(s_SoundLoseLife);
 
   switch(this.m_Type) {
     case this.m_Types.classic:
@@ -68,6 +110,8 @@ Game.prototype.onLost = function(element) {
 Game.prototype.onGameStart = function() {
   this.m_GameRunning = true;
   this.m_Lifes = 0;
+
+  DataManager.sharedManager().update(references.coins.lives, -1);
 };
 
 Game.prototype.onGameFinish = function() {
@@ -78,10 +122,14 @@ Game.prototype.onGameFinish = function() {
 };
 
 Game.prototype.onPreviewStart = function() {
+  this.m_GamePreviewRunning = true;
+
   this.m_PreviewText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
 };
 
 Game.prototype.onPreviewFinish = function() {
+  this.m_GamePreviewRunning = false;
+
   this.startGame();
 };
 
@@ -108,11 +156,16 @@ Game.prototype.onPauseEvent = function() {
 };
 
 Game.prototype.onShow = function() {
-  GamePanel.sharedScreen(this.m_Type, this).show();
+  if(DataManager.sharedManager().get(references.coins.lives) > 0) {
+    GamePanel.sharedScreen(this.m_Type, this).show();
 
-  this.startPreview();
+    this.clearResults();
+    this.startPreview();
 
-  DataManager.sharedManager().save(references.info.game, 1);
+    DataManager.sharedManager().save(references.info.game, 1);
+  } else {
+    Lives.sharedScreen(this).show();
+  }
 
   this.m_Level = 1;
   this.m_CurrentBlows = 0;

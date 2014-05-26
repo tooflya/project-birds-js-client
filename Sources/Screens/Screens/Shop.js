@@ -53,6 +53,7 @@ Shop = Screen.extend({
 
     for(var i = 0; i < 3; i++) {
       var counter = 20 * i;
+      var id = -1;
 
       this.m_Wheels[i] = new Array();
       this.m_Shelfs[i] = new Array();
@@ -75,11 +76,11 @@ Shop = Screen.extend({
         if(j != 0) {
           this.m_Shelfs[i][j].setCurrentFrameIndex(1);
         } else {
-          var id;
-          switch(i) { case 0: id = 'weapons'; break; case 1: id = 'birds'; break; case 2: id = 'bonuses'; break; }
-          var t = Text.create(id, this.m_Shelfs[i][j]);
+          var category;
+          switch(i) { case 0: category = 'weapons'; break; case 1: category = 'birds'; break; case 2: category = 'bonuses'; break; }
+          var t = Text.create(category, this.m_Shelfs[i][j]);
 
-          t.setCenterPosition(Camera.sharedCamera().coord(170), this.m_Shelfs[i][j].getHeight() / 2 + Camera.sharedCamera().coord(3));
+          t.setCenterPosition(Camera.sharedCamera().coord(170), this.m_Shelfs[i][j].getHeight() / 2 - Camera.sharedCamera().coord(3));
         }
 
         this.m_Shelfs[i][j].setZOrder(2);
@@ -88,6 +89,92 @@ Shop = Screen.extend({
       var x = -Camera.sharedCamera().coord(40);
 
       for(var j = 0; j < this.m_ElementsCount[i]; j++) {
+        switch(counter) {
+          case 0:
+          id = references.items.weapon1;
+          break;
+          case 1:
+          id = references.items.weapon2;
+          break;
+          case 2:
+          id = references.items.weapon3;
+          break;
+          case 3:
+          id = references.items.weapon4;
+          break;
+          case 4:
+          id = references.items.weapon5;
+          break;
+          case 5:
+          id = references.items.weapon6;
+          break;
+          case 6:
+          id = references.items.weapon7;
+          break;
+          case 7:
+          id = references.items.weapon8;
+          break;
+          case 8:
+          id = references.items.weapon9;
+          break;
+          case 9:
+          id = references.items.weapon10;
+          break;
+          case 10:
+          id = references.items.weapon11;
+          break;
+
+          case 20:
+          id = references.items.bird1;
+          break;
+          case 21:
+          id = references.items.bird2;
+          break;
+          case 22:
+          id = references.items.bird3;
+          break;
+          case 23:
+          id = references.items.bird4;
+          break;
+          case 24:
+          id = references.items.bird5;
+          break;
+          case 25:
+          id = references.items.bird6;
+          break;
+          case 26:
+          id = references.items.bird7;
+          break;
+          case 27:
+          id = references.items.bird8;
+          break;
+
+          case 40:
+          id = references.items.bonus1;
+          break;
+          case 41:
+          id = references.items.bonus2;
+          break;
+          case 42:
+          id = references.items.bonus3;
+          break;
+          case 43:
+          id = references.items.bonus4;
+          break;
+          case 44:
+          id = references.items.bonus5;
+          break;
+          case 45:
+          id = references.items.bonus6;
+          break;
+          case 46:
+          id = references.items.bonus7;
+          break;
+          case 47:
+          id = references.items.bonus8;
+          break;
+        }
+
         this.m_Items[i][j] = Button.create(s_ShopItems, 10, 6, this.m_Backgrounds[i]);
 
         x += this.m_Items[i][j].getHeight() + Camera.sharedCamera().coord(25);
@@ -96,7 +183,7 @@ Shop = Screen.extend({
 
         this.m_Items[i][j].setCurrentFrameIndex((20 * i) + j);
 
-        this.m_Items[i][j].setTouchHandler('show', Item, {id: counter});
+        this.m_Items[i][j].setTouchHandler('show', Item, {id: id, reference: counter, category: category});
         this.m_Items[i][j].setZOrder(3);
 
         counter++;

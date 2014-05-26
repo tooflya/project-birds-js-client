@@ -35,7 +35,7 @@ MenuPanel = Panel.extend({
     references.coins.silver,
     references.coins.lives,
     references.coins.keys,
-    references.coins.rating,
+    references.coins.rating
   ],
   m_Fields: [
     DataManager.sharedManager().get(references.coins.gold),
@@ -44,6 +44,11 @@ MenuPanel = Panel.extend({
     DataManager.sharedManager().get(references.coins.keys),
     DataManager.sharedManager().get(references.rating)
   ],
+  m_LeaderboardAnimationIndex: 1,
+  m_LeaderboardAnimationTime: 0.1,
+  m_LeaderboardAnimationTimeElapsed: 0,
+  m_LeaderboardAnimationCompleted: false,
+  m_LeaderboardIndex: -1,
   ctor: function(parent) {
     this._super(s_InterfacePanel, parent);
 
@@ -54,13 +59,43 @@ MenuPanel = Panel.extend({
       e.ccsf([MenuPanel.sharedScreen().m_Fields[1]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
-      e.ccsf([MenuPanel.sharedScreen().m_Fields[2]]);
+      EnergyManager.sharedManager().check();
+
+      if(DataManager.sharedManager().get(EnergyManager.sharedManager().getReference()) <= 0) {
+        e.timeLeft(EnergyManager.sharedManager().time() / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+      } else {
+        e.ccsf([DataManager.sharedManager().get(EnergyManager.sharedManager().getReference())]);
+      }
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([MenuPanel.sharedScreen().m_Fields[3]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon5, 3, 3], false, function(e) {
-      e.ccsf([MenuPanel.sharedScreen().m_Fields[4]]);
+      if(!MenuPanel.sharedScreen().m_LeaderboardAnimationCompleted) {
+        var loading = '';
+        
+        switch(MenuPanel.sharedScreen().m_LeaderboardAnimationIndex) {
+          case 1:
+          loading = '.';
+          break;
+          case 2:
+          loading = '..';
+          break;
+          case 3:
+          loading = '...';
+          break;
+          case 4:
+          loading = '....';
+          break;
+          case 5:
+          loading = '.....';
+          break;
+        }
+
+        e.ccsf([loading]);
+      } else {
+        e.ccsf([MenuPanel.sharedScreen().m_LeaderboardIndex]);
+      }
     });
 
     this.getIcons()[0].animate(0.02);
@@ -96,9 +131,16 @@ MenuPanel = Panel.extend({
   },
   onShow: function() {
     this._super();
+
+    DataManager.sharedManager().emit('leaderboard-id', 'my id', function(id) {
+      MenuPanel.sharedScreen().m_LeaderboardAnimationCompleted = true;
+      MenuPanel.sharedScreen().m_LeaderboardIndex = id;
+    });
   },
   onHide: function() {
     this._super();
+
+    this.removeFromParent();
   },
   onEnter: function() {
     this._super();
@@ -109,13 +151,22 @@ MenuPanel = Panel.extend({
     this._super();
   },
   update: function(time) {
-    if(!MenuPanel.instance) return;
-
     this._super(time);
 
     for(var i = 0; i < 5; i++) {
       if(this.m_Fields[i] != DataManager.sharedManager().get(this.m_Keys[i])) {
         this.m_Fields[i] += this.m_Fields[i] > DataManager.sharedManager().get(this.m_Keys[i]) ? -1 : 1;
+      }
+    }
+
+    if(!this.m_LeaderboardAnimationCompleted) {
+      this.m_LeaderboardAnimationTimeElapsed += time;
+      if(this.m_LeaderboardAnimationTimeElapsed >= this.m_LeaderboardAnimationTime) {
+        this.m_LeaderboardAnimationTimeElapsed = 0;
+
+        if(++this.m_LeaderboardAnimationIndex >= 6) {
+          this.m_LeaderboardAnimationIndex = 1;
+        }
       }
     }
   },
@@ -133,7 +184,9 @@ MenuPanel = Panel.extend({
 MenuPanel.instance = false;
 MenuPanel.sharedScreen = function(parent) {
   if(MenuPanel.instance) {
-    MenuPanel.instance.m_Parent = parent;
+    if(parent) {
+      MenuPanel.instance.m_Parent = parent;
+    }
   } else {
     MenuPanel.instance = new MenuPanel(parent);
   }

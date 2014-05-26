@@ -113,7 +113,13 @@ GamePanel = Panel.extend({
     }
 
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
-      e.ccsf([GamePanel.sharedScreen().m_Fields[2]]);
+      EnergyManager.sharedManager().check();
+
+      if(DataManager.sharedManager().get(EnergyManager.sharedManager().getReference()) <= 0) {
+        e.timeLeft(EnergyManager.sharedManager().time() / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+      } else {
+        e.ccsf([DataManager.sharedManager().get(EnergyManager.sharedManager().getReference())]);
+      }
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[3]]);

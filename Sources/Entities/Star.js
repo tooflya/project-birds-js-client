@@ -30,31 +30,57 @@
  */
 
 Star = Entity.extend({
-  m_FadeTime: 0.5,
-  ctor: function() {
-      this._super(s_StarParticle);
+  m_Type: -1,
+  ctor: function(type) {
+    this._super(s_StarParticle);
+
+    this.m_Type = type;
   },
   onCreate: function() {
     this._super();
 
-    this.setScale(2.0);
     this.setColor(Star.colors[Random.sharedRandom().random(0, 3, true)]);
-    this.runRecognizeAction(false, {
-      name: "rotate",
-      time: this.m_FadeTime,
-      value: Random.sharedRandom().random(-720, 720)
-    });
-    this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), {
-      name: "scale",
-      time: this.m_FadeTime,
-      value: 0.0
-    });
+
+    switch(this.m_Type) {
+      default:
+      this.setScale(2.0);
+      this.runRecognizeAction(false, {
+        name: "rotate",
+        time: 0.5,
+        value: Random.sharedRandom().random(-720, 720)
+      });
+      this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), {
+        name: "scale",
+        time: 0.5,
+        value: 0.0
+      });
+      break;
+      case 1:
+      this.m_VectorX = (Random.sharedRandom().random(10.0, 200.0) * (Random.sharedRandom().probably(50) ? -1 : 1)) * Random.sharedRandom().random(2.0, 10.0);
+      this.m_VectorY = (Random.sharedRandom().random(10.0, 200.0) * (Random.sharedRandom().probably(50) ? -1 : 1)) * Random.sharedRandom().random(2.0, 10.0);
+
+      this.setRotation(Math.atan2(this.m_VectorY, this.m_VectorX) * 180.0 / Math.PI);
+      break;
+    }
   },
   update: function(time) {
     this._super(time);
+
+    switch(this.m_Type) {
+      default:
+      break;
+      case 1:
+      this.setCenterPosition(this.getCenterX() + this.m_VectorX * time, this.getCenterY() + this.m_VectorY * time);
+      this.setOpacity(this.getOpacity() - 1);
+
+      if(this.getOpacity() <= 0) {
+        this.destroy();
+      }
+      break;
+    }
   },
   deepCopy: function() {
-    return Star.create();
+    return Star.create(this.m_Type);
   }
 });
 
@@ -63,8 +89,8 @@ Star.colors = [
   cc.c3(0, 255, 0),
   cc.c3(0, 0, 255)
 ];
-Star.create = function() {
-  var entity = new Star();
+Star.create = function(type) {
+  var entity = new Star(type);
 
   return entity;
 };

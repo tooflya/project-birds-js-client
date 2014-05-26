@@ -52,7 +52,7 @@ Languages = Screen.extend({
 
       this.m_NotAvailableBackgrounds[i] = Entity.create(s_FlagNotAvailable, this.m_Flags[i]);
 
-      if(i >= 2 && this.config.params.vendor != 'ubi-nuri') {
+      if(i >= 2 && i != 7 && this.config.params.vendor != 'ubi-nuri') {
         var text = Text.create('language-not-available', this.m_NotAvailableBackgrounds[i]);
         text.setCenterPosition(this.m_NotAvailableBackgrounds[i].getWidth() / 2, this.m_NotAvailableBackgrounds[i].getHeight() / 2);
         text.disableShadow();

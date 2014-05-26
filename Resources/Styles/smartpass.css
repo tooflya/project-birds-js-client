@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'RiiPopkk-R';
+  src: url('../Fonts/RiiPopkkR.otf');
+}
+*, html, canvas {
+  margin: 0;
+  padding: 0;
+  cursor: url('../Graphics/cursor.png'), -moz-zoom-in;
+}
+div.canvas {
+  margin: 0px auto;
+}
+div.smartpass a {
+  display: block;
+  width: 100%;
+  height: 25px;
+  background: transparent url("../Graphics/smartpass-small-banner.png") center no-repeat;
+  border: 1px solid #C3CBD4;
+  margin: 2px 0 0 0;
+  padding: 10px 0;
+}
+div.home {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 30px;
+  width: 218px;
+  height: 111px;
+  display: inline-block;
+  background: transparent url("../Graphics/smartpass-large-banner.png") no-repeat;
+}
+div.home a {
+  background: transparent url("../Graphics/smartpass-large-banner-close.png") no-repeat;
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  -webkit-transition: all .2s ease-in-out;
+}
+div.home a:hover {
+  -webkit-transform: scale(1.2);
+}

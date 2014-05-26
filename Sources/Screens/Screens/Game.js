@@ -107,6 +107,12 @@ Game = Screen.extend({
       }
     ]
   },
+  m_Results: {
+    birds: 0,
+    flayers: 0,
+    combo: 0,
+    keys: 0
+  },
   m_GameRunning: false,
   m_GamePreviewRunning: false,
   m_GamePause: false,
@@ -161,9 +167,12 @@ Game = Screen.extend({
     this.m_Marks = EntityManager.create(1500, Mark.create(), this, 100);
     this.m_Stars = EntityManager.create(1500, Star.create(), this, 100);
     this.m_Birds = EntityManager.create(50, Bird.create(false, this.getPhysicsWorld()), this, 105);
+    this.m_BombBirds = EntityManager.create(10, BombBird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_FlayerBirds = EntityManager.create(10, FlayerBird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 110);
     this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110);
+    this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this, 201);
+    this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 201);
 
     this.m_PreviewText = Text.create(false, this.m_PreviewBackground);
   },
@@ -186,6 +195,17 @@ Game = Screen.extend({
     if(child instanceof Popup) {
       this.pause();
     }
+  },
+  clearResults: function() {
+    this.m_Results = {
+      birds: 0,
+      flayers: 0,
+      combo: 0,
+      keys: 0
+    };
+  },
+  getResults: function() {
+    return this.m_Results;
   },
   update: function(time) {
     if(this.m_GamePause) return;

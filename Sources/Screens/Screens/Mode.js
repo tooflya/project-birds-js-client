@@ -107,16 +107,24 @@ Mode = Screen.extend({
       Lock.sharedScreen(this).show(0);
     } else {
       //Multiplayer.sharedScreen(this).show();
-      Game.sharedScreen(1);
-      ScreenManager.sharedManager().replace(Loading);
+      if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
+        Lives.sharedScreen(this).show();
+      } else {
+        Game.sharedScreen(1);
+        ScreenManager.sharedManager().replace(Loading);
+      }
     }
   },
   onArcadeEvent: function() {
     if(!DataManager.sharedManager().get(references.lock.modes.arcade)) {
       Lock.sharedScreen(this).show(1);
     } else {
-      Game.sharedScreen(2);
-      ScreenManager.sharedManager().replace(Loading);
+      if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
+        Lives.sharedScreen(this).show();
+      } else {
+        Game.sharedScreen(2);
+        ScreenManager.sharedManager().replace(Loading);
+      }
     }
   },
   onRatingEvent: function() {
@@ -166,6 +174,8 @@ Mode = Screen.extend({
       }]);
 
       AchievementsManager.sharedManager().unlock(id + 1);
+
+      Sound.sharedSound().play(s_SoundSlash);
     } else {
       Keys.sharedScreen(this).show();
     }

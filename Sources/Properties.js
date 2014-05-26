@@ -29,8 +29,8 @@
  *
  */
 
-var weapon = 0;
 var purchase = {
+  cancel: -1,
   coins: {
     pack1: 0,
     pack2: 1,
@@ -45,6 +45,7 @@ var purchase = {
 };
 var references = {
   info: {
+    weapon: 0,
     install: 1,
     game: 2,
     rate: 3
@@ -63,6 +64,41 @@ var references = {
   },
   achievements: {
     count: 10
+  },
+  time: {
+    reward: 11,
+    days: 12
+  },
+  items: {
+    weapon1: 101,
+    weapon2: 102,
+    weapon3: 103,
+    weapon4: 104,
+    weapon5: 105,
+    weapon6: 106,
+    weapon7: 107,
+    weapon8: 108,
+    weapon9: 109,
+    weapon10: 110,
+    weapon11: 111,
+
+    bird1: 201,
+    bird2: 202,
+    bird3: 203,
+    bird4: 204,
+    bird5: 205,
+    bird6: 206,
+    bird7: 207,
+    bird8: 208,
+
+    bonus1: 301,
+    bonus2: 302,
+    bonus3: 303,
+    bonus4: 304,
+    bonus5: 305,
+    bonus6: 306,
+    bonus7: 307,
+    bonus8: 308
   }
 };
 var unlock = {

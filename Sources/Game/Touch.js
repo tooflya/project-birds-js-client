@@ -33,5 +33,8 @@ Game.prototype.onMouseDragged = function(e) {
   if(Screen.prototype.onMouseDragged.call(this, e)) {
     this.m_Touch.point.x = e.getLocation().x;
     this.m_Touch.point.y = e.getLocation().y;
+
+    this.m_WeaponParticles1.create().setCenterPosition(this.m_Touch.point.x, this.m_Touch.point.y);
+    this.m_WeaponParticles2.create().setCenterPosition(this.m_Touch.point.x, this.m_Touch.point.y);
   }
 };

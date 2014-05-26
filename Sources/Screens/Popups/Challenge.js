@@ -33,6 +33,8 @@ Challenge = ExtendedPopup.extend({
   ctor: function(parent) {
     this._super(parent);
 
+    Challenge.instance = this;
+
     this.m_BackgroundHolder1 = Entity.create(s_ListFixSmall, this.m_Background);
     this.m_BackgroundHolder2 = Entity.create(s_ListFixSmall, this.m_Background);
     this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);

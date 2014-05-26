@@ -36,33 +36,130 @@ Lives = ExtendedPopup.extend({
     this.m_Decoration = Entity.create(s_PopupDecoration8, this.m_Background);
     this.m_GetButton = Button.create(s_GetLivesPopupButton, 1, 1, this.m_Background);
     this.m_Text = Text.create('lives-popup-1', this.m_Background);
+    this.m_Counter = Text.create('lives-counter', this.m_Background);
+
+    var platformPriceText;
+
+    switch(this.config.params.platform) {
+      case 'vk':
+      platformPriceText = 'vk-price-text';
+      break;
+    }
+
+    this.m_PriceText = Text.create(platformPriceText, this.m_GetButton);
+
+    switch(this.config.params.platform) {
+      case 'vk':
+      this.m_PriceText.ccsf([5]);
+      break;
+    }
+
+    this.m_PriceText.setCenterPosition(this.m_GetButton.getWidth() / 2, this.m_GetButton.getHeight() / 2 - Camera.sharedCamera().coord(83));
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
     this.m_GetButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(80));
 
     this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
+    this.m_Counter.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(320));
+
+    this.m_Counter.setColor(cc.c3(0.0, 120.0, 255.0));
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Lives);
     this.m_GetButton.setTouchHandler('onActionEvent', Lives, {id: purchase.lives});
   },
   onActionEvent: function(params) {
+    this.m_GetButton.action = true;
     this.hide(function() {
       Purchase.sharedScreen(this.getParent()).show(params, function(id) {
         switch(id) {
+          case purchase.cancel:
+          if(DataManager.sharedManager().get(EnergyManager.sharedManager().getReference()) <= 0) {
+            if(Game.instance) {
+              ScreenManager.sharedManager().replace(Menu);
+            }
+          }
+          break;
           case purchase.lives:
-          DataManager.sharedManager().save(references.coins.lives, 5);
+          EnergyManager.sharedManager().restoreAll();
+
+          if(Game.instance) {
+            if(!Game.sharedScreen().m_GameRunning) {
+              Game.sharedScreen().onShow();
+            }
+          }
           break;
         }
       });
     });
   },
-  onShow: function() {
-    this._super();
-  },
-  onHide: function() {
+  show: function() {
     this._super();
 
+    var lives = DataManager.sharedManager().get(references.coins.lives);
+
+    if(lives <= 0) {
+    } else if(lives < 5) {
+      this.m_Text.setText('lives-popup-3');
+      this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
+    } else {
+      this.m_Text.setText('lives-popup-2');
+      this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(230));
+      this.m_GetButton.setVisible(false);
+      this.m_GetButton.runAction(
+        cc.Sequence.create(
+        cc.ScaleTo.create(0.1, 0.8, 1.2),
+        cc.ScaleTo.create(0.1, 1.2, 0.8),
+        cc.ScaleTo.create(0.1, 1.0, 1.0)
+        )
+      );
+    }
+  },
+  onShow: function() {
+    this._super();
+
+    if(DataManager.sharedManager().get(references.coins.lives) < 5) {
+      this.m_GetButton.runAction(
+        cc.Sequence.create(
+        cc.ScaleTo.create(0.1, 0.8, 1.2),
+        cc.ScaleTo.create(0.1, 1.2, 0.8),
+        cc.ScaleTo.create(0.1, 1.0, 1.0)
+        )
+      );
+    }
+  },
+  onHide: function(callback, prepare) {
+    this._super(callback, prepare);
+
     Lives.instance = false;
+
+    if(!prepare && !this.m_GetButton.action) {
+      if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
+        if(Game.instance) {
+          if(!Game.sharedScreen().m_GameRunning) {
+            ScreenManager.sharedManager().replace(Menu);
+          }
+        }
+      } else {
+        if(Game.instance) {
+          if(!Game.sharedScreen().m_GameRunning && !Game.sharedScreen().m_GamePreviewRunning) {
+            Game.sharedScreen().onShow();
+          }
+        }
+      }
+    }
+  },
+  update: function(time) {
+    this._super(time);
+
+    var lives = DataManager.sharedManager().get(references.coins.lives);
+
+    if(lives <= 0) {
+      this.m_Counter.timeLeft(EnergyManager.sharedManager().time() / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+    } else {
+      this.m_Counter.ccsf([lives]);
+    }
+
+    EnergyManager.sharedManager().check();
   }
 });
 

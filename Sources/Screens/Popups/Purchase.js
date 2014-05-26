@@ -34,6 +34,7 @@ Purchase = ExtendedPopup.extend({
   m_PurchaseParameters: false,
   m_PauseTimeElapsed: 0,
   m_PauseTime: 2.0,
+  m_TimeMakePurchase: false,
   ctor: function(parent) {
     this._super(parent);
 
@@ -65,29 +66,34 @@ Purchase = ExtendedPopup.extend({
   update: function(time) {
     this._super(time);
 
-    this.m_PauseTimeElapsed += time;
-    if(this.m_PauseTimeElapsed >= this.m_PauseTime) {
-      this.m_PauseTimeElapsed = 0;
+    if(!this.m_TimeMakePurchase) {
+      this.m_PauseTimeElapsed += time;
+      if(this.m_PauseTimeElapsed >= this.m_PauseTime) {
+        this.m_PauseTimeElapsed = 0;
+        this.m_TimeMakePurchase = true;
 
-      var params = this.m_PurchaseParameters;
-      var self = this;
+        var params = this.m_PurchaseParameters;
+        var self = this;
 
-      switch(this.config.params.platform) {
-        default:
-        self.hide(self.m_PurchaseCallback(params.id));
-        break;
-        case 'vk':
-        VK.callMethod('showOrderBox', {
-          type: 'item',
-          item: params.id
-        });
-        VK.addCallback('onOrderCancel', function() {
-          self.hide();
-        });
-        VK.addCallback('onOrderSuccess', function() {
+        switch(this.config.params.platform) {
+          default:
           self.hide(self.m_PurchaseCallback(params.id));
-        });
-        break;
+          break;
+          case 'vk':
+          VK.callMethod('showOrderBox', {
+            type: 'item',
+            item: params.id
+          });
+          VK.addCallback('onOrderCancel', function() {
+            self.hide(self.m_PurchaseCallback(purchase.cancel));
+          });
+          VK.addCallback('onOrderSuccess', function() {
+            self.hide(self.m_PurchaseCallback(params.id));
+
+            PurchasesBackground.sharedScreen(ScreenManager.sharedManager().getCurrentScreen()).show(params.id);
+          });
+          break;
+        }
       }
     }
   }

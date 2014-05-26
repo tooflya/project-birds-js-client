@@ -63,17 +63,36 @@ Item = ExtendedPopup.extend({
 
     this._super();
 
-    this.showButton(params.id);
+    this.showButton(params);
 
-    this.m_List.onShow(params.id);
+    this.m_List.onShow(params.reference);
   },
-  showButton: function(id) {
-    if(false) {
-      this.m_ActionButton.setVisible(false);
-    } else {
-      this.m_ActionButton.setVisible(true);
+  showButton: function(params) {
+    switch(params.category) {
+      case 'weapons':
+      if(DataManager.sharedManager().get(params.id) > 0) {
+        if(DataManager.sharedManager().get(references.weapon) == params.id - 100) {
+          this.m_ActionButton.setVisible(false);
+        } else {
+          this.m_ActionButton.setVisible(true);
 
-      this.m_ActionText.setText('buy');
+          this.m_ActionText.setText('choose');
+        }
+      } else {
+        this.m_ActionButton.setVisible(true);
+
+        this.m_ActionText.setText('buy');
+      }
+      break;
+      default:
+      if(DataManager.sharedManager().get(params.id) > 0) {
+        this.m_ActionButton.setVisible(false);
+      } else {
+        this.m_ActionButton.setVisible(true);
+
+        this.m_ActionText.setText('buy');
+      }
+      break;
     }
   },
   onShow: function() {
@@ -82,13 +101,27 @@ Item = ExtendedPopup.extend({
   onHide: function() {
     this._super();
 
+    Item.instance = false;
+
     if(this.m_ActionButton.action) {
-      var silver = properties.items[this.m_ActionButton.params.id].price.silver;
-      var gold = properties.items[this.m_ActionButton.params.id].price.gold;
+      switch(this.m_ActionButton.params.category) {
+        case 'weapons':
+        if(DataManager.sharedManager().get(this.m_ActionButton.params.id) > 0) {
+          DataManager.sharedManager().save(references.weapon, this.m_ActionButton.params.id - 100);
+
+          Sound.sharedSound().play(s_SoundEquipSword);
+
+          return true;
+        }
+        break;
+      }
+
+      var silver = properties.items[this.m_ActionButton.params.reference].price.silver;
+      var gold = properties.items[this.m_ActionButton.params.reference].price.gold;
 
       if(DataManager.sharedManager().get(references.coins.silver) < silver || DataManager.sharedManager().get(references.coins.gold) < gold) {
         if(this.config.params.vendor == 'ubi-nuri') {
-          //Toast
+          NotificationsManager.sharedManager().show('not-enoght-coins');
         } else {
           Coins.sharedScreen(this.m_Parent).show();
         }
@@ -96,11 +129,21 @@ Item = ExtendedPopup.extend({
         DataManager.sharedManager().update(references.coins.gold, -gold);
         DataManager.sharedManager().update(references.coins.silver, -silver);
 
+        switch(this.m_ActionButton.params.category) {
+          case 'weapons':
+          DataManager.sharedManager().save(this.m_ActionButton.params.id, 1);
+          DataManager.sharedManager().save(references.weapon, this.m_ActionButton.params.id - 100);
+          break;
+          default:
+          DataManager.sharedManager().save(this.m_ActionButton.params.id, 1);
+          break;
+        }
+
         Bought.sharedScreen(this.m_Parent).show(this.m_ActionButton.params);
+
+        Sound.sharedSound().play(s_SoundEquipUnlock);
       }
     }
-
-    Item.instance = false;
   }
 });
 

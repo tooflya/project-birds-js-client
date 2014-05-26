@@ -82,9 +82,9 @@ Bought = ExtendedPopup.extend({
         )
       );
 
-    this.m_BackgroundIcon.setCurrentFrameIndex(params.id);
+    this.m_BackgroundIcon.setCurrentFrameIndex(params.reference);
 
-    this.m_ItemText.setText(['item-title-' + params.id]);
+    this.m_ItemText.setText(['item-title-' + params.reference]);
     this.m_ItemText.setFontSize(this.m_UnlockText.getFontSize());
   },
   hide: function() {

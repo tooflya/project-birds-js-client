@@ -49,12 +49,6 @@ Preloader = Screen.extend({
     this.m_LoadingBar.setSize(577, 38);
     this.m_LoadingBar.showPercentage(0);
   },
-  /**
-   * init with resources
-   * @param {Array} resources
-   * @param {Function|String} selector
-   * @param {Object} target
-   */
   initWithResources: function(resources, selector, target) {
     this.resources = resources;
     this.selector = selector;

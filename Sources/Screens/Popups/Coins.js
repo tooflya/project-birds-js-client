@@ -40,17 +40,39 @@ Coins = ExtendedPopup.extend({
     this.m_CoinsButton4 = Button.create(s_GetCoinsPopupButton, 2, 2, this.m_Background);
     this.m_Text = Text.create('coins-popup', this.m_Background);
 
-    this.m_CoinsButton1.setTextureRect(cc.rect(Camera.sharedCamera().coord(14), Camera.sharedCamera().coord(36), Camera.sharedCamera().coord(282), Camera.sharedCamera().coord(207)));
-    this.m_CoinsButton2.setTextureRect(cc.rect(Camera.sharedCamera().coord(296), Camera.sharedCamera().coord(25), Camera.sharedCamera().coord(279), Camera.sharedCamera().coord(201)));
-    this.m_CoinsButton3.setTextureRect(cc.rect(Camera.sharedCamera().coord(14), Camera.sharedCamera().coord(243), Camera.sharedCamera().coord(285), Camera.sharedCamera().coord(225)));
-    this.m_CoinsButton4.setTextureRect(cc.rect(Camera.sharedCamera().coord(296), Camera.sharedCamera().coord(226), Camera.sharedCamera().coord(279), Camera.sharedCamera().coord(242)));
+    var platformPriceText;
+
+    switch(this.config.params.platform) {
+      case 'vk':
+      platformPriceText = 'vk-price-text';
+      break;
+    }
+
+    this.m_PriceText1 = Text.create(platformPriceText, this.m_CoinsButton1);
+    this.m_PriceText2 = Text.create(platformPriceText, this.m_CoinsButton2);
+    this.m_PriceText3 = Text.create(platformPriceText, this.m_CoinsButton3);
+    this.m_PriceText4 = Text.create(platformPriceText, this.m_CoinsButton4);
+
+    switch(this.config.params.platform) {
+      case 'vk':
+      this.m_PriceText1.ccsf([5]);
+      this.m_PriceText2.ccsf([10]);
+      this.m_PriceText3.ccsf([25]);
+      this.m_PriceText4.ccsf([40]);
+      break;
+    }
+
+    this.m_PriceText1.setCenterPosition(this.m_CoinsButton1.getWidth() / 2, this.m_CoinsButton1.getHeight() / 2 - Camera.sharedCamera().coord(75));
+    this.m_PriceText2.setCenterPosition(this.m_CoinsButton2.getWidth() / 2, this.m_CoinsButton2.getHeight() / 2 - Camera.sharedCamera().coord(75));
+    this.m_PriceText3.setCenterPosition(this.m_CoinsButton3.getWidth() / 2, this.m_CoinsButton3.getHeight() / 2 - Camera.sharedCamera().coord(75));
+    this.m_PriceText4.setCenterPosition(this.m_CoinsButton4.getWidth() / 2, this.m_CoinsButton4.getHeight() / 2 - Camera.sharedCamera().coord(75));
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(350));
 
-    this.m_CoinsButton1.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(155));
-    this.m_CoinsButton2.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(140));
-    this.m_CoinsButton3.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
-    this.m_CoinsButton4.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(140), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(345));
+    this.m_CoinsButton1.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(150), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(130));
+    this.m_CoinsButton2.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(150), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(130));
+    this.m_CoinsButton3.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(150), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
+    this.m_CoinsButton4.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(150), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(350));
 
     this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(60));
 
@@ -58,6 +80,11 @@ Coins = ExtendedPopup.extend({
     this.m_CoinsButton2.setTouchHandler('onActionEvent', Coins, {id: purchase.coins.pack2});
     this.m_CoinsButton3.setTouchHandler('onActionEvent', Coins, {id: purchase.coins.pack3});
     this.m_CoinsButton4.setTouchHandler('onActionEvent', Coins, {id: purchase.coins.pack4});
+
+    this.m_CoinsButton1.setCurrentFrameIndex(0);
+    this.m_CoinsButton2.setCurrentFrameIndex(1);
+    this.m_CoinsButton3.setCurrentFrameIndex(2);
+    this.m_CoinsButton4.setCurrentFrameIndex(3);
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Coins);
   },
@@ -87,6 +114,38 @@ Coins = ExtendedPopup.extend({
   },
   onShow: function() {
     this._super();
+
+    this.m_CoinsButton1.runAction(
+      cc.Sequence.create(
+      cc.ScaleTo.create(0.1, 0.8, 1.2),
+      cc.ScaleTo.create(0.1, 1.2, 0.8),
+      cc.ScaleTo.create(0.1, 1.0, 1.0)
+      )
+    );
+
+    this.m_CoinsButton2.runAction(
+    cc.Sequence.create(
+      cc.ScaleTo.create(0.1, 0.8, 1.2),
+      cc.ScaleTo.create(0.1, 1.2, 0.8),
+      cc.ScaleTo.create(0.1, 1.0, 1.0)
+      )
+    );
+
+    this.m_CoinsButton3.runAction(
+      cc.Sequence.create(
+      cc.ScaleTo.create(0.1, 0.8, 1.2),
+      cc.ScaleTo.create(0.1, 1.2, 0.8),
+      cc.ScaleTo.create(0.1, 1.0, 1.0)
+      )
+    );
+
+    this.m_CoinsButton4.runAction(
+    cc.Sequence.create(
+      cc.ScaleTo.create(0.1, 0.8, 1.2),
+      cc.ScaleTo.create(0.1, 1.2, 0.8),
+      cc.ScaleTo.create(0.1, 1.0, 1.0)
+      )
+    );
   },
   onHide: function() {
     this._super();

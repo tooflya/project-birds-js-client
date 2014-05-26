@@ -221,7 +221,7 @@ Finish = Background.extend({
           this.m_SplashStars.create();
         }
 
-        ConfettiBackground.sharedScreen(this).show();
+        ConfettiBackground.sharedScreen(Game.sharedScreen()).show();
       }
       break;
     }
@@ -229,6 +229,12 @@ Finish = Background.extend({
     this.m_TotalCoins = 0;
     this.m_CountReference = 0;
     this.m_CountReferences = [0, 0, 0, 0];
+    this.m_ResultReferences = [
+      Game.sharedScreen().getResults().birds,
+      Game.sharedScreen().getResults().flayers,
+      Game.sharedScreen().getResults().combo,
+      Game.sharedScreen().getResults().keys
+    ];
 
     this.schedule(this.count, 0.01);
   },
@@ -312,7 +318,7 @@ Finish = Background.extend({
       this.m_TextValue1.ccsf([this.m_CountReferences[this.m_CountReference]]);
       this.m_TextValue2.ccsf([this.m_TotalCoins]);
 
-      if(this.m_CountReferences[this.m_CountReference] >= 100) { // TODO: Change 100 to the real data.
+      if(this.m_CountReferences[this.m_CountReference] >= this.m_ResultReferences[this.m_CountReference]) {
         this.m_TextValue1.runRecognizeAction(cc.CallFunc.create(this.onCountingResume, this, this), {
           name: 'fade',
           time: 0.2,

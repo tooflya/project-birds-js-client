@@ -33,7 +33,7 @@
   App.run(false, {
     platform: 'standalone',
     designed: {
-      width: 980,
+      width: 979,
       height: 551
     },
     orientation: 'height',
@@ -58,6 +58,13 @@
   'Sources/Entities/BirdExplosion.js',
   'Sources/Entities/SplashStar.js',
   'Sources/Entities/Confetti.js',
+  'Sources/Entities/Dust.js',
+  'Sources/Entities/Water.js',
+  'Sources/Entities/ParticleCoin.js',
+  'Sources/Entities/ParticleKey.js',
+  'Sources/Entities/ParticleLive.js',
+  'Sources/Entities/WeaponParticle1.js',
+  'Sources/Entities/WeaponParticle2.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',
@@ -107,11 +114,17 @@
   'Sources/Game/Level.js',
   'Sources/Game/Pause.js',
   'Sources/Game/Touch.js',
-  'Sources/Layers/ConfettiBackground.js'
+  'Sources/Layers/ConfettiBackground.js',
+  'Sources/Layers/DustBackground.js',
+  'Sources/Layers/PurchasesBackground.js',
+  'Sources/Maps/Promotion.js'
   ], function() {
     Preloader.preload(resources, function() {
       DataManager.sharedManager().getCurrentUser(function() {
+        cc.canvas.style.cursor = "url('Resources/Graphics/cursor.png'), -moz-zoom-in";
+
         AchievementsManager.sharedManager();
+        EnergyManager.sharedManager(references.coins.lives, 5, 0);
 
         ScreenManager.sharedManager().replace(Menu);
       });
@@ -169,19 +182,19 @@
 
     DataManager.sharedManager().save(references.info.install, 1);
     DataManager.sharedManager().save(references.language, -1);
-    DataManager.sharedManager().save(references.rating, 0); // TODO: Place?
+    DataManager.sharedManager().save(references.rating, 0);
     DataManager.sharedManager().save(references.coins.gold, 0);
     DataManager.sharedManager().save(references.coins.silver, 0);
     DataManager.sharedManager().save(references.coins.keys, 0);
     DataManager.sharedManager().save(references.coins.lives, 5);
     DataManager.sharedManager().save(references.lock.modes.classic, 0);
     DataManager.sharedManager().save(references.lock.modes.arcade, 0);
+    DataManager.sharedManager().save(references.time.reward, 0);
+    DataManager.sharedManager().save(references.weapon, 1);
 
     AchievementsManager.sharedManager().install(achievements);
 
-    if(LanguagesManager.sharedManager().config.params.vendor == 'ubi-nuri') {
-      LanguagesManager.sharedManager().changeLanguage(7);
-    }
+    LanguagesManager.sharedManager().changeLanguage(7);
 
     callback();
   });
