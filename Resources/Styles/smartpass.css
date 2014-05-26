@@ -27,6 +27,7 @@ div.home {
   width: 218px;
   height: 111px;
   display: inline-block;
+  display: none;
   background: transparent url("../Graphics/smartpass-large-banner.png") no-repeat;
 }
 div.home a {

@@ -53,6 +53,7 @@
   'Sources/Entities/Feather.js',
   'Sources/Entities/Explosion.js',
   'Sources/Entities/Bird.js',
+  'Sources/Entities/BombBird.js',
   'Sources/Entities/FlayerBird.js',
   'Sources/Entities/BonusBird.js',
   'Sources/Entities/BirdExplosion.js',
