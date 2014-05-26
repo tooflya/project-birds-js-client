@@ -38,7 +38,3 @@ Game.prototype.onMouseDragged = function(e) {
     this.m_WeaponParticles2.create().setCenterPosition(this.m_Touch.point.x, this.m_Touch.point.y);
   }
 };
-
-Game.prototype.onTouchMoved = function(touch, e) {
-    return this.onMouseDragged(touch);
-};
