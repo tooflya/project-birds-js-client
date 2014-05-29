@@ -38,8 +38,12 @@
     },
     orientation: 'height',
     analytics: 0,
-    purchases: false,
-    vendor: 'ubi-nuri'
+    purchases: true,
+    vendor: 'tooflya',
+    server: {
+      url: 'http://127.0.0.1',//'http://www.tooflya.com',
+      port: 82
+    }
   }, [
   'Sources/Resources.js',
   'Sources/Language.js',
@@ -53,13 +57,20 @@
   'Sources/Entities/Feather.js',
   'Sources/Entities/Explosion.js',
   'Sources/Entities/Bird.js',
+  'Sources/Entities/BombBird.js',
   'Sources/Entities/FlayerBird.js',
   'Sources/Entities/BonusBird.js',
   'Sources/Entities/BirdExplosion.js',
   'Sources/Entities/SplashStar.js',
   'Sources/Entities/Confetti.js',
+  'Sources/Entities/Key.js',
   'Sources/Entities/Dust.js',
   'Sources/Entities/Water.js',
+  'Sources/Entities/ParticleCoin.js',
+  'Sources/Entities/ParticleKey.js',
+  'Sources/Entities/ParticleLive.js',
+  'Sources/Entities/WeaponParticle1.js',
+  'Sources/Entities/WeaponParticle2.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',
@@ -119,6 +130,7 @@
         cc.canvas.style.cursor = "url('Resources/Graphics/cursor.png'), -moz-zoom-in";
 
         AchievementsManager.sharedManager();
+        EnergyManager.sharedManager(references.coins.lives, 5, 30 * 60 * 1000);
 
         ScreenManager.sharedManager().replace(Menu);
       });
@@ -174,21 +186,49 @@
     achievements.push({id: '', icon: s_AchievementIcon44, name: 'achievement-name-44', description: 'achievement-description-44', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon45, name: 'achievement-name-45', description: 'achievement-description-45', state: 0});
 
+    AchievementsManager.sharedManager().install(achievements);
+
     DataManager.sharedManager().save(references.info.install, 1);
     DataManager.sharedManager().save(references.language, -1);
-    DataManager.sharedManager().save(references.rating, 0); // TODO: Place?
+    DataManager.sharedManager().save(references.rating, 0);
     DataManager.sharedManager().save(references.coins.gold, 0);
     DataManager.sharedManager().save(references.coins.silver, 0);
     DataManager.sharedManager().save(references.coins.keys, 0);
     DataManager.sharedManager().save(references.coins.lives, 5);
-    DataManager.sharedManager().save(references.lock.modes.classic, 0);
+    DataManager.sharedManager().save(references.lock.modes.classic, 1); // Unlock when progress mode is unavailable.
     DataManager.sharedManager().save(references.lock.modes.arcade, 0);
+    DataManager.sharedManager().save(references.time.reward, 0);
+    DataManager.sharedManager().save(references.weapon, 1);
 
-    AchievementsManager.sharedManager().install(achievements);
+    DataManager.sharedManager().save(references.items.weapon1, 1);
+    DataManager.sharedManager().save(references.items.weapon2, 0);
+    DataManager.sharedManager().save(references.items.weapon3, 0);
+    DataManager.sharedManager().save(references.items.weapon4, 0);
+    DataManager.sharedManager().save(references.items.weapon5, 0);
+    DataManager.sharedManager().save(references.items.weapon6, 0);
+    DataManager.sharedManager().save(references.items.weapon7, 0);
+    DataManager.sharedManager().save(references.items.weapon8, 0);
+    DataManager.sharedManager().save(references.items.weapon9, 0);
+    DataManager.sharedManager().save(references.items.weapon10, 0);
+    DataManager.sharedManager().save(references.items.weapon11, 0);
 
-    if(LanguagesManager.sharedManager().config.params.vendor == 'ubi-nuri') {
-      LanguagesManager.sharedManager().changeLanguage(7);
-    }
+    DataManager.sharedManager().save(references.items.bird1, 0);
+    DataManager.sharedManager().save(references.items.bird2, 0);
+    DataManager.sharedManager().save(references.items.bird3, 0);
+    DataManager.sharedManager().save(references.items.bird4, 0);
+    DataManager.sharedManager().save(references.items.bird5, 0);
+    DataManager.sharedManager().save(references.items.bird6, 0);
+    DataManager.sharedManager().save(references.items.bird7, 0);
+    DataManager.sharedManager().save(references.items.bird8, 0);
+
+    DataManager.sharedManager().save(references.items.bonus1, 0);
+    DataManager.sharedManager().save(references.items.bonus2, 0);
+    DataManager.sharedManager().save(references.items.bonus3, 0);
+    DataManager.sharedManager().save(references.items.bonus4, 0);
+    DataManager.sharedManager().save(references.items.bonus5, 0);
+    DataManager.sharedManager().save(references.items.bonus6, 0);
+    DataManager.sharedManager().save(references.items.bonus7, 0);
+    DataManager.sharedManager().save(references.items.bonus8, 0);
 
     callback();
   });

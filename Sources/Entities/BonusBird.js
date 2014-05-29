@@ -33,6 +33,14 @@ BonusBird = Bird.extend({
   ctor: function(parent, world) {
       this._super(parent, world, s_BonusBirds, 14, 8);
   },
+  onCreateSound: function() {
+    Sound.sharedSound().play(s_SoundThrowBird);
+  },
+  onDestroySound: function() {
+    Sound.sharedSound().play(s_SoundBirdExplosion);
+  },
+  checkPosition: function() {
+  },
   deepCopy: function() {
     return BonusBird.create(this.getParent(), this.getCurrentPhysicsWorld());
   }

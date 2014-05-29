@@ -30,11 +30,11 @@
  */
 
 (function() {
-  App.run(false, {
+  App.run(true, {
     platform: 'standalone',
     designed: {
-      width: 979,
-      height: 551
+      width: 0,
+      height: 0
     },
     orientation: 'height',
     analytics: 0,
@@ -59,6 +59,7 @@
   'Sources/Entities/BirdExplosion.js',
   'Sources/Entities/SplashStar.js',
   'Sources/Entities/Confetti.js',
+  'Sources/Entities/Key.js',
   'Sources/Entities/Dust.js',
   'Sources/Entities/Water.js',
   'Sources/Entities/ParticleCoin.js',

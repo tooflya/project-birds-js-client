@@ -63,6 +63,7 @@
   'Sources/Entities/BirdExplosion.js',
   'Sources/Entities/SplashStar.js',
   'Sources/Entities/Confetti.js',
+  'Sources/Entities/Key.js',
   'Sources/Entities/Dust.js',
   'Sources/Entities/Water.js',
   'Sources/Entities/ParticleCoin.js',
@@ -194,7 +195,7 @@
     DataManager.sharedManager().save(references.coins.silver, 0);
     DataManager.sharedManager().save(references.coins.keys, 0);
     DataManager.sharedManager().save(references.coins.lives, 5);
-    DataManager.sharedManager().save(references.lock.modes.classic, 0);
+    DataManager.sharedManager().save(references.lock.modes.classic, 1); // Unlock when progress mode is unavailable.
     DataManager.sharedManager().save(references.lock.modes.arcade, 0);
     DataManager.sharedManager().save(references.time.reward, 0);
     DataManager.sharedManager().save(references.weapon, 1);

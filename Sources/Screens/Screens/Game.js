@@ -166,6 +166,7 @@ Game = Screen.extend({
 
     this.m_Marks = EntityManager.create(1500, Mark.create(), this, 100);
     this.m_Stars = EntityManager.create(1500, Star.create(), this, 100);
+    this.m_Keys = EntityManager.create(50, Key.create(), this, 102);
     this.m_Birds = EntityManager.create(50, Bird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_BombBirds = EntityManager.create(10, BombBird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_FlayerBirds = EntityManager.create(10, FlayerBird.create(false, this.getPhysicsWorld()), this, 105);

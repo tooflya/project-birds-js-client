@@ -159,6 +159,13 @@ Bird = PhysicsEntity.extend({
       Game.sharedScreen().m_Feathers.last().setCurrentFrameIndex(this.m_Id / this.getHorizontalFramesCount());
     }
   },
+  checkPosition: function() {
+    if((this.getCenterX() < 0 && this.isFlippedHorizontally()) || (this.getCenterX() > Camera.sharedCamera().width && !this.isFlippedHorizontally())) {
+      this.setLinearVelocity(-this.getLinearVelocity().x, this.getLinearVelocity().y);
+
+      this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
+    }
+  },
   update: function(time) {
     this._super(time);
 
@@ -167,6 +174,7 @@ Bird = PhysicsEntity.extend({
     }
 
     this.checkCollides();
+    this.checkPosition();
   },
   deepCopy: function() {
     return Bird.create(this.getParent(), this.getCurrentPhysicsWorld());

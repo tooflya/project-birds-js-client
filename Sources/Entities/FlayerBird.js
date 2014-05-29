@@ -35,14 +35,16 @@ FlayerBird = Bird.extend({
   ctor: function(parent, world) {
       this._super(parent, world);
   },
+  onCreateSound: function() {
+    //Sound.sharedSound().play(s_SoundThrowBird);
+  },
+  onDestroySound: function() {
+    Sound.sharedSound().play(s_SoundBirdExplosion);
+  },
   onCreate: function() {
-    PhysicsEntity.prototype.onCreate.call(this);
-
-    this.setFlippedHorizontally(false);
-    this.setFlippedVertically(false);
+    this._super();
 
     this.m_Id = 7 * this.getHorizontalFramesCount();
-    this.m_Lifes = 12;
 
     this.animate(this.animations.fly);
   },
@@ -53,7 +55,12 @@ FlayerBird = Bird.extend({
 
     if(this.getCenterX() < -Camera.sharedCamera().width || this.getCenterX() > Camera.sharedCamera().width * 2 || this.getCenterY() < 0) {
     } else {
-      this.createExplosion();
+      if(Game.sharedScreen().m_GameRunning) {
+        this.onDestroySound();
+        this.createExplosion();
+
+        Game.sharedScreen().onKeyDropped(this);
+      }
     }
   },
   onCollideStart: function(entity, point) {
@@ -68,7 +75,7 @@ FlayerBird = Bird.extend({
 
     values.position = {
       x: Random.sharedRandom().probably(50) ? -this.getWidth() / 2 : Camera.sharedCamera().width + this.getWidth() / 2,
-      y: Random.sharedRandom().random(0, Camera.sharedCamera().center.y)
+      y: Random.sharedRandom().random(Camera.sharedCamera().height / 10, Camera.sharedCamera().center.y)
     };
 
     this.m_Forces = {
@@ -88,6 +95,8 @@ FlayerBird = Bird.extend({
   },
   createExplosion: function() {
     Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+  },
+  checkPosition: function() {
   },
   update: function(time) {
     this._super(time);

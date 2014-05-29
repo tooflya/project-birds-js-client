@@ -107,6 +107,14 @@ Game.prototype.onLost = function(element) {
   }
 };
 
+Game.prototype.onKeyDropped = function(element) {
+  this.m_Keys.create().setElementPosition(element.getCenterX(), element.getCenterY());
+};
+
+Game.prototype.onKeyReceived = function(element) {
+  
+};
+
 Game.prototype.onGameStart = function() {
   this.m_GameRunning = true;
   this.m_Lifes = 0;
@@ -148,6 +156,7 @@ Game.prototype.onUpdateLevelStart = function() {
 Game.prototype.onUpdateLevelFinish = function() {
   this.m_LevelTimeElapsed = 0;
 
+  this.m_PreviewBackground.setZOrder(200);
   this.m_PreviewText.setVisible(false);
 };
 

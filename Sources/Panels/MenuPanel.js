@@ -52,11 +52,13 @@ MenuPanel = Panel.extend({
   ctor: function(parent) {
     this._super(s_InterfacePanel, parent);
 
+    var self = this;
+
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
-      e.ccsf([MenuPanel.sharedScreen().m_Fields[0]]);
+      e.ccsf([self.m_Fields[0]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
-      e.ccsf([MenuPanel.sharedScreen().m_Fields[1]]);
+      e.ccsf([self.m_Fields[1]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       EnergyManager.sharedManager().check();
@@ -68,13 +70,13 @@ MenuPanel = Panel.extend({
       }
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
-      e.ccsf([MenuPanel.sharedScreen().m_Fields[3]]);
+      e.ccsf([self.m_Fields[3]]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon5, 3, 3], false, function(e) {
-      if(!MenuPanel.sharedScreen().m_LeaderboardAnimationCompleted) {
+      if(!self.m_LeaderboardAnimationCompleted) {
         var loading = '';
         
-        switch(MenuPanel.sharedScreen().m_LeaderboardAnimationIndex) {
+        switch(self.m_LeaderboardAnimationIndex) {
           case 1:
           loading = '.';
           break;
@@ -94,7 +96,7 @@ MenuPanel = Panel.extend({
 
         e.ccsf([loading]);
       } else {
-        e.ccsf([MenuPanel.sharedScreen().m_LeaderboardIndex]);
+        e.ccsf([self.m_LeaderboardIndex]);
       }
     });
 

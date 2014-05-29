@@ -35,7 +35,7 @@ document.onreadystatechange = function() {
   }
 }
 
-function resize() {
+function resize() {return;
   var container = document.getElementById('canvas');
   var canvas = $('div.canvas');
 

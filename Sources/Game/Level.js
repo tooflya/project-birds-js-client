@@ -38,6 +38,7 @@ Game.prototype.startLevelUpdate = function() {
 
   ConfettiBackground.sharedScreen(this).show();
 
+  this.m_PreviewBackground.setZOrder(100);
   this.m_PreviewBackground.runRecognizeAction(cc.CallFunc.create(this.finishLevelUpdate, this, this), [{
     name: 'fade',
     time: 0.5,
