@@ -14,3 +14,12 @@ document.onreadystatechange = function() {
     }
   }
 }
+
+(function() {
+  var viewport = document.getElementById('viewport');
+  if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)) {
+    viewport.setAttribute("content", "width=device-width, maximum-scale=0.5, minimum-scale=0.5, initial-scale=0.5, user-scalable=no");
+  } else if(navigator.userAgent.match(/iPad/i)) {
+    viewport.setAttribute("content", "width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, user-scalable=no");
+  }
+}(document));
