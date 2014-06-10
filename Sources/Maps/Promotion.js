@@ -107,9 +107,7 @@ Promotion = ClippedEntity.extend({
   show: function() {
     this.assert(this.m_Showed, "The Daily Revenue Map alredy been showed.");
 
-    if(cc.Browser.isMobile) return false;
-
-    if(Date.now() - DataManager.sharedManager().get(references.time.reward) > this.getEventsInMilliseconds('day')) {
+    if(Date.now() - DataManager.sharedManager().get(references.time.reward) > this.getEventsInMilliseconds('day') && !cc.Browser.isMobile) {
       if(Date.now() - DataManager.sharedManager().get(references.time.reward) > this.getEventsInMilliseconds('day') * 2) {
         this.m_Day = 1;
       } else {

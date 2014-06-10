@@ -79,30 +79,31 @@ GamePanel = Panel.extend({
       break;
       case 1:
         if(!cc.Browser.isMobile) {
-        this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
-        this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
-        this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
+          this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
+          this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
+          this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
 
-        this.getIcons()[3].setCurrentFrameIndex(1);
-        this.getIcons()[4].setCurrentFrameIndex(1);
-        this.getIcons()[5].setCurrentFrameIndex(1);
+          this.getIcons()[3].setCurrentFrameIndex(1);
+          this.getIcons()[4].setCurrentFrameIndex(1);
+          this.getIcons()[5].setCurrentFrameIndex(1);
 
-        this.getIcons()[3].setScale(0.95);
-        this.getIcons()[5].setScale(0.95);
+          this.getIcons()[3].setScale(0.95);
+          this.getIcons()[5].setScale(0.95);
 
-        this.getIcons()[3].setRotation(-5);
-        this.getIcons()[5].setRotation(5);
+          this.getIcons()[3].setRotation(-5);
+          this.getIcons()[5].setRotation(5);
 
-        this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
-        this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());}
+          this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
+          this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
 
-        if(!this.config.params.purchases) {
-          for(var i = 3; i <= 5; i++) {
-            this.getIcons()[i].setCenterPosition(this.getIcons()[i].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[i].getCenterY());
+          if(!this.config.params.purchases) {
+            for(var i = 3; i <= 5; i++) {
+              this.getIcons()[i].setCenterPosition(this.getIcons()[i].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[i].getCenterY());
+            }
           }
-        }
 
-        u = 3;
+          u = 3;
+        }
       break;
       case 2:
         this.addItem(s_PanelItemsBackground1, [s_PanelIcon8, 1, 1], false, function(e) {

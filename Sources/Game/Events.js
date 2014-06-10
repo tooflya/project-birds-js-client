@@ -95,7 +95,10 @@ Game.prototype.onLost = function(element) {
 
   switch(this.m_Type) {
     case this.m_Types.classic:
-    GamePanel.sharedScreen(this.m_Type, this).getIcons()[3 + this.m_Lifes].setCurrentFrameIndex(0);
+    if(!cc.Browser.isMobile) {
+      GamePanel.sharedScreen(this.m_Type, this).getIcons()[3 + this.m_Lifes].setCurrentFrameIndex(0);
+    }
+
     if(++this.m_Lifes >= 3) {
       this.finishGame();
 

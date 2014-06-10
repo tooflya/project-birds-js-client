@@ -143,14 +143,6 @@ Menu = Screen.extend({
     this.m_PlayButtonDecorations[0].setRotation(this.m_PlayButtonDecorations[0].getRotation() - 10 * time);
     this.m_PlayButtonDecorations[1].setRotation(this.m_PlayButtonDecorations[1].getRotation() + 10 * time);
   },
-  onOrientationChanged: function() {
-    this.m_Background.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
-    this.m_SettingsButton.setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_PlayButtonDecorations[0].setCenterPosition(Camera.sharedCamera().center.x+ Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
-    this.m_PlayButtonDecorations[1].setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
-    this.m_PlayButton.setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(20), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
-    this.m_ShopButton.setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
-  },
   onKeyDown: function(e) {
     switch(e) {
       case 27:
