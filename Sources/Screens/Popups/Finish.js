@@ -47,8 +47,8 @@ Finish = Background.extend({
 
     this.m_SplashStars = EntityManager.create(20, SplashStar.create(false, Game.sharedScreen().getPhysicsWorld()), this);
 
-    this.m_Background1 = TiledEntity.create(s_FinishBackground, 1, 2, this.m_Background);
-    this.m_Background2 = TiledEntity.create(s_FinishBackground, 1, 2, this.m_Background);
+    this.m_Background1 = TiledEntity.create(Orientation.parse(s_FinishBackground), 1, 2, this.m_Background);
+    this.m_Background2 = TiledEntity.create(Orientation.parse(s_FinishBackground), 1, 2, this.m_Background);
 
     this.m_TextValue1 = Text.create('finish-text-1', this.m_BackgroundSquare);
     this.m_TextValue2 = Text.create('finish-total-coins', this.m_BackgroundSquare);

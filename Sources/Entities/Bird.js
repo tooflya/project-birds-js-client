@@ -154,11 +154,13 @@ Bird = PhysicsEntity.extend({
   createExplosion: function() {
     Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY());
 
-    for(var i = 0; i < 50; i++) {
-      Game.sharedScreen().m_Feathers.create();
+    if(!cc.Browser.isMobile) {
+      for(var i = 0; i < 50; i++) {
+        Game.sharedScreen().m_Feathers.create();
 
-      Game.sharedScreen().m_Feathers.last().setCenterPosition(this.getCenterX(), this.getCenterY());
-      Game.sharedScreen().m_Feathers.last().setCurrentFrameIndex(this.m_Id / this.getHorizontalFramesCount());
+        Game.sharedScreen().m_Feathers.last().setCenterPosition(this.getCenterX(), this.getCenterY());
+        Game.sharedScreen().m_Feathers.last().setCurrentFrameIndex(this.m_Id / this.getHorizontalFramesCount());
+      }
     }
   },
   checkPosition: function() {

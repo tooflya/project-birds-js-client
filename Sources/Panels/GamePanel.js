@@ -78,6 +78,7 @@ GamePanel = Panel.extend({
         u = 3;
       break;
       case 1:
+        if(!cc.Browser.isMobile) {
         this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
         this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
         this.addItem(s_PanelItemsBackground2, [s_PanelIcon7, 2, 1]);
@@ -93,7 +94,7 @@ GamePanel = Panel.extend({
         this.getIcons()[5].setRotation(5);
 
         this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
-        this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
+        this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());}
 
         if(!this.config.params.purchases) {
           for(var i = 3; i <= 5; i++) {

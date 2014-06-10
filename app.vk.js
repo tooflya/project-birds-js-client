@@ -36,7 +36,10 @@
       width: 980,
       height: 551
     },
-    orientation: 'height',
+    orientations: {
+      portrait: false,
+      landscape: true
+    },
     analytics: 'UA-48406912-5',
     purchases: true,
     vendor: 'tooflya',

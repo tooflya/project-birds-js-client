@@ -106,6 +106,16 @@ var s_GameBackground2 = "Resources/Graphics/game-background-2.png";
 var s_GameBackground3 = "Resources/Graphics/game-background-3.png";
 var s_GameBackground4 = "Resources/Graphics/game-background-4.png";
 var s_GameBackground5 = "Resources/Graphics/game-background-5.png";
+var s_GameBackground1Portrait = "Resources/Graphics/game-background-1-portrait.png";
+var s_GameBackground2Portrait = "Resources/Graphics/game-background-2-portrait.png";
+var s_GameBackground3Portrait = "Resources/Graphics/game-background-3-portrait.png";
+var s_GameBackground4Portrait = "Resources/Graphics/game-background-4-portrait.png";
+var s_GameBackground5Portrait = "Resources/Graphics/game-background-5-portrait.png";
+var s_GameBackground1Landscape = "Resources/Graphics/game-background-1-landscape.png";
+var s_GameBackground2Landscape = "Resources/Graphics/game-background-2-landscape.png";
+var s_GameBackground3Landscape = "Resources/Graphics/game-background-3-landscape.png";
+var s_GameBackground4Landscape = "Resources/Graphics/game-background-4-landscape.png";
+var s_GameBackground5Landscape = "Resources/Graphics/game-background-5-landscape.png";
 var s_GetLivesPopupButton = "Resources/Graphics/popup-lives-get.png";
 var s_GetCoinsPopupButton = "Resources/Graphics/popup-coins-get.png";
 var s_GetKeysPopupButton1 = "Resources/Graphics/popup-keys-get-1.png";
@@ -131,6 +141,8 @@ var s_Birds = "Resources/Graphics/birds.png";
 var s_Explosion = "Resources/Graphics/explosion-1.png";
 var s_ExplosionBackground = "Resources/Graphics/explosion-2.png";
 var s_FinishBackground = "Resources/Graphics/finish-background.png";
+var s_FinishBackgroundPortrait = "Resources/Graphics/finish-background-portrait.png";
+var s_FinishBackgroundLandscape = "Resources/Graphics/finish-background-landscape.png";
 var s_FinishBackgroundSquare = "Resources/Graphics/finish-background-square.png";
 var s_FinishButtons = "Resources/Graphics/finish-buttons.png";
 var s_UnlockKey = "Resources/Graphics/unlock-key.png";
@@ -285,11 +297,16 @@ var resources = [
   {src: s_PanelIcon7},
   {src: s_PanelIcon8},
   {src: s_PanelButton},
-  {src: s_GameBackground1},
-  {src: s_GameBackground2},
-  {src: s_GameBackground3},
-  {src: s_GameBackground4},
-  {src: s_GameBackground5},
+  {src: s_GameBackground1Portrait},
+  {src: s_GameBackground2Portrait},
+  {src: s_GameBackground3Portrait},
+  {src: s_GameBackground4Portrait},
+  {src: s_GameBackground5Portrait},
+  {src: s_GameBackground1Landscape},
+  {src: s_GameBackground2Landscape},
+  {src: s_GameBackground3Landscape},
+  {src: s_GameBackground4Landscape},
+  {src: s_GameBackground5Landscape},
   {src: s_GetLivesPopupButton},
   {src: s_GetCoinsPopupButton},
   {src: s_GetKeysPopupButton1},
@@ -312,7 +329,8 @@ var resources = [
   {src: s_Lamp},
   {src: s_Mark},
   {src: s_Birds},
-  {src: s_FinishBackground},
+  {src: s_FinishBackgroundPortrait},
+  {src: s_FinishBackgroundLandscape},
   {src: s_FinishBackgroundSquare},
   {src: s_Explosion},
   {src: s_ExplosionBackground},

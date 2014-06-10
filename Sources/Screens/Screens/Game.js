@@ -147,11 +147,11 @@ Game = Screen.extend({
     };
 
     var backgrounds = [
-      s_GameBackground1,
-      s_GameBackground2,
-      s_GameBackground3,
-      s_GameBackground4,
-      s_GameBackground5
+      Orientation.parse(s_GameBackground1),
+      Orientation.parse(s_GameBackground2),
+      Orientation.parse(s_GameBackground3),
+      Orientation.parse(s_GameBackground4),
+      Orientation.parse(s_GameBackground5)
     ];
 
     this.m_Background = Entity.create(backgrounds[Random.sharedRandom().random(0, backgrounds.length, true)], this, true);

@@ -40,7 +40,10 @@
         y: 50
       }
     },
-    orientation: 'height',
+    orientations: {
+      portrait: true,
+      landscape: false
+    },
     analytics: 0,
     purchases: false,
     vendor: 'ubi-nuri'
@@ -140,7 +143,7 @@
 
     var achievements = [];
 
-    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 1});
     achievements.push({id: '', icon: s_AchievementIcon2, name: 'achievement-name-2', description: 'achievement-description-2', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon3, name: 'achievement-name-3', description: 'achievement-description-3', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon4, name: 'achievement-name-4', description: 'achievement-description-4', state: 0});

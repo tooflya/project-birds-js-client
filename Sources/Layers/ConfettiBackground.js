@@ -34,9 +34,14 @@ ConfettiBackground = BackgroundColor.extend({
     this._super(cc.c4(0, 0, 0, 0));
 
     this.m_Parent = parent;
-    this.m_Elements = EntityManager.create(300, Confetti.create(), this, 1, true);
+
+    if(!cc.Browser.isMobile) {
+      this.m_Elements = EntityManager.create(300, Confetti.create(), this, 1, true);
+    }
   },
   show: function() {
+    if(cc.Browser.isMobile) return false;
+
     ConfettiBackground.instance = false;
 
     this.m_Parent.addChild(this, this.m_zIndex);
@@ -68,8 +73,10 @@ ConfettiBackground = BackgroundColor.extend({
   update: function(time) {
     this._super(time);
 
-    if(this.m_Elements.getCount() <= 0) {
-      this.hide();
+    if(!cc.Browser.isMobile) {
+      if(this.m_Elements.getCount() <= 0) {
+        this.hide();
+      }
     }
   }
 });
