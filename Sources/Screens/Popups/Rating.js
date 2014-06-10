@@ -38,8 +38,8 @@ Rating = ExtendedPopup.extend({
 
     this.m_List = LeaderboardList.create(this.m_Background);
 
-    this.m_BackgroundHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(308));
-    this.m_BackgroundHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(398));
+    this.m_BackgroundHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(352));
+    this.m_BackgroundHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(355));
 
     this.m_BackgroundHolder2.setScaleY(-1);
 

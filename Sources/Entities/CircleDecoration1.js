@@ -31,7 +31,7 @@
 
 CircleDecoration1 = Entity.extend({
   ctor: function() {
-      this._super(s_CircleDecoration3);
+    this._super(s_CircleDecoration3);
   },
   onCreate: function() {
     this._super();
@@ -42,12 +42,12 @@ CircleDecoration1 = Entity.extend({
     this.runRecognizeAction(false, {
       name: "scale",
       time: 5.0,
-      value: 5.0    
+      value: 5.0
     });
     this.runRecognizeAction(cc.CallFunc.create(this.destroy, this, this), {
       name: "fade",
       time: 5.0,
-      value: 0.0    
+      value: 0.0
     });
   },
   update: function(time) {

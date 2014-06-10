@@ -147,7 +147,9 @@ Bird = PhysicsEntity.extend({
     this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
   },
   createMark: function() {
-    Game.sharedScreen().m_Marks.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+    if(!cc.Browser.isMobile) {
+      Game.sharedScreen().m_Marks.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+    }
   },
   createExplosion: function() {
     Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY());

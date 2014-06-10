@@ -37,7 +37,7 @@ Credits = Screen.extend({
 
     this.name = "Credits screen";
 
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
+    this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
 
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration3, this);

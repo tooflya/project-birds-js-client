@@ -33,7 +33,7 @@ AboutList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollLarge, 800, 890, 0, 600, parent);
 
-    this.m_GameLogo = Entity.create(s_CreditsGameName, this);
+    this.m_GameLogo = Entity.create(LanguagesManager.sharedManager().getLanguageId() == 7 ? s_CreditsGameNameJapan : s_CreditsGameName, this);
     this.m_CompanyLogo = Entity.create(s_CreditsCompanyName, this);
 
     var textes = new Array();

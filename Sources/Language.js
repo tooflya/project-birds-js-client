@@ -168,7 +168,7 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
-    {title: '制限時間は1分です！', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    {title: '制限時間は1分です！', font: 'RiiPopkk-R', size: 24, dimensions: false}
     ],
   'continue': [
     {title: 'Continue', font: 'Comic Sans MS', size: 40, dimensions: false},
@@ -448,7 +448,7 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 40, dimensions: false},
-    {title: 'プライバシーポリシー', font: 'RiiPopkk-R', size: 40, dimensions: false}
+    {title: 'プライバシーポリシー', font: 'RiiPopkk-R', size: 36, dimensions: false}
     ],
   'text-credits-1': [
     {title: "About", font: "Comic Sans MS", size: 56, dimensions: false},

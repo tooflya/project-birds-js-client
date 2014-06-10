@@ -40,7 +40,7 @@ Languages = Screen.extend({
     this.m_Flags = new Array();
     this.m_NotAvailableBackgrounds = new Array();
 
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
+    this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration1, this);

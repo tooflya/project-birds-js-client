@@ -31,10 +31,18 @@
 
 var s_PreloaderBackground = "Resources/Graphics/preloader-background.png";
 var s_PreloaderBackgroundJapan = "Resources/Graphics/preloader-background-japan.png";
+var s_PreloaderBackgroundPortrait = "Resources/Graphics/preloader-background-portrait.png";
+var s_PreloaderBackgroundLandscape = "Resources/Graphics/preloader-background-landscape.png";
+var s_PreloaderBackgroundPortraitJapan = "Resources/Graphics/preloader-background-japan-portrait.png";
+var s_PreloaderBackgroundLandscapeJapan = "Resources/Graphics/preloader-background-japan-landscape.png";
 var s_LoadingBarBackground = "Resources/Graphics/preloader-bar-background.png";
 var s_LoadingBar = "Resources/Graphics/preloader-bar.png";
 var s_MenuBackground = "Resources/Graphics/menu-background.png";
 var s_MenuBackgroundJapan = "Resources/Graphics/menu-background-japan.png";
+var s_MenuBackgroundPortrait = "Resources/Graphics/menu-background-portrait.png";
+var s_MenuBackgroundLandscape = "Resources/Graphics/menu-background-landscape.png";
+var s_MenuBackgroundPortraitJapan = "Resources/Graphics/menu-background-japan-portrait.png";
+var s_MenuBackgroundLandscapeJapan = "Resources/Graphics/menu-background-japan-landscape.png";
 var s_ButtonsSprite = "Resources/Graphics/buttons-sprite.png";
 var s_PauseButtonsSprite = "Resources/Graphics/pause-buttons-sprite.png";
 var s_PlayButton = "Resources/Graphics/play-button.png";
@@ -42,6 +50,8 @@ var s_CircleDecoration1 = "Resources/Graphics/circle-decoration-1.png";
 var s_CircleDecoration2 = "Resources/Graphics/circle-decoration-2.png";
 var s_CircleDecoration3 = "Resources/Graphics/circle-decoration-3.png";
 var s_ThirdPartyBackground = "Resources/Graphics/third-party-background.png";
+var s_ThirdPartyBackgroundPortrait = "Resources/Graphics/third-party-background-portrait.png";
+var s_ThirdPartyBackgroundLandscape = "Resources/Graphics/third-party-background-landscape.png";
 var s_LongButton = "Resources/Graphics/long-button.png";
 var s_SfxButtonsSprite = "Resources/Graphics/sfx-social-buttons.png";
 var s_PauseSfxButtonsSprite = "Resources/Graphics/pause-sfx-social-buttons.png";
@@ -56,6 +66,8 @@ var s_Lock = "Resources/Graphics/lock.png";
 var s_InterfacePanel = "Resources/Graphics/interface-panel.png";
 var s_GamePanel = "Resources/Graphics/game-panel.png";
 var s_LoadingBackground = "Resources/Graphics/loading-background.png";
+var s_LoadingBackgroundPortrait = "Resources/Graphics/loading-background-portrait.png";
+var s_LoadingBackgroundLandscape = "Resources/Graphics/loading-background-landscape.png";
 var s_LoadingDecoration = "Resources/Graphics/loading-decoration.png";
 var s_PopupBackground = "Resources/Graphics/popup-background.png";
 var s_PopupButton = "Resources/Graphics/popup-button.png";
@@ -104,6 +116,7 @@ var s_ListScrollLarge = "Resources/Graphics/list-scroll-large.png";
 var s_ListScrollSmall = "Resources/Graphics/list-scroll-small.png";
 var s_CreditsCompanyName = "Resources/Graphics/credits-company-name.png";
 var s_CreditsGameName = "Resources/Graphics/credits-game-name.png";
+var s_CreditsGameNameJapan = "Resources/Graphics/credits-game-name-japan.png";
 var s_ShopWheel = "Resources/Graphics/shop-wheel.png";
 var s_ShopShelfs = "Resources/Graphics/shop-shelfs.png";
 var s_ShopItems = "Resources/Graphics/shop-items.png";
@@ -206,17 +219,24 @@ var s_SoundLoseLife = "Resources/Sound/lose-life.mp3";
 var s_SoundBloom = ["Resources/Sound/bloom-1.mp3", "Resources/Sound/bloom-2.mp3", "Resources/Sound/bloom-3.mp3", "Resources/Sound/bloom-4.mp3"];
 
 var resources = [
-  {src: s_PreloaderBackground},
+  {src: s_PreloaderBackgroundPortrait},
+  {src: s_PreloaderBackgroundLandscape},
+  {src: s_PreloaderBackgroundPortraitJapan},
+  {src: s_PreloaderBackgroundLandscapeJapan},
   {src: s_LoadingBarBackground},
   {src: s_LoadingBar},
-  {src: s_MenuBackground},
+  {src: s_MenuBackgroundPortrait},
+  {src: s_MenuBackgroundLandscape},
+  {src: s_MenuBackgroundPortraitJapan},
+  {src: s_MenuBackgroundLandscapeJapan},
   {src: s_ButtonsSprite},
   {src: s_PauseButtonsSprite},
   {src: s_PlayButton},
   {src: s_CircleDecoration1},
   {src: s_CircleDecoration2},
   {src: s_CircleDecoration3},
-  {src: s_ThirdPartyBackground},
+  {src: s_ThirdPartyBackgroundPortrait},
+  {src: s_ThirdPartyBackgroundLandscape},
   {src: s_LongButton},
   {src: s_SfxButtonsSprite},
   {src: s_PauseSfxButtonsSprite},
@@ -230,7 +250,8 @@ var resources = [
   {src: s_Lock},
   {src: s_InterfacePanel},
   {src: s_GamePanel},
-  {src: s_LoadingBackground},
+  {src: s_LoadingBackgroundPortrait},
+  {src: s_LoadingBackgroundLandscape},
   {src: s_LoadingDecoration},
   {src: s_PopupBackground},
   {src: s_PopupButton},
@@ -278,6 +299,7 @@ var resources = [
   {src: s_ListScrollLarge},
   {src: s_ListScrollSmall},
   {src: s_CreditsGameName},
+  {src: s_CreditsGameNameJapan},
   {src: s_CreditsCompanyName},
   {src: s_ShopWheel},
   {src: s_ShopShelfs},

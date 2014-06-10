@@ -39,7 +39,7 @@ Mode = Screen.extend({
 
     this.m_Lock = [];
 
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
+    this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration3, this);
@@ -66,8 +66,6 @@ Mode = Screen.extend({
     this.m_ArcadeMode.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(100));
     this.m_RatingButton.create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(110), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(320));
     this.m_AchievementsButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(110), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(320));
-    this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(70));
-    this.m_HelpButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(80), Camera.sharedCamera().height - Camera.sharedCamera().coord(70));
     this.m_ComingSoon.create().setCenterPosition(-Camera.sharedCamera().coord(20), this.m_ProgressMode.getHeight() / 2 + Camera.sharedCamera().coord(10));
     this.m_Lock[0].create().setCenterPosition(0, this.m_ClassicMode.getHeight() / 2);
     this.m_Lock[1].create().setCenterPosition(0, this.m_ArcadeMode.getHeight() / 2);
@@ -76,6 +74,17 @@ Mode = Screen.extend({
     this.m_ShopButton.setCurrentFrameIndex(8);
     this.m_HelpButton.setCurrentFrameIndex(7);
     this.m_BackButton.setCurrentFrameIndex(1);
+
+    switch(Camera.sharedCamera().orientation) {
+      case Camera.sharedCamera().orientations.portrait:
+      this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(170));
+      this.m_HelpButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(80), Camera.sharedCamera().height - Camera.sharedCamera().coord(170));
+      break;
+      case Camera.sharedCamera().orientations.landscape:
+      this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(70));
+      this.m_HelpButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(80), Camera.sharedCamera().height - Camera.sharedCamera().coord(70));
+      break;
+    }
 
     this.m_ProgressModeText.setCenterPosition(this.m_ProgressMode.getWidth() / 2, this.m_ProgressMode.getHeight() / 2);
     this.m_ClassicModeText.setCenterPosition(this.m_ClassicMode.getWidth() / 2, this.m_ClassicMode.getHeight() / 2);

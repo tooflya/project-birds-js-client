@@ -34,7 +34,7 @@ ConfettiBackground = BackgroundColor.extend({
     this._super(cc.c4(0, 0, 0, 0));
 
     this.m_Parent = parent;
-    this.m_Elements = EntityManager.create(300, Confetti.create(), this);
+    this.m_Elements = EntityManager.create(300, Confetti.create(), this, 1, true);
   },
   show: function() {
     ConfettiBackground.instance = false;

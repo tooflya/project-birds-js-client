@@ -51,7 +51,7 @@ Promotion = ClippedEntity.extend({
     Promotion.instance = this;
 
     this.m_Background = BackgroundColor.create(cc.c4(0, 0, 0, 0), parent);
-    this.m_TextsHolder = Entity.create(s_LoadingBackground, parent);
+    this.m_TextsHolder = Entity.create(Orientation.parse(s_LoadingBackground), parent);
     this.m_Title = Entity.create(s_DailyMapTitle, this);
     this.m_Scroll = AnimatedEntity.create(s_MapScroll, 2, 2, parent);
 

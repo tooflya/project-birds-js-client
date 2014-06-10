@@ -41,7 +41,7 @@ Loading = Screen.extend({
 
     this.name = "Loading screen";
 
-    this.m_Background = Entity.create(s_LoadingBackground, this, true);
+    this.m_Background = Entity.create(Orientation.parse(s_LoadingBackground), this, true);
     this.m_BackgroundDecoration = Entity.create(s_LoadingDecoration, this, true);
     this.m_BackgroundWaves = EntityManager.create(15, CircleDecoration1.create(), this.m_Background);
 

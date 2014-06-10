@@ -164,16 +164,16 @@ Game = Screen.extend({
     this.m_SplashBackground.setZOrder(200);
     this.m_SplashEffect1.setZOrder(200);
 
-    this.m_Marks = EntityManager.create(1500, Mark.create(), this, 100);
-    this.m_Stars = EntityManager.create(1500, Star.create(), this, 100);
-    this.m_Keys = EntityManager.create(50, Key.create(), this, 102);
+    this.m_Marks = EntityManager.create(1500, Mark.create(), this, 100, true);
+    this.m_Stars = EntityManager.create(1500, Star.create(), this, 100, true);
+    this.m_Keys = EntityManager.create(50, Key.create(), this, 102, true);
     this.m_Birds = EntityManager.create(50, Bird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_BombBirds = EntityManager.create(10, BombBird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_FlayerBirds = EntityManager.create(10, FlayerBird.create(false, this.getPhysicsWorld()), this, 105);
-    this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 110);
-    this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110);
-    this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this, 201);
-    this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 201);
+    this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 110, true);
+    this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110, true);
+    this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this, 201, true);
+    this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 201, true);
 
     this.m_PreviewText = Text.create(false, this.m_PreviewBackground);
   },

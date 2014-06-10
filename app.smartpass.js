@@ -30,11 +30,15 @@
  */
 
 (function() {
-  App.run(true, {
+  App.run(false, {
     platform: 'standalone',
     designed: {
-      width: 980,
-      height: 551
+      width: 0,
+      height: 0,
+      margin: {
+        x: 0,
+        y: 50
+      }
     },
     orientation: 'height',
     analytics: 0,

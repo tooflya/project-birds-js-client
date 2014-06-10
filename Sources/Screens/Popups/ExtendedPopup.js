@@ -39,7 +39,9 @@ ExtendedPopup = Popup.extend({
   ctor: function(parent) {
     this._super(this.color, parent);
 
-    PopupShaderManager.create(this);
+    if(!cc.Browser.isMobile) {
+      PopupShaderManager.create(this);
+    }
 
     this.m_Decoration1 = Entity.create(s_PopupDecoration1, this);
     this.m_Decoration2 = Entity.create(s_PopupDecoration1, this);

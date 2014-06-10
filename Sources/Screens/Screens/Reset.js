@@ -37,7 +37,7 @@ Reset = Screen.extend({
 
     this.name = "Reset screen";
 
-    this.m_Background = Entity.create(s_ThirdPartyBackground, this, true);
+    this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_ResetButton = Button.create(s_LongButton, 1, 1, this);
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);

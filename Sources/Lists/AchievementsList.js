@@ -50,7 +50,7 @@ AchievementsList = PatternList.extend({
     var icon;
     var name;
     var descritption;
-    var locked
+    var locked;
 
     var self = this;
     AchievementsManager.sharedManager().get().forEach(function(element) {
