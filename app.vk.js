@@ -32,6 +32,7 @@
 (function() {
   App.run(false, {
     platform: 'vk',
+    language: 1,
     designed: {
       width: 980,
       height: 551
@@ -44,7 +45,7 @@
     purchases: true,
     vendor: 'tooflya',
     server: {
-      url: 'http://127.0.0.1',//'http://www.tooflya.com',
+      url: 'http://www.tooflya.com',
       port: 82
     }
   }, [
@@ -143,7 +144,7 @@
 
     var achievements = [];
 
-    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 1}); // Unlock when progress mode is unavailable.
     achievements.push({id: '', icon: s_AchievementIcon2, name: 'achievement-name-2', description: 'achievement-description-2', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon3, name: 'achievement-name-3', description: 'achievement-description-3', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon4, name: 'achievement-name-4', description: 'achievement-description-4', state: 0});

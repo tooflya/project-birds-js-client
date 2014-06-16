@@ -41,10 +41,19 @@ LeaderboardList = PatternList.extend({
     this.m_Text = [];
 
     this.m_Text[1] = Text.create('leaderboard-popup-1', this);
+    this.m_Text[2] = Text.create('leaderboard-popup-2', this, cc.TEXT_ALIGNMENT_LEFT);
+    this.m_Text[3] = Text.create('leaderboard-popup-3', this, cc.TEXT_ALIGNMENT_LEFT);
 
     this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
+    this.m_Text[2].setCenterPosition(this.getCenterX() + Camera.sharedCamera().coord(10), this.getCenterY() + Camera.sharedCamera().coord(120));
+    this.m_Text[3].setCenterPosition(this.getCenterX() + Camera.sharedCamera().coord(10), this.getCenterY() + Camera.sharedCamera().coord(70));
 
     this.m_Text[1].setColor(cc.c3(204.0, 102.0, 51.0));
+    this.m_Text[2].setColor(cc.c3(204.0, 102.0, 51.0));
+    this.m_Text[3].setColor(cc.c3(204.0, 102.0, 51.0));
+
+    this.m_Text[2].setVisible(false);
+    this.m_Text[3].setVisible(false);
 
     this.m_Loading.runAction(
       cc.RepeatForever.create(
@@ -57,9 +66,7 @@ LeaderboardList = PatternList.extend({
 
     var self = this;
 
-    DataManager.sharedManager().emit('leaderboard', {
-      id: 13712446
-    }, function(data) {
+    DataManager.sharedManager().emit('leaderboard', false, function(data) {
       self.m_Loading.destroy();
 
       VK.api("getProfiles", {
@@ -86,6 +93,12 @@ LeaderboardList = PatternList.extend({
           name.setColor(cc.c3(255.0, 130.0, 0.0));
           score.setColor(cc.c3(204.0, 102.0, 51.0));
         });
+
+        self.m_Text[2].ccsf([data.player.place]);
+        self.m_Text[3].ccsf([data.users]);
+
+        self.m_Text[2].setVisible(true);
+        self.m_Text[3].setVisible(true);
       });
 
       VK.api("getProfiles", {
@@ -97,7 +110,7 @@ LeaderboardList = PatternList.extend({
         uids: data.players.id,
         test_mode: 1
       }, function(user) {
-        var y = self.getCenterY() + Camera.sharedCamera().coord(50);
+        var y = self.getCenterY() - Camera.sharedCamera().coord(50);
         var index = 0;
 
         user.response.forEach(function(entry) {

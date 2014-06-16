@@ -910,6 +910,26 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "プレイヤーランキング", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}//
     ],
+  'leaderboard-popup-2': [
+    {title: "Ваша позиция в рейтинге: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "Ваша позиция в рейтинге: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 30, dimensions: [450, 0]}
+    ],
+  'leaderboard-popup-3': [
+    {title: "Всего игроков: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "Всего игроков: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 30, dimensions: [450, 0]}
+    ],
   'achievements-popup-1': [
     {title: "Achievements", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "Ваши достижения", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},

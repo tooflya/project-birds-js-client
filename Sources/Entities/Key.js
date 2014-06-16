@@ -100,25 +100,23 @@ Key = Entity.extend({
   onHover: function() {
     if(!this.m_Active) return false;
 
-    var self = this;
-
     this.stopAllActions();
     this.setOpacity(255);
-    
-    setTimeout(function() {
-      self.runAction(cc.RotateTo.create(1.0, -720 * 2));
-      self.runAction(cc.MoveTo.create(1.0, GamePanel.sharedScreen().getIcons()[4].convertToWorldSpace(GamePanel.sharedScreen().getIcons()[4].getPosition())));
-    }, 500);
 
     for(var i = 0; i < 2; i++) {
       this.m_Decorations[i].runAction(
         cc.Sequence.create(
-          cc.ScaleTo.create(0.5, 3.0),
+          cc.ScaleTo.create(0.2, 3.0),
           cc.FadeOut.create(0.1),
+          cc.CallFunc.create(this.destroy, this, this),
           false
           )
         );
     }
+
+    Sound.sharedSound().play(s_SoundSlash);
+
+    DataManager.sharedManager().update(references.coins.keys, 1);
 
     this.m_Active = false;
   },

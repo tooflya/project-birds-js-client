@@ -189,7 +189,7 @@ Game.prototype.onHide = function() {
 };
 
 Game.prototype.onEnterTransitionDidFinish = function() {
-  //this._super();
+  Screen.prototype.onEnterTransitionDidFinish.call(this);
 };
 
 Game.prototype.onExitTransitionDidStart = function() {

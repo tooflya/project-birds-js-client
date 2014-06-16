@@ -63,7 +63,7 @@ Game.prototype.updateThrower = function(time) {
 Game.prototype.run = function(type) {
   switch(type) {
     case 0:
-    if(Random.sharedRandom().probably(50)) {
+    if(Random.sharedRandom().probably(10)) {
       this.m_BombBirds.create().run();
     } else {
       this.m_Birds.create().run();

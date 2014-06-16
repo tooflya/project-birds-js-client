@@ -169,6 +169,16 @@ Bought = ExtendedPopup.extend({
     Bought.instance = false;
   },
   onTouch: function() {
+    switch(this.config.params.platform) {
+      case 'vk':
+      VK.api("wall.post", {
+        message: '???',
+        attachments: 'photo66748_265827614,http://habrahabr.ru',
+        test_mode: 1
+      });
+      break;
+    }
+
     this.hide();
   }
 });

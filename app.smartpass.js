@@ -32,6 +32,7 @@
 (function() {
   App.run(false, {
     platform: 'standalone',
+    language: 7,
     designed: {
       width: 0,
       height: 0,
@@ -202,8 +203,6 @@
     DataManager.sharedManager().save(references.weapon, 1);
 
     AchievementsManager.sharedManager().install(achievements);
-
-    LanguagesManager.sharedManager().changeLanguage(7);
 
     callback();
   });
