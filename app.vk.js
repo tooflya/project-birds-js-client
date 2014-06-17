@@ -45,7 +45,7 @@
     purchases: true,
     vendor: 'tooflya',
     server: {
-      url: 'http://www.tooflya.com',
+      url: 'http://127.0.0.1',//'http://www.tooflya.com',
       port: 82
     }
   }, [
@@ -75,6 +75,11 @@
   'Sources/Entities/ParticleLive.js',
   'Sources/Entities/WeaponParticle1.js',
   'Sources/Entities/WeaponParticle2.js',
+  'Sources/Entities/Bonus.js',
+  'Sources/Entities/Bonus1.js',
+  'Sources/Entities/Bonus2.js',
+  'Sources/Entities/Bonus6.js',
+  'Sources/Entities/Bonus7.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',

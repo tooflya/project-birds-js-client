@@ -287,17 +287,17 @@ Finish = Background.extend({
       case 1:
       this.m_TextValue1.setText('finish-text-2');
 
-      this.schedule(this.count, 0.01, null, 0.2);
+      this.schedule(this.count, 0.01, null, 1.0);
       break;
       case 2:
       this.m_TextValue1.setText('finish-text-3');
 
-      this.schedule(this.count, 0.01, null, 0.2);
+      this.schedule(this.count, 0.01, null, 1.0);
       break;
       case 3:
       this.m_TextValue1.setText('finish-text-4');
 
-      this.schedule(this.count, 0.01, null, 0.2);
+      this.schedule(this.count, 0.01, null, 1.0);
       break;
     }
 
@@ -319,16 +319,45 @@ Finish = Background.extend({
       this.m_TextValue2.ccsf([this.m_TotalCoins]);
 
       if(this.m_CountReferences[this.m_CountReference] >= this.m_ResultReferences[this.m_CountReference]) {
-        this.m_TextValue1.runRecognizeAction(cc.CallFunc.create(this.onCountingResume, this, this), {
-          name: 'fade',
-          time: 0.2,
-          value: 0
-        });
+        this.m_TextValue1.runAction(cc.Sequence.create(
+          cc.DelayTime.create(1.0),
+          cc.FadeTo.create(0.2, 0.0),
+          cc.CallFunc.create(this.onCountingResume, this, this)
+        ));
 
         this.unschedule(this.count);
       }
       break;
       case 3:
+      this.unschedule(this.count);
+
+      this.m_CountReference++;
+
+      this.runAction(cc.Sequence.create(
+        cc.DelayTime.create(0.5),
+        cc.CallFunc.create(this.count, this, this)
+      ));
+      break;
+      case 4:
+      this.m_CountReference++;
+
+      this.runAction(cc.Sequence.create(
+        cc.DelayTime.create(0.5),
+        cc.CallFunc.create(this.count, this, this)
+      ));
+
+      if(DataManager.sharedManager().get(references.items.bonus6)) {
+        Bonus6.create();
+      }
+      break;
+      case 5:
+      this.m_CountReference++;
+
+      if(DataManager.sharedManager().get(references.items.bonus7)) {
+        Bonus7.create();
+      }
+      break;
+      case 6:
       this.unschedule(this.count);
       break;
     }

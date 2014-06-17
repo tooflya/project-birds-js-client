@@ -29,35 +29,17 @@
  *
  */
 
-BonusBird = Bird.extend({
-  ctor: function(parent, world) {
-      this._super(parent, world, s_BonusBirds, 14, 8);
-  },
-  onCreateSound: function() {
-    Sound.sharedSound().play(s_SoundThrowBird);
-  },
-  onDestroySound: function() {
-    Sound.sharedSound().play(s_SoundBirdExplosion);
-  },
-  checkCollides: function() {
-    if(!Game.sharedScreen().m_Touch.active) return false;
+Bonus7 = Bonus.extend({
+  ctor: function() {
+    this._super(s_Bonus7, Finish.sharedScreen());
 
-    if(this.collideWithPoint(Game.sharedScreen().m_Touch.point.x, Game.sharedScreen().m_Touch.point.y)) {
-      this.destroy();
-    }
-  },
-  checkPosition: function() {
-  },
-  checkBonuses: function() {
-  },
-  deepCopy: function() {
-    return BonusBird.create(this.getParent(), this.getCurrentPhysicsWorld());
+    this.setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(500), Camera.sharedCamera().center.y + Camera.sharedCamera().coord(100));
   }
 });
 
 
-BonusBird.create = function(parent, world) {
-  var entity = new BonusBird(parent, world);
+Bonus7.create = function() {
+  var entity = new Bonus7();
 
   return entity;
 };

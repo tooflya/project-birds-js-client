@@ -42,7 +42,7 @@ Game.prototype.onBlow = function(element) {
       value: 0.0
     });*/
 
-    if(element instanceof BombBird) {
+    if(element instanceof BombBird) {alert(1);
       this.onLost(element);
 
       this.m_SplashBackground.stopAllActions();
@@ -100,9 +100,11 @@ Game.prototype.onLost = function(element) {
     }
 
     if(++this.m_Lifes >= 3) {
-      this.finishGame();
-
-      //this.m_Birds.clear();
+      if(DataManager.sharedManager().get(references.items.bonus2)) {
+        Bonus2.create();
+      } else {
+        this.finishGame();
+      }
     } else {
 
     }
@@ -123,6 +125,8 @@ Game.prototype.onGameStart = function() {
   this.m_Lifes = 0;
 
   DataManager.sharedManager().update(references.coins.lives, -1);
+
+  Game.power = DataManager.sharedManager().get(references.weapon) * 12;
 };
 
 Game.prototype.onGameFinish = function() {

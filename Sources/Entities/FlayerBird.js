@@ -96,7 +96,16 @@ FlayerBird = Bird.extend({
   createExplosion: function() {
     Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY());
   },
+  checkCollides: function() {
+    if(!Game.sharedScreen().m_Touch.active) return false;
+
+    if(this.collideWithPoint(Game.sharedScreen().m_Touch.point.x, Game.sharedScreen().m_Touch.point.y)) {
+      this.destroy();
+    }
+  },
   checkPosition: function() {
+  },
+  checkBonuses: function() {
   },
   update: function(time) {
     this._super(time);

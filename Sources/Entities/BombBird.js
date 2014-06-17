@@ -53,6 +53,15 @@ BombBird = Bird.extend({
 
     Sound.sharedSound().stop(this.m_SoundFuseId);
   },
+  checkCollides: function() {
+    if(!Game.sharedScreen().m_Touch.active) return false;
+
+    if(this.collideWithPoint(Game.sharedScreen().m_Touch.point.x, Game.sharedScreen().m_Touch.point.y)) {
+      this.destroy();
+    }
+  },
+  checkBonuses: function() {
+  },
   onLost: function() {
   },
   deepCopy: function() {

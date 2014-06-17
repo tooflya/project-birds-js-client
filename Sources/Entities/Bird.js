@@ -44,6 +44,8 @@ Bird = PhysicsEntity.extend({
     x: 0,
     y: 0
   },
+  m_Hitted: false,
+  m_Bonus1: false,
   ctor: function(parent, world) {
     this._super(s_Birds, 14, 9, parent, world);
 
@@ -73,6 +75,9 @@ Bird = PhysicsEntity.extend({
     this.m_Explosions.clear();
 
     this.animate(this.animations.fly);
+
+    this.m_Hitted = false;
+    this.m_Bonus1 = false;
   },
   onDestroy: function() {
     this._super();
@@ -88,6 +93,12 @@ Bird = PhysicsEntity.extend({
       }
     } else {
       this.onLost();
+    }
+
+    if(this.m_Bonus1) {
+      if(this.m_Bonus1 instanceof Bonus) {
+        this.m_Bonus1.destroy();
+      }
     }
   },
   onLost: function() {
@@ -123,10 +134,44 @@ Bird = PhysicsEntity.extend({
   },
   checkCollides: function() {
     if(!Game.sharedScreen().m_Touch.active) return false;
+    if(this.m_Hitted) return false;
 
     if(this.collideWithPoint(Game.sharedScreen().m_Touch.point.x, Game.sharedScreen().m_Touch.point.y)) {
-      this.destroy();
+      var critical = Random.sharedRandom().probably(30);
+
+      if(critical) {
+        this.destroy();
+      } else {
+        var damage = Game.power + Random.sharedRandom().random(-Game.power / 2, Game.power / 2, true);
+
+        this.m_Lifes.current -= damage;
+
+        if(this.m_Lifes.current <= 0) {
+          this.destroy();
+        } else {
+          this.onHit(damage);
+        }
+      }
     }
+  },
+  onHit: function(damage) {
+    Bird.text.create(damage, this, Game.sharedScreen());
+
+    this.onHitStart();
+
+    this.setScale(1.4);
+    this.runAction(cc.Sequence.create(
+      cc.ScaleTo.create(0.1, this.isFlippedHorizontally() ? -1.0 : 1.0, 1.0),
+      cc.CallFunc.create(this.onHitFinish, this, this)
+    ));
+
+    // TODO: Sound.
+  },
+  onHitStart: function() {
+    this.m_Hitted = true;
+  },
+  onHitFinish: function() {
+    this.m_Hitted = false;
   },
   run: function() {
     var values = {};
@@ -170,6 +215,17 @@ Bird = PhysicsEntity.extend({
       this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
     }
   },
+  checkBonuses: function() {
+    if(!this.m_Bonus1) {
+      if(this.getLinearVelocity().y <= 0) {
+        this.m_Bonus1 = true;
+
+        if(DataManager.sharedManager().get(references.items.bonus1)) {
+          this.m_Bonus1 = Bonus1.create(this);
+        }
+      }
+    }
+  },
   update: function(time) {
     this._super(time);
 
@@ -179,11 +235,42 @@ Bird = PhysicsEntity.extend({
 
     this.checkCollides();
     this.checkPosition();
+    this.checkBonuses();
   },
   deepCopy: function() {
     return Bird.create(this.getParent(), this.getCurrentPhysicsWorld());
   }
 });
+
+Bird.text = Text.extend({
+  ctor: function(value, bird, parent) {
+    this._super(false, parent);
+
+    this.setString("-" + value);
+    this.setFontSize(Camera.sharedCamera().coord(64));
+    this.setRotation(Random.sharedRandom().random(-15, 15));
+    this.setCenterPosition(
+      bird.getCenterX() + Camera.sharedCamera().coord(Random.sharedRandom().random(100, 200) * Random.sharedRandom().probably(50) ? 1 : -1),
+      bird.getCenterY() + Camera.sharedCamera().coord(Random.sharedRandom().random(100, 200) * Random.sharedRandom().probably(50) ? 1 : -1)
+    );
+
+    this.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(1.0),
+        cc.FadeOut.create(0.5),
+        cc.CallFunc.create(this.destroy, this, this)
+      )
+    );
+
+    this.setColor(Bird.colors[bird.m_Id / bird.getHorizontalFramesCount()]);
+  },
+  destroy: function() {
+    this.removeFromParent();
+  }
+});
+Bird.text.create = function(value, bird, parent) {
+  return new Bird.text(value, bird, parent);
+};
 
 Bird.count = 7;
 Bird.colors = [

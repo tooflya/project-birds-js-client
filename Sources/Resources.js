@@ -214,6 +214,10 @@ var s_Water = "Resources/Graphics/water-effect.png";
 var s_Prick = "Resources/Graphics/prick.png";
 var s_Loading = "Resources/Graphics/loading.png";
 var s_WeaponParticles = "Resources/Graphics/weapon-particles.png";
+var s_Bonus1 = "Resources/Graphics/bonus-1.png";
+var s_Bonus2 = "Resources/Graphics/bonus-2.png";
+var s_Bonus6 = "Resources/Graphics/bonus-6.png";
+var s_Bonus7 = "Resources/Graphics/bonus-7.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
@@ -404,6 +408,10 @@ var resources = [
   {src: s_Prick},
   {src: s_Loading},
   {src: s_WeaponParticles},
+  {src: s_Bonus1},
+  {src: s_Bonus2},
+  {src: s_Bonus6},
+  {src: s_Bonus7},
 
   {src: s_Music1},
   {src: s_Music2},

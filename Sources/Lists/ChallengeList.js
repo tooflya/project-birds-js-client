@@ -43,6 +43,8 @@ ChallengeList = PatternList.extend({
     this.m_Text[0].setColor(cc.c3(204.0, 102.0, 51.0));
 
     this.m_Text[1].setColor(cc.c3(255.0, 130.0, 0.0));
+
+    this.m_Text[1].setVisible(false);
   },
   onEnter: function() {
     this._super();
@@ -56,6 +58,7 @@ ChallengeList = PatternList.extend({
     InternetEntity.create(randomFriend.photo_big, this, function(entity) {
       entity.create().setCenterPosition(self.getCenterX(), self.getCenterY() + Camera.sharedCamera().coord(100));
 
+      self.m_Text[1].setVisible(true);
       self.m_Text[1].setCenterPosition(self.getCenterX(), entity.getCenterY() - entity.getHeight() / 2 - self.m_Text[1].getHeight() / 2 - Camera.sharedCamera().coord(30));
     });
   }
