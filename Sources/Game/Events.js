@@ -42,7 +42,7 @@ Game.prototype.onBlow = function(element) {
       value: 0.0
     });*/
 
-    if(element instanceof BombBird) {alert(1);
+    if(element instanceof BombBird) {
       this.onLost(element);
 
       this.m_SplashBackground.stopAllActions();
