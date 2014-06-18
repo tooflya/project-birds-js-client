@@ -75,6 +75,11 @@
   'Sources/Entities/ParticleLive.js',
   'Sources/Entities/WeaponParticle1.js',
   'Sources/Entities/WeaponParticle2.js',
+  'Sources/Entities/Bonus.js',
+  'Sources/Entities/Bonus1.js',
+  'Sources/Entities/Bonus2.js',
+  'Sources/Entities/Bonus6.js',
+  'Sources/Entities/Bonus7.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',
@@ -144,7 +149,7 @@
 
     var achievements = [];
 
-    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 1});
+    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 1}); // Unlock when progress mode is unavailable.
     achievements.push({id: '', icon: s_AchievementIcon2, name: 'achievement-name-2', description: 'achievement-description-2', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon3, name: 'achievement-name-3', description: 'achievement-description-3', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon4, name: 'achievement-name-4', description: 'achievement-description-4', state: 0});
@@ -190,6 +195,8 @@
     achievements.push({id: '', icon: s_AchievementIcon44, name: 'achievement-name-44', description: 'achievement-description-44', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon45, name: 'achievement-name-45', description: 'achievement-description-45', state: 0});
 
+    AchievementsManager.sharedManager().install(achievements);
+
     DataManager.sharedManager().save(references.info.install, 1);
     DataManager.sharedManager().save(references.language, -1);
     DataManager.sharedManager().save(references.rating, 0);
@@ -197,12 +204,40 @@
     DataManager.sharedManager().save(references.coins.silver, 0);
     DataManager.sharedManager().save(references.coins.keys, 0);
     DataManager.sharedManager().save(references.coins.lives, 5);
-    DataManager.sharedManager().save(references.lock.modes.classic, 0);
+    DataManager.sharedManager().save(references.lock.modes.classic, 1); // Unlock when progress mode is unavailable.
     DataManager.sharedManager().save(references.lock.modes.arcade, 0);
     DataManager.sharedManager().save(references.time.reward, 0);
     DataManager.sharedManager().save(references.weapon, 1);
 
-    AchievementsManager.sharedManager().install(achievements);
+    DataManager.sharedManager().save(references.items.weapon1, 1);
+    DataManager.sharedManager().save(references.items.weapon2, 0);
+    DataManager.sharedManager().save(references.items.weapon3, 0);
+    DataManager.sharedManager().save(references.items.weapon4, 0);
+    DataManager.sharedManager().save(references.items.weapon5, 0);
+    DataManager.sharedManager().save(references.items.weapon6, 0);
+    DataManager.sharedManager().save(references.items.weapon7, 0);
+    DataManager.sharedManager().save(references.items.weapon8, 0);
+    DataManager.sharedManager().save(references.items.weapon9, 0);
+    DataManager.sharedManager().save(references.items.weapon10, 0);
+    DataManager.sharedManager().save(references.items.weapon11, 0);
+
+    DataManager.sharedManager().save(references.items.bird1, 0);
+    DataManager.sharedManager().save(references.items.bird2, 0);
+    DataManager.sharedManager().save(references.items.bird3, 0);
+    DataManager.sharedManager().save(references.items.bird4, 0);
+    DataManager.sharedManager().save(references.items.bird5, 0);
+    DataManager.sharedManager().save(references.items.bird6, 0);
+    DataManager.sharedManager().save(references.items.bird7, 0);
+    DataManager.sharedManager().save(references.items.bird8, 0);
+
+    DataManager.sharedManager().save(references.items.bonus1, 0);
+    DataManager.sharedManager().save(references.items.bonus2, 0);
+    DataManager.sharedManager().save(references.items.bonus3, 0);
+    DataManager.sharedManager().save(references.items.bonus4, 0);
+    DataManager.sharedManager().save(references.items.bonus5, 0);
+    DataManager.sharedManager().save(references.items.bonus6, 0);
+    DataManager.sharedManager().save(references.items.bonus7, 0);
+    DataManager.sharedManager().save(references.items.bonus8, 0);
 
     callback();
   });

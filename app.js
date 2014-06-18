@@ -32,16 +32,20 @@
 (function() {
   App.run(false, {
     platform: 'standalone',
+    language: 0,
     designed: {
       width: 980,
       height: 551
     },
-    orientation: 'height',
+    orientations: {
+      portrait: false,
+      landscape: true
+    },
     analytics: 0,
     purchases: true,
     vendor: 'tooflya',
     server: {
-      url: 'http://127.0.0.1',//'http://www.tooflya.com',
+      url: 'http://www.tooflya.com',
       port: 82
     }
   }, [
@@ -71,6 +75,11 @@
   'Sources/Entities/ParticleLive.js',
   'Sources/Entities/WeaponParticle1.js',
   'Sources/Entities/WeaponParticle2.js',
+  'Sources/Entities/Bonus.js',
+  'Sources/Entities/Bonus1.js',
+  'Sources/Entities/Bonus2.js',
+  'Sources/Entities/Bonus6.js',
+  'Sources/Entities/Bonus7.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',
@@ -140,7 +149,7 @@
 
     var achievements = [];
 
-    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 0});
+    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 1}); // Unlock when progress mode is unavailable.
     achievements.push({id: '', icon: s_AchievementIcon2, name: 'achievement-name-2', description: 'achievement-description-2', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon3, name: 'achievement-name-3', description: 'achievement-description-3', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon4, name: 'achievement-name-4', description: 'achievement-description-4', state: 0});
