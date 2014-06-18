@@ -45,7 +45,7 @@
     purchases: true,
     vendor: 'tooflya',
     server: {
-      url: 'http://127.0.0.1',//'http://www.tooflya.com',
+      url: 'http://www.tooflya.com',
       port: 82
     }
   }, [
