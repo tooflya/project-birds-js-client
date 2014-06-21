@@ -1,5 +1,4 @@
-<!--
-  *
+/**
  * Tooflya Inc. Development
  *
  * @author Igor Mats from Tooflya Inc.
@@ -28,32 +27,47 @@
  *
  * @version of cocos2d-x is 2.1.4
  *
- *-->
+ */
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Game by Tooflya Inc.</title>
-  <link rel="icon" type="image/PNG" href="favicon.ico"/>
-  <meta name="viewport" content="width=1000,user-scalable=no"/>
-  <meta name="screen-orientation" content="portrait"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="full-screen" content="yes"/>
-  <meta name="x5-fullscreen" content="true"/>
-</head>
-<body>
-  <div id="no-support" style="display: none">
-    <h2>Your browser does not support HTML5 canvas!</h2>
-    <p>Google Chrome is a browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier.Click the logo to download.</p>
-    <a href="http://www.google.com/chrome" target="_blank"><img src="http://www.google.com/intl/zh-CN/chrome/assets/common/images/chrome_logo_2x.png" border="0"/></a>
-  </div>
-  <div class="canvas">
-    <canvas id="canvas" width="979" height="551"></canvas>
-    <div><a onclick="application.requestFullScreen()" id="fullscreen">Click here if you want to use fullscreen!</a></div>
-    <div><a onclick="launchGame()" id="lauch">Start</a></div>
-  </div>
-  <script src="cocos2dx-tooflya-sdk-html5/cocos2d.js"></script>
-  <script src="app.js"></script>
-</body>
-</html>
+Target = Entity.extend({
+  m_Decorations: [],
+  ctor: function(parent) {
+    this._super(s_Target, parent);
+  },
+  onCreate: function() {
+    this._super();
+
+    this.m_Decorations = [];
+
+    for(var i = 0; i < 2; i++) {
+      this.m_Decorations[i] = Entity.create(s_PopupDecoration1, this.getParent());
+
+      this.m_Decorations[i].create().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.m_Decorations[i].setScale(0.0);
+      this.m_Decorations[i].setZOrder(300);
+      this.m_Decorations[i].runAction(
+        cc.Sequence.create(
+          cc.ScaleTo.create(0.3, 1.2),
+          cc.ScaleTo.create(0.2, 0.8),
+          cc.ScaleTo.create(0.2, 1.0),
+          false
+          )
+        );
+    }
+  },
+  onDestroy: function() {
+    this._super();
+  },
+  update: function(time) {
+    this._super(time);
+
+    this.m_Decorations[0].setRotation(this.m_Decorations[0].getRotation() - 0.1);
+    this.m_Decorations[1].setRotation(this.m_Decorations[1].getRotation() + 0.1);
+  }
+});
+
+Target.create = function(parent) {
+  var entity = new Target(parent);
+
+  return entity;
+};

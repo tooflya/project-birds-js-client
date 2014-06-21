@@ -38,13 +38,14 @@ Game = Screen.extend({
   m_ThrowParameters: {
     birds: [
       {
+        count: 0,
         time: 0.0,
         timeElapsed: 0.0,
         min: {
           time: 0.0
         },
         max: {
-          time: 5.0
+          time: 0.0
         }
       },
       {
@@ -61,6 +62,7 @@ Game = Screen.extend({
         }
       },
       {
+        count: 0,
         time: 0.0,
         timeElapsed: 0.0,
         min: {
@@ -76,10 +78,10 @@ Game = Screen.extend({
         time: 0.0,
         timeElapsed: 0.0,
         min: {
-          time: 5.0
+          time: 0.0
         },
         max: {
-          time: 10.0
+          time: 0.0
         }
       },
       {
@@ -133,26 +135,40 @@ Game = Screen.extend({
   m_BestBlows: 0,
   m_Level: 0,
   m_SplashBackground : false,
-  ctor: function(type) {
+  ctor: function() {
     this._super(true);
 
     Game.instance = this;
 
     this.name = "Game screen";
 
-    this.m_Type = type;
+    this.m_Type = Game.type;
     this.m_ThrowParams = {
       birds: this.m_ThrowParameters.birds[this.m_Type],
       flayers: this.m_ThrowParameters.flayers[this.m_Type]
     };
 
-    var backgrounds = [
-      Orientation.parse(s_GameBackground1),
-      Orientation.parse(s_GameBackground2),
-      Orientation.parse(s_GameBackground3),
-      Orientation.parse(s_GameBackground4),
-      Orientation.parse(s_GameBackground5)
-    ];
+    switch(this.m_Type) {
+      case this.m_Types.progress:
+      var backgrounds = [
+        Orientation.parse(s_GameBackground1Blured),
+        Orientation.parse(s_GameBackground2Blured),
+        Orientation.parse(s_GameBackground3Blured),
+        Orientation.parse(s_GameBackground4Blured),
+        Orientation.parse(s_GameBackground5Blured)
+      ];
+      break;
+      case this.m_Types.classic:
+      case this.m_Types.arcade:
+      var backgrounds = [
+        Orientation.parse(s_GameBackground1),
+        Orientation.parse(s_GameBackground2),
+        Orientation.parse(s_GameBackground3),
+        Orientation.parse(s_GameBackground4),
+        Orientation.parse(s_GameBackground5)
+      ];
+      break;
+    }
 
     this.m_Background = Entity.create(backgrounds[Random.sharedRandom().random(0, backgrounds.length, true)], this, true);
 
@@ -176,6 +192,47 @@ Game = Screen.extend({
     this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 201, true);
 
     this.m_PreviewText = Text.create(false, this.m_PreviewBackground);
+
+    switch(this.m_Type) {
+      case this.m_Types.progress:
+      this.m_Ground = Entity.create(s_Ground, this);
+      this.m_Target = Target.create(this);
+      this.m_Catapults = {
+        m_Elements: [
+          Catapult.create(Game.instance),
+          Catapult.create(Game.instance)
+        ],
+        get: function(i) {
+          return this.m_Elements[i];
+        },
+        onLevelStart: function() {
+          this.get(0).create().setCenterPosition(-this.get(0).getWidth() / 2, Camera.sharedCamera().coord(75));
+          this.get(1).create().setCenterPosition(Camera.sharedCamera().width + this.get(1).getWidth() / 2, Camera.sharedCamera().coord(75));
+
+          this.get(0).setFlippedHorizontally(false);
+          this.get(1).setFlippedHorizontally(true);
+
+          this.get(0).setZOrder(303);
+          this.get(1).setZOrder(303);
+        }
+      };
+
+      this.m_Elements = ElementsManager.sharedManager();
+
+      this.m_Ground.setZOrder(301);
+      this.m_Target.setZOrder(302);
+
+      this.m_Ground.setCenterPosition(Camera.sharedCamera().center.x, this.m_Ground.getHeight() / 2);
+      this.m_Target.setCenterPosition(Camera.sharedCamera().center.x, this.m_Target.getHeight() / 2 + Camera.sharedCamera().coord(5));
+
+      this.m_Ground.create();
+      this.m_Target.create();
+      break;
+      case this.m_Types.classic:
+      break;
+      case this.m_Types.arcade:
+      break;
+    }
   },
   startGame: function() {
     this.onGameStart();
@@ -229,7 +286,7 @@ Game = Screen.extend({
 Game.instance = false;
 Game.type = false;
 Game.sharedScreen = function(type) {
-  Game.type = type ? type : Game.type;
+  Game.type = type === false || type === undefined ? Game.type : type;
 
-  return Game.instance ? Game.instance : new Game(Game.type);
+  return Game.instance ? Game.instance : new Game();
 };

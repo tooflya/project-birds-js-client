@@ -103,11 +103,11 @@ Dust = Entity.extend({
     this.m_VectorYUpdateTimeElapsed = 0;
     this.m_VectorY += Random.sharedRandom().probably(50) ? 10.0 : -10.0;
   },
-  updateColor: function(duration) {
+  /*updateColor: function(duration) {
     color = Random.sharedRandom().randomColor();
 
     this.runAction(cc.TintTo.create(duration, color.r, color.g, color.b));
-  },
+  },*/
   deepCopy: function() {
     return Dust.create();
   }

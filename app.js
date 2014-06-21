@@ -35,7 +35,11 @@
     language: 0,
     designed: {
       width: 980,
-      height: 551
+      height: 551,
+      margin: {
+        x: 0,
+        y: 0
+      }
     },
     orientations: {
       portrait: false,
@@ -80,6 +84,11 @@
   'Sources/Entities/Bonus2.js',
   'Sources/Entities/Bonus6.js',
   'Sources/Entities/Bonus7.js',
+  'Sources/Entities/Catapult.js',
+  'Sources/Entities/Element.js',
+  'Sources/Entities/ElementIcon.js',
+  'Sources/Entities/ElementPart.js',
+  'Sources/Entities/Target.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',
@@ -114,6 +123,8 @@
   'Sources/Screens/Popups/Purchase.js',
   'Sources/Screens/Popups/Multiplayer.js',
   'Sources/Managers/PopupShaderManager.js',
+  'Sources/Managers/ElementsManager.js',
+  'Sources/Managers/MatrixManager.js',
   'Sources/Panels/MenuPanel.js',
   'Sources/Panels/GamePanel.js',
   'Sources/Lists/AboutList.js',

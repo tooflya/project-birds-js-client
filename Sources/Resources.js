@@ -106,6 +106,11 @@ var s_GameBackground2 = "Resources/Graphics/game-background-2.png";
 var s_GameBackground3 = "Resources/Graphics/game-background-3.png";
 var s_GameBackground4 = "Resources/Graphics/game-background-4.png";
 var s_GameBackground5 = "Resources/Graphics/game-background-5.png";
+var s_GameBackground1Blured = "Resources/Graphics/game-background-1-blured.png";
+var s_GameBackground2Blured = "Resources/Graphics/game-background-2-blured.png";
+var s_GameBackground3Blured = "Resources/Graphics/game-background-3-blured.png";
+var s_GameBackground4Blured = "Resources/Graphics/game-background-4-blured.png";
+var s_GameBackground5Blured = "Resources/Graphics/game-background-5-blured.png";
 var s_GameBackground1Portrait = "Resources/Graphics/game-background-1-portrait.png";
 var s_GameBackground2Portrait = "Resources/Graphics/game-background-2-portrait.png";
 var s_GameBackground3Portrait = "Resources/Graphics/game-background-3-portrait.png";
@@ -116,6 +121,11 @@ var s_GameBackground2Landscape = "Resources/Graphics/game-background-2-landscape
 var s_GameBackground3Landscape = "Resources/Graphics/game-background-3-landscape.png";
 var s_GameBackground4Landscape = "Resources/Graphics/game-background-4-landscape.png";
 var s_GameBackground5Landscape = "Resources/Graphics/game-background-5-landscape.png";
+var s_GameBackground1BluredLandscape = "Resources/Graphics/game-background-1-blured-landscape.png";
+var s_GameBackground2BluredLandscape = "Resources/Graphics/game-background-2-blured-landscape.png";
+var s_GameBackground3BluredLandscape = "Resources/Graphics/game-background-3-blured-landscape.png";
+var s_GameBackground4BluredLandscape = "Resources/Graphics/game-background-4-blured-landscape.png";
+var s_GameBackground5BluredLandscape = "Resources/Graphics/game-background-5-blured-landscape.png";
 var s_GetLivesPopupButton = "Resources/Graphics/popup-lives-get.png";
 var s_GetCoinsPopupButton = "Resources/Graphics/popup-coins-get.png";
 var s_GetKeysPopupButton1 = "Resources/Graphics/popup-keys-get-1.png";
@@ -218,6 +228,12 @@ var s_Bonus1 = "Resources/Graphics/bonus-1.png";
 var s_Bonus2 = "Resources/Graphics/bonus-2.png";
 var s_Bonus6 = "Resources/Graphics/bonus-6.png";
 var s_Bonus7 = "Resources/Graphics/bonus-7.png";
+var s_Elements = "Resources/Graphics/elements.png";
+var s_ElementsIcons = "Resources/Graphics/elements-icons.png";
+var s_ElementsParts = "Resources/Graphics/elements-parts.png";
+var s_Ground = "Resources/Graphics/game-ground.png";
+var s_Catapult = "Resources/Graphics/catapult.png";
+var s_Target = "Resources/Graphics/game-target.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
@@ -311,6 +327,11 @@ var resources = [
   {src: s_GameBackground3Landscape},
   {src: s_GameBackground4Landscape},
   {src: s_GameBackground5Landscape},
+  {src: s_GameBackground1BluredLandscape},
+  {src: s_GameBackground2BluredLandscape},
+  {src: s_GameBackground3BluredLandscape},
+  {src: s_GameBackground4BluredLandscape},
+  {src: s_GameBackground5BluredLandscape},
   {src: s_GetLivesPopupButton},
   {src: s_GetCoinsPopupButton},
   {src: s_GetKeysPopupButton1},
@@ -412,6 +433,12 @@ var resources = [
   {src: s_Bonus2},
   {src: s_Bonus6},
   {src: s_Bonus7},
+  {src: s_Elements},
+  {src: s_ElementsIcons},
+  {src: s_ElementsParts},
+  {src: s_Ground},
+  {src: s_Catapult},
+  {src: s_Target},
 
   {src: s_Music1},
   {src: s_Music2},

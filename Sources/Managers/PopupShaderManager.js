@@ -31,11 +31,9 @@ PopupShaderManager = EntityManager.extend({
   m_AnimationTime: 0,
   m_AnimationTimeElapsed: 0,
   ctor: function(parent) {
-    this._super(30, PopupShader.create(), parent);
+    this._super(30, PopupShader.create(), parent, 1, true);
 
     PopupShaderManager.instance = this;
-
-    parent.addChild(this);
   },
   update: function(time) {
     this._super(time);

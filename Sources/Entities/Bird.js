@@ -47,7 +47,7 @@ Bird = PhysicsEntity.extend({
   m_Hitted: false,
   m_Bonus1: false,
   ctor: function(parent, world) {
-    this._super(s_Birds, 14, 9, parent, world);
+    this._super(s_Birds, 14, 9, parent, world, 0.5, 0.5, 0.5, 2.5);
 
     this.getPhysicsFixture().filter.categoryBits = 1;
     this.getPhysicsFixture().filter.maskBits = 1;
@@ -105,14 +105,39 @@ Bird = PhysicsEntity.extend({
     Game.sharedScreen().onLost(this);
   },
   onCollideStart: function(entity, point) {
-    if(entity instanceof Bird) {
-      this.m_Explosions.create().setCenterPosition(point.x, point.y);
+    var game = Game.sharedScreen();
+
+    switch(game.m_Type) {
+      case game.m_Types.progress:
+      break;
+      case game.m_Types.classic:
+      case game.m_Types.arcade:
+      if(entity instanceof Bird) {
+        this.m_Explosions.create().setCenterPosition(point.x, point.y);
+      }
+      break;
     }
   },
   onCollideFinish: function(entity) {
-    if(entity instanceof Bird) {
-      this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
+    var game = Game.sharedScreen();
+
+    switch(game.m_Type) {
+      case game.m_Types.progress:
+      break;
+      case game.m_Types.classic:
+      case game.m_Types.arcade:
+      if(entity instanceof Bird) {
+        this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
+      }
+      break;
     }
+  },
+  setContactBody: function() {
+    this.m_PhysicsBody = this.getCurrentPhysicsWorld().CreateBody(this.m_PhysicsDefinition);
+
+    this.m_PhysicsFixture.shape = new Box2D.Collision.Shapes.b2CircleShape(this.getHeight() / this.m_DevideFactor / PhysicsManager.ratio);
+
+    this.m_PhysicsBody.CreateFixture(this.getPhysicsFixture());
   },
   animate: function(type) {
     var repeat = Random.sharedRandom().random(0, 5, true);
@@ -174,22 +199,37 @@ Bird = PhysicsEntity.extend({
     this.m_Hitted = false;
   },
   run: function() {
-    var values = {};
+    var game = Game.sharedScreen();
 
-    // TODO: Correct force values.
-    values.position = {
-      x: Random.sharedRandom().random(this.getWidth(), Camera.sharedCamera().width - this.getWidth()),
-      y:  -Camera.sharedCamera().coord(100)
-    };
-    values.force = {
-      x: Random.sharedRandom().random(-Math.abs(Camera.sharedCamera().center.x - values.position.x), Math.abs(Camera.sharedCamera().center.x - values.position.x)),
-      y: Random.sharedRandom().random(40, 50) * -this.getCurrentPhysicsWorld().GetGravity().y
-    };
+    switch(game.m_Type) {
+      case game.m_Types.progress:
+      var values = {};
 
-    this.setLinearVelocity(values.force.x, values.force.y);
-    this.setCenterPosition(values.position.x, values.position.y);
+      values.position = {
+        x: Random.sharedRandom().random(this.getWidth(), Camera.sharedCamera().width - this.getWidth()),
+        y: Random.sharedRandom().random(Camera.sharedCamera().center.y, Camera.sharedCamera().height)
+      };
 
-    this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
+      this.setCenterPosition(values.position.x, values.position.y);
+      break;
+      case game.m_Types.classic:
+      case game.m_Types.arcade:
+      var values = {};
+
+      // TODO: Correct force values.
+      values.position = {
+        x: Random.sharedRandom().random(this.getWidth(), Camera.sharedCamera().width - this.getWidth()),
+        y:  -Camera.sharedCamera().coord(100)
+      };
+      values.force = {
+        x: Random.sharedRandom().random(-Math.abs(Camera.sharedCamera().center.x - values.position.x), Math.abs(Camera.sharedCamera().center.x - values.position.x)),
+        y: Random.sharedRandom().random(40, 50) * -this.getCurrentPhysicsWorld().GetGravity().y
+      };
+
+      this.setLinearVelocity(values.force.x, values.force.y);
+      this.setCenterPosition(values.position.x, values.position.y);
+      break;
+    }
   },
   createMark: function() {
     if(!cc.Browser.isMobile) {
@@ -209,10 +249,19 @@ Bird = PhysicsEntity.extend({
     }
   },
   checkPosition: function() {
-    if((this.getCenterX() < 0 && this.isFlippedHorizontally()) || (this.getCenterX() > Camera.sharedCamera().width && !this.isFlippedHorizontally())) {
-      this.setLinearVelocity(-this.getLinearVelocity().x, this.getLinearVelocity().y);
+    var game = Game.sharedScreen();
 
-      this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
+    switch(game.m_Type) {
+      case game.m_Types.progress:
+      break;
+      case game.m_Types.classic:
+      case game.m_Types.arcade:
+      if((this.getCenterX() < 0 && this.isFlippedHorizontally()) || (this.getCenterX() > Camera.sharedCamera().width && !this.isFlippedHorizontally())) {
+        this.setLinearVelocity(-this.getLinearVelocity().x, this.getLinearVelocity().y);
+
+        this.setFlippedHorizontally(this.getLinearVelocity().x < 0);
+      }
+      break;
     }
   },
   checkBonuses: function() {
@@ -230,7 +279,7 @@ Bird = PhysicsEntity.extend({
     this._super(time);
 
     if(this.getCurrentPhysicsWorld()) {
-      this.createMark();
+      //this.createMark();
     }
 
     this.checkCollides();

@@ -31,6 +31,7 @@
 
 Game.prototype.updateThrower = function(time) {
   if(!this.m_GameRunning) return false;
+  if(this.m_ThrowParams.birds.max.time <= 0) return false;
 
   this.m_ThrowParams.birds.timeElapsed += time;
   this.m_ThrowParams.flayers.timeElapsed += time;

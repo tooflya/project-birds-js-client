@@ -127,6 +127,16 @@ Game.prototype.onGameStart = function() {
   DataManager.sharedManager().update(references.coins.lives, -1);
 
   Game.power = DataManager.sharedManager().get(references.weapon) * 12;
+
+  switch(this.m_Type) {
+    case this.m_Types.progress:
+    this.onLevelStart();
+    break;
+    case this.m_Types.classic:
+    break;
+    case this.m_Types.arcade:
+    break;
+  }
 };
 
 Game.prototype.onGameFinish = function() {
@@ -134,6 +144,26 @@ Game.prototype.onGameFinish = function() {
 
   Finish.sharedScreen(this).show();
   GamePanel.sharedScreen().hide();
+
+  switch(this.m_Type) {
+    case this.m_Types.progress:
+    this.onLevelFinish();
+    break;
+    case this.m_Types.classic:
+    break;
+    case this.m_Types.arcade:
+    break;
+  }
+};
+
+Game.prototype.onLevelStart = function() {
+  ElementsManager.sharedManager().onLevelStart();
+
+  this.m_Catapults.onLevelStart();
+};
+
+Game.prototype.onLevelFinish = function() {
+  ElementsManager.sharedManager().onLevelFinish();
 };
 
 Game.prototype.onPreviewStart = function() {
@@ -190,6 +220,9 @@ Game.prototype.onShow = function() {
 
 Game.prototype.onHide = function() {
   Game.instance = false;
+  GamePanel.instance = false;
+  ElementsManager.instance = false;
+  MatrixManager.instance = false;
 };
 
 Game.prototype.onEnterTransitionDidFinish = function() {

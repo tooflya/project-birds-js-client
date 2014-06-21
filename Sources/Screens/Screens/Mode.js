@@ -91,7 +91,7 @@ Mode = Screen.extend({
     this.m_ArcadeModeText.setCenterPosition(this.m_ArcadeMode.getWidth() / 2, this.m_ArcadeMode.getHeight() / 2);
 
     this.m_BackButton.setTouchHandler('onBackEvent', Mode);
-    //this.m_ProgressMode.setTouchHandler('onProgressEvent', Mode);
+    this.m_ProgressMode.setTouchHandler('onProgressEvent', Mode);
     this.m_ClassicMode.setTouchHandler('onClassicEvent', Mode);
     this.m_ArcadeMode.setTouchHandler('onArcadeEvent', Mode);
     this.m_RatingButton.setTouchHandler('onRatingEvent', Mode);
@@ -109,10 +109,11 @@ Mode = Screen.extend({
     ScreenManager.sharedManager().replace(Menu);
   },
   onProgressEvent: function() {
-    ScreenManager.sharedManager().replace(Levels);
+    Game.sharedScreen(0);
+    ScreenManager.sharedManager().replace(Loading);
   },
   onClassicEvent: function() {
-    if(!DataManager.sharedManager().get(references.lock.modes.classic) && this.config.params.vendor != 'ubi-nuri') {
+    if(!DataManager.sharedManager().get(references.lock.modes.classic)) {
       Lock.sharedScreen(this).show(0);
     } else {
       //Multiplayer.sharedScreen(this).show();
@@ -201,6 +202,7 @@ Mode = Screen.extend({
     this._super();
 
     Mode.instance = false;
+    MenuPanel.instance = false;
   },
   onExitTransitionDidStart: function() {
     MenuPanel.sharedScreen(this).hide();

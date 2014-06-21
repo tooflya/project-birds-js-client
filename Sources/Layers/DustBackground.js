@@ -37,7 +37,7 @@ DustBackground = Background.extend({
     DustBackground.instance = this;
 
     if(!cc.Browser.isMobile) {
-      this.m_Elements = EntityManager.create(this.m_Count, Dust.create(), this, 1, true);
+      this.m_Elements = EntityManager.create(this.m_Count, Dust.create(), this, this.m_zIndex, true);
     }
   },
   update: function(time) {

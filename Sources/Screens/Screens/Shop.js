@@ -243,6 +243,7 @@ Shop = Screen.extend({
     this._super();
 
     Shop.instance = false;
+    MenuPanel.instance = false;
   },
   onExitTransitionDidStart: function() {
     MenuPanel.sharedScreen(this).hide();
