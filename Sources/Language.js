@@ -40,6 +40,16 @@ var g_language  = {
     {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
+  'tutorial-1': [
+    {title: 'Move green square to the left to match 3 of the same!', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
   'vk-price-text': [
     {title: '$1 votes', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '$1 голосов', font: 'Comic Sans MS', size: 32, dimensions: false},

@@ -33,12 +33,12 @@ ElementIcon = TiledEntity.extend({
   m_Id: -1,
   m_Time: 1.0,
   ctor: function() {
-    this._super(s_ElementsIcons, 2, 5);
+    this._super(s_ElementsIcons, 5, 2);
   },
   create: function(element) {
     this._super();
 
-    this.m_Id = element.getId() * 2;
+    this.m_Id = element.getId();
     this.setCurrentFrameIndex(this.m_Id);
     this.setCenterPosition(element.getCenterX(), element.getCenterY());
 
@@ -63,7 +63,7 @@ ElementIcon = TiledEntity.extend({
   },
   animate: function() {
     if(this.getCurrentFrameIndex() == this.m_Id) {
-      this.setCurrentFrameIndex(this.m_Id + 1);
+      this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount());
     } else {
       this.setCurrentFrameIndex(this.m_Id);
     }

@@ -66,7 +66,7 @@ Mode = Screen.extend({
     this.m_ArcadeMode.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(100));
     this.m_RatingButton.create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(110), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(320));
     this.m_AchievementsButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(110), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(320));
-    this.m_ComingSoon.create().setCenterPosition(-Camera.sharedCamera().coord(20), this.m_ProgressMode.getHeight() / 2 + Camera.sharedCamera().coord(10));
+    //this.m_ComingSoon.create().setCenterPosition(-Camera.sharedCamera().coord(20), this.m_ProgressMode.getHeight() / 2 + Camera.sharedCamera().coord(10));
     this.m_Lock[0].create().setCenterPosition(0, this.m_ClassicMode.getHeight() / 2);
     this.m_Lock[1].create().setCenterPosition(0, this.m_ArcadeMode.getHeight() / 2);
     this.m_RatingButton.setCurrentFrameIndex(5);
@@ -109,6 +109,7 @@ Mode = Screen.extend({
     ScreenManager.sharedManager().replace(Menu);
   },
   onProgressEvent: function() {
+    //Multiplayer.sharedScreen(this).show();
     Game.sharedScreen(0);
     ScreenManager.sharedManager().replace(Loading);
   },

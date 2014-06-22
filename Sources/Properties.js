@@ -99,6 +99,18 @@ var references = {
     bonus6: 306,
     bonus7: 307,
     bonus8: 308
+  },
+  tutorial: {
+    enable: 500,
+    element1: 501,
+    element2: 502,
+    element3: 503,
+    element4: 504,
+    element5: 505,
+    element6: 506,
+    elements: [
+      501, 502, 503, 504, 505, 506
+    ]
   }
 };
 var unlock = {

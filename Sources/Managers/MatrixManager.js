@@ -29,6 +29,7 @@
 
 MatrixManager = cc.Node.extend({
   m_Active: false,
+  m_Busy: true,
   m_Size: {
     x: 10,
     y: 7
@@ -38,6 +39,23 @@ MatrixManager = cc.Node.extend({
   m_Matrix: false,
   m_CurrentElement1: false,
   m_CurrentElement2: false,
+  m_Combinations: false,
+  m_TutorialMatrix: [
+    [4, 2, 4, 1, 2, 3, 3, 1, 2, 1],
+    [4, 1, 0, 3, 1, 4, 3, 2, 3, 1],
+    [2, 2, 1, 3, 3, 4, 0, 0, 2, 0],
+    [0, 0, 3, 1, 3, 3, 2, 0, 4, 3],
+    [3, 3, 4, 2, 4, 0, 4, 4, 0, 0],
+    [4, 3, 0, 3, 0, 2, 0, 2, 1, 0],
+    [1, 1, 2, 4, 4, 0, 0, 2, 0, 2],
+    [1, 3, 0, 3, 0, 4, 3, 4, 3, 0],
+    [3, 4, 3, 0, 2, 2, 0, 3, 1, 3],
+    [1, 3, 4, 1, 4, 0, 2, 4, 4, 0],
+    [3, 2, 3, 4, 4, 2, 4, 4, 3, 1],
+    [4, 3, 4, 3, 0, 0, 2, 0, 4, 3],
+    [0, 0, 2, 3, 4, 1, 4, 1, 2, 4],
+    [2, 1, 4, 0, 3, 2, 1, 1, 0, 0]
+  ],
   ctor: function() {
     this._super();
 
@@ -54,28 +72,109 @@ MatrixManager = cc.Node.extend({
   active: function() {
     return this.m_Active;
   },
-  set: function(element, x, y, newby) {
+  busy: function() {
+    return this.m_Busy;
+  },
+  set: function(element, x, y, created) {
     this.m_Matrix[x][y] = element;
 
     element.setIndex(x, y);
 
-    if(newby) {
-      element.chooseId();
+    if(created) {
+      element.chooseId(true);
     }
 
     element.onChangePosition();
   },
   get: function(x, y) {
-    return this.m_Matrix[x][y];
+    if(x >= 0 && y >= 0 && x < this.getSize().x && y < this.getSize().y * 2) {
+      return this.m_Matrix[x][y];
+    }
+
+    return false;
   },
   remove: function(element) {
     var index = element.getIndex();
 
     this.m_Matrix[index.x][index.y] = false;
   },
+  check: function(element) {
+    if(!this.m_CurrentElement1) {
+      this.m_CurrentElement1 = element;
+    } else {
+      this.m_CurrentElement2 = element;
 
+      var x = Math.abs(this.m_CurrentElement1.getIndex().x - this.m_CurrentElement2.getIndex().x);
+      var y = Math.abs(this.m_CurrentElement1.getIndex().y - this.m_CurrentElement2.getIndex().y);
+
+      var can = (x <= 1 && y <= 1) && (x + y <= 1);
+
+      if(can) {
+        this.replace(this.m_CurrentElement1, this.m_CurrentElement2);
+      } else {
+        this.m_CurrentElement1.onChangePosition();
+        this.m_CurrentElement2.onChangePosition();
+
+        this.m_CurrentElement1 = false;
+        this.m_CurrentElement2 = false;
+
+        element.onTouch();
+      }
+    }
+  },
+  computer: function() {
+    this.m_Busy = true;
+
+    this.m_Combinations = [];
+
+    for(var i = 0; i < this.getSize().x; i++) {
+      for(var j = 0; j < this.getSize().y; j++) {
+        var element = this.m_Matrix[i][j];
+
+        var neighbor = false;
+        for(var k = 0; k < 4; k++) {
+          switch(k) {
+            case 0:
+            neighbor = this.get(element.getIndex().x, element.getIndex().y + 1);
+            break;
+            case 1:
+            neighbor = this.get(element.getIndex().x, element.getIndex().y - 1);
+            break;
+            case 2:
+            neighbor = this.get(element.getIndex().x - 1, element.getIndex().y);
+            break;
+            case 3:
+            neighbor = this.get(element.getIndex().x + 1, element.getIndex().y);
+            break;
+          }
+
+          if(neighbor) {
+            if(this.hasMatchesWith(element, neighbor)) {
+              this.m_Combinations.push({
+                element: element,
+                neighbor: neighbor
+              });
+            }
+          }
+        }
+      }
+    }
+
+    if(this.m_Combinations.length > 0) {
+      var combination = this.m_Combinations[Random.sharedRandom().random(0, this.m_Combinations.length, true)];
+
+      this.replace(combination.element, combination.neighbor);
+    }
+
+    return false;
+  },
   replace: function(element, neighbor, back) {
     if(neighbor instanceof Element) {
+      if(!back) {
+        if(this.m_CurrentElement1) this.m_CurrentElement1.onChangePosition();
+        if(this.m_CurrentElement2) this.m_CurrentElement2.onChangePosition();
+      }
+
       this.m_CurrentElement1 = element;
       this.m_CurrentElement2 = neighbor;
 
@@ -109,6 +208,11 @@ MatrixManager = cc.Node.extend({
 
       this.set(this.m_CurrentElement1, x2, y2);
       this.set(this.m_CurrentElement2, x1, y1);
+
+      if(back) {
+        this.m_CurrentElement1 = false;
+        this.m_CurrentElement2 = false;
+      }
     } else {
       if(!this.active()) return false;
 
@@ -121,6 +225,16 @@ MatrixManager = cc.Node.extend({
         left: index.x > 0,
         right: index.x < this.getSize().x
       };
+
+      if(Game.tutorial) {
+        switch(Game.sharedScreen().m_TutorialState) {
+          case 1:
+          positions.top = false;
+          positions.down = false;
+          positions.right = false;
+          break;
+        }
+      }
 
       switch(neighbor) {
         case 'top':
@@ -171,6 +285,8 @@ MatrixManager = cc.Node.extend({
     }
     if(MatrixManager.pool.element) {
       MatrixManager.pool.element.destroy();
+
+      Game.sharedScreen().onBlow(MatrixManager.pool.element);
     }
 
     window.setTimeout(function() {
@@ -181,10 +297,43 @@ MatrixManager = cc.Node.extend({
       window.setTimeout(function() {
         if(!MatrixManager.sharedManager().findAll()) {
           // TODO: Combinations?
-          MatrixManager.sharedManager().enable();
+          MatrixManager.sharedManager().m_Busy = false;
+
+          Game.sharedScreen().onTurnChange();
         }
       }, 500 + MatrixManager.pause);
     }, 1000);
+  },
+  hasMatchesWith: function(element, neighbor) {
+    var index1 = {
+      x: -1,
+      y: -1
+    };
+    var index2 = {
+      x: -1,
+      y: -1
+    };
+
+    index1.x = element.getIndex().x;
+    index1.y = element.getIndex().y;
+
+    index2.x = neighbor.getIndex().x;
+    index2.y = neighbor.getIndex().y;
+
+    this.set(neighbor, index1.x, index1.y);
+    this.set(element, index2.x, index2.y);
+
+    if(!this.hasMatches(element) && !this.hasMatches(neighbor)) {
+      this.set(element, index1.x, index1.y);
+      this.set(neighbor, index2.x, index2.y);
+
+      return false;
+    } else {
+      this.set(element, index1.x, index1.y);
+      this.set(neighbor, index2.x, index2.y);
+
+      return true;
+    }
   },
   hasMatches: function(element, data) {
     if(!data) {
@@ -343,6 +492,13 @@ MatrixManager = cc.Node.extend({
     if(!this.hasMatches(this.m_CurrentElement1) && !this.hasMatches(this.m_CurrentElement2)) {
       this.replace(this.m_CurrentElement2, this.m_CurrentElement1, true);
     } else {
+      this.m_CurrentElement1 = false;
+      this.m_CurrentElement2 = false;
+
+      if(Game.tutorial) {
+        Game.sharedScreen().onReplaceTutorial();
+      }
+
       this.clear();
     }
   },

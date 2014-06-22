@@ -33,20 +33,35 @@ Target = Entity.extend({
   m_Decorations: [],
   ctor: function(parent) {
     this._super(s_Target, parent);
+
+    this.registerTouchable(true);
   },
   onCreate: function() {
     this._super();
+
+    this.setScale(0.0);
+    this.setAnchorPoint(cc.p(0.5, 0.1));
+    this.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(1.5),
+        cc.ScaleTo.create(0.3, 1.2),
+        cc.ScaleTo.create(0.2, 0.8),
+        cc.ScaleTo.create(0.2, 1.0),
+        false
+        )
+      );
 
     this.m_Decorations = [];
 
     for(var i = 0; i < 2; i++) {
       this.m_Decorations[i] = Entity.create(s_PopupDecoration1, this.getParent());
 
-      this.m_Decorations[i].create().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.m_Decorations[i].create().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
       this.m_Decorations[i].setScale(0.0);
       this.m_Decorations[i].setZOrder(300);
       this.m_Decorations[i].runAction(
         cc.Sequence.create(
+          cc.DelayTime.create(2.0),
           cc.ScaleTo.create(0.3, 1.2),
           cc.ScaleTo.create(0.2, 0.8),
           cc.ScaleTo.create(0.2, 1.0),
@@ -57,6 +72,19 @@ Target = Entity.extend({
   },
   onDestroy: function() {
     this._super();
+  },
+  onTouch: function() {
+    if(this.getNumberOfRunningActions() <= 0) {
+      this.runAction(
+        cc.Sequence.create(
+          cc.ScaleTo.create(0.1, 0.9),
+          cc.ScaleTo.create(0.2, 1.1),
+          cc.ScaleTo.create(0.3, 0.8),
+          cc.ScaleTo.create(0.2, 1.0),
+          false
+          )
+        );
+    }
   },
   update: function(time) {
     this._super(time);

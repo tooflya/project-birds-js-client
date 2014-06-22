@@ -32,7 +32,8 @@
 Element = TiledEntity.extend({
   m_Id: -1,
   m_Index: -1,
-  m_DragFactor: 32,
+  m_Glow: false,
+  m_GlowAnimationRunning: false,
   ctor: function() {
     this._super(s_Elements, 5, 2);
 
@@ -64,17 +65,29 @@ Element = TiledEntity.extend({
         this.registerTouchable(false);
       }
     }
+
+    if(this.m_Glow) {
+      this.m_Glow.destroy();
+    }
   },
   onHover: function() {
     if(!MatrixManager.sharedManager().active()) return false;
 
-    this.setCurrentFrameIndex(this.m_Id + 5);
+    this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount());
   },
   onUnHover: function() {
     this.setCurrentFrameIndex(this.m_Id);
   },
   onTouch: function() {
     if(!MatrixManager.sharedManager().active()) return false;
+
+    if(!this.m_GlowAnimationRunning) {
+      this.onUnHover();
+
+      ElementsManager.sharedManager().m_ElementsGlows.create(this);
+
+      MatrixManager.sharedManager().check(this);
+    }
   },
   onDragTop: function() {
     this._super();
@@ -111,14 +124,22 @@ Element = TiledEntity.extend({
   getId: function() {
     return this.m_Id;
   },
-  chooseId: function() {
-    this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount(), true);
+  chooseId: function(created) {
+    if(Game.tutorial && Game.sharedScreen().m_TutorialState == 1 && created) {
+      var index = this.getIndex();
 
-    if(MatrixManager.sharedManager().hasMatches(this)) {
-      this.chooseId();
+      this.m_Id = MatrixManager.sharedManager().m_TutorialMatrix[index.x][index.y];
+
+      this.setCurrentFrameIndex(this.m_Id);
+    } else {
+      this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount(), true);
+
+      if(MatrixManager.sharedManager().hasMatches(this)) {
+        this.chooseId();
+      }
+
+      this.setCurrentFrameIndex(this.m_Id);
     }
-
-    this.setCurrentFrameIndex(this.m_Id);
   },
   lookDown: function() {
     if(this.getIndex().y > 0) {
@@ -145,8 +166,75 @@ Element = TiledEntity.extend({
   }
 });
 
+ElementGlow = AnimatedEntity.extend({
+  m_Element: false,
+  m_ElementAnimationTime: 1.0,
+  m_ElementAnimationTimeElapsed: 0.0,
+  ctor: function() {
+    this._super(s_ElementsGlow, 1, 7);
+  },
+  create: function(element) {
+    this.m_Element = element;
+
+    this._super();
+  },
+  onCreate: function() {
+    this._super();
+
+    this.m_Element.m_GlowAnimationRunning = true;
+    this.m_Element.m_Glow = this;
+
+    this.setCenterPosition(this.m_Element.getCenterX(), this.m_Element.getCenterY());
+    this.animate(0.06, 1);
+  },
+  onDestroy: function() {
+    this._super();
+
+    this.m_Element.m_GlowAnimationRunning = false;
+    this.m_Element.m_Glow = false;
+  },
+  onAnimationStart: function() {
+    this._super();
+
+    this.setVisible(true);
+  },
+  onAnimationFinish: function() {
+    this._super();
+
+    this.setVisible(false);
+  },
+  update: function(time) {
+    this._super(time);
+
+    if(!this.isAnimationRunning()) {
+      this.m_ElementAnimationTimeElapsed += time;
+      if(this.m_ElementAnimationTimeElapsed >= this.m_ElementAnimationTime) {
+        this.m_ElementAnimationTimeElapsed = 0;
+
+        this.animate(0.06, 1);
+      }
+    }
+  },
+  deepCopy: function() {
+    return ElementGlow.create();
+  }
+});
+
+Element.colors = [
+  cc.c3(211, 33, 17),
+  cc.c3(231, 199, 0),
+  cc.c3(0, 173, 255),
+  cc.c3(223, 34, 232),
+  cc.c3(0, 211, 0),
+];
 Element.create = function() {
   var entity = new Element();
+
+  return entity;
+};
+
+ElementGlow.create = function() {
+  var entity = new ElementGlow();
 
   return entity;
 };

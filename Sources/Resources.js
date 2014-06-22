@@ -229,11 +229,15 @@ var s_Bonus2 = "Resources/Graphics/bonus-2.png";
 var s_Bonus6 = "Resources/Graphics/bonus-6.png";
 var s_Bonus7 = "Resources/Graphics/bonus-7.png";
 var s_Elements = "Resources/Graphics/elements.png";
+var s_ElementsGlow = "Resources/Graphics/elements-glow.png";
 var s_ElementsIcons = "Resources/Graphics/elements-icons.png";
 var s_ElementsParts = "Resources/Graphics/elements-parts.png";
 var s_Ground = "Resources/Graphics/game-ground.png";
 var s_Catapult = "Resources/Graphics/catapult.png";
 var s_Target = "Resources/Graphics/game-target.png";
+var s_Notification1 = "Resources/Graphics/notification-1.png";
+var s_Notification2 = "Resources/Graphics/notification-2.png";
+var s_TutorialFinger = "Resources/Graphics/tutorial-finger.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
@@ -434,11 +438,15 @@ var resources = [
   {src: s_Bonus6},
   {src: s_Bonus7},
   {src: s_Elements},
+  {src: s_ElementsGlow},
   {src: s_ElementsIcons},
   {src: s_ElementsParts},
   {src: s_Ground},
   {src: s_Catapult},
   {src: s_Target},
+  {src: s_Notification1},
+  {src: s_Notification2},
+  {src: s_TutorialFinger},
 
   {src: s_Music1},
   {src: s_Music2},

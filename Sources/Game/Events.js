@@ -32,59 +32,69 @@
 Game.prototype.onBlow = function(element) {
   if(!this.m_GameRunning) return false;
 
-  if(element instanceof Bird) {
-    /*Game.sharedScreen().m_SplashEffect1.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
-    Game.sharedScreen().m_SplashEffect1.setOpacity(255);
-    Game.sharedScreen().m_SplashEffect1.setColor(Bird.colors[element.m_Id / element.getHorizontalFramesCount()]);
-    Game.sharedScreen().m_SplashEffect1.runRecognizeAction(cc.CallFunc.create(Game.sharedScreen().m_SplashEffect1.destroy, Game.sharedScreen().m_SplashEffect1, Game.sharedScreen().m_SplashEffect1), {
-      name: 'fade',
-      time: 0.02,
-      value: 0.0
-    });*/
+  switch(this.m_Type) {
+    case this.m_Types.progress:
+    if(Game.tutorial) {
+      this.onBlowTutorial();
+    }
+    break;
+    case this.m_Types.classic:
+    case this.m_Types.arcade:
+    if(element instanceof Bird) {
+      /*Game.sharedScreen().m_SplashEffect1.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+      Game.sharedScreen().m_SplashEffect1.setOpacity(255);
+      Game.sharedScreen().m_SplashEffect1.setColor(Bird.colors[element.m_Id / element.getHorizontalFramesCount()]);
+      Game.sharedScreen().m_SplashEffect1.runRecognizeAction(cc.CallFunc.create(Game.sharedScreen().m_SplashEffect1.destroy, Game.sharedScreen().m_SplashEffect1, Game.sharedScreen().m_SplashEffect1), {
+        name: 'fade',
+        time: 0.02,
+        value: 0.0
+      });*/
 
-    if(element instanceof BombBird) {
-      this.onLost(element);
+      if(element instanceof BombBird) {
+        this.onLost(element);
 
-      this.m_SplashBackground.stopAllActions();
-      this.m_SplashBackground.runAction(
-        cc.Sequence.create(
-          cc.FadeIn.create(0.1),
-          cc.DelayTime.create(0.5),
-          cc.FadeOut.create(1.0),
-          cc.CallFunc.create(this.onLost, this, element)
-          )
-        );
+        this.m_SplashBackground.stopAllActions();
+        this.m_SplashBackground.runAction(
+          cc.Sequence.create(
+            cc.FadeIn.create(0.1),
+            cc.DelayTime.create(0.5),
+            cc.FadeOut.create(1.0),
+            cc.CallFunc.create(this.onLost, this, element)
+            )
+          );
 
-      for(var i = 0; i < this.m_Birds.getCount(); i++) {
-        var bird = this.m_Birds.get(i);
+        for(var i = 0; i < this.m_Birds.getCount(); i++) {
+          var bird = this.m_Birds.get(i);
 
-        if(bird.m_Id <= Bird.count * bird.getHorizontalFramesCount()) {
-          bird.destroy();
+          if(bird.m_Id <= Bird.count * bird.getHorizontalFramesCount()) {
+            bird.destroy();
+          }
         }
+
+        this.m_ThrowParams.birds.timeElapsed = -3.0;
+      } else {
+        this.m_SplashBackground.runAction(cc.FadeOut.create(0.02));
+        this.m_CurrentBlows++;
       }
 
-      this.m_ThrowParams.birds.timeElapsed = -3.0;
-    } else {
-      this.m_SplashBackground.runAction(cc.FadeOut.create(0.02));
-      this.m_CurrentBlows++;
+      switch(element.m_Id / element.getHorizontalFramesCount()) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        this.m_Results.birds++;
+        break;
+        case 7:
+        this.m_Results.flayers++;
+        break;
+      }
+    } else if(false) {
+      //
     }
-
-    switch(element.m_Id / element.getHorizontalFramesCount()) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-      case 6:
-      this.m_Results.birds++;
-      break;
-      case 7:
-      this.m_Results.flayers++;
-      break;
-    }
-  } else if(false) {
-    //
+    break;
   }
 };
 
@@ -160,6 +170,7 @@ Game.prototype.onLevelStart = function() {
   ElementsManager.sharedManager().onLevelStart();
 
   this.m_Catapults.onLevelStart();
+  this.m_Target.create();
 };
 
 Game.prototype.onLevelFinish = function() {

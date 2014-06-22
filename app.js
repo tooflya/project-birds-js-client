@@ -140,6 +140,8 @@
   'Sources/Game/Level.js',
   'Sources/Game/Pause.js',
   'Sources/Game/Touch.js',
+  'Sources/Game/Animations.js',
+  'Sources/Game/Tutorial.js',
   'Sources/Layers/ConfettiBackground.js',
   'Sources/Layers/DustBackground.js',
   'Sources/Layers/PurchasesBackground.js',
@@ -249,6 +251,14 @@
     DataManager.sharedManager().save(references.items.bonus6, 0);
     DataManager.sharedManager().save(references.items.bonus7, 0);
     DataManager.sharedManager().save(references.items.bonus8, 0);
+
+    DataManager.sharedManager().save(references.tutorial.enable, 1);
+    DataManager.sharedManager().save(references.tutorial.element1, 1);
+    DataManager.sharedManager().save(references.tutorial.element2, 1);
+    DataManager.sharedManager().save(references.tutorial.element3, 1);
+    DataManager.sharedManager().save(references.tutorial.element4, 1);
+    DataManager.sharedManager().save(references.tutorial.element5, 1);
+    DataManager.sharedManager().save(references.tutorial.element6, 1);
 
     callback();
   });

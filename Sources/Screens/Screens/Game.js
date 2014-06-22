@@ -116,6 +116,7 @@ Game = Screen.extend({
     keys: 0
   },
   m_GameRunning: false,
+  m_TutorialRunning: false,
   m_GamePreviewRunning: false,
   m_GamePause: false,
   m_GameTimeElapsed: 0,
@@ -135,6 +136,7 @@ Game = Screen.extend({
   m_BestBlows: 0,
   m_Level: 0,
   m_SplashBackground : false,
+  m_PlayerTurn: true,
   ctor: function() {
     this._super(true);
 
@@ -216,6 +218,16 @@ Game = Screen.extend({
           this.get(1).setZOrder(303);
         }
       };
+      this.m_Notifications = {
+        m_Notification1: false,
+        m_Notification2: false
+      };
+      this.m_Notifications.m_Notification1 = Entity.create(s_Notification1, this);
+      this.m_Notifications.m_Notification2 = Entity.create(s_Notification2, this);
+      this.m_Notifications.m_Notification1.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+      this.m_Notifications.m_Notification2.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+      this.m_Notifications.m_Notification1.setZOrder(500);
+      this.m_Notifications.m_Notification2.setZOrder(500);
 
       this.m_Elements = ElementsManager.sharedManager();
 
@@ -223,10 +235,13 @@ Game = Screen.extend({
       this.m_Target.setZOrder(302);
 
       this.m_Ground.setCenterPosition(Camera.sharedCamera().center.x, this.m_Ground.getHeight() / 2);
-      this.m_Target.setCenterPosition(Camera.sharedCamera().center.x, this.m_Target.getHeight() / 2 + Camera.sharedCamera().coord(5));
+      this.m_Target.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(18));
 
       this.m_Ground.create();
-      this.m_Target.create();
+
+      if(Game.tutorial) {
+        this.createTutorialelements();
+      }
       break;
       case this.m_Types.classic:
       break;
@@ -274,6 +289,28 @@ Game = Screen.extend({
     this.updateTimer(time);
 
     this.m_Touch.active = this.m_WasTouched;
+
+    switch(this.m_Type) {
+      case this.m_Types.progress:
+      if(this.m_GameRunning && !this.m_TutorialRunning) {
+        if(!this.m_PlayerTurn && !MatrixManager.sharedManager().active() && !MatrixManager.sharedManager().busy()) {
+          if(!this.getNumberOfRunningActions()) {
+            this.runAction(
+              cc.Sequence.create(
+                cc.DelayTime.create(3.0),
+                cc.CallFunc.create(MatrixManager.sharedManager().computer, MatrixManager.sharedManager()),
+                false
+              )
+            );
+          }
+        }
+      }
+      break;
+      case this.m_Types.classic:
+      break;
+      case this.m_Types.arcade:
+      break;
+    }
   },
   onKeyDown: function(e) {
     switch(e) {
@@ -284,6 +321,7 @@ Game = Screen.extend({
 });
 
 Game.instance = false;
+Game.tutorial = true;
 Game.type = false;
 Game.sharedScreen = function(type) {
   Game.type = type === false || type === undefined ? Game.type : type;
