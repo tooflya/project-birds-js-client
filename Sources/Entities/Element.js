@@ -78,7 +78,7 @@ Element = TiledEntity.extend({
   onUnHover: function() {
     this.setCurrentFrameIndex(this.m_Id);
   },
-  onTouch: function() {
+  onTouch: function() {console.log(this.getIndex());
     if(!MatrixManager.sharedManager().active()) return false;
 
     if(!this.m_GlowAnimationRunning) {
@@ -128,7 +128,7 @@ Element = TiledEntity.extend({
     if(Game.tutorial && Game.sharedScreen().m_TutorialState == 1 && created) {
       var index = this.getIndex();
 
-      this.m_Id = MatrixManager.sharedManager().m_TutorialMatrix[index.x][index.y];
+      this.m_Id = MatrixManager.sharedManager().m_TutorialMatrix[index.y][index.x];
 
       this.setCurrentFrameIndex(this.m_Id);
     } else {

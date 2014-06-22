@@ -94,13 +94,15 @@ Game.prototype.onReplaceTutorial = function() {
         }
       }
     }
+
+    this.m_TutorialState = 2;
     break;
   }
 };
 
 Game.prototype.onBlowTutorial = function() {
   switch(this.m_TutorialState) {
-    case 1:
+    case 2:
     this.m_TutorialFinger.stopAllActions();
     this.m_TutorialFinger.runAction(
       cc.Sequence.create(
@@ -116,7 +118,7 @@ Game.prototype.onBlowTutorial = function() {
     );
   
     this.m_TutorialState = false;
-    this.m_TutorialRunning = true;
+    this.m_TutorialRunning = false;
     break;
   }
 };
