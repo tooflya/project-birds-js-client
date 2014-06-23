@@ -236,8 +236,19 @@ var s_Ground = "Resources/Graphics/game-ground.png";
 var s_Catapult = "Resources/Graphics/catapult.png";
 var s_Target = "Resources/Graphics/game-target.png";
 var s_Notification1 = "Resources/Graphics/notification-1.png";
-var s_Notification2 = "Resources/Graphics/notification-2.png";
+var s_Notification2= "Resources/Graphics/notification-2.png";
+var s_Notification1English = "Resources/Graphics/notification-1-0.png";
+var s_Notification2English = "Resources/Graphics/notification-2-0.png";
+var s_Notification1Russian = "Resources/Graphics/notification-1-1.png";
+var s_Notification2Russian = "Resources/Graphics/notification-2-1.png";
 var s_TutorialFinger = "Resources/Graphics/tutorial-finger.png";
+var s_TutorialTargetExplanation = "Resources/Graphics/tutorial-target-explanation.png";
+var s_TutorialTeamExplanation = "Resources/Graphics/tutorial-team-explanation.png";
+var s_TutorialTextArea = "Resources/Graphics/tutorial-text-area.png";
+var s_TutorialElementsExplanation = "Resources/Graphics/tutorial-elements-explanation.png";
+var s_TutorialElementsExplanationTexts = "Resources/Graphics/tutorial-elements-explanation-texts.png";
+var s_TutorialElementsExplanationTextsEnglish = "Resources/Graphics/tutorial-elements-explanation-texts-0.png";
+var s_TutorialElementsExplanationTextsRussian = "Resources/Graphics/tutorial-elements-explanation-texts-1.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
@@ -444,9 +455,17 @@ var resources = [
   {src: s_Ground},
   {src: s_Catapult},
   {src: s_Target},
-  {src: s_Notification1},
-  {src: s_Notification2},
+  {src: s_Notification1Russian},
+  {src: s_Notification1English},
+  {src: s_Notification2Russian},
+  {src: s_Notification2English},
   {src: s_TutorialFinger},
+  {src: s_TutorialTargetExplanation},
+  {src: s_TutorialTeamExplanation},
+  {src: s_TutorialTextArea},
+  {src: s_TutorialElementsExplanation},
+  {src: s_TutorialElementsExplanationTextsRussian},
+  {src: s_TutorialElementsExplanationTextsEnglish},
 
   {src: s_Music1},
   {src: s_Music2},

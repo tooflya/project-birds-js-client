@@ -228,7 +228,7 @@ MatrixManager = cc.Node.extend({
 
       if(Game.tutorial) {
         switch(Game.sharedScreen().m_TutorialState) {
-          case 1:
+          case 5:
           positions.top = false;
           positions.down = false;
           positions.right = false;
@@ -289,20 +289,26 @@ MatrixManager = cc.Node.extend({
       Game.sharedScreen().onBlow(MatrixManager.pool.element);
     }
 
-    window.setTimeout(function() {
-      MatrixManager.pause = 0;
+    MatrixManager.pool.horizontal = [];
+    MatrixManager.pool.vertical = [];
+    MatrixManager.pool.element = false;
 
-      MatrixManager.sharedManager().lookDown();
-
+    if(!Game.sharedScreen().m_TutorialRunning) {
       window.setTimeout(function() {
-        if(!MatrixManager.sharedManager().findAll()) {
-          // TODO: Combinations?
-          MatrixManager.sharedManager().m_Busy = false;
+        MatrixManager.pause = 0;
 
-          Game.sharedScreen().onTurnChange();
-        }
-      }, 500 + MatrixManager.pause);
-    }, 1000);
+        MatrixManager.sharedManager().lookDown();
+
+        window.setTimeout(function() {
+          if(!MatrixManager.sharedManager().findAll()) {
+            // TODO: Combinations?
+
+            Game.sharedScreen().onTurnChange();
+            MatrixManager.sharedManager().m_Busy = false;
+          }
+        }, 500 + MatrixManager.pause);
+      }, 1000);
+    }
   },
   hasMatchesWith: function(element, neighbor) {
     var index1 = {
@@ -530,9 +536,11 @@ MatrixManager = cc.Node.extend({
     return false;
   },
   lookDown: function() {
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y * 2; j++) {
-        if(this.m_Matrix[i][j]) this.m_Matrix[i][j].lookDown();
+    if(!Game.sharedScreen().m_TutorialRunning) {
+      for(var i = 0; i < this.getSize().x; i++) {
+        for(var j = 0; j < this.getSize().y * 2; j++) {
+          if(this.m_Matrix[i][j]) this.m_Matrix[i][j].lookDown();
+        }
       }
     }
   },

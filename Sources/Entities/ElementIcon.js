@@ -50,8 +50,7 @@ ElementIcon = TiledEntity.extend({
             cc.CallFunc.create(this.animate, this, this),
             false
           ), 10),
-        cc.CallFunc.create(this.destroy, this, this),
-        false
+          cc.CallFunc.create(this.destroy, this, this)
       )
     );
   },

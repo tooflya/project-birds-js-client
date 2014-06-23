@@ -35,7 +35,9 @@ Game.prototype.onBlow = function(element) {
   switch(this.m_Type) {
     case this.m_Types.progress:
     if(Game.tutorial) {
-      this.onBlowTutorial();
+      if(this.m_PlayerTurn) {
+        this.onBlowTutorial(element);
+      }
     }
     break;
     case this.m_Types.classic:
@@ -217,7 +219,16 @@ Game.prototype.onShow = function() {
     GamePanel.sharedScreen(this.m_Type, this).show();
 
     this.clearResults();
-    this.startPreview();
+
+    switch(this.m_Type) {
+      case this.m_Types.progress:
+      this.onPreviewFinish();
+      break;
+      case this.m_Types.arcade:
+      case this.m_Types.classic:
+      this.startPreview();
+      break;
+    }
 
     DataManager.sharedManager().save(references.info.game, 1);
   } else {

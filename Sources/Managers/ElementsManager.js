@@ -126,6 +126,20 @@ ElementsManager = EntityManager.extend({
     } else {
       Game.sharedScreen().onStartAnimationFinish();
     }
+  },
+  scheduleUpdate: function() {
+    this._super();
+
+    this.m_ElementsGlows.scheduleUpdate();
+    this.m_ElementsIcons.scheduleUpdate();
+  },
+  unscheduleUpdate: function() {
+    this._super();
+
+    this.m_ElementsGlows.unscheduleUpdate();
+    this.m_ElementsIcons.unscheduleUpdate();
+
+    MatrixManager.sharedManager().m_Busy = true;
   }
 });
 

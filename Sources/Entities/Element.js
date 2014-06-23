@@ -51,8 +51,11 @@ Element = TiledEntity.extend({
     MatrixManager.sharedManager().remove(this);
 
     ElementsManager.sharedManager().m_ElementsIcons.create(this);
-    for(var i = 0; i < 10; i++) {
-      ElementsManager.sharedManager().m_ElementsParts.create(this);
+    for(var i = 0; i < 2; i++) {
+      ElementsManager.sharedManager().m_ElementsParts.create({
+        element: this,
+        index: i
+      });
     }
   },
   onChangePosition: function() {
@@ -78,7 +81,7 @@ Element = TiledEntity.extend({
   onUnHover: function() {
     this.setCurrentFrameIndex(this.m_Id);
   },
-  onTouch: function() {console.log(this.getIndex());
+  onTouch: function() {
     if(!MatrixManager.sharedManager().active()) return false;
 
     if(!this.m_GlowAnimationRunning) {

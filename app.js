@@ -162,7 +162,7 @@
 
     var achievements = [];
 
-    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 1}); // Unlock when progress mode is unavailable.
+    achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon2, name: 'achievement-name-2', description: 'achievement-description-2', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon3, name: 'achievement-name-3', description: 'achievement-description-3', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon4, name: 'achievement-name-4', description: 'achievement-description-4', state: 0});
@@ -217,7 +217,7 @@
     DataManager.sharedManager().save(references.coins.silver, 0);
     DataManager.sharedManager().save(references.coins.keys, 0);
     DataManager.sharedManager().save(references.coins.lives, 5);
-    DataManager.sharedManager().save(references.lock.modes.classic, 1); // Unlock when progress mode is unavailable.
+    DataManager.sharedManager().save(references.lock.modes.classic, 0);
     DataManager.sharedManager().save(references.lock.modes.arcade, 0);
     DataManager.sharedManager().save(references.time.reward, 0);
     DataManager.sharedManager().save(references.weapon, 1);

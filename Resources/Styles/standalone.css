@@ -1,0 +1,16 @@
+*, html {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+@font-face {
+  font-family: 'Comic Sans MS';
+  src: url('../Fonts/Comic Sans MS.ttf');
+}
+@font-face {
+  font-family: 'Comic Sans MS Bold';
+  src: url('../Fonts/Comic Sans MS Bold.ttf');
+}

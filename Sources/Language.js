@@ -42,6 +42,156 @@ var g_language  = {
     ],
   'tutorial-1': [
     {title: 'Move green square to the left to match 3 of the same!', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: 'Передвиньте зеленую иконку влево чтобы сократить 3 одинаковых иконок!', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'tutorial-2': [
+    {title: 'Get the gold heart quicker than your rival', font: 'Comic Sans MS Bold', size: 46, dimensions: [550, 280]},
+    {title: 'Проберитесь к Большому сердцу быстрее Вашего соперника', font: 'Comic Sans MS', size: 42, dimensions: [550, 350]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: [550, 280]}
+    ],
+  'tutorial-3': [
+    {title: 'This is you!', font: 'Comic Sans MS Bold', size: 46, dimensions: [550, 280]},
+    {title: 'Это Ваша катапульта!', font: 'Comic Sans MS', size: 46, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: [550, 280]}
+    ],
+  'tutorial-4': [
+    {title: 'This is your rival!', font: 'Comic Sans MS Bold', size: 46, dimensions: [550, 280]},
+    {title: 'Это катапульта соперника!', font: 'Comic Sans MS', size: 46, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: [550, 280]}
+    ],
+  'tutorial-elements-explanation-title-0': [
+    {title: 'ATTACK AND DESTROY YOUR RIVAL', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: 'АТАКУЙТЕ И УНИЧТОЖТЕ ВАШЕГО ПРОТИВНИКА', font: 'Comic Sans MS Bold', size: 32, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [300, 0]}
+    ],
+  'tutorial-elements-explanation-title-1': [
+    {title: 'THIS IS YOUR LIVES', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: 'ЭТО ВАШИ ЖИЗНИ', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [300, 0]}
+    ],
+  'tutorial-elements-explanation-title-2': [
+    {title: 'PROTECT YOURSELF FROM RIVAL ATTACKS', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: 'ЗАЩИТИТЕ СЕБЯ ОТ АТАК ПРОТИВНИКА', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [300, 0]}
+    ],
+  'tutorial-elements-explanation-title-3': [
+    {title: 'COLLECT KEYS TO UNLOCK NEW LEVELS', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: 'СОБИРАЙТЕ КЛЮЧИ, ЧТОБЫ ОТКРЫТЬ НОВЫЕ УРОВНИ', font: 'Comic Sans MS Bold', size: 32, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [300, 0]}
+    ],
+  'tutorial-elements-explanation-title-4': [
+    {title: 'GO FORWARD TO THE VICTORY', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: 'ИДИТЕ ВПЕРЕД К ПОБЕДЕ', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [300, 0]}
+    ],
+  'tutorial-elements-explanation-title-5': [
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'Comic Sans MS Bold', size: 36, dimensions: [300, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [300, 0]}
+    ],
+  'tutorial-elements-explanation-0': [
+    {title: 'When you collected "Attack" your catapult launches birds to the rival and strikes him.\nGet more powerful weapons in shop to increase the damage.', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: 'Когда вы соберете атаку, ваша катапульта запустит\nптицу в противника и нанесет ему урон.', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'tutorial-elements-explanation-1': [
+    {title: 'Collect hearts to fill up the scale of life and stay in the game for a long time.\nThe game will be defeat when you lost all lives.', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: 'Собирайте сердца, чтобы пополнить шкалу жизни и оставаться в игре\nкак можно дольше. Вы проиграете, если у вас закончатся жизни.', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'tutorial-elements-explanation-2': [
+    {title: 'If you collect "Shield" you will protected from heavy damage your rival.', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: 'Соберете щит и вы будете защищены от атак Вашего противника.', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'tutorial-elements-explanation-3': [
+    {title: 'You must successfully finish level to get keys collected in it.\nAlso you can buy keys in shop.', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: 'Вы должны успешно завершить уровень, чтобы получить ключи собранные в нем.\nТак же вы можете купить ключи в магазине.', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'tutorial-elements-explanation-4': [
+    {title: 'If you collect Move - your catapult will move closer to big heart.\nThe more Moves you got, the more closer you are to win!', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: 'Соберите движение и катапульта подкатится ближе к большому сердцу.\nЧем больше движений вы соберете - тем ближе будете к победе!', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'tutorial-elements-explanation-5': [
+    {title: 'Text?', font: 'Comic Sans MS', size: 46, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 46, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -653,6 +803,16 @@ var g_language  = {
   'tap-to-continue': [
     {title: "Tap to continue", font: "Comic Sans MS", size: 48, dimensions: false},
     {title: "Нажмите для продолжения", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "タップして継続", font: "RiiPopkk-R", size: 48, dimensions: false}
+    ],
+  'click-to-continue': [
+    {title: "click to continue", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "нажмите для продолжения", font: "Comic Sans MS", size: 48, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
