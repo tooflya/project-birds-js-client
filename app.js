@@ -125,6 +125,7 @@
   'Sources/Managers/PopupShaderManager.js',
   'Sources/Managers/ElementsManager.js',
   'Sources/Managers/MatrixManager.js',
+  'Sources/Managers/ActionsManager.js',
   'Sources/Panels/MenuPanel.js',
   'Sources/Panels/GamePanel.js',
   'Sources/Lists/AboutList.js',

@@ -30,6 +30,8 @@
  */
 
 Game.prototype.onTurnChange = function() {
+  if(!this.m_GameRunning) return false;
+
   this.onTurnChangeStart();
 
   var notification;
@@ -86,10 +88,75 @@ Game.prototype.onTurnChangeFinish = function() {
   }
 };
 
+Game.prototype.onTurnStart = function(id) {
+  if(!this.m_GameRunning) return false;
+
+  this.m_PreviewBackground.runAction(cc.FadeTo.create(0.5, 200));
+  this.m_ElementsExplanationTexts.setCurrentFrameIndex(id);
+  this.m_ElementsExplanationTexts.runAction(
+    cc.Sequence.create(
+      cc.EaseExponentialOut.create(
+        cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().coord(300)))
+      ),
+      cc.CallFunc.create(this.startAction, this, id),
+      false
+    )
+  );
+};
+
+Game.prototype.onTurnFinish = function(id, data) {
+  if(!this.m_GameRunning) return false;
+
+  switch(id) {
+    default:
+    this.m_ElementsExplanationTexts.runAction(
+      cc.Sequence.create(
+        cc.EaseExponentialIn.create(
+          cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200)))
+        ),
+        cc.CallFunc.create(ActionsManager.sharedManager().run, ActionsManager.sharedManager()),
+        false
+      )
+    );
+    break;
+    case 10:
+    this.m_Catapults.get(this.m_PlayerTurn ? 1 : 0).runGameAction(id, data);
+    break;
+  }
+};
+
 Game.prototype.onStartAnimationStart = function() {
    MatrixManager.sharedManager().disable();
 };
 
 Game.prototype.onStartAnimationFinish = function() {
   this.onTurnChange();
+};
+
+Game.prototype.startAction = function(selector, id) {
+  switch(id) {
+    case 0:
+    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(id, {
+      destroy: 10
+    });
+    break;
+    case 1:
+    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(id);
+    break;
+    case 2:
+    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(id);
+    break;
+    case 3:
+    Game.sharedScreen().onTurnFinish();
+    break;
+    case 4:
+    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(id);
+    break;
+  }
+};
+
+Game.prototype.onActionAnimationStart = function() {
+};
+
+Game.prototype.onActionAnimationFinish = function() {
 };

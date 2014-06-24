@@ -136,13 +136,15 @@ Game = Screen.extend({
   m_BestBlows: 0,
   m_Level: 0,
   m_SplashBackground : false,
-  m_PlayerTurn: true,
+  m_PlayerTurn: false,
   ctor: function() {
     this._super(true);
 
     Game.instance = this;
 
     this.name = "Game screen";
+
+    Game.tutorial = DataManager.sharedManager().get(references.tutorial.enable);
 
     this.m_Type = Game.type;
     this.m_ThrowParams = {
@@ -242,6 +244,11 @@ Game = Screen.extend({
       if(Game.tutorial) {
         this.createTutorialelements();
       }
+
+      this.m_ElementsExplanationTexts = TiledEntity.create(LanguagesManager.sharedManager().parse(s_TutorialElementsExplanationTexts), 1, 5, this);
+
+      this.m_ElementsExplanationTexts.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200));
+      this.m_ElementsExplanationTexts.setZOrder(303);
       break;
       case this.m_Types.classic:
       break;
@@ -303,6 +310,23 @@ Game = Screen.extend({
               )
             );
           }
+        }
+
+        if(this.m_Target.collideWithPoint(this.m_Catapults.get(0).getCenterX(), this.m_Catapults.get(0).getCenterY()) || this.m_Target.collideWithPoint(this.m_Catapults.get(1).getCenterX(), this.m_Catapults.get(1).getCenterY())) {
+          this.m_GameRunning = false;
+
+          this.m_PreviewBackground.setZOrder = function(selector, index) {
+            BackgroundColor.prototype.setZOrder.call(this, index);
+          };
+          this.m_PreviewBackground.runAction(
+            cc.Sequence.create(
+              cc.FadeTo.create(0.5, 0),
+              cc.CallFunc.create(this.m_PreviewBackground.setZOrder, this.m_PreviewBackground, 600),
+              cc.FadeTo.create(2.0, 255),
+              false
+            )
+          );
+          this.m_Target.finish();
         }
       }
       break;

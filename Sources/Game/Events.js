@@ -176,7 +176,7 @@ Game.prototype.onLevelStart = function() {
 };
 
 Game.prototype.onLevelFinish = function() {
-  ElementsManager.sharedManager().onLevelFinish();
+  this.finishGame();
 };
 
 Game.prototype.onPreviewStart = function() {

@@ -29,10 +29,11 @@
  *
  */
 
-Target = Entity.extend({
+Target = TiledEntity.extend({
+  m_Finish: false,
   m_Decorations: [],
   ctor: function(parent) {
-    this._super(s_Target, parent);
+    this._super(s_Target, 2, 1, parent);
 
     this.registerTouchable(true);
   },
@@ -86,11 +87,41 @@ Target = Entity.extend({
         );
     }
   },
+  finish: function() {
+    this.m_Finish = true;
+
+    this.m_Decorations[0].setZOrder(700);
+    this.m_Decorations[1].setZOrder(700);
+
+    this.nextFrameIndex();
+
+    this.setAnchorPoint(cc.p(0.5, 0.5));
+    this.setZOrder(701);
+
+    this.runAction(
+      cc.EaseExponentialInOut.create(
+        cc.MoveTo.create(3.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y))
+      )
+    );
+    this.runAction(
+      cc.Sequence.create(
+        cc.ScaleTo.create(3.0, 1.5),
+        cc.CallFunc.create(Game.sharedScreen().onLevelFinish, Game.sharedScreen()),
+        false
+      )
+    );
+  },
   update: function(time) {
     this._super(time);
 
     this.m_Decorations[0].setRotation(this.m_Decorations[0].getRotation() - 0.1);
     this.m_Decorations[1].setRotation(this.m_Decorations[1].getRotation() + 0.1);
+
+    this.m_Decorations[0].setScale(this.getScaleX());
+    this.m_Decorations[1].setScale(this.getScaleX());
+
+    this.m_Decorations[0].setCenterPosition(this.getCenterX(), this.getCenterY() + (this.m_Finish ? 0 : this.getHeight() / 2));
+    this.m_Decorations[1].setCenterPosition(this.getCenterX(), this.getCenterY() + (this.m_Finish ? Camera.sharedCamera().coord(50) : this.getHeight() / 2));
   }
 });
 

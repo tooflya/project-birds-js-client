@@ -37,31 +37,9 @@ Levels = Screen.extend({
 
     this.name = "Levels screen";
 
-    this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
-    this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration3, this);
-    this.m_StarsPanel = Entity.create(s_StarsPanel, this);
-    this.m_Star = TiledEntity.create(s_Star, 3, 2, this.m_StarsPanel);
-    this.m_Lamp = TiledEntity.create(s_Lamp, 1, 2, this);
+    this.m_Background = Entity.create(s_LevelsMapBackground, this, true);
 
-    this.m_StarsText = Text.create(false, this.m_StarsPanel);
-
-    this.m_BackgroundDecoration1.create().setCenterPosition(this.m_BackgroundDecoration1.getWidth() / 2, Camera.sharedCamera().height - this.m_BackgroundDecoration1.getHeight() / 2);
-    this.m_BackgroundDecoration2.create().setCenterPosition(Camera.sharedCamera().width - this.m_BackgroundDecoration2.getWidth() / 2, this.m_BackgroundDecoration2.getHeight() / 2);
-    this.m_StarsPanel.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(200));
-    this.m_Star.create().setCenterPosition(Camera.sharedCamera().coord(100), this.m_StarsPanel.getHeight() / 2);
-    this.m_Lamp.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - this.m_Lamp.getHeight() / 2);
-    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-
-    this.m_StarsText.setFontSize(Camera.sharedCamera().coord(64));
-
-    this.m_Star.setScale(0.5);
-
-    this.m_Star.setCurrentFrameIndex(1);
-    this.m_BackButton.setCurrentFrameIndex(1);
-
-    this.m_BackButton.setTouchHandler('onBackEvent', Levels);
+    //MenuPanel.sharedScreen().prepare();
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Mode);
@@ -70,18 +48,6 @@ Levels = Screen.extend({
     this._super();
 
     MenuPanel.sharedScreen(this).show();
-
-    this.m_StarsText.ccsf([51]);
-    this.m_StarsText.setCenterPosition(this.m_Star.getCenterX() + this.m_StarsText.getWidth() + Camera.sharedCamera().coord(24), this.m_StarsPanel.getHeight() / 2);
-    this.m_Star.stopAllActions();
-    this.m_Star.runAction(
-      cc.RepeatForever.create(
-        cc.Sequence.create(
-          cc.RotateTo.create(1.0, -10),
-          cc.RotateTo.create(1.0, 10)
-          )
-        )
-      );
   },
   onHide: function() {
     this._super();
@@ -102,8 +68,43 @@ Levels = Screen.extend({
       ScreenManager.sharedManager().back();
       break;
     }
+  },
+  onTouch: function(e) {
+    var x = e.getLocation().x;
+    var y = e.getLocation().y;
+
+    MapTree.create(this).create().setCenterPosition(x, y);
   }
 });
+
+MapTree = TiledEntity.extend({
+  ctor: function(parent) {
+    this._super(s_LevelsMapTrees, 3, 1, parent);
+
+    this.setAnchorPoint(cc.p(0.5, 0.2));
+    this.setRandomFrameIndex();
+
+    this.runAction(
+      cc.RepeatForever.create(
+        cc.Sequence.create(
+          cc.SkewTo.create(1.0, 5.0, 0.0),
+          cc.SkewTo.create(1.0, -5.0, 0.0),
+          cc.SkewTo.create(1.0, 0.0, 0.0),
+          cc.DelayTime.create(2.0),
+          false
+        )
+      )
+    );
+  },
+  update: function(time) {
+    this._super();
+  }
+});
+MapTree.create = function(parent) {
+  var entity = new MapTree(parent);
+
+  return entity;
+};
 
 Levels.instance = false;
 Levels.sharedScreen = function() {

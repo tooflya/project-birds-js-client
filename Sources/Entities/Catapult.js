@@ -30,15 +30,23 @@
  */
 
 Catapult = AnimatedEntity.extend({
+  m_Health: 0,
   m_State: 0,
   m_States: {
     stop: 0,
     run: 1,
-    fire: 2
+    fire: 2,
+    destroy: 3
   },
   m_StateData: false,
   ctor: function(parent) {
     this._super(s_Catapult, 6, 2, parent);
+
+    this.m_PlayerHealth = Entity.create(s_PlayerHealth, parent);
+    this.m_PlayerHealthBar = TiledEntity.create(s_PlayerHealthBar, 1, 1, this.m_PlayerHealth);
+
+    this.m_PlayerHealth.create().setCenterPosition(0, 0);
+    this.m_PlayerHealthBar.create().setCenterPosition(this.m_PlayerHealth.getWidth() / 2, this.m_PlayerHealth.getHeight() / 2);
 
     this.m_Speed = Camera.sharedCamera().coord(50);
 
@@ -46,6 +54,8 @@ Catapult = AnimatedEntity.extend({
   },
   onCreate: function() {
     this._super();
+
+    this.m_Health = 100;
 
     this.changeState(this.m_States.run, {
       distance: this.getWidth() * 2
@@ -63,6 +73,12 @@ Catapult = AnimatedEntity.extend({
   onAnimationFinish: function() {
     this._super();
 
+    if(this.m_StateData) {
+      if(this.m_StateData.callback) {
+        this.m_StateData.callback();
+      }
+    }
+
     switch(this.m_State) {
       case this.m_States.stop:
       break;
@@ -77,12 +93,52 @@ Catapult = AnimatedEntity.extend({
         this.changeState(this.m_States.stop);
       }
       break;
+      case this.m_States.destroy:
+      break;
     }
   },
   onTouch: function() {
     this.changeState(this.m_States.fire, {
       fire: true
     });
+  },
+  runGameAction: function(id, data) {
+    switch(id) {
+      case 0:
+      this.changeState(this.m_States.fire, {
+        fire: true,
+        callback: function() {
+          Game.sharedScreen().onTurnFinish(id + 10, {
+            destroy: data.destroy
+          });
+        }
+      });
+      break;
+      case 1:
+      Game.sharedScreen().onTurnFinish(id);
+      break;
+      case 2:
+      Game.sharedScreen().onTurnFinish(id);
+      break;
+      case 3:
+      break;
+      case 4:
+      this.changeState(this.m_States.run, {
+        distance: 100,
+        callback: function() {
+          Game.sharedScreen().onTurnFinish(id);
+        }
+      });
+      break;
+      case 10:
+      this.changeState(this.m_States.destroy, {
+        destroy: data.destroy,
+        callback: function() {
+          Game.sharedScreen().onTurnFinish(0);
+        }
+      });
+      break;
+    }
   },
   changeState: function(state, data) {
     //if(this.m_State == state) return false;
@@ -93,6 +149,7 @@ Catapult = AnimatedEntity.extend({
     switch(state) {
       case this.m_States.stop:
       this.stopAnimation();
+      this.onAnimationFinish();
 
       this.onStop();
       break;
@@ -110,6 +167,8 @@ Catapult = AnimatedEntity.extend({
 
       this.onFire();
       break;
+      case this.m_States.destroy:
+      break;
     }
   },
   updateState: function(time) {
@@ -122,12 +181,28 @@ Catapult = AnimatedEntity.extend({
 
         this.m_StateData.distance -= this.m_Speed * time;
       } else {
+        this.onAnimationFinish();
+
         this.changeState(this.m_States.stop);
       }
       break;
       case this.m_States.fire:
       break;
+      case this.m_States.destroy:
+      this.m_Health -= 1;
+      this.m_StateData.destroy -= 1;
+
+      if(this.m_StateData.destroy <= 0) {
+        this.changeState(this.m_States.stop, {
+          callback: this.m_StateData.callback
+        });
+      }
+      break;
     }
+
+    this.m_PlayerHealth.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(50));
+    this.m_PlayerHealthBar.showPercentage(this.m_Health);
+    this.m_PlayerHealthBar.setCenterPosition(this.m_PlayerHealth.getWidth() / 2 + this.m_PlayerHealthBar.getTextureRect().getWidth() / 2 - this.m_PlayerHealthBar.getWidth() / 2, this.m_PlayerHealth.getHeight() / 2);
   },
   update: function(time) {
     this._super(time);

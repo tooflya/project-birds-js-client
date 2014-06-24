@@ -30,8 +30,11 @@
  */
 
 Game.prototype.createTutorialelements = function() {
+  DataManager.sharedManager().save(references.tutorial.enable, false);
+
   this.m_TutorialState = 1;
   this.m_TutorialRunning = true;
+  this.m_PlayerTurn = true;
 
   this.m_TutorialBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
   this.m_TutorialBackgroundSplash = BackgroundColor.create(cc.c4(0, 0, 0, 200), this.m_TutorialBackground, Camera.sharedCamera().width, Camera.sharedCamera().coord(200));
@@ -236,6 +239,7 @@ Game.prototype.onTouchTutorial = function() {
         cc.EaseBounceOut.create(
           cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, -this.m_TutorialBackgroundSplash.getHeight()))
         ),
+        cc.CallFunc.create(MatrixManager.sharedManager().lookDown, MatrixManager.sharedManager()),
         false
       )
     );
@@ -245,7 +249,7 @@ Game.prototype.onTouchTutorial = function() {
 
     ElementsManager.sharedManager().scheduleUpdate();
 
-    MatrixManager.sharedManager().clear();
+    ActionsManager.sharedManager().run();
     break;
   }
 };

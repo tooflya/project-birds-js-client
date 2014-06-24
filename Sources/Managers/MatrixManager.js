@@ -284,6 +284,8 @@ MatrixManager = cc.Node.extend({
       }
     }
     if(MatrixManager.pool.element) {
+      ActionsManager.sharedManager().add(MatrixManager.pool.element.getId());
+
       MatrixManager.pool.element.destroy();
 
       Game.sharedScreen().onBlow(MatrixManager.pool.element);
@@ -302,9 +304,8 @@ MatrixManager = cc.Node.extend({
         window.setTimeout(function() {
           if(!MatrixManager.sharedManager().findAll()) {
             // TODO: Combinations?
-
-            Game.sharedScreen().onTurnChange();
-            MatrixManager.sharedManager().m_Busy = false;
+    
+            ActionsManager.sharedManager().run();
           }
         }, 500 + MatrixManager.pause);
       }, 1000);
