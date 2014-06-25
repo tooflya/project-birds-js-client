@@ -113,11 +113,7 @@ Mode = Screen.extend({
       Game.sharedScreen(0);
       ScreenManager.sharedManager().replace(Loading);
     } else {
-      if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
-        Lives.sharedScreen(this).show();
-      } else {
-        ScreenManager.sharedManager().replace(Levels);
-      }
+      ScreenManager.sharedManager().replace(Levels);
     }
   },
   onClassicEvent: function() {

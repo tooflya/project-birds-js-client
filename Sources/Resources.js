@@ -243,6 +243,9 @@ var s_Notification1Russian = "Resources/Graphics/notification-1-1.png";
 var s_Notification2Russian = "Resources/Graphics/notification-2-1.png";
 var s_LevelsMapBackground = "Resources/Graphics/levels-map-background.png";
 var s_LevelsMapTrees = "Resources/Graphics/levels-map-trees.png";
+var s_LevelsMapIcons = "Resources/Graphics/levels-map-icons.png";
+var s_LevelsMapPoint = "Resources/Graphics/levels-map-point.png";
+var s_LevelsMapCloud = "Resources/Graphics/levels-map-cloud.png";
 var s_PlayerHealth = "Resources/Graphics/player-health.png";
 var s_PlayerHealthBar = "Resources/Graphics/player-health-bar.png";
 var s_TutorialFinger = "Resources/Graphics/tutorial-finger.png";
@@ -467,6 +470,9 @@ var resources = [
   {src: s_PlayerHealthBar},
   {src: s_LevelsMapBackground},
   {src: s_LevelsMapTrees},
+  {src: s_LevelsMapIcons},
+  {src: s_LevelsMapPoint},
+  {src: s_LevelsMapCloud},
   {src: s_TutorialFinger},
   {src: s_TutorialTargetExplanation},
   {src: s_TutorialTeamExplanation},

@@ -34,8 +34,14 @@
     platform: 'standalone',
     language: 0,
     designed: {
-      width: 980,
-      height: 551,
+      size: {
+        width: 980,
+        height: 551
+      },
+      graphics: {
+        width: 1920,
+        height: 1080
+      },
       margin: {
         x: 0,
         y: 0
