@@ -88,17 +88,17 @@ Game.prototype.onTurnChangeFinish = function() {
   }
 };
 
-Game.prototype.onTurnStart = function(id) {
+Game.prototype.onTurnStart = function(data) {
   if(!this.m_GameRunning) return false;
 
   this.m_PreviewBackground.runAction(cc.FadeTo.create(0.5, 200));
-  this.m_ElementsExplanationTexts.setCurrentFrameIndex(id);
+  this.m_ElementsExplanationTexts.setCurrentFrameIndex(data.id);
   this.m_ElementsExplanationTexts.runAction(
     cc.Sequence.create(
       cc.EaseExponentialOut.create(
         cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().coord(300)))
       ),
-      cc.CallFunc.create(this.startAction, this, id),
+      cc.CallFunc.create(this.startAction, this, data),
       false
     )
   );
@@ -133,24 +133,30 @@ Game.prototype.onStartAnimationFinish = function() {
   this.onTurnChange();
 };
 
-Game.prototype.startAction = function(selector, id) {
-  switch(id) {
+Game.prototype.startAction = function(selector, data) {
+  switch(data.id) {
     case 0:
-    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(id, {
-      destroy: 10
+    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
+      destroy: 15 * data.factor
     });
     break;
     case 1:
-    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(id);
+    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
+      regeneration: 10 * data.factor
+    });
     break;
     case 2:
-    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(id);
+    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
+      shield: 1 * data.factor
+    });
     break;
     case 3:
     Game.sharedScreen().onTurnFinish();
     break;
     case 4:
-    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(id);
+    this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
+      distance: Camera.sharedCamera().coord(40) * data.factor
+    });
     break;
   }
 };

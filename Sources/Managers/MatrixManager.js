@@ -34,7 +34,6 @@ MatrixManager = cc.Node.extend({
     x: 10,
     y: 7
   },
-  m_Padding: 115,
   m_zIndex: 100,
   m_Matrix: false,
   m_CurrentElement1: false,
@@ -55,6 +54,24 @@ MatrixManager = cc.Node.extend({
     [4, 3, 4, 3, 0, 0, 2, 0, 4, 3],
     [0, 0, 2, 3, 4, 1, 4, 1, 2, 4],
     [2, 1, 4, 0, 3, 2, 1, 1, 0, 0]
+  ],
+  m_LevelsMatrixes: [
+    [
+    [4, 2, 4, 1, 2, 3, 3, 1, 2, 1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [2, 2, 1, 3, 3, 4, 0, 0, 2, 0],
+    [0, 0, 3, 1, 3, 3, 2, 0, 4, 3],
+    [3, 3, 4, 2, 4, 0, 2, 1, 0, 0],
+    [4, 3, 0, 3, 4, 4, 3, 4, 1, 0],
+    [1, 1, 2, 4, 1, 0, 0, 2, 0, 2],
+    [1, 3, 0, 3, 0, 4, 3, 4, 3, 0],
+    [3, 4, 3, 0, 2, 2, 0, 3, 1, 3],
+    [1, 3, 4, 1, 4, 0, 2, 4, 4, 0],
+    [3, 2, 3, 4, 4, 2, 4, 4, 3, 1],
+    [4, 3, 4, 3, 0, 0, 2, 0, 4, 3],
+    [0, 0, 2, 3, 4, 1, 4, 1, 2, 4],
+    [2, 1, 4, 0, 3, 2, 1, 1, 0, 0]
+    ]
   ],
   ctor: function() {
     this._super();
@@ -135,7 +152,7 @@ MatrixManager = cc.Node.extend({
         for(var k = 0; k < 4; k++) {
           switch(k) {
             case 0:
-            neighbor = this.get(element.getIndex().x, element.getIndex().y + 1);
+            if(element.getIndex().y < this.getSize().y - 1) neighbor = this.get(element.getIndex().x, element.getIndex().y + 1);
             break;
             case 1:
             neighbor = this.get(element.getIndex().x, element.getIndex().y - 1);
@@ -149,10 +166,12 @@ MatrixManager = cc.Node.extend({
           }
 
           if(neighbor) {
-            if(this.hasMatchesWith(element, neighbor)) {
+            var result = this.hasMatchesWith(element, neighbor);
+            if(result) {
               this.m_Combinations.push({
                 element: element,
-                neighbor: neighbor
+                neighbor: neighbor,
+                count: result
               });
             }
           }
@@ -161,7 +180,43 @@ MatrixManager = cc.Node.extend({
     }
 
     if(this.m_Combinations.length > 0) {
-      var combination = this.m_Combinations[Random.sharedRandom().random(0, this.m_Combinations.length, true)];
+      var priority = 0;
+      var combination = false;
+      var types = [[], [], [], [], [], []];
+      var health = Game.sharedScreen().m_Catapults.get(1).m_Health;
+
+      for(var i = 0; i < this.m_Combinations.length; i++) {
+        types[this.m_Combinations[i].element.getId()].push(this.m_Combinations[i]);
+      }
+
+      if(health < 50) {
+        priority = 1;
+      }
+
+      if(priority == 0) {
+        if(types[0].length < 1) {
+          priority = 4;
+        }
+      }
+
+      for(var i = 0; i < this.m_Combinations.length; i++) {
+        if(this.m_Combinations[i].element.getId() == priority) {
+          combination = this.m_Combinations[i];
+        }
+      }
+
+      if(!combination) {
+        combination = this.m_Combinations[Random.sharedRandom().random(0, this.m_Combinations.length, true)];
+      }
+
+      var id = combination.element.getId();
+      for(var i = 0; i < this.m_Combinations.length; i++) {
+        if(this.m_Combinations[i].element.getId() == id) {
+          if(this.m_Combinations[i].count > combination.count) {
+            combination = this.m_Combinations[i];
+          }
+        }
+      }console.log(combination.count);
 
       this.replace(combination.element, combination.neighbor);
     }
@@ -273,18 +328,29 @@ MatrixManager = cc.Node.extend({
     return this.m_Size;
   },
   clear: function() {
+    var factor = 0;
+
     for(var i = 0; i < MatrixManager.pool.horizontal.length; i++) {
       if(MatrixManager.pool.horizontal[i]) {
         MatrixManager.pool.horizontal[i].destroy();
+
+        factor++;
       }
     }
     for(var i = 0; i < MatrixManager.pool.vertical.length; i++) {
       if(MatrixManager.pool.vertical[i]) {
         MatrixManager.pool.vertical[i].destroy();
+
+        factor++;
       }
     }
     if(MatrixManager.pool.element) {
-      ActionsManager.sharedManager().add(MatrixManager.pool.element.getId());
+      factor++;
+
+      ActionsManager.sharedManager().add({
+        id: MatrixManager.pool.element.getId(),
+        factor: factor - 2
+      });
 
       MatrixManager.pool.element.destroy();
 
@@ -330,7 +396,9 @@ MatrixManager = cc.Node.extend({
     this.set(neighbor, index1.x, index1.y);
     this.set(element, index2.x, index2.y);
 
-    if(!this.hasMatches(element) && !this.hasMatches(neighbor)) {
+    var result = this.hasMatches(element);
+
+    if(!result) {
       this.set(element, index1.x, index1.y);
       this.set(neighbor, index2.x, index2.y);
 
@@ -339,7 +407,7 @@ MatrixManager = cc.Node.extend({
       this.set(element, index1.x, index1.y);
       this.set(neighbor, index2.x, index2.y);
 
-      return true;
+      return result;
     }
   },
   hasMatches: function(element, data) {
@@ -390,7 +458,7 @@ MatrixManager = cc.Node.extend({
         }
 
         if(horizontal >= 3 || vertical >= 3) {
-          return true;
+          return (MatrixManager.pool.horizontal.length + MatrixManager.pool.vertical.length + 1);
         } else {
           MatrixManager.pool.horizontal = [];
           MatrixManager.pool.vertical = [];
@@ -518,7 +586,7 @@ MatrixManager = cc.Node.extend({
           this.set(element, i, j, true);
 
           var x = this.m_Matrix[i][j - 1].getCenterX();
-          var y = this.m_Matrix[i][j - 1].getCenterY() +  Camera.sharedCamera().coord(this.m_Padding);
+          var y = this.m_Matrix[i][j - 1].getCenterY() + element.getHeight();
 
           element.setCenterPosition(x, y);
         }
@@ -554,9 +622,9 @@ MatrixManager = cc.Node.extend({
     
     element.runAction(
       cc.Sequence.create(
-        cc.MoveTo.create(0.1 * count / 2, cc.p(element.getCenterX(), element.getCenterY() - Camera.sharedCamera().coord(this.m_Padding) * count)),
-        cc.MoveTo.create(0.1, cc.p(element.getCenterX(), element.getCenterY() - Camera.sharedCamera().coord(this.m_Padding) * count + Camera.sharedCamera().coord(this.m_Padding) / 4)),
-        cc.MoveTo.create(0.05, cc.p(element.getCenterX(), element.getCenterY() - Camera.sharedCamera().coord(this.m_Padding) * count)),
+        cc.MoveTo.create(0.1 * count / 2, cc.p(element.getCenterX(), element.getCenterY() - element.getHeight() * count)),
+        cc.MoveTo.create(0.1, cc.p(element.getCenterX(), element.getCenterY() - element.getHeight() * count + element.getHeight() / 4)),
+        cc.MoveTo.create(0.05, cc.p(element.getCenterX(), element.getCenterY() - element.getHeight() * count)),
         false
       )
     );

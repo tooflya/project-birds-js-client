@@ -34,11 +34,11 @@ ActionsManager = cc.Node.extend({
 
     ActionsManager.instance = this;
   },
-  add: function(index) {
-    this.m_Pool.push(index);
+  add: function(data) {
+    this.m_Pool.push(data);
   },
-  remove: function(index) {
-    this.m_Pool.splice(this.m_Pool.indexOf(index), 1);
+  remove: function(data) {
+    this.m_Pool.splice(this.m_Pool.indexOf(data), 1);
   },
   empty: function() {
     return this.m_Pool.length <= 0;

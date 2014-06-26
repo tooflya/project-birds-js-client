@@ -256,6 +256,7 @@ var s_TutorialElementsExplanation = "Resources/Graphics/tutorial-elements-explan
 var s_TutorialElementsExplanationTexts = "Resources/Graphics/tutorial-elements-explanation-texts.png";
 var s_TutorialElementsExplanationTextsEnglish = "Resources/Graphics/tutorial-elements-explanation-texts-0.png";
 var s_TutorialElementsExplanationTextsRussian = "Resources/Graphics/tutorial-elements-explanation-texts-1.png";
+var s_1 = "Resources/Graphics/1.png";
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
@@ -480,6 +481,7 @@ var resources = [
   {src: s_TutorialElementsExplanation},
   {src: s_TutorialElementsExplanationTextsRussian},
   {src: s_TutorialElementsExplanationTextsEnglish},
+  {src: s_1},
 
   {src: s_Music1},
   {src: s_Music2},

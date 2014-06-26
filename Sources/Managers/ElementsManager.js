@@ -29,36 +29,57 @@
 
 ElementsManager = EntityManager.extend({
   m_MatrixManager: false,
-  m_MatrixArea: false,
   m_zIndex: 100,
   ctor: function() {
-    this.m_MatrixArea = List.create(1160, 813, 1160, 813, Game.sharedScreen());
-    this.m_MatrixArea.registerTouchable(false);
-    this.m_MatrixArea.m_Background.setOpacity(150);
-    this.m_MatrixArea.setListCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(30));
+    this.m_Clipper = this.clipper(s_1);
+    this.m_Stencil = this.stencil();
 
-    this._super(100, Element.create(), this.m_MatrixArea, this.m_zIndex, true);
+    this.m_Clipper.addChild(this.m_Stencil);
+
+    Game.sharedScreen().addChild(this.m_Clipper);
+
+    this._super(100, Element.create(), this.m_Stencil, this.m_zIndex, true);
 
     ElementsManager.instance = this;
 
-    this.m_ElementsIcons = EntityManager.create(10, ElementIcon.create(), this.m_MatrixArea, 110, true);
+    this.m_ElementsIcons = EntityManager.create(10, ElementIcon.create(), this.m_Stencil, 110, true);
     this.m_ElementsParts = EntityManager.create(100, ElementPart.create(), Game.sharedScreen(), 110, true);
-    this.m_ElementsGlows = EntityManager.create(10, ElementGlow.create(), this.m_MatrixArea, 110, true);
+    this.m_ElementsGlows = EntityManager.create(10, ElementGlow.create(), this.m_Stencil, 110, true);
 
     this.m_MatrixManager = MatrixManager.sharedManager();
 
     if(Game.tutorial) {
-      this.m_TutorialFinger = Entity.create(s_TutorialFinger, this.m_MatrixArea);
+      this.m_TutorialFinger = Entity.create(s_TutorialFinger, this.m_Stencil);
     }
+  },
+  stencil: function() {
+    var stencil = BackgroundColor.create(cc.c4(0, 0, 0, 100));
+
+    stencil.setAnchorPoint(cc.p(0, 0));
+    stencil.setPosition(cc.p(0, 0));
+
+    return stencil;
+  },
+  clipper: function(file) {
+    var stencil = cc.Sprite.create(file);
+    var clipper = cc.ClippingNode.create(stencil);
+
+    stencil.setAnchorPoint(cc.p(0, 0));
+    clipper.setAnchorPoint(cc.p(0, 0));
+
+    clipper.setPosition(cc.p(0, Camera.sharedCamera().coord(200)));
+    stencil.setPosition(cc.p(Camera.sharedCamera().center.x - stencil.getContentSize().width / 2, 0));
+
+    return clipper;
   },
   onLevelStart: function() {
     this.onStartAnimationStart();
 
-    var padding = Camera.sharedCamera().coord(this.m_MatrixManager.m_Padding);
+    var padding = this.get(0).getWidth();
 
     var origin = {
-      y: Camera.sharedCamera().coord(5) + padding / 2 + Camera.sharedCamera().height,
-      x: this.getParent().getWidth() / 2 + padding / 2
+      x: this.getParent().getWidth() / 2 + padding / 2,
+      y: padding / 2 + Camera.sharedCamera().height
     }
 
     var counter = {

@@ -220,6 +220,8 @@ Game.prototype.onTouchTutorial = function() {
     this.m_TutorialState = 5;
     break;
     case 10:
+    if(this.m_TutorialBackground.getNumberOfRunningActions() > 0 || this.m_TutorialElementsExplanation.getNumberOfRunningActions() > 0 || this.m_TutorialBackgroundSplash.getNumberOfRunningActions() > 0) return false;
+
     this.m_TutorialBackground.runAction(cc.FadeTo.create(0.5, 0));
     this.m_TutorialElementsExplanation.runAction(
       cc.FadeTo.create(0.5, 0.0)

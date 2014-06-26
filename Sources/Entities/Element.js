@@ -35,7 +35,7 @@ Element = TiledEntity.extend({
   m_Glow: false,
   m_GlowAnimationRunning: false,
   ctor: function() {
-    this._super(s_Elements, 5, 2);
+    this._super(s_Elements, 7, 2);
 
     this.m_Index = {
       x: -1,
@@ -82,6 +82,7 @@ Element = TiledEntity.extend({
     this.setCurrentFrameIndex(this.m_Id);
   },
   onTouch: function() {
+    if(!this.isRegisterTouchable()) return false;
     if(!MatrixManager.sharedManager().active()) return false;
 
     if(!this.m_GlowAnimationRunning) {
@@ -135,7 +136,7 @@ Element = TiledEntity.extend({
 
       this.setCurrentFrameIndex(this.m_Id);
     } else {
-      this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount(), true);
+      this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount() - 2, true);
 
       if(MatrixManager.sharedManager().hasMatches(this)) {
         this.chooseId();
