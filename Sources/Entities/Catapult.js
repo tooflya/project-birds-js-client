@@ -30,6 +30,7 @@
  */
 
 Catapult = AnimatedEntity.extend({
+  m_Birds: false,
   m_Health: 0,
   m_State: 0,
   m_States: {
@@ -67,13 +68,38 @@ Catapult = AnimatedEntity.extend({
   onDestroy: function() {
     this._super();
 
-    
+    this.m_PlayerHealth.destroy();
+
+    var explosion = Game.sharedScreen().m_Explosions.create();
+    explosion.setCenterPosition(this.getCenterX(), this.getCenterY());
+    explosion.setZOrder(800);
+
+    var parts = [
+      PhysicsEntity.create(s_CatapultPart1, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0),
+      PhysicsEntity.create(s_CatapultPart2, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0),
+      PhysicsEntity.create(s_CatapultPart3, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0),
+      PhysicsEntity.create(s_CatapultPart3, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0),
+      PhysicsEntity.create(s_CatapultPart3, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0),
+      PhysicsEntity.create(s_CatapultPart3, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0)
+    ];
+
+    for(var i = 0; i < parts.length; i++) {
+      var x = Random.sharedRandom().random(-500, 500);
+      var y = Random.sharedRandom().random(500, 2000);
+      var r = Random.sharedRandom().random(0, 720);
+
+      parts[i].create().setCenterPosition(this.getCenterX(), this.getCenterY());
+      parts[i].setLinearVelocity(x, y);
+      parts[i].setRotation(r);
+      parts[i].setZOrder(800);
+    }
   },
   onStop: function() {
   },
   onRun: function() {
   },
   onFire: function() {
+    this.m_Birds.fire();
   },
   onAnimationFinish: function() {
     this._super();
@@ -108,6 +134,17 @@ Catapult = AnimatedEntity.extend({
     this.changeState(this.m_States.fire, {
       fire: true
     });
+  },
+  createElements: function() {
+    this.m_Birds = EntityManager.create(3, CatapultBird.create(this, this.isFlippedHorizontally() ? 1 : 0), Game.instance, true);
+    this.m_Birds.fire = function() {
+      this.get(0).fire();
+    };
+
+    for(var i = 1; i < 4; i++) {
+      this.m_Birds.create().setCenterPosition(this.getCenterX() - Camera.sharedCamera().coord(40) * i, this.getCenterY() - Camera.sharedCamera().coord(28));
+      this.m_Birds.last().setRandomFrameIndex();
+    }
   },
   runGameAction: function(id, data) {
     switch(id) {
@@ -194,6 +231,12 @@ Catapult = AnimatedEntity.extend({
         this.setCenterPosition(this.getCenterX() + (this.m_Speed * time) * (this.isFlippedHorizontally() ? -1 : 1), this.getCenterY());
 
         this.m_StateData.distance -= this.m_Speed * time;
+
+        for(var i = 0; i < 3; i++) {
+          var bird = this.m_Birds.get(i);
+
+          bird.setCenterPosition(bird.getCenterX() + (this.m_Speed * time) * (this.isFlippedHorizontally() ? -1 : 1), bird.getCenterY());
+        }
       } else {
         this.onAnimationFinish();
 

@@ -234,6 +234,10 @@ var s_ElementsIcons = "Resources/Graphics/elements-icons.png";
 var s_ElementsParts = "Resources/Graphics/elements-parts.png";
 var s_Ground = "Resources/Graphics/game-ground.png";
 var s_Catapult = "Resources/Graphics/catapult.png";
+var s_CatapultPart1 = "Resources/Graphics/catapult-part1.png";
+var s_CatapultPart2 = "Resources/Graphics/catapult-part2.png";
+var s_CatapultPart3 = "Resources/Graphics/catapult-part3.png";
+var s_CatapultBirds = "Resources/Graphics/catapult-birds.png";
 var s_Target = "Resources/Graphics/game-target.png";
 var s_Notification1 = "Resources/Graphics/notification-1.png";
 var s_Notification2= "Resources/Graphics/notification-2.png";
@@ -462,6 +466,10 @@ var resources = [
   {src: s_ElementsParts},
   {src: s_Ground},
   {src: s_Catapult},
+  {src: s_CatapultPart1},
+  {src: s_CatapultPart2},
+  {src: s_CatapultPart3},
+  {src: s_CatapultBirds},
   {src: s_Target},
   {src: s_Notification1Russian},
   {src: s_Notification1English},

@@ -91,6 +91,7 @@
   'Sources/Entities/Bonus6.js',
   'Sources/Entities/Bonus7.js',
   'Sources/Entities/Catapult.js',
+  'Sources/Entities/CatapultBird.js',
   'Sources/Entities/Element.js',
   'Sources/Entities/ElementIcon.js',
   'Sources/Entities/ElementPart.js',

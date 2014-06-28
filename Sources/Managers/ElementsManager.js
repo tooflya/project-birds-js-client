@@ -87,6 +87,27 @@ ElementsManager = EntityManager.extend({
       y: 0
     };
 
+    for(var i = 0; i < this.m_MatrixManager.getSize().y; i++) {
+      counter.x = 0;
+
+      var y = origin.y + padding * i - Camera.sharedCamera().height;
+
+      for(var j = -this.m_MatrixManager.getSize().x / 2; j < this.m_MatrixManager.getSize().x / 2; j++) {
+        var x = origin.x + padding * j;
+
+        if(MatrixManager.sharedManager().m_TestMatrixes[0][counter.y][counter.x] == etypes.block) {
+          this.createBlock().setCenterPosition(x, y);
+        }
+
+        counter.x++;
+      }
+
+      counter.y++;
+    }
+
+    counter.x = 0;
+    counter.y = 0;
+
     for(var i = 0; i < this.m_MatrixManager.getSize().y * 2; i++) {
       counter.x = 0;
 
@@ -95,9 +116,24 @@ ElementsManager = EntityManager.extend({
       for(var j = -this.m_MatrixManager.getSize().x / 2; j < this.m_MatrixManager.getSize().x / 2; j++) {
         var x = origin.x + padding * j;
 
-        this.m_MatrixManager.set(this.create(), counter.x, counter.y, true);
+        var type = MatrixManager.sharedManager().m_TestMatrixes[0][counter.y][counter.x];
 
-        this.last().setCenterPosition(x, y);
+        if(type === etypes.empty) {
+          this.m_MatrixManager.set(etypes.empty, counter.x, counter.y, true);
+        } else if(type === etypes.block) {
+          this.m_MatrixManager.set(etypes.block, counter.x, counter.y, true);
+        } else if(type === etypes.star) {
+          var star = this.create();
+          star.setId(Element.types.star);
+          star.setCurrentFrameIndex(Element.types.star);
+          star.setCenterPosition(x, y);
+
+          this.m_MatrixManager.set(star, counter.x, counter.y);
+        } else {
+          this.m_MatrixManager.set(this.create(), counter.x, counter.y, true);
+
+          this.last().setCenterPosition(x, y);
+        }
 
         counter.x++;
       }
@@ -113,17 +149,23 @@ ElementsManager = EntityManager.extend({
         max = counter * 0.05 + 1.0;
 
         var element = this.m_MatrixManager.get(j, i);
-        element.runAction(
-          cc.Sequence.create(
-            cc.DelayTime.create(i == this.m_MatrixManager.getSize().y * 2 - 1 && j == (reverse ? 0 : this.m_MatrixManager.getSize().x) ? max / 2.0 : 0.05 * counter),
-            cc.EaseBounceOut.create(
-              cc.MoveTo.create(1.0, cc.p(element.getCenterX(), element.getCenterY() - Camera.sharedCamera().height))
-            ),
-            i == this.m_MatrixManager.getSize().y * 2 - 1 && j == (reverse ? 0 : this.m_MatrixManager.getSize().x) ? cc.CallFunc.create(this.onStartAnimationFinish, this, this) : false
-          )
-        );
 
-        counter++;
+        if(element == etypes.empty) {
+        } else if(element == etypes.block) {
+        } else if(element == etypes.star) {
+        } else {
+          element.runAction(
+            cc.Sequence.create(
+              cc.DelayTime.create(i == this.m_MatrixManager.getSize().y * 2 - 1 && j == (reverse ? 0 : this.m_MatrixManager.getSize().x) ? max / 2.0 : 0.05 * counter),
+              cc.EaseBounceOut.create(
+                cc.MoveTo.create(1.0, cc.p(element.getCenterX(), element.getCenterY() - Camera.sharedCamera().height))
+              ),
+              i == this.m_MatrixManager.getSize().y * 2 - 1 && j == (reverse ? 0 : this.m_MatrixManager.getSize().x) ? cc.CallFunc.create(this.onStartAnimationFinish, this, this) : false
+            )
+          );
+
+          counter++;
+        }
       }
 
       reverse = !reverse;
@@ -161,6 +203,11 @@ ElementsManager = EntityManager.extend({
     this.m_ElementsIcons.unscheduleUpdate();
 
     MatrixManager.sharedManager().m_Busy = true;
+  },
+  createBlock: function() {
+    this.create().setCurrentFrameIndex(7);
+
+    return this.last();
   }
 });
 

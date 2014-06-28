@@ -30,6 +30,7 @@
  */
 
 GamePanel = Panel.extend({
+  m_Stars: 0,
   m_DecorationTime: 1.0,
   m_DecorationTimeElapsed: 0,
   m_Keys: [
@@ -64,9 +65,9 @@ GamePanel = Panel.extend({
         this.addItem(s_PanelItemsBackground2, [s_Star, 3, 2]);
         this.addItem(s_PanelItemsBackground2, [s_Star, 3, 2]);
 
-        this.getIcons()[3].setCurrentFrameIndex(0);
-        this.getIcons()[4].setCurrentFrameIndex(1);
-        this.getIcons()[5].setCurrentFrameIndex(2);
+        this.getIcons()[3].setCurrentFrameIndex(3);
+        this.getIcons()[4].setCurrentFrameIndex(4);
+        this.getIcons()[5].setCurrentFrameIndex(5);
 
         this.getIcons()[3].setScale(0.3);
         this.getIcons()[4].setScale(0.3);
@@ -170,6 +171,11 @@ GamePanel = Panel.extend({
     this._super();
 
     GamePanel.instance = false;
+  },
+  starred: function() {
+    this.getIcons()[this.m_Stars + 3].setCurrentFrameIndex(this.getIcons()[this.m_Stars + 3].getCurrentFrameIndex() - 3);
+
+    this.m_Stars++;
   },
   onShow: function() {
     this._super();

@@ -191,7 +191,7 @@ Game = Screen.extend({
     this.m_BombBirds = EntityManager.create(10, BombBird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_FlayerBirds = EntityManager.create(10, FlayerBird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 110, true);
-    this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110, true);
+    this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110);
     this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this, 201, true);
     this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 201, true);
 
@@ -199,7 +199,7 @@ Game = Screen.extend({
 
     switch(this.m_Type) {
       case this.m_Types.progress:
-      this.m_Ground = Entity.create(s_Ground, this);
+      this.m_Ground = PhysicsEntity.create(s_Ground, 1, 1, this, this.getPhysicsWorld(), 0.1, 1.0, 0.1, 2.0, 8.0);
       this.m_Target = Target.create(this);
       this.m_Catapults = {
         m_Elements: [
@@ -215,6 +215,9 @@ Game = Screen.extend({
 
           this.get(0).setFlippedHorizontally(false);
           this.get(1).setFlippedHorizontally(true);
+
+          this.get(0).createElements();
+          this.get(1).createElements();
 
           this.get(0).setZOrder(303);
           this.get(1).setZOrder(303);
@@ -236,10 +239,12 @@ Game = Screen.extend({
       this.m_Ground.setZOrder(301);
       this.m_Target.setZOrder(302);
 
-      this.m_Ground.setCenterPosition(Camera.sharedCamera().center.x, this.m_Ground.getHeight() / 2);
-      this.m_Target.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(18));
+      this.m_Ground.m_PhysicsDefinition.type = Box2D.Dynamics.b2Body.b2_staticBody;
 
       this.m_Ground.create();
+
+      this.m_Ground.setCenterPosition(Camera.sharedCamera().center.x, this.m_Ground.getHeight() / 2);
+      this.m_Target.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(18));
 
       if(Game.tutorial) {
         this.createTutorialelements();
@@ -249,6 +254,15 @@ Game = Screen.extend({
 
       this.m_ElementsExplanationTexts.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200));
       this.m_ElementsExplanationTexts.setZOrder(303);
+
+
+      this.m_CombinationsNotification = BackgroundColor.create(cc.c4(255, 255, 255, 255), this, Camera.sharedCamera().width, Camera.sharedCamera().coord(200));
+      this.m_CombinationsNotification.setCenterPosition(Camera.sharedCamera().center.x, -this.m_CombinationsNotification.getHeight());
+
+      this.m_CombinationsNotificationText = Text.create('no-more-combinations', this.m_CombinationsNotification);
+      this.m_CombinationsNotificationText.setCenterPosition(this.m_CombinationsNotification.getWidth() / 2, this.m_CombinationsNotification.getHeight() / 2);
+      this.m_CombinationsNotificationText.disableShadow();
+      this.m_CombinationsNotificationText.setColor(cc.c3(26, 92, 165));
       break;
       case this.m_Types.classic:
       break;

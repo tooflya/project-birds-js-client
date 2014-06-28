@@ -83,6 +83,10 @@ Game.prototype.onTurnChangeStart = function() {
 Game.prototype.onTurnChangeFinish = function() {
   this.m_PreviewBackground.runAction(cc.FadeTo.create(0.5, 0));
 
+  if(!MatrixManager.sharedManager().computer(false, true)) {
+    this.onNoMoreCombinations();
+  }
+
   if(Game.tutorial) {
     this.onTurnChangeFinishTutorial();
   }
@@ -165,4 +169,21 @@ Game.prototype.onActionAnimationStart = function() {
 };
 
 Game.prototype.onActionAnimationFinish = function() {
+};
+
+Game.prototype.onNoMoreCombinations = function() {
+  this.m_CombinationsNotification.runAction(
+    cc.Sequence.create(
+      cc.EaseBounceOut.create(
+        cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(300)))
+      ),
+      cc.DelayTime.create(0.5),
+      cc.CallFunc.create(MatrixManager.sharedManager().shuffle, MatrixManager.sharedManager()),
+      cc.DelayTime.create(0.5),
+      cc.EaseBounceOut.create(
+        cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, -this.m_CombinationsNotification.getHeight()))
+      ),
+      false
+    )
+  );
 };

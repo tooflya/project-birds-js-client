@@ -35,7 +35,7 @@ Element = TiledEntity.extend({
   m_Glow: false,
   m_GlowAnimationRunning: false,
   ctor: function() {
-    this._super(s_Elements, 7, 2);
+    this._super(s_Elements, 8, 2);
 
     this.m_Index = {
       x: -1,
@@ -48,17 +48,49 @@ Element = TiledEntity.extend({
   onDestroy: function() {
     this._super();
 
-    MatrixManager.sharedManager().remove(this);
+    switch(this.getId()) {
+      default:
+      break;
+      case Element.types.star:
+      if(this.m_Icon) {
+        this.m_Icon.destroy();
+        this.m_Icon.removeFromParent();
+      }
 
-    ElementsManager.sharedManager().m_ElementsIcons.create(this);
-    for(var i = 0; i < 2; i++) {
-      ElementsManager.sharedManager().m_ElementsParts.create({
-        element: this,
-        index: i
-      });
+      this.m_Id = -1;
+
+      GamePanel.sharedScreen().starred();
+      break;
     }
   },
-  onChangePosition: function() {
+  onRemove: function(data) {
+    switch(this.getId()) {
+      default:
+      this.destroy();
+
+      ElementsManager.sharedManager().m_ElementsIcons.create(this);
+      for(var i = 0; i < 2; i++) {
+        ElementsManager.sharedManager().m_ElementsParts.create({
+          element: this,
+          index: i
+        });
+      }
+      break;
+      case Element.types.star:
+      this.runAction(cc.ScaleTo.create(0.2, 0.0));
+      this.runAction(
+        cc.Sequence.create(
+          cc.MoveTo.create(0.2, cc.p(this.getCenterX(), this.getCenterY() - this.getHeight())),
+          cc.CallFunc.create(this.destroy, this),
+          data.replaced ? false : cc.CallFunc.create(MatrixManager.instance.lookDown, MatrixManager.instance)
+        )
+      );
+      break;
+    }
+  },
+  onChangePosition: function(target, complete) {
+    if(this.getId() == Element.types.block) return false;
+
     if(this.getIndex().y < MatrixManager.sharedManager().getSize().y) {
       if(!this.isRegisterTouchable()) {
         this.registerTouchable(true);
@@ -72,18 +104,34 @@ Element = TiledEntity.extend({
     if(this.m_Glow) {
       this.m_Glow.destroy();
     }
+
+    if(complete) {
+      switch(this.getId()) {
+        case Element.types.star:
+        if(this.getIndex().y == 0) {
+          this.remove();
+        }
+        break;
+      }
+    }
   },
   onHover: function() {
     if(!MatrixManager.sharedManager().active()) return false;
 
+    if(this.getId() == Element.types.block) return false;
+
     this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount());
   },
   onUnHover: function() {
+    if(this.getId() == Element.types.block) return false;
+
     this.setCurrentFrameIndex(this.m_Id);
   },
   onTouch: function() {
     if(!this.isRegisterTouchable()) return false;
     if(!MatrixManager.sharedManager().active()) return false;
+
+    if(this.getId() == Element.types.block) return false;
 
     if(!this.m_GlowAnimationRunning) {
       this.onUnHover();
@@ -116,7 +164,14 @@ Element = TiledEntity.extend({
   onMouseDragged: function(e) {
     if(this.getNumberOfRunningActions() > 0) return false;
 
+    if(this.getId() == Element.types.block) return false;
+
     return this._super(e);
+  },
+  remove: function(data) {
+    MatrixManager.sharedManager().remove(this);
+
+    this.onRemove(data);
   },
   setIndex: function(x, y) {
     this.m_Index.x = x;
@@ -125,10 +180,35 @@ Element = TiledEntity.extend({
   getIndex: function() {
     return this.m_Index;
   },
+  setId: function(id) {
+    this.m_Id = id;
+
+    switch(id) {
+      case Element.types.star:
+      if(!this.m_Icon) {
+        this.m_Icon = TiledEntity.create(s_Elements, 8, 2, this);
+        this.m_Icon.create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2);
+        this.m_Icon.setCurrentFrameIndex(15);
+        this.m_Icon.runAction(
+          cc.RepeatForever.create(
+            cc.Sequence.create(
+              cc.FadeTo.create(1.0, 0.0),
+              cc.DelayTime.create(0.5),
+              cc.FadeTo.create(1.0, 255.0),
+              false
+            )
+          )
+        );
+      }
+      break;
+    }
+  },
   getId: function() {
     return this.m_Id;
   },
   chooseId: function(created) {
+    if(this.getId() == Element.types.star) return false;
+
     if(Game.tutorial && Game.sharedScreen().m_TutorialState == 1 && created) {
       var index = this.getIndex();
 
@@ -136,7 +216,7 @@ Element = TiledEntity.extend({
 
       this.setCurrentFrameIndex(this.m_Id);
     } else {
-      this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount() - 2, true);
+      this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount() - 3, true);
 
       if(MatrixManager.sharedManager().hasMatches(this)) {
         this.chooseId();
@@ -146,19 +226,71 @@ Element = TiledEntity.extend({
     }
   },
   lookDown: function() {
+    if(this.getId() == Element.types.block) return false;
+
     if(this.getIndex().y > 0) {
       var free = true;
-      var count = 0;
+      var current = 0;
+      var empty = 0;
+      var data = {
+        down: 0,
+        left: 0,
+        right: 0
+      };
+
       while(free) {
-        if(this.getIndex().y - (count + 1) >= 0 && !MatrixManager.sharedManager().get(this.getIndex().x, this.getIndex().y - (count + 1))) {
-          count++;
+        var frame = MatrixManager.sharedManager().get(this.getIndex().x, this.getIndex().y - (data.down + 1));
+
+        if(frame === etypes.block) {
+          free = false;
+        }
+
+        if(this.getIndex().y - (data.down + 1) >= 0 && (!frame || frame === etypes.empty)) {
+          if(frame === etypes.empty) {
+            empty++;
+            current = etypes.empty;
+          } else if(frame === etypes.block) {
+            free = false;
+          } else {
+            empty = 0;
+            current = 0;
+          }
+          
+          data.down++;
         } else {
           free = false;
         }
       }
 
-      if(count > 0) {
-        MatrixManager.sharedManager().moveDown(this, count);
+      if(current == etypes.empty) {
+        data.down -= empty;
+      }
+
+      if(true) {
+        var frames = {
+          left: MatrixManager.sharedManager().get(this.getIndex().x - 1, this.getIndex().y - (data.down - 1)),
+          right: MatrixManager.sharedManager().get(this.getIndex().x + 1, this.getIndex().y - (data.down - 1)),
+          down: {
+            left: MatrixManager.sharedManager().get(this.getIndex().x - 1, this.getIndex().y - data.down),
+            right: MatrixManager.sharedManager().get(this.getIndex().x + 1, this.getIndex().y - data.down)
+          }
+        };
+
+        if(frames.left == etypes.block) {
+          if(!frames.down.left) {
+            data.left++;
+          }
+        }
+
+        if(frames.right == etypes.block) {
+          if(!frames.down.right) {
+            data.right++;
+          }
+        }
+      }
+
+      if(data.down > 0) {
+        MatrixManager.sharedManager().moveDown(this, data);
       }
     }
   },
@@ -224,6 +356,12 @@ ElementGlow = AnimatedEntity.extend({
   }
 });
 
+var etypes = {
+  empty: -1,
+  block: -2,
+  star: -3
+};
+
 Element.colors = [
   cc.c3(211, 33, 17),
   cc.c3(231, 199, 0),
@@ -231,6 +369,16 @@ Element.colors = [
   cc.c3(223, 34, 232),
   cc.c3(0, 211, 0),
 ];
+Element.types = {
+  fire: 0,
+  regeneration: 1,
+  defence: 2,
+  keys: 3,
+  run: 4,
+  bomb: 5,
+  star: 6,
+  block: 7
+};
 Element.create = function() {
   var entity = new Element();
 
