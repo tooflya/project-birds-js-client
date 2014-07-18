@@ -124,6 +124,9 @@ Game = Screen.extend({
   m_LevelTime: 10.0,
   m_GamePreviewCount: 0,
   m_GamePreviewTime: 0.5,
+  m_BonusKeysAnimationRunning: false,
+  m_BonusKeysAnimationTimeElapsed: 0,
+  m_BonusKeysAnimationTime: 0.2,
   m_Lifes: 0,
   m_Touch: {
     point: {
@@ -190,15 +193,17 @@ Game = Screen.extend({
     this.m_Birds = EntityManager.create(50, Bird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_BombBirds = EntityManager.create(10, BombBird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_FlayerBirds = EntityManager.create(10, FlayerBird.create(false, this.getPhysicsWorld()), this, 105);
-    this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 110, true);
-    this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110);
-    this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this, 201, true);
-    this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 201, true);
 
     this.m_PreviewText = Text.create(false, this.m_PreviewBackground);
 
     switch(this.m_Type) {
       case this.m_Types.progress:
+      this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this, 305);
+      this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 305);
+
+      this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 304);
+      this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 306);
+
       this.m_Ground = PhysicsEntity.create(s_Ground, 1, 1, this, this.getPhysicsWorld(), 0.1, 1.0, 0.1, 2.0, 8.0);
       this.m_Target = Target.create(this);
       this.m_Catapults = {
@@ -216,11 +221,11 @@ Game = Screen.extend({
           this.get(0).setFlippedHorizontally(false);
           this.get(1).setFlippedHorizontally(true);
 
-          this.get(0).createElements();
-          this.get(1).createElements();
-
           this.get(0).setZOrder(303);
           this.get(1).setZOrder(303);
+
+          this.get(0).createElements();
+          this.get(1).createElements();
         }
       };
       this.m_Notifications = {
@@ -250,11 +255,34 @@ Game = Screen.extend({
         this.createTutorialelements();
       }
 
+      this.m_KeysPanel = Entity.create(s_DailyMapTitle, this);
+
+      this.m_KeysPanel.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200));
+      this.m_KeysPanel.setZOrder(302);
+
+      /*this.m_KeysIcon = Entity.create(s_UnlockKey, this.m_KeysPanel);
+
+      this.m_KeysIcon.create().setCenterPosition(Camera.sharedCamera().coord(64), this.m_KeysPanel.getHeight() / 2);
+      this.m_KeysIcon.runAction(
+        cc.RepeatForever.create(
+          cc.Sequence.create(
+            cc.RotateTo.create(1.0, -15.0),
+            cc.RotateTo.create(1.0, 15.0),
+            false
+          )
+        )
+      );*/
+
+      this.m_BonusKeys = 0;
+      this.m_BonusKeysTemp = 0;
+
+      this.m_KeysText = Text.create('bonus-keys', this.m_KeysPanel);
+      this.m_KeysText.setCenterPosition(this.m_KeysPanel.getWidth() / 2, this.m_KeysPanel.getHeight() / 2);
+
       this.m_ElementsExplanationTexts = TiledEntity.create(LanguagesManager.sharedManager().parse(s_TutorialElementsExplanationTexts), 1, 5, this);
 
       this.m_ElementsExplanationTexts.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200));
       this.m_ElementsExplanationTexts.setZOrder(303);
-
 
       this.m_CombinationsNotification = BackgroundColor.create(cc.c4(255, 255, 255, 255), this, Camera.sharedCamera().width, Camera.sharedCamera().coord(200));
       this.m_CombinationsNotification.setCenterPosition(Camera.sharedCamera().center.x, -this.m_CombinationsNotification.getHeight());
@@ -265,8 +293,12 @@ Game = Screen.extend({
       this.m_CombinationsNotificationText.setColor(cc.c3(26, 92, 165));
       break;
       case this.m_Types.classic:
-      break;
       case this.m_Types.arcade:
+      this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 110, true);
+      this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 110);
+
+      this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this, 201, true);
+      this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 201, true);
       break;
     }
   },
@@ -341,6 +373,31 @@ Game = Screen.extend({
             )
           );
           this.m_Target.finish();
+        }
+
+        if(this.m_BonusKeysAnimationRunning) {
+          this.m_BonusKeysAnimationTimeElapsed += time;
+          if(this.m_BonusKeysAnimationTimeElapsed >= this.m_BonusKeysAnimationTime) {
+            this.m_BonusKeysAnimationTimeElapsed = 0;
+
+            if(this.m_BonusKeysTemp >= this.m_BonusKeys) {
+              this.m_BonusKeysAnimationRunning = false;
+
+              this.m_KeysPanel.runAction(
+                cc.Sequence.create(
+                  cc.EaseExponentialIn.create(
+                    cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200)))
+                  ),
+                  cc.CallFunc.create(this.onTurnFinish, this),
+                  false
+                )
+              );
+            } else {
+              this.m_BonusKeysTemp++;
+
+              this.m_KeysText.ccsf([this.m_BonusKeysTemp]);
+            }
+          }
         }
       }
       break;

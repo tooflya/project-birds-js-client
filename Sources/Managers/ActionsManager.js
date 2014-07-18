@@ -35,7 +35,26 @@ ActionsManager = cc.Node.extend({
     ActionsManager.instance = this;
   },
   add: function(data) {
-    this.m_Pool.push(data);
+    var exist = false;
+
+    for(var i = 0; i < this.m_Pool.length; i++) {
+      if(data.id == this.m_Pool[i].id) {
+        this.m_Pool[i].repeat++;
+        this.m_Pool[i].factor = Math.max(this.m_Pool[i].factor, data.factor);
+
+        exist = true;
+      }
+    }
+
+    if(!exist) {
+      data.repeat = 1;
+
+      this.m_Pool.push(data);
+    }
+
+    this.m_Pool.sort(function(previous, next) {
+      return next.id - previous.id;
+    });
   },
   remove: function(data) {
     this.m_Pool.splice(this.m_Pool.indexOf(data), 1);

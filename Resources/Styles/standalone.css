@@ -1,10 +1,10 @@
 *, html {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 @font-face {
   font-family: 'Comic Sans MS';
@@ -13,4 +13,9 @@
 @font-face {
   font-family: 'Comic Sans MS Bold';
   src: url('../Fonts/Comic Sans MS Bold.ttf');
+}
+div.canvas {
+  width: 979px;
+  height: 551px; 
+  margin: 100px auto;
 }

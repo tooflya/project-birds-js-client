@@ -159,7 +159,6 @@ Game.prototype.onGameFinish = function() {
 
   switch(this.m_Type) {
     case this.m_Types.progress:
-    this.onLevelFinish();
     break;
     case this.m_Types.classic:
     break;
@@ -215,6 +214,10 @@ Game.prototype.onPauseEvent = function() {
 };
 
 Game.prototype.onShow = function() {
+  this.m_Level = 1;
+  this.m_CurrentBlows = 0;
+  this.m_LevelTimeElapsed = 0;
+
   if(DataManager.sharedManager().get(references.coins.lives) > 0) {
     GamePanel.sharedScreen(this.m_Type, this).show();
 
@@ -222,6 +225,8 @@ Game.prototype.onShow = function() {
 
     switch(this.m_Type) {
       case this.m_Types.progress:
+      this.m_CurrentBlows = 20;
+
       this.onPreviewFinish();
       break;
       case this.m_Types.arcade:
@@ -234,10 +239,6 @@ Game.prototype.onShow = function() {
   } else {
     Lives.sharedScreen(this).show();
   }
-
-  this.m_Level = 1;
-  this.m_CurrentBlows = 0;
-  this.m_LevelTimeElapsed = 0;
 };
 
 Game.prototype.onHide = function() {

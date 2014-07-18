@@ -52,7 +52,7 @@ var g_language  = {
     ],
   'tutorial-2': [
     {title: 'Get the gold heart quicker than your rival', font: 'Comic Sans MS Bold', size: 46, dimensions: [550, 280]},
-    {title: 'Проберитесь к Большому сердцу быстрее Вашего соперника', font: 'Comic Sans MS', size: 42, dimensions: [550, 350]},
+    {title: 'Проберитесь к Большому сердцу быстрее Вашего соперника', font: 'Comic Sans MS Bold', size: 38, dimensions: [550, 350]},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
@@ -209,6 +209,36 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'bonus-keys': [
+    {title: {string: '$1 ', nom: 'key', gen: 'keys', plu: 'keys'}, font: 'Comic Sans MS Bold', size: 36, dimensions: false},
+    {title: {string: '$1 ', nom: 'ключ', gen: 'ключа', plu: 'ключей'}, font: 'Comic Sans MS Bold', size: 36, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 36, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 36, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 36, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 36, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 36, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 36, dimensions: false}
+    ],
+  'player-health': [
+    {title: 'HP $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'Здоровье: $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'HP $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'HP $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'HP $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'HP $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'HP $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'HP $1', font: 'RiiPopkk-R', size: 24, dimensions: false}
+    ],
+  'player-defence': [
+    {title: 'DF $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'Защита: $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'DF $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'DF $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'DF $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'DF $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'DF $1', font: 'Comic Sans MS Bold', size: 24, dimensions: false},
+    {title: 'DF $1', font: 'RiiPopkk-R', size: 24, dimensions: false}
     ],
   'vk-price-text': [
     {title: '$1 votes', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -469,6 +499,16 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
     {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [512, 0]}//
+    ],
+  'moves-popup-1': [
+    {title: 'You have run out of moves but you can restore them right now!', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]},
+    {title: 'У вас закончились ходы, но вы можете восстановить их прямо сейчас!', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [512, 0]}
     ],
   'coins-popup': [
     {title: 'You need to buy some coins!', font: 'Comic Sans MS', size: 48, dimensions: [512, 0]},

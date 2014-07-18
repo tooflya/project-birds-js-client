@@ -39,40 +39,6 @@ MatrixManager = cc.Node.extend({
   m_CurrentElement1: false,
   m_CurrentElement2: false,
   m_Combinations: false,
-  m_TutorialMatrix: [
-    [4, 2, 4, 1, 2, 3, 3, 1, 2, 1],
-    [4, 1, 0, 3, 1, 4, 3, 2, 3, 1],
-    [2, 2, 1, 3, 3, 4, 0, 0, 2, 0],
-    [0, 0, 3, 1, 3, 3, 2, 0, 4, 3],
-    [3, 3, 4, 2, 4, 0, 2, 1, 0, 0],
-    [4, 3, 0, 3, 4, 4, 3, 4, 1, 0],
-    [1, 1, 2, 4, 1, 0, 0, 2, 0, 2],
-    [1, 3, 0, 3, 0, 4, 3, 4, 3, 0],
-    [3, 4, 3, 0, 2, 2, 0, 3, 1, 3],
-    [1, 3, 4, 1, 4, 0, 2, 4, 4, 0],
-    [3, 2, 3, 4, 4, 2, 4, 4, 3, 1],
-    [4, 3, 4, 3, 0, 0, 2, 0, 4, 3],
-    [0, 0, 2, 3, 4, 1, 4, 1, 2, 4],
-    [2, 1, 4, 0, 3, 2, 1, 1, 0, 0]
-  ],
-  m_TestMatrixes: [
-    [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, -3, 1, 1, 1, 1, 1, 1, 1],
-    [1, -2, 1, 1, 1, 1, 1, 1, -2, 1],
-    [1, 1, 1, 1, -1, -1, 1, 1, -3, 1],
-    [1, 1, 1, -1, -1, -1, -1, 1, 1, 1],
-    [1, 1, -1, -1, -1, -1, -1, -1, 1, 1],
-    [1, -1, -1, 1, 1, 1, 1, -1, -1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
-  ],
   ctor: function() {
     this._super();
 
@@ -91,6 +57,9 @@ MatrixManager = cc.Node.extend({
   },
   busy: function() {
     return this.m_Busy;
+  },
+  unbusy: function() {
+    this.m_Busy = false;
   },
   set: function(element, x, y, created) {
     if(element === etypes.empty || element === etypes.block) {
@@ -188,7 +157,7 @@ MatrixManager = cc.Node.extend({
     if(this.m_Combinations.length > 0) {
       var priority = 0;
       var combination = false;
-      var types = [[], [], [], [], [], []];
+      var types = [[], [], [], [], [], [], [], [], []];
       var health = Game.sharedScreen().m_Catapults.get(1).m_Health;
 
       for(var i = 0; i < this.m_Combinations.length; i++) {
@@ -234,6 +203,8 @@ MatrixManager = cc.Node.extend({
     return false;
   },
   replace: function(element, neighbor, back) {
+    Sound.sharedSound().play(s_SoundExchange);
+
     if(neighbor instanceof Element) {
       if(!back) {
         if(this.m_CurrentElement1) this.m_CurrentElement1.onChangePosition();
@@ -338,52 +309,92 @@ MatrixManager = cc.Node.extend({
     return this.m_Size;
   },
   clear: function() {
-    var factor = 0;
+    this.m_PauseTime = Array();
 
-    for(var i = 0; i < MatrixManager.pool.horizontal.length; i++) {
-      if(MatrixManager.pool.horizontal[i]) {
-        MatrixManager.pool.horizontal[i].remove();
+    if(this.m_Timeout) {
+      window.clearTimeout(this.m_Timeout);
 
-        factor++;
+      this.m_Timeout = false;
+    }
+
+    for(var a = 0; a < MatrixManager.pools.length; a++) {
+      var bonus = {
+        horizontal: 0,
+        vertical: 0,
+
+        element: false,
+        elements: [],
+        icons: []
+      };
+
+      var factor = 0;
+      var pool = MatrixManager.pools[a];
+
+      for(var i = 0; i < pool.horizontal.length; i++) {
+        if(pool.horizontal[i]) {
+          if(!pool.horizontal[i].m_Removed) {
+            bonus.icons = bonus.icons.concat(pool.horizontal[i].remove());
+            bonus.elements.push(pool.horizontal[i]);
+
+            factor++;
+
+            bonus.horizontal++;
+          }
+        }
+      }
+      for(var i = 0; i < pool.vertical.length; i++) {
+        if(pool.vertical[i]) {
+          if(!pool.vertical[i].m_Removed) {
+            bonus.icons = bonus.icons.concat(pool.vertical[i].remove());
+            bonus.elements.push(pool.vertical[i]);
+
+            factor++;
+
+            bonus.vertical++;
+          }
+        }
+      }
+      if(pool.element) {
+        if(!pool.element.m_Removed) {
+          bonus.element = pool.element;
+
+          factor++;
+
+          ActionsManager.sharedManager().add({
+            id: pool.element.getId(),
+            factor: factor - 2
+          });
+
+          pool.element.remove();
+
+          Game.sharedScreen().onBlow(pool.element);
+
+          if(bonus.horizontal > 3 || bonus.vertical > 3) {
+            ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.bomb);
+          } else if(bonus.horizontal >= 2 && bonus.vertical >= 2) {
+            ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.pack);
+          } else if(bonus.horizontal >= 3) {
+            ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.vertical);
+          } else if(bonus.vertical >= 3) {
+            ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.horizontal);
+          }
+        }
       }
     }
-    for(var i = 0; i < MatrixManager.pool.vertical.length; i++) {
-      if(MatrixManager.pool.vertical[i]) {
-        MatrixManager.pool.vertical[i].remove();
 
-        factor++;
-      }
-    }
-    if(MatrixManager.pool.element) {
-      factor++;
-
-      ActionsManager.sharedManager().add({
-        id: MatrixManager.pool.element.getId(),
-        factor: factor - 2
-      });
-
-      MatrixManager.pool.element.remove();
-
-      Game.sharedScreen().onBlow(MatrixManager.pool.element);
-    }
-
-    MatrixManager.pool.horizontal = [];
-    MatrixManager.pool.vertical = [];
-    MatrixManager.pool.element = false;
+    MatrixManager.pools = [];
 
     if(!Game.sharedScreen().m_TutorialRunning) {
       window.setTimeout(function() {
-        MatrixManager.pause = 0;
-
         MatrixManager.sharedManager().lookDown();
 
-        window.setTimeout(function() {
+        MatrixManager.sharedManager().m_Timeout = window.setTimeout(function() {
+          MatrixManager.pause = 0;
+
           if(!MatrixManager.sharedManager().findAll()) {
-            // TODO: Combinations?
-    
             ActionsManager.sharedManager().run();
           }
-        }, 500 + MatrixManager.pause);
+        }, MatrixManager.pause * 1000);
       }, 1000);
     }
   },
@@ -411,6 +422,8 @@ MatrixManager = cc.Node.extend({
 
     var result = this.hasMatches(element);
 
+    MatrixManager.pools = [];
+
     if(!result) {
       this.set(element, index1.x, index1.y);
       this.set(neighbor, index2.x, index2.y);
@@ -425,11 +438,14 @@ MatrixManager = cc.Node.extend({
   },
   hasMatches: function(element, data) {
     if(!element || element === etypes.empty || element === etypes.block) return false;
+    if(element.getId() == etypes.star) return false;
 
     if(!data) {
-      MatrixManager.pool.horizontal = [];
-      MatrixManager.pool.vertical = [];
-      MatrixManager.pool.element = element;
+      MatrixManager.pools.push(MatrixManager.pool());
+
+      MatrixManager.pools.last().horizontal = [];
+      MatrixManager.pools.last().vertical = [];
+      MatrixManager.pools.last().element = element;
     }
 
     var index = element.getIndex();
@@ -472,19 +488,17 @@ MatrixManager = cc.Node.extend({
         var vertical = 1 + this.top + this.down;
 
         if(horizontal < 3) {
-          MatrixManager.pool.horizontal = [];
+          MatrixManager.pools.last().horizontal = [];
         }
 
         if(vertical < 3) {
-          MatrixManager.pool.vertical = [];
+          MatrixManager.pools.last().vertical = [];
         }
 
         if(horizontal >= 3 || vertical >= 3) {
-          return (MatrixManager.pool.horizontal.length + MatrixManager.pool.vertical.length + 1);
+          return (MatrixManager.pools.last().horizontal.length + MatrixManager.pools.last().vertical.length + 1);
         } else {
-          MatrixManager.pool.horizontal = [];
-          MatrixManager.pool.vertical = [];
-          MatrixManager.pool.element = false;
+          MatrixManager.pools.pop();
 
           return false;
         }
@@ -501,7 +515,7 @@ MatrixManager = cc.Node.extend({
           if(neighbor.getId() == id) {
             matches.top++;
 
-            MatrixManager.pool.vertical.push(neighbor);
+            MatrixManager.pools.last().vertical.push(neighbor);
 
             matches.add(this.hasMatches(neighbor, {
               previous: element,
@@ -525,7 +539,7 @@ MatrixManager = cc.Node.extend({
           if(neighbor.getId() == id) {
             matches.down++;
 
-            MatrixManager.pool.vertical.push(neighbor);
+            MatrixManager.pools.last().vertical.push(neighbor);
 
             matches.add(this.hasMatches(neighbor, {
               previous: element,
@@ -549,7 +563,7 @@ MatrixManager = cc.Node.extend({
           if(neighbor.getId() == id) {
             matches.left++;
 
-            MatrixManager.pool.horizontal.push(neighbor);
+            MatrixManager.pools.last().horizontal.push(neighbor);
 
             matches.add(this.hasMatches(neighbor, {
               previous: element,
@@ -573,7 +587,7 @@ MatrixManager = cc.Node.extend({
           if(neighbor.getId() == id) {
             matches.right++;
 
-            MatrixManager.pool.horizontal.push(neighbor);
+            MatrixManager.pools.last().horizontal.push(neighbor);
 
             matches.add(this.hasMatches(neighbor, {
               previous: element,
@@ -594,11 +608,39 @@ MatrixManager = cc.Node.extend({
   find: function() {
     this.disable();
 
-    if(!this.hasMatches(this.m_CurrentElement1) && !this.hasMatches(this.m_CurrentElement2)) {
-      this.replace(this.m_CurrentElement2, this.m_CurrentElement1, true);
+    MatrixManager.pools = [];
+
+    var result1 = this.hasMatches(this.m_CurrentElement1);
+    var result2 = this.hasMatches(this.m_CurrentElement2);
+
+    if(!result1 && !result2) {
+      if(!this.m_CurrentElement1.m_Bonus && !this.m_CurrentElement2.m_Bonus) {
+        this.replace(this.m_CurrentElement2, this.m_CurrentElement1, true);
+      } else {
+        this.clear();
+
+        this.m_CurrentElement1.remove(true);
+        this.m_CurrentElement2.remove(true);
+      }
     } else {
+      if(Game.instance.m_PlayerTurn) {
+        Game.instance.m_CurrentBlows--;
+      }
+
       this.m_CurrentElement1.onChangePosition(false, true);
       this.m_CurrentElement2.onChangePosition(false, true);
+
+      if(!result1) {
+        if(this.m_CurrentElement1.m_Bonus) {
+          this.m_CurrentElement1.remove(true);
+        }
+      }
+
+      if(!result2) {
+        if(this.m_CurrentElement2.m_Bonus) {
+          this.m_CurrentElement2.remove(true);
+        }
+      }
 
       this.m_CurrentElement1 = false;
       this.m_CurrentElement2 = false;
@@ -610,7 +652,7 @@ MatrixManager = cc.Node.extend({
       this.clear();
     }
   },
-  findAll: function() {
+  fillAll: function() {
     for(var i = 0; i < this.getSize().x; i++) {
       for(var j = this.getSize().y; j < this.getSize().y * 2; j++) {
         var frame = this.m_Matrix[i][j];
@@ -619,89 +661,89 @@ MatrixManager = cc.Node.extend({
 
           this.set(element, i, j, true);
 
-          var x = this.m_Matrix[i][j - 1].getCenterX();
-          var y = this.m_Matrix[i][j - 1].getCenterY() + element.getHeight();
+          var down = this.m_Matrix[i][j - 1];
 
-          element.setCenterPosition(x, y);
+          if(down && down != etypes.empty && down != etypes.block) {
+            var x = down.getCenterX();
+            var y = down.getCenterY() + element.getHeight();
+
+            element.setCenterPosition(x, y);
+          }
         }
       }
     }
+
+    for(var i = 0; i < this.getSize().x; i++) {
+      for(var j = 0; j < this.getSize().y * 2; j++) {
+        var frame = this.m_Matrix[i][j];
+        if(frame && frame != etypes.empty && frame != etypes.block) {
+          frame.setCenterPosition(ElementsManager.sharedManager().getParent().getWidth() / 4 + frame.getWidth() * frame.getIndex().x - frame.getWidth() / 4 + Camera.sharedCamera().coord(4), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
+        }
+      }
+    }
+  },
+  findAll: function() {
+    MatrixManager.pools = [];
+
+    this.fillAll();
+
+    var combinations = 0;
     for(var i = 0; i < this.getSize().x; i++) {
       for(var j = 0; j < this.getSize().y; j++) {
         if(this.hasMatches(this.m_Matrix[i][j])) {
-          this.clear();
-
-          return true;
+          combinations++;
         }
       }
     }
 
-    return false;
+    if(combinations > 0) {
+      this.clear();
+    }
+
+    return combinations > 0;
   },
-  lookDown: function() {
+  lookDown: function(clear) {
     if(!Game.sharedScreen().m_TutorialRunning) {
-      for(var i = 0; i < this.getSize().x; i++) {
-        for(var j = 0; j < this.getSize().y * 2; j++) {
+      for(var j = 0; j < this.getSize().y * 2; j++) {
+        for(var i = 0; i < this.getSize().x; i++) {
           var frame = this.m_Matrix[i][j];
-          if(frame && frame != etypes.empty && frame != etypes.block) this.m_Matrix[i][j].lookDown();
+          if(frame && frame != etypes.empty && frame != etypes.block) this.m_Matrix[i][j].lookDown(true);
         }
       }
     }
   },
-  moveDown: function(element, data) {
-    var index = element.getIndex();
+  moveDown: function(element, data, actions) {
+    var index = {
+      x: element.getIndex().x,
+      y: element.getIndex().y,
+    };
+
+    if(!this.m_PauseTime[index.x]) this.m_PauseTime[index.x] = 0;
 
     this.m_Matrix[index.x][index.y] = false;
 
-    if(data.left > 0 && data.right > 0) {
-      if(Random.sharedRandom().probably(50)) {
-        data.left = 0;
-      } else {
-        data.right = 0;
-      }
+    var x = element.getCenterX();
+    var y = element.getCenterY();
+    var w = element.getWidth();
+    var h = element.getHeight();
+
+    this.set(element, index.x - data.left + data.right, index.y - data.down);
+
+    actions.unshift(cc.DelayTime.create(this.m_PauseTime[index.x]));
+    actions.push(cc.CallFunc.create(element.onChangePosition, element, {replaced: true}));
+    actions.push(cc.ScaleTo.create(0.2, 1.1, 0.9));
+    actions.push(cc.ScaleTo.create(0.1, 1.0, 1.0));
+    actions.push(false);
+
+    var sequence = cc.Sequence.create(actions);
+
+    element.runAction(sequence);
+
+    this.m_PauseTime[index.x] += 0.1;
+
+    if(index.y - data.down < this.getSize().y) {
+      MatrixManager.pause = Math.max(MatrixManager.pause, sequence.getDuration() + this.m_PauseTime.max());
     }
-
-    if(data.left > 0) {
-      this.set(element, index.x - data.left, index.y - data.down);
-      
-      element.runAction(
-        cc.Sequence.create(
-          cc.MoveTo.create(0.1 * (data.down - data.left) / 2, cc.p(element.getCenterX(), element.getCenterY() - element.getHeight() * (data.down - data.left))),
-          cc.MoveTo.create(0.1 * data.left / 2, cc.p(element.getCenterX() - element.getWidth() * data.left, element.getCenterY() - element.getHeight())),
-          cc.MoveTo.create(0.1, cc.p(element.getCenterX() - element.getWidth() * data.left, element.getCenterY() - element.getHeight() * data.down + element.getHeight() / 4)),
-          cc.MoveTo.create(0.05, cc.p(element.getCenterX() - element.getWidth() * data.left, element.getCenterY() - element.getHeight() * data.down)),
-          cc.CallFunc.create(element.onChangePosition, element, {replaced: true}),
-          false
-        )
-      );
-    } else if(data.right > 0) {
-      this.set(element, index.x + data.right, index.y - data.down);
-      
-      element.runAction(
-        cc.Sequence.create(
-          cc.MoveTo.create(0.1 * (data.down - data.right) / 2, cc.p(element.getCenterX(), element.getCenterY() - element.getHeight() * (data.down - data.right))),
-          cc.MoveTo.create(0.1 * data.right / 2, cc.p(element.getCenterX() + element.getWidth() * data.right, element.getCenterY() - element.getHeight())),
-          cc.MoveTo.create(0.1, cc.p(element.getCenterX() + element.getWidth() * data.right, element.getCenterY() - element.getHeight() * data.down + element.getHeight() / 4)),
-          cc.MoveTo.create(0.05, cc.p(element.getCenterX() + element.getWidth() * data.right, element.getCenterY() - element.getHeight() * data.down)),
-          cc.CallFunc.create(element.onChangePosition, element, {replaced: true}),
-          false
-        )
-      );
-    } else {
-      this.set(element, index.x, index.y - data.down);
-
-      element.runAction(
-        cc.Sequence.create(
-          cc.MoveTo.create(0.1 * data.down / 2, cc.p(element.getCenterX(), element.getCenterY() - element.getHeight() * data.down)),
-          cc.MoveTo.create(0.1, cc.p(element.getCenterX(), element.getCenterY() - element.getHeight() * data.down + element.getHeight() / 4)),
-          cc.MoveTo.create(0.05, cc.p(element.getCenterX(), element.getCenterY() - element.getHeight() * data.down)),
-          cc.CallFunc.create(element.onChangePosition, element, {replaced: true}),
-          false
-        )
-      );
-    }
-
-    MatrixManager.pause = Math.max(MatrixManager.pause, 0.1 * data.down / 2 + 0.1 + 0.05);
   },
   shuffle: function() {
     var counter = 0;
@@ -725,14 +767,177 @@ MatrixManager = cc.Node.extend({
         }
       }
     }
+  },
+  removeHorizontalLine: function(x, y, element) {
+    var sickle1 = ElementsManager.instance.m_ElementsSickles.create();
+    var sickle2 = ElementsManager.instance.m_ElementsSickles.create();
+
+    sickle1.setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2);
+    sickle1.setOpacity(255);
+    sickle2.setRotation(0);
+    sickle1.setFlippedHorizontally(true);
+    sickle1.runAction(cc.MoveTo.create(0.5, cc.p(sickle1.getCenterX() - Camera.sharedCamera().center.x, sickle1.getCenterY())));
+    sickle1.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.4),
+        cc.FadeTo.create(0.1, 0.0),
+        false
+      )
+    );
+
+    sickle2.setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2);
+    sickle2.setOpacity(255);
+    sickle2.setRotation(0);
+    sickle2.setFlippedHorizontally(false);
+    sickle2.runAction(cc.MoveTo.create(0.5, cc.p(sickle2.getCenterX() + Camera.sharedCamera().center.x, sickle2.getCenterY())));
+    sickle2.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.4),
+        cc.FadeTo.create(0.1, 0.0),
+        false
+      )
+    );
+
+    var time;
+
+    time = 0.05;
+    for(var i = x - 1; i >= 0; i--) {
+      var current = this.get(i, y);
+
+      if(current && current != etypes.empty && current != etypes.block && current != etypes.star) {
+        current.runAction(
+          cc.Sequence.create(
+            cc.DelayTime.create(time),
+            cc.CallFunc.create(current.remove, current, current),
+            false
+          )
+        );
+      }
+
+      time += 0.05;
+
+      if(!this.m_PauseTime[i]) {
+        this.m_PauseTime[i] = time;
+      } else {
+        this.m_PauseTime[i] += time;
+      }
+    }
+
+    time = 0.05;
+    for(var i = x + 1; i < this.getSize().x; i++) {
+      var current = this.get(i, y);
+
+      if(current && current != etypes.empty && current != etypes.block && current != etypes.star) {
+        current.runAction(
+          cc.Sequence.create(
+            cc.DelayTime.create(time),
+            cc.CallFunc.create(current.remove, current, current),
+            false
+          )
+        );
+      }
+
+      time += 0.05;
+
+      if(!this.m_PauseTime[i]) {
+        this.m_PauseTime[i] = time;
+      } else {
+        this.m_PauseTime[i] += time;
+      }
+    }
+
+    MatrixManager.pause += 1.0;
+
+    Sound.sharedSound().play(s_SoundLine);
+  },
+  removeVerticalLine: function(x, y, element) {
+    var sickle1 = ElementsManager.instance.m_ElementsSickles.create();
+    var sickle2 = ElementsManager.instance.m_ElementsSickles.create();
+
+    sickle1.setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2);
+    sickle1.setOpacity(255);
+    sickle2.setRotation(-90);
+    sickle1.setFlippedHorizontally(false);
+    sickle1.runAction(cc.MoveTo.create(0.5, cc.p(sickle1.getCenterX(), sickle1.getCenterY() + Camera.sharedCamera().center.y)));
+    sickle1.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.4),
+        cc.FadeTo.create(0.1, 0.0),
+        false
+      )
+    );
+
+    sickle2.setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2);
+    sickle2.setOpacity(255);
+    sickle2.setRotation(90);
+    sickle2.setFlippedHorizontally(false);
+    sickle2.runAction(cc.MoveTo.create(0.5, cc.p(sickle2.getCenterX(), sickle2.getCenterY() - Camera.sharedCamera().center.y)));
+    sickle2.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.4),
+        cc.FadeTo.create(0.1, 0.0),
+        false
+      )
+    );
+
+    var time;
+
+    time = 0.05;
+    for(var i = y - 1; i >= 0; i--) {
+      var current = this.get(x, i);
+
+      if(current && current != etypes.empty && current != etypes.block) {
+        if(current.getId() != Element.types.star) {
+          current.runAction(
+            cc.Sequence.create(
+              cc.DelayTime.create(time),
+              cc.CallFunc.create(current.remove, current, current),
+              false
+            )
+          );
+        }
+      }
+
+      time += 0.05;
+    }
+
+    time = 0.05;
+    for(var i = y + 1; i < this.getSize().y; i++) {
+      var current = this.get(x, i);
+
+      if(current && current != etypes.empty && current != etypes.block) {
+        if(current.getId() != Element.types.star) {
+          current.runAction(
+            cc.Sequence.create(
+              cc.DelayTime.create(time),
+              cc.CallFunc.create(current.remove, current, current),
+              false
+            )
+          );
+        }
+      }
+
+      time += 0.05;
+    }
+
+    if(!this.m_PauseTime[x]) {
+      this.m_PauseTime[x] = time;
+    } else {
+      this.m_PauseTime[x] += time;
+    }
+
+    Sound.sharedSound().play(s_SoundLine);
   }
 });
 
 MatrixManager.pause = 0;
-MatrixManager.pool = {
-  horizontal: [],
-  vertical: [],
-  element: false
+MatrixManager.pools = [];
+MatrixManager.pool = function () {
+  return {
+    horizontal: [],
+    vertical: [],
+    element: false
+  };
 };
 MatrixManager.instance = false;
 MatrixManager.sharedManager = function() {

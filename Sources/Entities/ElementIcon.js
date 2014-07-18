@@ -40,7 +40,7 @@ ElementIcon = TiledEntity.extend({
 
     this.m_Id = element.getId();
     this.setCurrentFrameIndex(this.m_Id);
-    this.setCenterPosition(element.getCenterX(), element.getCenterY());
+    this.setCenterPosition(element.getCenterX(), element.getCenterY() + element.getHeight() / 2);
 
     this.runAction(
       cc.Sequence.create(
@@ -53,6 +53,8 @@ ElementIcon = TiledEntity.extend({
           cc.CallFunc.create(this.destroy, this, this)
       )
     );
+
+    return this;
   },
   onCreate: function() {
     this._super();

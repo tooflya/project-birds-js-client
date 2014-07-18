@@ -29,66 +29,315 @@
  *
  */
 
-CatapultBird = TiledEntity.extend({
+CatapultBird = AnimatedEntity.extend({
+  m_Catapult: false,
   m_Id: 0,
-  m_OpponentId: 0,
-  ctor: function(parent, id) {
-    this._super(s_CatapultBirds, 1, 4, parent);
+  m_State: 0,
+  m_States: {
+    stop: 0,
+    run: 1,
+    jump: 2,
+    fire: 3,
+    blow: 4,
+    defence: 5
+  },
+  m_StateData: false,
+  m_DongleTime: 0,
+  m_DongleTimeElapsed: 0,
+  m_Shield: false,
+  animations: {
+    fly: 0,
+    dongle: 1
+  },
+  ctor: function(parent, catapult) {
+    this._super(s_CatapultBirds, 14, 9, parent);
 
-    this.m_Id = id;
+    this.m_Catapult = catapult;
 
-    if(this.m_Id == 1) this.m_OpponentId = 0;
-    if(this.m_Id == 0) this.m_OpponentId = 1;
+    this.chooseId();
+    this.setAnchorPoint(cc.p(0.5, 0.0));
+
+    this.m_Decorations = [];
+    for(var i = 0; i < 2; i++) {
+      this.m_Decorations[i] = Entity.create(s_PopupDecoration1, this);
+
+      this.m_Decorations[i].create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2);
+      this.m_Decorations[i].setScale(0.0);
+    }
+    this.m_Shield = Entity.create(s_CatapultBirdsShield, this);
   },
   onCreate: function() {
     this._super();
   },
   onDestroy: function() {
     this._super();
-
-    Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY());
   },
-  fire: function() {
-    var target = Game.instance.m_Catapults.get(this.m_OpponentId);
+  onBlow: function() {
+    Game.sharedScreen().m_Explosions.create().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
 
-    var bezier = Array();
-    bezier[0] = cc.p(this.getCenterX()/2, this.getCenterY()/2);
-    bezier[1] = cc.p(Camera.instance.center.x/2, Camera.instance.height);
-    bezier[2] = cc.p(target.getCenterX()/2, target.getCenterY()/2);
+    if(!cc.Browser.isMobile) {
+      for(var i = 0; i < 50; i++) {
+        Game.sharedScreen().m_Feathers.create();
+
+        Game.sharedScreen().m_Feathers.last().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
+        Game.sharedScreen().m_Feathers.last().setCurrentFrameIndex(this.m_Id / this.getHorizontalFramesCount());
+      }
+    }
+
+    this.m_Catapult.m_Birds.renew();
+
+    Sound.sharedSound().play(s_SoundBirdExplosion);
+  },
+  onStop: function() {
+    this.setCurrentFrameIndex(this.m_Id + 10);
+  },
+  onRun: function() {
+    this.stopAllActions();
+
+    this.animate(this.animations.fly);
+
+    var bezier = [];
+
+    bezier.push(cc.p(this.getCenterX(), this.getCenterY()));
+    bezier.push(cc.p(this.getCenterX() + ((this.m_StateData.distance || this.m_Catapult.m_LastMoveDistance) / 2) * (this.isFlippedHorizontally() ? -1 : 1), this.getCenterY() + ((this.m_StateData.distance || this.m_Catapult.m_LastMoveDistance) / 2)));
+    bezier.push(cc.p(this.getCenterX() + (this.m_StateData.distance || this.m_Catapult.m_LastMoveDistance) * (this.isFlippedHorizontally() ? -1 : 1), this.getCenterY()));
 
     this.runAction(
       cc.Sequence.create(
-        cc.BezierTo.create(2.0, bezier),
-        cc.CallFunc.create(this.destroy, this),
+        cc.DelayTime.create(this.m_StateData ? this.m_StateData.pause : 0),
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.BezierTo.create(0.5, bezier),
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.CallFunc.create(this.changeStateAction, this, this.m_States.stop),
         false
       )
     );
   },
-  updateRotation: function() {
-    var target = Game.instance.m_Catapults.get(this.m_OpponentId);
+  onJump: function() {
+    this.animate(this.animations.dongle);
 
-    var x = target.getCenterX();
-    var y = target.getCenterY();
+    this.runAction(
+      cc.Sequence.create(
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.EaseExponentialOut.create(
+          cc.MoveTo.create(0.5, cc.p(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(50)))
+        ),
+        cc.EaseExponentialIn.create(
+          cc.MoveTo.create(0.5, cc.p(this.getCenterX(), this.getCenterY()))
+        ),
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.CallFunc.create(this.changeStateAction, this, this.m_States.stop),
+        false
+      )
+    );
+  },
+  onFire: function() {
+    this.stopAllActions();
 
-    var dx = x - this.getCenterX();
-    var dy = y - this.getCenterY();
+    this.animate(this.animations.dongle);
 
-    var r = Math.atan2(dy, dx);
+    var opponent = Game.instance.m_Catapults.get(this.isFlippedHorizontally() ? 0 : 1);
 
-    this.setRotation(r * 180 / Math.PI);
+    var bezier = [];
+
+    bezier.push([]);
+    bezier.push([]);
+
+    var x, y;
+
+    x = this.getCenterX();
+    y = this.getCenterY();
+
+    bezier[0].push(cc.p(x, y));
+    bezier[0].push(cc.p(x + Camera.sharedCamera().coord(20) * (this.isFlippedHorizontally() ? -1 : 1), y + Camera.sharedCamera().coord(80)));
+    bezier[0].push(cc.p(x + Camera.sharedCamera().coord(45) * (this.isFlippedHorizontally() ? -1 : 1), y + Camera.sharedCamera().coord(45)));
+
+    x = this.getCenterX() + Camera.sharedCamera().coord(45) * (this.isFlippedHorizontally() ? -1 : 1);
+    y = this.getCenterY() + Camera.sharedCamera().coord(45);
+
+    bezier[1].push(cc.p(x, y));
+    bezier[1].push(cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height));
+    bezier[1].push(cc.p(opponent.getCenterX(), opponent.getCenterY()));
+
+    this.runAction(
+      cc.Sequence.create(
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.BezierTo.create(0.5, bezier[0]),
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.CallFunc.create(this.m_Catapult.onFire, this.m_Catapult, this),
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.BezierTo.create(1.1, bezier[1]),
+        cc.CallFunc.create(this.changeStateAction, this, this.m_States.blow),
+        false
+      )
+    );
+  },
+  onDefence: function() {
+    this.stopAllActions();
+
+    this.m_Shield.create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2);
+
+    this.m_Shield.runAction(
+      cc.Sequence.create(
+        cc.ScaleTo.create(0.3, 1.2),
+        cc.ScaleTo.create(0.1, 1.0),
+        cc.ScaleTo.create(0.1, 1.2),
+        cc.ScaleTo.create(0.2, 0.0),
+        cc.CallFunc.create(this.m_Shield.destroy, this.m_Shield),
+        false
+      )
+    );
+
+    for(var i = 0; i < 2; i++) {
+      this.m_Decorations[i].setScale(0.0);
+      this.m_Decorations[i].runAction(
+        cc.Sequence.create(
+          cc.ScaleTo.create(0.2, 1.2),
+          cc.ScaleTo.create(0.1, 0.8),
+          cc.ScaleTo.create(0.1, 1.0),
+          cc.ScaleTo.create(0.1, 0.8),
+          cc.ScaleTo.create(0.1, 1.2),
+          cc.ScaleTo.create(0.05, 0.0),
+          cc.CallFunc.create(this.changeStateAction, this, this.m_States.jump),
+          false
+        )
+      );
+    }
+
+    Sound.sharedSound().play(s_SoundSlash);
+
+    if(this.m_StateData) {
+      if(this.m_StateData.callback) {
+        this.m_StateData.callback();
+      }
+    }
+  },
+  stopAllActions: function() {
+    this._super();
+
+    this.setScale(1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1));
+    this.setCenterPosition(this.getCenterX(), Camera.sharedCamera().coord(10));
+  },
+  changeStateAction: function(selectot, state, data) {
+    switch(this.m_State) {
+      case this.m_States.stop:
+      break;
+      case this.m_States.run:
+      if(this.m_StateData) {
+        if(this.m_StateData.callback) {
+          this.m_StateData.callback();
+        }
+      }
+      break;
+      case this.m_States.jump:
+      break;
+      case this.m_States.fire:
+      break;
+      case this.m_States.blow:
+      break;
+      case this.m_States.defence:
+      break;
+    }
+
+    this.changeState(state, data);
+  },
+  changeState: function(state, data) {
+    this.m_StateData = data;
+    this.m_State = state;
+
+    switch(state) {
+      case this.m_States.stop:
+      this.onStop();
+      break;
+      case this.m_States.run:
+      this.onRun();
+      break;
+      case this.m_States.jump:
+      this.onJump();
+      break;
+      case this.m_States.fire:
+      this.onFire();
+      break;
+      case this.m_States.blow:
+      this.onBlow();
+      break;
+      case this.m_States.defence:
+      this.stopAllActions();
+
+      this.m_StateData.enable = false;
+      break;
+    }
+  },
+  chooseId: function() {
+    this.m_Id = Random.sharedRandom().random(0, Bird.count, true) * this.getHorizontalFramesCount();
+
+    this.setCurrentFrameIndex(this.m_Id + 10);
+  },
+  animate: function(type) {
+    switch(type) {
+      case this.animations.fly:
+      this._super(0.06, 1, {start: this.m_Id + 5, end: this.m_Id + 12});
+      break;
+      case this.animations.dongle:
+      this._super(0.06, 5, {start: this.m_Id, end: this.m_Id + 12});
+      break;
+    }
+  },
+  updateState: function(time) {
+    switch(this.m_State) {
+      case this.m_States.stop:
+      this.m_DongleTimeElapsed += time;
+      if(this.m_DongleTimeElapsed >= this.m_DongleTime) {
+        this.m_DongleTime = Random.sharedRandom().random(5.0, 15.0);
+        this.m_DongleTimeElapsed = 0;
+
+        this.changeState(this.m_States.jump);
+      }
+      break;
+      case this.m_States.run:
+      break;
+      case this.m_States.jump:
+      break;
+      case this.m_States.fire:
+      Game.instance.m_WeaponParticles1.create().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
+      Game.instance.m_WeaponParticles2.create().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
+      break;
+      case this.m_States.blow:
+      break;
+      case this.m_States.defence:
+      if(!this.m_StateData.enable) {
+        this.m_StateData.pause -= time;
+        if(this.m_StateData.pause <= 0) {
+          this.m_StateData.enable = true;
+
+          this.onDefence();
+        }
+      }
+      break;
+    }
   },
   update: function(time) {
     this._super(time);
 
-    this.updateRotation();
+    this.updateState(time);
+
+    this.m_Decorations[0].setRotation(this.m_Decorations[0].getRotation() - 0.1);
+    this.m_Decorations[1].setRotation(this.m_Decorations[1].getRotation() + 0.1);
   },
   deepCopy: function() {
-    return CatapultBird.create(false, this.m_Id);
+    return CatapultBird.create(false, this.m_Catapult);
   }
 });
 
-CatapultBird.create = function(parent, id) {
-  var entity = new CatapultBird(parent, id);
+CatapultBird.create = function(parent, catapult) {
+  var entity = new CatapultBird(parent, catapult);
 
   return entity;
 };

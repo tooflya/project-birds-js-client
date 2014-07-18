@@ -34,16 +34,24 @@ Element = TiledEntity.extend({
   m_Index: -1,
   m_Glow: false,
   m_GlowAnimationRunning: false,
+  m_Removed: true,
+  m_Bonus: false,
   ctor: function() {
-    this._super(s_Elements, 8, 2);
+    this._super(s_Elements, 8, 6);
 
     this.m_Index = {
       x: -1,
       y: -1
     };
+
+    this.setAnchorPoint(cc.p(0.5, 0.0));
   },
   onCreate: function() {
     this._super();
+
+    this.m_Bonus = false;
+
+    this.setRotation(0);
   },
   onDestroy: function() {
     this._super();
@@ -63,39 +71,77 @@ Element = TiledEntity.extend({
       break;
     }
   },
-  onRemove: function(data) {
+  onRemove: function() {
+    var icons = [];
+
     switch(this.getId()) {
       default:
       this.destroy();
 
-      ElementsManager.sharedManager().m_ElementsIcons.create(this);
+      icons.push(ElementsManager.sharedManager().m_ElementsIcons.create(this));
+
+      ElementsManager.sharedManager().m_ElementsSplashes.create(this);
       for(var i = 0; i < 2; i++) {
         ElementsManager.sharedManager().m_ElementsParts.create({
           element: this,
           index: i
         });
       }
+
+      Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
       break;
       case Element.types.star:
-      this.runAction(cc.ScaleTo.create(0.2, 0.0));
       this.runAction(
         cc.Sequence.create(
-          cc.MoveTo.create(0.2, cc.p(this.getCenterX(), this.getCenterY() - this.getHeight())),
+          cc.Repeat.create(
+            cc.Sequence.create(
+              cc.RotateTo.create(0.25, 10.0),
+              cc.RotateTo.create(0.25, -10),
+              false
+            ),
+          2),
+          cc.ScaleTo.create(0.2, 0.0),
           cc.CallFunc.create(this.destroy, this),
-          data.replaced ? false : cc.CallFunc.create(MatrixManager.instance.lookDown, MatrixManager.instance)
+          cc.CallFunc.create(MatrixManager.instance.lookDown, MatrixManager.instance),
+          false
         )
       );
+
+      MatrixManager.instance.clear();
+
+      Sound.sharedSound().play(s_SoundStar);
       break;
     }
+
+    switch(this.m_Bonus) {
+      case Element.bonus.types.horizontal:
+      MatrixManager.sharedManager().removeHorizontalLine(this.getIndex().x, this.getIndex().y, this);
+      break;
+      case Element.bonus.types.vertical:
+      MatrixManager.sharedManager().removeVerticalLine(this.getIndex().x, this.getIndex().y, this);
+      break;
+      case Element.bonus.types.pack:
+      break;
+      case Element.bonus.types.bomb:
+      break;
+    }
+
+    return icons;
   },
-  onChangePosition: function(target, complete) {
+  onChangePosition: function(target, data) {
     if(this.getId() == Element.types.block) return false;
 
     if(this.getIndex().y < MatrixManager.sharedManager().getSize().y) {
+      this.setVisible(true);
+
+      this.m_Removed = false;
+
       if(!this.isRegisterTouchable()) {
         this.registerTouchable(true);
       }
     } else {
+      this.setVisible(false);
+
       if(this.isRegisterTouchable()) {
         this.registerTouchable(false);
       }
@@ -105,13 +151,17 @@ Element = TiledEntity.extend({
       this.m_Glow.destroy();
     }
 
-    if(complete) {
+    if(data) {
       switch(this.getId()) {
         case Element.types.star:
         if(this.getIndex().y == 0) {
-          this.remove();
+          this.remove(data);
         }
         break;
+      }
+
+      if(this.getIndex().y < MatrixManager.sharedManager().getSize().y) {
+        Sound.sharedSound().play(s_SoundDrop[Random.sharedRandom().random(0, 3, true)]);
       }
     }
   },
@@ -120,12 +170,43 @@ Element = TiledEntity.extend({
 
     if(this.getId() == Element.types.block) return false;
 
-    this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount());
+
+    switch(this.m_Bonus) {
+      default:
+      this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount());
+      break;
+      case Element.bonus.types.horizontal:
+      this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount() * 5);
+      break;
+      case Element.bonus.types.vertical:
+      this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount() * 3);
+      break;
+      case Element.bonus.types.pack:
+      break;
+      case Element.bonus.types.bomb:
+      break;
+    }
   },
   onUnHover: function() {
     if(this.getId() == Element.types.block) return false;
 
-    this.setCurrentFrameIndex(this.m_Id);
+    switch(this.m_Bonus) {
+      default:
+      this.setCurrentFrameIndex(this.m_Id);
+      break;
+      case Element.bonus.types.horizontal:
+      this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount() * 4);
+      break;
+      case Element.bonus.types.vertical:
+      this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount() * 2);
+      break;
+      case Element.bonus.types.pack:
+      this.setCurrentFrameIndex(this.m_Id);
+      break;
+      case Element.bonus.types.bomb:
+      this.setCurrentFrameIndex(this.m_Id);
+      break;
+    }
   },
   onTouch: function() {
     if(!this.isRegisterTouchable()) return false;
@@ -168,10 +249,16 @@ Element = TiledEntity.extend({
 
     return this._super(e);
   },
-  remove: function(data) {
+  remove: function(collect) {
+    this.m_Removed = true;
+
     MatrixManager.sharedManager().remove(this);
 
-    this.onRemove(data);
+    if(collect) {
+      // TODO: Add to the actions manager.
+    }
+
+    return this.onRemove();
   },
   setIndex: function(x, y) {
     this.m_Index.x = x;
@@ -186,7 +273,7 @@ Element = TiledEntity.extend({
     switch(id) {
       case Element.types.star:
       if(!this.m_Icon) {
-        this.m_Icon = TiledEntity.create(s_Elements, 8, 2, this);
+        this.m_Icon = TiledEntity.create(s_Elements, 8, 6, this);
         this.m_Icon.create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2);
         this.m_Icon.setCurrentFrameIndex(15);
         this.m_Icon.runAction(
@@ -206,13 +293,18 @@ Element = TiledEntity.extend({
   getId: function() {
     return this.m_Id;
   },
+  setBonus: function(type) {
+    this.m_Bonus = type;
+
+    this.onUnHover();
+  },
   chooseId: function(created) {
     if(this.getId() == Element.types.star) return false;
 
     if(Game.tutorial && Game.sharedScreen().m_TutorialState == 1 && created) {
       var index = this.getIndex();
 
-      this.m_Id = MatrixManager.sharedManager().m_TutorialMatrix[index.y][index.x];
+      this.m_Id = Game.instance.m_TutorialMatrix.matrix[index.y][index.x];
 
       this.setCurrentFrameIndex(this.m_Id);
     } else {
@@ -225,77 +317,200 @@ Element = TiledEntity.extend({
       this.setCurrentFrameIndex(this.m_Id);
     }
   },
-  lookDown: function() {
+  lookDown: function(strong) {
     if(this.getId() == Element.types.block) return false;
 
     if(this.getIndex().y > 0) {
-      var free = true;
-      var current = 0;
-      var empty = 0;
+      var x = this.getCenterX();
+      var y = this.getCenterY();
+      var w = this.getWidth();
+      var h = this.getHeight();
+
+      var actions = [];
+      var repeat = true;
       var data = {
         down: 0,
         left: 0,
         right: 0
       };
 
-      while(free) {
-        var frame = MatrixManager.sharedManager().get(this.getIndex().x, this.getIndex().y - (data.down + 1));
+      var index = {
+        x: this.getIndex().x,
+        y: this.getIndex().y
+      };
 
-        if(frame === etypes.block) {
-          free = false;
+      if(index.y == MatrixManager.sharedManager().getSize().y) {
+        var bottom = MatrixManager.sharedManager().get(index.x, index.y - 1);
+        if(bottom === etypes.block || bottom === etypes.empty) {
+          return false;
         }
+      }
 
-        if(this.getIndex().y - (data.down + 1) >= 0 && (!frame || frame === etypes.empty)) {
-          if(frame === etypes.empty) {
-            empty++;
-            current = etypes.empty;
-          } else if(frame === etypes.block) {
+      while(repeat) {
+        var free = true;
+        var current = 0;
+        var empty = 0;
+        var down = 0;
+
+        while(free) {
+          var frame = MatrixManager.sharedManager().get(index.x, index.y - (down + 1));
+
+          if(frame === etypes.block) {
             free = false;
+          }
+
+          if(index.y - (down + 1) >= 0 && (!frame || frame === etypes.empty)) {
+            if(frame === etypes.empty) {
+              empty++;
+              current = etypes.empty;
+            } else if(frame === etypes.block || frame === etypes.empty) {
+              free = false;
+            } else {
+              empty = 0;
+              current = 0;
+            }
+
+            data.down++;
+
+            down++;
+
+            actions.push(cc.MoveTo.create(0.1, cc.p(x, y - h)));
+
+            y -= h;
           } else {
-            empty = 0;
-            current = 0;
-          }
-          
-          data.down++;
-        } else {
-          free = false;
-        }
-      }
-
-      if(current == etypes.empty) {
-        data.down -= empty;
-      }
-
-      if(true) {
-        var frames = {
-          left: MatrixManager.sharedManager().get(this.getIndex().x - 1, this.getIndex().y - (data.down - 1)),
-          right: MatrixManager.sharedManager().get(this.getIndex().x + 1, this.getIndex().y - (data.down - 1)),
-          down: {
-            left: MatrixManager.sharedManager().get(this.getIndex().x - 1, this.getIndex().y - data.down),
-            right: MatrixManager.sharedManager().get(this.getIndex().x + 1, this.getIndex().y - data.down)
-          }
-        };
-
-        if(frames.left == etypes.block) {
-          if(!frames.down.left) {
-            data.left++;
+            free = false;
           }
         }
 
-        if(frames.right == etypes.block) {
-          if(!frames.down.right) {
-            data.right++;
+        if(current == etypes.empty) {
+          data.down -= empty;
+
+          down -= empty;
+
+          for(var i = 0; i < empty; i++) {
+            actions.pop();
+
+            y += h;
           }
         }
+
+        index.y -= down;
+
+        var left = 0;
+        var right = 0;
+
+        down = 0;
+
+        if(strong) {
+          var frames = {
+            left: MatrixManager.sharedManager().get(index.x - 1, index.y),
+            right: MatrixManager.sharedManager().get(index.x + 1, index.y),
+            down: {
+              left: MatrixManager.sharedManager().get(index.x - 1, index.y - 1),
+              right: MatrixManager.sharedManager().get(index.x + 1, index.y - 1)
+            }
+          };
+
+          var toper = false;
+
+          for(var t = index.y; t < MatrixManager.sharedManager().getSize().y; t++) {
+            var element = MatrixManager.sharedManager().get(index.x - 1, t);
+
+            if(!toper) {
+              if(element == etypes.empty || element == etypes.block) {
+                toper = true;
+              }
+            } else {
+              if(element != etypes.empty && element != etypes.block) {
+                toper = false;
+              }
+            }
+          }
+
+          if((!frames.left || frames.left == etypes.empty || frames.left == etypes.block) && data.right <= 0 && toper) {
+            if(!frames.down.left) {
+              if(index.x - 1 > 0 && index.y - 1 >= 0) {
+                data.left++;
+                data.down++;
+
+                left++;
+                down++;
+
+                actions.push(cc.MoveTo.create(0.1, cc.p(x - w, y)));
+                actions.push(cc.MoveTo.create(0.1, cc.p(x - w, y - h)));
+
+                x -= w;
+                y -= h;
+              }
+            }
+          }
+
+          toper = false;
+
+          for(var t = index.y; t < MatrixManager.sharedManager().getSize().y; t++) {
+            var element = MatrixManager.sharedManager().get(index.x + 1, t);
+
+            if(!toper) {
+              if(element == etypes.empty || element == etypes.block) {
+                toper = true;
+              }
+            } else {
+              if(element != etypes.empty && element != etypes.block) {
+                toper = false;
+              }
+            }
+          }
+
+          if((!frames.right || frames.right == etypes.empty || frames.right == etypes.block) && data.left <= 0 && toper) {
+            if(!frames.down.right) {
+              if(index.x + 1 < MatrixManager.instance.getSize().x && index.y - 1 >= 0) {
+                data.right++;
+                data.down++;
+
+                right++;
+                down++;
+
+                actions.push(cc.MoveTo.create(0.1, cc.p(x + w, y)));
+                actions.push(cc.MoveTo.create(0.1, cc.p(x + w, y - h)));
+
+                x += w;
+                y -= h;
+              }
+            }
+          }
+        }
+
+        index.x -= left;
+        index.x += right;
+
+        index.y -= down;
+
+        repeat = down > 0 && strong;
       }
 
-      if(data.down > 0) {
-        MatrixManager.sharedManager().moveDown(this, data);
+      if(actions.length > 0) {
+        MatrixManager.sharedManager().moveDown(this, data, actions);
       }
+    }
+  },
+  updateBonusAnimation: function() {
+    if(!this.m_Bonus) return false;
+
+    switch(this.m_Bonus) {
+      case Element.bonus.types.horizontal:
+      break;
+      case Element.bonus.types.vertical:
+      break;
+      case Element.bonus.types.pack:
+      break;
+      case Element.bonus.types.bomb:
+      break;
     }
   },
   update: function(time) {
     this._super(time);
+
+    this.updateBonusAnimation();
   },
   deepCopy: function() {
     return Element.create();
@@ -320,7 +535,7 @@ ElementGlow = AnimatedEntity.extend({
     this.m_Element.m_GlowAnimationRunning = true;
     this.m_Element.m_Glow = this;
 
-    this.setCenterPosition(this.m_Element.getCenterX(), this.m_Element.getCenterY());
+    this.setCenterPosition(this.m_Element.getCenterX(), this.m_Element.getCenterY() + this.m_Element.getHeight() / 2);
     this.animate(0.06, 1);
   },
   onDestroy: function() {
@@ -378,6 +593,14 @@ Element.types = {
   bomb: 5,
   star: 6,
   block: 7
+};
+Element.bonus = {
+  types: {
+    horizontal: 1,
+    vertical: 2,
+    pack: 3,
+    bomb: 4
+  }
 };
 Element.create = function() {
   var entity = new Element();

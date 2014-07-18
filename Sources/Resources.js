@@ -229,6 +229,8 @@ var s_Bonus2 = "Resources/Graphics/bonus-2.png";
 var s_Bonus6 = "Resources/Graphics/bonus-6.png";
 var s_Bonus7 = "Resources/Graphics/bonus-7.png";
 var s_Elements = "Resources/Graphics/elements.png";
+var s_ElementsSickles = "Resources/Graphics/elements-sickle.png";
+var s_ElementsSplash = "Resources/Graphics/elements-splash.png";
 var s_ElementsGlow = "Resources/Graphics/elements-glow.png";
 var s_ElementsIcons = "Resources/Graphics/elements-icons.png";
 var s_ElementsParts = "Resources/Graphics/elements-parts.png";
@@ -238,6 +240,7 @@ var s_CatapultPart1 = "Resources/Graphics/catapult-part1.png";
 var s_CatapultPart2 = "Resources/Graphics/catapult-part2.png";
 var s_CatapultPart3 = "Resources/Graphics/catapult-part3.png";
 var s_CatapultBirds = "Resources/Graphics/catapult-birds.png";
+var s_CatapultBirdsShield = "Resources/Graphics/catapult-birds-shield.png";
 var s_Target = "Resources/Graphics/game-target.png";
 var s_Notification1 = "Resources/Graphics/notification-1.png";
 var s_Notification2= "Resources/Graphics/notification-2.png";
@@ -260,7 +263,41 @@ var s_TutorialElementsExplanation = "Resources/Graphics/tutorial-elements-explan
 var s_TutorialElementsExplanationTexts = "Resources/Graphics/tutorial-elements-explanation-texts.png";
 var s_TutorialElementsExplanationTextsEnglish = "Resources/Graphics/tutorial-elements-explanation-texts-0.png";
 var s_TutorialElementsExplanationTextsRussian = "Resources/Graphics/tutorial-elements-explanation-texts-1.png";
-var s_1 = "Resources/Graphics/1.png";
+var s_MatrixArrow1 = "Resources/Graphics/matrix-arrow-1.png";
+var s_MatrixArrow2 = "Resources/Graphics/matrix-arrow-2.png";
+var s_TutorialLevel = "Resources/Graphics/level-tutorial.png";
+var s_Levels = [
+  "Resources/Graphics/level-1.png",
+  "Resources/Graphics/level-2.png",
+  "Resources/Graphics/level-3.png",
+  "Resources/Graphics/level-4.png",
+  "Resources/Graphics/level-5.png",
+  "Resources/Graphics/level-6.png",
+  "Resources/Graphics/level-7.png",
+  "Resources/Graphics/level-8.png",
+  "Resources/Graphics/level-9.png",
+  "Resources/Graphics/level-10.png",
+  "Resources/Graphics/level-11.png",
+  "Resources/Graphics/level-12.png",
+  "Resources/Graphics/level-13.png",
+  "Resources/Graphics/level-14.png",
+  "Resources/Graphics/level-15.png",
+  "Resources/Graphics/level-16.png",
+  "Resources/Graphics/level-17.png",
+  "Resources/Graphics/level-18.png",
+  "Resources/Graphics/level-19.png",
+  "Resources/Graphics/level-20.png",
+  "Resources/Graphics/level-21.png",
+  "Resources/Graphics/level-22.png",
+  "Resources/Graphics/level-23.png",
+  "Resources/Graphics/level-24.png",
+  "Resources/Graphics/level-25.png",
+  "Resources/Graphics/level-26.png",
+  "Resources/Graphics/level-27.png",
+  "Resources/Graphics/level-28.png",
+  "Resources/Graphics/level-29.png",
+  "Resources/Graphics/level-30.png"
+];
 
 var s_Music1 = "Resources/Music/music-1.mp3";
 var s_Music2 = "Resources/Music/music-2.mp3";
@@ -275,7 +312,13 @@ var s_SoundThrowBombFuse = "Resources/Sound/throw-bomb-fuse.mp3";
 var s_SoundExplosion = "Resources/Sound/explosion.mp3";
 var s_SoundBirdExplosion = "Resources/Sound/bird-explosion.mp3";
 var s_SoundLoseLife = "Resources/Sound/lose-life.mp3";
+var s_SoundExchange = "Resources/Sound/exchange.mp3";
+var s_SoundSwitch = "Resources/Sound/switch.mp3";
+var s_SoundStar = "Resources/Sound/star.mp3";
+var s_SoundLine = "Resources/Sound/line.mp3";
 var s_SoundBloom = ["Resources/Sound/bloom-1.mp3", "Resources/Sound/bloom-2.mp3", "Resources/Sound/bloom-3.mp3", "Resources/Sound/bloom-4.mp3"];
+var s_SoundChew = ["Resources/Sound/chew-1.mp3", "Resources/Sound/chew-2.mp3", "Resources/Sound/chew-3.mp3"];
+var s_SoundDrop = ["Resources/Sound/drop-1.mp3", "Resources/Sound/drop-2.mp3", "Resources/Sound/drop-3.mp3"];
 
 var resources = [
   {src: s_PreloaderBackgroundPortrait},
@@ -461,6 +504,8 @@ var resources = [
   {src: s_Bonus6},
   {src: s_Bonus7},
   {src: s_Elements},
+  {src: s_ElementsSickles},
+  {src: s_ElementsSplash},
   {src: s_ElementsGlow},
   {src: s_ElementsIcons},
   {src: s_ElementsParts},
@@ -470,6 +515,7 @@ var resources = [
   {src: s_CatapultPart2},
   {src: s_CatapultPart3},
   {src: s_CatapultBirds},
+  {src: s_CatapultBirdsShield},
   {src: s_Target},
   {src: s_Notification1Russian},
   {src: s_Notification1English},
@@ -489,7 +535,39 @@ var resources = [
   {src: s_TutorialElementsExplanation},
   {src: s_TutorialElementsExplanationTextsRussian},
   {src: s_TutorialElementsExplanationTextsEnglish},
-  {src: s_1},
+  {src: s_MatrixArrow1},
+  {src: s_MatrixArrow2},
+  {src: s_TutorialLevel},
+  {src: s_Levels[0]},
+  {src: s_Levels[1]},
+  {src: s_Levels[2]},
+  {src: s_Levels[3]},
+  {src: s_Levels[4]},
+  {src: s_Levels[5]},
+  {src: s_Levels[6]},
+  {src: s_Levels[7]},
+  {src: s_Levels[8]},
+  {src: s_Levels[9]},
+  {src: s_Levels[10]},
+  {src: s_Levels[11]},
+  {src: s_Levels[12]},
+  {src: s_Levels[13]},
+  {src: s_Levels[14]},
+  {src: s_Levels[15]},
+  {src: s_Levels[16]},
+  {src: s_Levels[17]},
+  {src: s_Levels[18]},
+  {src: s_Levels[19]},
+  {src: s_Levels[20]},
+  {src: s_Levels[21]},
+  {src: s_Levels[22]},
+  {src: s_Levels[23]},
+  {src: s_Levels[24]},
+  {src: s_Levels[25]},
+  {src: s_Levels[26]},
+  {src: s_Levels[27]},
+  {src: s_Levels[28]},
+  {src: s_Levels[29]},
 
   {src: s_Music1},
   {src: s_Music2},
@@ -504,8 +582,18 @@ var resources = [
   {src: s_SoundExplosion},
   {src: s_SoundBirdExplosion},
   {src: s_SoundLoseLife},
+  {src: s_SoundExchange},
+  {src: s_SoundSwitch},
+  {src: s_SoundStar},
+  {src: s_SoundLine},
   {src: s_SoundBloom[0]},
   {src: s_SoundBloom[1]},
   {src: s_SoundBloom[2]},
-  {src: s_SoundBloom[3]}
+  {src: s_SoundBloom[3]},
+  {src: s_SoundChew[0]},
+  {src: s_SoundChew[1]},
+  {src: s_SoundChew[2]},
+  {src: s_SoundDrop[0]},
+  {src: s_SoundDrop[1]},
+  {src: s_SoundDrop[2]}
 ];

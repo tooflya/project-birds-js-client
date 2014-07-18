@@ -45,7 +45,7 @@ ElementPart = TiledEntity.extend({
 
     this.m_Id = params.element.getId();
     this.setCurrentFrameIndex(params.index ? this.m_Id : this.m_Id + this.getHorizontalFramesCount());
-    this.setCenterPosition(params.element.convertToWorldSpace(cc.p(0, 0)).x + params.element.getWidth() / 2, params.element.convertToWorldSpace(cc.p(0, 0)).y + params.element.getHeight() / 2);
+    this.setCenterPosition(params.element.convertToWorldSpace(cc.p(0, 0)).x + params.element.getWidth() / 2, params.element.convertToWorldSpace(cc.p(0, 0)).y + params.element.getHeight());
     this.setOpacity(255.0);
     this.setRotation(0);
     this.setScale(1.0);
@@ -77,6 +77,8 @@ ElementPart = TiledEntity.extend({
         this.m_SpeedY = Camera.sharedCamera().coord(Random.sharedRandom().random(500.0, 1000.0));
 
         this.m_Status++;
+
+        Sound.sharedSound().play(s_SoundDrop[Random.sharedRandom().random(0, 3, true)]);
       }
       break;
       case 1:

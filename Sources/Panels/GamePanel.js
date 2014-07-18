@@ -49,6 +49,12 @@ GamePanel = Panel.extend({
     this._super(s_GamePanel, parent);
 
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon6, 7, 1], false, function(e) {
+      if(Game.sharedScreen().m_CurrentBlows <= 5) {
+        e.setColor(cc.c3(255, 0, 0));
+      } else {
+        e.setColor(cc.c3(255, 255, 255));
+      }
+
       e.ccsf([Game.sharedScreen().m_CurrentBlows]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
@@ -202,6 +208,12 @@ GamePanel = Panel.extend({
       this.m_DecorationTimeElapsed = 0;
 
       this.m_BackgroundCircleDecoration.create().setCenterPosition(this.getTexts()[0].getCenterX(), this.getTexts()[0].getCenterY());
+
+      if(Game.sharedScreen().m_CurrentBlows <= 5) {
+        this.m_BackgroundCircleDecoration.last().setColor(cc.c3(255, 0, 0));
+      } else {
+        this.m_BackgroundCircleDecoration.last().setColor(cc.c3(255, 255, 255));
+      }
     }
 
     for(var i = 0; i < 4; i++) {

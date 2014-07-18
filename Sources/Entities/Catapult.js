@@ -32,6 +32,7 @@
 Catapult = AnimatedEntity.extend({
   m_Birds: false,
   m_Health: 0,
+  m_Defence: 0,
   m_State: 0,
   m_States: {
     stop: 0,
@@ -41,11 +42,15 @@ Catapult = AnimatedEntity.extend({
     regeneration: 4
   },
   m_StateData: false,
+  m_LastMoveDistance: 0,
   ctor: function(parent) {
     this._super(s_Catapult, 6, 2, parent);
 
     this.m_PlayerHealth = Entity.create(s_PlayerHealth, parent);
     this.m_PlayerHealthBar = TiledEntity.create(s_PlayerHealthBar, 1, 1, this.m_PlayerHealth);
+
+    this.m_PlayerHealthText = Text.create('player-health', parent);
+    this.m_PlayerDefenceText = Text.create('player-defence', parent);
 
     this.m_PlayerHealth.create().setCenterPosition(0, 0);
     this.m_PlayerHealthBar.create().setCenterPosition(this.m_PlayerHealth.getWidth() / 2, this.m_PlayerHealth.getHeight() / 2);
@@ -53,13 +58,14 @@ Catapult = AnimatedEntity.extend({
     this.m_Speed = Camera.sharedCamera().coord(50);
 
     this.m_PlayerHealth.setZOrder(304);
-
-    this.registerTouchable(true);
+    this.m_PlayerHealthText.setZOrder(304);
+    this.m_PlayerDefenceText.setZOrder(304);
   },
   onCreate: function() {
     this._super();
 
     this.m_Health = 100;
+    this.m_Defence = 0;
 
     this.changeState(this.m_States.run, {
       distance: this.getWidth() * 2
@@ -69,6 +75,8 @@ Catapult = AnimatedEntity.extend({
     this._super();
 
     this.m_PlayerHealth.destroy();
+    this.m_PlayerHealthText.destroy();
+    this.m_PlayerDefenceText.destroy();
 
     var explosion = Game.sharedScreen().m_Explosions.create();
     explosion.setCenterPosition(this.getCenterX(), this.getCenterY());
@@ -97,64 +105,143 @@ Catapult = AnimatedEntity.extend({
   onStop: function() {
   },
   onRun: function() {
+    this.m_Defence = 0;
+
+    this.m_LastMoveDistance = this.m_StateData.distance;
   },
-  onFire: function() {
-    this.m_Birds.fire();
+  onFire: function(data) {
+    this.animate(0.1, 1, {start: 0, end: 5});
+
+    Sound.sharedSound().play(s_SoundThrowBird);
+  },
+  onUnFire: function() {
+    this.animate(0.06, 1, {start: 5, end: 0});
   },
   onAnimationFinish: function() {
     this._super();
-
-    if(this.m_StateData) {
-      if(this.m_StateData.callback) {
-        this.m_StateData.callback();
-      }
-    }
 
     switch(this.m_State) {
       case this.m_States.stop:
       break;
       case this.m_States.run:
+      this.changeState(this.m_States.stop, {
+        callback: this.m_StateData.callback
+      });
+
+      if(this.m_StateData) {
+        if(this.m_StateData.callback) {
+          this.m_StateData.callback();
+        }
+      }
       break;
       case this.m_States.fire:
       if(this.m_StateData.fire) {
+        if(this.m_StateData) {
+          if(this.m_StateData.response) {
+            this.m_StateData.response();
+          }
+        }
+
         this.changeState(this.m_States.fire, {
-          fire: false
+          fire: false,
+          callback: this.m_StateData.callback
         });
       } else {
-        this.changeState(this.m_States.stop);
+        this.changeState(this.m_States.stop, {
+          callback: this.m_StateData.callback
+        });
       }
       break;
       case this.m_States.destroy:
+      this.changeState(this.m_States.stop, {
+        callback: this.m_StateData.callback
+      });
+
+      if(this.m_StateData) {
+        if(this.m_StateData.callback) {
+          this.m_StateData.callback();
+        }
+      }
       break;
       case this.m_States.regeneration:
+      this.changeState(this.m_States.stop, {
+        callback: this.m_StateData.callback
+      });
+
+      if(this.m_StateData) {
+        if(this.m_StateData.callback) {
+          this.m_StateData.callback();
+        }
+      }
       break;
     }
   },
-  onTouch: function() {
-    this.changeState(this.m_States.fire, {
-      fire: true
-    });
-  },
   createElements: function() {
-    this.m_Birds = EntityManager.create(3, CatapultBird.create(this, this.isFlippedHorizontally() ? 1 : 0), Game.instance, true);
+    var self = this;
+
+    this.m_Birds = EntityManager.create(3, CatapultBird.create(false, this), Game.instance);
     this.m_Birds.fire = function() {
-      this.get(0).fire();
+      this.get(0).changeState(this.get(0).m_States.fire);
+      this.get(1).changeState(this.get(1).m_States.run, {
+        distance: Camera.sharedCamera().coord(55),
+        pause: 0.5
+      });
+      this.get(2).changeState(this.get(2).m_States.run, {
+        distance: Camera.sharedCamera().coord(55),
+        pause: 1.0
+      });
+    };
+    this.m_Birds.renew = function() {
+      var element = this.get(0);
+
+      this.m_Elements.remove(0);
+      this.m_Elements.push(element);
+
+      for(var i = 0; i < this.getCapacity(); i++) {
+        this.get(i).setID(i);
+      }
+
+      this.get(2).setCenterPosition((this.get(2).isFlippedHorizontally() ? Camera.sharedCamera().width + this.get(2).getWidth() / 2 : -this.get(2).getWidth() / 2), Camera.sharedCamera().coord(10));
+      this.get(2).changeState(this.get(2).m_States.run, {
+        distance: this.get(2).isFlippedHorizontally() ? ((this.get(2).getCenterX() - self.getCenterX()) - Camera.sharedCamera().coord(220)) : ((self.getCenterX() - this.get(2).getCenterX()) - Camera.sharedCamera().coord(220)),
+        pause: 1.0,
+        callback: function() {
+          if(self.m_StateData) {
+            if(self.m_StateData.callback) {
+              self.m_StateData.callback();
+            }
+          }
+        }
+      });
+
+      for(var i = 0; i < 2; i++) {
+        this.get(i).setCenterPosition(self.getCenterX() - (Camera.sharedCamera().coord(55) * i + Camera.sharedCamera().coord(110)) * (this.get(i).isFlippedHorizontally() ? -1 : 1), Camera.sharedCamera().coord(10));
+      }
     };
 
     for(var i = 1; i < 4; i++) {
-      this.m_Birds.create().setCenterPosition(this.getCenterX() - Camera.sharedCamera().coord(40) * i, this.getCenterY() - Camera.sharedCamera().coord(28));
-      this.m_Birds.last().setRandomFrameIndex();
+      this.m_Birds.create();
+      this.m_Birds.last().setFlippedHorizontally(this.isFlippedHorizontally());
+      this.m_Birds.last().setCenterPosition(this.getCenterX() - (Camera.sharedCamera().coord(55) * i + Camera.sharedCamera().coord(55)) * (this.m_Birds.last().isFlippedHorizontally() ? -1 : 1), this.getCenterY() - Camera.sharedCamera().coord(65));
+      this.m_Birds.last().setZOrder(this.getZOrder());
     }
   },
   runGameAction: function(id, data) {
+    var self = this;
+
+    data.repeat--;
+
     switch(id) {
       case 0:
       this.changeState(this.m_States.fire, {
         fire: true,
         callback: function() {
-          Game.sharedScreen().onTurnFinish(id + 10, {
-            destroy: data.destroy
-          });
+          if(data.repeat > 0) {
+            self.runGameAction(id, data);
+          }
+        },
+        response: function() {
+          Game.sharedScreen().onTurnFinish(id + 10, data);
         }
       });
       break;
@@ -162,36 +249,58 @@ Catapult = AnimatedEntity.extend({
       this.changeState(this.m_States.regeneration, {
         regeneration: data.regeneration,
         callback: function() {
-          Game.sharedScreen().onTurnFinish(id);
+          if(data.repeat > 0) {
+            self.runGameAction(id, data);
+          } else {
+            Game.sharedScreen().onTurnFinish(id);
+          }
         }
       });
       break;
       case 2:
-      Game.sharedScreen().onTurnFinish(id);
+      this.m_Defence += data.shield * (data.repeat + 1);
+
+      for(var i = 0; i < 3; i++) {
+        this.m_Birds.get(i).changeState(this.m_Birds.get(i).m_States.defence, {
+          pause: 0.6 * i,
+          callback: (i == 2 ? function() {
+            Game.sharedScreen().onTurnFinish(id);
+          } : false)
+        });
+      }
       break;
       case 3:
       break;
       case 4:
       this.changeState(this.m_States.run, {
         distance: data.distance,
+        pause: data.pause,
         callback: function() {
-          Game.sharedScreen().onTurnFinish(id);
+          if(data.repeat > 0) {
+            self.runGameAction(id, {
+              distance: data.distance,
+              pause: 1.5
+            });
+          } else {
+            Game.sharedScreen().onTurnFinish(id);
+          }
         }
       });
       break;
       case 10:
       this.changeState(this.m_States.destroy, {
         destroy: data.destroy,
+        pause: data.pause,
         callback: function() {
-          Game.sharedScreen().onTurnFinish(0);
+          if(++data.repeat <= 0) {
+            Game.sharedScreen().onTurnFinish(0);
+          }
         }
       });
       break;
     }
   },
   changeState: function(state, data) {
-    //if(this.m_State == state) return false;
-
     this.m_StateData = data;
     this.m_State = state;
 
@@ -209,12 +318,10 @@ Catapult = AnimatedEntity.extend({
       break;
       case this.m_States.fire:
       if(this.m_StateData.fire) {
-        this.animate(0.01, 1, {start: 0, end: 5});
+        this.m_Birds.fire();
       } else {
-        this.animate(0.06, 1, {start: 5, end: 0});
+        this.onUnFire();
       }
-
-      this.onFire();
       break;
       case this.m_States.destroy:
       break;
@@ -227,44 +334,50 @@ Catapult = AnimatedEntity.extend({
       case this.m_States.stop:
       break;
       case this.m_States.run:
-      if(this.m_StateData.distance > 0) {
-        this.setCenterPosition(this.getCenterX() + (this.m_Speed * time) * (this.isFlippedHorizontally() ? -1 : 1), this.getCenterY());
+      this.m_StateData.pause -= time;
 
-        this.m_StateData.distance -= this.m_Speed * time;
+      if(!this.m_StateData.pause || this.m_StateData.pause <= 0) {
+        if(this.m_StateData.distance > 0) {
+          this.setCenterPosition(this.getCenterX() + (this.m_Speed * time) * (this.isFlippedHorizontally() ? -1 : 1), this.getCenterY());
 
-        for(var i = 0; i < 3; i++) {
-          var bird = this.m_Birds.get(i);
+          this.m_StateData.distance -= this.m_Speed * time;
+        } else {
+          this.onAnimationFinish();
 
-          bird.setCenterPosition(bird.getCenterX() + (this.m_Speed * time) * (this.isFlippedHorizontally() ? -1 : 1), bird.getCenterY());
+          for(var i = 0; i < 3; i++) {
+            this.m_Birds.get(i).changeState(this.m_Birds.get(i).m_States.run, {
+              pause: 0.5 * i
+            });
+          }
         }
-      } else {
-        this.onAnimationFinish();
-
-        this.changeState(this.m_States.stop);
       }
       break;
       case this.m_States.fire:
       break;
       case this.m_States.destroy:
-      this.m_Health -= 0.1;
-      this.m_StateData.destroy -= 0.1;
+      this.m_StateData.pause -= time;
 
-      if(this.m_Health <= 0.0) {
-        this.destroy();
-      } else if(this.m_StateData.destroy <= 0.0) {
-        this.changeState(this.m_States.stop, {
-          callback: this.m_StateData.callback
-        });
+      if(this.m_StateData.pause <= 0) {
+        if(this.m_Health <= 0.0) {
+          this.destroy();
+        } else if(this.m_StateData.destroy <= 0.0) {
+          this.onAnimationFinish();
+        } else {
+          if(this.m_Defence > 0) {
+            this.m_Defence -= 1;
+          } else {
+            this.m_Health -= 1;
+          }
+          this.m_StateData.destroy -= 1;
+        }
       }
       break;
       case this.m_States.regeneration:
-      this.m_Health += 0.1;
-      this.m_StateData.regeneration -= 0.1;
-
       if(this.m_StateData.regeneration <= 0.0 || this.m_Health >= 100.0) {
-        this.changeState(this.m_States.stop, {
-          callback: this.m_StateData.callback
-        });
+        this.onAnimationFinish();
+      } else {
+        this.m_Health += 1;
+        this.m_StateData.regeneration -= 1;
       }
       break;
     }
@@ -272,6 +385,11 @@ Catapult = AnimatedEntity.extend({
     this.m_PlayerHealth.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(50));
     this.m_PlayerHealthBar.showPercentage(this.m_Health);
     this.m_PlayerHealthBar.setCenterPosition(this.m_PlayerHealth.getWidth() / 2 + this.m_PlayerHealthBar.getTextureRect().getWidth() / 2 - this.m_PlayerHealthBar.getWidth() / 2, this.m_PlayerHealth.getHeight() / 2);
+
+    this.m_PlayerHealthText.ccsf([this.m_Health]);
+    this.m_PlayerDefenceText.ccsf([this.m_Defence]);
+    this.m_PlayerHealthText.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(80));
+    this.m_PlayerDefenceText.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(110));
 
     var color;
     if(this.m_Health < 25) {
@@ -283,6 +401,10 @@ Catapult = AnimatedEntity.extend({
     }
 
     this.m_PlayerHealthBar.setColor(color);
+    this.m_PlayerHealthText.setColor(color);
+    this.m_PlayerDefenceText.setColor(cc.c3(0, 200, 255));
+
+    this.m_PlayerDefenceText.setVisible(this.m_Defence > 0);
   },
   update: function(time) {
     this._super(time);

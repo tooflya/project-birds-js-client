@@ -34,21 +34,78 @@ Moves = ExtendedPopup.extend({
     this._super(parent);
 
     this.m_Decoration = Entity.create(s_PopupDecoration9, this.m_Background);
+    this.m_GetButton = Button.create(s_GetLivesPopupButton, 1, 1, this.m_Background);
+    this.m_Text = Text.create('moves-popup-1', this.m_Background);
+
+    var platformPriceText;
+
+    switch(this.config.params.platform) {
+      case 'vk':
+      platformPriceText = 'vk-price-text';
+      break;
+    }
+
+    this.m_PriceText = Text.create(platformPriceText, this.m_GetButton);
+
+    switch(this.config.params.platform) {
+      case 'vk':
+      this.m_PriceText.ccsf([5]);
+      break;
+    }
+
+    this.m_PriceText.setCenterPosition(this.m_GetButton.getWidth() / 2, this.m_GetButton.getHeight() / 2 - Camera.sharedCamera().coord(83));
 
     this.m_Decoration.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(250));
+    this.m_GetButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(80));
+
+    this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Moves);
+    this.m_GetButton.setTouchHandler('onActionEvent', Moves, {id: purchase.moves});
   },
-  onActionEvent: function() {
-    //
+  onActionEvent: function(params) {
+    this.m_GetButton.action = true;
+    this.hide(function() {
+      Purchase.sharedScreen(this.getParent()).show(params, function(id) {
+        switch(id) {
+          case purchase.cancel:
+          if(Game.instance) {
+            Game.instance.finishGame();
+          }
+          break;
+          case purchase.moves:
+          if(Game.instance) {
+            Game.instance.m_CurrentBlows = 1;
+
+            Game.instance.m_PlayerTurn = false;
+            Game.instance.onTurnChange();
+          }
+          break;
+        }
+      });
+    });
   },
   onShow: function() {
     this._super();
+
+    this.m_GetButton.runAction(
+      cc.Sequence.create(
+      cc.ScaleTo.create(0.1, 0.8, 1.2),
+      cc.ScaleTo.create(0.1, 1.2, 0.8),
+      cc.ScaleTo.create(0.1, 1.0, 1.0)
+      )
+    );
   },
-  onHide: function() {
-    this._super();
+  onHide: function(callback, prepare) {
+    this._super(callback, prepare);
 
     Moves.instance = false;
+
+    if(!prepare && !this.m_GetButton.action) {
+      if(Game.instance) {
+        Game.instance.finishGame();
+      }
+    }
   }
 });
 

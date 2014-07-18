@@ -41,7 +41,8 @@ var purchase = {
     pack1: 4,
     pack2: 5
   },
-  lives: 6
+  lives: 6,
+  moves: 7
 };
 var references = {
   info: {

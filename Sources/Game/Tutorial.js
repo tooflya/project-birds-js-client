@@ -241,7 +241,6 @@ Game.prototype.onTouchTutorial = function() {
         cc.EaseBounceOut.create(
           cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, -this.m_TutorialBackgroundSplash.getHeight()))
         ),
-        cc.CallFunc.create(MatrixManager.sharedManager().lookDown, MatrixManager.sharedManager()),
         false
       )
     );
@@ -251,7 +250,7 @@ Game.prototype.onTouchTutorial = function() {
 
     ElementsManager.sharedManager().scheduleUpdate();
 
-    ActionsManager.sharedManager().run();
+    MatrixManager.sharedManager().clear();
     break;
   }
 };

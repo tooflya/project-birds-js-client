@@ -32,6 +32,14 @@
 Game.prototype.onTurnChange = function() {
   if(!this.m_GameRunning) return false;
 
+  if(Game.instance.m_CurrentBlows <= 0 && !this.m_PlayerTurn) {
+    this.m_PlayerTurn = true;
+
+    Moves.sharedScreen(this).show();
+
+    return false;
+  }
+
   this.onTurnChangeStart();
 
   var notification;
@@ -68,6 +76,8 @@ Game.prototype.onTurnChange = function() {
   );
 
   this.m_PlayerTurn = !this.m_PlayerTurn;
+
+  Sound.sharedSound().play(s_SoundSwitch);
 
   return this.m_PlayerTurn;
 };
@@ -116,7 +126,7 @@ Game.prototype.onTurnFinish = function(id, data) {
     this.m_ElementsExplanationTexts.runAction(
       cc.Sequence.create(
         cc.EaseExponentialIn.create(
-          cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200)))
+          cc.MoveTo.create(0.5, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200)))
         ),
         cc.CallFunc.create(ActionsManager.sharedManager().run, ActionsManager.sharedManager()),
         false
@@ -141,24 +151,39 @@ Game.prototype.startAction = function(selector, data) {
   switch(data.id) {
     case 0:
     this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
-      destroy: 15 * data.factor
+      repeat: data.repeat,
+      destroy: 15 * data.factor,
+      pause: 1.5
     });
     break;
     case 1:
     this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
+      repeat: data.repeat,
       regeneration: 10 * data.factor
     });
     break;
     case 2:
     this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
-      shield: 1 * data.factor
+      repeat: data.repeat,
+      shield: 5 * data.factor
     });
     break;
     case 3:
-    Game.sharedScreen().onTurnFinish();
+    this.m_BonusKeysAnimationRunning = true;
+    this.m_BonusKeysAnimationTimeElapsed = -1.0;
+    this.m_BonusKeys += (2 + data.factor) * data.repeat;
+
+    this.m_KeysText.ccsf([this.m_BonusKeysTemp]);
+
+    this.m_KeysPanel.runAction(
+      cc.EaseExponentialOut.create(
+        cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().coord(500)))
+      )
+    );
     break;
     case 4:
     this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
+      repeat: data.repeat,
       distance: Camera.sharedCamera().coord(40) * data.factor
     });
     break;
@@ -183,6 +208,7 @@ Game.prototype.onNoMoreCombinations = function() {
       cc.EaseBounceOut.create(
         cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, -this.m_CombinationsNotification.getHeight()))
       ),
+      cc.CallFunc.create(MatrixManager.sharedManager().unbusy, MatrixManager.sharedManager()),
       false
     )
   );

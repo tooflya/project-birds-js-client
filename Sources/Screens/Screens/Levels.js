@@ -40,13 +40,13 @@ Levels = Screen.extend({
     {x: 693, y: 329},
     {x: 519, y: 354},
     {x: 362, y: 358},
-    {x: 109, y: 897},
     {x: 201, y: 356},
-    {x: 166, y: 778},
-    {x: 325, y: 711},
-    {x: 284, y: 938},
     {x: 94, y: 599},
     {x: 252, y: 615},
+    {x: 325, y: 711},
+    {x: 166, y: 778},
+    {x: 109, y: 897},
+    {x: 284, y: 938},
     {x: 456, y: 899},
     {x: 548, y: 789},
     {x: 529, y: 658},
@@ -560,8 +560,6 @@ Levels = Screen.extend({
       y: Camera.sharedCamera().height - parallax.getHeight() / 2 + Camera.sharedCamera().coord(300)
     }, this);
 
-    //MenuPanel.sharedScreen().prepare();
-
     for(var i = 0; i < this.m_WaterCoordinates.length; i++) {
       this.m_Water.create().setCenterPosition(Camera.sharedCamera().coord(this.m_WaterCoordinates[i].x), Camera.sharedCamera().coord(this.m_WaterCoordinates[i].y));
     }
@@ -586,8 +584,12 @@ Levels = Screen.extend({
     if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
       Lives.sharedScreen(this).show();
     } else {
-      Game.sharedScreen(0);
-      ScreenManager.sharedManager().replace(Loading);
+      if(false) {
+
+      } else {
+        Game.sharedScreen(0);
+        ScreenManager.sharedManager().replace(Loading);
+      }
     }
   },
   onShow: function() {
@@ -665,12 +667,16 @@ MapIcon = Button.extend({
     this.m_Text.setString(this.getID() + 1);
     this.m_Text.disableShadow();
     this.m_Text.setColor(cc.c3(0, 0, 0));
+
+    if(true && this.getID() > 0) {
+      this.setColor(cc.c3(150, 150, 150));
+    } else {
+      this.setColor(cc.c3(255, 255, 255));
+    }
   },
   onHover: function() {
-    //this.runAction(cc.ScaleTo.create(0.2, 1.2));
   },
   onUnHover: function() {
-    //this.runAction(cc.ScaleTo.create(0.2, 1.0));
   },
   update: function(time) {
     this._super();
