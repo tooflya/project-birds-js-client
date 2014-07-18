@@ -56,6 +56,8 @@ Element = TiledEntity.extend({
   onDestroy: function() {
     this._super();
 
+    this.stopAllActions();
+
     switch(this.getId()) {
       default:
       break;
@@ -154,7 +156,7 @@ Element = TiledEntity.extend({
     if(data) {
       switch(this.getId()) {
         case Element.types.star:
-        if(this.getIndex().y == 0) {
+        if(this.getIndex().y == 0) { // TODO: Replace to the last bottom available point.
           this.remove(data);
         }
         break;
@@ -166,6 +168,7 @@ Element = TiledEntity.extend({
     }
   },
   onHover: function() {
+    if(!this.isRegisterTouchable()) return false;
     if(!MatrixManager.sharedManager().active()) return false;
 
     if(this.getId() == Element.types.block) return false;

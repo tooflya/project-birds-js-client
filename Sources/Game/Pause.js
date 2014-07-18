@@ -39,4 +39,25 @@ Game.prototype.pause = function() {
       pause ? child.unscheduleUpdate() : child.scheduleUpdate();
     }
   });
+
+switch(this.m_Type) {
+  case this.m_Types.progress:
+  pause ? this.m_ElementsExplanationTexts.pauseSchedulerAndActions() : this.m_ElementsExplanationTexts.resumeSchedulerAndActions();
+  pause ? this.m_Notifications.m_Notification1.pauseSchedulerAndActions() : this.m_Notifications.m_Notification1.resumeSchedulerAndActions();
+  pause ? this.m_Notifications.m_Notification2.pauseSchedulerAndActions() : this.m_Notifications.m_Notification2.resumeSchedulerAndActions();
+  ElementsManager.instance.m_Stencil.getChildren().forEach(function(child) {
+    if(child instanceof EntityManager) {
+      pause ? child.unscheduleUpdate() : child.scheduleUpdate();
+    }
+  });
+  if(MatrixManager.timeout) {
+    pause ? MatrixManager.timeout.pause() : MatrixManager.timeout.resume();
+  }
+  break;
+  case this.m_Types.classic:
+  case this.m_Types.arcade:
+  break;
+  }
+
+  pause ? this.pauseSchedulerAndActions() : this.resumeSchedulerAndActions();
 };

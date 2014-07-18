@@ -34,7 +34,7 @@ Moves = ExtendedPopup.extend({
     this._super(parent);
 
     this.m_Decoration = Entity.create(s_PopupDecoration9, this.m_Background);
-    this.m_GetButton = Button.create(s_GetLivesPopupButton, 1, 1, this.m_Background);
+    this.m_GetButton = Button.create(s_GetMovesPopupButton, 1, 1, this.m_Background);
     this.m_Text = Text.create('moves-popup-1', this.m_Background);
 
     var platformPriceText;

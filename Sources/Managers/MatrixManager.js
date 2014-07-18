@@ -311,10 +311,10 @@ MatrixManager = cc.Node.extend({
   clear: function() {
     this.m_PauseTime = Array();
 
-    if(this.m_Timeout) {
-      window.clearTimeout(this.m_Timeout);
+    if(MatrixManager.timeout) {
+      window.clearTimeout(MatrixManager.timeout);
 
-      this.m_Timeout = false;
+      MatrixManager.timeout = false;
     }
 
     for(var a = 0; a < MatrixManager.pools.length; a++) {
@@ -385,11 +385,12 @@ MatrixManager = cc.Node.extend({
     MatrixManager.pools = [];
 
     if(!Game.sharedScreen().m_TutorialRunning) {
-      window.setTimeout(function() {
+      MatrixManager.timeout = new PausableTimeout(function() {
         MatrixManager.sharedManager().lookDown();
 
-        MatrixManager.sharedManager().m_Timeout = window.setTimeout(function() {
+        MatrixManager.timeout = new PausableTimeout(function() {
           MatrixManager.pause = 0;
+          MatrixManager.timeout = false;
 
           if(!MatrixManager.sharedManager().findAll()) {
             ActionsManager.sharedManager().run();
@@ -438,7 +439,7 @@ MatrixManager = cc.Node.extend({
   },
   hasMatches: function(element, data) {
     if(!element || element === etypes.empty || element === etypes.block) return false;
-    if(element.getId() == etypes.star) return false;
+    if(element.getId() === Element.types.star) return false;
 
     if(!data) {
       MatrixManager.pools.push(MatrixManager.pool());
@@ -614,14 +615,7 @@ MatrixManager = cc.Node.extend({
     var result2 = this.hasMatches(this.m_CurrentElement2);
 
     if(!result1 && !result2) {
-      if(!this.m_CurrentElement1.m_Bonus && !this.m_CurrentElement2.m_Bonus) {
-        this.replace(this.m_CurrentElement2, this.m_CurrentElement1, true);
-      } else {
-        this.clear();
-
-        this.m_CurrentElement1.remove(true);
-        this.m_CurrentElement2.remove(true);
-      }
+      this.replace(this.m_CurrentElement2, this.m_CurrentElement1, true);
     } else {
       if(Game.instance.m_PlayerTurn) {
         Game.instance.m_CurrentBlows--;
@@ -804,7 +798,8 @@ MatrixManager = cc.Node.extend({
     for(var i = x - 1; i >= 0; i--) {
       var current = this.get(i, y);
 
-      if(current && current != etypes.empty && current != etypes.block && current != etypes.star) {
+      if(current && current != etypes.empty && current != etypes.block) {
+        if(current.getId() != Element.types.star) {
         current.runAction(
           cc.Sequence.create(
             cc.DelayTime.create(time),
@@ -812,6 +807,7 @@ MatrixManager = cc.Node.extend({
             false
           )
         );
+        }
       }
 
       time += 0.05;
@@ -827,14 +823,16 @@ MatrixManager = cc.Node.extend({
     for(var i = x + 1; i < this.getSize().x; i++) {
       var current = this.get(i, y);
 
-      if(current && current != etypes.empty && current != etypes.block && current != etypes.star) {
-        current.runAction(
-          cc.Sequence.create(
-            cc.DelayTime.create(time),
-            cc.CallFunc.create(current.remove, current, current),
-            false
-          )
-        );
+      if(current && current != etypes.empty && current != etypes.block) {
+        if(current.getId() != Element.types.star) {
+          current.runAction(
+            cc.Sequence.create(
+              cc.DelayTime.create(time),
+              cc.CallFunc.create(current.remove, current, current),
+              false
+            )
+          );
+        }
       }
 
       time += 0.05;

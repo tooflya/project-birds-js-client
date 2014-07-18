@@ -244,6 +244,8 @@ ElementsManager = EntityManager.extend({
     var element = this.create();
     var bonus = data.element || data.elements[0];
 
+    MatrixManager.sharedManager().set(element, bonus.getIndex().x, bonus.getIndex().y);
+
     element.m_Removed = true;
     element.setBonus(type);
     element.setId(bonus.getId());
@@ -257,8 +259,6 @@ ElementsManager = EntityManager.extend({
         false
       )
     );
-
-    MatrixManager.sharedManager().set(element, bonus.getIndex().x, bonus.getIndex().y);
 
     for(var i = 0; i < data.icons.length; i++) {
       data.icons[i].runAction(

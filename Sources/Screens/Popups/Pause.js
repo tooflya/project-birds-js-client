@@ -34,10 +34,10 @@ Pause = ExtendedPopup.extend({
   ctor: function(parent) {
     this._super(parent);
 
-    this.m_Decorations[0] = Entity.create(s_PopupDecoration12, this.m_Background);
-    this.m_Decorations[1] = Entity.create(s_PopupDecoration12, this.m_Background);
-    this.m_Decorations[2] = Entity.create(s_PopupDecoration12, this.m_Background);
-    this.m_Decorations[3] = Entity.create(s_PopupDecoration12, this.m_Background);
+    this.m_Decorations[0] = Entity.create(s_PopupDecoration16, this.m_Background);
+    this.m_Decorations[1] = TiledEntity.create(s_PopupDecoration12, 3, 2, this.m_Background);
+    this.m_Decorations[2] = TiledEntity.create(s_PopupDecoration12, 3, 2, this.m_Background);
+    this.m_Decorations[3] = TiledEntity.create(s_PopupDecoration12, 3, 2, this.m_Background);
 
     this.m_ContinueButton = Button.create(s_PauseButton, 1, 1, this.m_Background);
     this.m_ModeButton = Button.create(s_PauseButton, 1, 1, this.m_Background);
@@ -49,28 +49,27 @@ Pause = ExtendedPopup.extend({
     this.m_ContinueText = Text.create('continue', this.m_ContinueButton);
     this.m_ModeText = Text.create('choose-mode', this.m_ModeButton);
 
-    this.m_Decorations[0].setTextureRect(cc.rect(0, 0, 200, 300));
-    this.m_Decorations[1].setTextureRect(cc.rect(200, 0, 200, 300));
-    this.m_Decorations[2].setTextureRect(cc.rect(400, 0, 200, 300));
-    this.m_Decorations[3].setTextureRect(cc.rect(0, 600, 600, 107));
-
-    this.m_Decorations[0].create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(154), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(400));
-    this.m_Decorations[1].create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(154), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(400));
-    this.m_Decorations[2].create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(4), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(400));
-    this.m_Decorations[3].create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(220));
+    this.m_Decorations[0].create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(240));
+    this.m_Decorations[1].create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(162), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(420));
+    this.m_Decorations[2].create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(10), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(425));
+    this.m_Decorations[3].create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(152), this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(425));
 
     this.m_ContinueButton.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 + Camera.sharedCamera().coord(90));
     this.m_ModeButton.create().setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(70));
     this.m_MenuButton.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(90), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(240));
     this.m_ShopButton.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(90), this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(240));
-    this.m_MusicButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_SoundButton.create().setCenterPosition(Camera.sharedCamera().coord(210), Camera.sharedCamera().coord(100));
+    this.m_MusicButton.create().setCenterPosition(this.m_Background.getWidth() / 2 - Camera.sharedCamera().coord(60), Camera.sharedCamera().coord(100));
+    this.m_SoundButton.create().setCenterPosition(this.m_Background.getWidth() / 2 + Camera.sharedCamera().coord(60), Camera.sharedCamera().coord(100));
 
     this.m_ContinueText.setCenterPosition(this.m_ContinueButton.getWidth() / 2, this.m_ContinueButton.getHeight() / 2);
     this.m_ModeText.setCenterPosition(this.m_ModeButton.getWidth() / 2, this.m_ModeButton.getHeight() / 2);
 
     this.m_MenuButton.setCurrentFrameIndex(0);
     this.m_ShopButton.setCurrentFrameIndex(1);
+
+    this.m_Decorations[1].setCurrentFrameIndex(0);
+    this.m_Decorations[2].setCurrentFrameIndex(1);
+    this.m_Decorations[3].setCurrentFrameIndex(2);
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Pause);
     this.m_ContinueButton.setTouchHandler('onContinueEvent', Pause);

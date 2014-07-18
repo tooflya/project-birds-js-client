@@ -34,8 +34,18 @@
     platform: 'vk',
     language: 1,
     designed: {
-      width: 980,
-      height: 551
+      size: {
+        width: 980,
+        height: 551
+      },
+      graphics: {
+        width: 1920,
+        height: 1080
+      },
+      margin: {
+        x: 0,
+        y: 0
+      }
     },
     orientations: {
       portrait: false,
@@ -80,6 +90,13 @@
   'Sources/Entities/Bonus2.js',
   'Sources/Entities/Bonus6.js',
   'Sources/Entities/Bonus7.js',
+  'Sources/Entities/Catapult.js',
+  'Sources/Entities/CatapultBird.js',
+  'Sources/Entities/Element.js',
+  'Sources/Entities/ElementSplash.js',
+  'Sources/Entities/ElementIcon.js',
+  'Sources/Entities/ElementPart.js',
+  'Sources/Entities/Target.js',
   'Sources/Screens/Screens/Preloader.js',
   'Sources/Screens/Screens/Menu.js',
   'Sources/Screens/Screens/Settings.js',
@@ -114,6 +131,9 @@
   'Sources/Screens/Popups/Purchase.js',
   'Sources/Screens/Popups/Multiplayer.js',
   'Sources/Managers/PopupShaderManager.js',
+  'Sources/Managers/ElementsManager.js',
+  'Sources/Managers/MatrixManager.js',
+  'Sources/Managers/ActionsManager.js',
   'Sources/Panels/MenuPanel.js',
   'Sources/Panels/GamePanel.js',
   'Sources/Lists/AboutList.js',
@@ -127,8 +147,11 @@
   'Sources/Game/Thrower.js',
   'Sources/Game/Timer.js',
   'Sources/Game/Level.js',
+  'Sources/Game/Levels.js',
   'Sources/Game/Pause.js',
   'Sources/Game/Touch.js',
+  'Sources/Game/Animations.js',
+  'Sources/Game/Tutorial.js',
   'Sources/Layers/ConfettiBackground.js',
   'Sources/Layers/DustBackground.js',
   'Sources/Layers/PurchasesBackground.js',

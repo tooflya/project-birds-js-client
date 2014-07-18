@@ -159,7 +159,16 @@ Finish = Background.extend({
 
     switch(type) {
       case types.progress:
+      this.m_RestartButton.setVisible(false);
+      this.m_MenuButton.setVisible(true);
+      this.m_ContinueButton.setVisible(true);
+      this.m_ShopButton.setVisible(true);
 
+      this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
+      this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
+      this.m_ContinueButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
+
+      this.m_PrizeDecoration.create().setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(250));
       break;
       case types.classic:
       this.m_RestartButton.setVisible(false);

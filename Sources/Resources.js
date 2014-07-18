@@ -90,6 +90,7 @@ var s_PopupDecoration12 = "Resources/Graphics/popup-decoration-12.png";
 var s_PopupDecoration13 = "Resources/Graphics/popup-decoration-13.png";
 var s_PopupDecoration14 = "Resources/Graphics/popup-decoration-14.png";
 var s_PopupDecoration15 = "Resources/Graphics/popup-decoration-15.png";
+var s_PopupDecoration16 = "Resources/Graphics/popup-decoration-16.png";
 var s_PanelItemsBackground1 = "Resources/Graphics/panel-item-background-1.png";
 var s_PanelItemsBackground2 = "Resources/Graphics/panel-item-background-2.png";
 var s_PanelIcon1 = "Resources/Graphics/panel-icon-1.png";
@@ -126,6 +127,7 @@ var s_GameBackground2BluredLandscape = "Resources/Graphics/game-background-2-blu
 var s_GameBackground3BluredLandscape = "Resources/Graphics/game-background-3-blured-landscape.png";
 var s_GameBackground4BluredLandscape = "Resources/Graphics/game-background-4-blured-landscape.png";
 var s_GameBackground5BluredLandscape = "Resources/Graphics/game-background-5-blured-landscape.png";
+var s_GetMovesPopupButton = "Resources/Graphics/popup-moves-get.png";
 var s_GetLivesPopupButton = "Resources/Graphics/popup-lives-get.png";
 var s_GetCoinsPopupButton = "Resources/Graphics/popup-coins-get.png";
 var s_GetKeysPopupButton1 = "Resources/Graphics/popup-keys-get-1.png";
@@ -376,6 +378,7 @@ var resources = [
   {src: s_PopupDecoration13},
   {src: s_PopupDecoration14},
   {src: s_PopupDecoration15},
+  {src: s_PopupDecoration16},
   {src: s_PanelItemsBackground1},
   {src: s_PanelItemsBackground2},
   {src: s_PanelIcon1},
@@ -402,6 +405,7 @@ var resources = [
   {src: s_GameBackground3BluredLandscape},
   {src: s_GameBackground4BluredLandscape},
   {src: s_GameBackground5BluredLandscape},
+  {src: s_GetMovesPopupButton},
   {src: s_GetLivesPopupButton},
   {src: s_GetCoinsPopupButton},
   {src: s_GetKeysPopupButton1},
