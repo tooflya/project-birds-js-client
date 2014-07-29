@@ -157,7 +157,7 @@
     'Sources/Maps/Promotion.js'
   ], function() {
     Preloader.preload(resources, function() {
-      DataManager.sharedManager().getCurrentUser(function() {
+      DataManager.sharedManager().setup(function() {
         cc.canvas.style.cursor = "url('Resources/Graphics/cursor.png'), -moz-zoom-in";
 
         AchievementsManager.sharedManager();
