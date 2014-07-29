@@ -31,7 +31,9 @@
 
 (function() {
   App.run(false, {
+    application: 5,
     platform: 'standalone',
+    auto: false,
     language: 0,
     designed: {
       size: {
@@ -56,106 +58,103 @@
     vendor: 'tooflya',
     server: {
       url: 'http://www.tooflya.com',
-      port: 82
+      port: 8082
     }
   }, [
-  'Sources/Resources.js',
-  'Sources/Language.js',
-  'Sources/Properties.js',
-  'Sources/Entities/Button.js',
-  'Sources/Entities/CircleDecoration1.js',
-  'Sources/Entities/CircleDecoration2.js',
-  'Sources/Entities/PopupShader.js',
-  'Sources/Entities/Mark.js',
-  'Sources/Entities/Star.js',
-  'Sources/Entities/Feather.js',
-  'Sources/Entities/Explosion.js',
-  'Sources/Entities/Bird.js',
-  'Sources/Entities/BombBird.js',
-  'Sources/Entities/FlayerBird.js',
-  'Sources/Entities/BonusBird.js',
-  'Sources/Entities/BirdExplosion.js',
-  'Sources/Entities/SplashStar.js',
-  'Sources/Entities/Confetti.js',
-  'Sources/Entities/Key.js',
-  'Sources/Entities/Dust.js',
-  'Sources/Entities/Water.js',
-  'Sources/Entities/ParticleCoin.js',
-  'Sources/Entities/ParticleKey.js',
-  'Sources/Entities/ParticleLive.js',
-  'Sources/Entities/WeaponParticle1.js',
-  'Sources/Entities/WeaponParticle2.js',
-  'Sources/Entities/Bonus.js',
-  'Sources/Entities/Bonus1.js',
-  'Sources/Entities/Bonus2.js',
-  'Sources/Entities/Bonus6.js',
-  'Sources/Entities/Bonus7.js',
-  'Sources/Entities/Catapult.js',
-  'Sources/Entities/CatapultBird.js',
-  'Sources/Entities/Element.js',
-  'Sources/Entities/ElementSplash.js',
-  'Sources/Entities/ElementIcon.js',
-  'Sources/Entities/ElementPart.js',
-  'Sources/Entities/Target.js',
-  'Sources/Screens/Screens/Preloader.js',
-  'Sources/Screens/Screens/Menu.js',
-  'Sources/Screens/Screens/Settings.js',
-  'Sources/Screens/Screens/Credits.js',
-  'Sources/Screens/Screens/Languages.js',
-  'Sources/Screens/Screens/Mode.js',
-  'Sources/Screens/Screens/More.js',
-  'Sources/Screens/Screens/Reset.js',
-  'Sources/Screens/Screens/Shop.js',
-  'Sources/Screens/Screens/Levels.js',
-  'Sources/Screens/Screens/Loading.js',
-  'Sources/Screens/Screens/Game.js',
-  'Sources/Screens/Popups/ExtendedPopup.js',
-  'Sources/Screens/Popups/Rate.js',
-  'Sources/Screens/Popups/Social.js',
-  'Sources/Screens/Popups/Exit.js',
-  'Sources/Screens/Popups/ResetProgress.js',
-  'Sources/Screens/Popups/Coins.js',
-  'Sources/Screens/Popups/Keys.js',
-  'Sources/Screens/Popups/Lives.js',
-  'Sources/Screens/Popups/Moves.js',
-  'Sources/Screens/Popups/Gift.js',
-  'Sources/Screens/Popups/Help.js',
-  'Sources/Screens/Popups/Lock.js',
-  'Sources/Screens/Popups/Item.js',
-  'Sources/Screens/Popups/Bought.js',
-  'Sources/Screens/Popups/Rating.js',
-  'Sources/Screens/Popups/Pause.js',
-  'Sources/Screens/Popups/Achievements.js',
-  'Sources/Screens/Popups/Finish.js',
-  'Sources/Screens/Popups/Challenge.js',
-  'Sources/Screens/Popups/Purchase.js',
-  'Sources/Screens/Popups/Multiplayer.js',
-  'Sources/Managers/PopupShaderManager.js',
-  'Sources/Managers/ElementsManager.js',
-  'Sources/Managers/MatrixManager.js',
-  'Sources/Managers/ActionsManager.js',
-  'Sources/Panels/MenuPanel.js',
-  'Sources/Panels/GamePanel.js',
-  'Sources/Lists/AboutList.js',
-  'Sources/Lists/ItemList.js',
-  'Sources/Lists/HelpList.js',
-  'Sources/Lists/AchievementsList.js',
-  'Sources/Lists/LeaderboardList.js',
-  'Sources/Lists/ChallengeList.js',
-  'Sources/Game/Preview.js',
-  'Sources/Game/Events.js',
-  'Sources/Game/Thrower.js',
-  'Sources/Game/Timer.js',
-  'Sources/Game/Level.js',
-  'Sources/Game/Levels.js',
-  'Sources/Game/Pause.js',
-  'Sources/Game/Touch.js',
-  'Sources/Game/Animations.js',
-  'Sources/Game/Tutorial.js',
-  'Sources/Layers/ConfettiBackground.js',
-  'Sources/Layers/DustBackground.js',
-  'Sources/Layers/PurchasesBackground.js',
-  'Sources/Maps/Promotion.js'
+    'Sources/Entities/Button.js',
+    'Sources/Entities/CircleDecoration1.js',
+    'Sources/Entities/CircleDecoration2.js',
+    'Sources/Entities/PopupShader.js',
+    'Sources/Entities/Mark.js',
+    'Sources/Entities/Star.js',
+    'Sources/Entities/Feather.js',
+    'Sources/Entities/Explosion.js',
+    'Sources/Entities/Bird.js',
+    'Sources/Entities/BombBird.js',
+    'Sources/Entities/FlayerBird.js',
+    'Sources/Entities/BonusBird.js',
+    'Sources/Entities/BirdExplosion.js',
+    'Sources/Entities/SplashStar.js',
+    'Sources/Entities/Confetti.js',
+    'Sources/Entities/Key.js',
+    'Sources/Entities/Dust.js',
+    'Sources/Entities/Water.js',
+    'Sources/Entities/ParticleCoin.js',
+    'Sources/Entities/ParticleKey.js',
+    'Sources/Entities/ParticleLive.js',
+    'Sources/Entities/WeaponParticle1.js',
+    'Sources/Entities/WeaponParticle2.js',
+    'Sources/Entities/Bonus.js',
+    'Sources/Entities/Bonus1.js',
+    'Sources/Entities/Bonus2.js',
+    'Sources/Entities/Bonus6.js',
+    'Sources/Entities/Bonus7.js',
+    'Sources/Entities/Catapult.js',
+    'Sources/Entities/CatapultBird.js',
+    'Sources/Entities/Element.js',
+    'Sources/Entities/ElementSplash.js',
+    'Sources/Entities/ElementIcon.js',
+    'Sources/Entities/ElementPart.js',
+    'Sources/Entities/Target.js',
+    'Sources/Screens/Screens/Preloader.js',
+    'Sources/Screens/Screens/Menu.js',
+    'Sources/Screens/Screens/Settings.js',
+    'Sources/Screens/Screens/Credits.js',
+    'Sources/Screens/Screens/Languages.js',
+    'Sources/Screens/Screens/Mode.js',
+    'Sources/Screens/Screens/More.js',
+    'Sources/Screens/Screens/Reset.js',
+    'Sources/Screens/Screens/Shop.js',
+    'Sources/Screens/Screens/Levels.js',
+    'Sources/Screens/Screens/Loading.js',
+    'Sources/Screens/Screens/Game.js',
+    'Sources/Screens/Popups/ExtendedPopup.js',
+    'Sources/Screens/Popups/Rate.js',
+    'Sources/Screens/Popups/Social.js',
+    'Sources/Screens/Popups/Exit.js',
+    'Sources/Screens/Popups/ResetProgress.js',
+    'Sources/Screens/Popups/Coins.js',
+    'Sources/Screens/Popups/Keys.js',
+    'Sources/Screens/Popups/Lives.js',
+    'Sources/Screens/Popups/Moves.js',
+    'Sources/Screens/Popups/Gift.js',
+    'Sources/Screens/Popups/Help.js',
+    'Sources/Screens/Popups/Lock.js',
+    'Sources/Screens/Popups/Item.js',
+    'Sources/Screens/Popups/Bought.js',
+    'Sources/Screens/Popups/Rating.js',
+    'Sources/Screens/Popups/Pause.js',
+    'Sources/Screens/Popups/Achievements.js',
+    'Sources/Screens/Popups/Finish.js',
+    'Sources/Screens/Popups/Challenge.js',
+    'Sources/Screens/Popups/Purchase.js',
+    'Sources/Screens/Popups/Multiplayer.js',
+    'Sources/Managers/PopupShaderManager.js',
+    'Sources/Managers/ElementsManager.js',
+    'Sources/Managers/MatrixManager.js',
+    'Sources/Managers/ActionsManager.js',
+    'Sources/Panels/MenuPanel.js',
+    'Sources/Panels/GamePanel.js',
+    'Sources/Lists/AboutList.js',
+    'Sources/Lists/ItemList.js',
+    'Sources/Lists/HelpList.js',
+    'Sources/Lists/AchievementsList.js',
+    'Sources/Lists/LeaderboardList.js',
+    'Sources/Lists/ChallengeList.js',
+    'Sources/Game/Preview.js',
+    'Sources/Game/Events.js',
+    'Sources/Game/Thrower.js',
+    'Sources/Game/Timer.js',
+    'Sources/Game/Level.js',
+    'Sources/Game/Levels.js',
+    'Sources/Game/Pause.js',
+    'Sources/Game/Touch.js',
+    'Sources/Game/Animations.js',
+    'Sources/Game/Tutorial.js',
+    'Sources/Layers/ConfettiBackground.js',
+    'Sources/Layers/DustBackground.js',
+    'Sources/Layers/PurchasesBackground.js',
+    'Sources/Maps/Promotion.js'
   ], function() {
     Preloader.preload(resources, function() {
       DataManager.sharedManager().getCurrentUser(function() {
@@ -168,8 +167,6 @@
       });
     }, application);
   }, function(callback) {
-    console.log('Your are a new user - welcome!');
-
     var achievements = [];
 
     achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 0});
@@ -220,56 +217,64 @@
 
     AchievementsManager.sharedManager().install(achievements);
 
-    DataManager.sharedManager().save(references.info.install, 1);
-    DataManager.sharedManager().save(references.language, -1);
-    DataManager.sharedManager().save(references.rating, 0);
-    DataManager.sharedManager().save(references.coins.gold, 0);
-    DataManager.sharedManager().save(references.coins.silver, 0);
-    DataManager.sharedManager().save(references.coins.keys, 0);
-    DataManager.sharedManager().save(references.coins.lives, 5);
-    DataManager.sharedManager().save(references.lock.modes.classic, 0);
-    DataManager.sharedManager().save(references.lock.modes.arcade, 0);
-    DataManager.sharedManager().save(references.time.reward, 0);
-    DataManager.sharedManager().save(references.weapon, 1);
+    DataManager.sharedManager().set(true,
+    [
+      references.sound,
+      references.music,
+      references.language,
+      references.info.install,
+      references.info.game,
+      references.info.rate,
+      references.coins.gold,
+      references.coins.silver,
+      references.coins.keys,
+      references.coins.lives,
 
-    DataManager.sharedManager().save(references.items.weapon1, 1);
-    DataManager.sharedManager().save(references.items.weapon2, 0);
-    DataManager.sharedManager().save(references.items.weapon3, 0);
-    DataManager.sharedManager().save(references.items.weapon4, 0);
-    DataManager.sharedManager().save(references.items.weapon5, 0);
-    DataManager.sharedManager().save(references.items.weapon6, 0);
-    DataManager.sharedManager().save(references.items.weapon7, 0);
-    DataManager.sharedManager().save(references.items.weapon8, 0);
-    DataManager.sharedManager().save(references.items.weapon9, 0);
-    DataManager.sharedManager().save(references.items.weapon10, 0);
-    DataManager.sharedManager().save(references.items.weapon11, 0);
+      references.lock.modes.classic,
+      references.lock.modes.arcade,
+      references.time.reward,
+      references.weapon,
 
-    DataManager.sharedManager().save(references.items.bird1, 0);
-    DataManager.sharedManager().save(references.items.bird2, 0);
-    DataManager.sharedManager().save(references.items.bird3, 0);
-    DataManager.sharedManager().save(references.items.bird4, 0);
-    DataManager.sharedManager().save(references.items.bird5, 0);
-    DataManager.sharedManager().save(references.items.bird6, 0);
-    DataManager.sharedManager().save(references.items.bird7, 0);
-    DataManager.sharedManager().save(references.items.bird8, 0);
+      references.items.weapon1,
+      references.items.weapon2,
+      references.items.weapon3,
+      references.items.weapon4,
+      references.items.weapon5,
+      references.items.weapon6,
+      references.items.weapon7,
+      references.items.weapon8,
+      references.items.weapon9,
+      references.items.weapon10,
+      references.items.weapon11,
 
-    DataManager.sharedManager().save(references.items.bonus1, 0);
-    DataManager.sharedManager().save(references.items.bonus2, 0);
-    DataManager.sharedManager().save(references.items.bonus3, 0);
-    DataManager.sharedManager().save(references.items.bonus4, 0);
-    DataManager.sharedManager().save(references.items.bonus5, 0);
-    DataManager.sharedManager().save(references.items.bonus6, 0);
-    DataManager.sharedManager().save(references.items.bonus7, 0);
-    DataManager.sharedManager().save(references.items.bonus8, 0);
+      references.items.bird1,
+      references.items.bird2,
+      references.items.bird3,
+      references.items.bird4,
+      references.items.bird5,
+      references.items.bird6,
+      references.items.bird7,
+      references.items.bird8,
 
-    DataManager.sharedManager().save(references.tutorial.enable, 1);
-    DataManager.sharedManager().save(references.tutorial.element1, 1);
-    DataManager.sharedManager().save(references.tutorial.element2, 1);
-    DataManager.sharedManager().save(references.tutorial.element3, 1);
-    DataManager.sharedManager().save(references.tutorial.element4, 1);
-    DataManager.sharedManager().save(references.tutorial.element5, 1);
-    DataManager.sharedManager().save(references.tutorial.element6, 1);
-
-    callback();
+      references.items.bonus1,
+      references.items.bonus2,
+      references.items.bonus3,
+      references.items.bonus4,
+      references.items.bonus5,
+      references.items.bonus6,
+      references.items.bonus7,
+      references.items.bonus8
+    ],
+    [
+      1, 1, document['ccConfig'].params.language, 1, 0, 0, 0, 0, 0, 5,
+      0, 0, 0, 1,
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0
+    ], {
+      success: function() {
+        callback();
+      }
+    });
   });
 })();

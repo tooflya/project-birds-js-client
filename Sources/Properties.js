@@ -45,30 +45,38 @@ var purchase = {
   moves: 7
 };
 var references = {
+  music: 1,
+  sound: 2,
+  language: 3,
   info: {
-    weapon: 0,
-    install: 1,
-    game: 2,
-    rate: 3
+    personal: {
+      id: 4,
+      name: 5,
+      surname: 6
+    },
+    install: 7,
+    game: 8,
+    rate: 9,
+    weapon: 10
   },
   coins: {
-    gold: 4,
-    silver: 5,
-    keys: 6,
-    lives: 7
+    gold: 11,
+    silver: 12,
+    keys: 13,
+    lives: 14
   },
   lock: {
     modes: {
-      classic: 8,
-      arcade: 9
+      classic: 15,
+      arcade: 16
     }
   },
   achievements: {
-    count: 10
+    count: 17
   },
   time: {
-    reward: 11,
-    days: 12
+    reward: 18,
+    days: 19
   },
   items: {
     weapon1: 101,
