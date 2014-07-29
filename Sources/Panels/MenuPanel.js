@@ -38,11 +38,11 @@ MenuPanel = Panel.extend({
     references.coins.rating
   ],
   m_Fields: [
-    DataManager.sharedManager().get(references.coins.gold),
-    DataManager.sharedManager().get(references.coins.silver),
-    DataManager.sharedManager().get(references.coins.lives),
-    DataManager.sharedManager().get(references.coins.keys),
-    DataManager.sharedManager().get(references.rating)
+    DataManager.sharedManager().get(false, references.coins.gold),
+    DataManager.sharedManager().get(false, references.coins.silver),
+    DataManager.sharedManager().get(false, references.coins.lives),
+    DataManager.sharedManager().get(false, references.coins.keys),
+    DataManager.sharedManager().get(false, references.rating)
   ],
   m_LeaderboardAnimationIndex: 1,
   m_LeaderboardAnimationTime: 0.1,
@@ -63,10 +63,10 @@ MenuPanel = Panel.extend({
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       EnergyManager.sharedManager().check();
 
-      if(DataManager.sharedManager().get(EnergyManager.sharedManager().getReference()) <= 0) {
+      if(DataManager.sharedManager().get(false, EnergyManager.sharedManager().getReference()) <= 0) {
         e.timeLeft(EnergyManager.sharedManager().time() / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
       } else {
-        e.ccsf([DataManager.sharedManager().get(EnergyManager.sharedManager().getReference())]);
+        e.ccsf([DataManager.sharedManager().get(false, EnergyManager.sharedManager().getReference())]);
       }
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
@@ -134,7 +134,7 @@ MenuPanel = Panel.extend({
   onShow: function() {
     this._super();
 
-    DataManager.sharedManager().emit('leaderboard-id', 'my id', function(id) {
+    NetworkManager.sharedManager().emit('leaderboard-id', 'my id', function(id) {
       MenuPanel.sharedScreen().m_LeaderboardAnimationCompleted = true;
       MenuPanel.sharedScreen().m_LeaderboardIndex = id;
     });
@@ -156,8 +156,8 @@ MenuPanel = Panel.extend({
     this._super(time);
 
     for(var i = 0; i < 5; i++) {
-      if(this.m_Fields[i] != DataManager.sharedManager().get(this.m_Keys[i])) {
-        this.m_Fields[i] += this.m_Fields[i] > DataManager.sharedManager().get(this.m_Keys[i]) ? -1 : 1;
+      if(this.m_Fields[i] != DataManager.sharedManager().get(false, this.m_Keys[i])) {
+        this.m_Fields[i] += this.m_Fields[i] > DataManager.sharedManager().get(false, this.m_Keys[i]) ? -1 : 1;
       }
     }
 
@@ -174,11 +174,11 @@ MenuPanel = Panel.extend({
   },
   updateData: function() {
     this.m_Fields = [
-      DataManager.sharedManager().get(references.coins.gold),
-      DataManager.sharedManager().get(references.coins.silver),
-      DataManager.sharedManager().get(references.coins.lives),
-      DataManager.sharedManager().get(references.coins.keys),
-      DataManager.sharedManager().get(references.rating)
+      DataManager.sharedManager().get(false, references.coins.gold),
+      DataManager.sharedManager().get(false, references.coins.silver),
+      DataManager.sharedManager().get(false, references.coins.lives),
+      DataManager.sharedManager().get(false, references.coins.keys),
+      DataManager.sharedManager().get(false, references.rating)
     ];
   }
 });
