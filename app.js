@@ -278,3 +278,12 @@
     });
   });
 })();
+
+window.onmousemove = function (e) {
+  var x = e.clientX;
+  var y = e.clientY;
+  var center = ((screen.width / 2) - 700);
+
+  document.body.style.backgroundPosition = -(center + x / 100) + "px bottom, " + (center + x / 100) + "px bottom, " + (center + x / 100) + "px " + (70 - (y / 100)) + "px";
+  document.getElementsByTagName("html")[0].style.backgroundPosition = "center " + (70 - (y / 100)) + "px";
+};

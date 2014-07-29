@@ -1,0 +1,29 @@
+html {
+  background-color: #f3fbff !important;
+  background-image: url(../Graphics/promo-background-0.png) !important;
+  background-position: center 70px;
+  background-repeat: repeat-x !important;
+}
+body {
+  background-color: transparent;
+  background-image: url(../Graphics/promo-background-3.png), url(../Graphics/promo-background-2.png), url(../Graphics/promo-background-1.png);
+  background-position: center bottom, center bottom, center 70px;
+  background-repeat: repeat-x, repeat-x, no-repeat;
+}
+div.loader {
+  background-color: #ebf0f0;
+  width: 980px !important;
+  height: 551px !important;
+  margin: 0 !important;
+}
+div.loader img {
+  margin: 250px 460px !important;
+}
+div.game-description div.name, div.game-description div.description, div.game-description div.name sup {
+  color: #fff !important;
+  font-weight: 500 !important;
+  text-shadow: 0px 1px #000 !important;
+}
+div.canvas {
+  border: 1px #fff solid !important;
+}
