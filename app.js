@@ -165,7 +165,7 @@
         ScreenManager.sharedManager().replace(Menu);
       });
     });
-  }, function(callback) {alert('install');
+  }, function(callback) {
     var achievements = [];
 
     achievements.push({id: '', icon: s_AchievementIcon1, name: 'achievement-name-1', description: 'achievement-description-1', state: 0});
