@@ -581,16 +581,16 @@ Levels = Screen.extend({
     ScreenManager.sharedManager().replace(Mode);
   },
   onSelected: function(data) {
-    if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
-      Lives.sharedScreen(this).show();
-    } else {
-      if(false) {
-
-      } else {
-        Game.sharedScreen(0);
-        ScreenManager.sharedManager().replace(Loading);
-      }
-    }
+    DataManager.sharedManager().get(true, references.coins.lives, {
+        success: function(value) {
+          if(value <= 0) {
+            Lives.sharedScreen(this).show();
+          } else {
+            Game.sharedScreen(0);
+            ScreenManager.sharedManager().replace(Loading);
+          }
+        }
+    });
   },
   onShow: function() {
     this._super();

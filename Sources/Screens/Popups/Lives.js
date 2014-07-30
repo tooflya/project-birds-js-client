@@ -73,11 +73,15 @@ Lives = ExtendedPopup.extend({
       Purchase.sharedScreen(this.getParent()).show(params, function(id) {
         switch(id) {
           case purchase.cancel:
-          if(DataManager.sharedManager().get(EnergyManager.sharedManager().getReference()) <= 0) {
-            if(Game.instance) {
-              ScreenManager.sharedManager().replace(Menu);
+          DataManager.sharedManager().get(true, EnergyManager.sharedManager().getReference(), {
+            success: function(value) {
+              if(value <= 0) {
+                if(Game.instance) {
+                  ScreenManager.sharedManager().replace(Menu);
+                }
+              }
             }
-          }
+          });
           break;
           case purchase.lives:
           EnergyManager.sharedManager().restoreAll();
@@ -93,31 +97,33 @@ Lives = ExtendedPopup.extend({
     });
   },
   show: function() {
-    this._super();
+    DataManager.sharedManager().get(true, references.coins.lives, {
+      success: function(value) {
+        ExtendedPopup.prototype.show.call(Lives.instance);
 
-    var lives = DataManager.sharedManager().get(references.coins.lives);
-
-    if(lives <= 0) {
-    } else if(lives < 5) {
-      this.m_Text.setText('lives-popup-3');
-      this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
-    } else {
-      this.m_Text.setText('lives-popup-2');
-      this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(230));
-      this.m_GetButton.setVisible(false);
-      this.m_GetButton.runAction(
-        cc.Sequence.create(
-        cc.ScaleTo.create(0.1, 0.8, 1.2),
-        cc.ScaleTo.create(0.1, 1.2, 0.8),
-        cc.ScaleTo.create(0.1, 1.0, 1.0)
-        )
-      );
-    }
+        if(value <= 0) {
+        } else if(value < 5) {
+          Lives.instance.m_Text.setText('lives-popup-3');
+          Lives.instance.m_Text.setCenterPosition(Lives.instance.m_Background.getWidth() / 2, Lives.instance.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
+        } else {
+          Lives.instance.m_Text.setText('lives-popup-2');
+          Lives.instance.m_Text.setCenterPosition(Lives.instance.m_Background.getWidth() / 2, Lives.instance.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(230));
+          Lives.instance.m_GetButton.setVisible(false);
+          Lives.instance.m_GetButton.runAction(
+            cc.Sequence.create(
+            cc.ScaleTo.create(0.1, 0.8, 1.2),
+            cc.ScaleTo.create(0.1, 1.2, 0.8),
+            cc.ScaleTo.create(0.1, 1.0, 1.0)
+            )
+          );
+        }
+      }
+    });
   },
   onShow: function() {
     this._super();
 
-    if(DataManager.sharedManager().get(references.coins.lives) < 5) {
+    if(DataManager.sharedManager().get(false, references.coins.lives) < 5) {
       this.m_GetButton.runAction(
         cc.Sequence.create(
         cc.ScaleTo.create(0.1, 0.8, 1.2),
@@ -133,7 +139,7 @@ Lives = ExtendedPopup.extend({
     Lives.instance = false;
 
     if(!prepare && !this.m_GetButton.action) {
-      if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
+      if(DataManager.sharedManager().get(false, references.coins.lives) <= 0) {
         if(Game.instance) {
           if(!Game.sharedScreen().m_GameRunning) {
             ScreenManager.sharedManager().replace(Menu);
@@ -151,7 +157,7 @@ Lives = ExtendedPopup.extend({
   update: function(time) {
     this._super(time);
 
-    var lives = DataManager.sharedManager().get(references.coins.lives);
+    var lives = DataManager.sharedManager().get(false, references.coins.lives);
 
     if(lives <= 0) {
       this.m_Counter.timeLeft(EnergyManager.sharedManager().time() / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);

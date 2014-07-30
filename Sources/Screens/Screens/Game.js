@@ -147,7 +147,7 @@ Game = Screen.extend({
 
     this.name = "Game screen";
 
-    Game.tutorial = DataManager.sharedManager().get(references.tutorial.enable);
+    Game.tutorial = DataManager.sharedManager().get(false, references.tutorial.enable);
 
     this.m_Type = Game.type;
     this.m_ThrowParams = {

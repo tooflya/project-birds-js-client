@@ -107,15 +107,14 @@ Promotion = ClippedEntity.extend({
   show: function() {
     this.assert(this.m_Showed, "The Daily Revenue Map alredy been showed.");
 
-    if(Date.now() - DataManager.sharedManager().get(references.time.reward) > this.getEventsInMilliseconds('day') && !cc.Browser.isMobile) {
-      if(Date.now() - DataManager.sharedManager().get(references.time.reward) > this.getEventsInMilliseconds('day') * 2) {
+    if(Date.now() - DataManager.sharedManager().get(false, references.time.reward) > this.getEventsInMilliseconds('day') && !cc.Browser.isMobile) {
+      if(Date.now() - DataManager.sharedManager().get(false, references.time.reward) > this.getEventsInMilliseconds('day') * 2) {
         this.m_Day = 1;
       } else {
-        this.m_Day = DataManager.sharedManager().get(references.time.days) + 1;
+        this.m_Day = DataManager.sharedManager().get(false, references.time.days) + 1;
       }
 
-      DataManager.sharedManager().save(references.time.reward, Date.now());
-      DataManager.sharedManager().save(references.time.days, this.m_Day);
+      DataManager.sharedManager().set(true, [references.time.reward, references.time.days], [Date.now(), this.m_Day]);
     } else {
       this.onHide();
 
@@ -221,11 +220,13 @@ Promotion = ClippedEntity.extend({
       break;
     }
 
-    DataManager.sharedManager().update(references.coins.silver, coins.silver);
-    DataManager.sharedManager().update(references.coins.gold, coins.gold);
+    DataManager.sharedManager().set(true, [
+      references.coins.gold,
+      references.coins.silver
+    ], [coins.gold, coins.silver]);
 
-    this.m_Texts[1].ccsf([coins.silver]);
-    this.m_Texts[2].ccsf([coins.gold]);
+    this.m_Texts[1].ccsf([coins.gold]);
+    this.m_Texts[2].ccsf([coins.silver]);
 
     this.m_Texts[0].setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(120) + this.m_Texts[0].getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(350));
     this.m_Texts[1].setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(190) + this.m_Texts[1].getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(50));

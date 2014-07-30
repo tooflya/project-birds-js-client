@@ -160,12 +160,11 @@
       cc.canvas.style.cursor = "url('Resources/Graphics/cursor.png'), -moz-zoom-in";
 
       DataManager.sharedManager().setup(function() {
-        AchievementsManager.sharedManager();
         EnergyManager.sharedManager(references.coins.lives, 5, 30 * 60 * 1000);
 
         ScreenManager.sharedManager().replace(Menu);
       });
-    }, application);
+    });
   }, function(callback) {
     var achievements = [];
 
@@ -215,66 +214,76 @@
     achievements.push({id: '', icon: s_AchievementIcon44, name: 'achievement-name-44', description: 'achievement-description-44', state: 0});
     achievements.push({id: '', icon: s_AchievementIcon45, name: 'achievement-name-45', description: 'achievement-description-45', state: 0});
 
-    AchievementsManager.sharedManager().install(achievements);
+    AchievementsManager.sharedManager().install(achievements, function() {
+      DataManager.sharedManager().set(true,
+      [
+        references.sound,
+        references.music,
+        references.language,
+        references.info.install,
+        references.info.game,
+        references.info.rate,
+        references.coins.gold,
+        references.coins.silver,
+        references.coins.keys,
+        references.coins.lives,
 
-    DataManager.sharedManager().set(true,
-    [
-      references.sound,
-      references.music,
-      references.language,
-      references.info.install,
-      references.info.game,
-      references.info.rate,
-      references.coins.gold,
-      references.coins.silver,
-      references.coins.keys,
-      references.coins.lives,
+        references.lock.modes.classic,
+        references.lock.modes.arcade,
+        references.time.reward,
+        references.time.days,
+        references.info.weapon,
 
-      references.lock.modes.classic,
-      references.lock.modes.arcade,
-      references.time.reward,
-      references.weapon,
+        references.items.weapon1,
+        references.items.weapon2,
+        references.items.weapon3,
+        references.items.weapon4,
+        references.items.weapon5,
+        references.items.weapon6,
+        references.items.weapon7,
+        references.items.weapon8,
+        references.items.weapon9,
+        references.items.weapon10,
+        references.items.weapon11,
 
-      references.items.weapon1,
-      references.items.weapon2,
-      references.items.weapon3,
-      references.items.weapon4,
-      references.items.weapon5,
-      references.items.weapon6,
-      references.items.weapon7,
-      references.items.weapon8,
-      references.items.weapon9,
-      references.items.weapon10,
-      references.items.weapon11,
+        references.items.bird1,
+        references.items.bird2,
+        references.items.bird3,
+        references.items.bird4,
+        references.items.bird5,
+        references.items.bird6,
+        references.items.bird7,
+        references.items.bird8,
 
-      references.items.bird1,
-      references.items.bird2,
-      references.items.bird3,
-      references.items.bird4,
-      references.items.bird5,
-      references.items.bird6,
-      references.items.bird7,
-      references.items.bird8,
+        references.items.bonus1,
+        references.items.bonus2,
+        references.items.bonus3,
+        references.items.bonus4,
+        references.items.bonus5,
+        references.items.bonus6,
+        references.items.bonus7,
+        references.items.bonus8,
 
-      references.items.bonus1,
-      references.items.bonus2,
-      references.items.bonus3,
-      references.items.bonus4,
-      references.items.bonus5,
-      references.items.bonus6,
-      references.items.bonus7,
-      references.items.bonus8
-    ],
-    [
-      1, 1, document['ccConfig'].params.language, 1, 0, 0, 0, 0, 0, 5,
-      0, 0, 0, 1,
-      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0
-    ], {
-      success: function() {
-        callback();
-      }
+        references.tutorial.enable,
+        references.tutorial.element1,
+        references.tutorial.element2,
+        references.tutorial.element3,
+        references.tutorial.element4,
+        references.tutorial.element5,
+        references.tutorial.element6
+      ],
+      [
+        1, 1, document['ccConfig'].params.language, 1, 0, 0, 0, 0, 0, 5,
+        0, 0, 0, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0
+      ], {
+        success: function() {
+          callback();
+        }
+      });
     });
   });
 })();

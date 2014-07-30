@@ -112,7 +112,7 @@ Game.prototype.onLost = function(element) {
     }
 
     if(++this.m_Lifes >= 3) {
-      if(DataManager.sharedManager().get(references.items.bonus2)) {
+      if(DataManager.sharedManager().get(false, references.items.bonus2)) {
         Bonus2.create();
       } else {
         this.finishGame();
@@ -136,9 +136,9 @@ Game.prototype.onGameStart = function() {
   this.m_GameRunning = true;
   this.m_Lifes = 0;
 
-  DataManager.sharedManager().update(references.coins.lives, -1);
+  DataManager.sharedManager().update(true, references.coins.lives, -1);
 
-  Game.power = DataManager.sharedManager().get(references.weapon) * 12;
+  Game.power = DataManager.sharedManager().get(false, references.weapon) * 12;
 
   switch(this.m_Type) {
     case this.m_Types.progress:
@@ -218,27 +218,31 @@ Game.prototype.onShow = function() {
   this.m_CurrentBlows = 0;
   this.m_LevelTimeElapsed = 0;
 
-  if(DataManager.sharedManager().get(references.coins.lives) > 0) {
-    GamePanel.sharedScreen(this.m_Type, this).show();
+  DataManager.sharedManager().get(true, references.coins.lives, {
+    success: function(value) {
+      if(value > 0) {
+        GamePanel.sharedScreen(Game.instance.m_Type, Game.instance).show();
 
-    this.clearResults();
+        Game.instance.clearResults();
 
-    switch(this.m_Type) {
-      case this.m_Types.progress:
-      this.m_CurrentBlows = 20;
+        switch(Game.instance.m_Type) {
+          case Game.instance.m_Types.progress:
+          Game.instance.m_CurrentBlows = 20;
 
-      this.onPreviewFinish();
-      break;
-      case this.m_Types.arcade:
-      case this.m_Types.classic:
-      this.startPreview();
-      break;
+          Game.instance.onPreviewFinish();
+          break;
+          case Game.instance.m_Types.arcade:
+          case Game.instance.m_Types.classic:
+          Game.instance.startPreview();
+          break;
+        }
+
+        DataManager.sharedManager().set(true, references.info.game, 1);
+      } else {
+        Lives.sharedScreen(Game.instance).show();
+      }
     }
-
-    DataManager.sharedManager().save(references.info.game, 1);
-  } else {
-    Lives.sharedScreen(this).show();
-  }
+  });
 };
 
 Game.prototype.onHide = function() {

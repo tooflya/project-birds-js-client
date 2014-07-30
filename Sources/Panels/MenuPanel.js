@@ -134,7 +134,7 @@ MenuPanel = Panel.extend({
   onShow: function() {
     this._super();
 
-    NetworkManager.sharedManager().emit('leaderboard-id', 'my id', function(id) {
+    NetworkManager.sharedInstance().emit('leaderboard-id', 'my id', function(id) {
       MenuPanel.sharedScreen().m_LeaderboardAnimationCompleted = true;
       MenuPanel.sharedScreen().m_LeaderboardIndex = id;
     });
@@ -173,13 +173,12 @@ MenuPanel = Panel.extend({
     }
   },
   updateData: function() {
-    this.m_Fields = [
-      DataManager.sharedManager().get(false, references.coins.gold),
-      DataManager.sharedManager().get(false, references.coins.silver),
-      DataManager.sharedManager().get(false, references.coins.lives),
-      DataManager.sharedManager().get(false, references.coins.keys),
-      DataManager.sharedManager().get(false, references.rating)
-    ];
+    DataManager.sharedManager().get(true, MenuPanel.instance.m_Keys, {
+      success: function(storage) {
+        MenuPanel.instance.m_Fields = storage
+        DataManager.sharedManager().set(false, MenuPanel.instance.m_Keys, storage);
+      }
+    });
   }
 });
 

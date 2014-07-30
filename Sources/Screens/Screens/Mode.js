@@ -50,7 +50,6 @@ Mode = Screen.extend({
     this.m_AchievementsButton = Button.create(s_SfxButtonsSprite, 3, 2, this);
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
     this.m_HelpButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_ComingSoon = Entity.create(s_ComingSoon, this.m_ProgressMode);
     this.m_Lock[0] = Entity.create(s_Lock, this.m_ClassicMode);
     this.m_Lock[1] = Entity.create(s_Lock, this.m_ArcadeMode);
 
@@ -66,7 +65,6 @@ Mode = Screen.extend({
     this.m_ArcadeMode.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(100));
     this.m_RatingButton.create().setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(110), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(320));
     this.m_AchievementsButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(110), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(320));
-    //this.m_ComingSoon.create().setCenterPosition(-Camera.sharedCamera().coord(20), this.m_ProgressMode.getHeight() / 2 + Camera.sharedCamera().coord(10));
     this.m_Lock[0].create().setCenterPosition(0, this.m_ClassicMode.getHeight() / 2);
     this.m_Lock[1].create().setCenterPosition(0, this.m_ArcadeMode.getHeight() / 2);
     this.m_RatingButton.setCurrentFrameIndex(5);
@@ -109,37 +107,40 @@ Mode = Screen.extend({
     ScreenManager.sharedManager().replace(Menu);
   },
   onProgressEvent: function() {
-    if(DataManager.sharedManager().get(references.tutorial.enable)) {
-      Game.sharedScreen(0);
-      ScreenManager.sharedManager().replace(Loading);
-    } else {
-      ScreenManager.sharedManager().replace(Levels);
-    }
+    DataManager.sharedManager().get(true, references.tutorial.enable, {
+      success: function(value) {
+        if(value) {
+          Game.sharedScreen(0);
+          ScreenManager.sharedManager().replace(Loading);
+        } else {
+          ScreenManager.sharedManager().replace(Levels);
+        }
+      }
+    });
   },
   onClassicEvent: function() {
-    if(!DataManager.sharedManager().get(references.lock.modes.classic)) {
-      Lock.sharedScreen(this).show(0);
-    } else {
-      //Multiplayer.sharedScreen(this).show();
-      if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
-        Lives.sharedScreen(this).show();
-      } else {
-        Game.sharedScreen(1);
-        ScreenManager.sharedManager().replace(Loading);
+    DataManager.sharedManager().get(true, references.lock.modes.classic, {
+      success: function(value) {
+        if(value) {
+          Game.sharedScreen(1);
+          ScreenManager.sharedManager().replace(Loading);
+        } else {
+          Lock.sharedScreen(Mode.instance).show(0);
+        }
       }
-    }
+    });
   },
   onArcadeEvent: function() {
-    if(!DataManager.sharedManager().get(references.lock.modes.arcade)) {
-      Lock.sharedScreen(this).show(1);
-    } else {
-      if(DataManager.sharedManager().get(references.coins.lives) <= 0) {
-        Lives.sharedScreen(this).show();
-      } else {
-        Game.sharedScreen(2);
-        ScreenManager.sharedManager().replace(Loading);
+    DataManager.sharedManager().get(true, references.lock.modes.arcade, {
+      success: function(value) {
+        if(value) {
+          Game.sharedScreen(2);
+          ScreenManager.sharedManager().replace(Loading);
+        } else {
+          Lock.sharedScreen(Mode.instance).show(1);
+        }
       }
-    }
+    });
   },
   onRatingEvent: function() {
     Rating.sharedScreen(this).show();
@@ -154,53 +155,57 @@ Mode = Screen.extend({
     Help.sharedScreen(this).show();
   },
   unlock: function(id) {
-    if(DataManager.sharedManager().get(references.coins.keys) > unlock.modes[id].price) {
-      var mode = id == 0 ? references.lock.modes.classic : references.lock.modes.arcade;
+    DataManager.sharedManager().get(true, references.coins.keys, {
+      success: function(value) {
+        if(value > unlock.modes[id].price) {
+          var mode = id == 0 ? references.lock.modes.classic : references.lock.modes.arcade;
 
-      DataManager.sharedManager().save(mode, 1);
-      DataManager.sharedManager().update(references.coins.keys, -unlock.modes[id].price);
+          DataManager.sharedManager().set(true, mode, 1);
+          DataManager.sharedManager().update(true, references.coins.keys, -unlock.modes[id].price);
 
-      var line = Entity.create(s_ModeUnlockLine, this);
+          var line = Entity.create(s_ModeUnlockLine, Mode.instance);
 
-      line.create().setCenterPosition(this.m_Lock[id].getParent().getCenterX(), this.m_Lock[id].getParent().getCenterY());
-      line.setOpacity(0);
-      line.setScaleY(5);
-      line.setScaleX(Camera.sharedCamera().width / line.getWidth());
+          line.create().setCenterPosition(Mode.instance.m_Lock[id].getParent().getCenterX(), Mode.instance.m_Lock[id].getParent().getCenterY());
+          line.setOpacity(0);
+          line.setScaleY(5);
+          line.setScaleX(Camera.sharedCamera().width / line.getWidth());
 
-      this.m_Lock[id].runRecognizeAction(false, {
-        name: 'scale',
-        time: 1.0,
-        value: 3.0
-      });
-      this.m_Lock[id].runRecognizeAction(false, {
-        name: 'fade',
-        time: 1.0,
-        value: 0.0
-      });
-      line.runRecognizeAction(false, [{
-        name: 'fade',
-        time: 0.5,
-        value: 255.0
-      }, {
-        name: 'fade',
-        time: 0.5,
-        value: 0.0
-      }]);
+          Mode.instance.m_Lock[id].runRecognizeAction(false, {
+            name: 'scale',
+            time: 1.0,
+            value: 3.0
+          });
+          Mode.instance.m_Lock[id].runRecognizeAction(false, {
+            name: 'fade',
+            time: 1.0,
+            value: 0.0
+          });
+          line.runRecognizeAction(false, [{
+            name: 'fade',
+            time: 0.5,
+            value: 255.0
+          }, {
+            name: 'fade',
+            time: 0.5,
+            value: 0.0
+          }]);
 
-      AchievementsManager.sharedManager().unlock(id + 1);
+          AchievementsManager.sharedManager().unlock(id + 1);
 
-      Sound.sharedSound().play(s_SoundSlash);
-    } else {
-      Keys.sharedScreen(this).show();
-    }
+          Sound.sharedSound().play(s_SoundSlash);
+        } else {
+          Keys.sharedScreen(Mode.instance).show();
+        }
+      }
+    });
   },
   onShow: function() {
     this._super();
 
     MenuPanel.sharedScreen(this).show();
 
-    if(DataManager.sharedManager().get(references.lock.modes.classic) || this.config.params.vendor == 'ubi-nuri') this.m_Lock[0].destroy();
-    if(DataManager.sharedManager().get(references.lock.modes.arcade)) this.m_Lock[1].destroy(); 
+    if(DataManager.sharedManager().get(false, references.lock.modes.classic) || this.config.params.vendor == 'ubi-nuri') this.m_Lock[0].destroy();
+    if(DataManager.sharedManager().get(false, references.lock.modes.arcade)) this.m_Lock[1].destroy(); 
   },
   onHide: function() {
     this._super();

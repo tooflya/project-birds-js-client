@@ -165,13 +165,6 @@ GamePanel = Panel.extend({
   },
   show: function() {
     this._super();
-
-    this.m_Fields = [
-      DataManager.sharedManager().get(false, references.coins.gold),
-      DataManager.sharedManager().get(false, references.coins.silver),
-      DataManager.sharedManager().get(false, references.coins.lives),
-      DataManager.sharedManager().get(false, references.coins.keys)
-    ];
   },
   hide: function() {
     this._super();
@@ -193,9 +186,19 @@ GamePanel = Panel.extend({
   },
   onEnter: function() {
     this._super();
+
+    this.updateData();
   },
   onExit: function() {
     this._super();
+  },
+  updateData: function() {
+    DataManager.sharedManager().get(true, GamePanel.instance.m_Keys, {
+      success: function(storage) {
+        GamePanel.instance.m_Fields = storage
+        DataManager.sharedManager().set(false, GamePanel.instance.m_Keys, storage);
+      }
+    });
   },
   update: function(time) {
     if(!GamePanel.instance) return;
