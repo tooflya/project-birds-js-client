@@ -51,13 +51,13 @@ Rate = ExtendedPopup.extend({
   },
   onActionEvent: function() {
     this.hide(function() {
-      DataManager.sharedManager().save(references.info.rate, 1);
+      DataManager.sharedManager().set(true, references.info.rate, 1);
     });
   },
   onShow: function() {
     this._super();
 
-    DataManager.sharedManager().save(references.info.game, 0);
+    DataManager.sharedManager().set(true, references.info.game, 0);
   },
   onHide: function() {
     this._super();

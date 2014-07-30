@@ -30,7 +30,7 @@
  */
 
 Game.prototype.createTutorialelements = function() {
-  DataManager.sharedManager().set(true, references.tutorial.enable, false);
+  DataManager.sharedManager().set(true, references.tutorial.enable, 0);
 
   this.m_TutorialState = 1;
   this.m_TutorialRunning = true;
