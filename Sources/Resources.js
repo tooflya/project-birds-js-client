@@ -303,29 +303,29 @@ var s_Levels = [
   "Resources/Graphics/level-30.png"
 ];
 
-var s_Music1 = "Resources/Music/music-1.mp3";
-var s_Music2 = "Resources/Music/music-2.mp3";
-var s_SoundButtonTouch = "Resources/Sound/button-touch.mp3";
-var s_SoundEquipUnlock = "Resources/Sound/equip-unlock.mp3";
-var s_SoundEquipSword = "Resources/Sound/equip-sword.mp3";
-var s_SoundComplete = "Resources/Sound/complete.mp3";
-var s_SoundSlash = "Resources/Sound/slash.mp3";
-var s_SoundThrowBird = "Resources/Sound/throw-bird.mp3";
-var s_SoundThrowBomb = "Resources/Sound/throw-bomb.mp3";
-var s_SoundThrowBombFuse = "Resources/Sound/throw-bomb-fuse.mp3";
-var s_SoundExplosion = "Resources/Sound/explosion.mp3";
-var s_SoundBirdExplosion = "Resources/Sound/bird-explosion.mp3";
-var s_SoundLoseLife = "Resources/Sound/lose-life.mp3";
-var s_SoundExchange = "Resources/Sound/exchange.mp3";
-var s_SoundSwitch = "Resources/Sound/switch.mp3";
-var s_SoundStar = "Resources/Sound/star.mp3";
-var s_SoundLine = "Resources/Sound/line.mp3";
+var s_Music1 = "Resources/Music/music-1.wav";
+var s_Music2 = "Resources/Music/music-2.wav";
+var s_SoundButtonTouch = "Resources/Sound/button-touch.wav";
+var s_SoundEquipUnlock = "Resources/Sound/equip-unlock.wav";
+var s_SoundEquipSword = "Resources/Sound/equip-sword.wav";
+var s_SoundComplete = "Resources/Sound/complete.wav";
+var s_SoundSlash = "Resources/Sound/slash.wav";
+var s_SoundThrowBird = "Resources/Sound/throw-bird.wav";
+var s_SoundThrowBomb = "Resources/Sound/throw-bomb.wav";
+var s_SoundThrowBombFuse = "Resources/Sound/throw-bomb-fuse.wav";
+var s_SoundExplosion = "Resources/Sound/explosion.wav";
+var s_SoundBirdExplosion = "Resources/Sound/bird-explosion.wav";
+var s_SoundLoseLife = "Resources/Sound/lose-life.wav";
+var s_SoundExchange = "Resources/Sound/exchange.wav";
+var s_SoundSwitch = "Resources/Sound/switch.wav";
+var s_SoundStar = "Resources/Sound/star.wav";
+var s_SoundLine = "Resources/Sound/line.wav";
 var s_SoundLose = "Resources/Sound/lose.wav";
 var s_SoundWin = "Resources/Sound/win.wav";
-var s_SoundBloom = ["Resources/Sound/bloom-1.mp3", "Resources/Sound/bloom-2.mp3", "Resources/Sound/bloom-3.mp3", "Resources/Sound/bloom-4.mp3"];
-var s_SoundChew = ["Resources/Sound/chew-1.mp3", "Resources/Sound/chew-2.mp3", "Resources/Sound/chew-3.mp3"];
-var s_SoundDrop = ["Resources/Sound/drop-1.mp3", "Resources/Sound/drop-2.mp3", "Resources/Sound/drop-3.mp3"];
-var s_SoundStars = ["Resources/Sound/star1.mp3", "Resources/Sound/star2.mp3", "Resources/Sound/star3.mp3"];
+var s_SoundBloom = ["Resources/Sound/bloom-1.wav", "Resources/Sound/bloom-2.wav", "Resources/Sound/bloom-3.wav", "Resources/Sound/bloom-4.wav"];
+var s_SoundChew = ["Resources/Sound/chew-1.wav", "Resources/Sound/chew-2.wav", "Resources/Sound/chew-3.wav"];
+var s_SoundDrop = ["Resources/Sound/drop-1.wav", "Resources/Sound/drop-2.wav", "Resources/Sound/drop-3.wav"];
+var s_SoundStars = ["Resources/Sound/star1.wav", "Resources/Sound/star2.wav", "Resources/Sound/star3.wav"];
 
 var resources = [
   {src: s_PreloaderBackgroundPortrait},

@@ -165,7 +165,7 @@
       cc.canvas.style.cursor = "url('Resources/Graphics/cursor.png'), -moz-zoom-in";
 
       DataManager.sharedManager().setup(function() {
-        EnergyManager.sharedManager(references.coins.lives, 5, 30 * 60 * 1000);
+        EnergyManager.sharedManager(references.coins.lives, 5, 60 * 60 * 1000);
 
         ScreenManager.sharedManager().replace(Menu);
       });
@@ -311,7 +311,7 @@
       ],
       [
         1, 1, -1, 1, 0, 0, 0, 0, 0, 5,
-        0, 0, 0, 0, 1,
+        0, 0, 0, -1, 1,
         1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
         -1, -1, -1, -1, -1, -1, -1, -1,
         -1, -1, -1, -1, -1, -1, -1, -1,

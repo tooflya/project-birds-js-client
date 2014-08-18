@@ -137,15 +137,7 @@ Game.prototype.onKeyReceived = function(element) {
 Game.prototype.onGameStart = function() {
   this.m_GameRunning = true;
   this.m_Lifes = 0;
-  this.m_Stars = 0;
-
-  DataManager.sharedManager().update(true, references.coins.lives, -1, {
-    success: function() {
-      if(!Game.network) {
-        GamePanel.instance.updateData();
-      }
-    }
-  });
+  this.m_StarsPoints = 0;
 
   Game.power = DataManager.sharedManager().get(false, references.weapon) * 12;
 
@@ -275,12 +267,20 @@ Game.prototype.onShow = function() {
 
   DataManager.sharedManager().get(true, references.coins.lives, {
     success: function(value) {
-      if(value > 0) {
+      if(value > 0 || Game.tutorial) {
         if(!Game.network) {
           GamePanel.sharedScreen(Game.instance.m_Type, Game.instance).show();
         } else {
           MenuPanel.sharedScreen(Game.instance).show();
         }
+
+        DataManager.sharedManager().update(true, references.coins.lives, -1, {
+          success: function() {
+            if(!Game.network) {
+              GamePanel.instance.updateData();
+            }
+          }
+        });
 
         Game.instance.clearResults();
 
@@ -334,6 +334,14 @@ Game.prototype.onFinishShow = function() {
 
     this.m_Target.destroy();
     this.m_Catapults.onLevelFinish();
+
+    if(Game.tutorial) {
+      this.m_TutorialState = 1;
+      this.m_TutorialRunning = true;
+      this.m_PlayerTurn = true;
+
+      this.m_TutorialTextArea.setCenterPosition(Camera.sharedCamera().center.x - Camera.sharedCamera().coord(300), Camera.sharedCamera().coord(480));
+    }
     break;
     case this.m_Types.classic:
     break;

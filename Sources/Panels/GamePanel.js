@@ -177,6 +177,7 @@ GamePanel = Panel.extend({
     this.getIcons()[this.m_Stars + 3].setCurrentFrameIndex(this.getIcons()[this.m_Stars + 3].getCurrentFrameIndex() - 3);
 
     this.m_Stars++;
+    Game.instance.m_StarsPoints++;
   },
   onShow: function() {
     this._super();

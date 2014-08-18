@@ -70,7 +70,6 @@ Element = TiledEntity.extend({
       this.m_Id = -1;
 
       GamePanel.sharedScreen().starred();
-      Game.instance.m_Stars++;
       break;
     }
   },

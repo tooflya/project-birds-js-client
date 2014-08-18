@@ -204,7 +204,7 @@ Finish = Background.extend({
 
             if(Game.instance.m_GameState) {
               Finish.instance.current = 0;
-              for(var i = 0; i < Game.instance.m_Stars; i++) {
+              for(var i = 0; i < Game.instance.m_StarsPoints; i++) {
                 setTimeout(function() {
                   if(Finish.instance) {
                     var current = Finish.instance.current;
@@ -236,6 +236,10 @@ Finish = Background.extend({
                 score: Game.score
               });
             }
+          }
+        } else {
+          if(Game.instance.m_GameState) {
+            DataManager.sharedManager().set(true, references.tutorial.enable, 0);
           }
         }
 
@@ -301,13 +305,48 @@ Finish = Background.extend({
     this.m_TextValue1.ccsf([0]);
     this.m_TextValue2.ccsf([0]);
 
+    switch(type) {
+      case types.progress:
+      this.m_TempCoins = 0;
+      this.m_TotalCoins = 0;
+      this.m_CountReference = 0;
+      this.m_CountReferences = [0, 0, 0, 0];
+      this.m_ResultReferences = [
+        Game.score,
+        Game.sharedScreen().m_CurrentBlows,
+        Game.sharedScreen().m_BonusKeys
+      ];
+      break;
+      case types.classic:
+      case types.arcade:
+      this.m_TempCoins = 0;
+      this.m_TotalCoins = 0;
+      this.m_CountReference = 0;
+      this.m_CountReferences = [0, 0, 0, 0];
+      this.m_ResultReferences = [
+        Game.sharedScreen().getResults().birds,
+        Game.sharedScreen().getResults().flayers,
+        Game.sharedScreen().getResults().combo,
+        Game.sharedScreen().getResults().keys
+      ];
+      break;
+    }
+
     if(Game.instance.m_GameState) {
       Sound.sharedSound().play(s_SoundWin);
 
       DataManager.sharedManager().update(true, references.coins.lives, 1);
-      DataManager.sharedManager().update(true, references.coins.keys, Game.sharedScreen().m_BonusKeys);
+      if(Game.network) {
+        DataManager.sharedManager().update(true, references.coins.keys, Game.sharedScreen().m_BonusKeys);
+        DataManager.sharedManager().update(true, references.coins.gold, Math.floor(this.m_ResultReferences.sum() / 100));
+      } else {
+        DataManager.sharedManager().update(true, references.coins.keys, Game.sharedScreen().m_BonusKeys);
+        DataManager.sharedManager().update(true, references.coins.silver, Math.floor(this.m_ResultReferences.sum() / 10));
+      }
     } else {
       Sound.sharedSound().play(s_SoundLose);
+
+      this.m_TextValue1.setText('finish-text-4');
     }
   },
   hide: function(callback) {
@@ -365,34 +404,9 @@ Finish = Background.extend({
       break;
     }
 
-    switch(type) {
-      case types.progress:
-      this.m_TempCoins = 0;
-      this.m_TotalCoins = 0;
-      this.m_CountReference = 0;
-      this.m_CountReferences = [0, 0, 0, 0];
-      this.m_ResultReferences = [
-        Game.score,
-        10, // TODO: Moves
-        Game.sharedScreen().m_BonusKeys
-      ];
-      break;
-      case types.classic:
-      case types.arcade:
-      this.m_TempCoins = 0;
-      this.m_TotalCoins = 0;
-      this.m_CountReference = 0;
-      this.m_CountReferences = [0, 0, 0, 0];
-      this.m_ResultReferences = [
-        Game.sharedScreen().getResults().birds,
-        Game.sharedScreen().getResults().flayers,
-        Game.sharedScreen().getResults().combo,
-        Game.sharedScreen().getResults().keys
-      ];
-      break;
+    if(Game.instance.m_GameState) {
+      this.schedule(this.count, 0.01);
     }
-
-    this.schedule(this.count, 0.01);
 
     Game.instance.onFinishShow();
   },
@@ -454,12 +468,6 @@ Finish = Background.extend({
       switch(++this.m_CountReference) {
         default:
         this.unschedule(this.count);
-console.log(1);
-        if(Game.network) {
-          DataManager.sharedManager().set(true, references.coins.gold, this.m_TotalCoins);
-        } else {
-          DataManager.sharedManager().set(true, references.coins.silver, this.m_TotalCoins);
-        }
         break;
         case 1:
         this.m_TextValue1.setText('finish-text-6');
@@ -555,14 +563,19 @@ console.log(1);
           cc.CallFunc.create(this.count, this, this)
         ));
 
-        if(DataManager.sharedManager().get(false, references.items.bonus6)) {
+        if(DataManager.sharedManager().get(false, references.items.bonus6) > 0) {
           Bonus6.create();
         }
         break;
         case 5:
         this.m_CountReference++;
 
-        if(DataManager.sharedManager().get(false, references.items.bonus7)) {
+        this.runAction(cc.Sequence.create(
+          cc.DelayTime.create(0.5),
+          cc.CallFunc.create(this.count, this, this)
+        ));
+
+        if(DataManager.sharedManager().get(false, references.items.bonus7) > 0) {
           Bonus7.create();
         }
         break;
@@ -577,7 +590,7 @@ console.log(1);
         case 0:
         case 1:
         case 2:
-        reward = this.m_CountReference + 1; // TODO: Check data coins.
+        reward = this.m_CountReference + 1;
 
         this.m_CountReferences[this.m_CountReference]++;
         this.m_TotalCoins += reward;
