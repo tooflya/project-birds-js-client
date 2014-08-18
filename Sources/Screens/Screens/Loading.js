@@ -47,6 +47,16 @@ Loading = Screen.extend({
 
     this.m_TipText = Text.create(false, this);
     this.m_LoadingText = Text.create('loading', this);
+
+    this.m_BackgroundDecoration.runAction(
+      cc.RepeatForever.create(
+        cc.Sequence.create(
+          cc.ScaleTo.create(1.0, 1.02),
+          cc.ScaleTo.create(1.0, 1.0),
+          false
+        )
+      )
+    );
   },
   onShow: function() {
     this._super();

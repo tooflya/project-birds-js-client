@@ -30,6 +30,8 @@
  */
 
 Mode = Screen.extend({
+  m_DecorationTime: 0.5,
+  m_DecorationTimeElapsed: 0.5,
   ctor: function() {
     this._super();
 
@@ -102,42 +104,144 @@ Mode = Screen.extend({
     Achievements.sharedScreen(this).prepare();
     Lock.sharedScreen(this).prepare();
     Multiplayer.sharedScreen(this).prepare();
+
+    /** Network */
+
+    this.m_NetworkBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
+    this.m_NetworkDecorations = EntityManager.create(15, CircleDecoration1.create(), this.m_NetworkBackground);
+    this.m_NetworkBackgroundLoader = Entity.create(s_LoadingDecoration, this.m_NetworkBackground);
+    this.m_NetworkBackgroundText = Text.create('network-1', this.m_NetworkBackground);
+
+    this.m_NetworkBackgroundLoader.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+    this.m_NetworkBackgroundText.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(400));
+
+    this.m_NetworkBackground.setCascadeOpacityEnabled(true);
+    this.m_NetworkBackgroundLoader.runAction(
+      cc.RepeatForever.create(
+        cc.Sequence.create(
+          cc.ScaleTo.create(1.0, 1.02),
+          cc.ScaleTo.create(1.0, 1.0),
+          false
+        )
+      )
+    );
+
+    this.m_NetworkBackground.onEnter = function() {
+      cc.LayerColor.prototype.onEnter.call(this);
+
+      if(cc.Browser.isMobile) {
+        cc.Director.getInstance().getTouchDispatcher()._addTargetedDelegate(this, 0, true);
+      } else {
+        cc.Director.getInstance().getMouseDispatcher().addMouseDelegate(this, Touchable.priority--);
+      }
+    };
+    this.m_NetworkBackground.onExit = function() {
+      cc.LayerColor.prototype.onExit.call(this);
+
+      if(cc.Browser.isMobile) {
+        cc.Director.getInstance().getTouchDispatcher()._removeDelegate(this);
+      } else {
+        cc.Director.getInstance().getMouseDispatcher().removeMouseDelegate(this);
+      }
+    };
+    this.m_NetworkBackground.onMouseDown = function(e) {
+      var r = !(this.getOpacity() == 255);
+
+      if(!r) {
+        Touchable.active = true;
+        Touchable.list = true;
+      }
+
+      return r;
+    }; 
+    this.m_NetworkBackground.onMouseUp = function(e) {
+      Touchable.active = false;
+      Touchable.list = false;
+
+      this.onTouch(e);
+
+      return false;
+    };
+    this.m_NetworkBackground.onTouchBegan = function(touch, e) {
+      return this.onMouseDown(touch);
+    };
+    this.m_NetworkBackground.onTouchEnded = function(touch, e) {
+      return this.onMouseUp(touch);
+    };
+    this.m_NetworkBackground.onTouch = function(e) {
+      if(this.getOpacity() == 255) {
+        this.runAction(cc.FadeOut.create(0.5));
+
+        NetworkManager.sharedInstance().unsubscribe();
+      }
+    };
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Menu);
   },
   onProgressEvent: function() {
-    DataManager.sharedManager().get(true, references.tutorial.enable, {
-      success: function(value) {
-        if(value) {
+    Game.network = false;
+    Game.server = false;
+
+    DataManager.sharedManager().get(true, [references.tutorial.enable, references.coins.lives], {
+      success: function(values) {
+        var tutorial = values[0];
+        var lives = values[1];
+
+        if(tutorial) {
+          Game.level = 0;
           Game.sharedScreen(0);
           ScreenManager.sharedManager().replace(Loading);
         } else {
-          ScreenManager.sharedManager().replace(Levels);
+          if(lives > 0) {
+            Multiplayer.sharedScreen(Mode.instance).show();
+          } else {
+            Lives.sharedScreen(Mode.instance).show();
+          }
         }
       }
     });
   },
   onClassicEvent: function() {
-    DataManager.sharedManager().get(true, references.lock.modes.classic, {
-      success: function(value) {
-        if(value) {
+    Game.network = false;
+    Game.server = false;
+
+    DataManager.sharedManager().get(true, [references.lock.modes.classic, references.coins.lives], {
+      success: function(values) {
+        var lock = values[0];
+        var lives = values[1];
+
+        if(lock) {
           Game.sharedScreen(1);
           ScreenManager.sharedManager().replace(Loading);
         } else {
-          Lock.sharedScreen(Mode.instance).show(0);
+          if(lives > 0) {
+            Lock.sharedScreen(Mode.instance).show(0, 'mode');
+          } else {
+            Lives.sharedScreen(Mode.instance).show();
+          }
         }
       }
     });
   },
   onArcadeEvent: function() {
-    DataManager.sharedManager().get(true, references.lock.modes.arcade, {
-      success: function(value) {
-        if(value) {
+    Game.network = false;
+    Game.server = false;
+
+    DataManager.sharedManager().get(true, [references.lock.modes.arcade, references.coins.lives], {
+      success: function(values) {
+        var lock = values[0];
+        var lives = values[1];
+
+        if(lock) {
           Game.sharedScreen(2);
           ScreenManager.sharedManager().replace(Loading);
         } else {
-          Lock.sharedScreen(Mode.instance).show(1);
+          if(lives > 0) {
+            Lock.sharedScreen(Mode.instance).show(1, 'mode');
+          } else {
+            Lives.sharedScreen(Mode.instance).show();
+          }
         }
       }
     });
@@ -155,47 +259,81 @@ Mode = Screen.extend({
     Help.sharedScreen(this).show();
   },
   unlock: function(id) {
-    DataManager.sharedManager().get(true, references.coins.keys, {
-      success: function(value) {
-        if(value > unlock.modes[id].price) {
-          var mode = id == 0 ? references.lock.modes.classic : references.lock.modes.arcade;
+    var mode = id == 0 ? references.lock.modes.classic : references.lock.modes.arcade;
 
-          DataManager.sharedManager().set(true, mode, 1);
-          DataManager.sharedManager().update(true, references.coins.keys, -unlock.modes[id].price);
+    DataManager.sharedManager().set(true, mode, 1);
+    DataManager.sharedManager().update(true, references.coins.keys, -unlock.modes[id].price);
 
-          var line = Entity.create(s_ModeUnlockLine, Mode.instance);
+    var line = Entity.create(s_ModeUnlockLine, Mode.instance);
 
-          line.create().setCenterPosition(Mode.instance.m_Lock[id].getParent().getCenterX(), Mode.instance.m_Lock[id].getParent().getCenterY());
-          line.setOpacity(0);
-          line.setScaleY(5);
-          line.setScaleX(Camera.sharedCamera().width / line.getWidth());
+    line.create().setCenterPosition(Mode.instance.m_Lock[id].getParent().getCenterX(), Mode.instance.m_Lock[id].getParent().getCenterY());
+    line.setOpacity(0);
+    line.setScaleY(5);
+    line.setScaleX(Camera.sharedCamera().width / line.getWidth());
 
-          Mode.instance.m_Lock[id].runRecognizeAction(false, {
-            name: 'scale',
-            time: 1.0,
-            value: 3.0
-          });
-          Mode.instance.m_Lock[id].runRecognizeAction(false, {
-            name: 'fade',
-            time: 1.0,
-            value: 0.0
-          });
-          line.runRecognizeAction(false, [{
-            name: 'fade',
-            time: 0.5,
-            value: 255.0
-          }, {
-            name: 'fade',
-            time: 0.5,
-            value: 0.0
-          }]);
+    Mode.instance.m_Lock[id].runRecognizeAction(false, {
+      name: 'scale',
+      time: 1.0,
+      value: 3.0
+    });
+    Mode.instance.m_Lock[id].runRecognizeAction(false, {
+      name: 'fade',
+      time: 1.0,
+      value: 0.0
+    });
+    line.runRecognizeAction(false, [{
+      name: 'fade',
+      time: 0.5,
+      value: 255.0
+    }, {
+      name: 'fade',
+      time: 0.5,
+      value: 0.0
+    }]);
 
-          AchievementsManager.sharedManager().unlock(id + 1);
+    AchievementsManager.sharedManager().unlock(id + 1);
 
-          Sound.sharedSound().play(s_SoundSlash);
-        } else {
-          Keys.sharedScreen(Mode.instance).show();
-        }
+    Sound.sharedSound().play(s_SoundSlash);
+  },
+  request: function() {
+    this.m_NetworkBackgroundText.setText('network-1');
+
+    this.m_NetworkBackground.runAction(
+      cc.Sequence.create(
+        cc.FadeIn.create(0.5),
+        false
+      )
+    );
+
+    NetworkManager.sharedInstance().subscribe({
+      weapon: DataManager.sharedManager().get(false, references.info.weapon) - 1
+    }, {
+      subscribe: function() {
+        Mode.instance.m_NetworkBackgroundText.setText('network-2');
+
+        Game.network = false;
+        Game.server = false;
+      },
+      pending: function() {
+        Mode.instance.m_NetworkBackgroundText.setText('network-3');
+      },
+      start: function(data) {
+        Music.sharedMusic().stop();
+
+        Game.level = 1; // Random.sharedRandom().random(1, 30, true); // TODO: Random level?
+        Game.users = data.users;
+        Game.network = true;
+        Game.server = data.server || false;
+        Game.sharedScreen(0);
+
+        ScreenManager.sharedManager().replace(Game);
+
+        Mode.instance.m_NetworkBackgroundLoader.runAction(cc.ScaleTo.create(0.5, 0.0));
+        Mode.instance.m_NetworkBackgroundLoader.runAction(cc.RotateTo.create(0.5, -720.0));
+
+        setTimeout(function() {
+          Music.sharedMusic().play(s_Music2, true);
+        }, 1000);
       }
     });
   },
@@ -220,6 +358,14 @@ Mode = Screen.extend({
   },
   update: function(time) {
     this._super(time);
+
+    this.m_DecorationTimeElapsed += time;
+
+    if(this.m_DecorationTimeElapsed >= this.m_DecorationTime) {
+      this.m_DecorationTimeElapsed = 0;
+
+      this.m_NetworkDecorations.create();
+    }
   },
   onKeyDown: function(e) {
     switch(e) {

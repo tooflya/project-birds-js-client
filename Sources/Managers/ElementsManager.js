@@ -29,9 +29,10 @@
 
 ElementsManager = EntityManager.extend({
   m_MatrixManager: false,
+  m_Matrix: false,
   m_zIndex: 100,
   ctor: function() {
-    this.m_Clipper = this.clipper(Game.tutorial ? s_TutorialLevel : s_Levels[a]);
+    this.m_Clipper = this.clipper(Game.tutorial ? s_TutorialLevel : s_Levels[Game.level - 1]);
     this.m_Stencil = this.stencil();
 
     this.m_Clipper.addChild(this.m_Stencil);
@@ -77,10 +78,22 @@ ElementsManager = EntityManager.extend({
 
     return clipper;
   },
-  onLevelStart: function() {
+  onLevelStart: function(matrix) {
     this.onStartAnimationStart();
 
-    var matrix = Game.tutorial ? Game.instance.m_TutorialMatrix.matrix : Game.instance.m_LevelsMatrixes[a].matrix;
+    if(Game.network) {
+      if(Game.server) {
+        this.m_Matrix = Array(MatrixManager.instance.getSize().x + 1);
+
+        for(var i = 0; i < MatrixManager.instance.getSize().x + 1; i++) {
+          this.m_Matrix[i] = Array(MatrixManager.instance.getSize().y * 2);
+        }
+
+        matrix = Game.tutorial ? Game.instance.m_TutorialMatrix.matrix : Game.instance.m_LevelsMatrixes[Game.level - 1].matrix;
+      }
+    } else {
+      matrix = Game.tutorial ? Game.instance.m_TutorialMatrix.matrix : Game.instance.m_LevelsMatrixes[Game.level - 1].matrix;
+    }
 
     var padding = this.get(0).getWidth();
 
@@ -123,23 +136,52 @@ ElementsManager = EntityManager.extend({
       for(var j = -this.m_MatrixManager.getSize().x / 2; j < this.m_MatrixManager.getSize().x / 2; j++) {
         var x = origin.x + padding * j;
 
-        var type = matrix[counter.y][counter.x];
+        if(Game.network && !Game.server) { // TODO: Adjust third-party types such as block or empty but not a star.
+          var id = matrix[counter.x][counter.y];
 
-        if(type === etypes.empty) {
-          this.m_MatrixManager.set(etypes.empty, counter.x, counter.y, true);
-        } else if(type === etypes.block) {
-          this.m_MatrixManager.set(etypes.block, counter.x, counter.y, true);
-        } else if(type === etypes.star) {
-          var star = this.create();
-          star.setId(Element.types.star);
-          star.setCurrentFrameIndex(Element.types.star);
-          star.setCenterPosition(x, y);
-
-          this.m_MatrixManager.set(star, counter.x, counter.y);
-        } else {
-          this.m_MatrixManager.set(this.create(), counter.x, counter.y, true);
-
+          this.create();
+          this.last().setId(id);
+          this.last().setCurrentFrameIndex(id);
           this.last().setCenterPosition(x, y);
+
+          this.m_MatrixManager.set(this.last(), counter.x, counter.y);
+        } else {
+          var type = matrix[counter.y][counter.x];
+
+          if(type === etypes.empty) {
+            this.m_MatrixManager.set(etypes.empty, counter.x, counter.y, true);
+
+            if(Game.network) {
+              if(Game.server) {
+                this.m_Matrix[counter.x][counter.y] = etypes.empty;
+              }
+            }
+          } else if(type === etypes.block) {
+            this.m_MatrixManager.set(etypes.block, counter.x, counter.y, true);
+
+            if(Game.network) {
+              if(Game.server) {
+                this.m_Matrix[counter.x][counter.y] = etypes.block;
+              }
+            }
+          } else if(type === etypes.star && !Game.network) {
+            var star = this.create();
+            star.setId(Element.types.star);
+            star.setCurrentFrameIndex(Element.types.star);
+            star.setCenterPosition(x, y);
+
+            this.m_MatrixManager.set(star, counter.x, counter.y);
+          } else {
+            this.m_MatrixManager.set(this.create(), counter.x, counter.y, true);
+
+            this.last().setCenterPosition(x, y);
+
+            if(Game.network) {
+              if(Game.server) {
+                this.m_Matrix[counter.x][counter.y] = this.last().getId();
+              }
+            }
+          }
         }
 
         counter.x++;
@@ -235,6 +277,12 @@ ElementsManager = EntityManager.extend({
 
     MatrixManager.sharedManager().m_Busy = true;
   },
+  clear: function() {
+    this.m_MatrixArrows1.removeFromParent();
+    this.m_MatrixArrows2.removeFromParent();
+    this.m_Clipper.removeFromParent();
+    this.removeFromParent();
+  },
   createBlock: function() {
     this.create().setCurrentFrameIndex(7);
 
@@ -269,6 +317,9 @@ ElementsManager = EntityManager.extend({
         )
       );
     }
+  },
+  getMatrix: function() {
+    return this.m_Matrix;
   }
 });
 

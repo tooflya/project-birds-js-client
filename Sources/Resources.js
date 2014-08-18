@@ -268,6 +268,8 @@ var s_TutorialElementsExplanationTextsRussian = "Resources/Graphics/tutorial-ele
 var s_MatrixArrow1 = "Resources/Graphics/matrix-arrow-1.png";
 var s_MatrixArrow2 = "Resources/Graphics/matrix-arrow-2.png";
 var s_TutorialLevel = "Resources/Graphics/level-tutorial.png";
+var s_LevelIcon = "Resources/Graphics/level-icon.png";
+var s_InputTextArea = "Resources/Graphics/input-text-area.png";
 var s_Levels = [
   "Resources/Graphics/level-1.png",
   "Resources/Graphics/level-2.png",
@@ -318,9 +320,12 @@ var s_SoundExchange = "Resources/Sound/exchange.mp3";
 var s_SoundSwitch = "Resources/Sound/switch.mp3";
 var s_SoundStar = "Resources/Sound/star.mp3";
 var s_SoundLine = "Resources/Sound/line.mp3";
+var s_SoundLose = "Resources/Sound/lose.wav";
+var s_SoundWin = "Resources/Sound/win.wav";
 var s_SoundBloom = ["Resources/Sound/bloom-1.mp3", "Resources/Sound/bloom-2.mp3", "Resources/Sound/bloom-3.mp3", "Resources/Sound/bloom-4.mp3"];
 var s_SoundChew = ["Resources/Sound/chew-1.mp3", "Resources/Sound/chew-2.mp3", "Resources/Sound/chew-3.mp3"];
 var s_SoundDrop = ["Resources/Sound/drop-1.mp3", "Resources/Sound/drop-2.mp3", "Resources/Sound/drop-3.mp3"];
+var s_SoundStars = ["Resources/Sound/star1.mp3", "Resources/Sound/star2.mp3", "Resources/Sound/star3.mp3"];
 
 var resources = [
   {src: s_PreloaderBackgroundPortrait},
@@ -542,6 +547,8 @@ var resources = [
   {src: s_MatrixArrow1},
   {src: s_MatrixArrow2},
   {src: s_TutorialLevel},
+  {src: s_LevelIcon},
+  {src: s_InputTextArea},
   {src: s_Levels[0]},
   {src: s_Levels[1]},
   {src: s_Levels[2]},
@@ -590,6 +597,11 @@ var resources = [
   {src: s_SoundSwitch},
   {src: s_SoundStar},
   {src: s_SoundLine},
+  {src: s_SoundWin},
+  {src: s_SoundLose},
+  {src: s_SoundStars[0]},
+  {src: s_SoundStars[1]},
+  {src: s_SoundStars[2]},
   {src: s_SoundBloom[0]},
   {src: s_SoundBloom[1]},
   {src: s_SoundBloom[2]},

@@ -32,6 +32,17 @@
 BombBird = Bird.extend({
   m_SoundFuseId: false,
   ctor: function(parent, world) {
+    var game = Game.sharedScreen();
+
+    switch(game.m_Type) {
+      case game.m_Types.progress:
+      world = false;
+      break;
+      case game.m_Types.classic:
+      case game.m_Types.arcade:
+      break;
+    }
+
     this._super(parent, world);
   },
   onCreateSound: function() {
@@ -54,10 +65,39 @@ BombBird = Bird.extend({
     Sound.sharedSound().stop(this.m_SoundFuseId);
   },
   checkCollides: function() {
-    if(!Game.sharedScreen().m_Touch.active) return false;
+    var game = Game.sharedScreen();
 
-    if(this.collideWithPoint(Game.sharedScreen().m_Touch.point.x, Game.sharedScreen().m_Touch.point.y)) {
-      this.destroy();
+    switch(game.m_Type) {
+      case game.m_Types.progress:
+      break;
+      case game.m_Types.classic:
+      case game.m_Types.arcade:
+      if(!Game.sharedScreen().m_Touch.active) return false;
+
+      if(this.collideWithPoint(Game.sharedScreen().m_Touch.point.x, Game.sharedScreen().m_Touch.point.y)) {
+        this.destroy();
+      }
+      break;
+    }
+  },
+  run: function(data) {
+    var game = Game.sharedScreen();
+
+    switch(game.m_Type) {
+      case game.m_Types.progress:
+      this.setCenterPosition(data.element.convertToWorldSpace(cc.p(0, 0)).x, -this.getHeight() / 2);
+      this.runAction(
+        cc.Sequence.create(
+          cc.MoveTo.create(data.speed, data.element.convertToWorldSpace(cc.p(0, 0))),
+          cc.CallFunc.create(this.destroy, this, this),
+          false
+        )
+      );
+      break;
+      case game.m_Types.classic:
+      case game.m_Types.arcade:
+      this._super();
+      break;
     }
   },
   checkBonuses: function() {

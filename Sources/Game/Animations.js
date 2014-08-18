@@ -140,7 +140,7 @@ Game.prototype.onTurnFinish = function(id, data) {
 };
 
 Game.prototype.onStartAnimationStart = function() {
-   MatrixManager.sharedManager().disable();
+  MatrixManager.sharedManager().disable();
 };
 
 Game.prototype.onStartAnimationFinish = function() {
@@ -152,7 +152,7 @@ Game.prototype.startAction = function(selector, data) {
     case 0:
     this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
       repeat: data.repeat,
-      destroy: 15 * data.factor,
+      destroy: 15 * data.factor + (this.getWeapon() * 12),
       pause: 1.5
     });
     break;

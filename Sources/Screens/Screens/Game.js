@@ -140,6 +140,8 @@ Game = Screen.extend({
   m_Level: 0,
   m_SplashBackground : false,
   m_PlayerTurn: false,
+  m_DecorationTime: 0.5,
+  m_DecorationTimeElapsed: 0.5,
   ctor: function() {
     this._super(true);
 
@@ -187,8 +189,8 @@ Game = Screen.extend({
     this.m_SplashBackground.setZOrder(200);
     this.m_SplashEffect1.setZOrder(200);
 
-    this.m_Marks = EntityManager.create(1500, Mark.create(), this, 100, true);
-    this.m_Stars = EntityManager.create(1500, Star.create(), this, 100, true);
+    this.m_Marks = EntityManager.create(1500, Mark.create(), this, 105);
+    this.m_Stars = EntityManager.create(1500, Star.create(), this, 105);
     this.m_Keys = EntityManager.create(50, Key.create(), this, 102, true);
     this.m_Birds = EntityManager.create(50, Bird.create(false, this.getPhysicsWorld()), this, 105);
     this.m_BombBirds = EntityManager.create(10, BombBird.create(false, this.getPhysicsWorld()), this, 105);
@@ -215,6 +217,19 @@ Game = Screen.extend({
           return this.m_Elements[i];
         },
         onLevelStart: function() {
+          this.get(0)._id = 0;
+          this.get(1)._id = 1;
+
+          if(Game.network) {
+            if(Game.server) {
+              this.get(0)._user = Game.users[0];
+              this.get(1)._user = Game.users[1];
+            } else {
+              this.get(0)._user = Game.users[1];
+              this.get(1)._user = Game.users[0];
+            }
+          }
+
           this.get(0).create().setCenterPosition(-this.get(0).getWidth() / 2, Camera.sharedCamera().coord(75));
           this.get(1).create().setCenterPosition(Camera.sharedCamera().width + this.get(1).getWidth() / 2, Camera.sharedCamera().coord(75));
 
@@ -226,6 +241,13 @@ Game = Screen.extend({
 
           this.get(0).createElements();
           this.get(1).createElements();
+        },
+        onLevelFinish: function() {
+          this.get(0).setCenterPosition(-this.get(0).getWidth() / 2, Camera.sharedCamera().coord(75));
+          this.get(1).setCenterPosition(Camera.sharedCamera().width + this.get(1).getWidth() / 2, Camera.sharedCamera().coord(75));
+
+          this.get(0).destroyElements();
+          this.get(1).destroyElements();
         }
       };
       this.m_Notifications = {
@@ -252,7 +274,7 @@ Game = Screen.extend({
       this.m_Target.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(18));
 
       if(Game.tutorial) {
-        this.createTutorialelements();
+        this.createTutorialElements();
       }
 
       this.m_KeysPanel = Entity.create(s_DailyMapTitle, this);
@@ -291,6 +313,54 @@ Game = Screen.extend({
       this.m_CombinationsNotificationText.setCenterPosition(this.m_CombinationsNotification.getWidth() / 2, this.m_CombinationsNotification.getHeight() / 2);
       this.m_CombinationsNotificationText.disableShadow();
       this.m_CombinationsNotificationText.setColor(cc.c3(26, 92, 165));
+
+      if(Game.network) {
+        this.m_InputBackground = Entity.create(s_InputTextArea, this);
+        this.m_Input = Input.create({
+          size: cc.size(this.m_InputBackground.getWidth() - Camera.sharedCamera().coord(40), this.m_InputBackground.getHeight() - Camera.sharedCamera().coord(30)),
+          placeholder: {
+            text: 'Enter your message',
+            color: cc.c4(143, 215, 59, 255)
+          },
+          font: {
+            name: 'Comic Sans MS Bold',
+            size: Camera.sharedCamera().coord(38),
+            color: cc.c4(143, 215, 59, 255)
+          }
+        }, this.m_InputBackground);
+        this.m_InputBackground.setAnchorPoint(0, 0);
+        this.m_InputBackground.setZOrder(900);
+        this.m_Input.setCenterPosition(Camera.sharedCamera().coord(275), Camera.sharedCamera().coord(90));
+        this.m_Input.setMaxLength(23);
+        this.m_Input.setDelegate(this);
+
+        NetworkManager.instance.onData = function(data) {
+          switch(data.e) {
+            case 0:
+            Game.instance.onLevelStart(data.matrix);
+            break;
+            case 1:
+            var element1 = MatrixManager.instance.get(data.element1.x, data.element1.y);
+            var element2 = MatrixManager.instance.get(data.element2.x, data.element2.y);
+
+            MatrixManager.instance.replace(element1, element2, false, true);
+            break;
+            case 2:
+            MatrixManager.instance.fillAll(data.matrix);
+            break;
+          }
+        };
+        NetworkManager.instance.onUnsubscribe = function(data) {
+          if(Game.instance) {
+            Game.instance.networkProblem();
+          }
+        };
+        NetworkManager.instance.onMessage = function(data) {
+          if(Game.instance) {
+            Game.instance.createSplashText(data.message);
+          }
+        };
+      }
       break;
       case this.m_Types.classic:
       case this.m_Types.arcade:
@@ -305,21 +375,25 @@ Game = Screen.extend({
   startGame: function() {
     this.onGameStart();
   },
-  finishGame: function(){
-    this.onGameFinish();
+  finishGame: function(state1, state2) {
+    this.onGameFinish(state2 != 'undefined' ? state2 : state1);
   },
   addChild: function(child, zindex) {
     this._super(child, zindex);
 
-    if(child instanceof Popup) {
-      this.pause();
+    if(!Game.network) {
+      if(child instanceof Popup) {
+        this.pause();
+      }
     }
   },
   removeChild: function(child) {
     this._super(child);
 
-    if(child instanceof Popup) {
-      this.pause();
+    if(!Game.network) {
+      if(child instanceof Popup) {
+        this.pause();
+      }
     }
   },
   clearResults: function() {
@@ -332,6 +406,126 @@ Game = Screen.extend({
   },
   getResults: function() {
     return this.m_Results;
+  },
+  getWeapon: function() {
+    if(Game.network) {
+      var user;
+
+      if(Game.server) {
+        user = Game.users[Game.instance.m_PlayerTurn ? 0 : 1];
+      } else {
+        user = Game.users[Game.instance.m_PlayerTurn ? 1 : 0];
+      }
+
+      return user.weapon;
+    } else if(Game.instance.m_PlayerTurn) {
+      return DataManager.sharedManager().get(false, references.info.weapon) - 1;
+    } else {
+      if(Game.tutorial) {
+        return Game.instance.m_TutorialMatrix.opponent.weapon;
+      } else {
+        return Game.instance.m_LevelsMatrixes[Game.level - 1].opponent.weapon;
+      }
+    }
+  },
+  networkProblem: function() {
+    this.m_NetworkBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
+    this.m_NetworkDecorations = EntityManager.create(15, CircleDecoration1.create(), this.m_NetworkBackground);
+    this.m_NetworkBackgroundLoader = Entity.create(s_LoadingDecoration, this.m_NetworkBackground);
+    this.m_NetworkBackgroundText = Text.create('network-4', this.m_NetworkBackground);
+
+    this.m_NetworkBackgroundLoader.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+    this.m_NetworkBackgroundText.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(400));
+    this.m_NetworkBackground.setCascadeOpacityEnabled(true);
+    this.m_NetworkBackground.setZOrder(800);
+    this.m_NetworkBackgroundLoader.runAction(
+      cc.RepeatForever.create(
+        cc.Sequence.create(
+          cc.ScaleTo.create(1.0, 1.02),
+          cc.ScaleTo.create(1.0, 1.0),
+          false
+        )
+      )
+    );
+
+    this.m_NetworkBackground.onEnter = function() {
+      cc.LayerColor.prototype.onEnter.call(this);
+
+      if(cc.Browser.isMobile) {
+        cc.Director.getInstance().getTouchDispatcher()._addTargetedDelegate(this, 0, true);
+      } else {
+        cc.Director.getInstance().getMouseDispatcher().addMouseDelegate(this, Touchable.priority--);
+      }
+    };
+    this.m_NetworkBackground.onExit = function() {
+      cc.LayerColor.prototype.onExit.call(this);
+
+      if(cc.Browser.isMobile) {
+        cc.Director.getInstance().getTouchDispatcher()._removeDelegate(this);
+      } else {
+        cc.Director.getInstance().getMouseDispatcher().removeMouseDelegate(this);
+      }
+    };
+    this.m_NetworkBackground.onMouseDown = function(e) {
+      var r = !(this.getOpacity() == 255);
+
+      if(!r) {
+        Touchable.active = true;
+        Touchable.list = true;
+      }
+
+      return r;
+    }; 
+    this.m_NetworkBackground.onMouseUp = function(e) {
+      Touchable.active = false;
+      Touchable.list = false;
+
+      this.onTouch(e);
+
+      return false;
+    };
+    this.m_NetworkBackground.onTouchBegan = function(touch, e) {
+      return this.onMouseDown(touch);
+    };
+    this.m_NetworkBackground.onTouchEnded = function(touch, e) {
+      return this.onMouseUp(touch);
+    };
+    this.m_NetworkBackground.onTouch = function(e) {
+    };
+
+    this.m_NetworkBackground.runAction(
+      cc.Sequence.create(
+        cc.FadeIn.create(0.5),
+        false
+      )
+    );
+
+    setTimeout(function() {
+      Game.instance.finishGame(true, true);
+    }, 10000);
+  },
+  createSplashText: function(message, my) {
+    var text = SplashText.create('splash-message', this, my);
+
+    text.ccsf([message]);
+    text.setColor(cc.c3(143, 215, 59));
+  },
+  editBoxEditingDidEnd: function(sender) {
+    if(Game.network) {
+      if(Game.instance.m_InputBackground.isVisible()) {
+        Game.instance.onTouch();
+
+        var message = sender.getText();
+
+        if(message != 'undefined' && message != '') {
+          NetworkManager.sharedInstance().emit('message', {
+            message: message
+          });
+
+          Game.instance.createSplashText(message, true);
+        }
+      }
+    }
   },
   update: function(time) {
     if(this.m_GamePause) return;
@@ -346,19 +540,21 @@ Game = Screen.extend({
     switch(this.m_Type) {
       case this.m_Types.progress:
       if(this.m_GameRunning && !this.m_TutorialRunning) {
-        if(!this.m_PlayerTurn && !MatrixManager.sharedManager().active() && !MatrixManager.sharedManager().busy()) {
-          if(!this.getNumberOfRunningActions()) {
-            this.runAction(
-              cc.Sequence.create(
-                cc.DelayTime.create(3.0),
-                cc.CallFunc.create(MatrixManager.sharedManager().computer, MatrixManager.sharedManager()),
-                false
-              )
-            );
+        if(!Game.network) {
+          if(!this.m_PlayerTurn && !MatrixManager.sharedManager().active() && !MatrixManager.sharedManager().busy()) {
+            if(!this.getNumberOfRunningActions()) {
+              this.runAction(
+                cc.Sequence.create(
+                  cc.DelayTime.create(3.0),
+                  cc.CallFunc.create(MatrixManager.sharedManager().computer, MatrixManager.sharedManager()),
+                  false
+                )
+              );
+            }
           }
         }
 
-        if(this.m_Target.collideWithPoint(this.m_Catapults.get(0).getCenterX(), this.m_Catapults.get(0).getCenterY()) || this.m_Target.collideWithPoint(this.m_Catapults.get(1).getCenterX(), this.m_Catapults.get(1).getCenterY())) {
+        if(this.m_Target.collideWithEntity(this.m_Catapults.get(0)) || this.m_Target.collideWithEntity(this.m_Catapults.get(1))) {
           this.m_GameRunning = false;
 
           this.m_PreviewBackground.setZOrder = function(selector, index) {
@@ -372,7 +568,7 @@ Game = Screen.extend({
               false
             )
           );
-          this.m_Target.finish();
+          this.m_Target.finish(this.m_PlayerTurn, this.m_PlayerTurn);
         }
 
         if(this.m_BonusKeysAnimationRunning) {
@@ -405,6 +601,16 @@ Game = Screen.extend({
       break;
       case this.m_Types.arcade:
       break;
+    }
+
+    if(this.m_NetworkDecorations) {
+      this.m_DecorationTimeElapsed += time;
+
+      if(this.m_DecorationTimeElapsed >= this.m_DecorationTime) {
+        this.m_DecorationTimeElapsed = 0;
+
+        this.m_NetworkDecorations.create();
+      }
     }
   },
   onKeyDown: function(e) {

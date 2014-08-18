@@ -107,8 +107,10 @@ Game.prototype.onLost = function(element) {
 
   switch(this.m_Type) {
     case this.m_Types.classic:
-    if(!cc.Browser.isMobile) {
-      GamePanel.sharedScreen(this.m_Type, this).getIcons()[3 + this.m_Lifes].setCurrentFrameIndex(0);
+    if(!Game.network) {
+      if(!cc.Browser.isMobile) {
+        GamePanel.sharedScreen(this.m_Type, this).getIcons()[3 + this.m_Lifes].setCurrentFrameIndex(0);
+      }
     }
 
     if(++this.m_Lifes >= 3) {
@@ -135,14 +137,23 @@ Game.prototype.onKeyReceived = function(element) {
 Game.prototype.onGameStart = function() {
   this.m_GameRunning = true;
   this.m_Lifes = 0;
+  this.m_Stars = 0;
 
-  DataManager.sharedManager().update(true, references.coins.lives, -1);
+  DataManager.sharedManager().update(true, references.coins.lives, -1, {
+    success: function() {
+      if(!Game.network) {
+        GamePanel.instance.updateData();
+      }
+    }
+  });
 
   Game.power = DataManager.sharedManager().get(false, references.weapon) * 12;
 
   switch(this.m_Type) {
     case this.m_Types.progress:
-    this.onLevelStart();
+    if(!Game.network || Game.server) {
+      this.onLevelStart();
+    }
     break;
     case this.m_Types.classic:
     break;
@@ -151,11 +162,15 @@ Game.prototype.onGameStart = function() {
   }
 };
 
-Game.prototype.onGameFinish = function() {
+Game.prototype.onGameFinish = function(state) {
+  this.m_GameState = state;
   this.m_GameRunning = false;
 
   Finish.sharedScreen(this).show();
-  GamePanel.sharedScreen().hide();
+
+  if(!Game.network) {
+    GamePanel.sharedScreen().hide();
+  }
 
   switch(this.m_Type) {
     case this.m_Types.progress:
@@ -167,15 +182,34 @@ Game.prototype.onGameFinish = function() {
   }
 };
 
-Game.prototype.onLevelStart = function() {
-  ElementsManager.sharedManager().onLevelStart();
+Game.prototype.onLevelStart = function(matrix) {
+  ElementsManager.sharedManager().onLevelStart(matrix);
 
   this.m_Catapults.onLevelStart();
   this.m_Target.create();
+
+  if(!Game.network) {
+    if(Game.tutorial) {
+      GamePanel.instance.starred();
+      GamePanel.instance.starred();
+      GamePanel.instance.starred();
+    }
+  } else {
+    if(Game.server) {
+      NetworkManager.sharedInstance().emit('data', {
+        e: 0,
+        matrix: ElementsManager.sharedManager().getMatrix()
+      });
+
+      this.m_PlayerTurn = false;
+    } else {
+      this.m_PlayerTurn = true;
+    }
+  }
 };
 
-Game.prototype.onLevelFinish = function() {
-  this.finishGame();
+Game.prototype.onLevelFinish = function(state) {
+  this.finishGame(state);
 };
 
 Game.prototype.onPreviewStart = function() {
@@ -217,17 +251,42 @@ Game.prototype.onShow = function() {
   this.m_Level = 1;
   this.m_CurrentBlows = 0;
   this.m_LevelTimeElapsed = 0;
+  this.m_PlayerTurn = Game.tutorial;
+  this.m_GameRunning = false;
+  this.m_GamePreviewRunning = false;
+
+  this.stopAllActions();
+
+  this.resetScore();
+
+  switch(this.m_Type) {
+    case this.m_Types.progress:
+    MatrixManager.sharedManager().m_Busy = true;
+
+    if(Game.network) {
+      this.m_InputBackground.setVisible(false);
+    }
+    break;
+    case this.m_Types.classic:
+    break;
+    case this.m_Types.arcade:
+    break;
+  }
 
   DataManager.sharedManager().get(true, references.coins.lives, {
     success: function(value) {
       if(value > 0) {
-        GamePanel.sharedScreen(Game.instance.m_Type, Game.instance).show();
+        if(!Game.network) {
+          GamePanel.sharedScreen(Game.instance.m_Type, Game.instance).show();
+        } else {
+          MenuPanel.sharedScreen(Game.instance).show();
+        }
 
         Game.instance.clearResults();
 
         switch(Game.instance.m_Type) {
           case Game.instance.m_Types.progress:
-          Game.instance.m_CurrentBlows = 20;
+          Game.instance.m_CurrentBlows = Game.tutorial ? Game.instance.m_TutorialMatrix.moves : Game.instance.m_LevelsMatrixes[Game.level - 1].moves;
 
           Game.instance.onPreviewFinish();
           break;
@@ -246,10 +305,53 @@ Game.prototype.onShow = function() {
 };
 
 Game.prototype.onHide = function() {
+  NetworkManager.sharedInstance().unsubscribe();
+
   Game.instance = false;
   GamePanel.instance = false;
   ElementsManager.instance = false;
   MatrixManager.instance = false;
+};
+
+Game.prototype.onFinishShow = function() {
+  switch(this.m_Type) {
+    case this.m_Types.progress:
+    ElementsManager.instance.clear();
+    MatrixManager.instance.clear();
+
+    ElementsManager.instance = false;
+    MatrixManager.instance = false;
+    ActionsManager.instance = false;
+
+    this.m_ElementsExplanationTexts.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200));
+    this.m_PreviewBackground.setOpacity(0);
+
+    this.m_Ground.setZOrder(301);
+    this.m_Target.setZOrder(302);
+    this.m_Notifications.m_Notification1.setZOrder(500);
+    this.m_Notifications.m_Notification2.setZOrder(500);
+    this.m_PreviewBackground.setZOrder(200, 200)
+
+    this.m_Target.destroy();
+    this.m_Catapults.onLevelFinish();
+    break;
+    case this.m_Types.classic:
+    break;
+    case this.m_Types.arcade:
+    break;
+  }
+
+  if(this.m_NetworkBackground) {
+    this.m_NetworkBackground.removeFromParent();
+    this.m_NetworkDecorations.removeFromParent();
+    this.m_NetworkBackgroundLoader.removeFromParent();
+    this.m_NetworkBackgroundText.removeFromParent();
+
+    this.m_NetworkBackground = false;
+    this.m_NetworkDecorations = false;
+    this.m_NetworkBackgroundLoader = false;
+    this.m_NetworkBackgroundText = false;
+  }
 };
 
 Game.prototype.onEnterTransitionDidFinish = function() {

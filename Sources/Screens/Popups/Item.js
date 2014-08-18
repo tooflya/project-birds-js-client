@@ -71,8 +71,8 @@ Item = ExtendedPopup.extend({
   showButton: function(params) {
     switch(params.category) {
       case 'weapons':
-      if(DataManager.sharedManager().get(params.id) > 0) {
-        if(DataManager.sharedManager().get(references.weapon) == params.id - 100) {
+      if(DataManager.sharedManager().get(false, params.id) > 0) {
+        if(DataManager.sharedManager().get(false, references.info.weapon) == params.id - 100) {
           this.m_ActionButton.setVisible(false);
         } else {
           this.m_ActionButton.setVisible(true);
@@ -86,7 +86,7 @@ Item = ExtendedPopup.extend({
       }
       break;
       default:
-      if(DataManager.sharedManager().get(params.id) > 0) {
+      if(DataManager.sharedManager().get(false, params.id) > 0) {
         this.m_ActionButton.setVisible(false);
       } else {
         this.m_ActionButton.setVisible(true);
@@ -104,11 +104,13 @@ Item = ExtendedPopup.extend({
 
     Item.instance = false;
 
+    var self = this;
+
     if(this.m_ActionButton.action) {
       switch(this.m_ActionButton.params.category) {
         case 'weapons':
-        if(DataManager.sharedManager().get(this.m_ActionButton.params.id) > 0) {
-          DataManager.sharedManager().save(references.weapon, this.m_ActionButton.params.id - 100);
+        if(DataManager.sharedManager().get(false, this.m_ActionButton.params.id) > 0) {
+          DataManager.sharedManager().set(true, references.info.weapon, this.m_ActionButton.params.id - 100);
 
           Sound.sharedSound().play(s_SoundEquipSword);
 
@@ -120,30 +122,44 @@ Item = ExtendedPopup.extend({
       var silver = properties.items[this.m_ActionButton.params.reference].price.silver;
       var gold = properties.items[this.m_ActionButton.params.reference].price.gold;
 
-      if(DataManager.sharedManager().get(references.coins.silver) < silver || DataManager.sharedManager().get(references.coins.gold) < gold) {
-        if(this.config.params.vendor == 'ubi-nuri') {
-          NotificationsManager.sharedManager().show('not-enoght-coins');
-        } else {
-          Coins.sharedScreen(this.m_Parent).show();
+      DataManager.sharedManager().get(true, [references.coins.gold, references.coins.silver], {
+        success: function(storage) {
+          var coins = {
+            gold: storage[0],
+            silver: storage[1]
+          };
+
+          if(coins.gold < gold || coins.silver < silver) {
+            Coins.sharedScreen(self.m_Parent).show();
+          } else {
+            DataManager.sharedManager().update(true, references.coins.gold, -gold);
+            DataManager.sharedManager().update(true, references.coins.silver, -silver);
+
+            switch(self.m_ActionButton.params.category) {
+              case 'weapons':
+              DataManager.sharedManager().set(true,
+                [
+                  self.m_ActionButton.params.id,
+                  references.info.weapon
+                ],
+                [
+                  1,
+                  self.m_ActionButton.params.id - 100
+                ]
+              );
+              break;
+              case 'birds':
+              AchievementsManager.sharedManager().unlock(self.m_ActionButton.params.id - 200 + 2);
+              default:
+              DataManager.sharedManager().set(true, self.m_ActionButton.params.id, 1);
+              break;
+            }
+
+            Bought.sharedScreen(self.m_Parent).show(self.m_ActionButton.params);
+            Sound.sharedSound().play(s_SoundEquipUnlock);
+          }
         }
-      } else {
-        DataManager.sharedManager().update(references.coins.gold, -gold);
-        DataManager.sharedManager().update(references.coins.silver, -silver);
-
-        switch(this.m_ActionButton.params.category) {
-          case 'weapons':
-          DataManager.sharedManager().save(this.m_ActionButton.params.id, 1);
-          DataManager.sharedManager().save(references.weapon, this.m_ActionButton.params.id - 100);
-          break;
-          default:
-          DataManager.sharedManager().save(this.m_ActionButton.params.id, 1);
-          break;
-        }
-
-        Bought.sharedScreen(this.m_Parent).show(this.m_ActionButton.params);
-
-        Sound.sharedSound().play(s_SoundEquipUnlock);
-      }
+      });
     }
   }
 });

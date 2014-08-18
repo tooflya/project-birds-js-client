@@ -49,7 +49,7 @@ ChallengeList = PatternList.extend({
   onEnter: function() {
     this._super();
 
-    var randomFriend = DataManager.sharedManager().getAppFriends().random();
+    var randomFriend = FriendsManager.sharedInstance().getAppFriends().random();
 
     this.m_Text[1].ccsf([randomFriend.first_name + " " + randomFriend.last_name]);
 

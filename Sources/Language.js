@@ -40,6 +40,16 @@ var g_language  = {
     {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
+  'splash-message': [
+    {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 38, dimensions: false}
+    ],
   'tutorial-1': [
     {title: 'Move green square to the left to match 3 of the same!', font: 'Comic Sans MS', size: 46, dimensions: false},
     {title: 'Передвиньте зеленую иконку влево чтобы сократить 3 одинаковых иконок!', font: 'Comic Sans MS', size: 46, dimensions: false},
@@ -880,6 +890,16 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 62, dimensions: false},
     {title: "ロック解除されました", font: "RiiPopkk-R", size: 62, dimensions: false}
     ],
+  'go': [
+    {title: "Play", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "Играть", font: "Comic Sans MS", size: 42, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 48, dimensions: false}
+    ],
   'unlock': [
     {title: "Unlock", font: "Comic Sans MS", size: 48, dimensions: false},
     {title: "Открыть", font: "Comic Sans MS", size: 48, dimensions: false},
@@ -899,6 +919,76 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
     {title: "このモードのロックを解除するには：", font: "RiiPopkk-R", size: 42, dimensions: [450, 0]}
+    ],
+  'item-unlock': [
+    {title: "This item is locked. You must unlock it first just for:", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Этот элемент закрыт. \n Его можно открыть всего за:", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
+    {title: "このモードのロックを解除するには：", font: "RiiPopkk-R", size: 42, dimensions: [450, 0]}
+    ],
+  'multiplayer-popup-1': [
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Сыграть онлайн?", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
+    ],
+  'multiplayer-popup-2': [
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "Вступите в схватку птиц с живим игроком! Заработайте много золотых монет и увеличте свой глобальный рейтинг!", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [500, 0]}
+    ],
+  'network-1': [
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Соединяемся с сервером...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
+    ],
+  'network-2': [
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Поиск игрока...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
+    ],
+  'network-3': [
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Ожидание начала битвы...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
+    ],
+  'network-4': [
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Соперник отключился! \n Пробуем восстановить соединение...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
     ],
   'help-popup-1': [
     {title: "About modes", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -950,6 +1040,16 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "プログレスモード - さまざまなミッションに挑戦。", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
+  'help-popup-6': [
+    {title: "Arcade mode - allow you to show what you can do in one minute! As the game progresses your skills increase and you are quite able to surpass its previous record!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Режим аркады - позволит вам показать на что вы способны за одну минуту! По мере прохождения игры ваши навыки увеличиваются и вы вполне в силах превзойти свой предыдущий рекорд!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "アーケードモード - 1分間で記録に挑戦！", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
   'help-popup-7': [
     {title: "Classic mode - the game in which you have to compete with other players to earn coins, to increase its global ranking and use the bonus earned.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "Классический режим - режим игры в котором вам предстоит соревноваться с другими игроками, зарабатывать монеты, увеличивать свой глобальный рейтинг и пользоваться заработанными бонусами.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -960,15 +1060,105 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "クラシックモード -  ランキングやコイン獲得を目指すゲーム！", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
-  'help-popup-6': [
-    {title: "Arcade mode - allow you to show what you can do in one minute! As the game progresses your skills increase and you are quite able to surpass its previous record!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "Режим аркады - позволит вам показать на что вы способны за одну минуту! По мере прохождения игры ваши навыки увеличиваются и вы вполне в силах превзойти свой предыдущий рекорд!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+  'level-popup-1': [
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Уровень - $1", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
+    ],
+  'level-popup-2': [
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Рейтинг друзей", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
+    ],
+  'level-popup-3': [
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Глобальный рейтинг", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
+    ],
+  'level-popup-4': [
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
+    {title: "Сложность:", font: "Comic Sans MS", size: 28, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 28, dimensions: false}
+    ],
+  'level-popup-level-1': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Все начинается здесь. Королевская гвардия больше не может справляться с возросшим давлением со стороны ополчения. Мы же сможем победить?", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "アーケードモード - 1分間で記録に挑戦！", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-2': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Первая попытка была удачной, но не сильно взолновала корону. К вам отправлен всего лишь более быстрый отряд.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-3': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Королевское общество не верит в угрозу с вашей стороны, но тем не менее посылает самый быстрый отряд в вашем регионе. Ваши силы на исходе.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-4': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Вы проявили себя хорошо в битве за правду и немного восстановив силы, встречаете еще более злейшего врага!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-5': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Королевский трон пошатнулся. Угрозу чувствуют все предворные шуты. Они не на шутку вооружились...", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-6': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Просто неверится что вы уцелели после такой битвы! Вы все ближе к королевству, но все еще встречаете очаги сопротивления. Впереди очень быстрая катапульта!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'tip-0': [
     {title: "Tip 0", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
@@ -1228,7 +1418,37 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
-    {title: '総コインが獲得した。', font: 'RiiPopkk-R', size: 32, dimensions: false}//
+    {title: '総コインが獲得した。', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'finish-text-5': [
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Рейтинг увеличен на: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'finish-text-6': [
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Ходов осталось: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'finish-text-7': [
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Заработано ключей: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
   'finish-total-coins': [
     {title: '$1', font: 'Comic Sans MS', size: 48, dimensions: false},

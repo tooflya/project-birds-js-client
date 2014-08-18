@@ -64,18 +64,57 @@ Lock = ExtendedPopup.extend({
     this.m_ActionButton.setTouchHandler('onActionEvent', Lock);
   },
   onActionEvent: function() {
-    this.m_ActionButton.action = true;
+    var self = this;
 
-    this.hide();
+    this.hide(function() {
+      var price = Lock.instance.price;
+      var id = Lock.instance.id;
+      var data = Lock.instance.data;
+      var parent = Lock.instance.getParent();
+      DataManager.sharedManager().get(true, references.coins.keys, {
+        success: function(value) {
+          if(value >= price) {
+            DataManager.sharedManager().update(true, references.coins.keys, -price);
+
+            parent.unlock(id, data);
+          } else {
+            Keys.sharedScreen(parent).show();
+          }
+        }
+      });
+    });
   },
-  show: function(id) {
+  show: function(id, type, data) {
     this._super();
 
-    this.m_PriceText.ccsf([unlock.modes[id].price]);
+    var prices;
+    switch(type) {
+      case 'item':
+      prices = unlock.items;
+
+      this.m_BackgroundText.setText('item-unlock');
+      break;
+      case 'level':
+      prices = unlock.levels;
+
+      this.m_BackgroundText.setText('level-unlock');
+      break;
+      case 'mode':
+      prices = unlock.modes;
+
+      this.m_BackgroundText.setText('mode-unlock');
+      break;
+    }
+
+    this.m_BackgroundText.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(100));
+
+    this.m_PriceText.ccsf([prices[id].price]);
     this.m_PriceText.setCenterPosition(this.m_Background.getWidth() / 2 + this.m_PriceText.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(270));
     this.m_Key.setCenterPosition(this.m_Background.getWidth() / 2 - this.m_PriceText.getWidth() / 2, this.m_Key.getCenterY());
 
     this.id = id;
+    this.price = prices[id].price;
+    this.data = data;
   },
   onShow: function() {
     this._super();
@@ -83,18 +122,6 @@ Lock = ExtendedPopup.extend({
     this.m_ActionButton.action = false;
   },
   onHide: function() {
-    if(this.m_ActionButton.action) {
-      if(DataManager.sharedManager().get(references.coins.keys) >= 10) {
-        this.getParent().unlock(this.id);
-      } else {
-        if(this.config.params.vendor == 'ubi-nuri') {
-          //Toast
-        } else {
-          Keys.sharedScreen(this.m_Parent).show();
-        }
-      }
-    }
-
     this._super();
 
     Lock.instance = false;

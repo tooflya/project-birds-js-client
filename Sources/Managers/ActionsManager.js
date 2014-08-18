@@ -39,11 +39,19 @@ ActionsManager = cc.Node.extend({
 
     for(var i = 0; i < this.m_Pool.length; i++) {
       if(data.id == this.m_Pool[i].id) {
-        this.m_Pool[i].repeat++;
-        this.m_Pool[i].factor = Math.max(this.m_Pool[i].factor, data.factor);
+        if(data.factor) {
+          this.m_Pool[i].repeat++;
+          this.m_Pool[i].factor = Math.max(this.m_Pool[i].factor, data.factor);
+        } else {
+          this.m_Pool[i].factor += 0.3;
+        }
 
         exist = true;
       }
+    }
+
+    if(!data.factor) {
+      data.factor = 0.3;
     }
 
     if(!exist) {
@@ -59,18 +67,30 @@ ActionsManager = cc.Node.extend({
   remove: function(data) {
     this.m_Pool.splice(this.m_Pool.indexOf(data), 1);
   },
+  round: function(value) {
+    for(var i = 0; i < 5; i++) {
+      if(value > i && value <= (i + 1)) return (i + 1);
+    }
+
+    return value;
+  },
   empty: function() {
     return this.m_Pool.length <= 0;
   },
   clear: function() {
     this.m_Pool = [];
+    this.m_TempPool = [];
   },
   run: function() {
     if(this.m_Pool.length > 0) {
       if(!Game.sharedScreen().m_TutorialRunning) {
-        Game.sharedScreen().onTurnStart(this.m_Pool[0]);
+        var entry = this.m_Pool[0];
 
-        this.remove(this.m_Pool[0]);
+        entry.factor = this.round(entry.factor);
+
+        Game.sharedScreen().onTurnStart(entry);
+
+        this.remove(entry);
       }
     } else {
       Game.sharedScreen().onTurnChange();

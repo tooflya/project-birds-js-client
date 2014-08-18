@@ -49,8 +49,10 @@ Bird = PhysicsEntity.extend({
   ctor: function(parent, world) {
     this._super(s_Birds, 14, 9, parent, world, 0.5, 0.5, 0.5, 2.5);
 
-    this.getPhysicsFixture().filter.categoryBits = 1;
-    this.getPhysicsFixture().filter.maskBits = 1;
+    if(this.getPhysicsFixture()) {
+      this.getPhysicsFixture().filter.categoryBits = 1;
+      this.getPhysicsFixture().filter.maskBits = 1;
+    }
 
     this.m_Explosions = EntityManager.create(5, BirdExplosion.create(), this);
   },
@@ -84,21 +86,32 @@ Bird = PhysicsEntity.extend({
 
     this.m_Explosions.clear();
 
-    if(this.getCenterY() > -this.getHeight() / 2) {
-      if(Game.sharedScreen().m_GameRunning) {
-        this.onDestroySound();
-        this.createExplosion();
+    var game = Game.sharedScreen();
 
-        Game.sharedScreen().onBlow(this);
-      }
-    } else {
-      this.onLost();
-    }
+    switch(game.m_Type) {
+      case game.m_Types.progress:
+      this.onDestroySound();
+      this.createExplosion();
+      break;
+      case game.m_Types.classic:
+      case game.m_Types.arcade:
+      if(this.getCenterY() > -this.getHeight() / 2) {
+        if(Game.sharedScreen().m_GameRunning) {
+          this.onDestroySound();
+          this.createExplosion();
 
-    if(this.m_Bonus1) {
-      if(this.m_Bonus1 instanceof Bonus) {
-        this.m_Bonus1.destroy();
+          Game.sharedScreen().onBlow(this);
+        }
+      } else {
+        this.onLost();
       }
+
+      if(this.m_Bonus1) {
+        if(this.m_Bonus1 instanceof Bonus) {
+          this.m_Bonus1.destroy();
+        }
+      }
+      break;
     }
   },
   onLost: function() {
@@ -135,7 +148,7 @@ Bird = PhysicsEntity.extend({
   setContactBody: function() {
     this.m_PhysicsBody = this.getCurrentPhysicsWorld().CreateBody(this.m_PhysicsDefinition);
 
-    this.m_PhysicsFixture.shape = new Box2D.Collision.Shapes.b2CircleShape(this.getHeight() / this.m_DevideFactor / PhysicsManager.ratio);
+    this.m_PhysicsFixture.shape = new Box2D.Collision.Shapes.b2CircleShape(this.getHeight() / this.m_DevideFactorX / PhysicsManager.ratio);
 
     this.m_PhysicsBody.CreateFixture(this.getPhysicsFixture());
   },
@@ -253,6 +266,10 @@ Bird = PhysicsEntity.extend({
 
     switch(game.m_Type) {
       case game.m_Types.progress:
+      if(this._sfp) {
+        this.setScaleX(this._sfp > this.getCenterX() ? -1 : 1); // TODO: Change to non-hard code.
+      }
+      this._sfp = this.getCenterX();
       break;
       case game.m_Types.classic:
       case game.m_Types.arcade:
@@ -269,7 +286,7 @@ Bird = PhysicsEntity.extend({
       if(this.getLinearVelocity().y <= 0) {
         this.m_Bonus1 = true;
 
-        if(DataManager.sharedManager().get(references.items.bonus1)) {
+        if(DataManager.sharedManager().get(false, references.items.bonus1)) {
           this.m_Bonus1 = Bonus1.create(this);
         }
       }
@@ -278,9 +295,7 @@ Bird = PhysicsEntity.extend({
   update: function(time) {
     this._super(time);
 
-    if(this.getCurrentPhysicsWorld()) {
-      //this.createMark();
-    }
+    this.createMark();
 
     this.checkCollides();
     this.checkPosition();

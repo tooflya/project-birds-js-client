@@ -546,10 +546,10 @@ Levels = Screen.extend({
 
     this.m_Background.create().setCenterPosition(Camera.sharedCamera().center.x, this.m_Background.getHeight() / 2);
 
-    this.m_Water = EntityManager.create(this.m_WaterCoordinates.length, Water.create(), this);
-    this.m_Icons = EntityManager.create(this.m_IconsCoordinates.length, MapIcon.create(), this);
-    this.m_Points = EntityManager.create(this.m_PointsCoordinates.length, MapPoint.create(), this);
-    this.m_Trees = EntityManager.create(this.m_TreesCoordinates.length, MapTree.create(), this);
+    this.m_Water = EntityManager.create(this.m_WaterCoordinates.length, Water.create(), this, 100);
+    this.m_Icons = EntityManager.create(this.m_IconsCoordinates.length, MapIcon.create(), this, 101);
+    this.m_Points = EntityManager.create(this.m_PointsCoordinates.length, MapPoint.create(), this, 102);
+    this.m_Trees = EntityManager.create(this.m_TreesCoordinates.length, MapTree.create(), this, 103);
 
     var parallax = Entity.create(s_LevelsMapCloud);
     this.m_Cloud = ParallaxEntity.create(parallax, {
@@ -559,13 +559,59 @@ Levels = Screen.extend({
       x: Camera.sharedCamera().center.x,
       y: Camera.sharedCamera().height - parallax.getHeight() / 2 + Camera.sharedCamera().coord(300)
     }, this);
+    this.m_Cloud.setZOrder(200);
 
     for(var i = 0; i < this.m_WaterCoordinates.length; i++) {
       this.m_Water.create().setCenterPosition(Camera.sharedCamera().coord(this.m_WaterCoordinates[i].x), Camera.sharedCamera().coord(this.m_WaterCoordinates[i].y));
     }
 
     for(var i = 0; i < this.m_IconsCoordinates.length; i++) {
-      this.m_Icons.create().setCenterPosition(Camera.sharedCamera().coord(this.m_IconsCoordinates[i].x), Camera.sharedCamera().coord(this.m_IconsCoordinates[i].y));
+      var element = this.m_Icons.create();
+
+      element.setCenterPosition(Camera.sharedCamera().coord(this.m_IconsCoordinates[i].x), Camera.sharedCamera().coord(this.m_IconsCoordinates[i].y));
+      element.registerTouchable(false);
+
+      if(!DataManager.sharedManager().get(false, references.levels.levels[i])) {
+        element.locked = true;
+
+        element.decorations = [];
+        for(var h = 0; h < 2; h++) {
+          element.decorations[h] = Entity.create(s_PopupDecoration1, this);
+
+          element.decorations[h].create().setCenterPosition(element.getCenterX(), element.getCenterY());
+          element.decorations[h].setScale(0.6);
+          element.decorations[h].setOpacity(100.0);
+          element.decorations[h].setZOrder(99);
+          element.decorations[h].runAction(
+            cc.RepeatForever.create(
+              cc.RotateTo.create(30.0, h == 0 ? 720 : -720),
+              false
+              )
+            );
+        }
+
+        element.lock = Entity.create(s_Lock, element);
+        element.lock.create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2);
+        element.lock.setScale(1.0);
+        element.lock.setOpacity(255.0)
+      } else {
+        element.registerTouchable(true);
+
+        element.decorations = [];
+        for(var h = 0; h < 2; h++) {
+          element.decorations[h] = Entity.create(s_PopupDecoration1, this);
+
+          element.decorations[h].create().setCenterPosition(element.getCenterX(), element.getCenterY());
+          element.decorations[h].setZOrder(99);
+          element.decorations[h].setScale(0);
+          element.decorations[h].runAction(
+            cc.RepeatForever.create(
+              cc.RotateTo.create(30.0, h == 0 ? 720 : -720),
+              false
+            )
+          );
+        }
+      }
     }
 
     for(var i = 0; i < this.m_PointsCoordinates.length; i++) {
@@ -581,21 +627,38 @@ Levels = Screen.extend({
     ScreenManager.sharedManager().replace(Mode);
   },
   onSelected: function(data) {
-    DataManager.sharedManager().get(true, references.coins.lives, {
-        success: function(value) {
-          if(value <= 0) {
-            Lives.sharedScreen(this).show();
-          } else {
-            Game.sharedScreen(0);
-            ScreenManager.sharedManager().replace(Loading);
-          }
-        }
-    });
+    Game.level = data.id ? data.id : Game.level;
+    Level.sharedScreen(this).show();
   },
   onShow: function() {
     this._super();
 
     MenuPanel.sharedScreen(this).show();
+
+    Tooflya.api.call('level.get', false, {
+      success: function(data) {
+        var element = Levels.instance.m_Icons.get(data.level - 1);
+
+        for(var h = 0; h < 2; h++) {
+          element.decorations[h].runAction(
+            cc.Sequence.create(
+              cc.DelayTime.create(1.5),
+              cc.FadeIn.create(0.4),
+              false
+            )
+          );
+          element.decorations[h].runAction(
+            cc.Sequence.create(
+              cc.DelayTime.create(1.5),
+              cc.ScaleTo.create(0.2, 1.2),
+              cc.ScaleTo.create(0.1, 0.8),
+              cc.ScaleTo.create(0.1, 1.0),
+              false
+            )
+          );
+        }
+      }
+    });
   },
   onHide: function() {
     this._super();
@@ -657,7 +720,7 @@ MapIcon = Button.extend({
 
     this.m_Text = Text.create(false, this);
 
-    this.setTouchHandler('onSelected', Levels);
+    this.registerTouchable(true);
   },
   onCreate: function() {
     this._super();
@@ -667,16 +730,17 @@ MapIcon = Button.extend({
     this.m_Text.setString(this.getID() + 1);
     this.m_Text.disableShadow();
     this.m_Text.setColor(cc.c3(0, 0, 0));
-
-    if(true && this.getID() > 0) {
-      this.setColor(cc.c3(150, 150, 150));
-    } else {
-      this.setColor(cc.c3(255, 255, 255));
-    }
   },
   onHover: function() {
   },
   onUnHover: function() {
+  },
+  onTouch: function() {
+    this._super();
+
+    Levels.instance.onSelected({
+      id: this.getID() + 1
+    });
   },
   update: function(time) {
     this._super();

@@ -125,7 +125,9 @@ GamePanel = Panel.extend({
       EnergyManager.sharedManager().check();
 
       if(DataManager.sharedManager().get(false, EnergyManager.sharedManager().getReference()) <= 0) {
-        e.timeLeft(EnergyManager.sharedManager().time() / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+        EnergyManager.sharedManager().time(function(value) {
+          e.timeLeft(value / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+        });
       } else {
         e.ccsf([DataManager.sharedManager().get(false, EnergyManager.sharedManager().getReference())]);
       }

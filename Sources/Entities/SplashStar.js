@@ -31,8 +31,8 @@ SplashStar = PhysicsEntity.extend({
   ctor: function(parent, world) {
     this._super(s_SplashStar, 1, 1, parent, world);
 
-    this.getPhysicsFixture().filter.categoryBits = 3;
-    this.getPhysicsFixture().filter.maskBits = 3;
+    this.getPhysicsFixture().filter.categoryBits = 0;
+    this.getPhysicsFixture().filter.maskBits = 0;
   },
   onCreate: function() {
     this._super();

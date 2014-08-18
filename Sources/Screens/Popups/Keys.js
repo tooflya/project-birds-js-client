@@ -76,10 +76,10 @@ Keys = ExtendedPopup.extend({
       Purchase.sharedScreen(this.getParent()).show(params, function(id) {
         switch(id) {
           case purchase.keys.pack1:
-          DataManager.sharedManager().update(references.coins.keys, 50);
+          DataManager.sharedManager().update(true, references.coins.keys, 50);
           break;
           case purchase.keys.pack2:
-          DataManager.sharedManager().update(references.coins.keys, 200);
+          DataManager.sharedManager().update(true, references.coins.keys, 200);
           break;
         }
       });
@@ -87,6 +87,8 @@ Keys = ExtendedPopup.extend({
   },
   onShow: function() {
     this._super();
+
+    Tooflya.api.call('payments.visit');
 
     this.m_CoinsButton1.runAction(
       cc.Sequence.create(

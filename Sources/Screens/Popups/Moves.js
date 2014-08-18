@@ -88,6 +88,8 @@ Moves = ExtendedPopup.extend({
   onShow: function() {
     this._super();
 
+    Tooflya.api.call('payments.visit');
+
     this.m_GetButton.runAction(
       cc.Sequence.create(
       cc.ScaleTo.create(0.1, 0.8, 1.2),

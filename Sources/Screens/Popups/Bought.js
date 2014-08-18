@@ -61,6 +61,8 @@ Bought = ExtendedPopup.extend({
 
     Popup.prototype.show.call(this);
 
+    this.reference = params.reference;
+
     this.m_BackgroundIcon.setOpacity(0);
     this.m_Decoration1.setOpacity(0);
     this.m_Decoration2.setOpacity(0);
@@ -172,8 +174,8 @@ Bought = ExtendedPopup.extend({
     switch(this.config.params.platform) {
       case 'vk':
       VK.api("wall.post", {
-        message: '???',
-        attachments: 'photo66748_265827614,http://habrahabr.ru',
+        message: properties.items[this.reference].share.message,
+        attachments: properties.items[this.reference].share.image + ',http://vk.com/app4165575',
         test_mode: 1
       });
       break;

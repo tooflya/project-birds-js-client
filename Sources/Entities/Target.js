@@ -36,9 +36,14 @@ Target = TiledEntity.extend({
     this._super(s_Target, 2, 1, parent);
 
     this.registerTouchable(true);
+
+    this.m_Text = Text.create('zero', this, cc.TEXT_ALIGNMENT_CENTER);
   },
   onCreate: function() {
     this._super();
+
+    this.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(18));
+    this.setCurrentFrameIndex(0);
 
     this.setScale(0.0);
     this.setAnchorPoint(cc.p(0.5, 0.1));
@@ -70,9 +75,16 @@ Target = TiledEntity.extend({
           )
         );
     }
+
+    this.m_Text.create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2 + Camera.sharedCamera().coord(5));
+    this.m_Text.score = 0;
   },
   onDestroy: function() {
     this._super();
+
+    for(var i = 0; i < 2; i++) {
+      this.m_Decorations[i].removeFromParent();
+    }
   },
   onTouch: function() {
     if(this.getNumberOfRunningActions() <= 0) {
@@ -87,8 +99,10 @@ Target = TiledEntity.extend({
         );
     }
   },
-  finish: function() {
+  finish: function(state) {
     this.m_Finish = true;
+
+    this.m_Text.destroy();
 
     this.m_Decorations[0].setZOrder(700);
     this.m_Decorations[1].setZOrder(700);
@@ -103,10 +117,12 @@ Target = TiledEntity.extend({
         cc.MoveTo.create(3.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y))
       )
     );
-    this.runAction(
+    this.runAction(cc.ScaleTo.create(3.0, 1.5));
+
+    Game.instance.runAction(
       cc.Sequence.create(
-        cc.ScaleTo.create(3.0, 1.5),
-        cc.CallFunc.create(Game.sharedScreen().onLevelFinish, Game.sharedScreen()),
+        cc.DelayTime.create(3.0),
+        cc.CallFunc.create(Game.instance.finishGame, Game.instance, state),
         false
       )
     );
@@ -122,6 +138,15 @@ Target = TiledEntity.extend({
 
     this.m_Decorations[0].setCenterPosition(this.getCenterX(), this.getCenterY() + (this.m_Finish ? 0 : this.getHeight() / 2));
     this.m_Decorations[1].setCenterPosition(this.getCenterX(), this.getCenterY() + (this.m_Finish ? Camera.sharedCamera().coord(50) : this.getHeight() / 2));
+
+    if(this.m_Text.score != Game.score) {
+      if(Game.score - this.m_Text.score > 1111) this.m_Text.score += 1111;
+      else if(Game.score - this.m_Text.score > 111) this.m_Text.score += 111;
+      else if(Game.score - this.m_Text.score > 11) this.m_Text.score += 11;
+      else this.m_Text.score++;
+    }
+
+    this.m_Text.ccsf([this.m_Text.score]);
   }
 });
 

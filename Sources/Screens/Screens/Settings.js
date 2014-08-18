@@ -90,7 +90,8 @@ Settings = Screen.extend({
     ScreenManager.sharedManager().replace(Reset);
   },
   onMoreEvent: function() {
-    ScreenManager.sharedManager().replace(More);
+    /** ScreenManager.sharedManager().replace(More); */
+    openURL("//www.tooflya.com/");
   },
   onLanguagesEvent: function() {
     ScreenManager.sharedManager().replace(Languages);

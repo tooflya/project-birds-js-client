@@ -29,7 +29,7 @@
  *
  */
 
-Game.prototype.createTutorialelements = function() {
+Game.prototype.createTutorialElements = function() {
   DataManager.sharedManager().set(true, references.tutorial.enable, 0);
 
   this.m_TutorialState = 1;
@@ -294,8 +294,8 @@ Game.prototype.onBlowTutorial = function(element) {
     default:
     var id = element.getId();
 
-    if(DataManager.sharedManager().get(false, references.tutorial.elements[id])) {
-      DataManager.sharedManager().set(true, references.tutorial.elements[id], 0);
+    if(!DataManager.sharedManager().get(false, references.tutorial.elements[id])) {
+      DataManager.sharedManager().set(true, references.tutorial.elements[id], 1);
 
       this.m_TutorialBackground.runAction(cc.FadeTo.create(0.5, 200));
       this.m_TutorialElementsExplanationText.setText("tutorial-elements-explanation-title-" + id);

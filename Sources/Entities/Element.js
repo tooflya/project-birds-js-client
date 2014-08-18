@@ -58,18 +58,19 @@ Element = TiledEntity.extend({
 
     this.stopAllActions();
 
+    if(this.m_Icon) {
+      this.m_Icon.destroy();
+      this.m_Icon.removeFromParent();
+    }
+
     switch(this.getId()) {
       default:
       break;
       case Element.types.star:
-      if(this.m_Icon) {
-        this.m_Icon.destroy();
-        this.m_Icon.removeFromParent();
-      }
-
       this.m_Id = -1;
 
       GamePanel.sharedScreen().starred();
+      Game.instance.m_Stars++;
       break;
     }
   },
@@ -91,8 +92,14 @@ Element = TiledEntity.extend({
       }
 
       Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
+
+      Game.instance.updateScore(1);
       break;
       case Element.types.star:
+      if(MatrixManager.timeout) {
+        MatrixManager.timeout.pause();
+      }
+
       this.runAction(
         cc.Sequence.create(
           cc.Repeat.create(
@@ -112,19 +119,39 @@ Element = TiledEntity.extend({
       MatrixManager.instance.clear();
 
       Sound.sharedSound().play(s_SoundStar);
+
+      Game.instance.updateScore(1000);
       break;
     }
 
     switch(this.m_Bonus) {
       case Element.bonus.types.horizontal:
       MatrixManager.sharedManager().removeHorizontalLine(this.getIndex().x, this.getIndex().y, this);
+
+      Game.instance.updateScore(180);
       break;
       case Element.bonus.types.vertical:
       MatrixManager.sharedManager().removeVerticalLine(this.getIndex().x, this.getIndex().y, this);
+
+      Game.instance.updateScore(180);
       break;
       case Element.bonus.types.pack:
+      // MatrixManager.sharedManager().removeSquare(this.getIndex().x, this.getIndex().y, this); // Temporarity remove.
+
+      Game.instance.updateScore(250);
       break;
       case Element.bonus.types.bomb:
+      var element;
+
+      if(MatrixManager.sharedManager().m_CurrentElement1 === this) {
+        element = MatrixManager.sharedManager().m_CurrentElement2;
+      } else {
+        element = MatrixManager.sharedManager().m_CurrentElement1;
+      }
+
+      MatrixManager.sharedManager().removeSimilar(element.getIndex().x, element.getIndex().y, element);
+
+      Game.instance.updateScore(500);
       break;
     }
 
@@ -173,7 +200,6 @@ Element = TiledEntity.extend({
 
     if(this.getId() == Element.types.block) return false;
 
-
     switch(this.m_Bonus) {
       default:
       this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount());
@@ -185,6 +211,7 @@ Element = TiledEntity.extend({
       this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount() * 3);
       break;
       case Element.bonus.types.pack:
+      this.setCurrentFrameIndex(Element.types.pack);
       break;
       case Element.bonus.types.bomb:
       break;
@@ -204,7 +231,7 @@ Element = TiledEntity.extend({
       this.setCurrentFrameIndex(this.m_Id + this.getHorizontalFramesCount() * 2);
       break;
       case Element.bonus.types.pack:
-      this.setCurrentFrameIndex(this.m_Id);
+      this.setCurrentFrameIndex(Element.types.pack + this.getHorizontalFramesCount() * 1);
       break;
       case Element.bonus.types.bomb:
       this.setCurrentFrameIndex(this.m_Id);
@@ -252,14 +279,10 @@ Element = TiledEntity.extend({
 
     return this._super(e);
   },
-  remove: function(collect) {
+  remove: function() {
     this.m_Removed = true;
 
     MatrixManager.sharedManager().remove(this);
-
-    if(collect) {
-      // TODO: Add to the actions manager.
-    }
 
     return this.onRemove();
   },
@@ -298,6 +321,41 @@ Element = TiledEntity.extend({
   },
   setBonus: function(type) {
     this.m_Bonus = type;
+
+    /*var icon;
+    switch(this.m_Bonus) {
+      default:
+      icon = this.m_Id + this.getHorizontalFramesCount();
+      break;
+      case Element.bonus.types.horizontal:
+      icon = this.m_Id + this.getHorizontalFramesCount() * 5;
+      break;
+      case Element.bonus.types.vertical:
+      icon = this.m_Id + this.getHorizontalFramesCount() * 3;
+      break;
+      case Element.bonus.types.pack:
+      icon = Element.types.pack;
+      break;
+      case Element.bonus.types.bomb:
+      icon = this.m_Id;
+      break;
+    }
+
+    if(!this.m_Icon) {
+      this.m_Icon = TiledEntity.create(s_Elements, 8, 6, this);
+      this.m_Icon.create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2);
+      this.m_Icon.setCurrentFrameIndex(icon);
+      this.m_Icon.runAction(
+        cc.RepeatForever.create(
+          cc.Sequence.create(
+            cc.FadeTo.create(1.0, 0.0),
+            cc.DelayTime.create(0.5),
+            cc.FadeTo.create(1.0, 255.0),
+            false
+          )
+        )
+      );
+    }*/
 
     this.onUnHover();
   },
@@ -415,17 +473,24 @@ Element = TiledEntity.extend({
           };
 
           var toper = false;
+          var stop = false;
 
           for(var t = index.y; t < MatrixManager.sharedManager().getSize().y; t++) {
             var element = MatrixManager.sharedManager().get(index.x - 1, t);
 
-            if(!toper) {
-              if(element == etypes.empty || element == etypes.block) {
-                toper = true;
-              }
-            } else {
-              if(element != etypes.empty && element != etypes.block) {
-                toper = false;
+            if(!stop) {
+              if(!toper) {
+                if(element == etypes.empty || element == etypes.block) {
+                  toper = true;
+
+                  if(element == etypes.block) {
+                    stop = true;
+                  }
+                }
+              } else {
+                if(element != etypes.empty && element != etypes.block) {
+                  toper = false;
+                }
               }
             }
           }
@@ -449,17 +514,24 @@ Element = TiledEntity.extend({
           }
 
           toper = false;
+          stop = false;
 
           for(var t = index.y; t < MatrixManager.sharedManager().getSize().y; t++) {
             var element = MatrixManager.sharedManager().get(index.x + 1, t);
 
-            if(!toper) {
-              if(element == etypes.empty || element == etypes.block) {
-                toper = true;
-              }
-            } else {
-              if(element != etypes.empty && element != etypes.block) {
-                toper = false;
+            if(!stop) {
+              if(!toper) {
+                if(element == etypes.empty || element == etypes.block) {
+                  toper = true;
+
+                  if(element == etypes.block) {
+                    stop = true;
+                  }
+                }
+              } else {
+                if(element != etypes.empty && element != etypes.block) {
+                  toper = false;
+                }
               }
             }
           }
@@ -593,7 +665,7 @@ Element.types = {
   defence: 2,
   keys: 3,
   run: 4,
-  bomb: 5,
+  pack: 5,
   star: 6,
   block: 7
 };

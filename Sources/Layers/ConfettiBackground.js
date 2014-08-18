@@ -28,7 +28,7 @@
  */
 
 ConfettiBackground = BackgroundColor.extend({
-  m_zIndex: 600,
+  m_zIndex: 1100,
   m_Elements: false,
   ctor: function(parent) {
     this._super(cc.c4(0, 0, 0, 0));

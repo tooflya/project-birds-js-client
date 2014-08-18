@@ -46,3 +46,34 @@ Game.prototype.onMouseDragged = function(e) {
     break;
   }
 };
+
+Game.prototype.onTouch = function(e) {
+  if(!this.m_GameRunning || this.m_TutorialRunning) return false;
+
+  if(Game.network) {
+    if(this.m_InputBackground.getNumberOfRunningActions() > 0) return false;
+
+    if(this.m_InputBackground.isVisible()) {
+      this.m_InputBackground.runAction(
+        cc.Sequence.create(
+          cc.ScaleTo.create(0.1, 1.1),
+          cc.ScaleTo.create(0.1, 0.0),
+          cc.CallFunc.create(this.m_InputBackground.destroy, this.m_InputBackground, this.m_InputBackground),
+          false
+        )
+      );
+    } else {
+      var x = e.getLocation().x;
+      var y = e.getLocation().y;
+
+      this.m_InputBackground.setCenterPosition(x, y);
+      this.m_InputBackground.create().runAction(
+        cc.Sequence.create(
+          cc.ScaleTo.create(0.2, 1.1),
+          cc.ScaleTo.create(0.1, 1.0),        
+          false
+        )
+      );
+    }
+  }
+};

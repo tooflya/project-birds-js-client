@@ -220,10 +220,8 @@ Promotion = ClippedEntity.extend({
       break;
     }
 
-    DataManager.sharedManager().set(true, [
-      references.coins.gold,
-      references.coins.silver
-    ], [coins.gold, coins.silver]);
+    DataManager.sharedManager().update(true, references.coins.gold, coins.gold);
+    DataManager.sharedManager().update(true, references.coins.silver, coins.silver);
 
     this.m_Texts[1].ccsf([coins.gold]);
     this.m_Texts[2].ccsf([coins.silver]);

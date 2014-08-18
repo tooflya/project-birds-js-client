@@ -93,20 +93,20 @@ Coins = ExtendedPopup.extend({
       Purchase.sharedScreen(this.getParent()).show(params, function(id) {
         switch(id) {
           case purchase.coins.pack1:
-          DataManager.sharedManager().update(references.coins.gold, 25);
-          DataManager.sharedManager().update(references.coins.silver, 1000);
+          DataManager.sharedManager().update(true, references.coins.gold, 25);
+          DataManager.sharedManager().update(true, references.coins.silver, 1000);
           break;
           case purchase.coins.pack2:
-          DataManager.sharedManager().update(references.coins.gold, 150);
-          DataManager.sharedManager().update(references.coins.silver, 5000);
+          DataManager.sharedManager().update(true, references.coins.gold, 150);
+          DataManager.sharedManager().update(true, references.coins.silver, 5000);
           break;
           case purchase.coins.pack3:
-          DataManager.sharedManager().update(references.coins.gold, 500);
-          DataManager.sharedManager().update(references.coins.silver, 15000);
+          DataManager.sharedManager().update(true, references.coins.gold, 500);
+          DataManager.sharedManager().update(true, references.coins.silver, 15000);
           break;
           case purchase.coins.pack4:
-          DataManager.sharedManager().update(references.coins.gold, 2000);
-          DataManager.sharedManager().update(references.coins.silver, 50000);
+          DataManager.sharedManager().update(true, references.coins.gold, 2000);
+          DataManager.sharedManager().update(true, references.coins.silver, 50000);
           break;
         }
       });
@@ -114,6 +114,8 @@ Coins = ExtendedPopup.extend({
   },
   onShow: function() {
     this._super();
+
+    Tooflya.api.call('payments.visit');
 
     this.m_CoinsButton1.runAction(
       cc.Sequence.create(

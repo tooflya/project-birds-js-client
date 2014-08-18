@@ -123,6 +123,8 @@ Lives = ExtendedPopup.extend({
   onShow: function() {
     this._super();
 
+    Tooflya.api.call('payments.visit');
+
     if(DataManager.sharedManager().get(false, references.coins.lives) < 5) {
       this.m_GetButton.runAction(
         cc.Sequence.create(
@@ -157,10 +159,14 @@ Lives = ExtendedPopup.extend({
   update: function(time) {
     this._super(time);
 
+    var self = this;
+
     var lives = DataManager.sharedManager().get(false, references.coins.lives);
 
     if(lives <= 0) {
-      this.m_Counter.timeLeft(EnergyManager.sharedManager().time() / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+      EnergyManager.sharedManager().time(function(value) {
+        self.m_Counter.timeLeft(value / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+      });
     } else {
       this.m_Counter.ccsf([lives]);
     }

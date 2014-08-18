@@ -34,15 +34,13 @@ MenuPanel = Panel.extend({
     references.coins.gold,
     references.coins.silver,
     references.coins.lives,
-    references.coins.keys,
-    references.coins.rating
+    references.coins.keys
   ],
   m_Fields: [
     DataManager.sharedManager().get(false, references.coins.gold),
     DataManager.sharedManager().get(false, references.coins.silver),
     DataManager.sharedManager().get(false, references.coins.lives),
-    DataManager.sharedManager().get(false, references.coins.keys),
-    DataManager.sharedManager().get(false, references.rating)
+    DataManager.sharedManager().get(false, references.coins.keys)
   ],
   m_LeaderboardAnimationIndex: 1,
   m_LeaderboardAnimationTime: 0.1,
@@ -64,7 +62,9 @@ MenuPanel = Panel.extend({
       EnergyManager.sharedManager().check();
 
       if(DataManager.sharedManager().get(false, EnergyManager.sharedManager().getReference()) <= 0) {
-        e.timeLeft(EnergyManager.sharedManager().time() / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+        EnergyManager.sharedManager().time(function(value) {
+          e.timeLeft(value / 1000, EnergyManager.sharedManager().getRestoreTime() / 1000);
+        });
       } else {
         e.ccsf([DataManager.sharedManager().get(false, EnergyManager.sharedManager().getReference())]);
       }
@@ -134,9 +134,16 @@ MenuPanel = Panel.extend({
   onShow: function() {
     this._super();
 
-    NetworkManager.sharedInstance().emit('leaderboard-id', 'my id', function(id) {
-      MenuPanel.sharedScreen().m_LeaderboardAnimationCompleted = true;
-      MenuPanel.sharedScreen().m_LeaderboardIndex = id;
+    var self = this;
+
+    Tooflya.api.call('users.leaders', {
+      limit: 10000,
+      type: 2
+    }, {
+      success: function(data) {
+        self.m_LeaderboardAnimationCompleted = true;
+        self.m_LeaderboardIndex = data.place;
+      }
     });
   },
   onHide: function() {
@@ -155,7 +162,7 @@ MenuPanel = Panel.extend({
   update: function(time) {
     this._super(time);
 
-    for(var i = 0; i < 5; i++) {
+    for(var i = 0; i < 4; i++) {
       if(this.m_Fields[i] != DataManager.sharedManager().get(false, this.m_Keys[i])) {
         this.m_Fields[i] += this.m_Fields[i] > DataManager.sharedManager().get(false, this.m_Keys[i]) ? -1 : 1;
       }
@@ -175,7 +182,7 @@ MenuPanel = Panel.extend({
   updateData: function() {
     DataManager.sharedManager().get(true, MenuPanel.instance.m_Keys, {
       success: function(storage) {
-        MenuPanel.instance.m_Fields = storage
+        MenuPanel.instance.m_Fields = storage;
         DataManager.sharedManager().set(false, MenuPanel.instance.m_Keys, storage);
       }
     });

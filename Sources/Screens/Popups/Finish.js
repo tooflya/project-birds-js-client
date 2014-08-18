@@ -30,22 +30,27 @@
  */
 
 Finish = Background.extend({
-  m_zIndex: 500,
+  m_zIndex: 1000,
   ctor: function(parent) {
     this._super();
 
     this.m_Parent = parent;
 
+    this.m_Stars = [];
+
     this.m_Background = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
     this.m_BackgroundSquare = Entity.create(s_FinishBackgroundSquare, this);
     this.m_PrizeDecoration = TiledEntity.create(s_PrizeDecoration, 1, 2, this.m_BackgroundSquare);
+    this.m_Stars[0] = TiledEntity.create(s_Star, 3, 2, this.m_BackgroundSquare);
+    this.m_Stars[1] = TiledEntity.create(s_Star, 3, 2, this.m_BackgroundSquare);
+    this.m_Stars[2] = TiledEntity.create(s_Star, 3, 2, this.m_BackgroundSquare);
 
     this.m_MenuButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
     this.m_RestartButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
     this.m_ContinueButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
     this.m_ShopButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
 
-    this.m_SplashStars = EntityManager.create(20, SplashStar.create(false, Game.sharedScreen().getPhysicsWorld()), this);
+    this.m_SplashStars = EntityManager.create(20, SplashStar.create(false, Game.sharedScreen().getPhysicsWorld()), this.m_BackgroundSquare);
 
     this.m_Background1 = TiledEntity.create(Orientation.parse(s_FinishBackground), 1, 2, this.m_Background);
     this.m_Background2 = TiledEntity.create(Orientation.parse(s_FinishBackground), 1, 2, this.m_Background);
@@ -68,10 +73,22 @@ Finish = Background.extend({
     this.m_TextValue1.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 - Camera.sharedCamera().coord(20));
     this.m_TextValue2.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 - Camera.sharedCamera().coord(120));
 
+    this.m_Stars[0].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(170), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
+    this.m_Stars[1].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(0), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
+    this.m_Stars[2].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(170), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
+
+    this.m_Stars[0].setCurrentFrameIndex(3);
+    this.m_Stars[1].setCurrentFrameIndex(4);
+    this.m_Stars[2].setCurrentFrameIndex(5);
+
     this.m_TextValue1.ccsf([0]);
     this.m_TextValue2.ccsf([0]);
 
     this.m_BackgroundSquare.setCascadeOpacityEnabled(true);
+
+    this.m_Coins = EntityManager.create(50, ParticleCoin.create(false, this.m_Parent.getPhysicsWorld()), this.m_BackgroundSquare);
+    this.m_Lives = EntityManager.create(50, ParticleLive.create(false, this.m_Parent.getPhysicsWorld()), this.m_BackgroundSquare);
+    this.m_Keys = EntityManager.create(50, ParticleKey.create(false, this.m_Parent.getPhysicsWorld()), this.m_BackgroundSquare);
 
     this.m_MenuButton.setTouchHandler('onMenuEvent', Finish);
     this.m_RestartButton.setTouchHandler('onRestartEvent', Finish);
@@ -159,31 +176,138 @@ Finish = Background.extend({
 
     switch(type) {
       case types.progress:
-      this.m_RestartButton.setVisible(false);
-      this.m_MenuButton.setVisible(true);
-      this.m_ContinueButton.setVisible(true);
-      this.m_ShopButton.setVisible(true);
+      if(!Game.instance.m_GameState && !Game.network) {
+        this.m_RestartButton.setVisible(true);
+        this.m_MenuButton.setVisible(true);
+        this.m_ContinueButton.setVisible(false);
+        this.m_ShopButton.setVisible(true);
 
-      this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
-      this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
-      this.m_ContinueButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
+        this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
+        this.m_RestartButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
+        this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
+      } else {
+        if(!Game.tutorial) {
+          if(!Game.network) {
+            Tooflya.api.call('level.update', {
+              level: Game.level,
+              score: Game.score,
+              stars: Game.stars
+            });
 
-      this.m_PrizeDecoration.create().setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(250));
+            Game.level++;
+
+            Tooflya.api.call('level.set', {
+              level: Game.level
+            });
+
+            DataManager.sharedManager().set(true, references.levels.levels[Game.level - 1], 1);
+
+            if(Game.instance.m_GameState) {
+              Finish.instance.current = 0;
+              for(var i = 0; i < Game.instance.m_Stars; i++) {
+                setTimeout(function() {
+                  if(Finish.instance) {
+                    var current = Finish.instance.current;
+
+                    Sound.sharedSound().play(s_SoundStars[current]);
+
+                    Finish.instance.m_Stars[current].setCurrentFrameIndex(current);
+                    Finish.instance.m_Stars[current].runAction(
+                      cc.Sequence.create(
+                        cc.ScaleTo.create(0.1, 1.2),
+                        cc.ScaleTo.create(0.5, 1.0),
+                        false
+                      )
+                    );
+
+                    for(var j = 0; j < 7; j++) {
+                      Finish.instance.m_SplashStars.create().setCenterPosition(Finish.instance.m_Stars[current].getCenterX(), Finish.instance.m_Stars[current].getCenterY());
+                    }
+                  }
+
+                  Finish.instance.current++;
+                }, 1000 + 500 * (i + 1));
+              }
+            }
+          } else {
+            if(Game.instance.m_GameState) {
+              Tooflya.api.call('level.update', {
+                level: -1,
+                score: Game.score
+              });
+            }
+          }
+        }
+
+        this.m_RestartButton.setVisible(false);
+        this.m_MenuButton.setVisible(true);
+        this.m_ContinueButton.setVisible(true);
+        this.m_ShopButton.setVisible(true);
+
+        this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
+        this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
+        this.m_ContinueButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
+      }
+
+      this.m_Stars[0].create();
+      this.m_Stars[1].create();
+      this.m_Stars[2].create();
       break;
       case types.classic:
-      this.m_RestartButton.setVisible(false);
-      this.m_MenuButton.setVisible(true);
-      this.m_ContinueButton.setVisible(true);
-      this.m_ShopButton.setVisible(true);
+      if(!Game.instance.m_GameState) {
+        this.m_RestartButton.setVisible(true);
+        this.m_MenuButton.setVisible(true);
+        this.m_ContinueButton.setVisible(false);
+        this.m_ShopButton.setVisible(true);
 
-      this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
-      this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
-      this.m_ContinueButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
+        this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
+        this.m_RestartButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
+        this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
+      } else {
+        this.m_RestartButton.setVisible(false);
+        this.m_MenuButton.setVisible(true);
+        this.m_ContinueButton.setVisible(true);
+        this.m_ShopButton.setVisible(true);
+
+        this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
+        this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
+        this.m_ContinueButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
+      }
 
       this.m_PrizeDecoration.create().setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(250));
       break;
       case types.arcade:
+      this.m_RestartButton.setVisible(true);
+      this.m_MenuButton.setVisible(true);
+      this.m_ContinueButton.setVisible(false);
+      this.m_ShopButton.setVisible(true);
+
+      this.m_ShopButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(190),  Camera.sharedCamera().coord(140));
+      this.m_RestartButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, Camera.sharedCamera().coord(120));
+      this.m_MenuButton.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(190), Camera.sharedCamera().coord(140));
       break;
+    }
+
+    switch(type) {
+      case types.progress:
+      this.m_TextValue1.setText('finish-text-5');
+      break;
+      case types.classic:
+      case types.arcade:
+      this.m_TextValue1.setText('finish-text-1');
+      break;
+    }
+
+    this.m_TextValue1.ccsf([0]);
+    this.m_TextValue2.ccsf([0]);
+
+    if(Game.instance.m_GameState) {
+      Sound.sharedSound().play(s_SoundWin);
+
+      DataManager.sharedManager().update(true, references.coins.lives, 1);
+      DataManager.sharedManager().update(true, references.coins.keys, Game.sharedScreen().m_BonusKeys);
+    } else {
+      Sound.sharedSound().play(s_SoundLose);
     }
   },
   hide: function(callback) {
@@ -219,11 +343,15 @@ Finish = Background.extend({
 
     switch(type) {
       case types.progress:
+      if(Game.instance.m_GameState) {
+        this.m_Lives.create();
 
+        ConfettiBackground.sharedScreen(Game.sharedScreen()).show();
+      }
       break;
       case types.classic:
       case types.arcade:
-      if(true) {
+      if(Game.instance.m_GameState) {
         this.m_PrizeDecoration.setCurrentFrameIndex(1);
 
         for(var i = 0; i < 20; i++) {
@@ -231,21 +359,42 @@ Finish = Background.extend({
         }
 
         ConfettiBackground.sharedScreen(Game.sharedScreen()).show();
+      } else {
+
       }
       break;
     }
 
-    this.m_TotalCoins = 0;
-    this.m_CountReference = 0;
-    this.m_CountReferences = [0, 0, 0, 0];
-    this.m_ResultReferences = [
-      Game.sharedScreen().getResults().birds,
-      Game.sharedScreen().getResults().flayers,
-      Game.sharedScreen().getResults().combo,
-      Game.sharedScreen().getResults().keys
-    ];
+    switch(type) {
+      case types.progress:
+      this.m_TempCoins = 0;
+      this.m_TotalCoins = 0;
+      this.m_CountReference = 0;
+      this.m_CountReferences = [0, 0, 0, 0];
+      this.m_ResultReferences = [
+        Game.score,
+        10, // TODO: Moves
+        Game.sharedScreen().m_BonusKeys
+      ];
+      break;
+      case types.classic:
+      case types.arcade:
+      this.m_TempCoins = 0;
+      this.m_TotalCoins = 0;
+      this.m_CountReference = 0;
+      this.m_CountReferences = [0, 0, 0, 0];
+      this.m_ResultReferences = [
+        Game.sharedScreen().getResults().birds,
+        Game.sharedScreen().getResults().flayers,
+        Game.sharedScreen().getResults().combo,
+        Game.sharedScreen().getResults().keys
+      ];
+      break;
+    }
 
     this.schedule(this.count, 0.01);
+
+    Game.instance.onFinishShow();
   },
   onHide: function() {
     this.removeFromParent();
@@ -271,7 +420,15 @@ Finish = Background.extend({
   },
   onContinueEvent: function() {
     this.hide(function() {
-      Game.sharedScreen().onShow();
+      if(Game.tutorial) {
+        ScreenManager.sharedManager().replace(Levels);
+      } else {
+        if(Game.network) {
+          ScreenManager.sharedManager().replace(Mode);
+        } else {
+          Game.sharedScreen().onShow();
+        }
+      }
     });
   },
   onEnter: function() {
@@ -289,89 +446,192 @@ Finish = Background.extend({
       value: 255
     });
 
-    switch(++this.m_CountReference) {
-      default:
-      this.unschedule(this.count);
-      break;
-      case 1:
-      this.m_TextValue1.setText('finish-text-2');
+    var types = Game.sharedScreen().m_Types;
+    var type = Game.sharedScreen().m_Type;
 
-      this.schedule(this.count, 0.01, null, 1.0);
-      break;
-      case 2:
-      this.m_TextValue1.setText('finish-text-3');
+    switch(type) {
+      case types.progress:
+      switch(++this.m_CountReference) {
+        default:
+        this.unschedule(this.count);
+console.log(1);
+        if(Game.network) {
+          DataManager.sharedManager().set(true, references.coins.gold, this.m_TotalCoins);
+        } else {
+          DataManager.sharedManager().set(true, references.coins.silver, this.m_TotalCoins);
+        }
+        break;
+        case 1:
+        this.m_TextValue1.setText('finish-text-6');
 
-      this.schedule(this.count, 0.01, null, 1.0);
-      break;
-      case 3:
-      this.m_TextValue1.setText('finish-text-4');
+        this.schedule(this.count, 0.01, null, 1.0);
+        break;
+        case 2:
+        this.m_TextValue1.setText('finish-text-7');
 
-      this.schedule(this.count, 0.01, null, 1.0);
+        this.schedule(this.count, 0.01, null, 1.0);
+        break;
+        case 3:
+        this.m_TextValue1.setText('finish-text-4');
+
+        this.schedule(this.count, 0.01, null, 1.0);
+        break;
+      }
+      break;
+      case types.classic:
+      case types.arcade:
+      switch(++this.m_CountReference) {
+        default:
+        this.unschedule(this.count);
+        break;
+        case 1:
+        this.m_TextValue1.setText('finish-text-2');
+
+        this.schedule(this.count, 0.01, null, 1.0);
+        break;
+        case 2:
+        this.m_TextValue1.setText('finish-text-3');
+
+        this.schedule(this.count, 0.01, null, 1.0);
+        break;
+        case 3:
+        this.m_TextValue1.setText('finish-text-4');
+
+        this.schedule(this.count, 0.01, null, 1.0);
+        break;
+      }
       break;
     }
 
     this.m_TextValue1.ccsf([this.m_CountReferences[this.m_CountReference]]);
   },
   count: function() {
-    var reward = 0;
+    var types = Game.sharedScreen().m_Types;
+    var type = Game.sharedScreen().m_Type;
 
-    switch(this.m_CountReference) {
-      case 0:
-      case 1:
-      case 2:
-      reward = this.m_CountReference + 1; // TODO: Check data coins.
+    switch(type) {
+      case types.progress:
+      switch(this.m_CountReference) {
+        case 0:
+        case 1:
+        case 2:
+        this.m_CountReferences[this.m_CountReference]++;
+        this.m_TempCoins++;
 
-      this.m_CountReferences[this.m_CountReference]++;
-      this.m_TotalCoins += reward;
+        if(this.m_TempCoins > (Game.network ? 100 : 10)) {
+          this.m_TempCoins = 0;
 
-      this.m_TextValue1.ccsf([this.m_CountReferences[this.m_CountReference]]);
-      this.m_TextValue2.ccsf([this.m_TotalCoins]);
+          this.m_TotalCoins++;
+        }
 
-      if(this.m_CountReferences[this.m_CountReference] >= this.m_ResultReferences[this.m_CountReference]) {
-        this.m_TextValue1.runAction(cc.Sequence.create(
-          cc.DelayTime.create(1.0),
-          cc.FadeTo.create(0.2, 0.0),
-          cc.CallFunc.create(this.onCountingResume, this, this)
+        this.m_TextValue1.ccsf([this.m_CountReferences[this.m_CountReference]]);
+        this.m_TextValue2.ccsf([this.m_TotalCoins]);
+
+        if(this.m_CountReferences[this.m_CountReference] >= this.m_ResultReferences[this.m_CountReference]) {
+          this.m_TextValue1.runAction(cc.Sequence.create(
+            cc.DelayTime.create(1.0),
+            cc.FadeTo.create(0.2, 0.0),
+            cc.CallFunc.create(this.onCountingResume, this, this)
+          ));
+
+          this.unschedule(this.count);
+        }
+        break;
+        case 3:
+        this.unschedule(this.count);
+
+        this.m_CountReference++;
+
+        this.runAction(cc.Sequence.create(
+          cc.DelayTime.create(0.5),
+          cc.CallFunc.create(this.count, this, this)
+        ));
+        break;
+        case 4:
+        this.m_CountReference++;
+
+        this.runAction(cc.Sequence.create(
+          cc.DelayTime.create(0.5),
+          cc.CallFunc.create(this.count, this, this)
         ));
 
+        if(DataManager.sharedManager().get(false, references.items.bonus6)) {
+          Bonus6.create();
+        }
+        break;
+        case 5:
+        this.m_CountReference++;
+
+        if(DataManager.sharedManager().get(false, references.items.bonus7)) {
+          Bonus7.create();
+        }
+        break;
+        case 6:
         this.unschedule(this.count);
+        break;
       }
       break;
-      case 3:
-      this.unschedule(this.count);
+      case types.classic:
+      case types.arcade:
+      switch(this.m_CountReference) {
+        case 0:
+        case 1:
+        case 2:
+        reward = this.m_CountReference + 1; // TODO: Check data coins.
 
-      this.m_CountReference++;
+        this.m_CountReferences[this.m_CountReference]++;
+        this.m_TotalCoins += reward;
 
-      this.runAction(cc.Sequence.create(
-        cc.DelayTime.create(0.5),
-        cc.CallFunc.create(this.count, this, this)
-      ));
-      break;
-      case 4:
-      this.m_CountReference++;
+        this.m_TextValue1.ccsf([this.m_CountReferences[this.m_CountReference]]);
+        this.m_TextValue2.ccsf([this.m_TotalCoins]);
 
-      this.runAction(cc.Sequence.create(
-        cc.DelayTime.create(0.5),
-        cc.CallFunc.create(this.count, this, this)
-      ));
+        if(this.m_CountReferences[this.m_CountReference] >= this.m_ResultReferences[this.m_CountReference]) {
+          this.m_TextValue1.runAction(cc.Sequence.create(
+            cc.DelayTime.create(1.0),
+            cc.FadeTo.create(0.2, 0.0),
+            cc.CallFunc.create(this.onCountingResume, this, this)
+          ));
 
-      if(DataManager.sharedManager().get(references.items.bonus6)) {
-        Bonus6.create();
+          this.unschedule(this.count);
+        }
+        break;
+        case 3:
+        this.unschedule(this.count);
+
+        this.m_CountReference++;
+
+        this.runAction(cc.Sequence.create(
+          cc.DelayTime.create(0.5),
+          cc.CallFunc.create(this.count, this, this)
+        ));
+        break;
+        case 4:
+        this.m_CountReference++;
+
+        this.runAction(cc.Sequence.create(
+          cc.DelayTime.create(0.5),
+          cc.CallFunc.create(this.count, this, this)
+        ));
+
+        if(DataManager.sharedManager().get(false, references.items.bonus6)) {
+          Bonus6.create();
+        }
+        break;
+        case 5:
+        this.m_CountReference++;
+
+        if(DataManager.sharedManager().get(false, references.items.bonus7)) {
+          Bonus7.create();
+        }
+        break;
+        case 6:
+        this.unschedule(this.count);
+        break;
       }
-      break;
-      case 5:
-      this.m_CountReference++;
-
-      if(DataManager.sharedManager().get(references.items.bonus7)) {
-        Bonus7.create();
-      }
-      break;
-      case 6:
-      this.unschedule(this.count);
       break;
     }
 
-    DataManager.sharedManager().update(references.coins.silver, reward);
+    //DataManager.sharedManager().update(references.coins.silver, reward);
   }
 });
 

@@ -118,7 +118,7 @@ Menu = Screen.extend({
     if(Promotion.sharedInstance(this).show()) {
     } else if(DataManager.sharedManager().get(false, references.info.game) && !DataManager.sharedManager().get(false, references.info.rate) && LanguagesManager.sharedManager().config.params.vendor != 'ubi-nuri') {
       Rate.sharedScreen(this).show();
-    } else if(DataManager.sharedManager().getAppFriends().length > 0 && Random.sharedRandom().probably(30)) {
+    } else if(FriendsManager.sharedInstance().getAppFriends().length > 0 && Random.sharedRandom().probably(30)) {
       Challenge.sharedScreen(this).show();
     }
 

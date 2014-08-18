@@ -41,7 +41,17 @@ WeaponParticle1 = AnimatedEntity.extend({
   onCreate: function() {
     this._super();
 
-    var id = DataManager.sharedManager().get(references.weapon) - 1;
+    var id;
+
+    switch(Game.instance.m_Type) {
+      case Game.instance.m_Types.progress:
+      id = Game.instance.getWeapon();
+      break;
+      case Game.instance.m_Types.classic:
+      case Game.instance.m_Types.arcade:
+      id = DataManager.sharedManager().get(false, references.info.weapon) - 1;
+      break;
+    }
 
     this.m_AlphaSpeed = 0;
     this.m_ScaleSpeed = Random.sharedRandom().random(0.01, 0.05);

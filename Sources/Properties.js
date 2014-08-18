@@ -52,31 +52,32 @@ var references = {
     personal: {
       id: 4,
       name: 5,
-      surname: 6
+      surname: 6,
+      photo: 7
     },
-    install: 7,
-    game: 8,
-    rate: 9,
-    weapon: 10
+    install: 8,
+    game: 9,
+    rate: 10,
+    weapon: 11
   },
   coins: {
-    gold: 11,
-    silver: 12,
-    keys: 13,
-    lives: 14
+    gold: 12,
+    silver: 13,
+    keys: 14,
+    lives: 15
   },
   lock: {
     modes: {
-      classic: 15,
-      arcade: 16
+      classic: 16,
+      arcade: 17
     }
   },
   achievements: {
-    count: 17
+    count: 18
   },
   time: {
-    reward: 18,
-    days: 19
+    reward: 19,
+    days: 20
   },
   items: {
     weapon1: 101,
@@ -120,6 +121,40 @@ var references = {
     elements: [
       501, 502, 503, 504, 505, 506
     ]
+  },
+  levels: {
+    level1: 1050,
+    level2: 1051,
+    level3: 1052,
+    level4: 1053,
+    level5: 1054,
+    level6: 1055,
+    level7: 1056,
+    level8: 1057,
+    level9: 1058,
+    level10: 1059,
+    level11: 1060,
+    level12: 1061,
+    level13: 1062,
+    level14: 1063,
+    level15: 1064,
+    level16: 1065,
+    level17: 1066,
+    level18: 1067,
+    level19: 1068,
+    level20: 1069,
+    level21: 1070,
+    level22: 1071,
+    level23: 1072,
+    level24: 1073,
+    level25: 1074,
+    level26: 1075,
+    level27: 1076,
+    level28: 1077,
+    level29: 1078,
+    level30: 1079,
+    levels: [1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079],
+    current: 1500
   }
 };
 var unlock = {
@@ -129,6 +164,190 @@ var unlock = {
     },
     {
       price: 40
+    }
+  ],
+  items: [
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
     }
   ]
 };
@@ -141,6 +360,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -150,6 +373,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 200
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -159,6 +386,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 300
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -168,6 +399,10 @@ var properties = {
       price: {
         gold: 25,
         silver: 400
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -177,6 +412,10 @@ var properties = {
       price: {
         gold: 35,
         silver: 500
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -186,6 +425,10 @@ var properties = {
       price: {
         gold: 45,
         silver: 600
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -195,6 +438,10 @@ var properties = {
       price: {
         gold: 100,
         silver: 1500
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -204,6 +451,10 @@ var properties = {
       price: {
         gold: 200,
         silver: 3000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -213,6 +464,10 @@ var properties = {
       price: {
         gold: 300,
         silver: 5000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -222,6 +477,10 @@ var properties = {
       price: {
         gold: 350,
         silver: 8000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -231,6 +490,10 @@ var properties = {
       price: {
         gold: 600,
         silver: 10000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -240,6 +503,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -249,6 +516,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -258,6 +529,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -267,6 +542,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -276,6 +555,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -285,6 +568,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -294,6 +581,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -303,6 +594,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -312,6 +607,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -321,6 +620,10 @@ var properties = {
       price: {
         gold: 50,
         silver: 2000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -330,6 +633,10 @@ var properties = {
       price: {
         gold: 60,
         silver: 2500
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -339,6 +646,10 @@ var properties = {
       price: {
         gold: 70,
         silver: 3000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -348,6 +659,10 @@ var properties = {
       price: {
         gold: 100,
         silver: 5000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -357,6 +672,10 @@ var properties = {
       price: {
         gold: 100,
         silver: 7000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -366,6 +685,10 @@ var properties = {
       price: {
         gold: 120,
         silver: 8000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -375,6 +698,10 @@ var properties = {
       price: {
         gold: 150,
         silver: 9000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -384,6 +711,10 @@ var properties = {
       price: {
         gold: 150,
         silver: 10000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -393,6 +724,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -402,6 +737,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -411,6 +750,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -420,6 +763,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -429,6 +776,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -438,6 +789,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -447,6 +802,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -456,6 +815,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -465,6 +828,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -474,6 +841,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -483,6 +854,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -492,6 +867,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -501,6 +880,10 @@ var properties = {
       price: {
         gold: 100,
         silver: 1000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -510,6 +893,10 @@ var properties = {
       price: {
         gold: 100,
         silver: 2000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -519,6 +906,10 @@ var properties = {
       price: {
         gold: 200,
         silver: 2000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -528,6 +919,10 @@ var properties = {
       price: {
         gold: 150,
         silver: 3000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -537,6 +932,10 @@ var properties = {
       price: {
         gold: 100,
         silver: 2500
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -546,6 +945,10 @@ var properties = {
       price: {
         gold: 50,
         silver: 5000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -555,6 +958,10 @@ var properties = {
       price: {
         gold: 100,
         silver: 5000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -564,6 +971,10 @@ var properties = {
       price: {
         gold: 100,
         silver: 4000
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -573,6 +984,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -582,6 +997,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -591,6 +1010,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -600,6 +1023,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -609,6 +1036,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -618,6 +1049,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -627,6 +1062,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -636,6 +1075,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -645,6 +1088,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -654,6 +1101,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -663,6 +1114,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     },
     {
@@ -672,6 +1127,10 @@ var properties = {
       price: {
         gold: 0,
         silver: 0
+      },
+      share: {
+        message: "",
+        image: ""
       }
     }
   ]

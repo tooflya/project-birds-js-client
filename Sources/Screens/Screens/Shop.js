@@ -44,6 +44,7 @@ Shop = Screen.extend({
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
 
+    Lock.sharedScreen(this).prepare();
     Item.sharedScreen(this).prepare();
     Bought.sharedScreen(this).prepare();
 
@@ -183,10 +184,16 @@ Shop = Screen.extend({
 
         this.m_Items[i][j].setCurrentFrameIndex((20 * i) + j);
 
-        this.m_Items[i][j].setTouchHandler('show', Item, {id: id, reference: counter, category: category});
         this.m_Items[i][j].setZOrder(3);
 
+        var element = this.m_Items[i][j];
+        element.number = counter;
+        element.reference = id;
+        element.category = category;
+
         counter++;
+
+        element.registerTouchable(true);
 
         // Under construction
         switch(i) {
@@ -211,6 +218,87 @@ Shop = Screen.extend({
           }
           break;
         }
+
+        if(DataManager.sharedManager().get(false, id) < 0 && element.getCurrentFrameIndex() != 59) {
+          element.locked = true;
+          element.setColor(cc.c3(130, 130, 130));
+
+          element.decorations = [];
+          for(var h = 0; h < 2; h++) {
+            element.decorations[h] = Entity.create(s_PopupDecoration1, element);
+
+            element.decorations[h].create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2);
+            element.decorations[h].setScale(0.6);
+            element.decorations[h].setOpacity(100.0);
+            element.decorations[h].runAction(
+              cc.RepeatForever.create(
+                cc.RotateTo.create(30.0, h == 0 ? 720 : -720),
+                false
+                )
+              );
+          }
+
+          element.lock = Entity.create(s_Lock, element);
+          element.lock.create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2);
+          element.lock.setScale(1.0);
+          element.lock.setOpacity(255.0);
+
+          element.key = Entity.create(s_UnlockKey, element);
+          element.key.create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2 - Camera.sharedCamera().coord(20));
+          element.key.setOpacity(0.0);
+
+          element.onHover = function() {
+            if(!this.locked) return false;
+
+            this.lock.stopAllActions();
+            this.key.stopAllActions();
+
+            for(var h = 0; h < 2; h++) {
+              this.decorations[h].stopAllActions();
+              this.decorations[h].runAction(cc.FadeTo.create(0.1, 200.0));
+            }
+
+            this.lock.runAction(cc.FadeTo.create(0.1, 0.0));
+            this.key.runAction(cc.FadeTo.create(0.1, 255.0));
+            this.lock.runAction(cc.MoveTo.create(0.1, cc.p(element.getWidth() / 2, element.getHeight() / 2 + Camera.sharedCamera().coord(20))));
+            this.key.runAction(cc.MoveTo.create(0.1, cc.p(element.getWidth() / 2, element.getHeight() / 2)));
+
+            this.key.setRotation(0);
+            this.key.runAction(
+              cc.RepeatForever.create(
+                cc.Sequence.create(
+                  cc.RotateTo.create(0.2, -15),
+                  cc.RotateTo.create(0.2, 15),
+                  false
+                )
+              )
+            );
+          };
+          element.onUnHover = function() {
+            if(!this.locked) return false;
+
+            this.lock.stopAllActions();
+            this.key.stopAllActions();
+
+            for(var h = 0; h < 2; h++) {
+              this.decorations[h].stopAllActions();
+              this.decorations[h].runAction(cc.FadeTo.create(0.1, 100.0));
+            }
+
+            this.lock.runAction(cc.FadeTo.create(0.1, 255.0));
+            this.key.runAction(cc.FadeTo.create(0.1, 0.0));
+            this.lock.runAction(cc.MoveTo.create(0.1, cc.p(element.getWidth() / 2, element.getHeight() / 2)));
+            this.key.runAction(cc.MoveTo.create(0.1, cc.p(element.getWidth() / 2, element.getHeight() / 2 - Camera.sharedCamera().coord(20))));
+          };
+        }
+
+        element.onTouch = function() {
+          if(this.locked) {
+            Lock.sharedScreen().show(this.number, 'item', this);
+          } else {
+            Item.sharedScreen().show({id: this.reference, reference: this.number, category: this.category});
+          }
+        };
       }
     }
 
@@ -224,12 +312,66 @@ Shop = Screen.extend({
 
     this.m_BackButton.setTouchHandler('onBackEvent', Shop);
   },
-  updateWheelsState: function() {
-    for(var i = 0; i < 3; i++) {
-      for(var j = 0; j < 3; j++) {
-        this.m_Wheels[i][j].setRotation(this.m_Backgrounds[i].m_Background.getPosition().x);
+  unlock: function(id, element) {
+    DataManager.sharedManager().set(true, element.reference, 0, {
+      success: function() {
+        element.locked = false;
+
+        element.lock.stopAllActions();
+        element.key.stopAllActions();
+        element.decorations[0].stopAllActions();
+        element.decorations[1].stopAllActions();
+
+        element.lock.runAction(
+          cc.Sequence.create(
+            cc.FadeOut.create(0.2),
+            cc.CallFunc.create(element.lock.removeFromParent, element.lock),
+            false
+          )
+        );
+        element.key.runAction(
+          cc.Sequence.create(
+            cc.FadeOut.create(0.2),
+            cc.CallFunc.create(element.key.removeFromParent, element.key),
+            false
+          )
+        );
+        element.decorations[0].runAction(
+          cc.Sequence.create(
+            cc.FadeOut.create(0.2),
+            cc.CallFunc.create(element.decorations[0].removeFromParent, element.decorations[0]),
+            false
+          )
+        );
+        element.decorations[1].runAction(
+          cc.Sequence.create(
+            cc.FadeOut.create(0.2),
+            cc.CallFunc.create(element.decorations[1].removeFromParent, element.decorations[1]),
+            false
+          )
+        );
+        element.runAction(cc.TintTo.create(0.2, 255, 255, 255));
+
+        var line = Entity.create(s_ModeUnlockLine, element.getParent());
+
+        line.create().setCenterPosition(element.getCenterX(),element.getCenterY());
+        line.setOpacity(0);
+        line.setScaleY(5);
+        line.setZOrder(500);
+        line.setScaleX((Camera.sharedCamera().width / line.getWidth()) * 2);
+        line.runRecognizeAction(cc.CallFunc.create(line.removeFromParent, line), [{
+          name: 'fade',
+          time: 0.2,
+          value: 255.0
+        }, {
+          name: 'fade',
+          time: 0.5,
+          value: 0.0
+        }]);
+
+        Sound.sharedSound().play(s_SoundSlash);
       }
-    }
+    });
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().back();
@@ -249,6 +391,13 @@ Shop = Screen.extend({
     MenuPanel.sharedScreen(this).hide();
 
     this._super();
+  },
+  updateWheelsState: function() {
+    for(var i = 0; i < 3; i++) {
+      for(var j = 0; j < 3; j++) {
+        this.m_Wheels[i][j].setRotation(this.m_Backgrounds[i].m_Background.getPosition().x);
+      }
+    }
   },
   update: function(time) {
     this._super(time);

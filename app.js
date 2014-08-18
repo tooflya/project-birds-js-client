@@ -96,6 +96,7 @@
     'Sources/Entities/ElementIcon.js',
     'Sources/Entities/ElementPart.js',
     'Sources/Entities/Target.js',
+    'Sources/Entities/SplashText.js',
     'Sources/Screens/Screens/Preloader.js',
     'Sources/Screens/Screens/Menu.js',
     'Sources/Screens/Screens/Settings.js',
@@ -129,15 +130,18 @@
     'Sources/Screens/Popups/Challenge.js',
     'Sources/Screens/Popups/Purchase.js',
     'Sources/Screens/Popups/Multiplayer.js',
+    'Sources/Screens/Popups/Level.js',
     'Sources/Managers/PopupShaderManager.js',
     'Sources/Managers/ElementsManager.js',
     'Sources/Managers/MatrixManager.js',
     'Sources/Managers/ActionsManager.js',
     'Sources/Panels/MenuPanel.js',
     'Sources/Panels/GamePanel.js',
+    'Sources/Panels/FriendsPanel.js',
     'Sources/Lists/AboutList.js',
     'Sources/Lists/ItemList.js',
     'Sources/Lists/HelpList.js',
+    'Sources/Lists/LevelList.js',
     'Sources/Lists/AchievementsList.js',
     'Sources/Lists/LeaderboardList.js',
     'Sources/Lists/ChallengeList.js',
@@ -149,6 +153,7 @@
     'Sources/Game/Levels.js',
     'Sources/Game/Pause.js',
     'Sources/Game/Touch.js',
+    'Sources/Game/Score.js',
     'Sources/Game/Animations.js',
     'Sources/Game/Tutorial.js',
     'Sources/Layers/ConfettiBackground.js',
@@ -270,15 +275,48 @@
         references.tutorial.element3,
         references.tutorial.element4,
         references.tutorial.element5,
-        references.tutorial.element6
+        references.tutorial.element6,
+
+        references.levels.level1,
+        references.levels.level2,
+        references.levels.level3,
+        references.levels.level4,
+        references.levels.level5,
+        references.levels.level6,
+        references.levels.level7,
+        references.levels.level8,
+        references.levels.level9,
+        references.levels.level10,
+        references.levels.level11,
+        references.levels.level12,
+        references.levels.level13,
+        references.levels.level14,
+        references.levels.level15,
+        references.levels.level16,
+        references.levels.level17,
+        references.levels.level18,
+        references.levels.level19,
+        references.levels.level20,
+        references.levels.level21,
+        references.levels.level22,
+        references.levels.level23,
+        references.levels.level24,
+        references.levels.level25,
+        references.levels.level26,
+        references.levels.level27,
+        references.levels.level28,
+        references.levels.level29,
+        references.levels.level30,
+        references.levels.current
       ],
       [
-        1, 1, document['ccConfig'].params.language, 1, 0, 0, 0, 0, 0, 5,
+        1, 1, -1, 1, 0, 0, 0, 0, 0, 5,
         0, 0, 0, 0, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        1, 0, 0, 0, 0, 0, 0
+        1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1,
+        1, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       ], {
         success: function() {
           callback();
@@ -288,11 +326,13 @@
   });
 })();
 
-window.onmousemove = function (e) {
-  var x = e.clientX;
-  var y = e.clientY;
-  var center = ((screen.width / 2) - 700);
+window.onmousemove = function(e) {
+  if(!App.launched()) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var center = ((screen.width / 2) - 700);
 
-  document.body.style.backgroundPosition = -(center + x / 100) + "px bottom, " + (center + x / 100) + "px bottom, " + (center + x / 100) + "px " + (70 - (y / 100)) + "px";
-  document.getElementsByTagName("html")[0].style.backgroundPosition = "center " + (70 - (y / 100)) + "px";
+    document.body.style.backgroundPosition = -(center + x / 100) + "px bottom, " + (center + x / 100) + "px bottom, " + (center + x / 100) + "px " + (70 - (y / 100)) + "px";
+    document.getElementsByTagName("html")[0].style.backgroundPosition = "center " + (70 - (y / 100)) + "px";
+  }
 };

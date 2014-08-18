@@ -30,6 +30,8 @@
  */
 
 Game.prototype.pause = function() {
+  if(!this.m_GameRunning) return false;
+
   this.m_GamePause = !this.m_GamePause;
 
   var pause = this.m_GamePause;

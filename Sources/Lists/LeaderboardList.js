@@ -34,28 +34,34 @@ LeaderboardList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
 
-    this.m_Loading = Entity.create(s_Loading, this);
+    this.m_Loading = [];
 
-    this.m_Loading.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+    this.m_Loading[0] = Entity.create(s_Loading, this);
+    this.m_Loading[1] = Entity.create(s_Loading, this);
 
     this.m_Text = [];
 
     this.m_Text[1] = Text.create('leaderboard-popup-1', this);
-    this.m_Text[2] = Text.create('leaderboard-popup-2', this, cc.TEXT_ALIGNMENT_LEFT);
-    this.m_Text[3] = Text.create('leaderboard-popup-3', this, cc.TEXT_ALIGNMENT_LEFT);
+    this.m_Text[2] = Text.create('level-popup-2', this);
+    this.m_Text[3] = Text.create('level-popup-3', this);
 
     this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
-    this.m_Text[2].setCenterPosition(this.getCenterX() + Camera.sharedCamera().coord(10), this.getCenterY() + Camera.sharedCamera().coord(120));
-    this.m_Text[3].setCenterPosition(this.getCenterX() + Camera.sharedCamera().coord(10), this.getCenterY() + Camera.sharedCamera().coord(70));
+    this.m_Text[2].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(220));
+    this.m_Text[3].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(0));
 
     this.m_Text[1].setColor(cc.c3(204.0, 102.0, 51.0));
-    this.m_Text[2].setColor(cc.c3(204.0, 102.0, 51.0));
-    this.m_Text[3].setColor(cc.c3(204.0, 102.0, 51.0));
+    this.m_Text[2].setColor(cc.c3(255.0, 130.0, 0.0));
+    this.m_Text[3].setColor(cc.c3(255.0, 130.0, 0.0));
 
-    this.m_Text[2].setVisible(false);
-    this.m_Text[3].setVisible(false);
+    this.m_Loading[0].create().setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(100));
+    this.m_Loading[1].create().setCenterPosition(this.getCenterX(), this.getCenterY() - Camera.sharedCamera().coord(120));
 
-    this.m_Loading.runAction(
+    this.m_Loading[0].runAction(
+      cc.RepeatForever.create(
+        cc.RotateTo.create(1.0, 720)
+        )
+      );
+    this.m_Loading[1].runAction(
       cc.RepeatForever.create(
         cc.RotateTo.create(1.0, 720)
         )
@@ -66,82 +72,108 @@ LeaderboardList = PatternList.extend({
 
     var self = this;
 
-    DataManager.sharedManager().emit('leaderboard', false, function(data) {
-      self.m_Loading.destroy();
+    new PausableTimeout(function() {
+      Tooflya.api.call('users.leaders', {
+        limit: 100,
+        type: 1
+      }, {
+        success: function(data) {
+          self.m_Loading[0].destroy();
+          self.m_Loading[1].destroy();
 
-      VK.api("getProfiles", {
-        fields: [
-        "first_name",
-        "last_name",
-        "photo_medium"
-        ],
-        uids: data.player.id,
-        test_mode: 1
-      }, function(user) {
-        InternetEntity.create(user.response[0].photo_medium, self, function(entity) {
-          entity.create().setCenterPosition(Camera.sharedCamera().coord(100), self.getCenterY() + Camera.sharedCamera().coord(200));
+          var y = self.getCenterY() + Camera.sharedCamera().coord(120);
+          var index = 0;
 
-          var name = Text.create('leaderboard-name', self, cc.TEXT_ALIGNMENT_LEFT);
-          var score = Text.create('leaderboard-score', self);
+          data.users.forEach(function(user) {
+            if(FriendsManager.sharedInstance().isFriend(user)) {
+              var s = y;
+              InternetEntity.create(user.photo, self, function(entity) {
+                entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
 
-          name.ccsf([user.response[0].first_name + " " + user.response[0].last_name]);
-          score.ccsf([data.player.score]);
+                var icon = Entity.create(s_LevelIcon, entity);
+                var level = Text.create('zero', icon);
 
-          name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), self.getCenterY() + Camera.sharedCamera().coord(260) - name.getHeight() / 2);
-          score.setCenterPosition(score.getWidth() / 2 + Camera.sharedCamera().coord(160), self.getCenterY() + Camera.sharedCamera().coord(200));
+                level.setColor(cc.BLACK);
+                level.disableShadow();
+                level.setFontSize(Camera.sharedCamera().coord(24));
+                level.ccsf([user.level]);
+                level.create().setCenterPosition(icon.getWidth() / 2, icon.getHeight() / 2);
 
-          name.setColor(cc.c3(255.0, 130.0, 0.0));
-          score.setColor(cc.c3(204.0, 102.0, 51.0));
-        });
+                icon.create().setCenterPosition(Camera.sharedCamera().coord(10), Camera.sharedCamera().coord(10));
 
-        self.m_Text[2].ccsf([data.player.place]);
-        self.m_Text[3].ccsf([data.users]);
+                var name = Text.create('leaderboard-name', self, cc.TEXT_ALIGNMENT_LEFT);
+                var score = Text.create('leaderboard-score', self);
 
-        self.m_Text[2].setVisible(true);
-        self.m_Text[3].setVisible(true);
-      });
+                name.ccsf([user.name + " " + user.surname]);
+                score.ccsf([user.rating]);
 
-      VK.api("getProfiles", {
-        fields: [
-        "first_name",
-        "last_name",
-        "photo_medium"
-        ],
-        uids: data.players.id,
-        test_mode: 1
-      }, function(user) {
-        var y = self.getCenterY() - Camera.sharedCamera().coord(50);
-        var index = 0;
+                name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), s + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
+                score.setCenterPosition(score.getWidth() / 2 + Camera.sharedCamera().coord(160), s - Camera.sharedCamera().coord(0));
 
-        user.response.forEach(function(entry) {
-          if(entry.first_name == "DELETED") {
-            // Dead user.
-          } else {
-            InternetEntity.create(entry.photo_medium, self, function(entity) {
-              entity.create().setCenterPosition(Camera.sharedCamera().coord(100), y);
-
-              var name = Text.create('leaderboard-name', self, cc.TEXT_ALIGNMENT_LEFT);
-              var score = Text.create('leaderboard-score', self);
-
-              name.ccsf([entry.first_name + " " + entry.last_name]);
-              score.ccsf([data.players.score[index]]);
-
-              name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), y + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
-              score.setCenterPosition(score.getWidth() / 2 + Camera.sharedCamera().coord(160), y - Camera.sharedCamera().coord(0));
-
-              name.setColor(cc.c3(255.0, 130.0, 0.0));
-              score.setColor(cc.c3(204.0, 102.0, 51.0));
+                name.setColor(cc.c3(255.0, 130.0, 0.0));
+                score.setColor(cc.c3(204.0, 102.0, 51.0));
+              });
 
               y -= Camera.sharedCamera().coord(120);
 
               index++;
+            }
+          });
 
-              self.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));
-            });
+          if(index < 1) {
+            self.m_Text[2].setVisible(false);
           }
-        });
+
+          self.m_Text[3].setCenterPosition(self.getCenterX(), y + Camera.sharedCamera().coord(20));
+
+          y -= Camera.sharedCamera().coord(80);
+
+          index = 0;
+
+          data.users.forEach(function(user) {
+            if(!FriendsManager.sharedInstance().isFriend(user)) {
+              var s = y;
+              InternetEntity.create(user.photo, self, function(entity) {
+                entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
+
+                var icon = Entity.create(s_LevelIcon, entity);
+                var level = Text.create('zero', icon);
+
+                level.setColor(cc.BLACK);
+                level.disableShadow();
+                level.setFontSize(Camera.sharedCamera().coord(24));
+                level.ccsf([user.level]);
+                level.create().setCenterPosition(icon.getWidth() / 2, icon.getHeight() / 2);
+
+                icon.create().setCenterPosition(Camera.sharedCamera().coord(10), Camera.sharedCamera().coord(10));
+
+                var name = Text.create('leaderboard-name', self, cc.TEXT_ALIGNMENT_LEFT);
+                var score = Text.create('leaderboard-score', self);
+
+                name.ccsf([user.name + " " + user.surname]);
+                score.ccsf([user.rating]);
+
+                name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), s + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
+                score.setCenterPosition(score.getWidth() / 2 + Camera.sharedCamera().coord(160), s - Camera.sharedCamera().coord(0));
+
+                name.setColor(cc.c3(255.0, 130.0, 0.0));
+                score.setColor(cc.c3(204.0, 102.0, 51.0));
+
+                self.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));
+              });
+
+              y -= Camera.sharedCamera().coord(120);
+
+              index++;
+            }
+          });
+
+          if(index < 1) {
+            self.m_Text[3].setVisible(false);
+          }
+        }
       });
-    });
+    }, 1000);
   }
 });
 

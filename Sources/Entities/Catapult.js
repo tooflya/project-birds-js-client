@@ -32,6 +32,9 @@
 Catapult = AnimatedEntity.extend({
   m_Birds: false,
   m_Health: 0,
+  m_HealthBasic: 0,
+  m_Speed: 0,
+  m_SpeedFactor: 0,
   m_Defence: 0,
   m_State: 0,
   m_States: {
@@ -52,11 +55,6 @@ Catapult = AnimatedEntity.extend({
     this.m_PlayerHealthText = Text.create('player-health', parent);
     this.m_PlayerDefenceText = Text.create('player-defence', parent);
 
-    this.m_PlayerHealth.create().setCenterPosition(0, 0);
-    this.m_PlayerHealthBar.create().setCenterPosition(this.m_PlayerHealth.getWidth() / 2, this.m_PlayerHealth.getHeight() / 2);
-
-    this.m_Speed = Camera.sharedCamera().coord(50);
-
     this.m_PlayerHealth.setZOrder(304);
     this.m_PlayerHealthText.setZOrder(304);
     this.m_PlayerDefenceText.setZOrder(304);
@@ -64,17 +62,51 @@ Catapult = AnimatedEntity.extend({
   onCreate: function() {
     this._super();
 
-    this.m_Health = 100;
-    this.m_Defence = 0;
+    this.m_PlayerHealth.create().setCenterPosition(0, 0);
+    this.m_PlayerHealthBar.create().setCenterPosition(this.m_PlayerHealth.getWidth() / 2, this.m_PlayerHealth.getHeight() / 2);
+
+    this.m_PlayerHealthText.create();
+    this.m_PlayerDefenceText.create();
+
+    if(Game.network) {
+      this.m_Health = this.m_HealthBasic = 100;
+      this.m_Defence = 0;
+
+      this.m_SpeedFactor = 1;
+    } else {
+      this.m_Health = this.m_HealthBasic = this._id > 0 ? (Game.tutorial ? Game.instance.m_TutorialMatrix.opponent.health : Game.instance.m_LevelsMatrixes[Game.level - 1].opponent.health) : 100;
+      this.m_Defence = 0;
+
+      this.m_SpeedFactor = this._id > 0 ? (Game.tutorial ? Game.instance.m_TutorialMatrix.opponent.speed : Game.instance.m_LevelsMatrixes[Game.level - 1].opponent.speed) : 1;
+    }
+
+    this.m_Speed = Camera.sharedCamera().coord(50);
 
     this.changeState(this.m_States.run, {
-      distance: this.getWidth() * 2
+      distance: this.getWidth() * 2,
+      speedFactor: 1
     });
+
+    if(Game.network) {
+      var self = this;
+
+      if(this._user) {
+        var background = BackgroundColor.create(cc.c4(0, 0, 0, 150), Game.instance, Camera.sharedCamera().coord(300), Camera.sharedCamera().coord(100));
+
+        InternetEntity.create(this._user.photo, background, function(entity) {
+          var photo = entity.create();
+
+          background.setCenterPosition(this._id == 0 ? Camera.sharedCamera().coord(200) : Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(200));
+          photo.setCenterPosition(photo.getWidth() / 2 + Camera.sharedCamera().coord(10), photo.getHeight() / 2);
+        });
+      }
+    }
   },
   onDestroy: function() {
     this._super();
 
     this.m_PlayerHealth.destroy();
+    this.m_PlayerHealthBar.destroy();
     this.m_PlayerHealthText.destroy();
     this.m_PlayerDefenceText.destroy();
 
@@ -82,7 +114,7 @@ Catapult = AnimatedEntity.extend({
     explosion.setCenterPosition(this.getCenterX(), this.getCenterY());
     explosion.setZOrder(800);
 
-    var parts = [
+    this.parts = [
       PhysicsEntity.create(s_CatapultPart1, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0),
       PhysicsEntity.create(s_CatapultPart2, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0),
       PhysicsEntity.create(s_CatapultPart3, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0),
@@ -91,23 +123,31 @@ Catapult = AnimatedEntity.extend({
       PhysicsEntity.create(s_CatapultPart3, 1, 1, Game.instance, Game.instance.getPhysicsWorld(), 0.1, 0.1, 0.1, 4.0)
     ];
 
-    for(var i = 0; i < parts.length; i++) {
+    for(var i = 0; i < this.parts.length; i++) {
       var x = Random.sharedRandom().random(-500, 500);
       var y = Random.sharedRandom().random(500, 2000);
       var r = Random.sharedRandom().random(0, 720);
 
-      parts[i].create().setCenterPosition(this.getCenterX(), this.getCenterY());
-      parts[i].setLinearVelocity(x, y);
-      parts[i].setRotation(r);
-      parts[i].setZOrder(800);
+      this.parts[i].create().setCenterPosition(this.getCenterX(), this.getCenterY());
+      this.parts[i].setLinearVelocity(x, y);
+      this.parts[i].setRotation(r);
+      this.parts[i].setZOrder(450);
     }
+
+    Game.instance.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(2.0),
+        cc.CallFunc.create(Game.instance.finishGame, Game.instance, this._id == 1),
+        false
+      )
+    );
   },
   onStop: function() {
   },
   onRun: function() {
     this.m_Defence = 0;
 
-    this.m_LastMoveDistance = this.m_StateData.distance;
+    this.m_LastMoveDistance = this.m_StateData.distance * (this.m_StateData.speedFactor || this.m_SpeedFactor);
   },
   onFire: function(data) {
     this.animate(0.1, 1, {start: 0, end: 5});
@@ -226,6 +266,16 @@ Catapult = AnimatedEntity.extend({
       this.m_Birds.last().setZOrder(this.getZOrder());
     }
   },
+  destroyElements: function() {
+    if(this.parts) {
+      for(var i = 0; i < this.parts.length; i++) {
+        this.parts[i].removeFromParent();
+      }
+      this.parts = false;
+    }
+
+    this.m_Birds.removeFromParent();
+  },
   runGameAction: function(id, data) {
     var self = this;
 
@@ -329,6 +379,12 @@ Catapult = AnimatedEntity.extend({
       break;
     }
   },
+  setHealth: function(value) {
+    this.m_Health = this.m_HealthBasic = value;
+  },
+  setSpeed: function(value) {
+    this.m_SpeedFactor = value;
+  },
   updateState: function(time) {
     switch(this.m_State) {
       case this.m_States.stop:
@@ -340,7 +396,7 @@ Catapult = AnimatedEntity.extend({
         if(this.m_StateData.distance > 0) {
           this.setCenterPosition(this.getCenterX() + (this.m_Speed * time) * (this.isFlippedHorizontally() ? -1 : 1), this.getCenterY());
 
-          this.m_StateData.distance -= this.m_Speed * time;
+          this.m_StateData.distance -= (this.m_Speed / (this.m_StateData.speedFactor || this.m_SpeedFactor)) * time;
         } else {
           this.onAnimationFinish();
 
@@ -373,7 +429,7 @@ Catapult = AnimatedEntity.extend({
       }
       break;
       case this.m_States.regeneration:
-      if(this.m_StateData.regeneration <= 0.0 || this.m_Health >= 100.0) {
+      if(this.m_StateData.regeneration <= 0.0 || this.m_Health >= this.m_HealthBasic) {
         this.onAnimationFinish();
       } else {
         this.m_Health += 1;
@@ -382,8 +438,10 @@ Catapult = AnimatedEntity.extend({
       break;
     }
 
+    var percent = Math.floor(this.m_Health * 100.0 / this.m_HealthBasic);
+
     this.m_PlayerHealth.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(50));
-    this.m_PlayerHealthBar.showPercentage(this.m_Health);
+    this.m_PlayerHealthBar.showPercentage(percent);
     this.m_PlayerHealthBar.setCenterPosition(this.m_PlayerHealth.getWidth() / 2 + this.m_PlayerHealthBar.getTextureRect().getWidth() / 2 - this.m_PlayerHealthBar.getWidth() / 2, this.m_PlayerHealth.getHeight() / 2);
 
     this.m_PlayerHealthText.ccsf([this.m_Health]);
@@ -392,9 +450,9 @@ Catapult = AnimatedEntity.extend({
     this.m_PlayerDefenceText.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(110));
 
     var color;
-    if(this.m_Health < 25) {
+    if(percent < 25) {
       color = cc.c3(255, 0, 0);
-    } else if(this.m_Health < 75) {
+    } else if(percent < 75) {
       color = cc.c3(255, 255, 0);
     } else {
       color = cc.c3(0, 255, 0);

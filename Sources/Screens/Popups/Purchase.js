@@ -75,24 +75,51 @@ Purchase = ExtendedPopup.extend({
         var params = this.m_PurchaseParameters;
         var self = this;
 
-        switch(this.config.params.platform) {
-          default:
-          self.hide(self.m_PurchaseCallback(params.id));
-          break;
-          case 'vk':
-          VK.callMethod('showOrderBox', {
-            type: 'item',
-            item: params.id
-          });
-          VK.addCallback('onOrderCancel', function() {
-            self.hide(self.m_PurchaseCallback(purchase.cancel));
-          });
-          VK.addCallback('onOrderSuccess', function() {
-            self.hide(self.m_PurchaseCallback(params.id));
+        if(this.config.params.playtest) {
+          Tooflya.api.call('payments.show', {
+            item: params.id,
+            promo: 1
+          }, {
+            cancel: function() {
+              self.hide(self.m_PurchaseCallback(purchase.cancel));
+            },
+            success: function() {
+              self.hide(self.m_PurchaseCallback(params.id));
 
-            PurchasesBackground.sharedScreen(ScreenManager.sharedManager().getCurrentScreen()).show(params.id);
+              PurchasesBackground.sharedScreen(ScreenManager.sharedManager().getCurrentScreen()).show(params.id);
+            }
           });
-          break;
+        } else {
+          switch(this.config.params.platform) {
+            default:
+            Tooflya.api.call('payments.show', {
+              item: params.id
+            }, {
+              cancel: function() {
+                self.hide(self.m_PurchaseCallback(purchase.cancel));
+              },
+              success: function() {
+                self.hide(self.m_PurchaseCallback(params.id));
+
+                PurchasesBackground.sharedScreen(ScreenManager.sharedManager().getCurrentScreen()).show(params.id);
+              }
+            });
+            break;
+            case 'vk':
+            VK.callMethod('showOrderBox', {
+              type: 'item',
+              item: params.id
+            });
+            VK.addCallback('onOrderCancel', function() {
+              self.hide(self.m_PurchaseCallback(purchase.cancel));
+            });
+            VK.addCallback('onOrderSuccess', function() {
+              self.hide(self.m_PurchaseCallback(params.id));
+
+              PurchasesBackground.sharedScreen(ScreenManager.sharedManager().getCurrentScreen()).show(params.id);
+            });
+            break;
+          }
         }
       }
     }
