@@ -1156,7 +1156,7 @@ MatrixManager = cc.Node.extend({
         for(var j = 0; j < this.getSize().y; j++) {
           var current = this.get(i, j);
 
-          if(current) {
+          if(current instanceof Element) {
             if(current.special() == Element.types.box) {
               elements.push(current);
             }
