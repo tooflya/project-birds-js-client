@@ -228,11 +228,8 @@ MatrixManager = cc.Node.extend({
   },
   replace: function(element, neighbor, back, network, force) {
     if(this.soe(element)) return false;
-    if(element.special() && !force) return false;
 
     if(neighbor instanceof Element) {
-      if(neighbor.special() && !force) return false;
-
       Sound.sharedSound().play(s_SoundExchange);
 
       if(!back) {
