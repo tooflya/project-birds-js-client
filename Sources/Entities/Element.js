@@ -53,6 +53,7 @@ Element = TiledEntity.extend({
 
     this.m_Bonus = false;
     this.m_Chained = false;
+    this.m_Special = false;
 
     this.setRotation(0);
   },
@@ -84,16 +85,40 @@ Element = TiledEntity.extend({
       for(var i = 0; i < 2; i++) {
         ElementsManager.sharedManager().m_ElementsParts.create({
           element: this,
-          index: i
+          index: i,
+          force: 5
         });
       }
 
       Game.instance.updateScore(1);
 
       Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
+    } else if(this.special()) {
+      switch(this.special()) {
+        case Element.types.box:
+        this.m_Removed = true;
+
+        MatrixManager.sharedManager().remove(this);
+
+        this.destroy();
+
+        for(var i = 0; i < 2; i++) {
+          ElementsManager.sharedManager().m_ElementsParts.create({
+            element: this,
+            index: i,
+            force: 6
+          });
+        }
+
+        Game.instance.updateScore(1);
+
+        Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
+        break;
+      }
     } else {
       this.m_Removed = true;
 
+      MatrixManager.sharedManager().removeBoxes(this.getIndex().x, this.getIndex().y, this);
       MatrixManager.sharedManager().remove(this);
 
       switch(this.getId()) {
@@ -106,8 +131,7 @@ Element = TiledEntity.extend({
         for(var i = 0; i < 2; i++) {
           ElementsManager.sharedManager().m_ElementsParts.create({
             element: this,
-            index: i,
-            force: 5
+            index: i
           });
         }
 
@@ -237,6 +261,15 @@ Element = TiledEntity.extend({
       this.setCurrentFrameIndex(29);
       break;
     }
+
+    switch(this.m_Special) {
+      case Element.types.box:
+      this.setCurrentFrameIndex(22);
+      break;
+      case Element.types.change:
+      this.setCurrentFrameIndex(23);
+      break;
+    }
   },
   onUnHover: function() {
     if(this.getId() == Element.types.block) return false;
@@ -260,7 +293,7 @@ Element = TiledEntity.extend({
     }
 
     switch(this.m_Special) {
-      case Element.types.candy:
+      case Element.types.box:
       this.setCurrentFrameIndex(22);
       break;
       case Element.types.change:
@@ -268,11 +301,12 @@ Element = TiledEntity.extend({
       break;
     }
   },
-  onTouch: function() {this.remove();return false;
+  onTouch: function() {
     if(!this.isRegisterTouchable()) return false;
     if(!MatrixManager.sharedManager().active()) return false;
-
     if(MatrixManager.sharedManager().s(this)) return false;
+
+    if(this.special()) return false;
 
     if(!this.m_GlowAnimationRunning) {
       this.onUnHover();
@@ -389,13 +423,16 @@ Element = TiledEntity.extend({
     this.m_Special = type;
 
     switch(this.m_Special) {
-      case Element.types.candy:
+      case Element.types.box:
       break;
       case Element.types.change:
       break;
     }
 
     this.onUnHover();
+  },
+  special: function() {
+    return this.m_Special;
   },
   chain: function() {
     this.m_Chained = true;
@@ -705,7 +742,7 @@ var etypes = {
   block: -2,
   star: -3,
   chain: -4,
-  candy: -5,
+  box: -5,
   change: -6
 };
 
@@ -725,7 +762,7 @@ Element.types = {
   pack: 5,
   star: 6,
   block: 7,
-  candy: 8,
+  box: 8,
   change: 9
 };
 Element.bonus = {

@@ -39,6 +39,7 @@ MatrixManager = cc.Node.extend({
   m_CurrentElement1: false,
   m_CurrentElement2: false,
   m_Combinations: false,
+  m_ClearBox: true,
   m_ExtaMove: false,
   ctor: function() {
     this._super();
@@ -118,6 +119,8 @@ MatrixManager = cc.Node.extend({
       if(!soft) {
         if(element.chained()) return true;
       }
+
+      if(element.special() == Element.types.box) return true;
     } else {
       if(element == etypes.block) return true;
     }
@@ -223,10 +226,13 @@ MatrixManager = cc.Node.extend({
 
     return false;
   },
-  replace: function(element, neighbor, back, network) {
+  replace: function(element, neighbor, back, network, force) {
     if(this.soe(element)) return false;
+    if(element.special() && !force) return false;
 
     if(neighbor instanceof Element) {
+      if(neighbor.special() && !force) return false;
+
       Sound.sharedSound().play(s_SoundExchange);
 
       if(!back) {
@@ -255,7 +261,7 @@ MatrixManager = cc.Node.extend({
           cc.ScaleTo.create(0.1, 1.2),
           cc.ScaleTo.create(0.1, 1.0),
           cc.DelayTime.create(0.05),
-          back ? (network ? false : cc.CallFunc.create(this.enable, this, this)) : cc.CallFunc.create(this.find, this, network),
+          back ? (network ? false : cc.CallFunc.create(this.enable, this, this)) : (force ? false : cc.CallFunc.create(this.find, this, network)),
           false
         )
       );
@@ -280,7 +286,7 @@ MatrixManager = cc.Node.extend({
       this.set(this.m_CurrentElement1, x2, y2);
       this.set(this.m_CurrentElement2, x1, y1);
 
-      if(back) {
+      if(back || force) {
         this.m_CurrentElement1 = false;
         this.m_CurrentElement2 = false;
       }
@@ -494,6 +500,7 @@ MatrixManager = cc.Node.extend({
   hasMatches: function(element, data) {
     if(!element || this.soe(element, true)) return false;
     if(element.getId() === Element.types.star) return false;
+    if(element.special()) return false;
 
     if(!data) {
       MatrixManager.pools.push(MatrixManager.pool());
@@ -1111,6 +1118,24 @@ MatrixManager = cc.Node.extend({
       }
     }
   },
+  removeBoxes: function(x, y, element) {
+    var elements = [];
+
+    elements.push(this.get(x - 1, y));
+    elements.push(this.get(x, y + 1));
+    elements.push(this.get(x + 1, y));
+    elements.push(this.get(x, y - 1));
+
+    elements.forEach(function(current) {
+      if(current) {
+        if(current.special() == Element.types.box) {
+          current.remove();
+
+          this.m_ClearBox = true;
+        }
+      }
+    }.bind(this));
+  },
   hasBonus: function(type) {
     for(var i = 0; i < this.getSize().x; i++) {
       for(var j = 0; j < this.getSize().y; j++) {
@@ -1125,6 +1150,104 @@ MatrixManager = cc.Node.extend({
     }
 
     return false;
+  },
+  addBoxes: function() {
+    if(!this.m_ClearBox) {
+      var elements = [];
+
+      for(var i = 0; i < this.getSize().x; i++) {
+        for(var j = 0; j < this.getSize().y; j++) {
+          var current = this.get(i, j);
+
+          if(current) {
+            if(current.special() == Element.types.box) {
+              elements.push(current);
+            }
+          }
+        }
+      }
+
+      var build = false;
+
+      elements.shuffle();
+
+      elements.forEach(function(element) {
+        var x = element.getIndex().x;
+        var y = element.getIndex().y;
+
+        var els = [];
+
+        if(x > 0) els.push(this.get(x - 1, y));
+        if(y < this.getSize().y) els.push(this.get(x, y + 1));
+        if(x < this.getSize().x) els.push(this.get(x + 1, y));
+        if(y > 0) els.push(this.get(x, y - 1));
+
+        els.forEach(function(el) {
+          if(!build) {
+            if(el) {
+              if(!el.special() && !el.chained() && el.getId() != Element.types.star) {
+                if(true) {
+                  el.setSpecial(Element.types.box);
+                  el.setScale(0);
+                  el.runAction(cc.ScaleTo.create(0.5, 1.0));
+
+                  Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
+
+                  build = true;
+                }
+              }
+            }
+          }
+        }.bind(this));
+      }.bind(this));
+    }
+
+    this.m_ClearBox = false;
+  },
+  addChange: function() {
+    var elements = [];
+
+    for(var i = 0; i < this.getSize().x; i++) {
+      for(var j = 0; j < this.getSize().y; j++) {
+        var current = this.get(i, j);
+
+        if(current) {
+          if(current.special() == Element.types.change) {
+            elements.push(current);
+          }
+        }
+      }
+    }
+
+    elements.forEach(function(element) {
+      var x = element.getIndex().x;
+      var y = element.getIndex().y;
+
+      var els = [];
+
+      if((x - 1) >= 0) els.push(this.get(x - 1, y));
+      if((y + 1) < this.getSize().y) els.push(this.get(x, y + 1));
+      if((x + 1) < this.getSize().x) els.push(this.get(x + 1, y));
+      if((y - 1) >= 0) els.push(this.get(x, y - 1));
+
+      els.shuffle();
+
+      var build = false;
+
+      els.forEach(function(el) {
+        if(!build) {
+          if(el) {
+            if(!this.s(el) && el.getId() != Element.types.star) {
+              if(!this.hasMatchesWith(el, element) && !this.hasMatchesWith(element, el)) {
+                this.replace(element, el, false, false, true);
+
+                build = true;
+              }
+            }
+          }
+        }
+      }.bind(this));
+    }.bind(this));
   }
 });
 

@@ -100,6 +100,9 @@ Game.prototype.onTurnChangeFinish = function() {
   if(Game.tutorial) {
     this.onTurnChangeFinishTutorial();
   }
+
+  MatrixManager.sharedManager().addBoxes();
+  MatrixManager.sharedManager().addChange();
 };
 
 Game.prototype.onExtraMove = function() {

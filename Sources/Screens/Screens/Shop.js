@@ -293,7 +293,7 @@ Shop = Screen.extend({
         }
 
         element.onTouch = function(e) {
-          this._super(e);
+          Button.prototype.onTouch.call(this, e);
 
           if(this.locked) {
             Lock.sharedScreen().show(this.number, 'item', this);

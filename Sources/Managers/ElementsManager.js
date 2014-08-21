@@ -164,16 +164,18 @@ ElementsManager = EntityManager.extend({
                 this.m_Matrix[counter.x][counter.y] = etypes.block;
               }
             }
-          } else if(type === etypes.candy) {
-            this.m_MatrixManager.set(this.createCandy(), counter.x, counter.y, true);
+          } else if(type === etypes.box) {
+            this.m_MatrixManager.set(this.createBox(), counter.x, counter.y, true);
 
             this.last().setCenterPosition(x, y);
+            this.last().onUnHover();
 
             // TODO: Adjust network usage.
           } else if(type === etypes.change) {
             this.m_MatrixManager.set(this.createChange(), counter.x, counter.y, true);
 
             this.last().setCenterPosition(x, y);
+            this.last().onUnHover();
 
             // TODO: Adjust network usage.
           } else if(type === etypes.star && !Game.network) {
@@ -316,13 +318,13 @@ ElementsManager = EntityManager.extend({
 
     return this.last();
   },
-  createCandy: function() {
-    this.create().setCurrentFrameIndex(7);
+  createBox: function() {
+    this.create().setSpecial(Element.types.box);
 
     return this.last();
   },
   createChange: function() {
-    this.create().setCurrentFrameIndex(7);
+    this.create().setSpecial(Element.types.change);
 
     return this.last();
   },

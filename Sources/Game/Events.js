@@ -241,6 +241,8 @@ Game.prototype.onPauseEvent = function() {
 
 Game.prototype.onShow = function() {
   this.m_Level = 1;
+  this.m_BonusKeys = 0;
+  this.m_BonusKeysTemp = 0;
   this.m_CurrentBlows = 0;
   this.m_LevelTimeElapsed = 0;
   this.m_PlayerTurn = Game.tutorial;

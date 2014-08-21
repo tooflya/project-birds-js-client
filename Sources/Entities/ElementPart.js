@@ -38,7 +38,7 @@ ElementPart = TiledEntity.extend({
   m_AlphaSpeed: 0,
   m_ScaleSpeed: 0,
   ctor: function() {
-    this._super(s_ElementsParts, 5, 2);
+    this._super(s_ElementsParts, 7, 2);
   },
   create: function(params) {
     this._super();
@@ -50,7 +50,7 @@ ElementPart = TiledEntity.extend({
     this.setRotation(0);
     this.setScale(1.0);
 
-    this.m_SpeedX = Camera.sharedCamera().coord(Random.sharedRandom().random(100.0, 500.0)) * (params.index ? 1 : -1);
+    this.m_SpeedX = Camera.sharedCamera().coord(Random.sharedRandom().random(100.0, 500.0)) * (params.index ? -1 : 1);
     this.m_SpeedY = Camera.sharedCamera().coord(Random.sharedRandom().random(400.0, 700.0));
     this.m_RotationSpeed = Random.sharedRandom().random(0.1, 1.0) * (params.index ? -1 : 1);
     this.m_AlphaSpeed = Random.sharedRandom().random(1.0, 5.0);
