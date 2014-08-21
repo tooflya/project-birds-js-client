@@ -1124,7 +1124,7 @@ MatrixManager = cc.Node.extend({
     elements.push(this.get(x, y - 1));
 
     elements.forEach(function(current) {
-      if(current) {
+      if(current instanceof Element) {
         if(current.special() == Element.types.box) {
           current.remove();
 
