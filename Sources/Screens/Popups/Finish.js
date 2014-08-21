@@ -201,34 +201,6 @@ Finish = Background.extend({
             });
 
             DataManager.sharedManager().set(true, references.levels.levels[Game.level - 1], 1);
-
-            if(Game.instance.m_GameState) {
-              Finish.instance.current = 0;
-              for(var i = 0; i < Game.instance.m_StarsPoints; i++) {
-                setTimeout(function() {
-                  if(Finish.instance) {
-                    var current = Finish.instance.current;
-
-                    Sound.sharedSound().play(s_SoundStars[current]);
-
-                    Finish.instance.m_Stars[current].setCurrentFrameIndex(current);
-                    Finish.instance.m_Stars[current].runAction(
-                      cc.Sequence.create(
-                        cc.ScaleTo.create(0.1, 1.2),
-                        cc.ScaleTo.create(0.5, 1.0),
-                        false
-                      )
-                    );
-
-                    for(var j = 0; j < 7; j++) {
-                      Finish.instance.m_SplashStars.create().setCenterPosition(Finish.instance.m_Stars[current].getCenterX(), Finish.instance.m_Stars[current].getCenterY());
-                    }
-                  }
-
-                  Finish.instance.current++;
-                }, 1000 + 500 * (i + 1));
-              }
-            }
           } else {
             if(Game.instance.m_GameState) {
               Tooflya.api.call('level.update', {
@@ -240,6 +212,34 @@ Finish = Background.extend({
         } else {
           if(Game.instance.m_GameState) {
             DataManager.sharedManager().set(true, references.tutorial.enable, 0);
+          }
+        }
+
+        if(Game.instance.m_GameState) {
+          Finish.instance.current = 0;
+          for(var i = 0; i < (Game.network ? 3 : Game.instance.m_StarsPoints); i++) {
+            setTimeout(function() {
+              if(Finish.instance) {
+                var current = Finish.instance.current;
+
+                Sound.sharedSound().play(s_SoundStars[current]);
+
+                Finish.instance.m_Stars[current].setCurrentFrameIndex(current);
+                Finish.instance.m_Stars[current].runAction(
+                  cc.Sequence.create(
+                    cc.ScaleTo.create(0.1, 1.2),
+                    cc.ScaleTo.create(0.5, 1.0),
+                    false
+                  )
+                );
+
+                for(var j = 0; j < 7; j++) {
+                  Finish.instance.m_SplashStars.create().setCenterPosition(Finish.instance.m_Stars[current].getCenterX(), Finish.instance.m_Stars[current].getCenterY());
+                }
+              }
+
+              Finish.instance.current++;
+            }, 1000 + 500 * (i + 1));
           }
         }
 

@@ -252,14 +252,18 @@ Game = Screen.extend({
       };
       this.m_Notifications = {
         m_Notification1: false,
-        m_Notification2: false
+        m_Notification2: false,
+        m_Notification3: false
       };
       this.m_Notifications.m_Notification1 = Entity.create(LanguagesManager.sharedManager().parse(s_Notification1), this);
       this.m_Notifications.m_Notification2 = Entity.create(LanguagesManager.sharedManager().parse(s_Notification2), this);
+      this.m_Notifications.m_Notification3 = Entity.create(LanguagesManager.sharedManager().parse(s_Notification3), this);
       this.m_Notifications.m_Notification1.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
       this.m_Notifications.m_Notification2.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+      this.m_Notifications.m_Notification3.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
       this.m_Notifications.m_Notification1.setZOrder(500);
       this.m_Notifications.m_Notification2.setZOrder(500);
+      this.m_Notifications.m_Notification3.setZOrder(500);
 
       this.m_Elements = ElementsManager.sharedManager();
 

@@ -88,17 +88,31 @@ Catapult = AnimatedEntity.extend({
     });
 
     if(Game.network) {
-      var self = this;
-
       if(this._user) {
-        var background = BackgroundColor.create(cc.c4(0, 0, 0, 150), Game.instance, Camera.sharedCamera().coord(300), Camera.sharedCamera().coord(100));
+        var background = Entity.create(s_NetworkHolder, Game.instance);
 
         InternetEntity.create(this._user.photo, background, function(entity) {
           var photo = entity.create();
+          var text = Text.create('zero', background);
 
-          background.setCenterPosition(this._id == 0 ? Camera.sharedCamera().coord(200) : Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(200));
-          photo.setCenterPosition(photo.getWidth() / 2 + Camera.sharedCamera().coord(10), photo.getHeight() / 2);
-        });
+          background.create().setCenterPosition(this._id == 0 ? Camera.sharedCamera().coord(260) : Camera.sharedCamera().width - Camera.sharedCamera().coord(260), Camera.sharedCamera().height - Camera.sharedCamera().coord(150));
+          photo.setCenterPosition(background.getWidth() / 2 + Camera.sharedCamera().coord(7), background.getHeight() / 2 - Camera.sharedCamera().coord(6));
+          photo.setScale(1.5);
+
+          text.setFontSize(Camera.sharedCamera().coord(26));
+          text.ccsf([this._user.name]);
+          text.create().setCenterPosition(background.getWidth() / 2 + Camera.sharedCamera().coord(2), Camera.sharedCamera().coord(22));
+
+          if(this._id == 0) {
+            background.setFlippedHorizontally(false);
+            photo.setScale(1.5);
+            text.setScale(1.0);
+          } else {
+            background.setFlippedHorizontally(true);
+            photo.setScaleX(-1.5);
+            text.setScaleX(-1.0);
+          }
+        }.bind(this));
       }
     }
   },

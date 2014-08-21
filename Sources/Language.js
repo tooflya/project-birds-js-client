@@ -300,6 +300,16 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: 'リソース読み込んでいます... $1%', font: 'RiiPopkk-R', size: 36, dimensions: false}//
     ],
+  'connect-api': [
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Обновление информации...', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 36, dimensions: false}//
+    ],
   'connect': [
     {title: 'Connecting to the server...', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: 'Подключение к серверу...', font: 'Comic Sans MS', size: 36, dimensions: false},
@@ -319,6 +329,16 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '接続エラー', font: 'RiiPopkk-R', size: 36, dimensions: false}//
+    ],
+  'login': [
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Ожидание авторизации...', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'サーバーに接続している...', font: 'RiiPopkk-R', size: 36, dimensions: false}//
     ],
   'daily-revenue-title': [
     {title: 'Daily Revenue', font: 'Comic Sans MS', size: 38, dimensions: false},

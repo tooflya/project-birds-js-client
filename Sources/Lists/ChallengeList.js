@@ -53,14 +53,14 @@ ChallengeList = PatternList.extend({
 
     this.m_Text[1].ccsf([randomFriend.first_name + " " + randomFriend.last_name]);
 
-    var self = this;
-
     InternetEntity.create(randomFriend.photo_big, this, function(entity) {
-      entity.create().setCenterPosition(self.getCenterX(), self.getCenterY() + Camera.sharedCamera().coord(100));
+      entity.create().setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(250) - entity.getHeight() / 2);
 
-      self.m_Text[1].setVisible(true);
-      self.m_Text[1].setCenterPosition(self.getCenterX(), entity.getCenterY() - entity.getHeight() / 2 - self.m_Text[1].getHeight() / 2 - Camera.sharedCamera().coord(30));
-    });
+      this.m_Text[1].setVisible(true);
+      this.m_Text[1].setCenterPosition(this.getCenterX(), entity.getCenterY() - entity.getHeight() / 2 - this.m_Text[1].getHeight() / 2 - Camera.sharedCamera().coord(30));
+
+      this.m_ListMaxHeight = Math.abs(this.m_Text[1].getCenterY() - this.m_Text[1].getHeight() / 2 - Camera.sharedCamera().coord(50));
+    }.bind(this));
   }
 });
 

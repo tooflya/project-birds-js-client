@@ -292,7 +292,9 @@ Shop = Screen.extend({
           };
         }
 
-        element.onTouch = function() {
+        element.onTouch = function(e) {
+          this._super(e);
+
           if(this.locked) {
             Lock.sharedScreen().show(this.number, 'item', this);
           } else {
@@ -374,7 +376,11 @@ Shop = Screen.extend({
     });
   },
   onBackEvent: function() {
-    ScreenManager.sharedManager().back();
+    if(Game.network) {
+      ScreenManager.sharedManager().replace(Mode);
+    } else {
+      ScreenManager.sharedManager().back();
+    }
   },
   onShow: function() {
     this._super();

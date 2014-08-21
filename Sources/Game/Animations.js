@@ -102,6 +102,54 @@ Game.prototype.onTurnChangeFinish = function() {
   }
 };
 
+Game.prototype.onExtraMove = function() {
+  if(!this.m_GameRunning) return false;
+
+  this.onExtraMoveStart();
+
+  var notification = this.m_Notifications.m_Notification3;
+
+  notification.create();
+  notification.setOpacity(255.0);
+  notification.setScale(0.0);
+  notification.runAction(
+    cc.Sequence.create(
+      cc.DelayTime.create(0.7),
+      cc.FadeOut.create(0.5)
+    )
+  );
+  notification.runAction(
+    cc.Sequence.create(
+      cc.EaseElasticOut.create(
+        cc.ScaleTo.create(0.5, 1.0)
+      ),
+      cc.ScaleTo.create(0.2, 1.2),
+      cc.EaseExponentialIn.create(
+        cc.ScaleTo.create(0.5, 10.0)
+      ),
+      cc.CallFunc.create(notification.destroy, notification),
+      cc.CallFunc.create(this.m_PlayerTurn ? MatrixManager.sharedManager().enable : MatrixManager.sharedManager().disable, MatrixManager.sharedManager()),
+      cc.CallFunc.create(this.onExtraMoveFinish, this),
+      false
+    )
+  );
+
+  Sound.sharedSound().play(s_SoundExtraMove);
+};
+
+Game.prototype.onExtraMoveStart = function() {
+  ConfettiBackground.sharedScreen(this).show();
+
+  this.m_PreviewBackground.runAction(cc.FadeTo.create(0.5, 200));
+};
+
+Game.prototype.onExtraMoveFinish = function() {
+  this.m_PreviewBackground.runAction(cc.FadeTo.create(0.5, 0));
+
+  MatrixManager.sharedManager().unbusy();
+  MatrixManager.sharedManager().m_ExtaMove = false;
+};
+
 Game.prototype.onTurnStart = function(data) {
   if(!this.m_GameRunning) return false;
 

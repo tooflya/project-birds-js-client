@@ -370,4 +370,6 @@ Game.prototype.onExitTransitionDidStart = function() {
   Screen.prototype.onExitTransitionDidStart.call(this);
 
   GamePanel.sharedScreen(this.m_Type, this).hide();
+
+  Music.sharedMusic().play(s_Music1, true);
 };

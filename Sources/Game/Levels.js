@@ -58,7 +58,6 @@ Game.prototype.m_LevelsMatrixes = [
   /** Matrix of level #1 */
   {
     moves: 35,
-    difficult: 10,
     opponent: {
       weapon: 0,
       health: 35,
@@ -67,8 +66,8 @@ Game.prototype.m_LevelsMatrixes = [
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [-4, -4, -4, -4, -4, -4, -4, -4, -4, -4],
+      [-5, -5, -5, -5, -5, -5, -5, -5, -5, -5],
       [1, 1, 1, 1, 1, -3, 1, 1, 1, 1],
       [1, 1, 1, 1, -3, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -84,7 +83,6 @@ Game.prototype.m_LevelsMatrixes = [
   /** Matrix of level #2 */
   {
     moves: 30,
-    difficult: 10,
     opponent: {
       weapon: 0,
       health: 35,
@@ -110,7 +108,6 @@ Game.prototype.m_LevelsMatrixes = [
   /** Matrix of level #3 */
   {
     moves: 15,
-    difficult: 30,
     opponent: {
       weapon: 1,
       health: 30,
@@ -136,7 +133,6 @@ Game.prototype.m_LevelsMatrixes = [
   /** Matrix of level #4 */
   {
     moves: 30,
-    difficult: 40,
     opponent: {
       weapon: 1,
       health: 150,
@@ -162,7 +158,6 @@ Game.prototype.m_LevelsMatrixes = [
   /** Matrix of level #5 */
   {
     moves: 20,
-    difficult: 40,
     opponent: {
       weapon: 2,
       health: 100,
@@ -188,7 +183,6 @@ Game.prototype.m_LevelsMatrixes = [
   /** Matrix of level #6 */
   {
     moves: 10,
-    difficult: 70,
     opponent: {
       weapon: 2,
       health: 70,

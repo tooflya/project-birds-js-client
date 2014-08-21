@@ -231,6 +231,7 @@ var s_Bonus2 = "Resources/Graphics/bonus-2.png";
 var s_Bonus6 = "Resources/Graphics/bonus-6.png";
 var s_Bonus7 = "Resources/Graphics/bonus-7.png";
 var s_Elements = "Resources/Graphics/elements.png";
+var s_ElementsChain = "Resources/Graphics/element-chain.png";
 var s_ElementsSickles = "Resources/Graphics/elements-sickle.png";
 var s_ElementsSplash = "Resources/Graphics/elements-splash.png";
 var s_ElementsGlow = "Resources/Graphics/elements-glow.png";
@@ -245,11 +246,14 @@ var s_CatapultBirds = "Resources/Graphics/catapult-birds.png";
 var s_CatapultBirdsShield = "Resources/Graphics/catapult-birds-shield.png";
 var s_Target = "Resources/Graphics/game-target.png";
 var s_Notification1 = "Resources/Graphics/notification-1.png";
-var s_Notification2= "Resources/Graphics/notification-2.png";
+var s_Notification2 = "Resources/Graphics/notification-2.png";
+var s_Notification3 = "Resources/Graphics/extra-move-texts.png";
 var s_Notification1English = "Resources/Graphics/notification-1-0.png";
 var s_Notification2English = "Resources/Graphics/notification-2-0.png";
+var s_Notification3English = "Resources/Graphics/extra-move-texts-0.png";
 var s_Notification1Russian = "Resources/Graphics/notification-1-1.png";
 var s_Notification2Russian = "Resources/Graphics/notification-2-1.png";
+var s_Notification3Russian = "Resources/Graphics/extra-move-texts-1.png";
 var s_LevelsMapBackground = "Resources/Graphics/levels-map-background.png";
 var s_LevelsMapTrees = "Resources/Graphics/levels-map-trees.png";
 var s_LevelsMapIcons = "Resources/Graphics/levels-map-icons.png";
@@ -270,6 +274,7 @@ var s_MatrixArrow2 = "Resources/Graphics/matrix-arrow-2.png";
 var s_TutorialLevel = "Resources/Graphics/level-tutorial.png";
 var s_LevelIcon = "Resources/Graphics/level-icon.png";
 var s_InputTextArea = "Resources/Graphics/input-text-area.png";
+var s_NetworkHolder = "Resources/Graphics/network-holder.png";
 var s_Levels = [
   "Resources/Graphics/level-1.png",
   "Resources/Graphics/level-2.png",
@@ -322,6 +327,7 @@ var s_SoundStar = "Resources/Sound/star.wav";
 var s_SoundLine = "Resources/Sound/line.wav";
 var s_SoundLose = "Resources/Sound/lose.wav";
 var s_SoundWin = "Resources/Sound/win.wav";
+var s_SoundExtraMove = "Resources/Sound/pome-zoomout.wav";
 var s_SoundBloom = ["Resources/Sound/bloom-1.wav", "Resources/Sound/bloom-2.wav", "Resources/Sound/bloom-3.wav", "Resources/Sound/bloom-4.wav"];
 var s_SoundChew = ["Resources/Sound/chew-1.wav", "Resources/Sound/chew-2.wav", "Resources/Sound/chew-3.wav"];
 var s_SoundDrop = ["Resources/Sound/drop-1.wav", "Resources/Sound/drop-2.wav", "Resources/Sound/drop-3.wav"];
@@ -530,6 +536,8 @@ var resources = [
   {src: s_Notification1English},
   {src: s_Notification2Russian},
   {src: s_Notification2English},
+  {src: s_Notification3Russian},
+  {src: s_Notification3English},
   {src: s_PlayerHealth},
   {src: s_PlayerHealthBar},
   {src: s_LevelsMapBackground},
@@ -549,6 +557,7 @@ var resources = [
   {src: s_TutorialLevel},
   {src: s_LevelIcon},
   {src: s_InputTextArea},
+  {src: s_NetworkHolder},
   {src: s_Levels[0]},
   {src: s_Levels[1]},
   {src: s_Levels[2]},
@@ -599,6 +608,7 @@ var resources = [
   {src: s_SoundLine},
   {src: s_SoundWin},
   {src: s_SoundLose},
+  {src: s_SoundExtraMove},
   {src: s_SoundStars[0]},
   {src: s_SoundStars[1]},
   {src: s_SoundStars[2]},

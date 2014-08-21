@@ -43,14 +43,14 @@ ElementPart = TiledEntity.extend({
   create: function(params) {
     this._super();
 
-    this.m_Id = params.element.getId();
+    this.m_Id = (params.force ? params.force : params.element.getId());
     this.setCurrentFrameIndex(params.index ? this.m_Id : this.m_Id + this.getHorizontalFramesCount());
     this.setCenterPosition(params.element.convertToWorldSpace(cc.p(0, 0)).x + params.element.getWidth() / 2, params.element.convertToWorldSpace(cc.p(0, 0)).y + params.element.getHeight());
     this.setOpacity(255.0);
     this.setRotation(0);
     this.setScale(1.0);
 
-    this.m_SpeedX = Camera.sharedCamera().coord(Random.sharedRandom().random(100.0, 500.0)) * (params.index ? -1 : 1);
+    this.m_SpeedX = Camera.sharedCamera().coord(Random.sharedRandom().random(100.0, 500.0)) * (params.index ? 1 : -1);
     this.m_SpeedY = Camera.sharedCamera().coord(Random.sharedRandom().random(400.0, 700.0));
     this.m_RotationSpeed = Random.sharedRandom().random(0.1, 1.0) * (params.index ? -1 : 1);
     this.m_AlphaSpeed = Random.sharedRandom().random(1.0, 5.0);

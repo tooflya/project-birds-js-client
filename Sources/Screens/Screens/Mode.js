@@ -262,7 +262,6 @@ Mode = Screen.extend({
     var mode = id == 0 ? references.lock.modes.classic : references.lock.modes.arcade;
 
     DataManager.sharedManager().set(true, mode, 1);
-    DataManager.sharedManager().update(true, references.coins.keys, -unlock.modes[id].price);
 
     var line = Entity.create(s_ModeUnlockLine, Mode.instance);
 

@@ -164,6 +164,18 @@ ElementsManager = EntityManager.extend({
                 this.m_Matrix[counter.x][counter.y] = etypes.block;
               }
             }
+          } else if(type === etypes.candy) {
+            this.m_MatrixManager.set(this.createCandy(), counter.x, counter.y, true);
+
+            this.last().setCenterPosition(x, y);
+
+            // TODO: Adjust network usage.
+          } else if(type === etypes.change) {
+            this.m_MatrixManager.set(this.createChange(), counter.x, counter.y, true);
+
+            this.last().setCenterPosition(x, y);
+
+            // TODO: Adjust network usage.
           } else if(type === etypes.star && !Game.network) {
             var star = this.create();
             star.setId(Element.types.star);
@@ -172,9 +184,17 @@ ElementsManager = EntityManager.extend({
 
             this.m_MatrixManager.set(star, counter.x, counter.y);
           } else {
-            this.m_MatrixManager.set(this.create(), counter.x, counter.y, true);
+            if(type <= -10) {
+              this.m_MatrixManager.set(this.create(), counter.x, counter.y, false);
+
+              this.last().setId(type + 10);
+            } else {
+              this.m_MatrixManager.set(this.create(), counter.x, counter.y, true);
+            }
 
             this.last().setCenterPosition(x, y);
+
+            if(type == etypes.chain) this.last().chain();
 
             if(Game.network) {
               if(Game.server) {
@@ -268,6 +288,10 @@ ElementsManager = EntityManager.extend({
 
     this.m_ElementsGlows.scheduleUpdate();
     this.m_ElementsIcons.scheduleUpdate();
+
+    if(ElementsManager.bonus) {
+      ElementsManager.bonus.resume();
+    }
   },
   unscheduleUpdate: function() {
     this._super();
@@ -276,6 +300,10 @@ ElementsManager = EntityManager.extend({
     this.m_ElementsIcons.unscheduleUpdate();
 
     MatrixManager.sharedManager().m_Busy = true;
+
+    if(ElementsManager.bonus) {
+      ElementsManager.bonus.pause();
+    }
   },
   clear: function() {
     this.m_MatrixArrows1.removeFromParent();
@@ -288,25 +316,18 @@ ElementsManager = EntityManager.extend({
 
     return this.last();
   },
+  createCandy: function() {
+    this.create().setCurrentFrameIndex(7);
+
+    return this.last();
+  },
+  createChange: function() {
+    this.create().setCurrentFrameIndex(7);
+
+    return this.last();
+  },
   createBonus: function(data, type) {
-    var element = this.create();
     var bonus = data.element || data.elements[0];
-
-    MatrixManager.sharedManager().set(element, bonus.getIndex().x, bonus.getIndex().y);
-
-    element.m_Removed = true;
-    element.setBonus(type);
-    element.setId(bonus.getId());
-    element.setCenterPosition(bonus.getCenterX(), bonus.getCenterY());
-    element.setScale(0.0);
-    element.runAction(
-      cc.Sequence.create(
-        cc.DelayTime.create(1.0),
-        cc.ScaleTo.create(0.1, 1.0),
-        cc.CallFunc.create(element.onChangePosition, element),
-        false
-      )
-    );
 
     for(var i = 0; i < data.icons.length; i++) {
       data.icons[i].runAction(
@@ -317,6 +338,27 @@ ElementsManager = EntityManager.extend({
         )
       );
     }
+
+    ElementsManager.bonus = new PausableTimeout(function() {
+      ElementsManager.bonus = false;
+
+      var element = this.create();
+
+      MatrixManager.sharedManager().set(element, bonus.getIndex().x, bonus.getIndex().y);
+
+      element.m_Removed = true;
+      element.setId(bonus.getId());
+      element.setBonus(type);
+      element.setCenterPosition(bonus.getCenterX(), bonus.getCenterY());
+      element.setScale(0.0);
+      element.runAction(
+        cc.Sequence.create(
+          cc.ScaleTo.create(0.1, 1.0),
+          cc.CallFunc.create(element.onChangePosition, element),
+          false
+        )
+      );
+    }.bind(this), 990);
   },
   getMatrix: function() {
     return this.m_Matrix;

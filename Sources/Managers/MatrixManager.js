@@ -39,6 +39,7 @@ MatrixManager = cc.Node.extend({
   m_CurrentElement1: false,
   m_CurrentElement2: false,
   m_Combinations: false,
+  m_ExtaMove: false,
   ctor: function() {
     this._super();
 
@@ -111,6 +112,26 @@ MatrixManager = cc.Node.extend({
         element.onTouch();
       }
     }
+  },
+  s: function(element, soft) {
+    if(element instanceof Element) {
+      if(!soft) {
+        if(element.chained()) return true;
+      }
+    } else {
+      if(element == etypes.block) return true;
+    }
+
+    return false;
+  },
+  e: function(element) {
+    return element == etypes.empty;
+  },
+  soe: function(element, soft) {
+    return this.e(element) || this.s(element, soft);
+  },
+  sae: function(element, soft) {
+    return this.e(element) && this.s(element, soft);
   },
   computer: function(selector, automatic) {
     if(!automatic) this.m_Busy = true;
@@ -203,9 +224,11 @@ MatrixManager = cc.Node.extend({
     return false;
   },
   replace: function(element, neighbor, back, network) {
-    Sound.sharedSound().play(s_SoundExchange);
+    if(this.soe(element)) return false;
 
     if(neighbor instanceof Element) {
+      Sound.sharedSound().play(s_SoundExchange);
+
       if(!back) {
         if(this.m_CurrentElement1) this.m_CurrentElement1.onChangePosition();
         if(this.m_CurrentElement2) this.m_CurrentElement2.onChangePosition();
@@ -268,10 +291,10 @@ MatrixManager = cc.Node.extend({
       var index = element.getIndex();
 
       var positions = {
-        top: index.y < this.getSize().y && (this.get(index.x, index.y + 1) != etypes.empty && this.get(index.x, index.y + 1) != etypes.block),
-        down: index.y > 0 && (this.get(index.x, index.y - 1) != etypes.empty && this.get(index.x, index.y - 1) != etypes.block),
-        left: index.x > 0 && (this.get(index.x - 1, index.y) != etypes.empty && this.get(index.x - 1, index.y) != etypes.block),
-        right: index.x < this.getSize().x && (this.get(index.x + 1, index.y) != etypes.empty && this.get(index.x + 1, index.y) != etypes.block)
+        top: index.y < this.getSize().y && this.get(index.x, index.y + 1) && !this.soe(this.get(index.x, index.y + 1)),
+        down: index.y > 0 && this.get(index.x, index.y - 1) && !this.soe(this.get(index.x, index.y - 1)),
+        left: index.x > 0 && this.get(index.x - 1, index.y) && !this.soe(this.get(index.x - 1, index.y)),
+        right: index.x < this.getSize().x && this.get(index.x + 1, index.y) && !this.soe(this.get(index.x + 1, index.y))
       };
 
       if(Game.tutorial) {
@@ -379,9 +402,9 @@ MatrixManager = cc.Node.extend({
 
           pool.element.remove();
 
-          Game.sharedScreen().onBlow(pool.element);
-
           if(bonus.horizontal > 3 || bonus.vertical > 3) {
+            MatrixManager.sharedManager().m_ExtaMove = true;
+
             ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.bomb);
           } else if(bonus.horizontal >= 2 && bonus.vertical >= 2) {
             ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.pack);
@@ -390,6 +413,8 @@ MatrixManager = cc.Node.extend({
           } else if(bonus.vertical >= 3) {
             ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.horizontal);
           }
+
+          Game.sharedScreen().onBlow(pool.element);
         }
       }
     }
@@ -417,8 +442,10 @@ MatrixManager = cc.Node.extend({
                 MatrixManager.timeout = new PausableTimeout(function() {
                   MatrixManager.sharedManager().clear();
                 }, 600);
-              } else if(bomb) {
-                MatrixManager.sharedManager().enable(); // TODO: Additional bonus move.
+              } else if(bomb && MatrixManager.sharedManager().m_ExtaMove) {
+                Game.instance.onExtraMove();
+              } else {
+                ActionsManager.sharedManager().run();
               }
             }
           }
@@ -427,8 +454,8 @@ MatrixManager = cc.Node.extend({
     }
   },
   hasMatchesWith: function(element, neighbor) {
-    if(!element || element === etypes.empty || element === etypes.block) return false;
-    if(!neighbor || neighbor === etypes.empty || neighbor === etypes.block) return false;
+    if(!element || this.soe(element)) return false;
+    if(!neighbor || this.soe(neighbor)) return false;
 
     var index1 = {
       x: -1,
@@ -465,7 +492,7 @@ MatrixManager = cc.Node.extend({
     }
   },
   hasMatches: function(element, data) {
-    if(!element || element === etypes.empty || element === etypes.block) return false;
+    if(!element || this.soe(element, true)) return false;
     if(element.getId() === Element.types.star) return false;
 
     if(!data) {
@@ -487,10 +514,10 @@ MatrixManager = cc.Node.extend({
     };
 
     var positions = {
-      top: index.y < (this.getSize().y - 1) && frames.top && frames.top != etypes.empty && frames.top != etypes.block,
-      down: index.y > 0 && frames.down && frames.down != etypes.empty && frames.down != etypes.block,
-      left: index.x > 0 && frames.left && frames.left != etypes.empty && frames.left != etypes.block,
-      right: index.x < this.getSize().x && frames.right && frames.right != etypes.empty && frames.right != etypes.block
+      top: index.y < (this.getSize().y - 1) && frames.top && !this.soe(frames.top, true),
+      down: index.y > 0 && frames.down && !this.soe(frames.down, true),
+      left: index.x > 0 && frames.left && !this.soe(frames.left, true),
+      right: index.x < this.getSize().x && frames.right && !this.soe(frames.right, true)
     };
 
     if(data) {
@@ -776,7 +803,7 @@ MatrixManager = cc.Node.extend({
       for(var j = 0; j < this.getSize().y * 2; j++) {
         for(var i = 0; i < this.getSize().x; i++) {
           var frame = this.m_Matrix[i][j];
-          if(frame && frame != etypes.empty && frame != etypes.block) this.m_Matrix[i][j].lookDown(true);
+          if(frame && !this.soe(frame)) this.m_Matrix[i][j].lookDown(true);
         }
       }
     }
