@@ -186,10 +186,17 @@ ElementsManager = EntityManager.extend({
 
             this.m_MatrixManager.set(star, counter.x, counter.y);
           } else {
-            if(type <= -10) {
-              this.m_MatrixManager.set(this.create(), counter.x, counter.y, false);
+            if(type <= -10 || type <= -100) {
+              var chain = type <= -100;
 
-              this.last().setId(type + 10);
+              this.m_MatrixManager.set(this.create(), counter.x, counter.y, false);//-100 -110 -120 -130
+
+              this.last().setId(Math.abs(type + (chain ? 100 : 10)) / (chain ? 10 : 1));
+              this.last().setCurrentFrameIndex(Math.abs(type + (chain ? 100 : 10)) / (chain ? 10 : 1));
+
+              if(chain) {
+                this.last().chain();
+              }
             } else {
               this.m_MatrixManager.set(this.create(), counter.x, counter.y, true);
             }
