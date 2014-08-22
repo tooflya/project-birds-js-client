@@ -52,7 +52,7 @@ var g_language  = {
     ],
   'tutorial-1': [
     {title: 'Move green square to the left to match 3 of the same!', font: 'Comic Sans MS', size: 46, dimensions: false},
-    {title: 'Передвиньте зеленую иконку влево чтобы сократить 3 одинаковых иконок!', font: 'Comic Sans MS', size: 46, dimensions: false},
+    {title: 'Передвиньте зеленую иконку влево чтобы сократить 3 одинаковых иконки!', font: 'Comic Sans MS', size: 46, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -62,7 +62,7 @@ var g_language  = {
     ],
   'tutorial-2': [
     {title: 'Get the gold heart quicker than your rival', font: 'Comic Sans MS Bold', size: 46, dimensions: [550, 280]},
-    {title: 'Проберитесь к Большому сердцу быстрее Вашего соперника', font: 'Comic Sans MS Bold', size: 38, dimensions: [550, 350]},
+    {title: 'Доберитесь к Большому сердцу быстрее Вашего соперника', font: 'Comic Sans MS Bold', size: 38, dimensions: [550, 350]},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: [550, 280]},
@@ -351,7 +351,7 @@ var g_language  = {
     {title: '毎日の収入', font: 'RiiPopkk-R', size: 38, dimensions: false}//
     ],
   'daily-reward-side-title': [
-    {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
+    {title: 'Congratulations!\nYou got the daily reward!', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: 'Поздравляем!\nВы получили дневное\nвознаграждение!', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
@@ -361,7 +361,7 @@ var g_language  = {
     {title: 'おめでとう！\nあなたは一日の報酬を得る！', font: 'RiiPopkk-R', size: 52, dimensions: false}//
     ],
   'daily-reward-side-coins-1': [
-    {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
+    {title: '$1 gold coins', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: '$1 золотых монет', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
@@ -371,7 +371,7 @@ var g_language  = {
     {title: '$1 金貨', font: 'RiiPopkk-R', size: 52, dimensions: false}//
     ],
   'daily-reward-side-coins-2': [
-    {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
+    {title: '$1 silver coins', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: '$1 серебряных монет', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 52, dimensions: false},
@@ -381,7 +381,7 @@ var g_language  = {
     {title: '$1 銀貨', font: 'RiiPopkk-R', size: 52, dimensions: false}//
     ],
   'daily-reward-side-description': [
-    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Come again to play with birds\nevery day and\nget valuable gifts! ', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Приходите играть с птицами\nкаждый день и получайте все более\nи более ценные призы и подарки!', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -511,8 +511,8 @@ var g_language  = {
     {title: 'コインを購入する必要があります！', font: 'RiiPopkk-R', size: 36, dimensions: [512, 0]}
     ],
   'lives-popup-2': [
-    {title: '', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]},
-    {title: 'Если у вас закончаться золотые сердечки вам прийдется отыскать их для продолжения!', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
+    {title: 'If you run out of gold hearts you should to find their to continue! ', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]},
+    {title: 'Если у вас закончатся золотые сердечки вам придётся отыскать их для продолжения!', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
@@ -521,7 +521,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 36, dimensions: [512, 0]}//
     ],
   'lives-popup-3': [
-    {title: '', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]},
+    {title: 'Gold hearts will soon be over! You can restore them now.', font: 'Comic Sans MS', size: 42, dimensions: [512, 0]},
     {title: 'Золотые сердечки на исходе! Вы можете восстановить их прямо сейчас.', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: [512, 0]},
@@ -951,7 +951,7 @@ var g_language  = {
     {title: "このモードのロックを解除するには：", font: "RiiPopkk-R", size: 42, dimensions: [450, 0]}
     ],
   'multiplayer-popup-1': [
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Play online?", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "Сыграть онлайн?", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -961,8 +961,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
     ],
   'multiplayer-popup-2': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
-    {title: "Вступите в схватку птиц с живим игроком! Заработайте много золотых монет и увеличте свой глобальный рейтинг!", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "Let's begin to play online mode! Earn many gold coins and increase your global ranking!", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
+    {title: "Начните игру в онлайн режиме! Заработайте много золотых монет и увеличте свой глобальный рейтинг!", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
@@ -971,7 +971,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [500, 0]}
     ],
   'network-1': [
-    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Connecting to server...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "Соединяемся с сервером...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -981,7 +981,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
     ],
   'network-2': [
-    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Searching the player...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "Поиск игрока...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -991,7 +991,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
     ],
   'network-3': [
-    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Waiting to start game...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "Ожидание начала битвы...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -1001,7 +1001,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
     ],
   'network-4': [
-    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Rival has disconnected \n trying to restore connection...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "Соперник отключился! \n Пробуем восстановить соединение...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -1081,7 +1081,7 @@ var g_language  = {
     {title: "クラシックモード -  ランキングやコイン獲得を目指すゲーム！", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-1': [
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Level - $1", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "Уровень - $1", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -1091,7 +1091,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
     ],
   'level-popup-2': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Rating of friends", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Рейтинг друзей", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1101,7 +1101,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'level-popup-3': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Global rating", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Глобальный рейтинг", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1111,7 +1111,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'level-popup-4': [
-    {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
+    {title: "Difficulty", font: "Comic Sans MS", size: 28, dimensions: false},
     {title: "Сложность:", font: "Comic Sans MS", size: 28, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 28, dimensions: false},
@@ -1121,7 +1121,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 28, dimensions: false}
     ],
   'level-popup-level-1': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "All starts here. Royal Guard can no longer cope with the increased pressure from the home guard. We can win?", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "Все начинается здесь. Королевская гвардия больше не может справляться с возросшим давлением со стороны ополчения. Мы же сможем победить?", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1131,8 +1131,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-2': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "Первая попытка была удачной, но не сильно взолновала корону. К вам отправлен всего лишь более быстрый отряд.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "The first attempt was successful, but not too surprised crown. On you has been sent just more faster squad.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Первая попытка была удачной, но не сильно взволновала корону. К вам отправлен всего лишь более быстрый отряд.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1141,7 +1141,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-3': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "The Royal Society doesn't believe in the threat on your part, but nonetheless sends the fastest squad in your area. Your strength is almost exhausted.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "Королевское общество не верит в угрозу с вашей стороны, но тем не менее посылает самый быстрый отряд в вашем регионе. Ваши силы на исходе.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1151,7 +1151,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-4': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "You have shown themselves well in the battle for truth. Has already a little bit restored strength, you meet even more angry enemies!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "Вы проявили себя хорошо в битве за правду и немного восстановив силы, встречаете еще более злейшего врага!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1161,7 +1161,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-5': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Royal throne shaken. Threat felt by all royal jesters. They don't outright armed ...", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "Королевский трон пошатнулся. Угрозу чувствуют все предворные шуты. Они не на шутку вооружились...", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1171,8 +1171,248 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-6': [
+    {title: "Just can't believe that you survived after such a battle! You are closer to the kingdom, but still meets pockets of resistance. Ahead very fast catapult!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Просто не верится что вы уцелели после такой битвы! Вы все ближе к королевству, но все еще встречаете очаги сопротивления. Впереди очень быстрая катапульта!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "Просто неверится что вы уцелели после такой битвы! Вы все ближе к королевству, но все еще встречаете очаги сопротивления. Впереди очень быстрая катапульта!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-7': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-8': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-9': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-10': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-11': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-12': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-13': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-14': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-15': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-16': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-17': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-18': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-19': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-20': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-21': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-22': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-23': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-24': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-25': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-26': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-27': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-28': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-29': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-30': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1181,7 +1421,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'tip-0': [
-    {title: "Tip 0", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Each of the bonus birds has unique abilities in different game modes - let's check what they can do!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
     {title: "Каждая бонусная птица обладает уникальными способностями в каждом из режимов игры - посмотрите на что они способны!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
@@ -1401,7 +1641,7 @@ var g_language  = {
     {title: '招待', font: 'RiiPopkk-R', size: 38, dimensions: false}//
     ],
   'finish-text-1': [
-    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Caught birds: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Поймано птиц: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -1411,7 +1651,7 @@ var g_language  = {
     {title: 'キャッチ鳥： $1', font: 'RiiPopkk-R', size: 32, dimensions: false}//
     ],
   'finish-text-2': [
-    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Combo attack: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Комбо ударов: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -1421,7 +1661,7 @@ var g_language  = {
     {title: 'コンボ攻撃： $1', font: 'RiiPopkk-R', size: 32, dimensions: false}//
     ],
   'finish-text-3': [
-    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Ccaught aviators: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Поймано летчиков: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -1431,7 +1671,7 @@ var g_language  = {
     {title: 'キャッチパイロット： $1', font: 'RiiPopkk-R', size: 32, dimensions: false}//
     ],
   'finish-text-4': [
-    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Total coins earned:', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Всего монет заработано:', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -1441,7 +1681,7 @@ var g_language  = {
     {title: '総コインが獲得した。', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
   'finish-text-5': [
-    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Rating increased by: $ 1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Рейтинг увеличен на: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -1451,7 +1691,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
   'finish-text-6': [
-    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Moves left: $ 1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Ходов осталось: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -1461,7 +1701,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
   'finish-text-7': [
-    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Earned the keys: $1 ', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Заработано ключей: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -3604,7 +3844,7 @@ var g_language  = {
     {title: "$1", font: "RiiPopkk-R", size: 28, dimensions: false}
     ],
   'leaderboard-score': [
-    {title: "$1", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Ranking: $1", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Рейтинг: $1", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "$1", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "$1", font: "Comic Sans MS", size: 25, dimensions: false},
