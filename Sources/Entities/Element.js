@@ -306,7 +306,7 @@ Element = TiledEntity.extend({
     if(!MatrixManager.sharedManager().active()) return false;
     if(MatrixManager.sharedManager().s(this)) return false;
 
-    if(this.special()) return false;
+    if(this.special() == Element.types.box) return false;
 
     if(!this.m_GlowAnimationRunning) {
       this.onUnHover();
