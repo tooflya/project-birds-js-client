@@ -39,7 +39,9 @@ CatapultBird = AnimatedEntity.extend({
     jump: 2,
     fire: 3,
     blow: 4,
-    defence: 5
+    defence: 5,
+    left: 6,
+    right: 7
   },
   m_StateData: false,
   m_DongleTime: 0,
@@ -54,17 +56,17 @@ CatapultBird = AnimatedEntity.extend({
 
     this.m_Catapult = catapult;
 
-    this.chooseId();
-    this.setAnchorPoint(cc.p(0.5, 0.0));
-
     this.m_Decorations = [];
     for(var i = 0; i < 2; i++) {
-      this.m_Decorations[i] = Entity.create(s_PopupDecoration1, this);
+      this.m_Decorations[i] = Entity.create(s_PopupDecoration17, this);
 
       this.m_Decorations[i].create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2);
       this.m_Decorations[i].setScale(0.0);
+      this.m_Decorations[i].setOpacity(120);
     }
     this.m_Shield = Entity.create(s_CatapultBirdsShield, this);
+
+    this.registerTouchable(true);
   },
   onCreate: function() {
     this._super();
@@ -127,6 +129,47 @@ CatapultBird = AnimatedEntity.extend({
         ),
         cc.EaseExponentialIn.create(
           cc.MoveTo.create(0.5, cc.p(this.getCenterX(), this.getCenterY()))
+        ),
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.CallFunc.create(this.changeStateAction, this, this.m_States.stop),
+        false
+      )
+    );
+  },
+  onLeft: function() {
+    this.stopAllActions();
+
+    this.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.2),
+        cc.RotateTo.create(0.5, -720),
+        false
+      )
+    );
+    this.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.2),
+        cc.MoveTo.create(0.5, cc.p(this.getCenterX() - Camera.sharedCamera().coord(55), this.getCenterY())),
+        cc.CallFunc.create(this.changeStateAction, this, this.m_States.stop),
+        false
+      )
+    );
+  },
+  onRight: function() {
+    this.stopAllActions();
+
+    this.animate(this.animations.dongle);
+
+    this.runAction(
+      cc.Sequence.create(
+        cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
+        cc.EaseExponentialOut.create(
+          cc.MoveTo.create(0.5, cc.p(this.getCenterX() + Camera.sharedCamera().coord(55), this.getCenterY() + Camera.sharedCamera().coord(50)))
+        ),
+        cc.EaseExponentialIn.create(
+          cc.MoveTo.create(0.5, cc.p(this.getCenterX() + Camera.sharedCamera().coord(55), this.getCenterY()))
         ),
         cc.ScaleTo.create(0.1, 0.9 * (this.isFlippedHorizontally() ? -1 : 1), 0.9 * (this.isFlippedVertically() ? -1 : 1)),
         cc.ScaleTo.create(0.1, 1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1)),
@@ -205,13 +248,13 @@ CatapultBird = AnimatedEntity.extend({
           cc.ScaleTo.create(0.1, 0.8),
           cc.ScaleTo.create(0.1, 1.2),
           cc.ScaleTo.create(0.05, 0.0),
-          cc.CallFunc.create(this.changeStateAction, this, this.m_States.jump),
+          i == 0 ? cc.CallFunc.create(this.changeStateAction, this, this.m_States.jump) : false,
           false
         )
       );
     }
 
-    Sound.sharedSound().play(s_SoundSlash);
+    Sound.sharedSound().play(s_SoundDefence);
 
     if(this.m_StateData) {
       if(this.m_StateData.callback) {
@@ -219,11 +262,58 @@ CatapultBird = AnimatedEntity.extend({
       }
     }
   },
+  onTouch: function(e) {
+    this._super(e);
+  },
+  onDragLeft: function() {
+    this._super();
+
+    if(this.isFlippedHorizontally()) return;
+
+    if(this.m_State == this.m_States.stop) {
+      var id = this.getID();
+
+      if(id < 2) {
+        var element1 = this;
+        var element2 = this.getManager().get(id + 1);
+
+        element1.changeState(this.m_States.left);
+        element2.changeState(this.m_States.right);
+
+        this.getManager().m_Elements.swapAtIndex(id + 1, this);
+
+        element1.setID(id + 1);
+        element2.setID(id);
+      }
+    }
+  },
+  onDragRight: function() {
+    this._super();
+
+    if(this.isFlippedHorizontally()) return;
+
+    if(this.m_State == this.m_States.stop) {
+      var id = this.getID();
+
+      if(id > 0) {
+        var element1 = this;
+        var element2 = this.getManager().get(id - 1);
+
+        element1.changeState(this.m_States.right);
+        element2.changeState(this.m_States.left);
+
+        this.getManager().m_Elements.swapAtIndex(id - 1, this);
+
+        element1.setID(id - 1);
+        element2.setID(id);
+      }
+    }
+  },
   stopAllActions: function() {
     this._super();
 
     this.setScale(1.0 * (this.isFlippedHorizontally() ? -1 : 1), 1.0 * (this.isFlippedVertically() ? -1 : 1));
-    this.setCenterPosition(this.getCenterX(), Camera.sharedCamera().coord(10));
+    this.setCenterPosition(this.getCenterX(), Camera.sharedCamera().coord(10) + this.getHeight() / 2);
   },
   changeStateAction: function(selectot, state, data) {
     switch(this.m_State) {
@@ -273,12 +363,24 @@ CatapultBird = AnimatedEntity.extend({
 
       this.m_StateData.enable = false;
       break;
+      case this.m_States.left:
+      this.onLeft();
+      break;
+      case this.m_States.right:
+      this.onRight();
+      break;
     }
   },
   chooseId: function() {
-    this.m_Id = Random.sharedRandom().random(0, Bird.count, true) * this.getHorizontalFramesCount();
+    if(this.isFlippedHorizontally()) {
+      this.m_Id = Random.sharedRandom().random(0, Bird.count, true) * this.getHorizontalFramesCount();
 
-    this.setCurrentFrameIndex(this.m_Id + 10);
+      this.setCurrentFrameIndex(this.m_Id + 10);
+    } else {
+      this.m_Id = Game.selected.birds[this.getID()] * this.getHorizontalFramesCount();
+
+      this.setCurrentFrameIndex(this.m_Id + 10);
+    }
   },
   animate: function(type) {
     switch(type) {

@@ -29,6 +29,11 @@
  *
  */
 
+var s_Fonts = [
+  {src: "Resources/Fonts/Comic Sans MS.ttf", name: "Comic Sans MS"},
+  {src: "Resources/Fonts/Comic Sans MS Bold.ttf", name: "Comic Sans MS Bold"}
+];
+
 var s_PreloaderBackground = "Resources/Graphics/preloader-background.png";
 var s_PreloaderBackgroundJapan = "Resources/Graphics/preloader-background-japan.png";
 var s_PreloaderBackgroundPortrait = "Resources/Graphics/preloader-background-portrait.png";
@@ -91,6 +96,7 @@ var s_PopupDecoration13 = "Resources/Graphics/popup-decoration-13.png";
 var s_PopupDecoration14 = "Resources/Graphics/popup-decoration-14.png";
 var s_PopupDecoration15 = "Resources/Graphics/popup-decoration-15.png";
 var s_PopupDecoration16 = "Resources/Graphics/popup-decoration-16.png";
+var s_PopupDecoration17 = "Resources/Graphics/popup-decoration-17.png";
 var s_PanelItemsBackground1 = "Resources/Graphics/panel-item-background-1.png";
 var s_PanelItemsBackground2 = "Resources/Graphics/panel-item-background-2.png";
 var s_PanelIcon1 = "Resources/Graphics/panel-icon-1.png";
@@ -275,6 +281,13 @@ var s_TutorialLevel = "Resources/Graphics/level-tutorial.png";
 var s_LevelIcon = "Resources/Graphics/level-icon.png";
 var s_InputTextArea = "Resources/Graphics/input-text-area.png";
 var s_NetworkHolder = "Resources/Graphics/network-holder.png";
+var s_LevelElementChoise = "Resources/Graphics/level-element-choise.png";
+var s_LevelElementIcons = "Resources/Graphics/level-element-icons.png";
+var s_UsersCrown = "Resources/Graphics/users-crown.png";
+var s_LevelPointsHolder = "Resources/Graphics/level-points-holder.png";
+var s_LevelStars = "Resources/Graphics/level-stars.png";
+var s_LevelStarsCounter = "Resources/Graphics/stars-counter.png";
+var s_LevelStarsCounterArea = "Resources/Graphics/stars-counter-area.png";
 var s_Levels = [
   "Resources/Graphics/level-1.png",
   "Resources/Graphics/level-2.png",
@@ -328,12 +341,16 @@ var s_SoundLine = "Resources/Sound/line.wav";
 var s_SoundLose = "Resources/Sound/lose.wav";
 var s_SoundWin = "Resources/Sound/win.wav";
 var s_SoundExtraMove = "Resources/Sound/pome-zoomout.wav";
+var s_SoundDefence = "Resources/Sound/defence.mp3";
 var s_SoundBloom = ["Resources/Sound/bloom-1.wav", "Resources/Sound/bloom-2.wav", "Resources/Sound/bloom-3.wav", "Resources/Sound/bloom-4.wav"];
 var s_SoundChew = ["Resources/Sound/chew-1.wav", "Resources/Sound/chew-2.wav", "Resources/Sound/chew-3.wav"];
 var s_SoundDrop = ["Resources/Sound/drop-1.wav", "Resources/Sound/drop-2.wav", "Resources/Sound/drop-3.wav"];
 var s_SoundStars = ["Resources/Sound/star1.wav", "Resources/Sound/star2.wav", "Resources/Sound/star3.wav"];
 
 var resources = [
+  {src: s_Fonts[0].src, fontName: s_Fonts[0].name},
+  {src: s_Fonts[1].src, fontName: s_Fonts[1].name},
+
   {src: s_PreloaderBackgroundPortrait},
   {src: s_PreloaderBackgroundLandscape},
   {src: s_PreloaderBackgroundPortraitJapan},
@@ -390,6 +407,7 @@ var resources = [
   {src: s_PopupDecoration14},
   {src: s_PopupDecoration15},
   {src: s_PopupDecoration16},
+  {src: s_PopupDecoration17},
   {src: s_PanelItemsBackground1},
   {src: s_PanelItemsBackground2},
   {src: s_PanelIcon1},
@@ -558,6 +576,13 @@ var resources = [
   {src: s_LevelIcon},
   {src: s_InputTextArea},
   {src: s_NetworkHolder},
+  {src: s_LevelElementChoise},
+  {src: s_LevelElementIcons},
+  {src: s_UsersCrown},
+  {src: s_LevelPointsHolder},
+  {src: s_LevelStars},
+  {src: s_LevelStarsCounter},
+  {src: s_LevelStarsCounterArea},
   {src: s_Levels[0]},
   {src: s_Levels[1]},
   {src: s_Levels[2]},
@@ -609,6 +634,7 @@ var resources = [
   {src: s_SoundWin},
   {src: s_SoundLose},
   {src: s_SoundExtraMove},
+  {src: s_SoundDefence},
   {src: s_SoundStars[0]},
   {src: s_SoundStars[1]},
   {src: s_SoundStars[2]},

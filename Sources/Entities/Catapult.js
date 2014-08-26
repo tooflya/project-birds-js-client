@@ -269,15 +269,16 @@ Catapult = AnimatedEntity.extend({
       });
 
       for(var i = 0; i < 2; i++) {
-        this.get(i).setCenterPosition(self.getCenterX() - (Camera.sharedCamera().coord(55) * i + Camera.sharedCamera().coord(110)) * (this.get(i).isFlippedHorizontally() ? -1 : 1), Camera.sharedCamera().coord(10));
+        this.get(i).setCenterPosition(self.getCenterX() - (Camera.sharedCamera().coord(55) * i + Camera.sharedCamera().coord(110)) * (this.get(i).isFlippedHorizontally() ? -1 : 1), Camera.sharedCamera().coord(10) + this.get(i).getHeight() / 2);
       }
     };
 
     for(var i = 1; i < 4; i++) {
       this.m_Birds.create();
       this.m_Birds.last().setFlippedHorizontally(this.isFlippedHorizontally());
-      this.m_Birds.last().setCenterPosition(this.getCenterX() - (Camera.sharedCamera().coord(55) * i + Camera.sharedCamera().coord(55)) * (this.m_Birds.last().isFlippedHorizontally() ? -1 : 1), this.getCenterY() - Camera.sharedCamera().coord(65));
+      this.m_Birds.last().setCenterPosition(this.getCenterX() - (Camera.sharedCamera().coord(55) * i + Camera.sharedCamera().coord(55)) * (this.m_Birds.last().isFlippedHorizontally() ? -1 : 1), this.getCenterY() + this.m_Birds.last().getHeight() / 2 - Camera.sharedCamera().coord(65));
       this.m_Birds.last().setZOrder(this.getZOrder());
+      this.m_Birds.last().chooseId();
     }
   },
   destroyElements: function() {

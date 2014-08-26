@@ -312,6 +312,7 @@ Game = Screen.extend({
 
       this.m_CombinationsNotification = BackgroundColor.create(cc.c4(255, 255, 255, 255), this, Camera.sharedCamera().width, Camera.sharedCamera().coord(200));
       this.m_CombinationsNotification.setCenterPosition(Camera.sharedCamera().center.x, -this.m_CombinationsNotification.getHeight());
+      this.m_CombinationsNotification.setZOrder(300);
 
       this.m_CombinationsNotificationText = Text.create('no-more-combinations', this.m_CombinationsNotification);
       this.m_CombinationsNotificationText.setCenterPosition(this.m_CombinationsNotification.getWidth() / 2, this.m_CombinationsNotification.getHeight() / 2);

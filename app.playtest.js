@@ -278,6 +278,8 @@
         references.tutorial.element5,
         references.tutorial.element6,
 
+        references.tutorial.any1,
+
         references.levels.level1,
         references.levels.level2,
         references.levels.level3,
@@ -317,6 +319,7 @@
         -1, -1, -1, -1, -1, -1, -1, -1,
         -1, -1, -1, -1, -1, -1, -1, -1,
         1, 0, 0, 0, 0, 0, 0,
+        0,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       ], {
         success: function() {

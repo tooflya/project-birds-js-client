@@ -50,6 +50,26 @@ var g_language  = {
     {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
     {title: '$1', font: 'RiiPopkk-R', size: 38, dimensions: false}
     ],
+  'level': [
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
+  'total-stars': [
+    {title: 'Собирайте звезды!\n$1/$2', font: 'Comic Sans MS Bold', size: 26, dimensions: false},
+    {title: 'Собирайте звезды!\n$1/$2', font: 'Comic Sans MS Bold', size: 26, dimensions: false},
+    {title: '$1/$2', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1/$2', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1/$2', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1/$2', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1/$2', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1/$2', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
   'tutorial-1': [
     {title: 'Move green square to the left to match 3 of the same!', font: 'Comic Sans MS', size: 46, dimensions: false},
     {title: 'Передвиньте зеленую иконку влево чтобы сократить 3 одинаковых иконки!', font: 'Comic Sans MS', size: 46, dimensions: false},
@@ -1079,6 +1099,26 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "クラシックモード -  ランキングやコイン獲得を目指すゲーム！", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-points': [
+    {title: "Beat your record in \n $1 $2!", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "Побейте свой рекорд в \n $1 $2!", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 28, dimensions: [450, 0]}
+    ],
+  'level-points-point': [
+    {title: {string: '', nom: 'point', gen: 'points', plu: 'points'}, font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: {string: '', nom: 'очко', gen: 'очка', plu: 'очков'}, font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 28, dimensions: [450, 0]}
     ],
   'level-popup-1': [
     {title: "Level - $1", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -3844,8 +3884,8 @@ var g_language  = {
     {title: "$1", font: "RiiPopkk-R", size: 28, dimensions: false}
     ],
   'leaderboard-score': [
-    {title: "Ranking: $1", font: "Comic Sans MS", size: 25, dimensions: false},
-    {title: "Рейтинг: $1", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Ranking: $1 $2", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Рейтинг: $1 $2", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "$1", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "$1", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "$1", font: "Comic Sans MS", size: 25, dimensions: false},

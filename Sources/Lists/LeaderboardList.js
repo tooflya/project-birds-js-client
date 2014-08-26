@@ -70,24 +70,23 @@ LeaderboardList = PatternList.extend({
   onEnter: function() {
     this._super();
 
-    var self = this;
-
     new PausableTimeout(function() {
       Tooflya.api.call('users.leaders', {
         limit: 100,
         type: 1
       }, {
         success: function(data) {
-          self.m_Loading[0].destroy();
-          self.m_Loading[1].destroy();
+          this.m_Loading[0].destroy();
+          this.m_Loading[1].destroy();
 
-          var y = self.getCenterY() + Camera.sharedCamera().coord(120);
+          var y = this.getCenterY() + Camera.sharedCamera().coord(120);
           var index = 0;
 
           data.users.forEach(function(user) {
             if(FriendsManager.sharedInstance().isFriend(user)) {
               var s = y;
-              InternetEntity.create(user.photo, self, function(entity) {
+              var i = index;
+              InternetEntity.create(user.photo, this, function(entity) {
                 entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
 
                 var icon = Entity.create(s_LevelIcon, entity);
@@ -101,30 +100,36 @@ LeaderboardList = PatternList.extend({
 
                 icon.create().setCenterPosition(Camera.sharedCamera().coord(10), Camera.sharedCamera().coord(10));
 
-                var name = Text.create('leaderboard-name', self, cc.TEXT_ALIGNMENT_LEFT);
-                var score = Text.create('leaderboard-score', self);
+                var name = Text.create('leaderboard-name', this, cc.TEXT_ALIGNMENT_LEFT);
+                var score = Text.create('leaderboard-score', this);
 
                 name.ccsf([user.name + " " + user.surname]);
-                score.ccsf([user.rating]);
+                score.ccsf([user.rating, '']);
 
                 name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), s + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
                 score.setCenterPosition(score.getWidth() / 2 + Camera.sharedCamera().coord(160), s - Camera.sharedCamera().coord(0));
 
                 name.setColor(cc.c3(255.0, 130.0, 0.0));
                 score.setColor(cc.c3(204.0, 102.0, 51.0));
-              });
+
+                if(i == 0) {
+                  var crown = Entity.create(s_UsersCrown, this);
+
+                  crown.create().setCenterPosition(Camera.sharedCamera().coord(100), s + Camera.sharedCamera().coord(50));
+                }
+              }.bind(this));
 
               y -= Camera.sharedCamera().coord(120);
 
               index++;
             }
-          });
+          }.bind(this));
 
           if(index < 1) {
-            self.m_Text[2].setVisible(false);
+            this.m_Text[2].setVisible(false);
           }
 
-          self.m_Text[3].setCenterPosition(self.getCenterX(), y + Camera.sharedCamera().coord(20));
+          this.m_Text[3].setCenterPosition(this.getCenterX(), y + Camera.sharedCamera().coord(20));
 
           y -= Camera.sharedCamera().coord(80);
 
@@ -133,7 +138,8 @@ LeaderboardList = PatternList.extend({
           data.users.forEach(function(user) {
             if(!FriendsManager.sharedInstance().isFriend(user)) {
               var s = y;
-              InternetEntity.create(user.photo, self, function(entity) {
+              var i = index;
+              InternetEntity.create(user.photo, this, function(entity) {
                 entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
 
                 var icon = Entity.create(s_LevelIcon, entity);
@@ -147,11 +153,11 @@ LeaderboardList = PatternList.extend({
 
                 icon.create().setCenterPosition(Camera.sharedCamera().coord(10), Camera.sharedCamera().coord(10));
 
-                var name = Text.create('leaderboard-name', self, cc.TEXT_ALIGNMENT_LEFT);
-                var score = Text.create('leaderboard-score', self);
+                var name = Text.create('leaderboard-name', this, cc.TEXT_ALIGNMENT_LEFT);
+                var score = Text.create('leaderboard-score', this);
 
                 name.ccsf([user.name + " " + user.surname]);
-                score.ccsf([user.rating]);
+                score.ccsf([user.rating, '']);
 
                 name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), s + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
                 score.setCenterPosition(score.getWidth() / 2 + Camera.sharedCamera().coord(160), s - Camera.sharedCamera().coord(0));
@@ -159,21 +165,27 @@ LeaderboardList = PatternList.extend({
                 name.setColor(cc.c3(255.0, 130.0, 0.0));
                 score.setColor(cc.c3(204.0, 102.0, 51.0));
 
-                self.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));
-              });
+                this.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));
+
+                if(i == 0) {
+                  var crown = Entity.create(s_UsersCrown, this);
+
+                  crown.create().setCenterPosition(Camera.sharedCamera().coord(100), s + Camera.sharedCamera().coord(50));
+                }
+              }.bind(this));
 
               y -= Camera.sharedCamera().coord(120);
 
               index++;
             }
-          });
+          }.bind(this));
 
           if(index < 1) {
-            self.m_Text[3].setVisible(false);
+            this.m_Text[3].setVisible(false);
           }
-        }
+        }.bind(this)
       });
-    }, 1000);
+    }.bind(this), 1000);
   }
 });
 

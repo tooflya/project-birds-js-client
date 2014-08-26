@@ -548,8 +548,47 @@ Levels = Screen.extend({
 
     this.m_Water = EntityManager.create(this.m_WaterCoordinates.length, Water.create(), this, 100);
     this.m_Icons = EntityManager.create(this.m_IconsCoordinates.length, MapIcon.create(), this, 101);
-    this.m_Points = EntityManager.create(this.m_PointsCoordinates.length, MapPoint.create(), this, 102);
+    /** this.m_Points = EntityManager.create(this.m_PointsCoordinates.length, MapPoint.create(), this, 102); */
     this.m_Trees = EntityManager.create(this.m_TreesCoordinates.length, MapTree.create(), this, 103);
+
+    this.m_StarsCounter = Button.create(s_LevelStarsCounter, 1, 1, this);
+    this.m_StarsCounterArea = Entity.create(s_LevelStarsCounterArea, this);
+    this.m_StarsCounterArea.text = Text.create('total-stars', this.m_StarsCounterArea);
+    this.m_StarsCounter.onHover = function() {
+    };
+    this.m_StarsCounter.onUnHover = function() {
+    };
+    this.m_StarsCounter.onTouch = function(e) {
+      Button.prototype.onTouch.call(this, e);
+
+      var area = Levels.instance.m_StarsCounterArea;
+
+      if(area.getNumberOfRunningActions() > 0) return false;
+
+      if(this.showed) {
+        area.runAction(cc.FadeTo.create(0.5, 0));
+      } else {
+        area.setOpacity(0);
+        area.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(130));
+        area.runAction(cc.FadeTo.create(0.5, 255));
+      }
+
+      this.showed = !this.showed;
+    };
+    this.m_StarsCounter.setTouchHandler('onShowStarsInfo', Levels);
+
+    this.m_StarsCounter.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(150), -Camera.sharedCamera().coord(80));
+    this.m_StarsCounterArea.create().setCenterPosition(0, 0);
+    this.m_StarsCounterArea.setCascadeOpacityEnabled(true);
+    this.m_StarsCounter.registerTouchable(true);
+    this.m_StarsCounterArea.text.create().setCenterPosition(this.m_StarsCounterArea.getWidth() / 2, this.m_StarsCounterArea.getHeight() / 2);
+    this.m_StarsCounterArea.text.setColor(cc.c3(114.0, 80.0, 9.0));
+    this.m_StarsCounterArea.text.disableShadow();
+    this.m_StarsCounterArea.text.ccsf([0, 90]); // TODO: Add total stars count.
+    this.m_StarsCounterArea.setOpacity(0);
+
+    this.m_StarsCounter.setZOrder(200);
+    this.m_StarsCounterArea.setZOrder(200);
 
     var parallax = Entity.create(s_LevelsMapCloud);
     this.m_Cloud = ParallaxEntity.create(parallax, {
@@ -591,9 +630,11 @@ Levels = Screen.extend({
         }
 
         element.lock = Entity.create(s_Lock, element);
-        element.lock.create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2);
-        element.lock.setScale(1.0);
+        element.lock.create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2 - Camera.sharedCamera().coord(10));
+        element.lock.setScale(0.9);
         element.lock.setOpacity(255.0)
+
+        element.m_Text.removeFromParent();
       } else {
         element.registerTouchable(true);
 
@@ -611,12 +652,14 @@ Levels = Screen.extend({
             )
           );
         }
+
+        element.setCurrentFrameIndex(DataManager.sharedManager().get(false, references.levels.levels[i]) - 1);
       }
     }
 
-    for(var i = 0; i < this.m_PointsCoordinates.length; i++) {
+    /*for(var i = 0; i < this.m_PointsCoordinates.length; i++) {
       this.m_Points.create().setCenterPosition(Camera.sharedCamera().coord(this.m_PointsCoordinates[i].x), Camera.sharedCamera().coord(this.m_PointsCoordinates[i].y));
-    }
+    }*/
 
     for(var i = 0; i < this.m_TreesCoordinates.length; i++) {
       this.m_Trees.create().setCenterPosition(Camera.sharedCamera().coord(this.m_TreesCoordinates[i].x), Camera.sharedCamera().coord(this.m_TreesCoordinates[i].y));
@@ -629,6 +672,10 @@ Levels = Screen.extend({
   onSelected: function(data) {
     Game.level = data.id ? data.id : Game.level;
     Level.sharedScreen(this).show();
+  },
+  onShowStarsInfo: function() {
+  },
+  onLevelItemChanged: function() {
   },
   onShow: function() {
     this._super();
@@ -659,6 +706,16 @@ Levels = Screen.extend({
         }
       }
     });
+
+    this.m_StarsCounter.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(1.0),
+        cc.EaseExponentialOut.create(
+          cc.MoveTo.create(1.0, cc.p(this.m_StarsCounter.getCenterX(), this.m_StarsCounter.getCenterY() + Camera.sharedCamera().coord(160)))
+        ),
+        false
+      )
+    );
   },
   onHide: function() {
     this._super();
@@ -716,20 +773,21 @@ MapTree = TiledEntity.extend({
 
 MapIcon = Button.extend({
   ctor: function() {
-    this._super(s_LevelsMapIcons, 4, 1);
+    this._super(s_LevelsMapIcons, 2, 2);
 
-    this.m_Text = Text.create(false, this);
+    this.m_Text = Text.create('level', this);
+    this.m_Text.setText('level');
+
+    this.m_Text.setColor(cc.c3(114.0, 80.0, 9.0));
 
     this.registerTouchable(true);
   },
   onCreate: function() {
     this._super();
 
-    this.m_Text.setFontSize(Camera.sharedCamera().coord(20));
-    this.m_Text.setCenterPosition(this.getWidth() / 2 - Camera.sharedCamera().coord(0), this.getHeight() / 2 - Camera.sharedCamera().coord(20));
-    this.m_Text.setString(this.getID() + 1);
+    this.m_Text.setCenterPosition(this.getWidth() / 2, this.getHeight() / 2 - Camera.sharedCamera().coord(10));
+    this.m_Text.ccsf([this.getID() + 1]);
     this.m_Text.disableShadow();
-    this.m_Text.setColor(cc.c3(0, 0, 0));
   },
   onHover: function() {
   },

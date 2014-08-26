@@ -191,16 +191,33 @@ Finish = Background.extend({
             Tooflya.api.call('level.update', {
               level: Game.level,
               score: Game.score,
-              stars: Game.stars
+              stars: Game.instance.m_StarsPoints
             });
+
+            var previous = DataManager.sharedManager().get(false,
+              [
+                references.levels.levels[Game.level - 1],
+                references.levels.points[Game.level - 1]
+              ]
+            );
+            DataManager.sharedManager().set(true,
+              [
+                references.levels.levels[Game.level - 1],
+                references.levels.points[Game.level - 1],
+                references.levels.levels[Game.level]
+              ],
+              [
+                Math.max(previous[0], Game.instance.m_StarsPoints + 1),
+                Math.max(previous[1], Game.score),
+                1
+              ]
+            );
 
             Game.level++;
 
             Tooflya.api.call('level.set', {
               level: Game.level
             });
-
-            DataManager.sharedManager().set(true, references.levels.levels[Game.level - 1], 1);
           } else {
             if(Game.instance.m_GameState) {
               Tooflya.api.call('level.update', {

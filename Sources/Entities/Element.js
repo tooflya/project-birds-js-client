@@ -118,11 +118,11 @@ Element = TiledEntity.extend({
     } else {
       this.m_Removed = true;
 
-      MatrixManager.sharedManager().removeBoxes(this.getIndex().x, this.getIndex().y, this);
-      MatrixManager.sharedManager().remove(this);
-
       switch(this.getId()) {
         default:
+        MatrixManager.sharedManager().removeBoxes(this.getIndex().x, this.getIndex().y, this);
+        MatrixManager.sharedManager().remove(this);
+
         this.destroy();
 
         icons.push(ElementsManager.sharedManager().m_ElementsIcons.create(this));
@@ -144,6 +144,12 @@ Element = TiledEntity.extend({
           MatrixManager.timeout.pause();
         }
 
+        new PausableTimeout(function() {
+          MatrixManager.sharedManager().removeBoxes(this.getIndex().x, this.getIndex().y, this);
+          MatrixManager.sharedManager().remove(this);
+          MatrixManager.instance.clear();
+        }.bind(this), 1.2);
+
         this.runAction(
           cc.Sequence.create(
             cc.Repeat.create(
@@ -159,8 +165,6 @@ Element = TiledEntity.extend({
             false
           )
         );
-
-        MatrixManager.instance.clear();
 
         Sound.sharedSound().play(s_SoundStar);
 
