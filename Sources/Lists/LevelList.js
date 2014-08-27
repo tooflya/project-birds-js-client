@@ -161,11 +161,13 @@ LevelList = PatternList.extend({
       this.m_PointsHolder = Entity.create(s_LevelPointsHolder, this);
       this.m_PointsHolder.stars = TiledEntity.create(s_LevelStars, 1, 4, this.m_PointsHolder);
       this.m_PointsHolder.text = Text.create('level-points', this.m_PointsHolder);
+      this.m_PointsHolder.temp = Text.create('level-points-point', false);
 
       this.m_PointsHolder.create().setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(70));
       this.m_PointsHolder.stars.create().setCenterPosition(Camera.sharedCamera().coord(16), Camera.sharedCamera().coord(16));
       this.m_PointsHolder.text.create().setCenterPosition(this.m_PointsHolder.getWidth() / 2, this.m_PointsHolder.getHeight() / 2);
-      this.m_PointsHolder.text.ccsf([points, '']);
+      this.m_PointsHolder.temp.ccsf([points]);
+      this.m_PointsHolder.text.ccsf([points, this.m_PointsHolder.temp.getString()]);
       this.m_PointsHolder.text.setColor(cc.c3(204.0, 102.0, 51.0));
 
       this.m_PointsHolder.stars.setCurrentFrameIndex(DataManager.sharedManager().get(false, references.levels.levels[Game.level - 1]) - 1);

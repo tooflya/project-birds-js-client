@@ -29,29 +29,42 @@
  *
  */
 
-ChallengeList = PatternList.extend({
+FriendsLivesList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
 
-    this.m_Decoration = Entity.create(s_PopupDecoration18, this);
+    this.m_Decoration1 = Entity.create(s_PopupDecoration19, this);
+    this.m_Decoration2 = Entity.create(s_PopupDecoration20, this);
 
     this.m_Text = [];
 
-    this.m_Text[0] = Text.create('challenge-popup-1', this);
-    this.m_Text[1] = Text.create('challenge-popup-2', this);
+    this.m_Text[0] = Text.create('friends-lives-popup-1', this);
 
-    this.m_Text[0].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
-    this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() - Camera.sharedCamera().coord(230));
-    this.m_Decoration.create().setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(70));
+    this.m_Text[0].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(320));
+    this.m_Decoration1.create().setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(100));
+    this.m_Decoration2.create().setCenterPosition(this.getCenterX() - Camera.sharedCamera().coord(10), this.getCenterY() + Camera.sharedCamera().coord(100));
 
     this.m_Text[0].setColor(cc.c3(204.0, 102.0, 51.0));
-    this.m_Text[1].setColor(cc.c3(255.0, 130.0, 0.0));
+
+    this.m_Decoration2.runAction(
+      cc.RepeatForever.create(
+        cc.Sequence.create(
+          cc.ScaleTo.create(0.2, 0.95, 1.0),
+          cc.ScaleTo.create(0.1, 1.0, 1.0),
+          cc.MoveTo.create(2.2, cc.p(this.m_Decoration2.getCenterX(), this.m_Decoration2.getCenterY() + Camera.sharedCamera().coord(5))),
+          cc.ScaleTo.create(0.2, 0.95, 1.0),
+          cc.ScaleTo.create(0.1, 1.0, 1.0),
+          cc.MoveTo.create(2.2, cc.p(this.m_Decoration2.getCenterX(), this.m_Decoration2.getCenterY() - Camera.sharedCamera().coord(5))),
+          false
+        )
+      )
+    );
   },
   onEnter: function() {
     this._super();
   }
 });
 
-ChallengeList.create = function(parent) {
-  return new ChallengeList(parent);
+FriendsLivesList.create = function(parent) {
+  return new FriendsLivesList(parent);
 };

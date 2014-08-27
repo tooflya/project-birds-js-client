@@ -340,6 +340,7 @@ Mode = Screen.extend({
     this._super();
 
     MenuPanel.sharedScreen(this).show();
+    FriendsLives.sharedScreen(this).show();
 
     if(DataManager.sharedManager().get(false, references.lock.modes.classic) || this.config.params.vendor == 'ubi-nuri') this.m_Lock[0].destroy();
     if(DataManager.sharedManager().get(false, references.lock.modes.arcade)) this.m_Lock[1].destroy(); 

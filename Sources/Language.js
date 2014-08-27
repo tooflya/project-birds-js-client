@@ -1651,18 +1651,28 @@ var g_language  = {
     {title: "あなたの成果", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}//
     ],
   'challenge-popup-1': [
-    {title: "Challenge friend", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "Пригласить друга", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "友人を招待", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}//
+    {title: "Invite friends", font: "Comic Sans MS", size: 45, dimensions: [450, 0]},
+    {title: "Пригласить друзей", font: "Comic Sans MS", size: 45, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 45, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 45, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 45, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 45, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 45, dimensions: [450, 0]},
+    {title: "友人を招待", font: "RiiPopkk-R", size: 45, dimensions: [450, 0]}//
+    ],
+  'friends-lives-popup-1': [
+    {title: "Friends needs help!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Друзьям нужна помощь!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}//
     ],
   'challenge-popup-2': [
-    {title: "$1 already play this game. Request a battle if you want. Or close this window by pressing a close button.", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "$1 уже играет в эту игру. Вызовите его на битву птиц, либо закройте это окно, нажав на крестик.", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Invite your friends and receive valuable prizes and gifts!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Приглашайте друзей и получайте ценные призы и подарки!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},

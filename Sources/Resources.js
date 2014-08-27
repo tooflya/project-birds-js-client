@@ -97,6 +97,9 @@ var s_PopupDecoration14 = "Resources/Graphics/popup-decoration-14.png";
 var s_PopupDecoration15 = "Resources/Graphics/popup-decoration-15.png";
 var s_PopupDecoration16 = "Resources/Graphics/popup-decoration-16.png";
 var s_PopupDecoration17 = "Resources/Graphics/popup-decoration-17.png";
+var s_PopupDecoration18 = "Resources/Graphics/popup-decoration-18.png";
+var s_PopupDecoration19 = "Resources/Graphics/popup-decoration-19.png";
+var s_PopupDecoration20 = "Resources/Graphics/popup-decoration-20.png";
 var s_PanelItemsBackground1 = "Resources/Graphics/panel-item-background-1.png";
 var s_PanelItemsBackground2 = "Resources/Graphics/panel-item-background-2.png";
 var s_PanelIcon1 = "Resources/Graphics/panel-icon-1.png";
@@ -408,6 +411,9 @@ var resources = [
   {src: s_PopupDecoration15},
   {src: s_PopupDecoration16},
   {src: s_PopupDecoration17},
+  {src: s_PopupDecoration18},
+  {src: s_PopupDecoration19},
+  {src: s_PopupDecoration20},
   {src: s_PanelItemsBackground1},
   {src: s_PanelItemsBackground2},
   {src: s_PanelIcon1},
