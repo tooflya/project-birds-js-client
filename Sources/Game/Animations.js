@@ -210,13 +210,13 @@ Game.prototype.startAction = function(selector, data) {
     case 1:
     this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
       repeat: data.repeat,
-      regeneration: 10 * data.factor
+      regeneration: (5 * (this.getWeapon() + 1)) * data.factor
     });
     break;
     case 2:
     this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
       repeat: data.repeat,
-      shield: 5 * data.factor
+      shield: (7 * (this.getWeapon() + 1)) * data.factor
     });
     break;
     case 3:

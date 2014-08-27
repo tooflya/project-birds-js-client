@@ -74,7 +74,7 @@ Catapult = AnimatedEntity.extend({
 
       this.m_SpeedFactor = 1;
     } else {
-      this.m_Health = this.m_HealthBasic = this._id > 0 ? (Game.tutorial ? Game.instance.m_TutorialMatrix.opponent.health : Game.instance.m_LevelsMatrixes[Game.level - 1].opponent.health) : 100;
+      this.m_Health = this.m_HealthBasic = this._id > 0 ? (Game.tutorial ? Game.instance.m_TutorialMatrix.opponent.health : Game.instance.m_LevelsMatrixes[Game.level - 1].opponent.health) : (100 + (53 * (DataManager.sharedManager().get(false, references.info.weapon) - 1)));
       this.m_Defence = 0;
 
       this.m_SpeedFactor = this._id > 0 ? (Game.tutorial ? Game.instance.m_TutorialMatrix.opponent.speed : Game.instance.m_LevelsMatrixes[Game.level - 1].opponent.speed) : 1;
