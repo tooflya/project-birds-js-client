@@ -269,16 +269,39 @@ ElementsManager = EntityManager.extend({
       Game.sharedScreen().onStartAnimationFinish();
     }
 
+    var tops = [];
+
+    for(var x = 0; x < MatrixManager.sharedManager().getSize().x; x++) {
+      var top = 0;
+      var empty = false;
+      for(var y = 0; y < MatrixManager.sharedManager().getSize().y; y++) {
+        var element = MatrixManager.sharedManager().get(x, y);
+
+        if(element != etypes.empty) {
+          empty = false;
+        }
+
+        if((element == etypes.empty && !empty) || (element != etypes.empty && y == MatrixManager.sharedManager().getSize().y - 1)) {
+          top = y - (y == MatrixManager.sharedManager().getSize().y - 1 ? 0 : 1);
+          empty = true;
+        }
+      }
+
+      tops.push(top);
+    }
+
     var fields = [];
     for(var x = 0; x < MatrixManager.sharedManager().getSize().x; x++) {
       for(var y = 0; y < MatrixManager.sharedManager().getSize().y; y++) {
         var element = MatrixManager.sharedManager().get(x, y);
 
-        if((element == etypes.empty && y < MatrixManager.sharedManager().getSize().y - 1) || (y == MatrixManager.sharedManager().getSize().y - 1 && element != etypes.empty)) {
+        if((element == etypes.empty && y < MatrixManager.sharedManager().getSize().y - 1) || (y == tops[x] && element != etypes.empty)) {
           var top = MatrixManager.sharedManager().get(x, y + 1);
 
           if(top != etypes.empty && top != etypes.block) {
             this.m_MatrixArrows2.create().setCenterPosition(top.convertToWorldSpace(cc.p(0, 0)).x + top.getWidth() / 2, top.convertToWorldSpace(cc.p(0, 0)).y);
+          } else if(y == tops[x]) {
+            this.m_MatrixArrows2.create().setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight());
           }
         }
 

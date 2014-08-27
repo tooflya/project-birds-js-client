@@ -497,7 +497,7 @@ Element = TiledEntity.extend({
 
       if(index.y == manager.getSize().y) {
         var bottom = manager.get(index.x, index.y - 1);
-        if(manager.soe(bottom)) {
+        if(manager.s(bottom)) {
           return false;
         }
       }
@@ -575,7 +575,7 @@ Element = TiledEntity.extend({
 
             if(!stop) {
               if(!toper) {
-                if(manager.soe(element)) {
+                if(manager.s(element)) {
                   toper = true;
 
                   if(manager.s(element)) {
@@ -616,7 +616,7 @@ Element = TiledEntity.extend({
 
             if(!stop) {
               if(!toper) {
-                if(manager.soe(element)) {
+                if(manager.s(element)) {
                   toper = true;
 
                   if(manager.s(element)) {
