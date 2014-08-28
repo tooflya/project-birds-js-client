@@ -1660,16 +1660,6 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 45, dimensions: [450, 0]},
     {title: "友人を招待", font: "RiiPopkk-R", size: 45, dimensions: [450, 0]}//
     ],
-  'friends-lives-popup-1': [
-    {title: "Friends needs help!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "Друзьям нужна помощь!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}//
-    ],
   'challenge-popup-2': [
     {title: "Invite your friends and receive valuable prizes and gifts!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Приглашайте друзей и получайте ценные призы и подарки!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1680,9 +1670,39 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "$1 すでにこのゲームをプレイ。鳥の戦い、それを呼び出す、またはクロスをクリックして、ウィンドウを閉じます。", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}//
     ],
+  'friends-lives-popup-1': [
+    {title: "Friends needs help!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Друзьям нужна помощь!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}//
+    ],
+  'friends-lives-popup-2': [
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "У некоторых ваших друзей закончились золотые сердечки! Подарите им сердечки!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}//
+    ],
   'request-battle': [
     {title: 'Request', font: 'Comic Sans MS', size: 48, dimensions: false},
     {title: 'Пригласить', font: 'Comic Sans MS', size: 38, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 38, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 38, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 38, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 38, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 38, dimensions: false},
+    {title: '招待', font: 'RiiPopkk-R', size: 38, dimensions: false}//
+    ],
+  'friends-help': [
+    {title: 'Help', font: 'Comic Sans MS', size: 48, dimensions: false},
+    {title: 'Помочь', font: 'Comic Sans MS', size: 38, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 38, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 38, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 38, dimensions: false},

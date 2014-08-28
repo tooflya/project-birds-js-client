@@ -37,15 +37,24 @@ FriendsLives = ExtendedPopup.extend({
 
     this.m_BackgroundHolder1 = Entity.create(s_ListFixSmall, this.m_Background);
     this.m_BackgroundHolder2 = Entity.create(s_ListFixSmall, this.m_Background);
+    this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);
+    this.m_Text = Text.create('friends-help', this.m_ActionButton);
 
     this.m_List = FriendsLivesList.create(this.m_Background);
 
     this.m_BackgroundHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(308));
     this.m_BackgroundHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(398));
+    this.m_ActionButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
+    this.m_Text.setCenterPosition(this.m_ActionButton.getWidth() / 2, this.m_ActionButton.getHeight() / 2);
 
     this.m_BackgroundHolder2.setScaleY(-1);
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', FriendsLives);
+    this.m_ActionButton.setTouchHandler('onActionEvent', FriendsLives);
+  },
+  onActionEvent: function() {
+    this.m_ActionButton.destroy();
+    this.m_List.onActionEvent();
   },
   onShow: function() {
     this._super();

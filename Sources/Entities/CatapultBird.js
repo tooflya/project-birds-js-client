@@ -408,8 +408,8 @@ CatapultBird = AnimatedEntity.extend({
       case this.m_States.jump:
       break;
       case this.m_States.fire:
-      Game.instance.m_WeaponParticles1.create().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
-      Game.instance.m_WeaponParticles2.create().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
+      Game.instance.m_WeaponParticles1.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+      Game.instance.m_WeaponParticles2.create().setCenterPosition(this.getCenterX(), this.getCenterY());
       break;
       case this.m_States.blow:
       break;

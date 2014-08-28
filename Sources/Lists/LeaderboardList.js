@@ -59,13 +59,13 @@ LeaderboardList = PatternList.extend({
     this.m_Loading[0].runAction(
       cc.RepeatForever.create(
         cc.RotateTo.create(1.0, 720)
-        )
-      );
+      )
+    );
     this.m_Loading[1].runAction(
       cc.RepeatForever.create(
         cc.RotateTo.create(1.0, 720)
-        )
-      );
+      )
+    );
   },
   onEnter: function() {
     this._super();
