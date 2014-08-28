@@ -372,7 +372,7 @@ CatapultBird = AnimatedEntity.extend({
     }
   },
   chooseId: function() {
-    if(this.isFlippedHorizontally()) {
+    if(this.isFlippedHorizontally() || !Game.selected) {
       this.m_Id = Random.sharedRandom().random(0, Bird.count, true) * this.getHorizontalFramesCount();
 
       this.setCurrentFrameIndex(this.m_Id + 10);

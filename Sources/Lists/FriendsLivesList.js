@@ -33,8 +33,6 @@ FriendsLivesList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
 
-    this.m_Loading = Entity.create(s_Loading, this);
-
     this.m_Decoration1 = Entity.create(s_PopupDecoration19, this);
     this.m_Decoration2 = Entity.create(s_PopupDecoration20, this);
 
@@ -60,19 +58,84 @@ FriendsLivesList = PatternList.extend({
         )
       )
     );
-    this.m_Loading.runAction(
-      cc.RepeatForever.create(
-        cc.RotateTo.create(1.0, 720)
-      )
-    );
   },
-  onActionEvent: function() {
+  onActionEvent: function(users) {
     this.m_Text[1].setVisible(false);
 
     this.m_Decoration1.destroy();
     this.m_Decoration2.destroy();
 
-    this.m_Loading.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+
+    var y = this.getCenterY() + Camera.sharedCamera().coord(200);
+    users.forEach(function(user) {
+      if(true) {
+        var s = y;
+        InternetEntity.create(user.photo, this, function(entity) {
+          entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
+
+          var button = Entity.create(s_LivesPresentBackground, this);
+          var icon = AnimatedEntity.create(s_PanelIcon3, 3, 3, button);
+
+          var name = Text.create('leaderboard-name', this, cc.TEXT_ALIGNMENT_LEFT);
+          var text = Text.create('friends-live-present-1', button);
+
+          name.ccsf([user.name + " " + user.surname]);
+
+          name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), s + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
+          text.setCenterPosition(button.getWidth() / 2 + Camera.sharedCamera().coord(15), button.getHeight() / 2);
+          button.create().setCenterPosition(this.getCenterX() + Camera.sharedCamera().coord(60), s - Camera.sharedCamera().coord(20));
+          icon.create().setCenterPosition(Camera.sharedCamera().coord(35), button.getHeight() / 2);
+          icon.animate(0.06, 2, {start: 0, end: 7}, {start: 0, end: 5.0});
+
+          name.setColor(cc.c3(255.0, 130.0, 0.0));
+          text.setColor(cc.c3(204.0, 102.0, 51.0));
+
+          button.registerTouchable(true);
+          button.onCancel = function() {
+          };
+          button.onMouseDown = function(e) {
+            if(Entity.prototype.onMouseDown.call(this, e)) {
+              this.stopAllActions();
+
+              this.runRecognizeAction(false, {
+                name: 'scale',
+                time: 0.1,
+                value: 0.95
+              });
+            }
+          };
+          button.onMouseUp = function(e) {
+            if(Entity.prototype.onMouseUp.call(this, e)) {
+              this.stopAllActions();
+
+              this.runRecognizeAction(false, {
+                name: 'scale',
+                time: 0.1,
+                value: 1.0
+              });
+            }
+          };
+          button.onTouch = function(e) {
+            Button.prototype.onTouch.call(this, e);
+
+            this.registerTouchable(false);
+            text.setText('friends-live-present-2');
+            text.runAction(
+              cc.Sequence.create(
+                cc.DelayTime.create(0.2),
+                cc.EaseBounceOut.create(
+                  cc.MoveTo.create(0.5, cc.p(text.getCenterX() - Camera.sharedCamera().coord(100), text.getCenterY()))
+                ),
+                false
+              )
+            );
+            icon.runAction(cc.FadeOut.create(0.2));
+          };
+        }.bind(this));
+
+        y -= Camera.sharedCamera().coord(120);
+      }
+    }.bind(this));
   },
   onEnter: function() {
     this._super();

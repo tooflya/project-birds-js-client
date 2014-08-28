@@ -340,10 +340,32 @@ Mode = Screen.extend({
     this._super();
 
     MenuPanel.sharedScreen(this).show();
-    FriendsLives.sharedScreen(this).show();
 
     if(DataManager.sharedManager().get(false, references.lock.modes.classic) || this.config.params.vendor == 'ubi-nuri') this.m_Lock[0].destroy();
     if(DataManager.sharedManager().get(false, references.lock.modes.arcade)) this.m_Lock[1].destroy(); 
+
+    switch(this.config.params.platform)
+    {
+      case 'vk':
+      var id = [];
+      FriendsManager.instance.getAppFriends().forEach(function(user) {
+        id.push(user.uid);
+      });
+
+      if(id.length > 0) {
+        Tooflya.api.call('energy.get', {
+          key: references.coins.lives,
+          friends: id
+        }, {
+          success: function(data) {
+            if(data.friends.length > 0) {
+              FriendsLives.sharedScreen(this).show(data.friends);
+            }
+          }.bind(this)
+        });
+      }
+      break;
+    }
   },
   onHide: function() {
     this._super();

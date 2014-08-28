@@ -30,6 +30,7 @@
  */
 
 FriendsLives = ExtendedPopup.extend({
+  m_Friends: false,
   ctor: function(parent) {
     this._super(parent);
 
@@ -54,7 +55,7 @@ FriendsLives = ExtendedPopup.extend({
   },
   onActionEvent: function() {
     this.m_ActionButton.destroy();
-    this.m_List.onActionEvent();
+    this.m_List.onActionEvent(this.m_Friends);
   },
   onShow: function() {
     this._super();
@@ -63,6 +64,11 @@ FriendsLives = ExtendedPopup.extend({
     this._super();
 
     FriendsLives.instance = false;
+  },
+  show: function(data) {
+    this._super();
+
+    this.m_Friends = data;
   }
 });
 

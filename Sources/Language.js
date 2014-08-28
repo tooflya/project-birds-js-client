@@ -3923,4 +3923,24 @@ var g_language  = {
     {title: "$1", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "$1", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
+  'friends-live-present-1': [
+    {title: "Give live", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Подарить жизнь", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
+    ],
+  'friends-live-present-2': [
+    {title: "Thanks!", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Спасибо!", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
+    ]
 };
