@@ -534,6 +534,20 @@ Element = TiledEntity.extend({
 
             y -= h;
           } else {
+            var frames = {
+              left: manager.get(index.x - 1, index.y - down),
+              right: manager.get(index.x + 1, index.y - down),
+              down: {
+                left: manager.get(index.x - 1, index.y - (down + 1)),
+                right: manager.get(index.x + 1, index.y - (down + 1))
+              }
+            };
+
+            if((!frames.down.left && manager.s(frames.left)) || (!frames.down.right && manager.s(frames.right))) {
+              empty = 0;
+              current = 0;
+            }
+
             free = false;
           }
         }
