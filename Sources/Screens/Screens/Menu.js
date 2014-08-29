@@ -92,7 +92,7 @@ Menu = Screen.extend({
     }
 
     Rate.sharedScreen(this).prepare();
-    Challenge.sharedScreen(this).prepare();
+    Invite.sharedScreen(this).prepare();
   },
   onPlayEvent: function() {
     ScreenManager.sharedManager().replace(Mode);
@@ -119,7 +119,7 @@ Menu = Screen.extend({
     } else if(DataManager.sharedManager().get(false, references.info.game) && !DataManager.sharedManager().get(false, references.info.rate) && LanguagesManager.sharedManager().config.params.vendor != 'ubi-nuri') {
       Rate.sharedScreen(this).show();
     } else if(FriendsManager.sharedInstance().getAppFriends().length > 0 && Random.sharedRandom().probably(30)) {
-      Challenge.sharedScreen(this).show();
+      Invite.sharedScreen(this).show();
     }
 
     Music.sharedMusic().play(s_Music1, true);
@@ -148,8 +148,8 @@ Menu = Screen.extend({
       case 27:
         if(Rate.sharedScreen().getParent()) {
           Rate.sharedScreen().hide();
-        } else if(Challenge.sharedScreen(this).getParent()) {
-          Challenge.sharedScreen(this).hide();
+        } else if(Invite.sharedScreen(this).getParent()) {
+          Invite.sharedScreen(this).hide();
         } else if(Promotion.sharedInstance(this).isShowed()) {
           Promotion.sharedInstance(this).hide();
         } else {

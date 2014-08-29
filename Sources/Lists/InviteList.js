@@ -29,7 +29,7 @@
  *
  */
 
-ChallengeList = PatternList.extend({
+InviteList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
 
@@ -52,6 +52,6 @@ ChallengeList = PatternList.extend({
   }
 });
 
-ChallengeList.create = function(parent) {
-  return new ChallengeList(parent);
+InviteList.create = function(parent) {
+  return new InviteList(parent);
 };

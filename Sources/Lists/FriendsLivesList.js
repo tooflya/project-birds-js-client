@@ -118,18 +118,24 @@ FriendsLivesList = PatternList.extend({
           button.onTouch = function(e) {
             Button.prototype.onTouch.call(this, e);
 
+            Tooflya.api.call('energy.set', {
+              friend: user.uid
+            }, {
+              success: function(data) {
+                text.setText('friends-live-present-2');
+                text.runAction(
+                  cc.Sequence.create(
+                    cc.DelayTime.create(0.2),
+                    cc.EaseBounceOut.create(
+                      cc.MoveTo.create(0.5, cc.p(text.getCenterX() - Camera.sharedCamera().coord(100), text.getCenterY()))
+                    ),
+                    false
+                  )
+                );
+                icon.runAction(cc.FadeOut.create(0.2));
+              }.bind(this)
+            });
             this.registerTouchable(false);
-            text.setText('friends-live-present-2');
-            text.runAction(
-              cc.Sequence.create(
-                cc.DelayTime.create(0.2),
-                cc.EaseBounceOut.create(
-                  cc.MoveTo.create(0.5, cc.p(text.getCenterX() - Camera.sharedCamera().coord(100), text.getCenterY()))
-                ),
-                false
-              )
-            );
-            icon.runAction(cc.FadeOut.create(0.2));
           };
         }.bind(this));
 

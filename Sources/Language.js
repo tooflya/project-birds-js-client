@@ -3942,5 +3942,25 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
+    ],
+  'friends-live-present-3': [
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: 'Вам подарили жизнь', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}//
+    ],
+  'friends-live-present-4': [
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '$1 $2 подарил вам жизнь!', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 24, dimensions: [500, 0]}
     ]
 };

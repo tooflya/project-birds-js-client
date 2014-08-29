@@ -29,18 +29,18 @@
  *
  */
 
-Challenge = ExtendedPopup.extend({
+Invite = ExtendedPopup.extend({
   ctor: function(parent) {
     this._super(parent);
 
-    Challenge.instance = this;
+    Invite.instance = this;
 
     this.m_BackgroundHolder1 = Entity.create(s_ListFixSmall, this.m_Background);
     this.m_BackgroundHolder2 = Entity.create(s_ListFixSmall, this.m_Background);
     this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);
     this.m_Text = Text.create('request-battle', this.m_ActionButton);
 
-    this.m_List = ChallengeList.create(this.m_Background);
+    this.m_List = InviteList.create(this.m_Background);
 
     this.m_BackgroundHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(308));
     this.m_BackgroundHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(398));
@@ -49,8 +49,8 @@ Challenge = ExtendedPopup.extend({
 
     this.m_BackgroundHolder2.setScaleY(-1);
 
-    this.m_CloseButton.setTouchHandler('onCloseEvent', Challenge);
-    this.m_ActionButton.setTouchHandler('onActionEvent', Challenge);
+    this.m_CloseButton.setTouchHandler('onCloseEvent', Invite);
+    this.m_ActionButton.setTouchHandler('onActionEvent', Invite);
   },
   onActionEvent: function() {
     this.hide(function() {
@@ -63,17 +63,17 @@ Challenge = ExtendedPopup.extend({
   onHide: function() {
     this._super();
 
-    Challenge.instance = false;
+    Invite.instance = false;
   }
 });
 
-Challenge.instance = false;
-Challenge.sharedScreen = function(parent) {
-  if(Challenge.instance) {
-    Challenge.instance.m_Parent = parent;
+Invite.instance = false;
+Invite.sharedScreen = function(parent) {
+  if(Invite.instance) {
+    Invite.instance.m_Parent = parent;
   } else {
-    Challenge.instance = new Challenge(parent);
+    Invite.instance = new Invite(parent);
   }
 
-  return Challenge.instance;
+  return Invite.instance;
 };
