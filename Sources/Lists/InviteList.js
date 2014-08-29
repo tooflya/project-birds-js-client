@@ -48,9 +48,10 @@ InviteList = PatternList.extend({
     this.m_Text[0].setColor(cc.c3(204.0, 102.0, 51.0));
     this.m_Text[1].setColor(cc.c3(255.0, 130.0, 0.0));
 
-    var count = 0;
+    // TODO: Move to update function.
+    /*var count = 0;
     FriendsManager.sharedInstance().getFriends().shuffle().forEach(function(user) {
-      if(count > 8) return;
+      if(count > -1) return;
 
       var holder = Entity.create(s_FriendsBackground1, this);
 
@@ -102,7 +103,7 @@ InviteList = PatternList.extend({
 
     window.setInterval(function() {
       this.next();
-    }.bind(this), 500);
+    }.bind(this), 500);*/
   },
   onEnter: function() {
     this._super();
