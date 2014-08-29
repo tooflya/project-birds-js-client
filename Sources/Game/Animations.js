@@ -235,7 +235,7 @@ Game.prototype.startAction = function(selector, data) {
     case 4:
     this.m_Catapults.get(this.m_PlayerTurn ? 0 : 1).runGameAction(data.id, {
       repeat: data.repeat,
-      distance: Camera.sharedCamera().coord(40) * data.factor
+      distance: Camera.sharedCamera().coord(80) * data.factor
     });
     break;
   }
