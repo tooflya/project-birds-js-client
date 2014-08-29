@@ -292,6 +292,8 @@ var s_LevelStars = "Resources/Graphics/level-stars.png";
 var s_LevelStarsCounter = "Resources/Graphics/stars-counter.png";
 var s_LevelStarsCounterArea = "Resources/Graphics/stars-counter-area.png";
 var s_LivesPresentBackground = "Resources/Graphics/lives-present-background.png";
+var s_FriendsBackground1 = "Resources/Graphics/friends-background-1.png";
+var s_FriendsBackground2 = "Resources/Graphics/friends-background-2.png";
 var s_Levels = [
   "Resources/Graphics/level-1.png",
   "Resources/Graphics/level-2.png",
@@ -591,6 +593,8 @@ var resources = [
   {src: s_LevelStarsCounter},
   {src: s_LevelStarsCounterArea},
   {src: s_LivesPresentBackground},
+  {src: s_FriendsBackground1},
+  {src: s_FriendsBackground2},
   {src: s_Levels[0]},
   {src: s_Levels[1]},
   {src: s_Levels[2]},
