@@ -30,6 +30,8 @@
  */
 
 InviteList = PatternList.extend({
+  m_AnimationTime: 500,
+  m_AnimationTimeElapsed: 0,
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
 
@@ -48,8 +50,7 @@ InviteList = PatternList.extend({
     this.m_Text[0].setColor(cc.c3(204.0, 102.0, 51.0));
     this.m_Text[1].setColor(cc.c3(255.0, 130.0, 0.0));
 
-    // TODO: Move to update function.
-    /*var count = 0;
+    var count = 0;
     FriendsManager.sharedInstance().getFriends().shuffle().forEach(function(user) {
       if(count > -1) return;
 
@@ -100,12 +101,11 @@ InviteList = PatternList.extend({
     });
 
     this.m_Elements.index = -1;
-
-    window.setInterval(function() {
-      this.next();
-    }.bind(this), 500);*/
   },
   onEnter: function() {
+    this._super();
+  },
+  onExit: function() {
     this._super();
   },
   next: function() {
@@ -124,6 +124,16 @@ InviteList = PatternList.extend({
         false
       )
     );
+  },
+  update: function(time) {
+    this._super(time);
+
+    this.m_AnimationTimeElapsed += time;
+    if(this.m_AnimationTimeElapsed >= this.m_AnimationTime) {
+      this.m_AnimationTimeElapsed = 0;
+
+      this.next();
+    }
   }
 });
 
