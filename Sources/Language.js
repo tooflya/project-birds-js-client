@@ -240,6 +240,16 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
+  'moves': [
+    {title: {string: '', nom: ' move', gen: ' move', plu: ' moves'}, font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: {string: '', nom: ' ход', gen: ' хода', plu: ' ходов'}, font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
   'bonus-keys': [
     {title: {string: '$1 ', nom: 'key', gen: 'keys', plu: 'keys'}, font: 'Comic Sans MS Bold', size: 36, dimensions: false},
     {title: {string: '$1 ', nom: 'ключ', gen: 'ключа', plu: 'ключей'}, font: 'Comic Sans MS Bold', size: 36, dimensions: false},
@@ -1071,8 +1081,8 @@ var g_language  = {
     {title: "アーケードモード", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'help-popup-5': [
-    {title: "Progress mode - a special mode. Available to you 80 levels (update soon) with a variety of tasks. As you progress through levels you will unlock new opportunities that you can get to use in other game modes.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "Прохождение - это особый режим. Вам доступно 80 уровней (обновления совсем скоро) с различными заданиями. По мере прохождения уровней вам будут открываться новые возможности, которые вы можте использовать в других режимах игры.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Progress mode - a special mode. Available to you 30 levels (update soon) with a variety of tasks. As you progress through levels you will unlock new opportunities that you can get to use in other game modes.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Прохождение - это особый режим. Вам доступно 30 уровней (обновления совсем скоро) с различными заданиями. По мере прохождения уровней вам будут открываться новые возможности, которые вы можте использовать в других режимах игры.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1751,7 +1761,7 @@ var g_language  = {
     {title: '総コインが獲得した。', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
   'finish-text-5': [
-    {title: 'Rating increased by: $ 1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Rating increased by: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Рейтинг увеличен на: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -1761,7 +1771,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
   'finish-text-6': [
-    {title: 'Moves left: $ 1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: 'Moves left: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: 'Ходов осталось: $1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},

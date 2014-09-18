@@ -54,6 +54,7 @@ Element = TiledEntity.extend({
     this.m_Bonus = false;
     this.m_Chained = false;
     this.m_Special = false;
+    this._custom = false;
 
     this.setRotation(0);
   },
@@ -125,14 +126,16 @@ Element = TiledEntity.extend({
 
         this.destroy();
 
-        icons.push(ElementsManager.sharedManager().m_ElementsIcons.create(this));
+        if(this.m_Id >= 0) {
+          icons.push(ElementsManager.sharedManager().m_ElementsIcons.create(this));
 
-        ElementsManager.sharedManager().m_ElementsSplashes.create(this);
-        for(var i = 0; i < 2; i++) {
-          ElementsManager.sharedManager().m_ElementsParts.create({
-            element: this,
-            index: i
-          });
+          ElementsManager.sharedManager().m_ElementsSplashes.create(this);
+          for(var i = 0; i < 2; i++) {
+            ElementsManager.sharedManager().m_ElementsParts.create({
+              element: this,
+              index: i
+            });
+          }
         }
 
         Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
@@ -232,9 +235,6 @@ Element = TiledEntity.extend({
     if(data) {
       switch(this.getId()) {
         case Element.types.star:
-        if(this.getIndex().y == 0) { // TODO: Replace to the last bottom available point.
-          this.remove(data);
-        }
         break;
       }
 
@@ -271,7 +271,7 @@ Element = TiledEntity.extend({
       this.setCurrentFrameIndex(22);
       break;
       case Element.types.change:
-      this.setCurrentFrameIndex(23);
+      this.setCurrentFrameIndex(31);
       break;
     }
   },
@@ -386,6 +386,21 @@ Element = TiledEntity.extend({
   setBonus: function(type) {
     this.m_Bonus = type;
 
+    switch(this.m_Bonus) {
+      default:
+      break;
+      case Element.bonus.types.horizontal:
+      break;
+      case Element.bonus.types.vertical:
+      break;
+      case Element.bonus.types.pack:
+      this.m_Id = -1;
+      break;
+      case Element.bonus.types.bomb:
+      this.m_Id = -1;
+      break;
+    }
+
     /*var icon;
     switch(this.m_Bonus) {
       default:
@@ -446,29 +461,108 @@ Element = TiledEntity.extend({
   },
   unchain: function() {
     this.m_Chained = false;
+    this.m_Removed = true;
 
     this.m_Icon.destroy();
+
+    setTimeout(function() {
+      this.m_Removed = false;
+    }.bind(this), 500);
   },
   chained: function() {
     return this.m_Chained;
   },
-  chooseId: function(created) {
+  starred: function() {
+    switch(this.getId()) {
+      case Element.types.star:
+      if(this.getIndex().y == 0) { // TODO: Replace to the last bottom available point.
+        this.remove();
+
+        return true;
+      }
+      break;
+    }
+
+    return false;
+  },
+  chooseId: function(created, probably) {
     if(this.getId() == Element.types.star) return false;
 
-    if(Game.tutorial && Game.sharedScreen().m_TutorialState == 1 && created) {
-      var index = this.getIndex();
+    var probability = Game.tutorial ? Game.instance.m_TutorialMatrix.probability : Game.instance.m_LevelsMatrixes[Game.level - 1].probability;
 
-      this.m_Id = Game.instance.m_TutorialMatrix.matrix[index.y][index.x];
-
-      this.setCurrentFrameIndex(this.m_Id);
-    } else {
-      this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount() - 3, true);
-
-      if(MatrixManager.sharedManager().hasMatches(this)) {
-        this.chooseId();
+    if(probably && ((probability.scope && !Game.instance.m_PlayerTurn) || Game.instance.m_PlayerTurn)) {
+      var bonus = false;
+      if(Random.sharedRandom().probably(probability.bonuses.probably)) {
+        bonus = true;
       }
 
-      this.setCurrentFrameIndex(this.m_Id);
+      {
+        var found, element;
+        var p = [
+          {type: Element.types.fire, probably: probability.elements.fire},
+          {type: Element.types.regeneration, probably: probability.elements.regeneration},
+          {type: Element.types.defence, probably: probability.elements.defence},
+          {type: Element.types.keys, probably: probability.elements.keys},
+          {type: Element.types.run, probably: probability.elements.run}
+        ];
+        p.shuffle();
+        p.forEach(function(some) {
+          if(!found && some.probably > 0) {
+            if(Random.sharedRandom().probably(some.probably)) {
+              found = true;
+              element = some.type;
+            }
+          }
+        });
+
+        if(!found) {
+          this.chooseId(created, probably);
+        } else {
+          this.m_Id = element;
+          this.setCurrentFrameIndex(this.m_Id);
+
+          if(bonus) {
+            found = false;
+            element = false;
+
+            while(!found) {
+              var p = [
+                {type: Element.bonus.types.horizontal, probably: probability.bonuses.horizontal},
+                {type: Element.bonus.types.vertical, probably: probability.bonuses.vertical},
+                {type: Element.bonus.types.bomb, probably: probability.bonuses.bomb},
+                {type: Element.bonus.types.pack, probably: probability.bonuses.pack}
+              ];
+              p.shuffle();
+              p.forEach(function(some) {
+                if(!found && some.probably > 0) {
+                  if(Random.sharedRandom().probably(some.probably)) {
+                    found = true;
+                    element = some.type;
+                  }
+                }
+              });
+            }
+
+            this.setBonus(element);
+          }
+        }
+      }
+    } else {
+      if(Game.tutorial && Game.sharedScreen().m_TutorialState == 1 && created) {
+        var index = this.getIndex();
+
+        this.m_Id = Game.instance.m_TutorialMatrix.matrix[index.y][index.x];
+
+        this.setCurrentFrameIndex(this.m_Id);
+      } else {
+        this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount() - 3, true);
+
+        if(MatrixManager.sharedManager().hasMatches(this)) {
+          this.chooseId();
+        }
+
+        this.setCurrentFrameIndex(this.m_Id);
+      }
     }
   },
   lookDown: function(strong) {

@@ -30,7 +30,7 @@
  */
 
 InviteList = PatternList.extend({
-  m_AnimationTime: 500,
+  m_AnimationTime: 0.5,
   m_AnimationTimeElapsed: 0,
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 0, parent);
@@ -52,7 +52,7 @@ InviteList = PatternList.extend({
 
     var count = 0;
     FriendsManager.sharedInstance().getFriends().shuffle().forEach(function(user) {
-      if(count > -1) return;
+      if(count > 10) return;
 
       var holder = Entity.create(s_FriendsBackground1, this);
 

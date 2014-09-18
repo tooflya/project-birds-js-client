@@ -174,10 +174,13 @@ Bought = ExtendedPopup.extend({
     switch(this.config.params.platform) {
       case 'vk':
       VK.api("wall.post", {
-        message: properties.items[this.reference].share.message,
-        attachments: properties.items[this.reference].share.image + ',http://vk.com/app4165575',
+        message: properties.items[this.reference].share.vk.message,
+        attachments: properties.items[this.reference].share.vk.image + ',http://vk.com/app4165575',
         test_mode: 1
+      }, function(e) {
       });
+      case 'fb':
+      break;
       break;
     }
 

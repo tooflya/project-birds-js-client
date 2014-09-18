@@ -367,8 +367,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -380,8 +386,14 @@ var properties = {
         silver: 200
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Доска! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261814"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -393,8 +405,14 @@ var properties = {
         silver: 300
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Дубина! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261818"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -406,8 +424,14 @@ var properties = {
         silver: 400
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Лопата! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261821"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -419,8 +443,14 @@ var properties = {
         silver: 500
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Молот правды! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261831"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -432,8 +462,14 @@ var properties = {
         silver: 600
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Топор всевластия! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261839"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -445,8 +481,14 @@ var properties = {
         silver: 1500
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Волшебная палочка! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261823"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -458,8 +500,14 @@ var properties = {
         silver: 3000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Бита клоуна! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261811"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -471,8 +519,14 @@ var properties = {
         silver: 5000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Рыба! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261819"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -484,8 +538,14 @@ var properties = {
         silver: 8000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Механическая рука! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261826"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -497,8 +557,14 @@ var properties = {
         silver: 10000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мое новое оружие - Мечь Джедая! Заходи в игру и попробуй побить мои рекорды!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333261836"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -510,8 +576,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -523,8 +595,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -536,8 +614,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -549,8 +633,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -562,8 +652,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -575,8 +671,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -588,8 +690,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -601,8 +709,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -614,8 +728,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -627,8 +747,14 @@ var properties = {
         silver: 2000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "У меня открыта Ледяная Птица!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262538"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -640,8 +766,14 @@ var properties = {
         silver: 2500
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "У меня открыта Птица Индеец!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262539"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -653,8 +785,14 @@ var properties = {
         silver: 3000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "У меня открыта Птица Робот!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262548"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -666,8 +804,14 @@ var properties = {
         silver: 5000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "У меня открыта Птица Пират!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262545"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -679,8 +823,14 @@ var properties = {
         silver: 7000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "У меня открыта Птица Мексиканец!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262541"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -692,8 +842,14 @@ var properties = {
         silver: 8000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "У меня открыта Птица Командор!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262549"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -705,8 +861,14 @@ var properties = {
         silver: 9000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "У меня открыта Птица Зомби!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262551"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -718,8 +880,14 @@ var properties = {
         silver: 10000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "У меня открыта Птица Ниндзя!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262543"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -731,8 +899,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -744,8 +918,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -757,8 +937,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -770,8 +956,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -783,8 +975,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -796,8 +994,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -809,8 +1013,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -822,8 +1032,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -835,8 +1051,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -848,8 +1070,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -861,8 +1089,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -874,8 +1108,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -887,8 +1127,14 @@ var properties = {
         silver: 1000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мой бонус - Щит Ветра!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262785"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -900,8 +1146,14 @@ var properties = {
         silver: 2000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мой бонус - Сердца Жизней!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262778"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -913,8 +1165,14 @@ var properties = {
         silver: 2000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мой бонус - Песок Времени!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262784"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -926,8 +1184,14 @@ var properties = {
         silver: 3000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мой бонус - Экстра Жизни!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262776"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -939,8 +1203,14 @@ var properties = {
         silver: 2500
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мой бонус - Счастливый Ключ!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262780"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -952,8 +1222,14 @@ var properties = {
         silver: 5000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мой бонус - Увеличение Золотых Монет!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262777"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -965,8 +1241,14 @@ var properties = {
         silver: 5000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мой бонус - Увеличение Серебряных Монет!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262787"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -978,8 +1260,14 @@ var properties = {
         silver: 4000
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "Мой бонус - Множитель Убийств!\n#Tooflya #ProjectBirds",
+          image: "photo-43129938_333262781"
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -991,8 +1279,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1004,8 +1298,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1017,8 +1317,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1030,8 +1336,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1043,8 +1355,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1056,8 +1374,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1069,8 +1393,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1082,8 +1412,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1095,8 +1431,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1108,8 +1450,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1121,8 +1469,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     },
     {
@@ -1134,8 +1488,14 @@ var properties = {
         silver: 0
       },
       share: {
-        message: "",
-        image: ""
+        vk: {
+          message: "",
+          image: ""
+        },
+        fb: {
+          message: "",
+          image: ""
+        }
       }
     }
   ]

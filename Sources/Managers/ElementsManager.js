@@ -149,7 +149,7 @@ ElementsManager = EntityManager.extend({
           var type = matrix[counter.y][counter.x];
 
           if(type === etypes.empty) {
-            this.m_MatrixManager.set(etypes.empty, counter.x, counter.y, true);
+            this.m_MatrixManager.set(etypes.empty, counter.x, counter.y, false);
 
             if(Game.network) {
               if(Game.server) {
@@ -157,7 +157,7 @@ ElementsManager = EntityManager.extend({
               }
             }
           } else if(type === etypes.block) {
-            this.m_MatrixManager.set(etypes.block, counter.x, counter.y, true);
+            this.m_MatrixManager.set(etypes.block, counter.x, counter.y, false);
 
             if(Game.network) {
               if(Game.server) {
@@ -165,14 +165,14 @@ ElementsManager = EntityManager.extend({
               }
             }
           } else if(type === etypes.box) {
-            this.m_MatrixManager.set(this.createBox(), counter.x, counter.y, true);
+            this.m_MatrixManager.set(this.createBox(), counter.x, counter.y, false);
 
             this.last().setCenterPosition(x, y);
             this.last().onUnHover();
 
             // TODO: Adjust network usage.
           } else if(type === etypes.change) {
-            this.m_MatrixManager.set(this.createChange(), counter.x, counter.y, true);
+            this.m_MatrixManager.set(this.createChange(), counter.x, counter.y, false);
 
             this.last().setCenterPosition(x, y);
             this.last().onUnHover();
@@ -194,11 +194,15 @@ ElementsManager = EntityManager.extend({
               this.last().setId(Math.abs(type + (chain ? 100 : 10)) / (chain ? 10 : 1));
               this.last().setCurrentFrameIndex(Math.abs(type + (chain ? 100 : 10)) / (chain ? 10 : 1));
 
+              this.last()._custom = true;
+
               if(chain) {
                 this.last().chain();
+              } else {
+                MatrixManager.sharedManager().fix(this.last());
               }
             } else {
-              this.m_MatrixManager.set(this.create(), counter.x, counter.y, true);
+              this.m_MatrixManager.set(this.create(), counter.x, counter.y, true, i >= this.m_MatrixManager.getSize().y);
             }
 
             this.last().setCenterPosition(x, y);

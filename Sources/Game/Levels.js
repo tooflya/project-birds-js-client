@@ -30,7 +30,7 @@
  */
 
 Game.prototype.m_TutorialMatrix = {
-  moves: 100,
+  moves: 99,
   opponent: {
     weapon: 0,
     health: 10,
@@ -51,7 +51,35 @@ Game.prototype.m_TutorialMatrix = {
     [4, 3, 4, 3, 0, 0, 2, 0, 4, 3],
     [0, 0, 2, 3, 4, 1, 4, 1, 2, 4],
     [2, 1, 4, 0, 3, 2, 1, 1, 0, 0]
-  ]
+  ],
+  /**
+   * Generate of creation of new elements.
+   * If probably of bonus creation is 10% it's mean that probably of creation of simple element is 90%.
+   *
+   * !!! Please be careful in setting this properties. !!!
+   * !!! Sum of probability for the each section must be 100% !!!
+   *
+   */
+  probability: {
+    scope: true, // Rules of probability is working for computer to!
+    bonuses: {
+      probably: 0, // Probably for the creation of bonus.
+
+      horizontal: 0, // Probably of creation of specific bonus.
+      vertical: 0,
+      pack: 0,
+      bomb: 0
+    },
+    elements: {
+      // Probably for the creation of simple element is 100% now.
+
+      fire: 20, // Probably of creation of specific element.
+      regeneration: 20,
+      defence: 20,
+      keys: 20,
+      run: 20
+    }
+  }
 };
 
 Game.prototype.m_LevelsMatrixes = [
@@ -78,7 +106,25 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #2 */
   {
@@ -103,7 +149,25 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #3 */
   {
@@ -128,7 +192,25 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #4 */
   {
@@ -153,7 +235,25 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #5 */
   {
@@ -178,7 +278,25 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #6 */
   {
@@ -203,7 +321,25 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #7 */
   {
@@ -228,15 +364,33 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #8 */
   {
     moves: 15,
     opponent: {
-      weapon: 1.5,
+      weapon: 1,
       health: 70,
-      speed: 1
+      speed: 1.5
     },
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -253,13 +407,31 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #9 */
   {
     moves: 15,
     opponent: {
-      weapon: 1.5,
+      weapon: 1,
       health: 70,
       speed: 1.5
     },
@@ -278,7 +450,25 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #10 */
   {
@@ -303,13 +493,31 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #11 */
   {
     moves: 10,
     opponent: {
-      weapon: 2.5,
+      weapon: 2,
       health: 120,
       speed: 1
     },
@@ -328,19 +536,37 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #12 */
   {
     moves: 10,
     opponent: {
-      weapon: 2.5,
+      weapon: 2,
       health: 100,
       speed: 1
     },
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, -6, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, -3, -12, 1, 1, 1],
       [-1, -1, -1, -100, -1, -1, -140, -1, -1, -1],
       [-1, -1, -1, -100, -1, -1, -140, -1, -1, -1],
@@ -353,21 +579,39 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #13 */
   {
-    moves: 1,
+    moves: 10,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 3,
+      health: 100,
       speed: 1
     },
     matrix: [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [-1, -1, -1, -1, 1, 1, -1, -1, -1, -1],
-      [-1, -1, -1, -1, 1, 1, -1, -1, -1, -1],
+      [1, 1, -12, -11, 1, 1, -11, -13, 1, 1],
+      [-100, -100, -11, -10, -12, -13, -14, -11, -140, -140],
+      [-1, -1, -1, -1, 1, -13, -1, -1, -1, -1],
+      [-1, -1, -1, -1, -13, 1, -1, -1, -1, -1],
       [-1, 1, 1, -1, 1, 1, -1, 1, 1, -1],
       [-1, -3, 1, -1, 1, 1, -1, -3, 1, -1],
       [-1, -1, -1, -1, -3, 1, -1, -1, -1, -1],
@@ -378,19 +622,37 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #14 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 3,
+      health: 100,
       speed: 1
     },
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, -5, 1, 1, 1, 1, 1, 1, -5, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -403,20 +665,38 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #15 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 3,
+      health: 150,
       speed: 1
     },
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, -4, -4, 1, 1, -4, -4, 1, 1],
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
       [-1, -1, -3, 1, 1, 1, 1, -3, -1, -1],
@@ -428,14 +708,32 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #16 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 3,
+      health: 150,
       speed: 1
     },
     matrix: [
@@ -453,14 +751,32 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #17 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 3,
+      health: 150,
       speed: 1
     },
     matrix: [
@@ -478,22 +794,40 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #18 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 3,
+      health: 150,
       speed: 1
     },
     matrix: [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, -1, 1, -1, 1, 1, -1, 1, -1, 1],
-      [1, -1, 1, -1, 1, 1, -1, 1, -1, 1],
-      [1, -1, 1, -1, -3, 1, -1, 1, -1, 1],
-      [1, -1, 1, -1, 1, 1, -1, 1, -1, 1],
+      [1, 1, 1, 1, -10, 1, 1, 1, 1, 1],
+      [1, -1, 1, -1, -10, -14, -1, 1, -1, 1],
+      [1, -1, 1, -1, -10, 1, -1, 1, -1, 1],
+      [1, -1, 1, -1, -3, -14, -1, 1, -1, 1],
+      [1, -1, 1, -1, 1, -14, -1, 1, -1, 1],
       [1, -1, 1, -1, 1, 1, -1, 1, -1, 1],
       [1, -1, -3, -1, 1, 1, -1, -3, -1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -503,14 +837,32 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #19 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 3,
+      health: 150,
       speed: 1
     },
     matrix: [
@@ -528,20 +880,38 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #20 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 3,
+      health: 150,
       speed: 1
     },
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [-1, 1, -1, 1, -2, -2, 1, -1, 1, -1],
+      [-1, 1, -1, 1, -1, -1, 1, -1, 1, -1],
       [-1, 1, -1, 1, 1, 1, 1, -1, 1, -1],
       [-1, 1, -1, -1, -3, 1, -1, -1, 1, -1],
       [1, -3, 1, -1, -1, -1, -1, 1, -3, 1],
@@ -553,19 +923,37 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #21 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 4,
+      health: 200,
       speed: 1
     },
     matrix: [
-      [1, 1, 1, 1, 1, 1, 1, -4, -4, -4],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [-4, -4, -4, -4, -4, -4, -4, -4, -4, -4],
+      [-5, -5, 1, 1, 1, 1, 1, 1, -5, -5],
       [1, 1, 1, 1, 1, 1, 1, -3, 1, 1],
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
       [-3, 1, 1, 1, -1, -1, 1, 1, 1, 1],
@@ -578,14 +966,32 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #22 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 4,
+      health: 200,
       speed: 1
     },
     matrix: [
@@ -603,19 +1009,37 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #23 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 5,
+      health: 200,
       speed: 1
     },
     matrix: [
       [-4, -4, 1, 1, 1, 1, 1, 1, -4, -4],
-      [-2, -2, 1, 1, -4, -4, 1, 1, -2, -2],
+      [-1, -2, 1, 1, -4, -4, 1, 1, -2, -1],
       [1, -3, 1, 1, 1, 1, 1, 1, -3, 1],
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -628,14 +1052,32 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #24 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 5,
+      health: 200,
       speed: 1
     },
     matrix: [
@@ -653,18 +1095,36 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #25 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 5,
+      health: 250,
       speed: 1
     },
     matrix: [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [-4, 1, 1, 1, 1, 1, 1, 1, 1, -4],
       [1, 1, 1, 1, -4, -4, 1, 1, 1, 1],
       [-1, -1, -1, -1, -3, 1, -1, -1, -1, -1],
       [1, 1, 1, -1, -1, -1, -1, 1, 1, 1],
@@ -678,14 +1138,32 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #26 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 5,
+      health: 250,
       speed: 1
     },
     matrix: [
@@ -703,24 +1181,42 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #27 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
       weapon: 0,
-      health: 35,
+      health: 250,
       speed: 1
     },
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, -2, -2, -2, -2, 1, 1, 1],
-      [1, -2, 1, 1, -1, -1, 1, 1, -2, 1],
-      [-4, 1, 1, -1, -1, -1, -1, 1, 1, -4],
-      [1, 1, -1, -1, -1, -1, -1, -1, 1, 1],
-      [-3, -1, -1, 1, 1, -3, 1, -1, -1, -3],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, -1, -1, -1, -1, 1, 1, 1],
+      [1, -4, 1, 1, 1, 1, 1, 1, -4, 1],
+      [1, -1, -4, 1, -1, -1, 1, -4, -1, 1],
+      [1, -4, 1, -1, -1, -1, -1, 1, -4, 1],
+      [-3, 1, -1, -1, -1, -1, 1, -1, 1, -3],
+      [1, -1, -1, 1, 1, -3, 1, -1, -1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -728,14 +1224,32 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #28 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 5,
+      health: 250,
       speed: 1
     },
     matrix: [
@@ -753,20 +1267,38 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #29 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 5,
+      health: 250,
       speed: 1
     },
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, -4, 1, 1, 1, 1, 1, 1, -4, 1],
-      [1, -1, 1, 1, 1, 1, 1, 1, -1, 1],
+      [1, -1, 1, 1, -1, -1, 1, 1, -1, 1],
       [-1, -1, -1, -1, 1, 1, -1, -1, -1, -1],
       [1, -1, 1, 1, -1, -1, 1, 1, -1, 1],
       [1, -1, -1, 1, -1, -1, 1, -1, -1, 1],
@@ -778,20 +1310,38 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   },
   /** Matrix of level #30 */
   {
-    moves: 1,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 35,
+      weapon: 5,
+      health: 250,
       speed: 1
     },
     matrix: [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [-4, -4, -1, -1, -1, -1, -1, -1, -4, -4],
+      [-10, -11, 1, 1, 1, 1, 1, 1, -11, -10],
+      [-140, 1, 1, 1, 1, 1, 1, 1, 1, -140],
+      [-140, -100, 1, -1, -1, -1, -1, 1, -100, -140],
       [-1, -1, -1, -1, -3, 1, -1, -1, -1, -1],
       [1, 1, -3, -1, 1, 1, -1, -3, 1, 1],
       [1, -2, 1, -1, -1, -1, -1, 1, -2, 1],
@@ -803,6 +1353,24 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    ],
+    probability: {
+      scope: true,
+      bonuses: {
+        probably: 0,
+
+        horizontal: 0,
+        vertical: 0,
+        pack: 0,
+        bomb: 0
+      },
+      elements: {
+        fire: 20,
+        regeneration: 20,
+        defence: 20,
+        keys: 20,
+        run: 20
+      }
+    }
   }
 ];

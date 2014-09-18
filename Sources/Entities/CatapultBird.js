@@ -221,6 +221,8 @@ CatapultBird = AnimatedEntity.extend({
         false
       )
     );
+
+    this.m_Catapult.m_Birds.fix();
   },
   onDefence: function() {
     this.stopAllActions();
@@ -261,6 +263,8 @@ CatapultBird = AnimatedEntity.extend({
         this.m_StateData.callback();
       }
     }
+
+    this.m_Catapult.m_Birds.fix();
   },
   onTouch: function(e) {
     this._super(e);

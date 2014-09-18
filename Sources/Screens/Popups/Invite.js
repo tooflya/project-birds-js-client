@@ -53,9 +53,35 @@ Invite = ExtendedPopup.extend({
     this.m_ActionButton.setTouchHandler('onActionEvent', Invite);
   },
   onActionEvent: function() {
-    this.hide(function() {
-      Tooflya.VK.api.call('users.invite');
-    });
+    switch(this.config.params.platform) {
+      case 'vk':
+      if(!this.config.params.playtest) {
+        this.hide(function() {
+          Tooflya.VK.api.call('users.invite');
+        });
+      } else {
+        this.hide(function() {
+          VK.api("wall.post", {
+            message: 'Друзья, попробуйте побить мои рекорды в игре #ProjectBirds! Игрушка очень крутая!',
+            attachments: 'photo-43129938_340443444,http://vk.com/app4165575',
+            test_mode: 1
+          }, function(e) {
+          });
+        });
+      }
+      break;
+      case 'fb':
+      if(!this.config.params.playtest) {
+        this.hide(function() {
+          // TODO: Call Facebook API for invite users.
+        });
+      } else {
+        this.hide(function() {
+          // TODO: Call Facebook API for share message.
+        });
+      }
+      break;
+    }
   },
   onShow: function() {
     this._super();

@@ -96,6 +96,9 @@ ActionsManager = cc.Node.extend({
       Game.sharedScreen().onTurnChange();
       MatrixManager.sharedManager().m_Busy = false;
     }
+  },
+  onLevelStart: function() {
+    this.m_Pool = [];
   }
 });
 

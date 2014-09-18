@@ -55,7 +55,7 @@ GamePanel = Panel.extend({
         e.setColor(cc.c3(255, 255, 255));
       }
 
-      e.ccsf([Game.sharedScreen().m_CurrentBlows]);
+      e.ccsf([Game.sharedScreen().m_CurrentBlows + (type == 0 ? LanguagesManager.instance.get('moves', Game.sharedScreen().m_CurrentBlows).title : '')]);
     });
     this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[0]]);
@@ -81,6 +81,8 @@ GamePanel = Panel.extend({
 
         this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
         this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
+
+        this.getIcons()[0].setVisible(false);
 
         u = 3;
       break;

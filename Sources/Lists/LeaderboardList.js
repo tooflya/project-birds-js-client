@@ -127,11 +127,13 @@ LeaderboardList = PatternList.extend({
 
           if(index < 1) {
             this.m_Text[2].setVisible(false);
+
+            this.m_Text[3].setCenterPosition(this.getCenterX(), y + Camera.sharedCamera().coord(100));
+          } else {
+            this.m_Text[3].setCenterPosition(this.getCenterX(), y + Camera.sharedCamera().coord(20));
+
+            y -= Camera.sharedCamera().coord(80);
           }
-
-          this.m_Text[3].setCenterPosition(this.getCenterX(), y + Camera.sharedCamera().coord(20));
-
-          y -= Camera.sharedCamera().coord(80);
 
           index = 0;
 

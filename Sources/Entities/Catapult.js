@@ -272,6 +272,11 @@ Catapult = AnimatedEntity.extend({
         this.get(i).setCenterPosition(self.getCenterX() - (Camera.sharedCamera().coord(55) * i + Camera.sharedCamera().coord(110)) * (this.get(i).isFlippedHorizontally() ? -1 : 1), Camera.sharedCamera().coord(10) + this.get(i).getHeight() / 2);
       }
     };
+    this.m_Birds.fix = function() {
+      for(var i = 0; i < 3; i++) {
+        this.get(i).setCenterPosition(self.getCenterX() - (Camera.sharedCamera().coord(55) * i + Camera.sharedCamera().coord(110)) * (this.get(i).isFlippedHorizontally() ? -1 : 1), Camera.sharedCamera().coord(10) + this.get(i).getHeight() / 2);
+      }
+    };
 
     for(var i = 1; i < 4; i++) {
       this.m_Birds.create();

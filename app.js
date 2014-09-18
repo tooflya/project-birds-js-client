@@ -145,7 +145,7 @@
     'Sources/Lists/LevelList.js',
     'Sources/Lists/AchievementsList.js',
     'Sources/Lists/LeaderboardList.js',
-    'Sources/Lists/InvitengeList.js',
+    'Sources/Lists/InviteList.js',
     'Sources/Lists/FriendsLivesList.js',
     'Sources/Game/Preview.js',
     'Sources/Game/Events.js',

@@ -166,6 +166,9 @@ Game.prototype.onGameFinish = function(state) {
 
   switch(this.m_Type) {
     case this.m_Types.progress:
+    if(!Game.network) {
+      Game.instance.updateScore(Game.sharedScreen().m_CurrentBlows * 500);
+    }
     break;
     case this.m_Types.classic:
     break;
@@ -175,6 +178,7 @@ Game.prototype.onGameFinish = function(state) {
 };
 
 Game.prototype.onLevelStart = function(matrix) {
+  ActionsManager.sharedManager().onLevelStart();
   ElementsManager.sharedManager().onLevelStart(matrix);
 
   this.m_Catapults.onLevelStart();

@@ -63,7 +63,7 @@ MatrixManager = cc.Node.extend({
   unbusy: function() {
     this.m_Busy = false;
   },
-  set: function(element, x, y, created) {
+  set: function(element, x, y, created, probably) {
     if(element === etypes.empty || element === etypes.block) {
       this.m_Matrix[x][y] = element;
     } else {
@@ -71,8 +71,8 @@ MatrixManager = cc.Node.extend({
 
       element.setIndex(x, y);
 
-      if(created) {
-        element.chooseId(true);
+      if(probably || created) {
+        element.chooseId(created, probably);
       }
 
       element.onChangePosition();
@@ -113,6 +113,35 @@ MatrixManager = cc.Node.extend({
         element.onTouch();
       }
     }
+  },
+  fix: function(element) {
+    if(this.soe(element)) return false;
+
+    var x = element.getIndex().x;
+    var y = element.getIndex().y;
+
+    var elements = [];
+
+    elements.push(this.get(x - 1, y));
+    elements.push(this.get(x - 1, y + 1));
+    elements.push(this.get(x, y + 1));
+    elements.push(this.get(x + 1, y + 1));
+    elements.push(this.get(x + 1, y));
+    elements.push(this.get(x + 1, y - 1));
+    elements.push(this.get(x, y - 1));
+    elements.push(this.get(x - 1, y - 1));
+
+    elements.forEach(function(current) {
+      if(current && current != etypes.empty && current != etypes.block) {
+        if(current.getId() != Element.types.star) {
+          if(!current._custom) {
+            if(current.getId() == element.getId()) {
+              current.chooseId();
+            }
+          }
+        }
+      }
+    });
   },
   s: function(element, soft) {
     if(element instanceof Element) {
@@ -239,6 +268,9 @@ MatrixManager = cc.Node.extend({
 
       this.m_CurrentElement1 = element;
       this.m_CurrentElement2 = neighbor;
+
+      this.m_CurrentElement1.onUnHover();
+      this.m_CurrentElement2.onUnHover();
 
       if(!back) {
         if(!network) {
@@ -371,30 +403,38 @@ MatrixManager = cc.Node.extend({
       for(var i = 0; i < pool.horizontal.length; i++) {
         if(pool.horizontal[i]) {
           if(!pool.horizontal[i].m_Removed) {
+            if(!pool.horizontal[i].chained()) {
+              bonus.horizontal++;
+            }
+
             bonus.icons = bonus.icons.concat(pool.horizontal[i].remove());
             bonus.elements.push(pool.horizontal[i]);
 
             factor++;
-
-            bonus.horizontal++;
           }
         }
       }
+
       for(var i = 0; i < pool.vertical.length; i++) {
         if(pool.vertical[i]) {
           if(!pool.vertical[i].m_Removed) {
+            if(!pool.vertical[i].chained()) {
+              bonus.vertical++;
+            }
+
             bonus.icons = bonus.icons.concat(pool.vertical[i].remove());
             bonus.elements.push(pool.vertical[i]);
 
             factor++;
-
-            bonus.vertical++;
           }
         }
       }
+
       if(pool.element) {
         if(!pool.element.m_Removed) {
-          bonus.element = pool.element;
+          if(!pool.element.chained()) {
+            bonus.element = pool.element;
+          }
 
           factor++;
 
@@ -433,22 +473,24 @@ MatrixManager = cc.Node.extend({
           MatrixManager.timeout = false;
 
           if(!MatrixManager.sharedManager().findAll()) {
-            var pack = MatrixManager.sharedManager().hasBonus(Element.bonus.types.pack);
-            var bomb = MatrixManager.sharedManager().hasBonus(Element.bonus.types.bomb);
+            if(!MatrixManager.sharedManager().findStars()) {
+              var pack = MatrixManager.sharedManager().hasBonus(Element.bonus.types.pack);
+              var bomb = MatrixManager.sharedManager().hasBonus(Element.bonus.types.bomb);
 
-            if(!pack && !bomb) {
-              ActionsManager.sharedManager().run();
-            } else {
-              if(pack) {
-                MatrixManager.sharedManager().removeSquare(pack.getIndex().x, pack.getIndex().y, pack);
-
-                MatrixManager.timeout = new PausableTimeout(function() {
-                  MatrixManager.sharedManager().clear();
-                }, 600);
-              } else if(bomb && MatrixManager.sharedManager().m_ExtaMove) {
-                Game.instance.onExtraMove();
-              } else {
+              if(!pack && !bomb) {
                 ActionsManager.sharedManager().run();
+              } else {
+                if(pack) {
+                  MatrixManager.sharedManager().removeSquare(pack.getIndex().x, pack.getIndex().y, pack);
+
+                  MatrixManager.timeout = new PausableTimeout(function() {
+                    MatrixManager.sharedManager().clear();
+                  }, 600);
+                } else if(bomb && MatrixManager.sharedManager().m_ExtaMove) {
+                  Game.instance.onExtraMove();
+                } else {
+                  ActionsManager.sharedManager().run();
+                }
               }
             }
           }
@@ -546,12 +588,36 @@ MatrixManager = cc.Node.extend({
         var horizontal = 1 + this.left + this.right;
         var vertical = 1 + this.top + this.down;
 
+        var free1 = false;
+        MatrixManager.pools.last().horizontal.forEach(function(element) {
+          if(element instanceof Element) {
+            if(!element.chained()) {
+              free1 = true;
+            }
+          }
+        });
         if(horizontal < 3) {
           MatrixManager.pools.last().horizontal = [];
         }
 
+        var free2 = false;
+        MatrixManager.pools.last().vertical.forEach(function(element) {
+          if(element instanceof Element) {
+            if(!element.chained()) {
+              free2 = true;
+            }
+          }
+        });
         if(vertical < 3) {
           MatrixManager.pools.last().vertical = [];
+        }
+
+        if(!free1 && MatrixManager.pools.last().element.chained()) {
+          MatrixManager.pools.last().horizontal = [];horizontal = 0;
+        }
+
+        if(!free2 && MatrixManager.pools.last().element.chained()) {
+          MatrixManager.pools.last().vertical = [];vertical = 0;
         }
 
         if(horizontal >= 3 || vertical >= 3) {
@@ -707,6 +773,9 @@ MatrixManager = cc.Node.extend({
 
       this.clear();
     }
+
+    this.m_CurrentElement1 = false;
+    this.m_CurrentElement2 = false;
   },
   fillAll: function(matrix) {
     if(!Game.network || Game.server) {
@@ -718,7 +787,7 @@ MatrixManager = cc.Node.extend({
           if(!frame) {
             element = ElementsManager.sharedManager().create();
 
-            this.set(element, i, j, true);
+            this.set(element, i, j, true, true);
 
             matrix.push(element.getId());
 
@@ -802,6 +871,19 @@ MatrixManager = cc.Node.extend({
 
     return combinations > 0;
   },
+  findStars: function() {
+    for(var i = 0; i < this.getSize().x; i++) {
+      for(var j = 0; j < this.getSize().y; j++) {
+        if(this.m_Matrix[i][j] instanceof Element) {
+          if(this.m_Matrix[i][j].starred()) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
+  },
   lookDown: function(clear) {
     if(!Game.sharedScreen().m_TutorialRunning) {
       for(var j = 0; j < this.getSize().y * 2; j++) {
@@ -846,21 +928,27 @@ MatrixManager = cc.Node.extend({
     }
   },
   shuffle: function() {
+    var inc = 0;
     var counter = 0;
     for(var i = 0; i < this.getSize().x; i++) {
       for(var j = 0; j < this.getSize().y; j++) {
         var frame = this.m_Matrix[i][j];
 
         if(frame && frame != etypes.empty && frame != etypes.block) {
-          if(frame.getId() != Element.types.star && !frame.m_Bonus) {
-            frame.runAction(
-              cc.Sequence.create(
-                cc.ScaleTo.create(0.25, 0.0),
-                cc.CallFunc.create(frame.chooseId, frame, frame),
-                cc.ScaleTo.create(0.25, 1.0),
-                false
-              )
-            );
+          if(frame.getId() != Element.types.star && !frame.m_Bonus && !frame.m_Special) {
+            if(!this.soe(frame)) {
+              frame.runAction(
+                cc.Sequence.create(
+                  cc.DelayTime.create(0.01 * inc),
+                  cc.ScaleTo.create(0.25, 0.0),
+                  cc.CallFunc.create(frame.chooseId, frame),
+                  cc.ScaleTo.create(0.25, 1.0),
+                  false
+                )
+              );
+
+              inc++;
+            }
 
             counter++;
           }
@@ -874,7 +962,7 @@ MatrixManager = cc.Node.extend({
 
     sickle1.setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2);
     sickle1.setOpacity(255);
-    sickle2.setRotation(0);
+    sickle1.setRotation(0);
     sickle1.setFlippedHorizontally(true);
     sickle1.runAction(cc.MoveTo.create(1.0, cc.p(sickle1.getCenterX() - Camera.sharedCamera().width, sickle1.getCenterY())));
     sickle1.runAction(
@@ -968,7 +1056,7 @@ MatrixManager = cc.Node.extend({
 
     sickle1.setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2);
     sickle1.setOpacity(255);
-    sickle2.setRotation(-90);
+    sickle1.setRotation(-90);
     sickle1.setFlippedHorizontally(false);
     sickle1.runAction(cc.MoveTo.create(1.0, cc.p(sickle1.getCenterX(), sickle1.getCenterY() + Camera.sharedCamera().height)));
     sickle1.runAction(
@@ -1233,7 +1321,7 @@ MatrixManager = cc.Node.extend({
 
       els.forEach(function(el) {
         if(!build) {
-          if(el) {
+          if(el instanceof Element) {
             if(!this.s(el) && el.getId() != Element.types.star) {
               if(!this.hasMatchesWith(el, element) && !this.hasMatchesWith(element, el)) {
                 this.replace(element, el, false, false, true);
