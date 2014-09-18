@@ -95,6 +95,7 @@
     'Sources/Entities/ElementSplash.js',
     'Sources/Entities/ElementIcon.js',
     'Sources/Entities/ElementPart.js',
+    'Sources/Entities/ElementStar.js',
     'Sources/Entities/Target.js',
     'Sources/Entities/SplashText.js',
     'Sources/Screens/Screens/Preloader.js',

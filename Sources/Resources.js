@@ -102,6 +102,7 @@ var s_PopupDecoration19 = "Resources/Graphics/popup-decoration-19.png";
 var s_PopupDecoration20 = "Resources/Graphics/popup-decoration-20.png";
 var s_PanelItemsBackground1 = "Resources/Graphics/panel-item-background-1.png";
 var s_PanelItemsBackground2 = "Resources/Graphics/panel-item-background-2.png";
+var s_PanelItemsBackground3 = "Resources/Graphics/panel-item-background-3.png";
 var s_PanelIcon1 = "Resources/Graphics/panel-icon-1.png";
 var s_PanelIcon2 = "Resources/Graphics/panel-icon-2.png";
 var s_PanelIcon3 = "Resources/Graphics/panel-icon-3.png";
@@ -156,6 +157,7 @@ var s_ItemsProperties = "Resources/Graphics/items-properties.png";
 var s_ModeUnlockLine = "Resources/Graphics/unlock-line.png";
 var s_StarsPanel = "Resources/Graphics/stars-panel.png";
 var s_Star = "Resources/Graphics/star.png";
+var s_StarSmall = "Resources/Graphics/star-small.png";
 var s_Mark = "Resources/Graphics/mark.png";
 var s_Lamp = "Resources/Graphics/lamp.png";
 var s_Birds = "Resources/Graphics/birds.png";
@@ -289,7 +291,6 @@ var s_LevelElementIcons = "Resources/Graphics/level-element-icons.png";
 var s_UsersCrown = "Resources/Graphics/users-crown.png";
 var s_LevelPointsHolder = "Resources/Graphics/level-points-holder.png";
 var s_LevelStars = "Resources/Graphics/level-stars.png";
-var s_LevelStarsCounter = "Resources/Graphics/stars-counter.png";
 var s_LevelStarsCounterArea = "Resources/Graphics/stars-counter-area.png";
 var s_LivesPresentBackground = "Resources/Graphics/lives-present-background.png";
 var s_FriendsBackground1 = "Resources/Graphics/friends-background-1.png";
@@ -419,6 +420,7 @@ var resources = [
   {src: s_PopupDecoration20},
   {src: s_PanelItemsBackground1},
   {src: s_PanelItemsBackground2},
+  {src: s_PanelItemsBackground3},
   {src: s_PanelIcon1},
   {src: s_PanelIcon2},
   {src: s_PanelIcon3},
@@ -463,6 +465,7 @@ var resources = [
   {src: s_ModeUnlockLine},
   {src: s_StarsPanel},
   {src: s_Star},
+  {src: s_StarSmall},
   {src: s_Lamp},
   {src: s_Mark},
   {src: s_Birds},
@@ -590,7 +593,6 @@ var resources = [
   {src: s_UsersCrown},
   {src: s_LevelPointsHolder},
   {src: s_LevelStars},
-  {src: s_LevelStarsCounter},
   {src: s_LevelStarsCounterArea},
   {src: s_LivesPresentBackground},
   {src: s_FriendsBackground1},

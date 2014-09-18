@@ -67,6 +67,7 @@ Shop = Screen.extend({
       }
 
       this.m_Backgrounds[i] = List.create(1920, 280, 320, 0, this, 1);
+      this.m_Backgrounds[i].m_Fixed = true;
       this.m_Backgrounds[i].setListCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) + Camera.sharedCamera().coord(80));
 
       for(var j = -3; j < 6; j++) {
@@ -237,6 +238,13 @@ Shop = Screen.extend({
                 )
               );
           }
+
+          element.dock = Entity.create(s_PanelItemsBackground3, element);
+          element.dock.text = Text.create(false, element.dock);
+
+          element.dock.create().setCenterPosition(element.getWidth() / 2, Camera.sharedCamera().coord(15));
+          element.dock.text.create().setCenterPosition(element.dock.getWidth() / 2, element.dock.getHeight() / 2);
+          element.dock.text.ccsf([unlock.items[element.number].price]);
 
           element.lock = Entity.create(s_Lock, element);
           element.lock.create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2);

@@ -200,6 +200,10 @@ Element = TiledEntity.extend({
           element = MatrixManager.sharedManager().m_CurrentElement1;
         }
 
+        if(!element) {
+          element = MatrixManager.sharedManager().getFreeRandomElement();
+        }
+
         MatrixManager.sharedManager().removeSimilar(element.getIndex().x, element.getIndex().y, element);
 
         Game.instance.updateScore(500);

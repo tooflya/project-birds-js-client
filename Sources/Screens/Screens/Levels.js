@@ -551,43 +551,13 @@ Levels = Screen.extend({
     /** this.m_Points = EntityManager.create(this.m_PointsCoordinates.length, MapPoint.create(), this, 102); */
     this.m_Trees = EntityManager.create(this.m_TreesCoordinates.length, MapTree.create(), this, 103);
 
-    this.m_StarsCounter = Button.create(s_LevelStarsCounter, 1, 1, this);
     this.m_StarsCounterArea = Entity.create(s_LevelStarsCounterArea, this);
+    this.m_StarsCounterArea.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(160), Camera.sharedCamera().coord(70));
     this.m_StarsCounterArea.text = Text.create('total-stars', this.m_StarsCounterArea);
-    this.m_StarsCounter.onHover = function() {
-    };
-    this.m_StarsCounter.onUnHover = function() {
-    };
-    this.m_StarsCounter.onTouch = function(e) {
-      Button.prototype.onTouch.call(this, e);
-
-      var area = Levels.instance.m_StarsCounterArea;
-
-      if(area.getNumberOfRunningActions() > 0) return false;
-
-      if(this.showed) {
-        area.runAction(cc.FadeTo.create(0.5, 0));
-      } else {
-        area.setOpacity(0);
-        area.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(130));
-        area.runAction(cc.FadeTo.create(0.5, 255));
-      }
-
-      this.showed = !this.showed;
-    };
-    this.m_StarsCounter.setTouchHandler('onShowStarsInfo', Levels);
-
-    this.m_StarsCounter.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(150), -Camera.sharedCamera().coord(80));
-    this.m_StarsCounterArea.create().setCenterPosition(0, 0);
-    this.m_StarsCounterArea.setCascadeOpacityEnabled(true);
-    this.m_StarsCounter.registerTouchable(true);
-    this.m_StarsCounterArea.text.create().setCenterPosition(this.m_StarsCounterArea.getWidth() / 2, this.m_StarsCounterArea.getHeight() / 2);
+    this.m_StarsCounterArea.text.create().setCenterPosition(this.m_StarsCounterArea.getWidth() / 2, this.m_StarsCounterArea.getHeight() / 2 + Camera.sharedCamera().coord(10));
     this.m_StarsCounterArea.text.setColor(cc.c3(114.0, 80.0, 9.0));
     this.m_StarsCounterArea.text.disableShadow();
     this.m_StarsCounterArea.text.ccsf([0, 90]); // TODO: Add total stars count.
-    this.m_StarsCounterArea.setOpacity(0);
-
-    this.m_StarsCounter.setZOrder(200);
     this.m_StarsCounterArea.setZOrder(200);
 
     var parallax = Entity.create(s_LevelsMapCloud);
@@ -707,15 +677,11 @@ Levels = Screen.extend({
       }
     });
 
-    this.m_StarsCounter.runAction(
-      cc.Sequence.create(
-        cc.DelayTime.create(1.0),
-        cc.EaseExponentialOut.create(
-          cc.MoveTo.create(1.0, cc.p(this.m_StarsCounter.getCenterX(), this.m_StarsCounter.getCenterY() + Camera.sharedCamera().coord(160)))
-        ),
-        false
-      )
-    );
+    Tooflya.api.call('level.stars', false, {
+      success: function(dara) {
+        Levels.instance.m_StarsCounterArea.text.ccsf([data, 90]);
+      }
+    });
   },
   onHide: function() {
     this._super();

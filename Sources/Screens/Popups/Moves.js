@@ -75,7 +75,7 @@ Moves = ExtendedPopup.extend({
           break;
           case purchase.moves:
           if(Game.instance) {
-            Game.instance.m_CurrentBlows = 1;
+            Game.instance.m_CurrentBlows = Game.instance.m_LevelsMatrixes[Game.level].moves;
 
             Game.instance.m_PlayerTurn = false;
             Game.instance.onTurnChange();

@@ -165,6 +165,40 @@ MatrixManager = cc.Node.extend({
   sae: function(element, soft) {
     return this.e(element) && this.s(element, soft);
   },
+  getRandomElement: function() {
+    var elements = [];
+
+    for(var i = 0; i < this.getSize().x; i++) {
+      for(var j = 0; j < this.getSize().y; j++) {
+        var element = this.get(i, j);
+
+        if(element instanceof Element) {
+          elements.push(element);
+        }
+      }
+    }
+
+    return elements.random();
+  },
+  getFreeRandomElement: function() {
+    var elements = [];
+
+    for(var i = 0; i < this.getSize().x; i++) {
+      for(var j = 0; j < this.getSize().y; j++) {
+        var element = this.get(i, j);
+
+        if(element instanceof Element) {
+          if(!this.soe(element)) {
+            if(!this.m_Bonus) {
+              elements.push(element);
+            }
+          }
+        }
+      }
+    }
+
+    return elements.random();
+  },
   computer: function(selector, automatic) {
     if(!automatic) this.m_Busy = true;
 

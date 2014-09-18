@@ -173,13 +173,13 @@ var unlock = {
   ],
   items: [
     {
-      price: 25
+      price: 0
     },
     {
-      price: 25
+      price: 100
     },
     {
-      price: 25
+      price: 0
     },
     {
       price: 25

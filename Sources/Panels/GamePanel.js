@@ -67,17 +67,13 @@ GamePanel = Panel.extend({
     var u = 0;
     switch(type) {
       case 0:
-        this.addItem(s_PanelItemsBackground2, [s_Star, 3, 2]);
-        this.addItem(s_PanelItemsBackground2, [s_Star, 3, 2]);
-        this.addItem(s_PanelItemsBackground2, [s_Star, 3, 2]);
+        this.addItem(s_PanelItemsBackground2, [s_StarSmall, 3, 2]);
+        this.addItem(s_PanelItemsBackground2, [s_StarSmall, 3, 2]);
+        this.addItem(s_PanelItemsBackground2, [s_StarSmall, 3, 2]);
 
         this.getIcons()[3].setCurrentFrameIndex(3);
         this.getIcons()[4].setCurrentFrameIndex(4);
         this.getIcons()[5].setCurrentFrameIndex(5);
-
-        this.getIcons()[3].setScale(0.3);
-        this.getIcons()[4].setScale(0.3);
-        this.getIcons()[5].setScale(0.3);
 
         this.getIcons()[3].setCenterPosition(this.getIcons()[3].getCenterX() + Camera.sharedCamera().coord(10), this.getIcons()[3].getCenterY());
         this.getIcons()[5].setCenterPosition(this.getIcons()[5].getCenterX() - Camera.sharedCamera().coord(10), this.getIcons()[5].getCenterY());
@@ -176,10 +172,31 @@ GamePanel = Panel.extend({
     GamePanel.instance = false;
   },
   starred: function() {
+    ElementStar.create(Game.instance);
+    this.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(1.0),
+        cc.CallFunc.create(this.starred2, this, this),
+        false
+      )
+    );
+  },
+  starred2: function() {
     this.getIcons()[this.m_Stars + 3].setCurrentFrameIndex(this.getIcons()[this.m_Stars + 3].getCurrentFrameIndex() - 3);
+
+    this.getIcons()[this.m_Stars + 3].runAction(
+      cc.Sequence.create(
+        cc.ScaleTo.create(0.2, 0.6),
+        cc.ScaleTo.create(0.1, 1.0),
+        false
+      )
+    );
 
     this.m_Stars++;
     Game.instance.m_StarsPoints++;
+  },
+  shake: function() {
+
   },
   onShow: function() {
     this._super();
