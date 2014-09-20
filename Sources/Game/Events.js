@@ -322,6 +322,10 @@ Game.prototype.onHide = function() {
 Game.prototype.onFinishShow = function() {
   switch(this.m_Type) {
     case this.m_Types.progress:
+    this.stopAllActions();
+    this.m_CombinationsNotification.stopAllActions();
+    this.m_PreviewBackground.stopAllActions();
+
     ElementsManager.instance.clear();
     MatrixManager.instance.clear();
 

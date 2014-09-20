@@ -85,10 +85,10 @@ BombBird = Bird.extend({
 
     switch(game.m_Type) {
       case game.m_Types.progress:
-      this.setCenterPosition(data.element.convertToWorldSpace(cc.p(0, 0)).x, -this.getHeight() / 2);
+      this.setCenterPosition(data.element.convertToWorldSpace(cc.p(0, 0)).x + data.element.getWidth() / 2, -this.getHeight() / 2);
       this.runAction(
         cc.Sequence.create(
-          cc.MoveTo.create(data.speed, data.element.convertToWorldSpace(cc.p(0, 0))),
+          cc.MoveTo.create(data.speed, cc.p(data.element.convertToWorldSpace(cc.p(0, 0)).x + data.element.getWidth() / 2, data.element.convertToWorldSpace(cc.p(0, 0)).y + data.element.getHeight() / 2)),
           cc.CallFunc.create(this.destroy, this, this),
           false
         )

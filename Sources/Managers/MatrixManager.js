@@ -91,6 +91,17 @@ MatrixManager = cc.Node.extend({
     this.m_Matrix[index.x][index.y] = false;
   },
   check: function(element) {
+    this.unselectAll();
+
+    if(element instanceof Element) {
+      if(element.__instanceId == this.m_CurrentElement1.__instanceId) {
+        this.m_CurrentElement1.onChangePosition();
+        this.m_CurrentElement1 = false;
+
+        return false;
+      }
+    }
+
     if(!this.m_CurrentElement1) {
       this.m_CurrentElement1 = element;
     } else {
@@ -209,6 +220,11 @@ MatrixManager = cc.Node.extend({
         var element = this.m_Matrix[i][j];
 
         if(!element || element === etypes.empty || element === etypes.block) continue;
+        if(element instanceof Element) {
+          if(element.chained()) {
+            continue;
+          }
+        }
 
         var neighbor = false;
         for(var k = 0; k < 4; k++) {
@@ -235,6 +251,14 @@ MatrixManager = cc.Node.extend({
                 neighbor: neighbor,
                 count: result
               });
+            } else {
+              if(element.m_Bonus == Element.bonus.types.bomb) {
+                this.m_Combinations.push({
+                  element: element,
+                  neighbor: neighbor,
+                  count: 100
+                });
+              }
             }
           }
         }
@@ -244,11 +268,15 @@ MatrixManager = cc.Node.extend({
     if(this.m_Combinations.length > 0) {
       var priority = 0;
       var combination = false;
-      var types = [[], [], [], [], [], [], [], [], []];
+      var types = [[], [], [], [], [], [], [], [], [], [], [], [], []];
       var health = Game.sharedScreen().m_Catapults.get(1).m_Health * 100 / Game.sharedScreen().m_Catapults.get(1).m_HealthBasic;
 
       for(var i = 0; i < this.m_Combinations.length; i++) {
-        types[this.m_Combinations[i].element.getId()].push(this.m_Combinations[i]);
+        if(this.m_Combinations[i].element.getId() < 0) {
+          types[10].push(this.m_Combinations[i]);
+        } else {
+          types[this.m_Combinations[i].element.getId()].push(this.m_Combinations[i]);
+        }
       }
 
       if(health < 50) {
@@ -280,6 +308,29 @@ MatrixManager = cc.Node.extend({
         }
       }
 
+      var ccb = false;
+      var bonus = false;
+      var arr = [];
+      for(var i = 0; i < this.m_Combinations.length; i++) {
+        if(this.m_Combinations[i].element.getId() < 0) {
+          bonus = true;
+
+          if(this.m_Combinations[i].neighbor.getId() == priority) {
+            ccb = this.m_Combinations[i];
+          } else {
+            arr.push(this.m_Combinations[i]);
+          }
+        }
+      }
+
+      if(bonus) {
+        if(!ccb) {
+          combination = arr.random();
+        } else {
+          combination = ccb;
+        }
+      }
+
       if(automatic) {
         return true;
       }
@@ -291,6 +342,8 @@ MatrixManager = cc.Node.extend({
   },
   replace: function(element, neighbor, back, network, force) {
     if(this.soe(element)) return false;
+
+    this.unselectAll();
 
     if(neighbor instanceof Element) {
       Sound.sharedSound().play(s_SoundExchange);
@@ -990,6 +1043,39 @@ MatrixManager = cc.Node.extend({
       }
     }
   },
+  selectRandomCombination: function() {
+    if(this.m_CurrentElement1 || this.m_CurrentElement2) {
+      return false;
+    }
+
+    if(MatrixManager.sharedManager().computer(false, true)) {
+      var element = this.m_Combinations.random().element;
+      if(element instanceof Element) {
+        this.unselectAll();
+
+        element.onSelect();
+
+        return true;
+      }
+    }
+
+    return false;
+  },
+  unselectAll: function() {
+      for(var i = 0; i < this.getSize().x; i++) {
+        for(var j = 0; j < this.getSize().y; j++) {
+          var element = this.get(i, j);
+
+          if(element instanceof Element) {
+            if(element.m_Selected) {
+              if(element.__instanceId != this.m_CurrentElement1.__instanceId && element.__instanceId != this.m_CurrentElement2.__instanceId) {
+                element.onUnselect();
+              }
+            }
+          }
+        }
+      }
+  },
   removeHorizontalLine: function(x, y, element) {
     var sickle1 = ElementsManager.instance.m_ElementsSickles.create();
     var sickle2 = ElementsManager.instance.m_ElementsSickles.create();
@@ -1303,7 +1389,7 @@ MatrixManager = cc.Node.extend({
 
         els.forEach(function(el) {
           if(!build) {
-            if(el) {
+            if(el instanceof Element) {
               if(!el.special() && !el.chained() && el.getId() != Element.types.star) {
                 if(true) {
                   el.setSpecial(Element.types.box);

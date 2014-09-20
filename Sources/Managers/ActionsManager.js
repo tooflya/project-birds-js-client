@@ -98,7 +98,7 @@ ActionsManager = cc.Node.extend({
     }
   },
   onLevelStart: function() {
-    this.m_Pool = [];
+    this.clear();
   }
 });
 

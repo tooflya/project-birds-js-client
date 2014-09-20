@@ -52,7 +52,7 @@ InviteList = PatternList.extend({
 
     var count = 0;
     FriendsManager.sharedInstance().getFriends().shuffle().forEach(function(user) {
-      if(count > 10) return;
+      if(count > 6) return;
 
       var holder = Entity.create(s_FriendsBackground1, this);
 

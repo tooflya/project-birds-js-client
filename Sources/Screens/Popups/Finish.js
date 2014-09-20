@@ -372,6 +372,7 @@ Finish = Background.extend({
     this.m_HideCallback = callback;
 
     MenuPanel.sharedScreen(this).hide();
+    MenuPanel.instance = false;
 
     this.m_BackgroundSquare.runRecognizeAction(cc.CallFunc.create(this.onHide, this, this), {
       name: 'scale',
@@ -392,10 +393,10 @@ Finish = Background.extend({
     });
   },
   onShow: function() {
-    MenuPanel.sharedScreen(this).show();
-
     var types = Game.sharedScreen().m_Types;
     var type = Game.sharedScreen().m_Type;
+
+    MenuPanel.sharedScreen(this).show();
 
     switch(type) {
       case types.progress:
@@ -421,11 +422,11 @@ Finish = Background.extend({
       break;
     }
 
+    Game.instance.onFinishShow();
+
     if(Game.instance.m_GameState) {
       this.schedule(this.count, 0.01);
     }
-
-    Game.instance.onFinishShow();
   },
   onHide: function() {
     this.removeFromParent();
@@ -435,13 +436,15 @@ Finish = Background.extend({
     }
   },
   onMenuEvent: function() {
+    this.setBottomScreen(Menu);
+
     this.hide(function() {
-      ScreenManager.sharedManager().replace(Menu);
     });
   },
   onShopEvent: function() {
+    this.setBottomScreen(Shop);
+
     this.hide(function() {
-      ScreenManager.sharedManager().replace(Shop);
     });
   },
   onRestartEvent: function() {
@@ -450,17 +453,36 @@ Finish = Background.extend({
     });
   },
   onContinueEvent: function() {
-    this.hide(function() {
-      if(Game.tutorial) {
-        ScreenManager.sharedManager().replace(Levels);
+    if(Game.tutorial) {
+      this.setBottomScreen(Levels);
+
+      this.hide(function() {
+        window.setTimeout(function() {
+          Levels.instance.onSelected({
+            id: 1
+          });
+        }, 1500);
+      });
+    } else {
+      if(Game.network) {
+      this.setBottomScreen(Mode);
+
+      this.hide(function() {
+      });
       } else {
-        if(Game.network) {
-          ScreenManager.sharedManager().replace(Mode);
-        } else {
-          Game.sharedScreen().onShow();
-        }
+        this.setBottomScreen(Levels);
+
+        this.hide(function() {
+          if(!DataManager.sharedManager().get(false, references.levels.levels[Game.level + 1])) {
+            window.setTimeout(function() {
+              Levels.instance.onSelected({
+                id: Game.level
+              });
+            }, 1500);
+          }
+        });
       }
-    });
+    }
   },
   onEnter: function() {
     this._super();
@@ -469,6 +491,11 @@ Finish = Background.extend({
     this._super();
 
     Finish.instance = false;
+  },
+  setBottomScreen: function(screen) {
+    this.removeFromParent();
+    ScreenManager.sharedManager().replace(screen, -1);
+    screen.instance.addChild(this);
   },
   onCountingResume: function() {
     this.m_TextValue1.runRecognizeAction(false, {
@@ -540,13 +567,24 @@ Finish = Background.extend({
         case 0:
         case 1:
         case 2:
-        this.m_CountReferences[this.m_CountReference]++;
-        this.m_TempCoins++;
+        if(this.m_CountReference == 0 && this.m_ResultReferences[this.m_CountReference] - this.m_CountReferences[this.m_CountReference] >= 10) {
+          this.m_CountReferences[this.m_CountReference] += 10;
+          this.m_TempCoins += 10;
 
-        if(this.m_TempCoins > (Game.network ? 100 : 10)) {
-          this.m_TempCoins = 0;
+          if(this.m_TempCoins > (Game.network ? 1000 : 100)) {
+            this.m_TempCoins = 10;
 
-          this.m_TotalCoins++;
+            this.m_TotalCoins += 10;
+          }
+        } else {
+          this.m_CountReferences[this.m_CountReference]++;
+          this.m_TempCoins++;
+
+          if(this.m_TempCoins > (Game.network ? 100 : 10)) {
+            this.m_TempCoins = 0;
+
+            this.m_TotalCoins++;
+          }
         }
 
         this.m_TextValue1.ccsf([this.m_CountReferences[this.m_CountReference]]);

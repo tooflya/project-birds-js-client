@@ -112,6 +112,8 @@ Item = ExtendedPopup.extend({
         if(DataManager.sharedManager().get(false, this.m_ActionButton.params.id) > 0) {
           DataManager.sharedManager().set(true, references.info.weapon, this.m_ActionButton.params.id - 100);
 
+          Shop.sharedScreen().selectWeapon();
+
           Sound.sharedSound().play(s_SoundEquipSword);
 
           return true;
@@ -147,6 +149,8 @@ Item = ExtendedPopup.extend({
                   self.m_ActionButton.params.id - 100
                 ]
               );
+
+              Shop.sharedScreen().selectWeapon();
               break;
               case 'birds':
               AchievementsManager.sharedManager().unlock(self.m_ActionButton.params.id - 200 + 2);

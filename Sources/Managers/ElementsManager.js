@@ -49,8 +49,8 @@ ElementsManager = EntityManager.extend({
     this.m_ElementsSickles = EntityManager.create(10, Entity.create(s_ElementsSickles), Game.sharedScreen(), 110, true);
     this.m_ElementsGlows = EntityManager.create(10, ElementGlow.create(), this.m_Stencil, 110, true);
 
-    this.m_MatrixArrows1 = EntityManager.create(30, Entity.create(s_MatrixArrow1), Game.sharedScreen(), 110, true);
     this.m_MatrixArrows2 = EntityManager.create(30, Entity.create(s_MatrixArrow2), Game.sharedScreen(), 110, true);
+    this.m_MatrixArrows1 = EntityManager.create(30, Entity.create(s_MatrixArrow1), Game.sharedScreen(), 111, true);
 
     this.m_MatrixManager = MatrixManager.sharedManager();
 
@@ -276,22 +276,18 @@ ElementsManager = EntityManager.extend({
     var tops = [];
 
     for(var x = 0; x < MatrixManager.sharedManager().getSize().x; x++) {
-      var top = 0;
-      var empty = false;
+      var top = false;
       for(var y = 0; y < MatrixManager.sharedManager().getSize().y; y++) {
         var element = MatrixManager.sharedManager().get(x, y);
 
         if(element != etypes.empty) {
-          empty = false;
-        }
-
-        if((element == etypes.empty && !empty) || (element != etypes.empty && y == MatrixManager.sharedManager().getSize().y - 1)) {
-          top = y - (y == MatrixManager.sharedManager().getSize().y - 1 ? 0 : 1);
-          empty = true;
+          top = y;
         }
       }
 
-      tops.push(top);
+      if(top !== false) {
+        tops.push(top);
+      }
     }
 
     var fields = [];

@@ -93,16 +93,23 @@ Game.prototype.onTurnChangeStart = function() {
 Game.prototype.onTurnChangeFinish = function() {
   this.m_PreviewBackground.runAction(cc.FadeTo.create(0.5, 0));
 
+  this.runAction(
+    cc.Sequence.create(
+      cc.CallFunc.create(MatrixManager.instance.addBoxes, MatrixManager.instance),
+      cc.CallFunc.create(MatrixManager.instance.addChange, MatrixManager.instance),
+      false
+    )
+  );
+
   if(!MatrixManager.sharedManager().computer(false, true)) {
     this.onNoMoreCombinations();
-  }
+  } else {
+    if(Game.tutorial) {
+      this.onTurnChangeFinishTutorial();
+    }
 
-  if(Game.tutorial) {
-    this.onTurnChangeFinishTutorial();
+    Game.instance.m_LastActionTime = Date.now();
   }
-
-  MatrixManager.sharedManager().addBoxes();
-  MatrixManager.sharedManager().addChange();
 };
 
 Game.prototype.onExtraMove = function() {
@@ -250,17 +257,45 @@ Game.prototype.onActionAnimationFinish = function() {
 Game.prototype.onNoMoreCombinations = function() {
   this.m_CombinationsNotification.runAction(
     cc.Sequence.create(
+      cc.DelayTime.create(0.5),
       cc.EaseBounceOut.create(
         cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(300)))
       ),
       cc.DelayTime.create(0.5),
       cc.CallFunc.create(MatrixManager.sharedManager().shuffle, MatrixManager.sharedManager()),
       cc.DelayTime.create(0.5),
-      cc.EaseBounceOut.create(
-        cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, -this.m_CombinationsNotification.getHeight()))
-      ),
-      cc.CallFunc.create(MatrixManager.sharedManager().unbusy, MatrixManager.sharedManager()),
+      cc.CallFunc.create(this.onNoMoreCombinationsCheck, this, this),
       false
     )
   );
+};
+Game.prototype.onNoMoreCombinationsCheck = function() {
+  if(!MatrixManager.sharedManager().computer(false, true)) {
+    this.m_CombinationsNotification.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.5),
+        cc.CallFunc.create(MatrixManager.sharedManager().shuffle, MatrixManager.sharedManager()),
+        cc.DelayTime.create(0.5),
+        cc.CallFunc.create(this.onNoMoreCombinationsCheck, this, this),
+        false
+      )
+    );
+  } else {
+    this.m_CombinationsNotification.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.5),
+        cc.EaseBounceOut.create(
+          cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, -this.m_CombinationsNotification.getHeight()))
+        ),
+        cc.CallFunc.create(MatrixManager.sharedManager().unbusy, MatrixManager.sharedManager()),
+        false
+      )
+    );
+
+    if(Game.tutorial) {
+      this.onTurnChangeFinishTutorial();
+    }
+
+    Game.instance.m_LastActionTime = Date.now();
+  }
 };

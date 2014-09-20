@@ -43,6 +43,7 @@ Shop = Screen.extend({
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_WeaponChecker = Entity.create(s_Checker);
 
     Lock.sharedScreen(this).prepare();
     Item.sharedScreen(this).prepare();
@@ -327,6 +328,8 @@ Shop = Screen.extend({
       success: function() {
         element.locked = false;
 
+        element.dock.removeFromParent();
+
         element.lock.stopAllActions();
         element.key.stopAllActions();
         element.decorations[0].stopAllActions();
@@ -394,6 +397,8 @@ Shop = Screen.extend({
     this._super();
 
     MenuPanel.sharedScreen(this).show();
+
+    this.selectWeapon();
   },
   onHide: function() {
     this._super();
@@ -405,6 +410,14 @@ Shop = Screen.extend({
     MenuPanel.sharedScreen(this).hide();
 
     this._super();
+  },
+  selectWeapon: function() {
+    var weapon = this.m_Items[0][DataManager.sharedManager().get(false, references.info.weapon) - 1];
+
+    this.m_WeaponChecker.removeFromParent();
+    weapon.addChild(this.m_WeaponChecker);
+
+    this.m_WeaponChecker.create().setCenterPosition(weapon.getWidth() - Camera.sharedCamera().coord(24), Camera.sharedCamera().coord(24));
   },
   updateWheelsState: function() {
     for(var i = 0; i < 3; i++) {

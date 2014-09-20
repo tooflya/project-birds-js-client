@@ -322,6 +322,22 @@ Element = TiledEntity.extend({
       ElementsManager.sharedManager().m_ElementsGlows.create(this);
 
       MatrixManager.sharedManager().check(this);
+    } else {
+      MatrixManager.sharedManager().check(this);
+    }
+
+    Game.instance.m_LastActionTime = Date.now();
+  },
+  onSelect: function() {
+    this.m_Selected = true;
+
+    ElementsManager.sharedManager().m_ElementsGlows.create(this);
+  },
+  onUnselect: function() {
+    this.m_Selected = false;
+
+    if(this.m_Glow) {
+      this.m_Glow.destroy();
     }
   },
   onDragTop: function() {
@@ -348,6 +364,8 @@ Element = TiledEntity.extend({
     if(this.getNumberOfRunningActions() > 0) return false;
 
     if(this.getId() == Element.types.block) return false;
+
+    Game.instance.m_LastActionTime = Date.now();
 
     return this._super(e);
   },

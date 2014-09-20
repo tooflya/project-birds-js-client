@@ -31,7 +31,7 @@
 
 Levels = Screen.extend({
   m_IconsCoordinates: [
-    {x: 99, y: 156},
+    {x: 99, y: 256},
     {x: 246, y: 199},
     {x: 405, y: 203},
     {x: 550, y: 170},
@@ -40,7 +40,7 @@ Levels = Screen.extend({
     {x: 693, y: 329},
     {x: 519, y: 354},
     {x: 362, y: 358},
-    {x: 201, y: 356},
+    {x: 201, y: 396},
     {x: 94, y: 599},
     {x: 252, y: 615},
     {x: 325, y: 711},
@@ -543,6 +543,7 @@ Levels = Screen.extend({
     this.name = "Levels screen";
 
     this.m_Background = Entity.create(s_LevelsMapBackground, this);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
 
     this.m_Background.create().setCenterPosition(Camera.sharedCamera().center.x, this.m_Background.getHeight() / 2);
 
@@ -551,14 +552,17 @@ Levels = Screen.extend({
     /** this.m_Points = EntityManager.create(this.m_PointsCoordinates.length, MapPoint.create(), this, 102); */
     this.m_Trees = EntityManager.create(this.m_TreesCoordinates.length, MapTree.create(), this, 103);
 
+    this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
     this.m_StarsCounterArea = Entity.create(s_LevelStarsCounterArea, this);
     this.m_StarsCounterArea.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(160), Camera.sharedCamera().coord(70));
     this.m_StarsCounterArea.text = Text.create('total-stars', this.m_StarsCounterArea);
-    this.m_StarsCounterArea.text.create().setCenterPosition(this.m_StarsCounterArea.getWidth() / 2, this.m_StarsCounterArea.getHeight() / 2 + Camera.sharedCamera().coord(10));
+    this.m_StarsCounterArea.text.create().setCenterPosition(this.m_StarsCounterArea.getWidth() / 2 + Camera.sharedCamera().coord(10), this.m_StarsCounterArea.getHeight() / 2);
     this.m_StarsCounterArea.text.setColor(cc.c3(114.0, 80.0, 9.0));
     this.m_StarsCounterArea.text.disableShadow();
-    this.m_StarsCounterArea.text.ccsf([0, 90]); // TODO: Add total stars count.
+    this.m_StarsCounterArea.text.ccsf([0, 90]);
     this.m_StarsCounterArea.setZOrder(200);
+    this.m_BackButton.setCurrentFrameIndex(1);
+    this.m_BackButton.setZOrder(200);
 
     var parallax = Entity.create(s_LevelsMapCloud);
     this.m_Cloud = ParallaxEntity.create(parallax, {
@@ -635,6 +639,8 @@ Levels = Screen.extend({
       this.m_Trees.create().setCenterPosition(Camera.sharedCamera().coord(this.m_TreesCoordinates[i].x), Camera.sharedCamera().coord(this.m_TreesCoordinates[i].y));
       this.m_Trees.last().setCurrentFrameIndex(this.m_TreesCoordinates[i].frame);
     }
+
+    this.m_BackButton.setTouchHandler('onBackEvent', Levels);
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Mode);

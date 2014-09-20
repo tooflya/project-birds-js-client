@@ -126,8 +126,8 @@ MenuPanel = Panel.extend({
   show: function() {
     this._super();
   },
-  hide: function() {
-    this._super();
+  hide: function(callback) {
+    this._super(callback);
 
     MenuPanel.instance = false;
   },

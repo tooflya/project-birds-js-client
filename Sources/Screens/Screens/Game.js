@@ -142,6 +142,8 @@ Game = Screen.extend({
   m_PlayerTurn: false,
   m_DecorationTime: 0.5,
   m_DecorationTimeElapsed: 0.5,
+  m_HelpTime: 5.0,
+  m_HelpTimeElapsed: 0,
   ctor: function() {
     this._super(true);
 
@@ -547,7 +549,7 @@ Game = Screen.extend({
       if(this.m_GameRunning && !this.m_TutorialRunning) {
         if(!Game.network) {
           if(!this.m_PlayerTurn && !MatrixManager.sharedManager().active() && !MatrixManager.sharedManager().busy()) {
-            if(!this.getNumberOfRunningActions()) {
+            if(!this.getNumberOfRunningActions() && !this.m_CombinationsNotification.getNumberOfRunningActions()) {
               this.runAction(
                 cc.Sequence.create(
                   cc.DelayTime.create(3.0),
@@ -555,6 +557,19 @@ Game = Screen.extend({
                   false
                 )
               );
+            }
+          }
+        }
+
+        if(this.m_PlayerTurn && MatrixManager.sharedManager().active()) {
+          if(Date.now() - this.m_LastActionTime > 10000) {
+            this.m_HelpTimeElapsed += time;
+            if(this.m_HelpTimeElapsed >= this.m_HelpTime) {
+              this.m_LastActionTime = Date.now() + 60 * 1000;
+
+              if(MatrixManager.sharedManager().selectRandomCombination()) {
+                this.m_HelpTimeElapsed = 0;
+              }
             }
           }
         }

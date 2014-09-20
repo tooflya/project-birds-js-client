@@ -98,6 +98,7 @@
     'Sources/Entities/ElementPart.js',
     'Sources/Entities/ElementStar.js',
     'Sources/Entities/Target.js',
+    'Sources/Entities/HealthParticle.js',
     'Sources/Entities/SplashText.js',
     'Sources/Screens/Screens/Preloader.js',
     'Sources/Screens/Screens/Menu.js',

@@ -49,6 +49,8 @@ Catapult = AnimatedEntity.extend({
   ctor: function(parent) {
     this._super(s_Catapult, 6, 2, parent);
 
+    this.m_HealthParticles = EntityManager.create(300, HealthParticle.create(), parent, 301);
+
     this.m_PlayerHealth = Entity.create(s_PlayerHealth, parent);
     this.m_PlayerHealthBar = TiledEntity.create(s_PlayerHealthBar, 1, 1, this.m_PlayerHealth);
 
@@ -439,6 +441,11 @@ Catapult = AnimatedEntity.extend({
         } else if(this.m_StateData.destroy <= 0.0) {
           this.onAnimationFinish();
         } else {
+          this.m_HealthParticles.create({
+            element: this,
+            type: HealthParticle.types.simple.minus
+          });
+
           if(this.m_Defence > 0) {
             this.m_Defence -= 1;
           } else {
@@ -449,6 +456,11 @@ Catapult = AnimatedEntity.extend({
       }
       break;
       case this.m_States.regeneration:
+      this.m_HealthParticles.create({
+        element: this,
+        type: HealthParticle.types.simple.plus
+      });
+
       if(this.m_StateData.regeneration <= 0.0 || this.m_Health >= this.m_HealthBasic) {
         this.onAnimationFinish();
       } else {
