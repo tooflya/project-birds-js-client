@@ -269,8 +269,11 @@ Game = Screen.extend({
 
       this.m_Elements = ElementsManager.sharedManager();
 
+      this.m_HelpFinger = Entity.create(s_TutorialFinger, this);
+
       this.m_Ground.setZOrder(301);
       this.m_Target.setZOrder(302);
+      this.m_HelpFinger.setZOrder(500);
 
       this.m_Ground.m_PhysicsDefinition.type = Box2D.Dynamics.b2Body.b2_staticBody;
 

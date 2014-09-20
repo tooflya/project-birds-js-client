@@ -91,8 +91,6 @@ MatrixManager = cc.Node.extend({
     this.m_Matrix[index.x][index.y] = false;
   },
   check: function(element) {
-    this.unselectAll();
-
     if(element instanceof Element) {
       if(element.__instanceId == this.m_CurrentElement1.__instanceId) {
         this.m_CurrentElement1.onChangePosition();
@@ -342,8 +340,6 @@ MatrixManager = cc.Node.extend({
   },
   replace: function(element, neighbor, back, network, force) {
     if(this.soe(element)) return false;
-
-    this.unselectAll();
 
     if(neighbor instanceof Element) {
       Sound.sharedSound().play(s_SoundExchange);
@@ -1050,10 +1046,31 @@ MatrixManager = cc.Node.extend({
 
     if(MatrixManager.sharedManager().computer(false, true)) {
       var element = this.m_Combinations.random().element;
-      if(element instanceof Element) {
-        this.unselectAll();
+      var neighbor = this.m_Combinations.random().neighbor;
 
-        element.onSelect();
+      if(element instanceof Element) {
+        var x1 = element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2;
+        var y1 = element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2;
+        var x2 = neighbor.convertToWorldSpace(cc.p(0, 0)).x + neighbor.getWidth() / 2;
+        var y2 = neighbor.convertToWorldSpace(cc.p(0, 0)).y + neighbor.getHeight() / 2;
+
+        var finger = Game.instance.m_HelpFinger;
+        finger.create().setCenterPosition(x1, y1);
+        finger.setOpacity(0);
+        finger.stopAllActions();
+        finger.runAction(
+          cc.RepeatForever.create(
+            cc.Sequence.create(
+              cc.MoveTo.create(0.0, cc.p(x1, y1)),
+              cc.FadeIn.create(0.5),
+              cc.DelayTime.create(0.5),
+              cc.MoveTo.create(1.0, cc.p(x2, y2)),
+              cc.FadeOut.create(0.5),
+              cc.DelayTime.create(0.5),
+              false
+            )
+          )
+        );
 
         return true;
       }
@@ -1061,20 +1078,16 @@ MatrixManager = cc.Node.extend({
 
     return false;
   },
-  unselectAll: function() {
-      for(var i = 0; i < this.getSize().x; i++) {
-        for(var j = 0; j < this.getSize().y; j++) {
-          var element = this.get(i, j);
-
-          if(element instanceof Element) {
-            if(element.m_Selected) {
-              if(element.__instanceId != this.m_CurrentElement1.__instanceId && element.__instanceId != this.m_CurrentElement2.__instanceId) {
-                element.onUnselect();
-              }
-            }
-          }
-        }
-      }
+  uselectCombination: function() {
+    var finger = Game.instance.m_HelpFinger;
+    finger.stopAllActions();
+    finger.runAction(
+      cc.Sequence.create(
+        cc.FadeOut.create(0.5),
+        cc.CallFunc.create(finger.destroy, finger, finger),
+        false
+      )
+    );
   },
   removeHorizontalLine: function(x, y, element) {
     var sickle1 = ElementsManager.instance.m_ElementsSickles.create();

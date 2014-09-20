@@ -328,18 +328,6 @@ Element = TiledEntity.extend({
 
     Game.instance.m_LastActionTime = Date.now();
   },
-  onSelect: function() {
-    this.m_Selected = true;
-
-    ElementsManager.sharedManager().m_ElementsGlows.create(this);
-  },
-  onUnselect: function() {
-    this.m_Selected = false;
-
-    if(this.m_Glow) {
-      this.m_Glow.destroy();
-    }
-  },
   onDragTop: function() {
     this._super();
 
