@@ -202,6 +202,10 @@ Element = TiledEntity.extend({
 
         if(!element) {
           element = MatrixManager.sharedManager().getFreeRandomElement();
+        } else {
+          if(element == Element.types.star) {
+            element = MatrixManager.sharedManager().getFreeRandomElement();
+          }
         }
 
         MatrixManager.sharedManager().removeSimilar(element.getIndex().x, element.getIndex().y, element);

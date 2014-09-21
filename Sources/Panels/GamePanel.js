@@ -182,9 +182,10 @@ GamePanel = Panel.extend({
     );
   },
   starred2: function() {
-    this.getIcons()[this.m_Stars + 3].setCurrentFrameIndex(this.getIcons()[this.m_Stars + 3].getCurrentFrameIndex() - 3);
+    var icon = this.getIcons()[this.m_Stars + 3];
 
-    this.getIcons()[this.m_Stars + 3].runAction(
+    icon.setCurrentFrameIndex(icon.getCurrentFrameIndex() - 3);
+    icon.runAction(
       cc.Sequence.create(
         cc.ScaleTo.create(0.2, 0.6),
         cc.ScaleTo.create(0.1, 1.0),
@@ -194,6 +195,15 @@ GamePanel = Panel.extend({
 
     this.m_Stars++;
     Game.instance.m_StarsPoints++;
+
+    for(var i = 0; i < 10; i++) {
+      var x = icon.convertToWorldSpace(cc.p(0, 0)).x + Camera.sharedCamera().coord(Random.sharedRandom().random(-10, 10));
+      var y = icon.convertToWorldSpace(cc.p(0, 0)).y + Camera.sharedCamera().coord(Random.sharedRandom().random(-10, 10));
+
+      var star = Game.instance.m_SplashStars.create();
+      star.setCenterPosition(x, y);
+      star.setScale(0.5);
+    }
   },
   shake: function() {
 

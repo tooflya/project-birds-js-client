@@ -61,7 +61,7 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
   'total-stars': [
-    {title: 'Собирайте звезды!\n$1/$2', font: 'Comic Sans MS Bold', size: 26, dimensions: false},
+    {title: 'Collect stars!\n$1/$2', font: 'Comic Sans MS Bold', size: 26, dimensions: false},
     {title: 'Собирайте звезды!\n$1/$2', font: 'Comic Sans MS Bold', size: 26, dimensions: false},
     {title: '$1/$2', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '$1/$2', font: 'Comic Sans MS', size: 32, dimensions: false},
@@ -971,8 +971,8 @@ var g_language  = {
     {title: "このモードのロックを解除するには：", font: "RiiPopkk-R", size: 42, dimensions: [450, 0]}
     ],
   'item-unlock': [
-    {title: "This item is locked. You must unlock it first just for:", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "Этот элемент закрыт. \n Его можно открыть всего за:", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
+    {title: "This item is locked. You must unlock it first just for:", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
+    {title: "Этот элемент закрыт. \n Его можно открыть всего за:", font: "Comic Sans MS", size: 40, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [450, 0]},

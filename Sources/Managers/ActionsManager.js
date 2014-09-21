@@ -94,7 +94,6 @@ ActionsManager = cc.Node.extend({
       }
     } else {
       Game.sharedScreen().onTurnChange();
-      MatrixManager.sharedManager().m_Busy = false;
     }
   },
   onLevelStart: function() {

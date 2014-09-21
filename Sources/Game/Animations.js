@@ -61,6 +61,7 @@ Game.prototype.onTurnChange = function() {
   );
   notification.runAction(
     cc.Sequence.create(
+      cc.CallFunc.create(MatrixManager.sharedManager().busy, MatrixManager.sharedManager()),
       cc.EaseElasticOut.create(
         cc.ScaleTo.create(0.5, 1.0)
       ),
@@ -107,6 +108,8 @@ Game.prototype.onTurnChangeFinish = function() {
     if(Game.tutorial) {
       this.onTurnChangeFinishTutorial();
     }
+
+    MatrixManager.sharedManager().unbusy();
 
     Game.instance.m_LastActionTime = Date.now();
   }

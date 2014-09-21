@@ -91,6 +91,8 @@ MatrixManager = cc.Node.extend({
     this.m_Matrix[index.x][index.y] = false;
   },
   check: function(element) {
+    this.uselectCombination();
+
     if(element instanceof Element) {
       if(element.__instanceId == this.m_CurrentElement1.__instanceId) {
         this.m_CurrentElement1.onChangePosition();
@@ -340,6 +342,8 @@ MatrixManager = cc.Node.extend({
   },
   replace: function(element, neighbor, back, network, force) {
     if(this.soe(element)) return false;
+
+    this.uselectCombination();
 
     if(neighbor instanceof Element) {
       Sound.sharedSound().play(s_SoundExchange);
@@ -1045,16 +1049,20 @@ MatrixManager = cc.Node.extend({
     }
 
     if(MatrixManager.sharedManager().computer(false, true)) {
-      var element = this.m_Combinations.random().element;
-      var neighbor = this.m_Combinations.random().neighbor;
+      var combination = this.m_Combinations.random();
+
+      var element = combination.element;
+      var neighbor = combination.neighbor;
 
       if(element instanceof Element) {
-        var x1 = element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2;
-        var y1 = element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2;
-        var x2 = neighbor.convertToWorldSpace(cc.p(0, 0)).x + neighbor.getWidth() / 2;
-        var y2 = neighbor.convertToWorldSpace(cc.p(0, 0)).y + neighbor.getHeight() / 2;
-
         var finger = Game.instance.m_HelpFinger;
+
+        var x1 = element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2 + finger.getWidth() / 4;
+        var y1 = element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2 - finger.getHeight() / 2;
+
+        var x2 = neighbor.convertToWorldSpace(cc.p(0, 0)).x + neighbor.getWidth() / 2 + finger.getWidth() / 4;
+        var y2 = neighbor.convertToWorldSpace(cc.p(0, 0)).y + neighbor.getHeight() / 2 - finger.getHeight() / 2;
+
         finger.create().setCenterPosition(x1, y1);
         finger.setOpacity(0);
         finger.stopAllActions();
@@ -1080,14 +1088,17 @@ MatrixManager = cc.Node.extend({
   },
   uselectCombination: function() {
     var finger = Game.instance.m_HelpFinger;
-    finger.stopAllActions();
-    finger.runAction(
-      cc.Sequence.create(
-        cc.FadeOut.create(0.5),
-        cc.CallFunc.create(finger.destroy, finger, finger),
-        false
-      )
-    );
+
+    if(finger.isVisible()) {
+      finger.stopAllActions();
+      finger.runAction(
+        cc.Sequence.create(
+          cc.FadeOut.create(0.5),
+          cc.CallFunc.create(finger.destroy, finger, finger),
+          false
+        )
+      );
+    }
   },
   removeHorizontalLine: function(x, y, element) {
     var sickle1 = ElementsManager.instance.m_ElementsSickles.create();

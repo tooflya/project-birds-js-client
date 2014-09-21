@@ -267,6 +267,8 @@ Game = Screen.extend({
       this.m_Notifications.m_Notification2.setZOrder(500);
       this.m_Notifications.m_Notification3.setZOrder(500);
 
+      this.m_SplashStars = EntityManager.create(10, SplashStar.create(false, Game.sharedScreen().getPhysicsWorld()), this, 500);
+
       this.m_Elements = ElementsManager.sharedManager();
 
       this.m_HelpFinger = Entity.create(s_TutorialFinger, this);

@@ -98,6 +98,12 @@ Target = TiledEntity.extend({
           )
         );
     }
+
+    if(!Game.network) {
+      if(Game.instance.m_PlayerTurn) {
+        MatrixManager.sharedManager().selectRandomCombination();
+      }
+    }
   },
   finish: function(state) {
     this.m_Finish = true;
