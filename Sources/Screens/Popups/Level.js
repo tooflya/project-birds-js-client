@@ -72,8 +72,6 @@ Level = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Level.instance = false;
   }
 });
 

@@ -102,8 +102,6 @@ Item = ExtendedPopup.extend({
   onHide: function() {
     this._super();
 
-    Item.instance = false;
-
     var self = this;
 
     if(this.m_ActionButton.action) {

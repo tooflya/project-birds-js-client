@@ -50,8 +50,6 @@ Achievements = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Achievements.instance = false;
   }
 });
 

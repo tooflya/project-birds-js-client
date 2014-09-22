@@ -151,8 +151,6 @@ Coins = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Coins.instance = false;
   }
 });
 

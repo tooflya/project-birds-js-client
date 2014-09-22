@@ -50,8 +50,6 @@ Social = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Social.instance = false;
   }
 });
 

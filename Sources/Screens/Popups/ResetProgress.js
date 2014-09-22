@@ -61,8 +61,6 @@ ResetProgress = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    ResetProgress.instance = false;
   }
 });
 

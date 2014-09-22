@@ -61,8 +61,6 @@ Rate = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Rate.instance = false;
   }
 });
 

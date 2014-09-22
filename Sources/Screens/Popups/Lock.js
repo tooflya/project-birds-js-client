@@ -123,8 +123,6 @@ Lock = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Lock.instance = false;
   },
   update: function(time) {
     this._super(time);

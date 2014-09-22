@@ -43,8 +43,8 @@ FriendsLivesList = PatternList.extend({
 
     this.m_Text[0].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(320));
     this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() - Camera.sharedCamera().coord(230));
-    this.m_Decoration1.create().setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(100));
-    this.m_Decoration2.create().setCenterPosition(this.getCenterX() - Camera.sharedCamera().coord(10), this.getCenterY() + Camera.sharedCamera().coord(100));
+    this.m_Decoration1.setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(100));
+    this.m_Decoration2.setCenterPosition(this.getCenterX() - Camera.sharedCamera().coord(10), this.getCenterY() + Camera.sharedCamera().coord(100));
 
     this.m_Text[0].setColor(cc.c3(204.0, 102.0, 51.0));
     this.m_Text[1].setColor(cc.c3(255.0, 130.0, 0.0));
@@ -58,6 +58,8 @@ FriendsLivesList = PatternList.extend({
         )
       )
     );
+
+    this.m_BackgroundHolder = Background.create(this);
   },
   onActionEvent: function(users) {
     this.m_Text[1].setVisible(false);
@@ -65,18 +67,17 @@ FriendsLivesList = PatternList.extend({
     this.m_Decoration1.destroy();
     this.m_Decoration2.destroy();
 
-
     var y = this.getCenterY() + Camera.sharedCamera().coord(200);
     users.forEach(function(user) {
       if(true) {
         var s = y;
-        InternetEntity.create(user.photo, this, function(entity) {
+        InternetEntity.create(user.photo, this.m_BackgroundHolder, function(entity) {
           entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
 
-          var button = Entity.create(s_LivesPresentBackground, this);
+          var button = Entity.create(s_LivesPresentBackground, this.m_BackgroundHolder);
           var icon = AnimatedEntity.create(s_PanelIcon3, 3, 3, button);
 
-          var name = Text.create('leaderboard-name', this, cc.TEXT_ALIGNMENT_LEFT);
+          var name = Text.create('leaderboard-name', this.m_BackgroundHolder, cc.TEXT_ALIGNMENT_LEFT);
           var text = Text.create('friends-live-present-1', button);
 
           name.ccsf([user.name + " " + user.surname]);
@@ -145,6 +146,16 @@ FriendsLivesList = PatternList.extend({
   },
   onEnter: function() {
     this._super();
+
+    this.m_Text[1].setVisible(true);
+
+    this.m_Decoration1.create();
+    this.m_Decoration2.create();
+  },
+  onExit: function() {
+    this._super();
+
+    this.m_BackgroundHolder.removeAllChildrenWithCleanup(true);
   }
 });
 

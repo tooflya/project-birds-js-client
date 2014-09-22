@@ -108,8 +108,6 @@ Keys = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Keys.instance = false;
   }
 });
 

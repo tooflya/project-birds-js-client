@@ -138,8 +138,6 @@ Lives = ExtendedPopup.extend({
   onHide: function(callback, prepare) {
     this._super(callback, prepare);
 
-    Lives.instance = false;
-
     if(!prepare && !this.m_GetButton.action) {
       if(DataManager.sharedManager().get(false, references.coins.lives) <= 0) {
         if(Game.instance) {

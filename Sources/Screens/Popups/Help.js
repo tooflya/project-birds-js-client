@@ -50,8 +50,6 @@ Help = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Help.instance = false;
   }
 });
 

@@ -50,8 +50,6 @@ Rating = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Rating.instance = false;
   }
 });
 

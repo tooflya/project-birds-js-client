@@ -120,8 +120,6 @@ Pause = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Pause.instance = false;
   }
 });
 

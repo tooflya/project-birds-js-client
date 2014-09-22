@@ -58,8 +58,6 @@ Multiplayer = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Multiplayer.instance = false;
   },
   onCloseEvent: function() {
     this.hide(function() {

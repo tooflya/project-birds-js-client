@@ -369,9 +369,6 @@ Mode = Screen.extend({
   },
   onHide: function() {
     this._super();
-
-    Mode.instance = false;
-    MenuPanel.instance = false;
   },
   onExitTransitionDidStart: function() {
     MenuPanel.sharedScreen(this).hide();

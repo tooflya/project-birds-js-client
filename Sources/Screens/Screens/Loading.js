@@ -70,8 +70,6 @@ Loading = Screen.extend({
   },
   onHide: function() {
     this._super();
-
-    Loading.instance = false;
   },
   onComplete: function() {
     ScreenManager.sharedManager().replace(Game);

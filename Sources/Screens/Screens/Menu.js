@@ -134,8 +134,6 @@ Menu = Screen.extend({
   },
   onHide: function() {
     this._super();
-
-    Menu.instance = false;
   },
   update: function(time) {
     this._super(time);

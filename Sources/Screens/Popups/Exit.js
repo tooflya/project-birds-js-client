@@ -43,15 +43,12 @@ Exit = ExtendedPopup.extend({
     this.m_ActionButton.setTouchHandler('onActionEvent', Exit);
   },
   onActionEvent: function() {
-    //
   },
   onShow: function() {
     this._super();
   },
   onHide: function() {
     this._super();
-
-    Exit.instance = false;
   }
 });
 

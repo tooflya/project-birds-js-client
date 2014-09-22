@@ -101,8 +101,6 @@ Moves = ExtendedPopup.extend({
   onHide: function(callback, prepare) {
     this._super(callback, prepare);
 
-    Moves.instance = false;
-
     if(!prepare && !this.m_GetButton.action) {
       if(Game.instance) {
         Game.instance.finishGame();

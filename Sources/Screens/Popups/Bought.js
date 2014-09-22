@@ -167,8 +167,6 @@ Bought = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Bought.instance = false;
   },
   onTouch: function() {
     switch(this.config.params.platform) {

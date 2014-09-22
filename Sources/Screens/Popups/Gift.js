@@ -50,8 +50,6 @@ Gift = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
-
-    Gift.instance = false;
   }
 });
 

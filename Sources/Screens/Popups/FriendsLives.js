@@ -45,7 +45,7 @@ FriendsLives = ExtendedPopup.extend({
 
     this.m_BackgroundHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(308));
     this.m_BackgroundHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(398));
-    this.m_ActionButton.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
+    this.m_ActionButton.setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().coord(48));
     this.m_Text.setCenterPosition(this.m_ActionButton.getWidth() / 2, this.m_ActionButton.getHeight() / 2);
 
     this.m_BackgroundHolder2.setScaleY(-1);
@@ -62,8 +62,14 @@ FriendsLives = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
+  },
+  onEnter: function() {
+    this._super();
 
-    FriendsLives.instance = false;
+    this.m_ActionButton.create();
+  },
+  onExit: function() {
+    this._super();
   },
   show: function(data) {
     this._super();

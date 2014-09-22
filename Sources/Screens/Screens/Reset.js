@@ -72,8 +72,6 @@ Reset = Screen.extend({
   },
   onHide: function() {
     this._super();
-
-    Reset.instance = false;
   },
   update: function(time) {
     this._super(time);

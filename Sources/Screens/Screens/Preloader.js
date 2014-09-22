@@ -80,8 +80,6 @@ Preloader = Screen.extend({
   },
   onHide: function() {
     this._super();
-
-    Preloader.instance = false;
   }
 });
 

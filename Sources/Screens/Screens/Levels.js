@@ -653,6 +653,12 @@ Levels = Screen.extend({
   },
   onLevelItemChanged: function() {
   },
+  onEnter: function() {
+    this._super();
+  },
+  onExit: function() {
+    this._super();
+  },
   onShow: function() {
     this._super();
 
@@ -691,14 +697,18 @@ Levels = Screen.extend({
   },
   onHide: function() {
     this._super();
-
-    Levels.instance = false;
-    MenuPanel.instance = false;
   },
   onExitTransitionDidStart: function() {
     MenuPanel.sharedScreen(this).hide();
 
     this._super();
+
+    Camera.sharedCamera().setDesignResolutionSize();
+  },
+  onEnterTransitionDidFinish: function() {
+    this._super();
+
+    Camera.sharedCamera().setDesignResolutionSize(false, false, false, false, true);
   },
   update: function(time) {
     this._super(time);

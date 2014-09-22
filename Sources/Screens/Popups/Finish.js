@@ -489,8 +489,6 @@ Finish = Background.extend({
   },
   onExit: function() {
     this._super();
-
-    Finish.instance = false;
   },
   setBottomScreen: function(screen) {
     this.removeFromParent();
