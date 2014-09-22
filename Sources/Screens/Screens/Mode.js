@@ -32,6 +32,7 @@
 Mode = Screen.extend({
   m_DecorationTime: 0.5,
   m_DecorationTimeElapsed: 0.5,
+  m_NetworkTime: false,
   ctor: function() {
     this._super();
 
@@ -108,7 +109,7 @@ Mode = Screen.extend({
     /** Network */
 
     this.m_NetworkBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
-    this.m_NetworkDecorations = EntityManager.create(15, CircleDecoration1.create(), this.m_NetworkBackground);
+    this.m_NetworkDecorations = EntityManager.create(20, CircleDecoration1.create(), this.m_NetworkBackground);
     this.m_NetworkBackgroundLoader = Entity.create(s_LoadingDecoration, this.m_NetworkBackground);
     this.m_NetworkBackgroundText = Text.create('network-1', this.m_NetworkBackground);
 
@@ -173,6 +174,8 @@ Mode = Screen.extend({
         this.runAction(cc.FadeOut.create(0.5));
 
         NetworkManager.sharedInstance().unsubscribe();
+
+        Mode.instance.m_NetworkTime = false;
       }
     };
   },
@@ -297,6 +300,8 @@ Mode = Screen.extend({
   request: function() {
     this.m_NetworkBackgroundText.setText('network-1');
 
+    this.m_NetworkTime = true;
+
     this.m_NetworkBackground.runAction(
       cc.Sequence.create(
         cc.FadeIn.create(0.5),
@@ -378,12 +383,14 @@ Mode = Screen.extend({
   update: function(time) {
     this._super(time);
 
-    this.m_DecorationTimeElapsed += time;
+    if(this.m_NetworkTime) {
+      this.m_DecorationTimeElapsed += time;
 
-    if(this.m_DecorationTimeElapsed >= this.m_DecorationTime) {
-      this.m_DecorationTimeElapsed = 0;
+      if(this.m_DecorationTimeElapsed >= this.m_DecorationTime) {
+        this.m_DecorationTimeElapsed = 0;
 
-      this.m_NetworkDecorations.create();
+        this.m_NetworkDecorations.create();
+      }
     }
   },
   onKeyDown: function(e) {

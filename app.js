@@ -335,6 +335,54 @@
       });
     });
   });
+
+  App.reload = function(callback) {
+    var screens = [
+      Menu,
+      Settings,
+      Credits,
+      Languages,
+      Mode,
+      More,
+      Reset,
+      Shop,
+      Levels,
+      Loading,
+      Rate,
+      Social,
+      Exit,
+      ResetProgress,
+      Coins,
+      Keys,
+      Lives,
+      Moves,
+      Gift,
+      Help,
+      Lock,
+      Item,
+      Bought,
+      Rating,
+      Pause,
+      Achievements,
+      Invite,
+      Purchase,
+      Multiplayer,
+      //Level,
+      FriendsLives
+    ];
+
+    screens.forEach(function(c) {
+      c.instance = false;
+    });
+
+    screens.forEach(function(c) {
+      c.sharedScreen();
+    });
+
+    if(callback) {
+      callback();
+    }
+  };
 })();
 
 window.onmousemove = function(e) {

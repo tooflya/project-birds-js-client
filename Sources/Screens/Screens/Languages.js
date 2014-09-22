@@ -100,7 +100,13 @@ Languages = Screen.extend({
   onLanguageEvent: function(params) {
     LanguagesManager.sharedManager().changeLanguage(params.id);
 
-    ScreenManager.sharedManager().replace(Settings);
+    if(App.reload) {
+      App.reload(function() {
+        ScreenManager.sharedManager().replace(Settings);
+      });
+    } else {
+      ScreenManager.sharedManager().replace(Settings);
+    }
   },
   onShow: function() {
     this._super();

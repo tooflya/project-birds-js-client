@@ -50,11 +50,16 @@ InviteList = PatternList.extend({
     this.m_Text[0].setColor(cc.c3(204.0, 102.0, 51.0));
     this.m_Text[1].setColor(cc.c3(255.0, 130.0, 0.0));
 
+    this.m_BackgroundHolder = Background.create(this);
+  },
+  onEnter: function() {
+    this._super();
+
     var count = 0;
     FriendsManager.sharedInstance().getFriends().shuffle().forEach(function(user) {
       if(count > 6) return;
 
-      var holder = Entity.create(s_FriendsBackground1, this);
+      var holder = Entity.create(s_FriendsBackground1, this.m_BackgroundHolder);
 
       var stencil = cc.Sprite.create(s_FriendsBackground2);
       var clipper = cc.ClippingNode.create(stencil);
@@ -102,11 +107,10 @@ InviteList = PatternList.extend({
 
     this.m_Elements.index = -1;
   },
-  onEnter: function() {
-    this._super();
-  },
   onExit: function() {
     this._super();
+
+    this.m_BackgroundHolder.removeAllChildrenWithCleanup(true);
   },
   next: function() {
     if(this.m_Elements.index == (this.m_Elements.length - 1)) this.m_Elements.index = -1;

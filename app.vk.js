@@ -176,7 +176,9 @@
       DataManager.sharedManager().setup(function() {
         EnergyManager.sharedManager(references.coins.lives, 5, 60 * 60 * 1000);
 
-        ScreenManager.sharedManager().replace(Menu);
+        App.reload(function() {
+          ScreenManager.sharedManager().replace(Menu);
+        });
       });
     });
   }, function(callback) {
@@ -336,4 +338,52 @@
       });
     });
   });
+
+  App.reload = function(callback) {
+    var screens = [
+      Menu,
+      Settings,
+      Credits,
+      Languages,
+      Mode,
+      More,
+      Reset,
+      Shop,
+      Levels,
+      Loading,
+      Rate,
+      Social,
+      Exit,
+      ResetProgress,
+      Coins,
+      Keys,
+      Lives,
+      Moves,
+      Gift,
+      Help,
+      Lock,
+      Item,
+      Bought,
+      Rating,
+      Pause,
+      Achievements,
+      Invite,
+      Purchase,
+      Multiplayer,
+      //Level,
+      FriendsLives
+    ];
+
+    screens.forEach(function(c) {
+      c.instance = false;
+    });
+
+    screens.forEach(function(c) {
+      c.sharedScreen();
+    });
+
+    if(callback) {
+      callback();
+    }
+  };
 })();

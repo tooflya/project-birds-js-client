@@ -336,15 +336,52 @@
       });
     });
   });
+
+  App.reload = function(callback) {
+    var screens = [
+      Menu,
+      Settings,
+      Credits,
+      Languages,
+      Mode,
+      More,
+      Reset,
+      Shop,
+      Levels,
+      Loading,
+      Rate,
+      Social,
+      Exit,
+      ResetProgress,
+      Coins,
+      Keys,
+      Lives,
+      Moves,
+      Gift,
+      Help,
+      Lock,
+      Item,
+      Bought,
+      Rating,
+      Pause,
+      Achievements,
+      Invite,
+      Purchase,
+      Multiplayer,
+      //Level,
+      FriendsLives
+    ];
+
+    screens.forEach(function(c) {
+      c.instance = false;
+    });
+
+    screens.forEach(function(c) {
+      c.sharedScreen();
+    });
+
+    if(callback) {
+      callback();
+    }
+  };
 })();
-
-window.onmousemove = function(e) {
-  if(!App.launched()) {
-    var x = e.clientX;
-    var y = e.clientY;
-    var center = ((screen.width / 2) - 700);
-
-    document.body.style.backgroundPosition = -(center + x / 100) + "px bottom, " + (center + x / 100) + "px bottom, " + (center + x / 100) + "px " + (45 - (y / 100)) + "px";
-    document.getElementsByTagName("html")[0].style.backgroundPosition = "center " + (45 - (y / 100)) + "px";
-  }
-};
