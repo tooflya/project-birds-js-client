@@ -31,7 +31,7 @@
 
 FriendsList = List.extend({
   ctor: function(parent) {
-    this._super(false, 1920, 1480, 320, 0, parent, 1);
+    this._super(false, 1920, 200, 1920, 0, parent, 1);
 
     FriendsList.instance = this;
 
@@ -40,25 +40,55 @@ FriendsList = List.extend({
       type: 1
     }, {
       success: function(data) {
+        var count = 0.5;
+
+        data.users.forEach(function(user) {
+          if(FriendsManager.sharedInstance().isFriend(user)) {
+            var background = TiledEntity.create(s_FriendsListBackground, 2, 1, this);
+
+            background.create().setCenterPosition(Camera.sharedCamera().coord(180) * count, Camera.sharedCamera().coord(440));
+
+            count++;
+          }
+        }.bind(this));
+
+        data.users.forEach(function(user) {
+          if(!FriendsManager.sharedInstance().isFriend(user)) {
+            var background = TiledEntity.create(s_FriendsListBackground, 2, 1, this);
+
+            background.create().setCenterPosition(Camera.sharedCamera().coord(180) * count, Camera.sharedCamera().coord(440));
+
+            count++;
+          }
+        }.bind(this));
+
         this.m_BackgroundPicture = Entity.create(s_FriendsCover, parent);
 
         this.setCenterPosition(0, this.m_BackgroundPicture.getHeight() / 2 - Camera.sharedCamera().height / 2 + Camera.sharedCamera().coord(5));
         this.m_BackgroundPicture.create().setCenterPosition(Camera.sharedCamera().center.x, -this.m_BackgroundPicture.getHeight() / 2 + Camera.sharedCamera().coord(5));
+        this.m_BackgroundPicture.setZOrder(-1);
+        this.setZOrder(100);
 
         this.m_BackgroundHolder = Background.create(this);
 
-        data.users.forEach(function(user) {
-          if(FriendsManager.sharedInstance().isFriend(user)) {console.log(this);
-            var background = TiledEntity.create(s_FriendsListBackground, 2, 1, this);
-
-            background.create();
+        DisplayManager.sharedManager().m_Children.sort(function compare(element1, element2) {
+          if(element1.getZOrder() < element2.getZOrder()) {
+            return -1;
           }
-        }.bind(this));
+
+          if(element1.getZOrder() > element2.getZOrder()) {
+            return 1;
+          }
+
+          return 0;
+        });
       }.bind(this)
     });
   },
   onEnter: function() {
     this._super();
+
+    this.setListCenterPosition(Camera.sharedCamera().center.x, -this.config.params.designed.size.margin.y / 2);
   },
   onExit: function() {
     this._super();

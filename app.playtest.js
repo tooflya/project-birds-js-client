@@ -42,7 +42,7 @@
         height: 551,
         margin: {
           x: 0,
-          y: 100
+          y: 95
         }
       },
       graphics: {
