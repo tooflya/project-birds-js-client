@@ -370,7 +370,7 @@
       Invite,
       Purchase,
       Multiplayer,
-      //Level,
+      Level,
       FriendsLives
     ];
 

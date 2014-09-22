@@ -175,7 +175,9 @@
       DataManager.sharedManager().setup(function() {
         EnergyManager.sharedManager(references.coins.lives, 5, 60 * 60 * 1000);
 
-        ScreenManager.sharedManager().replace(Menu);
+        App.reload(function() {
+          ScreenManager.sharedManager().replace(Menu);
+        });
       });
     });
   }, function(callback) {
@@ -367,7 +369,7 @@
       Invite,
       Purchase,
       Multiplayer,
-      //Level,
+      Level,
       FriendsLives
     ];
 

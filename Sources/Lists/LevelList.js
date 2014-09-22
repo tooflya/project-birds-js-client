@@ -33,8 +33,6 @@ LevelList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 700, parent);
 
-    var points = DataManager.sharedManager().get(false, references.levels.points[Game.level - 1]);
-
     this.m_Text = [];
     this.m_Loading = [];
     this.m_ElementsBackgrounds =  [];
@@ -130,10 +128,10 @@ LevelList = PatternList.extend({
     this.m_Text[2] = Text.create('level-popup-2', this);
     this.m_Text[3] = Text.create('level-popup-3', this);
     //this.m_Text[4] = Text.create('level-popup-4', this);
-    this.m_Text[5] = Text.create('level-popup-level-' + Game.level, this);
+    this.m_Text[5] = Text.create('level-popup-level-1', this);
 
     this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
-    this.m_Text[5].setCenterPosition(this.getCenterX(), this.m_Text[1].getCenterY() - this.m_Text[1].getHeight() / 2 - this.m_Text[5].getHeight() / 2 - Camera.sharedCamera().coord(points ? 250 : 140));
+    this.m_Text[5].setCenterPosition(this.getCenterX(), this.m_Text[1].getCenterY() - this.m_Text[1].getHeight() / 2 - this.m_Text[5].getHeight() / 2 - Camera.sharedCamera().coord(140));
     this.m_Text[2].setCenterPosition(this.getCenterX(), this.m_Text[5].getCenterY() - this.m_Text[5].getHeight() / 2 - this.m_Text[2].getHeight() / 2 - Camera.sharedCamera().coord(50));
     this.m_Text[3].setCenterPosition(this.getCenterX(), this.m_Text[2].getCenterY() - this.m_Text[2].getHeight() / 2 - this.m_Text[2].getHeight() / 2 - Camera.sharedCamera().coord(150));
     this.m_Loading[0].setCenterPosition(this.getCenterX(), this.m_Text[2].getCenterY() - Camera.sharedCamera().coord(100));
@@ -146,8 +144,37 @@ LevelList = PatternList.extend({
 
     this.m_Text[5].setColor(cc.c3(204.0, 102.0, 51.0));
 
+    this.m_BackgroundHolder = Background.create(this);
+  },
+  onEnter: function() {
+    this._super();
+
+    var points = DataManager.sharedManager().get(false, references.levels.points[Game.level - 1]);
+
+    this.m_Text[1].ccsf([Game.level]);
+
+    this.m_Loading[0].create().runAction(
+      cc.RepeatForever.create(
+        cc.RotateTo.create(1.0, 720)
+      )
+    );
+    this.m_Loading[1].create().runAction(
+      cc.RepeatForever.create(
+        cc.RotateTo.create(1.0, 720)
+      )
+    );
+
+    this.m_Text[5] .setText('level-popup-level-' + Game.level);
+
+    this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
+    this.m_Text[5].setCenterPosition(this.getCenterX(), this.m_Text[1].getCenterY() - this.m_Text[1].getHeight() / 2 - this.m_Text[5].getHeight() / 2 - Camera.sharedCamera().coord(points ? 250 : 140));
+    this.m_Text[2].setCenterPosition(this.getCenterX(), this.m_Text[5].getCenterY() - this.m_Text[5].getHeight() / 2 - this.m_Text[2].getHeight() / 2 - Camera.sharedCamera().coord(50));
+    this.m_Text[3].setCenterPosition(this.getCenterX(), this.m_Text[2].getCenterY() - this.m_Text[2].getHeight() / 2 - this.m_Text[2].getHeight() / 2 - Camera.sharedCamera().coord(150));
+    this.m_Loading[0].setCenterPosition(this.getCenterX(), this.m_Text[2].getCenterY() - Camera.sharedCamera().coord(100));
+    this.m_Loading[1].setCenterPosition(this.getCenterX(), this.m_Text[3].getCenterY() - Camera.sharedCamera().coord(100));
+
     if(points) {
-      this.m_PointsHolder = Entity.create(s_LevelPointsHolder, this);
+      this.m_PointsHolder = Entity.create(s_LevelPointsHolder, this.m_BackgroundHolder);
       this.m_PointsHolder.stars = TiledEntity.create(s_LevelStars, 1, 4, this.m_PointsHolder);
       this.m_PointsHolder.text = Text.create('level-points', this.m_PointsHolder);
       this.m_PointsHolder.temp = Text.create('level-points-point', false);
@@ -188,26 +215,6 @@ LevelList = PatternList.extend({
         }
       }.bind(this)
     });
-
-    this.m_BackgroundHolder = Background.create(this);
-  },
-  onEnter: function() {
-    this._super();
-
-    var points = DataManager.sharedManager().get(false, references.levels.points[Game.level - 1]);
-
-    this.m_Text[1].ccsf([Game.level]);
-
-    this.m_Loading[0].create().runAction(
-      cc.RepeatForever.create(
-        cc.RotateTo.create(1.0, 720)
-      )
-    );
-    this.m_Loading[1].create().runAction(
-      cc.RepeatForever.create(
-        cc.RotateTo.create(1.0, 720)
-      )
-    );
 
     this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
     this.m_Text[5].setCenterPosition(this.getCenterX(), this.m_Text[1].getCenterY() - this.m_Text[1].getHeight() / 2 - this.m_Text[5].getHeight() / 2 - Camera.sharedCamera().coord(points ? 250 : 140));
@@ -300,7 +307,7 @@ LevelList = PatternList.extend({
                   crown.create().setCenterPosition(Camera.sharedCamera().coord(100), s + Camera.sharedCamera().coord(50));
                 }
 
-                this.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));
+                this.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 + Camera.sharedCamera().coord(50));
               }.bind(this));
 
               y -= Camera.sharedCamera().coord(120);

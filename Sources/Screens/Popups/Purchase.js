@@ -54,6 +54,9 @@ Purchase = ExtendedPopup.extend({
 
     this.m_PurchaseCallback = callback;
     this.m_PurchaseParameters = params;
+
+    this.m_TimeMakePurchase = false;
+    this.m_PauseTimeElapsed = 0;
   },
   onShow: function() {
     this._super();
