@@ -39,7 +39,11 @@
     designed: {
       size: {
         width: 980,
-        height: 551
+        height: 551,
+        margin: {
+          x: 0,
+          y: 0
+        }
       },
       graphics: {
         width: 1920,
