@@ -153,6 +153,7 @@
     'Sources/Lists/LeaderboardList.js',
     'Sources/Lists/InviteList.js',
     'Sources/Lists/FriendsLivesList.js',
+    'Sources/Lists/FriendsList.js',
     'Sources/Game/Preview.js',
     'Sources/Game/Events.js',
     'Sources/Game/Thrower.js',
