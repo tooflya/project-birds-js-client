@@ -40,7 +40,7 @@ LevelList = PatternList.extend({
     this.m_ElementsBackgrounds =  [];
     this.m_Elements =  [];
     this.m_ElementsIcons =  [];
-    this.m_Feathers = EntityManager.create(100, Feather.create(false, Levels.instance.getPhysicsWorld()), Levels.instance, 1100);
+    this.m_Feathers = EntityManager.create(100, Feather.create(false, Levels.instance.getPhysicsWorld()), Levels.instance, 1300);
 
     var self = this;
 
