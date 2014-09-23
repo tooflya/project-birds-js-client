@@ -49,8 +49,8 @@ LeaderboardList = PatternList.extend({
     this.m_Text[2].setColor(cc.c3(255.0, 130.0, 0.0));
     this.m_Text[3].setColor(cc.c3(255.0, 130.0, 0.0));
 
-    this.m_Loading[0].create().setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(100));
-    this.m_Loading[1].create().setCenterPosition(this.getCenterX(), this.getCenterY() - Camera.sharedCamera().coord(120));
+    this.m_Loading[0].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(100));
+    this.m_Loading[1].setCenterPosition(this.getCenterX(), this.getCenterY() - Camera.sharedCamera().coord(120));
 
     this.m_BackgroundHolder = Background.create(this);
   },
@@ -193,6 +193,9 @@ LeaderboardList = PatternList.extend({
   },
   onExit: function() {
     this._super();
+
+    this.m_Loading[0].destroy();
+    this.m_Loading[1].destroy();
 
     this.m_BackgroundHolder.removeAllChildrenWithCleanup(true);
   }

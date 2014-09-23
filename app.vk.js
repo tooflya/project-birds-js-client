@@ -31,7 +31,7 @@
 
 (function() {
   App.run(false, {
-    application: 5,
+    application: 6,
     platform: 'vk',
     auto: true,
     playtest: false,
@@ -42,7 +42,7 @@
         height: 551,
         margin: {
           x: 0,
-          y: 95
+          y: 100
         }
       },
       graphics: {

@@ -61,7 +61,9 @@ Loading = Screen.extend({
   onShow: function() {
     this._super();
 
-    this.m_TipText.setText('tip-0');// + Random.sharedRandom().random(0, 10, true));
+    this.m_LoadingTimeElapsed = 0;
+
+    this.m_TipText.setText('tip-' + Random.sharedRandom().random(0, 10, true));
     this.m_TipText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(300) - this.m_TipText.getHeight() / 2);
 
     this.m_BackgroundWaves.clear();

@@ -49,7 +49,7 @@ LevelList = PatternList.extend({
       this.m_ElementsBackgrounds[i + 1] = Button.create(s_LevelElementChoise, 1, 1, this);
       this.m_ElementsBackgrounds[i + 1].create().setCenterPosition(this.getCenterX() + (Camera.sharedCamera().coord(120) * i), this.getCenterY() + Camera.sharedCamera().coord(180));
       this.m_ElementsBackgrounds[i + 1].setTouchHandler('onLevelItemChanged', Levels);
-      this.m_ElementsBackgrounds[i + 1].registerTouchable(true);
+      //this.m_ElementsBackgrounds[i + 1].registerTouchable(true);
       this.m_ElementsBackgrounds[i + 1].icon = this.m_ElementsIcons[i + 1];
       this.m_ElementsBackgrounds[i + 1].id = i + 1;
       this.m_ElementsBackgrounds[i + 1].onTouch = function(e) {

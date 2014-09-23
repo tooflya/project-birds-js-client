@@ -143,7 +143,7 @@ ExtendedPopup = Popup.extend({
   onHide: function() {
     this._super();
 
-    this.removeFromParent();
+    this.removeFromParentAndCleanup(true);
   },
   onCloseEvent: function() {
     this.hide();

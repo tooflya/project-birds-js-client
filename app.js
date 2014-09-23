@@ -340,6 +340,7 @@
   });
 
   App.reload = function(callback) {
+    FriendsList.sharedScreen(DisplayManager.sharedManager());
     var screens = [
       Menu,
       Settings,
