@@ -102,7 +102,9 @@ Lives = ExtendedPopup.extend({
         ExtendedPopup.prototype.show.call(Lives.instance);
 
         if(value <= 0) {
+          Lives.instance.m_GetButton.setVisible(true);
         } else if(value < 5) {
+          Lives.instance.m_GetButton.setVisible(true);
           Lives.instance.m_Text.setText('lives-popup-3');
           Lives.instance.m_Text.setCenterPosition(Lives.instance.m_Background.getWidth() / 2, Lives.instance.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
         } else {

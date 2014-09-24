@@ -690,8 +690,8 @@ Levels = Screen.extend({
     });
 
     Tooflya.api.call('level.stars', false, {
-      success: function(dara) {
-        Levels.instance.m_StarsCounterArea.text.ccsf([data, 90]);
+      success: function(data) {
+        Levels.instance.m_StarsCounterArea.text.ccsf([data.count, 90]);
       }
     });
   },

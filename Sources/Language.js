@@ -981,8 +981,8 @@ var g_language  = {
     {title: "このモードのロックを解除するには：", font: "RiiPopkk-R", size: 42, dimensions: [450, 0]}
     ],
   'multiplayer-popup-1': [
-    {title: "Play online?", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
-    {title: "Сыграть онлайн?", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Выбор режима", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -991,14 +991,54 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
     ],
   'multiplayer-popup-2': [
-    {title: "Let's begin to play online mode! Earn many gold coins and increase your global ranking!", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
-    {title: "Начните игру в онлайн режиме! Заработайте много золотых монет и увеличте свой глобальный рейтинг!", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [500, 0]},
-    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [500, 0]}
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Проходите компанию и станьте лучше ваших друзей!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'multiplayer-popup-3': [
+    {title: "Let's begin to play online mode! Earn many gold coins and increase your global ranking!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Начните игру в онлайн режиме! Заработайте много золотых монет и увеличте свой глобальный рейтинг!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'multiplayer-popup-4': [
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Или выбирите друга", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
+    ],
+  'multiplayer-popup-10': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Играть компанию", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
+    ],
+  'multiplayer-popup-11': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Случайный соперник", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'network-1': [
     {title: "Connecting to server...", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -1799,6 +1839,47 @@ var g_language  = {
     {title: '$1', font: 'Comic Sans MS', size: 48, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 48, dimensions: false},
     {title: '$1', font: 'RiiPopkk-R', size: 48, dimensions: false}
+    ],
+
+  'friends-notification-vk-1': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Привет! Приглашаю тебя поиграть со мной! Здесь слишком много злодеев - твоя помощь не будет лишней!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-2': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'О, черт! Мне не справится одному! Выручай!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-3': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Приглашаю тебя в клевый мир пернатых! Не пропусти главную битву! :)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-4': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Знаю, что тебе нравятся сложные игры ведь ты же умён! :D', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
 
   'item-title-0': [

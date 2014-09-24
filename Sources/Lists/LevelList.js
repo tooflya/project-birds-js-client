@@ -49,7 +49,6 @@ LevelList = PatternList.extend({
       this.m_ElementsBackgrounds[i + 1] = Button.create(s_LevelElementChoise, 1, 1, this);
       this.m_ElementsBackgrounds[i + 1].create().setCenterPosition(this.getCenterX() + (Camera.sharedCamera().coord(120) * i), this.getCenterY() + Camera.sharedCamera().coord(180));
       this.m_ElementsBackgrounds[i + 1].setTouchHandler('onLevelItemChanged', Levels);
-      this.m_ElementsBackgrounds[i + 1].registerTouchable(true);
       this.m_ElementsBackgrounds[i + 1].icon = this.m_ElementsIcons[i + 1];
       this.m_ElementsBackgrounds[i + 1].id = i + 1;
       this.m_ElementsBackgrounds[i + 1].onTouch = function(e) {
@@ -220,6 +219,9 @@ LevelList = PatternList.extend({
     this.m_Text[5].setCenterPosition(this.getCenterX(), this.m_Text[1].getCenterY() - this.m_Text[1].getHeight() / 2 - this.m_Text[5].getHeight() / 2 - Camera.sharedCamera().coord(points ? 250 : 140));
     this.m_Text[2].setCenterPosition(this.getCenterX(), this.m_Text[5].getCenterY() - this.m_Text[5].getHeight() / 2 - this.m_Text[2].getHeight() / 2 - Camera.sharedCamera().coord(50));
     this.m_Text[3].setCenterPosition(this.getCenterX(), this.m_Text[2].getCenterY() - this.m_Text[2].getHeight() / 2 - this.m_Text[2].getHeight() / 2 - Camera.sharedCamera().coord(150));
+
+    this.m_Text[2].setVisible(true);
+    this.m_Text[3].setVisible(true);
 
     this.m_ListMaxHeight = Math.abs(this.m_Loading[1].getCenterY() - this.m_Loading[1].getHeight() / 2 - Camera.sharedCamera().coord(50));
 

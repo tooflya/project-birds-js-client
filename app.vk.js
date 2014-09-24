@@ -31,7 +31,7 @@
 
 (function() {
   App.run(false, {
-    application: 5,
+    application: 6,
     platform: 'vk',
     auto: true,
     playtest: false,
@@ -154,6 +154,8 @@
     'Sources/Lists/LeaderboardList.js',
     'Sources/Lists/InviteList.js',
     'Sources/Lists/FriendsLivesList.js',
+    'Sources/Lists/FriendsList.js',
+    'Sources/Lists/MultiplayerList.js',
     'Sources/Game/Preview.js',
     'Sources/Game/Events.js',
     'Sources/Game/Thrower.js',
@@ -340,6 +342,7 @@
   });
 
   App.reload = function(callback) {
+    FriendsList.sharedScreen(DisplayManager.sharedManager());
     var screens = [
       Menu,
       Settings,

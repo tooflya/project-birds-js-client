@@ -365,6 +365,8 @@ Finish = Background.extend({
 
       this.m_TextValue1.setText('finish-text-4');
     }
+
+    Camera.sharedCamera().setDesignResolutionSize(false, false, false, false, true);
   },
   hide: function(callback) {
     this.assert(!this.getParent(), "This popup window isn't showed.");
