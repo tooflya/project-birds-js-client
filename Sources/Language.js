@@ -1011,7 +1011,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
     ],
   'network-2': [
-    {title: "Searching the player...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "Searching for player...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "Поиск игрока...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -1231,8 +1231,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-7': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "After a difficult battle, you stopped for a rest to recuperate. But, be careful, woods are full of deft thieves.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "После нелегкой битвы вы остановились на привал, чтоб восстановить силы. Но, будьте бдительны в лесах полно ловких разбойников.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1241,8 +1241,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-8': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "After the battle with the robbers, you are don't rested. It's time to arm themselves - there is still a lot of villains.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "После битвы с разбойниками, вам не удалось восстановить силы. Самое время вооружиться - здесь еще много негодяев.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1251,8 +1251,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-9': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "It's time to look for a place to cross over a river. In this place too fast a flowing, go ahead.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Пора искать место для переправы. Здесь слишком быстрое течение, идите дальше.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1261,8 +1261,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-10': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "You got to the ferriage! There a strong protection! ", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: " Вы добрались до переправы! Здесь сильная охрана!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1271,8 +1271,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-11': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Victory! You had overcome the ferriage! In a new forest is even more powerful enemies!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Победа! Вы преодолели переправу! В новом лесу еще более сильные враги!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1281,8 +1281,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-12': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Far away you see the glade by the river. There you will be able to regain herself strength.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Вдали виднеется лужайка на берегу реки. Там вы сможете восстановить свои силы.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1291,8 +1291,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-13': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "You go into the thicket forest, there can be very dangerous robbers!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Вы входите в лесную чащу, здесь могут быть очень опасные разбойники!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1301,8 +1301,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-14': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Just now you have coped with the robbers! But, exactly same squad already go on your footsteps! Maybe, you should get a new weapon.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Только что вы справились с разбойниками! Но точно такой же отряд уже идет по вашим следам! Возможно, вам стоит взять новое оружие.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1311,8 +1311,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-15': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Strange clouds over your head! It seems that you enter into the very den of bandits!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Тучи сгущаются! Кажется, что вы заходите в самое логово разбойников!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1321,8 +1321,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-16': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "The map shows a village, there you will be able to gain strength. And now - Let's get ready to rumble!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "На карте отмечена деревушка, там вы сможете набраться сил. А сейчас - в бой!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1331,8 +1331,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-17': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Beware! Ahead you lies in wait a very dangerous opponent!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Остерегайтесь! Впереди вас подстерегает не менее опасный противник!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1341,8 +1341,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-18': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Forest path to the village changes direction, beware of thieves - they're everywhere!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Тропинка в деревню сворачивает, остерегайтесь разбойников - они повсюду!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1351,8 +1351,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-19': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "You get lost and got out again to the river. Going along the coast you get off to the right path.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Вы заплутали и снова выходите к реке. Идите вдоль береге и не собьетесь с верного пути.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1361,8 +1361,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-20': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Kingdom already heard about your battles with forest robbers. And sends his troops to help them.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Королевство узнало о ваших битвах с лесными разбойниками. И высылает свой отряд в помощь разбойникам.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1371,8 +1371,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-21': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "It's time to arm themselves! At the entrance to the village, already expected a royal detachment of you!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Пора вооружаться! На входе в деревню, вас ожидает королевский отряд!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1381,8 +1381,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-22': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "You have successfully reached a ferriage. But don't relax, enemies are everywhere!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Вы успешно добрались до переправы. Но не расслабляйтесь, кругом полно противников!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1391,8 +1391,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-23': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "You are on the way to the island, that full of strong barbarians!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Вы на пути к острову, там полно сильных варворов!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1401,8 +1401,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-24': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Crown has learned about your progress and sends a strong squad to stop you!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Корона узнала о ваших успехах и направляет сильный отряд, чтоб остановить вас!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1411,8 +1411,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-25': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Ahead the mountain! On top of mount waiting on you dangerous barbarians!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Впереди горы! На вершине вас подстерегают опасные варвары!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1421,8 +1421,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-26': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "In the mountains, you never know who find you! Be alert and move forward.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "В горах никогда не знаешь на кого нарвешься! Будьте бдительны и продвигайтесь вперед.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1431,8 +1431,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-27': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "You are on top of the mountain, fully visible the whole island! But dangerous barbarians lurked under the trees!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Вы на вершине горы, весь остров как на ладони! Но опасные варвары притаились под кронами деревьев!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1441,8 +1441,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-28': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "One more ferriage guarded by the very strong barbarians! Smash them to pass on!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Еще одна переправа под охраной очень сильных варваров! Разбейте их чтобы пройти дальше!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1451,8 +1451,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-29': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "You already sail off from the shore. Beware of Pirates!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Вы уже отчалили от берега. Остерегайтесь пиратов!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1461,8 +1461,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'level-popup-level-30': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Nobody knows, where bring you flow of the river. Continue to move in the same direction!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Никто не знает куда вас принесет течение. Продолжайте движение в том же направлении!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -1481,8 +1481,8 @@ var g_language  = {
     {title: "各ボーナスの鳥は、ゲームモードのそれぞれにユニークな能力を持っている - 彼らは何ができるかを参照してください！", font: "RiiPopkk-R", size: 42, dimensions: [1200, 0]}//
     ],
   'tip-1': [
-    {title: "Tip 1", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
-    {title: "Tip 1", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Buy new weapon to beat your opponent. New weapons will inflicts more damage to opponent, will restore more hit points, and will be giving you more defence.", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Покупайте новое оружие, чтоб победить соперника! Крутая пушка будет наносить больше урона противнику, будет восстанавливать больше жизней, а также, даст вам больше защиты.", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
@@ -1491,8 +1491,8 @@ var g_language  = {
     {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
     ],
   'tip-2': [
-    {title: "Tip 2", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "Tip 2", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Collect keys, with their help, you can open the locked position in the shop.", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Собирайте ключи, с их помощью вы сможете открыть заблокированные позиции в магазине.", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
@@ -1501,8 +1501,8 @@ var g_language  = {
     {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
     ],
   'tip-3': [
-    {title: "Tip 3", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "Tip 3", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Play in game every day to get a daily reward. The more days in a row you play - the more reward.", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Заходите в игру каждый день и получайте ежедневное вознаграждение. Чем больше дней подряд вы играете - тем больше вознаграждение.", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
@@ -1511,8 +1511,8 @@ var g_language  = {
     {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
     ],
   'tip-4': [
-    {title: "Tip 4", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "Tip 4", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "To earn gold coins - play online mode!", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Чтобы заработать золотых монет - играйте в онлайн режим!", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
@@ -1521,8 +1521,8 @@ var g_language  = {
     {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
     ],
   'tip-5': [
-    {title: "Tip 5", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "Tip 5", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Collect 5 identical tiles in a row to get an extra move!", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
+    {title: "Собирайте 5 одинаковый плиток в ряд, чтобы получить дополнительный ход!", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
