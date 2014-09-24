@@ -68,6 +68,10 @@ LeaderboardList = PatternList.extend({
       )
     );
 
+    this.m_Text[1].setVisible(true);
+    this.m_Text[2].setVisible(true);
+    this.m_Text[3].setVisible(true);
+
     this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
     this.m_Text[2].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(220));
     this.m_Text[3].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(0));

@@ -44,7 +44,7 @@ FriendsList = List.extend({
     this.m_BackgroundHolder = Background.create(this);
 
     var count = 0;
-    var limit = 20;
+    var limit = 50;
 
     FriendsManager.sharedInstance().getAppFriends().forEach(function(user) {
       if(count < limit) {
@@ -129,9 +129,9 @@ FriendsButton = Button.extend({
     this._super();
 
     this.text = Text.create(false, this);
-    this.text.setCenterPosition(this.getWidth() / 2, Camera.sharedCamera().coord(35));
+    this.text.setCenterPosition(this.getWidth() / 2, Camera.sharedCamera().coord(33));
     this.text.ccsf([this.user.first_name.toUpperCase()]);
-    this.text.setFontSize(8);
+    this.text.setFontSize(9);
 
     if(this.user.app) {
       this.setCurrentFrameIndex(0);
@@ -162,9 +162,16 @@ FriendsButton = Button.extend({
     if(this.user.app) {
 
     } else {
+      var messages = [
+        LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
+        LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
+        LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
+        LanguagesManager.sharedManager().get('friends-notification-vk-4').title
+      ];
+
       Tooflya.VK.api.call('friends.request', {
         id: this.user.uid,
-        message: 'Слышь, ты! Шаловливый язычек!!! :P'
+        message: messages.random()
       }, {
         success: function() {
           this.runAction(
@@ -233,6 +240,8 @@ FriendsButton = Button.extend({
     this._super();
 
     this.registerTouchable(false);
+  },
+  stopAllActions: function() {
   }
 });
 
