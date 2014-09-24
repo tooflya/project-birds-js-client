@@ -118,10 +118,6 @@ MenuPanel = Panel.extend({
       this.getButtons()[2].setTouchHandler('show', Lives);
       this.getButtons()[3].setTouchHandler('show', Keys);
     }
-
-    Coins.sharedScreen(this).prepare();
-    Keys.sharedScreen(this).prepare();
-    Lives.sharedScreen(this).prepare();
   },
   show: function() {
     this._super();

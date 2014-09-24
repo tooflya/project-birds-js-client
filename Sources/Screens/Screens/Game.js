@@ -362,7 +362,7 @@ Game = Screen.extend({
             break;
           }
         };
-        NetworkManager.instance.onUnsubscribe = function(data) {
+        NetworkManager.instance.onCancel = function(data) {
           if(Game.instance) {
             Game.instance.networkProblem();
           }

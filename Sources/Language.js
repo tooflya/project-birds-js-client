@@ -1012,13 +1012,63 @@ var g_language  = {
     ],
   'multiplayer-popup-4': [
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "Или выбирите друга", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Или выберите друга", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
+    ],
+  'multiplayer-popup-5': [
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Ожидание...", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
+    ],
+  'multiplayer-popup-6': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "$1 получил уведомление. Ожидаем подтверждения участия.", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
+    ],
+  'multiplayer-popup-7': [
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Осталось: $1", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
+    ],
+  'multiplayer-popup-8': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "Ожидание поиска случайного игрока.\nПожалуйста подождите.", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
+    ],
+  'multiplayer-popup-9': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "Статус: $1", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
     ],
   'multiplayer-popup-10': [
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -1041,8 +1091,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'network-1': [
-    {title: "Connecting to server...", font: "Comic Sans MS", size: 52, dimensions: false},
-    {title: "Соединяемся с сервером...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "connecting to server", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "соединяемся с сервером", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -1051,8 +1101,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
     ],
   'network-2': [
-    {title: "Searching for player...", font: "Comic Sans MS", size: 52, dimensions: false},
-    {title: "Поиск игрока...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "searching for player", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "поиск игрока", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -1061,8 +1111,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
     ],
   'network-3': [
-    {title: "Waiting to start game...", font: "Comic Sans MS", size: 52, dimensions: false},
-    {title: "Ожидание начала битвы...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "waiting to start game", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "ожидание начала битвы", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -1073,6 +1123,16 @@ var g_language  = {
   'network-4': [
     {title: "Rival has disconnected \n trying to restore connection...", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "Соперник отключился! \n Пробуем восстановить соединение...", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
+    ],
+  'network-5': [
+    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "ожидание игрока", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -4053,5 +4113,45 @@ var g_language  = {
     {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
     {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
     {title: '', font: 'RiiPopkk-R', size: 24, dimensions: [500, 0]}
+    ],
+  'friends-multiplayer-present-1': [
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: 'Вызвать на бой', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
+    ],
+  'friends-multiplayer-present-2': [
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: 'Пригласить в игру', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
+    ],
+  'friends-multiplayer-present-3': [
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: 'Друг приглашен!', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
+    ],
+  'friends-multiplayer-present-4': [
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: 'Отмена', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
     ]
 };

@@ -87,7 +87,7 @@ InviteList = PatternList.extend({
       element.setCenterPosition(Camera.sharedCamera().coord(250), Camera.sharedCamera().coord(400));
       element.setScale(0);
 
-      var speed = 2;
+      var speed = 100;
       var radius = Camera.sharedCamera().coord(150);
 
       element.angle = 0;
@@ -96,7 +96,7 @@ InviteList = PatternList.extend({
       element.update = function(time) {
         Entity.prototype.update.call(this, time);
 
-        this.angle -= Math.acos(1 - Math.pow(speed / radius, 2) / 2);
+        this.angle -= Math.acos(1 - Math.pow((speed * time) / radius, 2) / 2);
 
         var x = this.cx + radius * Math.cos(this.angle)
         var y = this.cy + radius * Math.sin(this.angle);

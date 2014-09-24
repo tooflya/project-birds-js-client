@@ -60,9 +60,7 @@ Multiplayer = ExtendedPopup.extend({
     });
   },
   onMode2Event: function() {
-    this.hide(function() {
-      Mode.sharedScreen().request();
-    });
+    this.m_List.showIncognitoConnectionView();
   }
 });
 

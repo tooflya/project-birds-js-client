@@ -138,6 +138,8 @@ FriendsLivesList = PatternList.extend({
             });
             this.registerTouchable(false);
           };
+
+          this.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));
         }.bind(this));
 
         y -= Camera.sharedCamera().coord(120);

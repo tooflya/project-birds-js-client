@@ -32,7 +32,6 @@
 Mode = Screen.extend({
   m_DecorationTime: 0.5,
   m_DecorationTimeElapsed: 0.5,
-  m_NetworkTime: false,
   ctor: function() {
     this._super();
 
@@ -99,85 +98,6 @@ Mode = Screen.extend({
     this.m_AchievementsButton.setTouchHandler('onAchievementsEvent', Mode);
     this.m_ShopButton.setTouchHandler('onShopEvent', Mode);
     this.m_HelpButton.setTouchHandler('onHelpEvent', Mode);
-
-    Help.sharedScreen(this).prepare();
-    Rating.sharedScreen(this).prepare();
-    Achievements.sharedScreen(this).prepare();
-    Lock.sharedScreen(this).prepare();
-    Multiplayer.sharedScreen(this).prepare();
-
-    /** Network */
-
-    this.m_NetworkBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
-    this.m_NetworkDecorations = EntityManager.create(20, CircleDecoration1.create(), this.m_NetworkBackground);
-    this.m_NetworkBackgroundLoader = Entity.create(s_LoadingDecoration, this.m_NetworkBackground);
-    this.m_NetworkBackgroundText = Text.create('network-1', this.m_NetworkBackground);
-
-    this.m_NetworkBackgroundLoader.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
-    this.m_NetworkBackgroundText.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(400));
-
-    this.m_NetworkBackground.setCascadeOpacityEnabled(true);
-    this.m_NetworkBackgroundLoader.runAction(
-      cc.RepeatForever.create(
-        cc.Sequence.create(
-          cc.ScaleTo.create(1.0, 1.02),
-          cc.ScaleTo.create(1.0, 1.0),
-          false
-        )
-      )
-    );
-
-    this.m_NetworkBackground.onEnter = function() {
-      cc.LayerColor.prototype.onEnter.call(this);
-
-      if(cc.Browser.isMobile) {
-        cc.Director.getInstance().getTouchDispatcher()._addTargetedDelegate(this, 0, true);
-      } else {
-        cc.Director.getInstance().getMouseDispatcher().addMouseDelegate(this, Touchable.priority--);
-      }
-    };
-    this.m_NetworkBackground.onExit = function() {
-      cc.LayerColor.prototype.onExit.call(this);
-
-      if(cc.Browser.isMobile) {
-        cc.Director.getInstance().getTouchDispatcher()._removeDelegate(this);
-      } else {
-        cc.Director.getInstance().getMouseDispatcher().removeMouseDelegate(this);
-      }
-    };
-    this.m_NetworkBackground.onMouseDown = function(e) {
-      var r = !(this.getOpacity() == 255);
-
-      if(!r) {
-        Touchable.active = true;
-        Touchable.list = true;
-      }
-
-      return r;
-    }; 
-    this.m_NetworkBackground.onMouseUp = function(e) {
-      Touchable.active = false;
-      Touchable.list = false;
-
-      this.onTouch(e);
-
-      return false;
-    };
-    this.m_NetworkBackground.onTouchBegan = function(touch, e) {
-      return this.onMouseDown(touch);
-    };
-    this.m_NetworkBackground.onTouchEnded = function(touch, e) {
-      return this.onMouseUp(touch);
-    };
-    this.m_NetworkBackground.onTouch = function(e) {
-      if(this.getOpacity() == 255) {
-        this.runAction(cc.FadeOut.create(0.5));
-
-        NetworkManager.sharedInstance().unsubscribe();
-
-        Mode.instance.m_NetworkTime = false;
-      }
-    };
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Menu);
@@ -297,50 +217,6 @@ Mode = Screen.extend({
 
     Sound.sharedSound().play(s_SoundSlash);
   },
-  request: function() {
-    this.m_NetworkBackgroundText.setText('network-1');
-
-    this.m_NetworkTime = true;
-
-    this.m_NetworkBackground.runAction(
-      cc.Sequence.create(
-        cc.FadeIn.create(0.5),
-        false
-      )
-    );
-
-    NetworkManager.sharedInstance().subscribe({
-      weapon: DataManager.sharedManager().get(false, references.info.weapon) - 1
-    }, {
-      subscribe: function() {
-        Mode.instance.m_NetworkBackgroundText.setText('network-2');
-
-        Game.network = false;
-        Game.server = false;
-      },
-      pending: function() {
-        Mode.instance.m_NetworkBackgroundText.setText('network-3');
-      },
-      start: function(data) {
-        Music.sharedMusic().stop();
-
-        Game.level = 1; // Random.sharedRandom().random(1, 30, true); // TODO: Random level?
-        Game.users = data.users;
-        Game.network = true;
-        Game.server = data.server || false;
-        Game.sharedScreen(0);
-
-        ScreenManager.sharedManager().replace(Game);
-
-        Mode.instance.m_NetworkBackgroundLoader.runAction(cc.ScaleTo.create(0.5, 0.0));
-        Mode.instance.m_NetworkBackgroundLoader.runAction(cc.RotateTo.create(0.5, -720.0));
-
-        setTimeout(function() {
-          Music.sharedMusic().play(s_Music2, true);
-        }, 1000);
-      }
-    });
-  },
   onShow: function() {
     this._super();
 
@@ -382,16 +258,6 @@ Mode = Screen.extend({
   },
   update: function(time) {
     this._super(time);
-
-    if(this.m_NetworkTime) {
-      this.m_DecorationTimeElapsed += time;
-
-      if(this.m_DecorationTimeElapsed >= this.m_DecorationTime) {
-        this.m_DecorationTimeElapsed = 0;
-
-        this.m_NetworkDecorations.create();
-      }
-    }
   },
   onKeyDown: function(e) {
     switch(e) {
