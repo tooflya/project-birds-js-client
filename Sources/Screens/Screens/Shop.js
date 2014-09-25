@@ -45,10 +45,6 @@ Shop = Screen.extend({
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_WeaponChecker = Entity.create(s_Checker);
 
-    Lock.sharedScreen(this).prepare();
-    Item.sharedScreen(this).prepare();
-    Bought.sharedScreen(this).prepare();
-
     this.m_Wheels = new Array();
     this.m_Shelfs = new Array();
     this.m_Items = new Array();
@@ -443,6 +439,26 @@ Shop = Screen.extend({
   }
 });
 
+Shop.notifyHandler = function(button, time) {
+  var count = 0;
+  var coins = {
+    gold: DataManager.instance.get(false, references.coins.gold),
+    silver: DataManager.instance.get(false, references.coins.silver)
+  };
+  properties.items.forEach(function(item) {
+    if(item.price.gold > 0 && item.price.silver > 0) {
+      if(coins.gold >= item.price.gold && coins.silver >= item.price.silver) {
+        count++;
+      }
+    }
+  });
+
+  if(count > 0) {
+    button.showNotifier(count);
+  } else {
+    button.hideNotifier();
+  }
+};
 Shop.instance = false;
 Shop.sharedScreen = function() {
   return Shop.instance ? Shop.instance : new Shop();

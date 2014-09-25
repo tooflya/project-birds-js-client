@@ -45,7 +45,7 @@ ParticleLive = PhysicsEntity.extend({
     };
     values.force = {
       x: 0,
-      y: Random.sharedRandom().random(40, 50) * -this.getCurrentPhysicsWorld().GetGravity().y
+      y: Random.sharedRandom().random(30, 40) * -this.getCurrentPhysicsWorld().GetGravity().y
     };
 
     this.setLinearVelocity(values.force.x, values.force.y);

@@ -94,6 +94,8 @@ Finish = Background.extend({
     this.m_RestartButton.setTouchHandler('onRestartEvent', Finish);
     this.m_ContinueButton.setTouchHandler('onContinueEvent', Finish);
     this.m_ShopButton.setTouchHandler('onShopEvent', Finish);
+
+    this.m_ShopButton.createNotifier(Shop.notifyHandler, 32, 64);
   },
   show: function() {
     this.assert(this.getParent(), "This popup window is already showed.");

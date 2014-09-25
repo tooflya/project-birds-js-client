@@ -157,11 +157,6 @@ GamePanel = Panel.extend({
     this.getButtons()[this.config.params.purchases ? 4 : 0].setTouchHandler('onPauseEvent', Game);
 
     this.m_BackgroundCircleDecoration = EntityManager.create(5, CircleDecoration2.create(), this.getBackgrounds()[0], 0);
-
-    Coins.sharedScreen(this).prepare();
-    Keys.sharedScreen(this).prepare();
-    Lives.sharedScreen(this).prepare();
-    Pause.sharedScreen(this).prepare();
   },
   show: function() {
     this._super();

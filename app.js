@@ -103,6 +103,7 @@
     'Sources/Entities/Target.js',
     'Sources/Entities/HealthParticle.js',
     'Sources/Entities/SplashText.js',
+    'Sources/Entities/Notify.js',
     'Sources/Screens/Screens/Preloader.js',
     'Sources/Screens/Screens/Menu.js',
     'Sources/Screens/Screens/Settings.js',

@@ -75,6 +75,8 @@ Mode = Screen.extend({
     this.m_HelpButton.setCurrentFrameIndex(7);
     this.m_BackButton.setCurrentFrameIndex(1);
 
+    this.m_ShopButton.createNotifier(Shop.notifyHandler, 48, 80);
+
     switch(Camera.sharedCamera().orientation) {
       case Camera.sharedCamera().orientations.portrait:
       this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(200), Camera.sharedCamera().height - Camera.sharedCamera().coord(170));

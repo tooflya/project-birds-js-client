@@ -60,7 +60,7 @@ Menu = Screen.extend({
     this.m_PlayButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(20), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_EventsButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
     this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(440));
-    
+
     if(this.config.params.vendor == 'ubi-nuri') {
     } else {
       if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
@@ -70,6 +70,7 @@ Menu = Screen.extend({
 
     this.m_SettingsButton.setCurrentFrameIndex(6);
     this.m_ShopButton.setCurrentFrameIndex(2);
+    this.m_EventsButton.setCurrentFrameIndex(9);
 
     if(this.config.params.vendor == 'ubi-nuri') {
     } else {
@@ -82,6 +83,21 @@ Menu = Screen.extend({
 
     this.m_PlayButton.animate(0.06, 1, false, {start: 0, end: 5.0});
 
+    this.m_EventsButton.createNotifier(function(button, time) {
+      Tooflya.api.call('request.find', {
+        force: true
+      }, {
+        success: function(data) {
+          if(data.requests.length > 0) {
+            button.showNotifier(data.requests.length);
+          } else {
+            button.hideNotifier();
+          }
+        }
+      });
+    }, 32, 64);
+    this.m_ShopButton.createNotifier(Shop.notifyHandler, 32, 64);
+
     this.m_PlayButton.setTouchHandler('onPlayEvent', Menu);
     this.m_SettingsButton.setTouchHandler('onSettingsEvent', Menu);
     this.m_EventsButton.setTouchHandler('onEventsEvent', Menu);
@@ -93,9 +109,6 @@ Menu = Screen.extend({
       if(this.config.params.platform == 'vk') this.m_VkontakteButton.setTouchHandler('onVkontakteEvent', Menu);
       this.m_TwitterButton.setTouchHandler('onTwitterEvent', Menu);
     }
-
-    Rate.sharedScreen(this).prepare();
-    Invite.sharedScreen(this).prepare();
   },
   onPlayEvent: function() {
     ScreenManager.sharedManager().replace(Mode);

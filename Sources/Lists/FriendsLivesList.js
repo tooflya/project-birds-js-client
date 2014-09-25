@@ -74,7 +74,7 @@ FriendsLivesList = PatternList.extend({
         InternetEntity.create(user.photo_medium, this.m_BackgroundHolder, function(entity) {
           entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
 
-          var button = Entity.create(s_LivesPresentBackground, this.m_BackgroundHolder);
+          var button = Button.create(s_LivesPresentBackground, 1, 1, this.m_BackgroundHolder);
           var icon = AnimatedEntity.create(s_PanelIcon3, 3, 3, button);
 
           var name = Text.create('leaderboard-name', this.m_BackgroundHolder, cc.TEXT_ALIGNMENT_LEFT);
@@ -92,30 +92,6 @@ FriendsLivesList = PatternList.extend({
           text.setColor(cc.c3(204.0, 102.0, 51.0));
 
           button.registerTouchable(true);
-          button.onCancel = function() {
-          };
-          button.onMouseDown = function(e) {
-            if(Entity.prototype.onMouseDown.call(this, e)) {
-              this.stopAllActions();
-
-              this.runRecognizeAction(false, {
-                name: 'scale',
-                time: 0.1,
-                value: 0.95
-              });
-            }
-          };
-          button.onMouseUp = function(e) {
-            if(Entity.prototype.onMouseUp.call(this, e)) {
-              this.stopAllActions();
-
-              this.runRecognizeAction(false, {
-                name: 'scale',
-                time: 0.1,
-                value: 1.0
-              });
-            }
-          };
           button.onTouch = function(e) {
             Button.prototype.onTouch.call(this, e);
 

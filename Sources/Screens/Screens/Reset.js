@@ -58,8 +58,6 @@ Reset = Screen.extend({
 
     this.m_BackButton.setTouchHandler('onBackEvent', Reset);
     this.m_ResetButton.setTouchHandler('onResetEvent', Reset);
-
-    ResetProgress.sharedScreen(this).prepare();
   },
   onBackEvent: function() {
     ScreenManager.sharedManager().replace(Settings);

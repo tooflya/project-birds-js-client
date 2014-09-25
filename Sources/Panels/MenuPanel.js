@@ -121,6 +121,18 @@ MenuPanel = Panel.extend({
   },
   show: function() {
     this._super();
+
+    this.updateData(function() {
+      Tooflya.api.call('users.leaders', {
+        limit: 10000,
+        type: 2
+      }, {
+        success: function(data) {
+          this.m_LeaderboardAnimationCompleted = true;
+          this.m_LeaderboardIndex = data.place;
+        }.bind(this)
+      });
+    }.bind(this));
   },
   hide: function(callback) {
     this._super(callback);
@@ -129,18 +141,6 @@ MenuPanel = Panel.extend({
   },
   onShow: function() {
     this._super();
-
-    var self = this;
-
-    Tooflya.api.call('users.leaders', {
-      limit: 10000,
-      type: 2
-    }, {
-      success: function(data) {
-        self.m_LeaderboardAnimationCompleted = true;
-        self.m_LeaderboardIndex = data.place;
-      }
-    });
   },
   onHide: function() {
     this._super();
@@ -149,8 +149,6 @@ MenuPanel = Panel.extend({
   },
   onEnter: function() {
     this._super();
-
-    this.updateData();
   },
   onExit: function() {
     this._super();
@@ -175,11 +173,15 @@ MenuPanel = Panel.extend({
       }
     }
   },
-  updateData: function() {
+  updateData: function(callback) {
     DataManager.sharedManager().get(true, MenuPanel.instance.m_Keys, {
       success: function(storage) {
         MenuPanel.instance.m_Fields = storage;
         DataManager.sharedManager().set(false, MenuPanel.instance.m_Keys, storage);
+
+        if(callback) {
+          callback();
+        }
       }
     });
   }

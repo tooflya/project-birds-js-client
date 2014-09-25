@@ -49,7 +49,7 @@ Button.prototype.onCancel = function(callback) {
   });
 };
 
-Button.prototype.onTouch= function() {
+Button.prototype.onTouch = function() {
   Sound.sharedSound().play(s_SoundButtonTouch);
 
   this.onCancel(cc.CallFunc.create(this.onFinish, this, this));
@@ -59,4 +59,68 @@ Button.prototype.onHover = function() {
 };
 
 Button.prototype.onUnHover = function() {
+};
+
+Button.prototype.createNotifier = function(handler, x, y) {
+  this.notifier = Notify.create(this);
+  this.notifier.text = Text.create(false, this.notifier);
+
+  this.notifier.handler = handler;
+
+  this.notifier.setCenterPosition(this.getWidth() - Camera.sharedCamera().coord(x), this.getHeight() - Camera.sharedCamera().coord(y));
+  this.notifier.text.setCenterPosition(this.notifier.getWidth() / 2, this.notifier.getHeight() / 2);
+
+  this.notifier.setScale(0);
+
+  this.notifier.handler(this);
+
+  this.notifier.updateTime = 5.0;
+  this.notifier.updateTimeElapsed = 0.0;
+};
+
+Button.prototype.showNotifier = function(text) {
+  if(this.notifier) {
+    this.notifier.text.ccsf([text]);
+    if(!this.notifier.isVisible()) {
+      this.notifier.runAction(
+        cc.Sequence.create(
+          cc.CallFunc.create(this.notifier.create, this.notifier),
+          cc.EaseExponentialOut.create(
+            cc.ScaleTo.create(0.2, 1.0)
+          ),
+          false
+        )
+      );
+    }
+  }
+};
+
+Button.prototype.hideNotifier = function(text) {
+  if(this.notifier) {
+    this.notifier.text.ccsf([0]);
+    if(this.notifier.isVisible()) {
+      this.notifier.runAction(
+        cc.Sequence.create(
+          cc.EaseExponentialIn.create(
+            cc.ScaleTo.create(0.2, 0.0)
+          ),
+          cc.CallFunc.create(this.notifier.destroy, this.notifier),
+          false
+        )
+      );
+    }
+  }
+};
+
+Button.prototype.update = function(time) {
+  AnimatedEntity.prototype.update.call(this, time);
+
+  if(this.notifier) {
+    this.notifier.updateTimeElapsed += time;
+    if(this.notifier.updateTimeElapsed >= this.notifier.updateTime) {
+      this.notifier.updateTimeElapsed = 0;
+
+      this.notifier.handler(this, time);
+    }
+  }
 };
