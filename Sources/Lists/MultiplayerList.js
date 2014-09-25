@@ -188,13 +188,13 @@ MultiplayerList = PatternList.extend({
 
           var separator = false;
           friends.forEach(function(user) {
-            var s = y;
-
-            if(!separator) {
+            if(!separator && !user.app) {
               separator = true;
 
               y -= Camera.sharedCamera().coord(50);
             }
+
+            var s = y;
 
             InternetEntity.create(user.photo_medium, this.m_BackgroundHolders[0], function(entity) {
               entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
@@ -306,11 +306,9 @@ MultiplayerList = PatternList.extend({
     this.m_BackgroundHolders[1].removeAllChildrenWithCleanup(true);
     this.m_BackgroundHolders[2].removeAllChildrenWithCleanup(true);
 
-    if(this.m_Connection) {
+    if(!Game.network) {
       NetworkManager.sharedInstance().unsubscribe();
-    }
-
-    if(this.m_Connected) {
+    } else {
       Multiplayer.instance = false;
     }
   },
@@ -428,6 +426,8 @@ MultiplayerList = PatternList.extend({
     button.onTouch = function(e) {
       Button.prototype.onTouch.call(this, e);
 
+      NetworkManager.sharedInstance().unsubscribe();
+
       MultiplayerList.instance.showMainView();
     };
 
@@ -468,6 +468,7 @@ MultiplayerList = PatternList.extend({
         }, 1000);
       }.bind(this),
       cancel: function() {
+        this.m_BackgroundHolders[1].removeAllChildrenWithCleanup(true);
         this.onSetConnectionView(data);
       }.bind(this)
     });
@@ -538,14 +539,26 @@ MultiplayerList = PatternList.extend({
         Game.network = false;
         Game.server = false;
       }.bind(this),
-      pending: function() {
+      pending: function(data) {
         this.m_Text[11].ccsf([LanguagesManager.sharedManager().get('network-3').title]);
         this.m_Text[10].setVisible(false);
 
         this.m_Connected = true;
         this.m_Connection = false;
 
-        // TODO: add info.
+        this.m_Loading[2].destroy();
+
+        InternetEntity.create(data.user.photo, this.m_BackgroundHolders[2], function(entity) {
+          entity.create().setCenterPosition(Camera.sharedCamera().coord(100), this.getCenterY() + Camera.sharedCamera().coord(190));
+
+          var name = Text.create('leaderboard-name', this.m_BackgroundHolders[2]);
+
+          name.ccsf([data.user.name + " " + data.user.surname]);
+
+          name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), this.getCenterY() + Camera.sharedCamera().coord(190) + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
+
+          name.setColor(cc.c3(255.0, 130.0, 0.0));
+        }.bind(this));
       }.bind(this),
       start: function(data) {
         Music.sharedMusic().stop();
@@ -565,6 +578,7 @@ MultiplayerList = PatternList.extend({
         }, 1000);
       }.bind(this),
       cancel: function() {
+        this.m_BackgroundHolders[2].removeAllChildrenWithCleanup(true);
         this.onSetIncognitoConnectionView();
       }.bind(this)
     });
