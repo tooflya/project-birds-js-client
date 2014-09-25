@@ -284,6 +284,7 @@ var s_MatrixArrow1 = "Resources/Graphics/matrix-arrow-1.png";
 var s_MatrixArrow2 = "Resources/Graphics/matrix-arrow-2.png";
 var s_TutorialLevel = "Resources/Graphics/level-tutorial.png";
 var s_LevelIcon = "Resources/Graphics/level-icon.png";
+var s_NotifyIcon = "Resources/Graphics/notify-icon.png";
 var s_InputTextArea = "Resources/Graphics/input-text-area.png";
 var s_NetworkHolder = "Resources/Graphics/network-holder.png";
 var s_LevelElementChoise = "Resources/Graphics/level-element-choise.png";
@@ -299,6 +300,7 @@ var s_FriendsBackground1 = "Resources/Graphics/friends-background-1.png";
 var s_FriendsBackground2 = "Resources/Graphics/friends-background-2.png";
 var s_FriendsCover = "Resources/Graphics/friends-list-cover.png";
 var s_FriendsListBackground = "Resources/Graphics/friends-list-background.png";
+var s_UserOnlineStatus = "Resources/Graphics/users-online-status.png";
 var s_Levels = [
   "Resources/Graphics/level-1.png",
   "Resources/Graphics/level-2.png",
@@ -590,6 +592,7 @@ var resources = [
   {src: s_MatrixArrow2},
   {src: s_TutorialLevel},
   {src: s_LevelIcon},
+  {src: s_NotifyIcon},
   {src: s_InputTextArea},
   {src: s_NetworkHolder},
   {src: s_LevelElementChoise},
@@ -605,6 +608,7 @@ var resources = [
   {src: s_FriendsBackground2},
   {src: s_FriendsCover},
   {src: s_FriendsListBackground},
+  {src: s_UserOnlineStatus},
   {src: s_Levels[0]},
   {src: s_Levels[1]},
   {src: s_Levels[2]},

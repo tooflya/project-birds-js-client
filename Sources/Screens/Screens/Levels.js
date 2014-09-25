@@ -543,7 +543,7 @@ Levels = Screen.extend({
     this.name = "Levels screen";
 
     this.m_Background = Entity.create(s_LevelsMapBackground, this);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
 
     this.m_Background.create().setCenterPosition(Camera.sharedCamera().center.x, this.m_Background.getHeight() / 2);
 

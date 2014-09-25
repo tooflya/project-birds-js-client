@@ -139,6 +139,7 @@
     'Sources/Screens/Popups/Multiplayer.js',
     'Sources/Screens/Popups/Level.js',
     'Sources/Screens/Popups/FriendsLives.js',
+    'Sources/Screens/Popups/Events.js',
     'Sources/Managers/PopupShaderManager.js',
     'Sources/Managers/ElementsManager.js',
     'Sources/Managers/MatrixManager.js',
@@ -156,6 +157,7 @@
     'Sources/Lists/FriendsLivesList.js',
     'Sources/Lists/FriendsList.js',
     'Sources/Lists/MultiplayerList.js',
+    'Sources/Lists/EventsList.js',
     'Sources/Game/Preview.js',
     'Sources/Game/Events.js',
     'Sources/Game/Thrower.js',
@@ -374,7 +376,8 @@
       Purchase,
       Multiplayer,
       Level,
-      FriendsLives
+      FriendsLives,
+      Events
     ];
 
     screens.forEach(function(c) {

@@ -43,13 +43,14 @@ Menu = Screen.extend({
     this.m_PlayButtonDecorations[0] = Entity.create(s_CircleDecoration1, this);
     this.m_PlayButtonDecorations[1] = Entity.create(s_CircleDecoration1, this);
     this.m_PlayButton = Button.create(s_PlayButton, 6, 2, this);
-    this.m_SettingsButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_SettingsButton = Button.create(s_ButtonsSprite, 3, 4, this);
+    this.m_EventsButton = Button.create(s_ButtonsSprite, 3, 4, this);
+    this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 4, this);
 
     if(this.config.params.vendor == 'ubi-nuri') {
     } else {
-      this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 3, this);
-      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 3, this);
+      this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 4, this);
+      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 4, this);
       if(this.config.params.platform == 'vk') this.m_VkontakteButton = Button.create(s_VkontakteButton, 1, 1, this);
     }
 
@@ -57,7 +58,8 @@ Menu = Screen.extend({
     this.m_PlayButtonDecorations[0].create().setCenterPosition(Camera.sharedCamera().center.x+ Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_PlayButtonDecorations[1].create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(10), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
     this.m_PlayButton.create().setCenterPosition(Camera.sharedCamera().center.x + Camera.sharedCamera().coord(20), Camera.sharedCamera().center.y - Camera.sharedCamera().coord(80));
-    this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
+    this.m_EventsButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
+    this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(440));
     
     if(this.config.params.vendor == 'ubi-nuri') {
     } else {
@@ -82,6 +84,7 @@ Menu = Screen.extend({
 
     this.m_PlayButton.setTouchHandler('onPlayEvent', Menu);
     this.m_SettingsButton.setTouchHandler('onSettingsEvent', Menu);
+    this.m_EventsButton.setTouchHandler('onEventsEvent', Menu);
     this.m_ShopButton.setTouchHandler('onShopEvent', Menu);
 
     if(this.config.params.vendor == 'ubi-nuri') {
@@ -102,6 +105,9 @@ Menu = Screen.extend({
   },
   onShopEvent: function() {
     ScreenManager.sharedManager().replace(Shop);
+  },
+  onEventsEvent: function() {
+    Events.sharedScreen(this).show();
   },
   onFacebookEvent: function() {
     openURL("http://www.facebook.com/tooflya");

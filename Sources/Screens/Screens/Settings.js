@@ -38,7 +38,7 @@ Settings = Screen.extend({
     this.name = "Settings screen";
 
     this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_CreditsButton = Button.create(s_LongButton, 1, 1, this);
     this.m_ProgressButton = Button.create(s_LongButton, 1, 1, this);
     this.m_MoreButton = Button.create(s_LongButton, 1, 1, this);

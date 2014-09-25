@@ -38,7 +38,7 @@ More = Screen.extend({
     this.name = "More screen";
 
     this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_VideoButton = Button.create(s_LongButton, 1, 1, this);
     this.m_MoreGamesButton = Button.create(s_LongButton, 1, 1, this);
     this.m_PrivacyPolicyButton = Button.create(s_LongButton, 1, 1, this);

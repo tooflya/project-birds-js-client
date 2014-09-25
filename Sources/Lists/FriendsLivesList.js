@@ -61,17 +61,17 @@ FriendsLivesList = PatternList.extend({
 
     this.m_BackgroundHolder = Background.create(this);
   },
-  onActionEvent: function(users) {
+  onActionEvent: function() {
     this.m_Text[1].setVisible(false);
 
     this.m_Decoration1.destroy();
     this.m_Decoration2.destroy();
 
     var y = this.getCenterY() + Camera.sharedCamera().coord(200);
-    users.forEach(function(user) {
+    FriendsManager.instance.getAppFriends().forEach(function(user) {
       if(true) {
         var s = y;
-        InternetEntity.create(user.photo, this.m_BackgroundHolder, function(entity) {
+        InternetEntity.create(user.photo_medium, this.m_BackgroundHolder, function(entity) {
           entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
 
           var button = Entity.create(s_LivesPresentBackground, this.m_BackgroundHolder);
@@ -80,7 +80,7 @@ FriendsLivesList = PatternList.extend({
           var name = Text.create('leaderboard-name', this.m_BackgroundHolder, cc.TEXT_ALIGNMENT_LEFT);
           var text = Text.create('friends-live-present-1', button);
 
-          name.ccsf([user.name + " " + user.surname]);
+          name.ccsf([user.first_name + " " + user.last_name]);
 
           name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), s + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
           text.setCenterPosition(button.getWidth() / 2 + Camera.sharedCamera().coord(15), button.getHeight() / 2);
@@ -119,24 +119,40 @@ FriendsLivesList = PatternList.extend({
           button.onTouch = function(e) {
             Button.prototype.onTouch.call(this, e);
 
-            Tooflya.api.call('energy.set', {
-              friend: user.uid
+            var messages = [
+              LanguagesManager.sharedManager().get('friends-notification-vk-11').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-12').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-13').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-14').title
+            ];
+
+            Tooflya.VK.api.call('friends.request', {
+              id: user.uid,
+              message: messages.random()
             }, {
-              success: function(data) {
-                text.setText('friends-live-present-2');
-                text.runAction(
-                  cc.Sequence.create(
-                    cc.DelayTime.create(0.2),
-                    cc.EaseBounceOut.create(
-                      cc.MoveTo.create(0.5, cc.p(text.getCenterX() - Camera.sharedCamera().coord(100), text.getCenterY()))
-                    ),
-                    false
-                  )
-                );
-                icon.runAction(cc.FadeOut.create(0.2));
+              success: function() {
+                Tooflya.api.call('request.send', {
+                  type: 'live.send',
+                  uid: user.uid
+                }, {
+                  success: function(data) {
+                    this.registerTouchable(false);
+                    text.setText('friends-live-present-2');
+                    text.runAction(
+                      cc.Sequence.create(
+                        cc.DelayTime.create(0.2),
+                        cc.EaseBounceOut.create(
+                          cc.MoveTo.create(0.5, cc.p(text.getCenterX() - Camera.sharedCamera().coord(100), text.getCenterY()))
+                        ),
+                        false
+                      )
+                    );
+                    icon.runAction(cc.FadeOut.create(0.2));
+                  }.bind(this)
+                });
+                this.registerTouchable(false);
               }.bind(this)
             });
-            this.registerTouchable(false);
           };
 
           this.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));

@@ -1942,6 +1942,88 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
 
+  'friends-notification-vk-11': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Привет! Дарю тебе золотое сердечко! Воспользуйся им с умом.', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-12': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Вот тебе мой подарок - золотое сердечко! Их число ограничено!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-13': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Хватай золотое сердечко! ;)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-14': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Знаю, золотые сердца сейчас в дифиците, но у меня нашлось одно для тебя! :D', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+
+  'friends-notification-vk-21': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Привет! Приглашаю тебя сразиться со мной! Принимай вызов если не боишься!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-22': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Бросаю тебе вызов!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-23': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Тебе меня не одолеть! Можешь даже не пытаться...', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-vk-24': [
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Есть минутка? Хочу сыграть с тобой один на один :)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+
   'item-title-0': [
     {title: "Bamboo truth", font: "Comic Sans MS", size: 42, dimensions: false},
     {title: "Бамбуковая палка", font: "Comic Sans MS", size: 42, dimensions: false},
@@ -4153,5 +4235,25 @@ var g_language  = {
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
+    ],
+  'friends-multiplayer-present-5': [
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: 'Вас вызывают на битву', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}//
+    ],
+  'friends-multiplayer-present-6': [
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '$1 $2 вызывает вас на битву!', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '', font: 'RiiPopkk-R', size: 24, dimensions: [500, 0]}
     ]
 };

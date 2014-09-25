@@ -42,7 +42,7 @@ Shop = Screen.extend({
     this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration1, this);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_WeaponChecker = Entity.create(s_Checker);
 
     Lock.sharedScreen(this).prepare();

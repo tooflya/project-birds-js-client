@@ -42,7 +42,7 @@ Mode = Screen.extend({
     this.m_Lock = [];
 
     this.m_Background = Entity.create(Orientation.parse(s_ThirdPartyBackground), this, true);
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration3, this);
     this.m_ProgressMode = Button.create(s_LongButton, 1, 1, this);
@@ -50,8 +50,8 @@ Mode = Screen.extend({
     this.m_ArcadeMode = Button.create(s_LongButton, 1, 1, this);
     this.m_RatingButton = Button.create(s_SfxButtonsSprite, 3, 2, this);
     this.m_AchievementsButton = Button.create(s_SfxButtonsSprite, 3, 2, this);
-    this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 3, this);
-    this.m_HelpButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 4, this);
+    this.m_HelpButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_Lock[0] = Entity.create(s_Lock, this.m_ClassicMode);
     this.m_Lock[1] = Entity.create(s_Lock, this.m_ArcadeMode);
 
@@ -228,20 +228,26 @@ Mode = Screen.extend({
     switch(this.config.params.platform)
     {
       case 'vk':
-      var id = [];
+      var uids = [];
       FriendsManager.instance.getAppFriends().forEach(function(user) {
-        id.push(user.uid);
+        uids.push(user.uid);
       });
 
-      if(id.length > 0) {
-        Tooflya.api.call('energy.get', {
+      if(uids.length > 0) {
+        Tooflya.api.call('storage.get', {
           key: references.coins.lives,
-          friends: id
+          uids: uids
         }, {
           success: function(data) {
-            if(data.friends.length > 0) {
-              FriendsLives.sharedScreen(this).show(data.friends);
-            }
+            FriendsManager.instance.getAppFriends().forEach(function(user) {
+              data.forEach(function(u) {
+                if(data.uid == user.uid) {
+                  user.energy = u.storage[0];
+                }
+              });
+            });
+
+            FriendsLives.sharedScreen(this).show();
           }.bind(this)
         });
       }

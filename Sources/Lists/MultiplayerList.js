@@ -72,9 +72,6 @@ MultiplayerList = PatternList.extend({
     this.m_Mode1Button.text = Text.create('multiplayer-popup-10', this.m_Mode1Button);
     this.m_Mode2Button.text = Text.create('multiplayer-popup-11', this.m_Mode2Button);
 
-    this.m_Mode1Button.icon = TiledEntity.create(s_ItemsProperties, 1, 3, this.m_Mode1Button);
-    this.m_Mode2Button.icon = TiledEntity.create(s_ItemsProperties, 1, 3, this.m_Mode2Button);
-
     this.m_Loading[0] = Entity.create(s_Loading, this.m_Backgrounds[0]);
     this.m_Loading[1] = Entity.create(s_Loading, this.m_Backgrounds[1]);
     this.m_Loading[2] = Entity.create(s_Loading, this.m_Backgrounds[2]);
@@ -107,12 +104,6 @@ MultiplayerList = PatternList.extend({
 
     this.m_Mode1Button.text.create().setCenterPosition(this.m_Mode1Button.getWidth() / 2, this.m_Mode1Button.getHeight() / 2);
     this.m_Mode2Button.text.create().setCenterPosition(this.m_Mode2Button.getWidth() / 2, this.m_Mode2Button.getHeight() / 2);
-
-    //this.m_Mode1Button.icon.create().setCenterPosition(Camera.sharedCamera().coord(25), this.m_Mode1Button.getHeight() / 2);
-    //this.m_Mode2Button.icon.create().setCenterPosition(Camera.sharedCamera().coord(25), this.m_Mode2Button.getHeight() / 2);
-
-    this.m_Mode1Button.icon.setCurrentFrameIndex(1);
-    this.m_Mode2Button.icon.setCurrentFrameIndex(1);
 
     this.m_Text[1].setColor(cc.c3(204.0, 102.0, 51.0));
     this.m_Text[5].setColor(cc.c3(204.0, 102.0, 51.0));
@@ -157,11 +148,11 @@ MultiplayerList = PatternList.extend({
 
       var friends = FriendsManager.sharedInstance().getFriends();
       friends.sort(function compare(element1, element2) {
-        if(element1.app && !element2.app) {
+        if(element1.app) {
           return -1;
         }
 
-        if(!element1.app && element2.app) {
+        if(element2.app) {
           return 1;
         }
 
@@ -186,6 +177,23 @@ MultiplayerList = PatternList.extend({
             });
           });
 
+          friends.sort(function compare(element1, element2) {
+            if(element1.app && element2.app) {
+              if(element1.online) return -1;
+              if(element2.online) return 1;
+            }
+
+            if(element1.app) {
+              return -1;
+            }
+
+            if(element2.app) {
+              return 1;
+            }
+
+            return 0;
+          });
+
           var separator = false;
           friends.forEach(function(user) {
             if(!separator && !user.app) {
@@ -199,6 +207,12 @@ MultiplayerList = PatternList.extend({
             InternetEntity.create(user.photo_medium, this.m_BackgroundHolders[0], function(entity) {
               entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
 
+              if(user.app) {
+                entity.status = TiledEntity.create(s_UserOnlineStatus, 1, 2, entity);
+                entity.status.create().setCenterPosition(Camera.sharedCamera().coord(8), Camera.sharedCamera().coord(8));
+                entity.status.setCurrentFrameIndex(user.online ? 0 : 1);
+              }
+
               var t = {
                 string: false,
                 getText: function(user) {
@@ -211,7 +225,7 @@ MultiplayerList = PatternList.extend({
                 }
               };
 
-              var button = Entity.create(s_LivesPresentBackground, this.m_BackgroundHolders[0]);
+              var button = Button.create(s_LivesPresentBackground, 1, 1, this.m_BackgroundHolders[0]);
 
               var name = Text.create('leaderboard-name', this.m_BackgroundHolders[0]);
               var text = Text.create(t.getText(user), button, cc.TEXT_ALIGNMENT_LEFT);
@@ -228,35 +242,54 @@ MultiplayerList = PatternList.extend({
               button.user = user;
 
               button.registerTouchable(true);
-              button.onCancel = function() {
-              };
-              button.onMouseDown = function(e) {
-                if(Entity.prototype.onMouseDown.call(this, e)) {
-                  this.stopAllActions();
-
-                  this.runRecognizeAction(false, {
-                    name: 'scale',
-                    time: 0.1,
-                    value: 0.95
-                  });
-                }
-              };
-              button.onMouseUp = function(e) {
-                if(Entity.prototype.onMouseUp.call(this, e)) {
-                  this.stopAllActions();
-
-                  this.runRecognizeAction(false, {
-                    name: 'scale',
-                    time: 0.1,
-                    value: 1.0
-                  });
-                }
-              };
               button.onTouch = function(e) {
                 Button.prototype.onTouch.call(this, e);
 
                 if(this.user.app) {
-                  MultiplayerList.instance.showConnectionView(this.user);
+                  if(this.user.online) {
+                    Tooflya.api.call('request.send', {
+                      type: 'play.send',
+                      uid: this.user.uid
+                    }, {
+                      success: function() {
+                        MultiplayerList.instance.showConnectionView(this.user);
+                      }.bind(this)
+                    });
+                  } else {
+                    var messages = [
+                      LanguagesManager.sharedManager().get('friends-notification-vk-21').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-22').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-23').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-24').title
+                    ];
+
+                    Tooflya.VK.api.call('friends.request', {
+                      id: this.user.uid,
+                      message: messages.random()
+                    }, {
+                      success: function() {
+                        Tooflya.api.call('request.send', {
+                          type: 'play.send',
+                          uid: this.user.uid
+                        }, {
+                          success: function() {
+                            this.registerTouchable(false);
+                            text.setText('friends-multiplayer-present-3');
+                            text.setCenterPosition(Camera.sharedCamera().coord(30) + text.getWidth() / 2, button.getHeight() / 2);
+                            text.runAction(
+                              cc.Sequence.create(
+                                cc.DelayTime.create(0.2),
+                                cc.EaseBounceOut.create(
+                                  cc.MoveTo.create(0.5, cc.p(text.getCenterX() - Camera.sharedCamera().coord(10), text.getCenterY()))
+                                ),
+                                false
+                              )
+                            );
+                          }.bind(this)
+                        });
+                      }.bind(this)
+                    });
+                  }
                 } else {
                   var messages = [
                     LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
@@ -272,6 +305,7 @@ MultiplayerList = PatternList.extend({
                     success: function() {
                       this.registerTouchable(false);
                       text.setText('friends-multiplayer-present-3');
+                      text.setCenterPosition(Camera.sharedCamera().coord(30) + text.getWidth() / 2, button.getHeight() / 2);
                       text.runAction(
                         cc.Sequence.create(
                           cc.DelayTime.create(0.2),
@@ -314,6 +348,7 @@ MultiplayerList = PatternList.extend({
   },
   onViewChanged: function() {
     this.setCenterPosition(-Camera.sharedCamera().margin.x / 2, -Camera.sharedCamera().margin.y / 2);
+    this.onMouseUp(false, true);
   },
   showMainView: function(data) {
     this.addChild(this.m_Backgrounds[0]);
@@ -390,7 +425,7 @@ MultiplayerList = PatternList.extend({
     this.m_Text[7].setCenterPosition(this.getWidth() / 2, this.m_Text[12].getCenterY() - this.m_Text[7].getHeight() / 2 - Camera.sharedCamera().coord(150));
     this.m_Loading[1].setCenterPosition(this.getWidth() / 2, this.m_Text[7].getCenterY() + Camera.sharedCamera().coord(70));
 
-    var button = Entity.create(s_LivesPresentBackground, this.m_BackgroundHolders[1]);
+    var button = Button.create(s_LivesPresentBackground, 1, 1, this.m_BackgroundHolders[1]);
     var text = Text.create('friends-multiplayer-present-4', button, cc.TEXT_ALIGNMENT_LEFT);
 
     button.create().setCenterPosition(this.getCenterX(), this.m_Text[7].getCenterY() - Camera.sharedCamera().coord(100));
@@ -399,30 +434,6 @@ MultiplayerList = PatternList.extend({
     text.setColor(cc.c3(204.0, 102.0, 51.0));
 
     button.registerTouchable(true);
-    button.onCancel = function() {
-    };
-    button.onMouseDown = function(e) {
-      if(Entity.prototype.onMouseDown.call(this, e)) {
-        this.stopAllActions();
-
-        this.runRecognizeAction(false, {
-          name: 'scale',
-          time: 0.1,
-          value: 0.95
-        });
-      }
-    };
-    button.onMouseUp = function(e) {
-      if(Entity.prototype.onMouseUp.call(this, e)) {
-        this.stopAllActions();
-
-        this.runRecognizeAction(false, {
-          name: 'scale',
-          time: 0.1,
-          value: 1.0
-        });
-      }
-    };
     button.onTouch = function(e) {
       Button.prototype.onTouch.call(this, e);
 
@@ -488,7 +499,7 @@ MultiplayerList = PatternList.extend({
 
     this.m_Text[10].setVisible(true);
 
-    var button = Entity.create(s_LivesPresentBackground, this.m_BackgroundHolders[2]);
+    var button = Button.create(s_LivesPresentBackground, 1, 1, this.m_BackgroundHolders[2]);
     var text = Text.create('friends-multiplayer-present-4', button, cc.TEXT_ALIGNMENT_LEFT);
 
     button.create().setCenterPosition(this.getCenterX(), this.m_Text[10].getCenterY() - Camera.sharedCamera().coord(100));
@@ -497,30 +508,6 @@ MultiplayerList = PatternList.extend({
     text.setColor(cc.c3(204.0, 102.0, 51.0));
 
     button.registerTouchable(true);
-    button.onCancel = function() {
-    };
-    button.onMouseDown = function(e) {
-      if(Entity.prototype.onMouseDown.call(this, e)) {
-        this.stopAllActions();
-
-        this.runRecognizeAction(false, {
-          name: 'scale',
-          time: 0.1,
-          value: 0.95
-        });
-      }
-    };
-    button.onMouseUp = function(e) {
-      if(Entity.prototype.onMouseUp.call(this, e)) {
-        this.stopAllActions();
-
-        this.runRecognizeAction(false, {
-          name: 'scale',
-          time: 0.1,
-          value: 1.0
-        });
-      }
-    };
     button.onTouch = function(e) {
       Button.prototype.onTouch.call(this, e);
 

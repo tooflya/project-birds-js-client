@@ -42,7 +42,7 @@ Credits = Screen.extend({
     this.m_BackgroundDecoration1 = Entity.create(s_BackgroundDecoration1, this);
     this.m_BackgroundDecoration2 = Entity.create(s_BackgroundDecoration3, this);
 
-    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 3, this);
+    this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
 
     thisHolder1 = Entity.create(s_ListFixLarge, this);
     thisHolder2 = Entity.create(s_ListFixLarge, this);
