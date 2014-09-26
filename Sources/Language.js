@@ -4246,7 +4246,7 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
-  'friends-live-present-6': [
+  'friends-live-present-7': [
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Получено!", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},

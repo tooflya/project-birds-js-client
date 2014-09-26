@@ -79,22 +79,66 @@ EventsList = PatternList.extend({
               InternetEntity.create(request.photo, this.m_BackgroundHolder, function(entity) {
                 entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
 
-                var button = Entity.create(s_LivesPresentBackground, this.m_BackgroundHolder);
+                var button = Button.create(s_LivesPresentBackground, 1, 1, this.m_BackgroundHolder);
                 var icon = AnimatedEntity.create(s_PanelIcon3, 3, 3, button);
 
                 var name = Text.create('leaderboard-name', this.m_BackgroundHolder, cc.TEXT_ALIGNMENT_LEFT);
-                var text = Text.create('friends-live-present-5', button);
+                button.text = Text.create('friends-live-present-5', button);
 
                 name.ccsf([request.name + " " + request.surname]);
 
                 name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), s + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
-                text.setCenterPosition(button.getWidth() / 2 + Camera.sharedCamera().coord(15), button.getHeight() / 2);
+                //button.text.setCenterPosition(button.getWidth() / 2 + Camera.sharedCamera().coord(15), button.getHeight() / 2);
                 button.create().setCenterPosition(this.getCenterX() + Camera.sharedCamera().coord(60), s - Camera.sharedCamera().coord(20));
                 icon.create().setCenterPosition(Camera.sharedCamera().coord(35), button.getHeight() / 2);
                 icon.animate(0.06, 2, {start: 0, end: 7}, {start: 0, end: 5.0});
 
                 name.setColor(cc.c3(255.0, 130.0, 0.0));
-                text.setColor(cc.c3(204.0, 102.0, 51.0));
+                button.text.setColor(cc.c3(204.0, 102.0, 51.0));
+
+                button.time = request.time;
+                button.registerTouchable(true);
+                button.text.setTextAction = function(selector, text) {
+                  Text.prototype.setText.call(this, text);
+                };
+                button.onHover = function(e) {
+                  Button.prototype.onHover.call(this, e);
+
+                  this.text.stopAllActions();
+                  this.text.runAction(
+                    cc.Sequence.create(
+                      cc.FadeTo.create(0.1, 0.0),
+                      cc.CallFunc.create(this.text.setTextAction, this.text, 'friends-live-present-6'),
+                      cc.FadeTo.create(0.1, 255.0),
+                      false
+                    )
+                  );
+                };
+                button.onUnHover = function(e) {
+                  Button.prototype.onUnHover.call(this, e);
+
+                  this.text.stopAllActions();
+                  this.text.runAction(
+                    cc.Sequence.create(
+                      cc.FadeTo.create(0.1, 0.0),
+                      cc.CallFunc.create(this.text.setTextAction, this.text, 'friends-live-present-5'),
+                      cc.FadeTo.create(0.1, 255.0),
+                      false
+                    )
+                  );
+                };
+                button.onTouch = function(e) {
+                  Button.prototype.onTouch.call(this, e);
+                };
+                button.update = function(time) {
+                  Button.prototype.update.call(this, time);
+
+                  if(this.m_Hovered) {
+                    this.text.timeLeft(24 * 60 * 60 * 1000, this.time + (24 * 60 * 60 * 1000));//?
+                  }
+
+                  this.text.setCenterPosition(this.text.getWidth() / 2 + Camera.sharedCamera().coord(70), this.getHeight() / 2);
+                };
               }.bind(this));
 
               y -= Camera.sharedCamera().coord(120);
@@ -105,6 +149,11 @@ EventsList = PatternList.extend({
         }.bind(this)
       });
     }.bind(this), 1500);
+  },
+  onExit: function() {
+    this._super();
+
+    this.m_BackgroundHolder.removeAllChildrenWithCleanup(true);
   }
 });
 
