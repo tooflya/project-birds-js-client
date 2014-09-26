@@ -301,6 +301,8 @@ var s_FriendsBackground2 = "Resources/Graphics/friends-background-2.png";
 var s_FriendsCover = "Resources/Graphics/friends-list-cover.png";
 var s_FriendsListBackground = "Resources/Graphics/friends-list-background.png";
 var s_UserOnlineStatus = "Resources/Graphics/users-online-status.png";
+var s_ListElementClose = "Resources/Graphics/list-element-close.png";
+var s_ListElementHidder = "Resources/Graphics/list-name-hidder.png";
 var s_Levels = [
   "Resources/Graphics/level-1.png",
   "Resources/Graphics/level-2.png",
@@ -609,6 +611,8 @@ var resources = [
   {src: s_FriendsCover},
   {src: s_FriendsListBackground},
   {src: s_UserOnlineStatus},
+  {src: s_ListElementClose},
+  {src: s_ListElementHidder},
   {src: s_Levels[0]},
   {src: s_Levels[1]},
   {src: s_Levels[2]},

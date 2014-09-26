@@ -249,7 +249,7 @@ Mode = Screen.extend({
               });
             });
 
-            FriendsLives.sharedScreen(this).show();
+            LivesSend.sharedScreen(this).show();
           }.bind(this)
         });
       }

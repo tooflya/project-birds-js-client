@@ -127,62 +127,18 @@ MultiplayerList = PatternList.extend({
     this.m_Backgrounds[1].removeFromParent();
     this.m_Backgrounds[2].removeFromParent();
 
-    this.m_Mode1Button.setTouchHandler('onMode1Event', Multiplayer);
-    this.m_Mode2Button.setTouchHandler('onMode2Event', Multiplayer);
-  },
-  onEnter: function() {
-    this._super();
-
-    this.m_Connected = false;
-
-    this.showMainView();
-
-    this.m_Loading[0].create().runAction(
-      cc.RepeatForever.create(
-        cc.RotateTo.create(1.0, 720)
-      )
-    );
-
-    new PausableTimeout(function() {
-      this.m_Loading[0].destroy();
-
-      var friends = FriendsManager.sharedInstance().getFriends();
-      friends.sort(function compare(element1, element2) {
-        if(element1.app) {
-          return -1;
-        }
-
-        if(element2.app) {
-          return 1;
-        }
-
-        return 0;
-      });
-      var uids = [];
-      FriendsManager.sharedInstance().getAppFriends().forEach(function(friend) {
-        uids.push(friend.uid);
-      });
-      Tooflya.api.call('users.online', {
-        uids: uids
-      }, {
-        success: function(data) {
-          var x = Camera.sharedCamera().coord(100);
-          var y = this.m_Text[4].getCenterY() - Camera.sharedCamera().coord(100);
-
-          data.uids.forEach(function(uid) {
-            friends.forEach(function(friend) {
-              if(friend.uid == uid.uid) {
-                friend.online = (Date.now() - uid.online < (30 * 1000));
-              }
-            });
-          });
-
+    this.m_BackgroundHolder = EntryManager.create(this, {
+      update: {
+        start: function() {
+          this.m_Loading[0].create().runAction(
+            cc.RepeatForever.create(
+              cc.RotateTo.create(1.0, 720)
+            )
+          );
+        },
+        update: function(callback) {
+          var friends = FriendsManager.sharedInstance().getFriends();
           friends.sort(function compare(element1, element2) {
-            if(element1.app && element2.app) {
-              if(element1.online) return -1;
-              if(element2.online) return 1;
-            }
-
             if(element1.app) {
               return -1;
             }
@@ -193,141 +149,194 @@ MultiplayerList = PatternList.extend({
 
             return 0;
           });
+          var uids = [];
+          FriendsManager.sharedInstance().getAppFriends().forEach(function(friend) {
+            uids.push(friend.uid);
+          });
 
-          var separator = false;
-          friends.forEach(function(user) {
-            if(!separator && !user.app) {
-              separator = true;
-
-              y -= Camera.sharedCamera().coord(50);
-            }
-
-            var s = y;
-
-            InternetEntity.create(user.photo_medium, this.m_BackgroundHolders[0], function(entity) {
-              entity.create().setCenterPosition(Camera.sharedCamera().coord(100), s);
-
-              if(user.app) {
-                entity.status = TiledEntity.create(s_UserOnlineStatus, 1, 2, entity);
-                entity.status.create().setCenterPosition(Camera.sharedCamera().coord(8), Camera.sharedCamera().coord(8));
-                entity.status.setCurrentFrameIndex(user.online ? 0 : 1);
-              }
-
-              var t = {
-                string: false,
-                getText: function(user) {
-                  if(user.app) {
-                    this.string = 'friends-multiplayer-present-1';
-                  } else {
-                    this.string = 'friends-multiplayer-present-2';
+          Tooflya.api.call('users.online', {
+            uids: uids
+          }, {
+            success: function(data) {
+              data.uids.forEach(function(uid) {
+                friends.forEach(function(friend) {
+                  if(friend.uid == uid.uid) {
+                    friend.online = uid.online;
                   }
-                  return this.string;
+                });
+              });
+
+              friends.sort(function compare(element1, element2) {
+                if(element1.app && element2.app) {
+                  if(element1.online) return -1;
+                  if(element2.online) return 1;
                 }
-              };
 
-              var button = Button.create(s_LivesPresentBackground, 1, 1, this.m_BackgroundHolders[0]);
+                if(element1.app) {
+                  return -1;
+                }
 
-              var name = Text.create('leaderboard-name', this.m_BackgroundHolders[0]);
-              var text = Text.create(t.getText(user), button, cc.TEXT_ALIGNMENT_LEFT);
+                if(element2.app) {
+                  return 1;
+                }
 
-              name.ccsf([user.first_name + " " + user.last_name]);
+                return 0;
+              });
 
-              name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), s + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
-              text.setCenterPosition(Camera.sharedCamera().coord(20) + text.getWidth() / 2, button.getHeight() / 2);
-              button.create().setCenterPosition(this.getCenterX() + Camera.sharedCamera().coord(60), s - Camera.sharedCamera().coord(20));
+              callback.finish();
 
-              name.setColor(cc.c3(255.0, 130.0, 0.0));
-              text.setColor(cc.c3(204.0, 102.0, 51.0));
+              if(data.uids.length > 0) {
+                callback.create(friends);
+              } else {
+                callback.empty();
+              }
+            }
+          });
+        },
+        finish: function() {
+          this.m_Loading[0].destroy();
+        }
+      },
+      events: {
+        enter: function() {
+          this.m_BackgroundHolder.clear();
+        }
+      },
+      empty: function() {
+        this.m_Text[4].setVisible(false);
+      },
+      create: function(data) {
+        data.forEach(function(user) {
+          user.supports = {
+            close: true,
+            status: true
+          };
 
-              button.user = user;
+          this.m_BackgroundHolder.create(user, function() {
+            var handlers = {
+              update: function() {
+              },
+              touch: function() {
+              }
+            };
 
-              button.registerTouchable(true);
-              button.onTouch = function(e) {
-                Button.prototype.onTouch.call(this, e);
+            if(user.app) {
+              this.createButton({
+                texts: {
+                  original: 'friends-multiplayer-present-1'
+                },
+                handlers: {
+                  create: function() {
+                    this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(65), this.elements.button.getHeight() / 2);
+                  },
+                  touch: function() {
+                    if(this.data.online) {
+                      Tooflya.api.call('request.send', {
+                        type: 'play.send',
+                        uid: this.data.uid
+                      }, {
+                        success: function() {
+                          MultiplayerList.instance.showConnectionView(this.data);
+                        }.bind(this)
+                      });
+                    } else {
+                      var messages = [
+                        LanguagesManager.sharedManager().get('friends-notification-vk-21').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-22').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-23').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-24').title
+                      ];
 
-                if(this.user.app) {
-                  if(this.user.online) {
-                    Tooflya.api.call('request.send', {
-                      type: 'play.send',
-                      uid: this.user.uid
-                    }, {
-                      success: function() {
-                        MultiplayerList.instance.showConnectionView(this.user);
-                      }.bind(this)
-                    });
-                  } else {
+                      Tooflya.VK.api.call('friends.request', {
+                        id: this.data.uid,
+                        message: messages.random()
+                      }, {
+                        success: function() {
+                          Tooflya.api.call('request.send', {
+                            type: 'play.send',
+                            uid: this.data.uid
+                          }, {
+                            success: function() {
+                              this.registerTouchable(false);
+                              this.elements.button.text.setText('friends-multiplayer-present-3');
+                              this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(30) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
+                              this.elements.button.text.runAction(
+                                cc.Sequence.create(
+                                  cc.DelayTime.create(0.2),
+                                  cc.EaseBounceOut.create(
+                                    cc.MoveTo.create(0.5, cc.p(this.elements.button.text.getCenterX() - Camera.sharedCamera().coord(10), this.elements.button.text.getCenterY()))
+                                  ),
+                                  false
+                                )
+                              );
+                            }.bind(this)
+                          });
+                        }.bind(this)
+                      });
+                    }
+                  }
+                }
+              });
+            } else {
+              this.createButton({
+                texts: {
+                  original: 'friends-multiplayer-present-2',
+                  complete: ''
+                },
+                handlers: {
+                  create: function() {
+                    this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(65), this.elements.button.getHeight() / 2);
+                  },
+                  touch: function() {
                     var messages = [
-                      LanguagesManager.sharedManager().get('friends-notification-vk-21').title,
-                      LanguagesManager.sharedManager().get('friends-notification-vk-22').title,
-                      LanguagesManager.sharedManager().get('friends-notification-vk-23').title,
-                      LanguagesManager.sharedManager().get('friends-notification-vk-24').title
+                      LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-4').title
                     ];
 
                     Tooflya.VK.api.call('friends.request', {
-                      id: this.user.uid,
+                      id: this.data.uid,
                       message: messages.random()
                     }, {
                       success: function() {
-                        Tooflya.api.call('request.send', {
-                          type: 'play.send',
-                          uid: this.user.uid
-                        }, {
-                          success: function() {
-                            this.registerTouchable(false);
-                            text.setText('friends-multiplayer-present-3');
-                            text.setCenterPosition(Camera.sharedCamera().coord(30) + text.getWidth() / 2, button.getHeight() / 2);
-                            text.runAction(
-                              cc.Sequence.create(
-                                cc.DelayTime.create(0.2),
-                                cc.EaseBounceOut.create(
-                                  cc.MoveTo.create(0.5, cc.p(text.getCenterX() - Camera.sharedCamera().coord(10), text.getCenterY()))
-                                ),
-                                false
-                              )
-                            );
-                          }.bind(this)
-                        });
+                        this.registerTouchable(false);
+                        this.elements.button.text.setText('friends-multiplayer-present-3');
+                        this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(30) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
+                        this.elements.button.text.runAction(
+                          cc.Sequence.create(
+                            cc.DelayTime.create(0.2),
+                            cc.EaseBounceOut.create(
+                              cc.MoveTo.create(0.5, cc.p(this.elements.button.text.getCenterX() - Camera.sharedCamera().coord(10), this.elements.button.text.getCenterY()))
+                            ),
+                            false
+                          )
+                        );
                       }.bind(this)
                     });
                   }
-                } else {
-                  var messages = [
-                    LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
-                    LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
-                    LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
-                    LanguagesManager.sharedManager().get('friends-notification-vk-4').title
-                  ];
-
-                  Tooflya.VK.api.call('friends.request', {
-                    id: this.user.uid,
-                    message: messages.random()
-                  }, {
-                    success: function() {
-                      this.registerTouchable(false);
-                      text.setText('friends-multiplayer-present-3');
-                      text.setCenterPosition(Camera.sharedCamera().coord(30) + text.getWidth() / 2, button.getHeight() / 2);
-                      text.runAction(
-                        cc.Sequence.create(
-                          cc.DelayTime.create(0.2),
-                          cc.EaseBounceOut.create(
-                            cc.MoveTo.create(0.5, cc.p(text.getCenterX() - Camera.sharedCamera().coord(10), text.getCenterY()))
-                          ),
-                          false
-                        )
-                      );
-                    }.bind(this)
-                  });
                 }
-              };
+              });
+            }
+          });
+        }.bind(this));
+      }
+    }, {
+      x: this.getCenterX(),
+      y: this.m_Text[4].getCenterY() - Camera.sharedCamera().coord(100)
+    });
+    this.m_BackgroundHolder.removeFromParent();
+    this.m_Backgrounds[0].addChild(this.m_BackgroundHolder);
 
-              this.m_ListMaxHeight = Math.abs(entity.getCenterY() - entity.getHeight() / 2 - Camera.sharedCamera().coord(50));
-            }.bind(this));
+    this.m_Mode1Button.setTouchHandler('onMode1Event', Multiplayer);
+    this.m_Mode2Button.setTouchHandler('onMode2Event', Multiplayer);
+  },
+  onEnter: function() {
+    this._super();
 
-            y -= Camera.sharedCamera().coord(120);
-          }.bind(this));
-        }.bind(this)
-      });
-    }.bind(this), 1500);
+    this.m_Connected = false;
+
+    this.showMainView();
   },
   onExit: function() {
     this._super();
@@ -393,6 +402,8 @@ MultiplayerList = PatternList.extend({
   },
   onSetMainView: function(data) {
     this.m_CurrentView = this.views.main;
+
+    this.m_BackgroundHolder.upgrade();
   },
   onSetConnectionView: function(data) {
     this.m_CurrentView = this.views.connection;
@@ -409,19 +420,19 @@ MultiplayerList = PatternList.extend({
 
     this.m_Text[7].setVisible(true);
 
-    InternetEntity.create(data.photo_medium, this.m_BackgroundHolders[1], function(entity) {
+    InternetEntity.create((data.photo_medium || data.photo), this.m_BackgroundHolders[1], function(entity) {
       entity.create().setCenterPosition(Camera.sharedCamera().coord(100), this.getCenterY() + Camera.sharedCamera().coord(190));
 
       var name = Text.create('leaderboard-name', this.m_BackgroundHolders[1]);
 
-      name.ccsf([data.first_name + " " + data.last_name]);
+      name.ccsf([(data.first_name || data.name) + " " + (data.last_name || data.surname)]);
 
       name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), this.getCenterY() + Camera.sharedCamera().coord(190) + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
 
       name.setColor(cc.c3(255.0, 130.0, 0.0));
     }.bind(this));
 
-    this.m_Text[6].ccsf([data.first_name + " " + data.last_name]);
+    this.m_Text[6].ccsf([(data.first_name || data.name) + " " + (data.last_name || data.surname)]);
     this.m_Text[7].setCenterPosition(this.getWidth() / 2, this.m_Text[12].getCenterY() - this.m_Text[7].getHeight() / 2 - Camera.sharedCamera().coord(150));
     this.m_Loading[1].setCenterPosition(this.getWidth() / 2, this.m_Text[7].getCenterY() + Camera.sharedCamera().coord(70));
 

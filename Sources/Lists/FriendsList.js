@@ -55,6 +55,7 @@ FriendsList = List.extend({
         this.m_Elements.push(background);
 
         count++;
+        this.m_LastPosition++;
       }
     }.bind(this));
 
@@ -209,7 +210,7 @@ FriendsButton = Button.extend({
 
           if(FriendsManager.sharedInstance().getNotAppFriends()[FriendsList.instance.m_LastIndex]) {
             var background = FriendsButton.create(FriendsManager.sharedInstance().getNotAppFriends()[FriendsList.instance.m_LastIndex], FriendsList.instance.m_BackgroundHolder);
-            background.create().setCenterPosition(Camera.sharedCamera().coord(90) + Camera.sharedCamera().coord(180) * FriendsList.instance.m_LastPosition, this.config.params.designed.size.margin.y / 2 + Camera.sharedCamera().coord(25) - Camera.sharedCamera().coord(200));
+            background.create().setCenterPosition(Camera.sharedCamera().coord(90) + Camera.sharedCamera().coord(180) * (FriendsList.instance.m_LastPosition - 1), this.config.params.designed.size.margin.y / 2 + Camera.sharedCamera().coord(25) - Camera.sharedCamera().coord(200));
             background.runAction(
               cc.Sequence.create(
                 cc.DelayTime.create(0.2 * count + 0.5),

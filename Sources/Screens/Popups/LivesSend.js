@@ -29,19 +29,19 @@
  *
  */
 
-FriendsLives = ExtendedPopup.extend({
+LivesSend = ExtendedPopup.extend({
   m_Friends: false,
   ctor: function(parent) {
     this._super(parent);
 
-    FriendsLives.instance = this;
+    LivesSend.instance = this;
 
     this.m_BackgroundHolder1 = Entity.create(s_ListFixSmall, this.m_Background);
     this.m_BackgroundHolder2 = Entity.create(s_ListFixSmall, this.m_Background);
     this.m_ActionButton = Button.create(s_PopupButton, 1, 1, this.m_Background);
     this.m_Text = Text.create('friends-help', this.m_ActionButton);
 
-    this.m_List = FriendsLivesList.create(this.m_Background);
+    this.m_List = LivesSendList.create(this.m_Background);
 
     this.m_BackgroundHolder1.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y + Camera.sharedCamera().coord(308));
     this.m_BackgroundHolder2.create().setCenterPosition(this.m_Background.getWidth() / 2, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(398));
@@ -50,8 +50,8 @@ FriendsLives = ExtendedPopup.extend({
 
     this.m_BackgroundHolder2.setScaleY(-1);
 
-    this.m_CloseButton.setTouchHandler('onCloseEvent', FriendsLives);
-    this.m_ActionButton.setTouchHandler('onActionEvent', FriendsLives);
+    this.m_CloseButton.setTouchHandler('onCloseEvent', LivesSend);
+    this.m_ActionButton.setTouchHandler('onActionEvent', LivesSend);
   },
   onActionEvent: function() {
     this.m_ActionButton.destroy();
@@ -80,13 +80,13 @@ FriendsLives = ExtendedPopup.extend({
   }
 });
 
-FriendsLives.instance = false;
-FriendsLives.sharedScreen = function(parent) {
-  if(FriendsLives.instance) {
-    FriendsLives.instance.m_Parent = parent;
+LivesSend.instance = false;
+LivesSend.sharedScreen = function(parent) {
+  if(LivesSend.instance) {
+    LivesSend.instance.m_Parent = parent;
   } else {
-    FriendsLives.instance = new FriendsLives(parent);
+    LivesSend.instance = new LivesSend(parent);
   }
 
-  return FriendsLives.instance;
+  return LivesSend.instance;
 };
