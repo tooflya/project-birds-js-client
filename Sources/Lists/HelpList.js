@@ -63,8 +63,6 @@ HelpList = PatternList.extend({
   },
   onEnter: function() {
     this._super();
-
-    this.m_ListMaxHeight = Math.abs(this.m_Text[7].getCenterY() - this.m_Text[7].getHeight() / 2 - Camera.sharedCamera().coord(50));
   }
 });
 

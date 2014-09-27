@@ -88,8 +88,6 @@ AchievementsList = PatternList.extend({
 
         y -= Camera.sharedCamera().coord(170);
       }.bind(this));
-
-      this.m_ListMaxHeight = Math.abs(icon.getCenterY() - icon.getHeight() / 2 - Camera.sharedCamera().coord(50));
     }.bind(this), 1500);
   },
   onExit: function() {

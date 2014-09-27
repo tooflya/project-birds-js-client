@@ -130,6 +130,7 @@ MultiplayerList = PatternList.extend({
     this.m_BackgroundHolder = EntryManager.create(this, {
       update: {
         start: function() {
+          this.m_Text[4].create();
           this.m_Loading[0].create().runAction(
             cc.RepeatForever.create(
               cc.RotateTo.create(1.0, 720)
@@ -203,27 +204,21 @@ MultiplayerList = PatternList.extend({
         }
       },
       empty: function() {
-        this.m_Text[4].setVisible(false);
+        this.m_Text[4].destroy();
       },
       create: function(data) {
         data.forEach(function(user) {
           user.supports = {
             close: true,
-            status: true
+            status: user.app
           };
 
           this.m_BackgroundHolder.create(user, function() {
-            var handlers = {
-              update: function() {
-              },
-              touch: function() {
-              }
-            };
-
             if(user.app) {
               this.createButton({
                 texts: {
-                  original: 'friends-multiplayer-present-1'
+                  original: 'friends-multiplayer-present-1',
+                  complete: 'friends-multiplayer-present-3'
                 },
                 handlers: {
                   create: function() {
@@ -257,8 +252,8 @@ MultiplayerList = PatternList.extend({
                             uid: this.data.uid
                           }, {
                             success: function() {
-                              this.registerTouchable(false);
-                              this.elements.button.text.setText('friends-multiplayer-present-3');
+                              this.elements.button.registerTouchable(false);
+                              this.elements.button.text.setText(this.elements.button.text.texts.complete);
                               this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(30) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
                               this.elements.button.text.runAction(
                                 cc.Sequence.create(
@@ -269,6 +264,7 @@ MultiplayerList = PatternList.extend({
                                   false
                                 )
                               );
+                              this.close();
                             }.bind(this)
                           });
                         }.bind(this)
@@ -281,7 +277,7 @@ MultiplayerList = PatternList.extend({
               this.createButton({
                 texts: {
                   original: 'friends-multiplayer-present-2',
-                  complete: ''
+                  complete: 'friends-multiplayer-present-3'
                 },
                 handlers: {
                   create: function() {
@@ -300,8 +296,8 @@ MultiplayerList = PatternList.extend({
                       message: messages.random()
                     }, {
                       success: function() {
-                        this.registerTouchable(false);
-                        this.elements.button.text.setText('friends-multiplayer-present-3');
+                        this.elements.button.registerTouchable(false);
+                        this.elements.button.text.setText(this.elements.button.text.texts.complete);
                         this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(30) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
                         this.elements.button.text.runAction(
                           cc.Sequence.create(
@@ -312,6 +308,7 @@ MultiplayerList = PatternList.extend({
                             false
                           )
                         );
+                        this.close();
                       }.bind(this)
                     });
                   }
@@ -330,11 +327,11 @@ MultiplayerList = PatternList.extend({
 
     this.m_Mode1Button.setTouchHandler('onMode1Event', Multiplayer);
     this.m_Mode2Button.setTouchHandler('onMode2Event', Multiplayer);
+
+    this.showMainView();
   },
   onEnter: function() {
     this._super();
-
-    this.m_Connected = false;
 
     this.showMainView();
   },
@@ -402,6 +399,7 @@ MultiplayerList = PatternList.extend({
   },
   onSetMainView: function(data) {
     this.m_CurrentView = this.views.main;
+    this.m_Connected = false;
 
     this.m_BackgroundHolder.upgrade();
   },

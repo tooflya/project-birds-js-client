@@ -111,7 +111,7 @@ Entry = Entity.extend({
 
         if(this.supports.status) {
           if(this.data.online) {
-            this.data.online = ((Date.now() / 1000) - parseInt(uid.online) < 30);
+            this.data.online = ((Date.now() / 1000) - parseInt(this.data.online) < 30);
           }
 
           this.elements.status = TiledEntity.create(s_UserOnlineStatus, 1, 2, this.elements.photo);
