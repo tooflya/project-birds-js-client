@@ -57,10 +57,10 @@ GamePanel = Panel.extend({
 
       e.ccsf([Game.sharedScreen().m_CurrentBlows + (type == 0 ? LanguagesManager.instance.get('moves', Game.sharedScreen().m_CurrentBlows).title : '')]);
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon1, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 2] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[0]]);
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon2, 5, 4], this.config.params.purchases ? [s_PanelButton, 1, 2] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[1]]);
     });
 
@@ -119,7 +119,7 @@ GamePanel = Panel.extend({
       break;
     }
 
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon3, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 2] : false, function(e) {
       EnergyManager.sharedManager().check();
 
       if(DataManager.sharedManager().get(false, EnergyManager.sharedManager().getReference()) <= 0) {
@@ -130,7 +130,7 @@ GamePanel = Panel.extend({
         e.ccsf([DataManager.sharedManager().get(false, EnergyManager.sharedManager().getReference())]);
       }
     });
-    this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 1] : false, function(e) {
+    this.addItem(s_PanelItemsBackground1, [s_PanelIcon4, 3, 3], this.config.params.purchases ? [s_PanelButton, 1, 2] : false, function(e) {
       e.ccsf([GamePanel.sharedScreen().m_Fields[3]]);
     });
     this.addItem(s_PanelItemsBackground2, false, [s_PopupPauseButton, 1, 1]);
@@ -215,6 +215,19 @@ GamePanel = Panel.extend({
     this._super();
 
     this.updateData();
+
+    var count = 0;
+    EventsManager.sharedInstance().onUpdate = function(events) {
+      events.forEach(function(event) {
+        if(event.type == 'live.send') count++;
+      });
+    };
+
+    if(count > 0) {
+      this.getButtons()[2].setCurrentFrameIndex(1);
+    } else {
+      this.getButtons()[2].setCurrentFrameIndex(0);
+    }
   },
   onExit: function() {
     this._super();

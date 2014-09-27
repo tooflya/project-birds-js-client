@@ -40,6 +40,16 @@ var g_language  = {
     {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
+  'zero-bold': [
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    ],
   'splash-message': [
     {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
     {title: '$1', font: 'Comic Sans MS Bold', size: 38, dimensions: false},
@@ -1239,6 +1249,36 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
+    ],
+  'events-popup-4': [
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Принять жизни", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
+    ],
+  'events-popup-5': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "Ваши друзья помогли вам. Воспользуйтесь их подарками!", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
+    ],
+  'events-popup-6': [
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Вы можете попросить больше жизней!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'level-points': [
     {title: "Beat your record in \n $1 $2!", font: "Comic Sans MS", size: 28, dimensions: [450, 0]},
@@ -4329,6 +4369,16 @@ var g_language  = {
   'friends-live-present-9': [
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Вызов принят!", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
+    ],
+  'friends-live-present-10': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Жизни полные", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},

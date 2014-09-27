@@ -29,11 +29,11 @@
  *
  */
 
-EventsList = PatternList.extend({
+LivesReceiveList = PatternList.extend({
   ctor: function(parent) {
     this._super(s_ListScrollSmall, 512, 700, 512, 700, parent);
 
-    EventsList.instance = this;
+    LivesReceiveList.instance = this;
 
     this.m_Loading = Entity.create(s_Loading, this);
 
@@ -41,9 +41,9 @@ EventsList = PatternList.extend({
 
     this.m_Text = [];
 
-    this.m_Text[1] = Text.create('events-popup-1', this);
-    this.m_Text[2] = Text.create('events-popup-2', this);
-    this.m_Text[3] = Text.create('events-popup-3', this);
+    this.m_Text[1] = Text.create('events-popup-4', this);
+    this.m_Text[2] = Text.create('events-popup-6', this);
+    this.m_Text[3] = Text.create('events-popup-5', this);
 
     this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
     this.m_Text[2].setCenterPosition(this.getCenterX(), this.getCenterY());
@@ -66,7 +66,8 @@ EventsList = PatternList.extend({
         },
         update: function(callback) {
           Tooflya.api.call('request.find', {
-            force: true
+            force: true,
+            type: 'live.send'
           }, {
             success: function(data) {
               callback.finish();
@@ -154,110 +155,45 @@ EventsList = PatternList.extend({
                 success = success.bind(this);
                 cancel = cancel.bind(this);
 
-                switch(this.data.type) {
-                  case 'live.send':
-                  if(DataManager.sharedManager().get(true, references.coins.lives, {
-                    success: function(value) {
-                      if(value < EnergyManager.sharedManager().getCount()) {
-                        success(function() {
-                          EnergyManager.sharedManager().restore();
-                        });
-                      } else {
-                        cancel();
-                      }
-                    }
-                  }));
-                  break;
-                  case 'play.send':
-                  if(this.data.online) {
-                    success(function() {
-                      Tooflya.api.call('request.send', {
-                        type: 'play.send',
-                        uid: this.data.uid
-                      }, {
-                        success: function() {
-                          Events.sharedScreen().hide(function() {
-                            Multiplayer.sharedScreen(Menu.instance).show();
-                            MultiplayerList.instance.showConnectionView(this.data);
-                          });
-                        }.bind(this)
+                if(DataManager.sharedManager().get(true, references.coins.lives, {
+                  success: function(value) {
+                    if(value < EnergyManager.sharedManager().getCount()) {
+                      success(function() {
+                        EnergyManager.sharedManager().restore();
                       });
-                    });
-                  } else {
-                    Tooflya.VK.api.call('friends.request', {
-                      id: this.data.uid,
-                      message: LanguagesManager.sharedManager().get('friends-notification-vk-31').title
-                    }, {
-                      success: function() {
-                        success(function() {
-                          Tooflya.api.call('request.send', {
-                            type: 'play.send',
-                            uid: this.data.uid
-                          }, {
-                            success: function() {
-                              Events.sharedScreen().hide(function() {
-                                Multiplayer.sharedScreen(Menu.instance).show();
-                                MultiplayerList.instance.showConnectionView(this.data);
-                              });
-                            }.bind(this)
-                          });
-                        });
-                      }
-                    });
+                    } else {
+                      cancel();
+                    }
                   }
-                  break;
-                }
+                }));
               }
             };
 
-            switch(this.data.type) {
-              case 'live.send':
-              this.createButton({
-                texts: {
-                  original: 'friends-live-present-5',
-                  hover: 'friends-live-present-6',
-                  complete: 'friends-live-present-7'
-                },
-                icon: AnimatedEntity.create(s_PanelIcon3, 3, 3),
-                handlers: {
-                  create: function() {
-                    this.elements.button.icon.animate(0.06, 2, {start: 0, end: 7}, {start: 0, end: 5.0});
+            this.createButton({
+              texts: {
+                original: 'friends-live-present-5',
+                hover: 'friends-live-present-6',
+                complete: 'friends-live-present-7'
+              },
+              icon: AnimatedEntity.create(s_PanelIcon3, 3, 3),
+              handlers: {
+                create: function() {
+                  this.elements.button.icon.animate(0.06, 2, {start: 0, end: 7}, {start: 0, end: 5.0});
 
-                    if(DataManager.sharedManager().get(true, references.coins.lives, {
-                      success: function(value) {
-                        if(value >= EnergyManager.sharedManager().getCount()) {
-                          this.elements.button.text.texts.original = 'friends-live-present-10';
-                          this.elements.button.text.setText(this.elements.button.text.texts.original);
-                          this.elements.button.lock = true;
-                        }
-                      }.bind(this)
-                    }));
-                  },
-                  touch: handlers.touch,
-                  update: handlers.update
-                }
-              });
-              break;
-              case 'live.request':
-              break;
-              case 'play.send':
-              this.createButton({
-                texts: {
-                  original: 'friends-live-present-8',
-                  hover: 'friends-live-present-6',
-                  complete: 'friends-live-present-9'
+                  if(DataManager.sharedManager().get(true, references.coins.lives, {
+                    success: function(value) {
+                      if(value >= EnergyManager.sharedManager().getCount()) {
+                        this.elements.button.text.texts.original = 'friends-live-present-10';
+                        this.elements.button.text.setText(this.elements.button.text.texts.original);
+                        this.elements.button.lock = true;
+                      }
+                    }.bind(this)
+                  }));
                 },
-                icon: TiledEntity.create(s_ItemsProperties, 1, 3),
-                handlers: {
-                  create: function() {
-                    this.elements.button.icon.setCurrentFrameIndex(1);
-                  },
-                  touch: handlers.touch,
-                  update: handlers.update
-                }
-              });
-              break;
-            }
+                touch: handlers.touch,
+                update: handlers.update
+              }
+            });
           });
         }.bind(this));
       }
@@ -268,7 +204,7 @@ EventsList = PatternList.extend({
   }
 });
 
-EventsList.instance = false;
-EventsList.create = function(parent) {
-  return new EventsList(parent);
+LivesReceiveList.instance = false;
+LivesReceiveList.create = function(parent) {
+  return new LivesReceiveList(parent);
 };

@@ -97,30 +97,36 @@ Lives = ExtendedPopup.extend({
     });
   },
   show: function() {
-    DataManager.sharedManager().get(true, references.coins.lives, {
-      success: function(value) {
-        ExtendedPopup.prototype.show.call(Lives.instance);
+    EventsManager.sharedInstance().getEvents('live.send', function(events) {
+      if(events) {
+        LivesReceive.sharedScreen().show();
+      } else {
+        DataManager.sharedManager().get(true, references.coins.lives, {
+          success: function(value) {
+            ExtendedPopup.prototype.show.call(this);
 
-        if(value <= 0) {
-          Lives.instance.m_GetButton.setVisible(true);
-        } else if(value < 5) {
-          Lives.instance.m_GetButton.setVisible(true);
-          Lives.instance.m_Text.setText('lives-popup-3');
-          Lives.instance.m_Text.setCenterPosition(Lives.instance.m_Background.getWidth() / 2, Lives.instance.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
-        } else {
-          Lives.instance.m_Text.setText('lives-popup-2');
-          Lives.instance.m_Text.setCenterPosition(Lives.instance.m_Background.getWidth() / 2, Lives.instance.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(230));
-          Lives.instance.m_GetButton.setVisible(false);
-          Lives.instance.m_GetButton.runAction(
-            cc.Sequence.create(
-            cc.ScaleTo.create(0.1, 0.8, 1.2),
-            cc.ScaleTo.create(0.1, 1.2, 0.8),
-            cc.ScaleTo.create(0.1, 1.0, 1.0)
-            )
-          );
-        }
+            if(value <= 0) {
+              this.m_GetButton.setVisible(true);
+            } else if(value < 5) {
+              this.m_GetButton.setVisible(true);
+              this.m_Text.setText('lives-popup-3');
+              this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(170));
+            } else {
+              this.m_Text.setText('lives-popup-2');
+              this.m_Text.setCenterPosition(this.m_Background.getWidth() / 2, this.m_Background.getHeight() / 2 - Camera.sharedCamera().coord(230));
+              this.m_GetButton.setVisible(false);
+              this.m_GetButton.runAction(
+                cc.Sequence.create(
+                cc.ScaleTo.create(0.1, 0.8, 1.2),
+                cc.ScaleTo.create(0.1, 1.2, 0.8),
+                cc.ScaleTo.create(0.1, 1.0, 1.0)
+                )
+              );
+            }
+          }.bind(this)
+        });
       }
-    });
+    }.bind(this));
   },
   onShow: function() {
     this._super();

@@ -240,7 +240,14 @@ Entry = Entity.extend({
         }
       }
     };
+    this.elements.button.onStart = function(e) {
+      if(this.lock) return false;
+
+      Button.prototype.onStart.call(this, e);
+    };
     this.elements.button.onTouch = function(e) {
+      if(this.lock) return false;
+
       Button.prototype.onTouch.call(this, e);
 
       if(params.handlers.touch) {

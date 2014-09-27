@@ -63,7 +63,7 @@ Button.prototype.onUnHover = function() {
 
 Button.prototype.createNotifier = function(handler, x, y) {
   this.notifier = Notify.create(this);
-  this.notifier.text = Text.create(false, this.notifier);
+  this.notifier.text = Text.create('zero-bold', this.notifier);
 
   this.notifier.handler = handler;
 
@@ -97,7 +97,6 @@ Button.prototype.showNotifier = function(text) {
 
 Button.prototype.hideNotifier = function(text) {
   if(this.notifier) {
-    this.notifier.text.ccsf([0]);
     if(this.notifier.isVisible()) {
       this.notifier.runAction(
         cc.Sequence.create(

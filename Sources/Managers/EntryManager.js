@@ -36,9 +36,11 @@ EntryManager = Background.extend({
   ctor: function(parent, callbacks, position) {
     this._super(parent);
 
+    this.m_Elements = [];
     this.m_Parent = parent;
     this.m_Position = position;
     this.m_Callbacks = callbacks;
+    this.m_Margin = 0;
 
     if(this.m_Callbacks) {
       if(this.m_Callbacks.update) {
