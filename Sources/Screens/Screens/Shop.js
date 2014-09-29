@@ -64,7 +64,7 @@ Shop = Screen.extend({
       }
 
       this.m_Backgrounds[i] = List.create(1920, 280, 320, 0, this, 1);
-      this.m_Backgrounds[i].m_Fixed = true;
+      this.m_Backgrounds[i].fixed = true;
       this.m_Backgrounds[i].setListCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(280) * (i - 1) + Camera.sharedCamera().coord(80));
 
       for(var j = -3; j < 6; j++) {

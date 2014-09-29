@@ -39,7 +39,7 @@ FriendsList = List.extend({
 
     FriendsList.instance = this;
 
-    this.m_Fixed = true;
+    this.fixed = true;
 
     this.m_BackgroundHolder = Background.create(this);
 

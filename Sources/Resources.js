@@ -265,7 +265,9 @@ var s_Notification3English = "Resources/Graphics/extra-move-texts-0.png";
 var s_Notification1Russian = "Resources/Graphics/notification-1-1.png";
 var s_Notification2Russian = "Resources/Graphics/notification-2-1.png";
 var s_Notification3Russian = "Resources/Graphics/extra-move-texts-1.png";
-var s_LevelsMapBackground = "Resources/Graphics/levels-map-background.png";
+var s_MapBackground1 = "Resources/Graphics/map-background-1.png";
+var s_MapBackground2 = "Resources/Graphics/map-background-2.png";
+var s_MapBackground3 = "Resources/Graphics/map-background-3.png";
 var s_LevelsMapTrees = "Resources/Graphics/levels-map-trees.png";
 var s_LevelsMapIcons = "Resources/Graphics/levels-map-icons.png";
 var s_LevelsMapPoint = "Resources/Graphics/levels-map-point.png";
@@ -578,7 +580,9 @@ var resources = [
   {src: s_Notification3English},
   {src: s_PlayerHealth},
   {src: s_PlayerHealthBar},
-  {src: s_LevelsMapBackground},
+  {src: s_MapBackground1},
+  {src: s_MapBackground2},
+  {src: s_MapBackground3},
   {src: s_LevelsMapTrees},
   {src: s_LevelsMapIcons},
   {src: s_LevelsMapPoint},
