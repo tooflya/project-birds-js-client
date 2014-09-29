@@ -61,14 +61,14 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 38, dimensions: false}
     ],
   'level': [
-    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
-    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
-    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
-    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
-    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
-    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
-    {title: '$1', font: 'Comic Sans MS Bold', size: 32, dimensions: false},
-    {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
+    {title: '$1', font: 'Comic Sans MS Bold', size: 42, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 42, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 42, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 42, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 42, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 42, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS Bold', size: 42, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 42, dimensions: false}
     ],
   'total-stars': [
     {title: 'Collect stars!\n$1/$2', font: 'Comic Sans MS Bold', size: 26, dimensions: false},

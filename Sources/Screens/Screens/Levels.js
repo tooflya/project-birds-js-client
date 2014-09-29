@@ -31,36 +31,36 @@
 
 Levels = Screen.extend({
   m_IconsCoordinates: [
-    {x: 99, y: 256},
-    {x: 246, y: 199},
-    {x: 405, y: 203},
-    {x: 550, y: 170},
-    {x: 709, y: 184},
-    {x: 836, y: 252},
-    {x: 693, y: 329},
-    {x: 519, y: 354},
-    {x: 362, y: 358},
-    {x: 201, y: 396},
-    {x: 94, y: 599},
-    {x: 252, y: 615},
-    {x: 325, y: 711},
-    {x: 166, y: 778},
-    {x: 109, y: 897},
-    {x: 284, y: 938},
-    {x: 456, y: 899},
-    {x: 548, y: 789},
-    {x: 529, y: 658},
-    {x: 678, y: 613},
-    {x: 827, y: 727},
-    {x: 1005, y: 901},
-    {x: 1252, y: 776},
-    {x: 1481, y: 715},
-    {x: 1403, y: 603},
-    {x: 1299, y: 501},
-    {x: 1548, y: 482},
-    {x: 1626, y: 599},
-    {x: 1756, y: 719},
-    {x: 1818, y: 870}
+    {x: 924.734693877551, y: -2011.2979591836736},
+    {x: 654.3673469387755, y: -1976.0326530612247},
+    {x: 611.2653061224489, y: -1782.0734693877544},
+    {x: 832.6530612244898, y: -1727.2163265306124},
+    {x: 1067.7551020408164, y: -1756.6040816326533},
+    {x: 1300.8979591836735, y: -1727.2163265306124},
+    {x: 1328.3265306122448, y: -1503.8693877551023},
+    {x: 977.6326530612245, y: -1505.5020408163268},
+    {x: 722.9387755102041, y: -1509.4204081632656},
+    {x: 517.2244897959183, y: -1374.236734693878},
+    {x: 672, y: -1217.5020408163268},
+    {x: 916.8979591836735, y: -1266.4816326530615},
+    {x: 1259.7551020408164, y: -1266.4816326530615},
+    {x: 1230.3673469387754, y: -1054.563265306123},
+    {x: 983.5102040816327, y: -1046.7265306122456},
+    {x: 699.4285714285714, y: -1034.9714285714292},
+    {x: 719.0204081632653, y: -831.2163265306128},
+    {x: 952.1632653061224, y: -842.9714285714292},
+    {x: 1202.938775510204, y: -850.6448979591842},
+    {x: 1289.142857142857, y: -642.9714285714291},
+    {x: 879.6734693877551, y: -638.8897959183679},
+    {x: 619.1020408163265, y: -623.2163265306128},
+    {x: 601.469387755102, y: -411.46122448979645},
+    {x: 924.734693877551, y: -419.13469387755157},
+    {x: 1240.1632653061224, y: -395.78775510204133},
+    {x: 1208.8163265306123, y: -146.8081632653068},
+    {x: 838.530612244898, y: -211.46122448979648},
+    {x: 640.6530612244898, y: -46.88979591836791},
+    {x: 1065.795918367347, y: 7.967346938774946},
+    {x: 1199.0204081632653, y: 280.62040816326464}
   ],
   ctor: function() {
     this._super();
@@ -182,6 +182,8 @@ Levels = Screen.extend({
       success: function(data) {
         var element = Levels.instance.m_Icons.get(data.level - 1);
 
+        element.setCurrentFrameIndex(4);
+
         for(var h = 0; h < 2; h++) {
           element.decorations[h].runAction(
             cc.Sequence.create(
@@ -248,16 +250,13 @@ MapIcon = Button.extend({
     this.m_Text = Text.create('level', this);
     this.m_Text.setText('level');
 
-    this.m_Text.setColor(cc.c3(114.0, 80.0, 9.0));
-
     this.registerTouchable(true);
   },
   onCreate: function() {
     this._super();
 
-    this.m_Text.setCenterPosition(this.getWidth() / 2, this.getHeight() / 2 - Camera.sharedCamera().coord(10));
+    this.m_Text.setCenterPosition(this.getWidth() / 2, this.getHeight() / 2 + Camera.sharedCamera().coord(5));
     this.m_Text.ccsf([this.getID() + 1]);
-    this.m_Text.disableShadow();
   },
   onHover: function() {
   },
@@ -270,6 +269,21 @@ MapIcon = Button.extend({
       id: this.getID() + 1
     });
   },
+  /*onMouseDragged: function(touch, e) {
+    if(this.containsTouchLocation(touch) && this.m_WasTouched) {
+      this.setCenterPosition(touch._point.x, touch._point.y - Levels.instance.m_List.m_Background.getPosition().y);
+    }
+  },
+  onMouseDown: function(e) {
+    var a =  this._super(e);
+
+    if(a ) Touchable.list = true;
+
+    return a;
+  },
+  onMouseUp: function(e, force) {
+    this.m_WasTouched = false;
+  },*/
   update: function(time) {
     this._super();
   },

@@ -292,7 +292,9 @@ Entry = Entity.extend({
   draw: function() {
   },
   visit: function() {
-    this._super();
+    if(cc.rectIntersectsRect(this.getBoundingBoxToWorld(), cc.rect(-Camera.sharedCamera().margin.x, -Camera.sharedCamera().margin.y, Camera.sharedCamera().width + Camera.sharedCamera().margin.x, Camera.sharedCamera().height + Camera.sharedCamera().margin.y)) && this.isVisible()) {
+      this._super();
+    }
   }
 });
 
