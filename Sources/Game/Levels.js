@@ -36,7 +36,12 @@ Game.prototype.m_TutorialMatrix = {
     health: 10,
     speed: 1.5
   },
-  matrix: [
+  size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
+    matrix: [
     [4, 2, 4, 1, 2, 3, 3, 1, 2, 1],
     [4, 1, 0, 3, 1, 4, 3, 2, 3, 1],
     [2, 2, 1, 3, 3, 4, 0, 0, 2, 0],
@@ -91,6 +96,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 75,
       speed: 0.6
     },
+    size: {
+      x: 10,
+      y: 14
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -102,10 +112,10 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1001, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      [1001, 1001, 1001, 1, 1, 1, 1, 1, 1, 1001]
     ],
     probability: {
       scope: true,
@@ -134,6 +144,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 75,
       speed: 2
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -177,6 +192,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 100,
       speed: 2
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -220,6 +240,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 50,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -263,6 +288,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 75,
       speed: 1.5
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, -11, -14, 1, 1, 1, 1, -11, 1, 1],
       [1, 1, -100, -4, 1, 1, -4, -140, 1, 1],
@@ -306,6 +336,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 70,
       speed: 2.0
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [-1, -1, 1, -13, 1, 1, 1, 1, -1, -1],
@@ -349,6 +384,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 70,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -392,6 +432,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 70,
       speed: 1.5
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -435,6 +480,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 70,
       speed: 1.5
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -478,6 +528,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 50,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -521,6 +576,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 120,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [-1, -1, -1, -1, 1, 1, -1, -1, -1, -1],
       [-1, -1, -4, -4, -4, -4, -4, -4, -1, -1],
@@ -564,6 +624,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 100,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, -6, 1, 1, 1, 1, 1, 1],
@@ -607,6 +672,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 100,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, -12, -11, 1, -6, -11, -13, 1, 1],
       [-100, -100, -11, -10, -12, -13, -14, -11, -140, -140],
@@ -650,6 +720,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 100,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [-5, -5, -5, -5, -5, -5, -5, -5, -5, -5],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -693,6 +768,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 150,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -736,6 +816,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 150,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -779,6 +864,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 150,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -822,6 +912,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 150,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, -10, 1, 1, 1, 1, 1],
       [1, -1, 1, -1, -10, -14, -1, 1, -1, 1],
@@ -865,6 +960,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 150,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -908,6 +1008,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 150,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -951,6 +1056,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 200,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [-4, -4, -4, -4, -4, -4, -4, -4, -4, -4],
       [-5, -5, 1, 1, 1, 1, 1, 1, -5, -5],
@@ -994,6 +1104,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 200,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [-4, -4, -4, -4, -4, -4, -4, -4, -4, -4],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -1037,6 +1152,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 200,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [-4, -4, 1, 1, 1, 1, 1, 1, -4, -4],
       [-1, -5, 1, 1, -4, -4, 1, 1, -5, -1],
@@ -1080,6 +1200,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 200,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, -4, 1, 1, -4, 1, 1, 1],
       [1, 1, 1, -4, 1, 1, -4, 1, 1, 1],
@@ -1123,6 +1248,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 250,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [-4, 1, 1, 1, 1, 1, 1, 1, 1, -4],
       [1, 1, 1, 1, -4, -4, 1, 1, 1, 1],
@@ -1166,6 +1296,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 250,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, -5, 1, 1, 1, 1],
       [1, -1, -1, -1, -1, -1, -1, -1, -1, 1],
@@ -1209,6 +1344,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 250,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, -1, -1, -1, -1, 1, 1, 1],
@@ -1252,6 +1392,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 250,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -1295,6 +1440,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 250,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [1, 1, 1, 1, -5, -5, 1, 1, 1, 1],
       [1, -4, 1, 1, 1, 1, 1, 1, -4, 1],
@@ -1338,6 +1488,11 @@ Game.prototype.m_LevelsMatrixes = [
       health: 250,
       speed: 1
     },
+    size: {
+      x: 10,
+      y: 7
+    },
+    scrolls: [],
     matrix: [
       [-10, -11, 1, 1, 1, 1, 1, 1, -11, -10],
       [-140, 1, 1, 1, 1, 1, 1, 1, 1, -140],

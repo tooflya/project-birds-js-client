@@ -248,6 +248,8 @@ var s_ElementsSplash = "Resources/Graphics/elements-splash.png";
 var s_ElementsGlow = "Resources/Graphics/elements-glow.png";
 var s_ElementsIcons = "Resources/Graphics/elements-icons.png";
 var s_ElementsParts = "Resources/Graphics/elements-parts.png";
+var s_ElementsBubbles = "Resources/Graphics/elements-bubble.png";
+var s_ElementsBubblesPoping = "Resources/Graphics/elements-bubble-poping.png";
 var s_Ground = "Resources/Graphics/game-ground.png";
 var s_Catapult = "Resources/Graphics/catapult.png";
 var s_CatapultPart1 = "Resources/Graphics/catapult-part1.png";
@@ -278,7 +280,8 @@ var s_MapBackground10 = "Resources/Graphics/map-background-10.png";
 var s_LevelsMapTrees = "Resources/Graphics/levels-map-trees.png";
 var s_LevelsMapIcons = "Resources/Graphics/levels-map-icons.png";
 var s_LevelsMapPoint = "Resources/Graphics/levels-map-point.png";
-var s_LevelsMapCloud = "Resources/Graphics/levels-map-cloud.png";
+var s_Cloud1 = "Resources/Graphics/cloud-1.png";
+var s_Cloud2 = "Resources/Graphics/cloud-2.png";
 var s_PlayerHealth = "Resources/Graphics/player-health.png";
 var s_PlayerHealthBar = "Resources/Graphics/player-health-bar.png";
 var s_TutorialFinger = "Resources/Graphics/tutorial-finger.png";
@@ -571,6 +574,8 @@ var resources = [
   {src: s_ElementsGlow},
   {src: s_ElementsIcons},
   {src: s_ElementsParts},
+  {src: s_ElementsBubbles},
+  {src: s_ElementsBubblesPoping},
   {src: s_Ground},
   {src: s_Catapult},
   {src: s_CatapultPart1},
@@ -593,7 +598,8 @@ var resources = [
   {src: s_LevelsMapTrees},
   {src: s_LevelsMapIcons},
   {src: s_LevelsMapPoint},
-  {src: s_LevelsMapCloud},
+  {src: s_Cloud1},
+  {src: s_Cloud2},
   {src: s_TutorialFinger},
   {src: s_TutorialTargetExplanation},
   {src: s_TutorialTeamExplanation},

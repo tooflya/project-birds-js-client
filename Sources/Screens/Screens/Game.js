@@ -202,18 +202,21 @@ Game = Screen.extend({
 
     switch(this.m_Type) {
       case this.m_Types.progress:
-      this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this, 305);
-      this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this, 305);
+      this.m_LevelBackground = Background.create(this);
 
-      this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this, 304);
-      this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 306);
+      this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this.m_LevelBackground, 305);
+      this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this.m_LevelBackground, 305);
 
-      this.m_Ground = PhysicsEntity.create(s_Ground, 1, 1, this, this.getPhysicsWorld(), 0.1, 1.0, 0.1, 2.0, 8.0);
-      this.m_Target = Target.create(this);
+      this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this.m_LevelBackground, 304);
+      this.m_Explosions = EntityManager.create(50, Explosion.create(), this.m_LevelBackground, 306);
+
+      this.m_Ground = PhysicsEntity.create(s_Ground, 1, 1, this.m_LevelBackground, this.getPhysicsWorld(), 0.1, 1.0, 0.1, 2.0, 8.0);
+      this.m_Target = Target.create(this.m_LevelBackground);
+      this.m_BubbleTarget = BubbleTarget.create(this);
       this.m_Catapults = {
         m_Elements: [
-          Catapult.create(Game.instance),
-          Catapult.create(Game.instance)
+          Catapult.create(Game.instance.m_LevelBackground),
+          Catapult.create(Game.instance.m_LevelBackground)
         ],
         get: function(i) {
           return this.m_Elements[i];
@@ -271,10 +274,11 @@ Game = Screen.extend({
 
       this.m_Elements = ElementsManager.sharedManager();
 
-      this.m_HelpFinger = Entity.create(s_TutorialFinger, this);
+      this.m_HelpFinger = Entity.create(s_TutorialFinger, this.m_LevelBackground);
 
       this.m_Ground.setZOrder(301);
       this.m_Target.setZOrder(302);
+      this.m_BubbleTarget.setZOrder(303);
       this.m_HelpFinger.setZOrder(500);
 
       this.m_Ground.m_PhysicsDefinition.type = Box2D.Dynamics.b2Body.b2_staticBody;
@@ -283,6 +287,7 @@ Game = Screen.extend({
 
       this.m_Ground.setCenterPosition(Camera.sharedCamera().center.x, this.m_Ground.getHeight() / 2);
       this.m_Target.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(18));
+      this.m_BubbleTarget.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(18));
 
       if(Game.tutorial) {
         this.createTutorialElements();
@@ -325,6 +330,16 @@ Game = Screen.extend({
       this.m_CombinationsNotificationText.setCenterPosition(this.m_CombinationsNotification.getWidth() / 2, this.m_CombinationsNotification.getHeight() / 2);
       this.m_CombinationsNotificationText.disableShadow();
       this.m_CombinationsNotificationText.setColor(cc.c3(26, 92, 165));
+
+      var parallax = Entity.create(s_Cloud2);
+      this.m_Cloud = ParallaxEntity.create(parallax, {
+        x: 50,
+        y: 0
+      }, {
+        x: Camera.sharedCamera().center.x,
+        y: parallax.getHeight() / 2
+      }, this);
+      this.m_Cloud.setOpacity(0);
 
       if(Game.network) {
         this.m_InputBackground = Entity.create(s_InputTextArea, this);

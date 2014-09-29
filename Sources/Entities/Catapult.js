@@ -235,7 +235,7 @@ Catapult = AnimatedEntity.extend({
   createElements: function() {
     var self = this;
 
-    this.m_Birds = EntityManager.create(3, CatapultBird.create(false, this), Game.instance);
+    this.m_Birds = EntityManager.create(3, CatapultBird.create(false, this), Game.instance.m_LevelBackground);
     this.m_Birds.fire = function() {
       this.get(0).changeState(this.get(0).m_States.fire);
       this.get(1).changeState(this.get(1).m_States.run, {

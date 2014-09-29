@@ -37,7 +37,7 @@ ElementsManager = EntityManager.extend({
 
     this.m_Clipper.addChild(this.m_Stencil);
 
-    Game.sharedScreen().addChild(this.m_Clipper);
+    Game.sharedScreen().m_LevelBackground.addChild(this.m_Clipper);
 
     this._super(200, Element.create(), this.m_Stencil, this.m_zIndex, true);
 
@@ -48,9 +48,11 @@ ElementsManager = EntityManager.extend({
     this.m_ElementsParts = EntityManager.create(100, ElementPart.create(), Game.sharedScreen(), 110, true);
     this.m_ElementsSickles = EntityManager.create(10, Entity.create(s_ElementsSickles), Game.sharedScreen(), 110, true);
     this.m_ElementsGlows = EntityManager.create(10, ElementGlow.create(), this.m_Stencil, 110, true);
+    this.m_ElementsBubbles = EntityManager.create(10, Bubble.create(), this.m_Stencil, 111, true);
+    this.m_ElementsBubblesPoping = EntityManager.create(10, BubblePoping.create(), this.m_Stencil, 111, true);
 
-    this.m_MatrixArrows2 = EntityManager.create(30, Entity.create(s_MatrixArrow2), Game.sharedScreen(), 110, true);
-    this.m_MatrixArrows1 = EntityManager.create(30, Entity.create(s_MatrixArrow1), Game.sharedScreen(), 111, true);
+    this.m_MatrixArrows2 = EntityManager.create(30, Entity.create(s_MatrixArrow2), Game.sharedScreen().m_LevelBackground, 110, true);
+    this.m_MatrixArrows1 = EntityManager.create(30, Entity.create(s_MatrixArrow1), Game.sharedScreen().m_LevelBackground, 111, true);
 
     this.m_MatrixManager = MatrixManager.sharedManager();
 
@@ -59,7 +61,7 @@ ElementsManager = EntityManager.extend({
     }
   },
   stencil: function() {
-    var stencil = BackgroundColor.create(cc.c4(0, 0, 0, 100));
+    var stencil = BackgroundColor.create(cc.c4(0, 0, 0, 100), false, Camera.sharedCamera().width, this.m_Template.getContentSize().height);
 
     stencil.setAnchorPoint(cc.p(0, 0));
     stencil.setPosition(cc.p(0, 0));
@@ -67,6 +69,8 @@ ElementsManager = EntityManager.extend({
     return stencil;
   },
   clipper: function(file) {
+    this.m_Template = Entity.create(file);
+
     var stencil = cc.Sprite.create(file);
     var clipper = cc.ClippingNode.create(stencil);
 
@@ -79,8 +83,6 @@ ElementsManager = EntityManager.extend({
     return clipper;
   },
   onLevelStart: function(matrix) {
-    this.onStartAnimationStart();
-
     if(Game.network) {
       if(Game.server) {
         this.m_Matrix = Array(MatrixManager.instance.getSize().x + 1);
@@ -93,6 +95,34 @@ ElementsManager = EntityManager.extend({
       }
     } else {
       matrix = Game.tutorial ? Game.instance.m_TutorialMatrix.matrix : Game.instance.m_LevelsMatrixes[Game.level - 1].matrix;
+    }
+
+    var m = Game.tutorial ? Game.instance.m_TutorialMatrix : Game.instance.m_LevelsMatrixes[Game.level - 1];
+
+    this.m_MatrixManager.m_Size = {
+      x: m.size.x,
+      y: m.size.y
+    };
+    this.m_MatrixManager.m_CurrentSize = {
+      x: {
+        start: 0,
+        finish: m.size.x - 1
+      },
+      y: {
+        start: 0,
+        finish: 6
+      }
+    };
+
+    this.m_MatrixManager.createMatrix();
+
+    for(var i = 0; i < m.size.y * 2; i++) {
+      if(!matrix[i]) {
+        matrix[i] = Array(this.m_MatrixManager.getSize().x);
+        for(var j = 0; j < m.size.x; j++) {
+          matrix[i].push(1);
+        }
+      }
     }
 
     var padding = this.get(0).getWidth();
@@ -136,6 +166,8 @@ ElementsManager = EntityManager.extend({
       for(var j = -this.m_MatrixManager.getSize().x / 2; j < this.m_MatrixManager.getSize().x / 2; j++) {
         var x = origin.x + padding * j;
 
+        var bubble = false;
+
         if(Game.network && !Game.server) { // TODO: Adjust third-party types such as block or empty but not a star.
           var id = matrix[counter.x][counter.y];
 
@@ -147,6 +179,15 @@ ElementsManager = EntityManager.extend({
           this.m_MatrixManager.set(this.last(), counter.x, counter.y);
         } else {
           var type = matrix[counter.y][counter.x];
+
+          if(Math.abs(type) >= 1000) {
+            type = type > 0 ? (type - 1000) : (type + 1000);
+
+            bubble = this.createBubble();
+
+            this.m_MatrixManager.createBubble(bubble, counter.x, counter.y);
+            bubble.setCenterPosition(x, y - Camera.sharedCamera().height + padding / 2);
+          }
 
           if(type === etypes.empty) {
             this.m_MatrixManager.set(etypes.empty, counter.x, counter.y, false);
@@ -253,6 +294,8 @@ ElementsManager = EntityManager.extend({
 
       reverse = !reverse;
     }
+
+    this.onStartAnimationStart();
   },
   onLevelFinish: function() {
 
@@ -260,10 +303,13 @@ ElementsManager = EntityManager.extend({
   onFreeTables: function(x, y) {
   },
   onStartAnimationStart: function() {
+    this.m_CurrentRow = 0;
+
     if(Game.tutorial) {
       Game.sharedScreen().onStartAnimationStartTutorial();
     } else {
       Game.sharedScreen().onStartAnimationStart();
+      this.slideToRowStart(this.m_MatrixManager.getSize().y - 7);
     }
   },
   onStartAnimationFinish: function() {
@@ -299,15 +345,15 @@ ElementsManager = EntityManager.extend({
           var top = MatrixManager.sharedManager().get(x, y + 1);
 
           if(top != etypes.empty && top != etypes.block) {
-            this.m_MatrixArrows2.create().setCenterPosition(top.convertToWorldSpace(cc.p(0, 0)).x + top.getWidth() / 2, top.convertToWorldSpace(cc.p(0, 0)).y);
+            this.m_MatrixArrows2.create().setCenterPosition(top.convertToWorldSpace(cc.p(0, 0)).x + top.getWidth() / 2, top.convertToWorldSpace(cc.p(0, 0)).y - Game.sharedScreen().m_LevelBackground.getPosition().y);
           } else if(y == tops[x]) {
-            this.m_MatrixArrows2.create().setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight());
+            this.m_MatrixArrows2.create().setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y - Game.sharedScreen().m_LevelBackground.getPosition().y + element.getHeight());
           }
         }
 
         if(!fields[x]) {
           if(element != etypes.empty) {
-            this.m_MatrixArrows1.create().setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y);
+            this.m_MatrixArrows1.create().setCenterPosition(element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2, element.convertToWorldSpace(cc.p(0, 0)).y - Game.sharedScreen().m_LevelBackground.getPosition().y);
 
             fields[x] = y + 1;
           }
@@ -358,6 +404,9 @@ ElementsManager = EntityManager.extend({
 
     return this.last();
   },
+  createBubble: function() {
+    return this.m_ElementsBubbles.create();
+  },
   createBonus: function(data, type) {
     var bonus = data.element || data.elements[0];
 
@@ -394,6 +443,64 @@ ElementsManager = EntityManager.extend({
   },
   getMatrix: function() {
     return this.m_Matrix;
+  },
+  slideToRow: function(row, delay) {
+    var distance = Math.abs(this.m_CurrentRow - row);
+
+    this.m_MatrixManager.m_CurrentSize.y.start = 0 + row - (row > 0 ? 1 : 0);
+    this.m_MatrixManager.m_CurrentSize.y.finish = 6 + row;
+
+    Game.sharedScreen().m_LevelBackground.runAction(
+      cc.Sequence.create(
+        cc.CallFunc.create(this.enableEffect, this, this),
+        cc.DelayTime.create(delay ? (delay * distance) : 0.0),
+        cc.MoveTo.create(delay ? (0.5 * row) : (0.1 * distance), {x: 0, y: -(this.get(0).getWidth() * row)}),
+        cc.CallFunc.create(this.m_PlayerTurn ? MatrixManager.sharedManager().disable : MatrixManager.sharedManager().enable, MatrixManager.sharedManager()),
+        cc.CallFunc.create(this.disableEffect, this, this),
+        false
+      )
+    );
+
+    this.m_CurrentRow = row;
+
+    if(this.m_CurrentRow > 0) {
+      Game.instance.m_Cloud.runAction(
+        cc.Sequence.create(
+        cc.DelayTime.create(delay ? (delay * distance) : 0.0),
+          cc.FadeIn.create(1.0),
+          false
+        )
+      );
+    } else {
+      Game.instance.m_Cloud.runAction(
+        cc.Sequence.create(
+          cc.FadeOut.create(1.0),
+          false
+        )
+      );
+    }
+  },
+  slideToRowStart: function(row) {
+    this.slideToRow(row, 0.5);
+  },
+  enableEffect: function() {
+    this.effectsEnabled = true;
+
+    this.m_Elements.forEach(function(element) {
+      if(element instanceof Element) {
+        element.setOpacity(255);
+        element.setVisible(true);
+      }
+    });
+  },
+  disableEffect: function() {
+    this.effectsEnabled = false;
+
+    this.m_Elements.forEach(function(element) {
+      if(element instanceof Element) {
+        element.onChangePosition();
+      }
+    });
   }
 });
 

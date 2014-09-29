@@ -212,7 +212,7 @@ Levels = Screen.extend({
     this.m_BackButton.setCurrentFrameIndex(1);
     this.m_BackButton.setZOrder(200);
 
-    var parallax = Entity.create(s_LevelsMapCloud);
+    var parallax = Entity.create(s_Cloud1);
     this.m_Cloud = ParallaxEntity.create(parallax, {
       x: 10,
       y: 0

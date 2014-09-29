@@ -38,6 +38,7 @@ Element = TiledEntity.extend({
   m_Bonus: false,
   m_Special: false,
   m_Chained: false,
+  m_Bubbled: false,
   ctor: function() {
     this._super(s_Elements, 8, 6);
 
@@ -53,6 +54,7 @@ Element = TiledEntity.extend({
 
     this.m_Bonus = false;
     this.m_Chained = false;
+    this.m_Bubbled = false;
     this.m_Special = false;
     this._custom = false;
 
@@ -220,8 +222,19 @@ Element = TiledEntity.extend({
   onChangePosition: function(target, data) {
     if(this.getId() == Element.types.block) return false;
 
-    if(this.getIndex().y < MatrixManager.sharedManager().getSize().y) {
+    if(!data) {
+      if(!this.bubbled() && MatrixManager.instance.m_BubbleMatrix[this.getIndex().x][this.getIndex().y]) {
+        this.bubble();
+      } else {
+        if(this.bubbled()) {
+          this.unbubble();
+        }
+      }
+    }
+
+    if(!this.getIndex() || (this.getIndex().y >= MatrixManager.sharedManager().getCurrentSize().y.start && this.getIndex().y <= MatrixManager.sharedManager().getCurrentSize().y.finish) || ElementsManager.instance.effectsEnabled) {
       this.setVisible(true);
+      this.setOpacity(255);
 
       this.m_Removed = false;
 
@@ -229,7 +242,12 @@ Element = TiledEntity.extend({
         this.registerTouchable(true);
       }
     } else {
-      this.setVisible(false);
+      if(this.getIndex().y >= (MatrixManager.sharedManager().getCurrentSize().y.start - 1) && this.getIndex().y <= (MatrixManager.sharedManager().getCurrentSize().y.finish + 1)) {
+        this.setVisible(true);
+        this.runAction(cc.FadeTo.create(0.5, 100));
+      } else {
+        this.setVisible(false);
+      }
 
       if(this.isRegisterTouchable()) {
         this.registerTouchable(false);
@@ -246,7 +264,7 @@ Element = TiledEntity.extend({
         break;
       }
 
-      if(this.getIndex().y < MatrixManager.sharedManager().getSize().y) {
+      if(this.getIndex().y <= MatrixManager.sharedManager().getCurrentSize().y.finish) {
         Sound.sharedSound().play(s_SoundDrop[Random.sharedRandom().random(0, 3, true)]);
       }
     }
@@ -486,6 +504,20 @@ Element = TiledEntity.extend({
   chained: function() {
     return this.m_Chained;
   },
+  bubble: function() {
+    this.m_Bubbled = true;
+
+    
+  },
+  unbubble: function() {
+    this.m_Bubbled = false;
+    this.m_Removed = true;
+
+    
+  },
+  bubbled: function() {
+    return this.m_Bubbled;
+  },
   starred: function() {
     switch(this.getId()) {
       case Element.types.star:
@@ -533,31 +565,35 @@ Element = TiledEntity.extend({
           this.chooseId(created, probably);
         } else {
           this.m_Id = element;
-          this.setCurrentFrameIndex(this.m_Id);
+          if(MatrixManager.sharedManager().hasMatches(this, false, true)) {
+            this.chooseId(created, probably);
+          } else {
+            this.setCurrentFrameIndex(this.m_Id);
 
-          if(bonus) {
-            found = false;
-            element = false;
+            if(bonus) {
+              found = false;
+              element = false;
 
-            while(!found) {
-              var p = [
-                {type: Element.bonus.types.horizontal, probably: probability.bonuses.horizontal},
-                {type: Element.bonus.types.vertical, probably: probability.bonuses.vertical},
-                {type: Element.bonus.types.bomb, probably: probability.bonuses.bomb},
-                {type: Element.bonus.types.pack, probably: probability.bonuses.pack}
-              ];
-              p.shuffle();
-              p.forEach(function(some) {
-                if(!found && some.probably > 0) {
-                  if(Random.sharedRandom().probably(some.probably)) {
-                    found = true;
-                    element = some.type;
+              while(!found) {
+                var p = [
+                  {type: Element.bonus.types.horizontal, probably: probability.bonuses.horizontal},
+                  {type: Element.bonus.types.vertical, probably: probability.bonuses.vertical},
+                  {type: Element.bonus.types.bomb, probably: probability.bonuses.bomb},
+                  {type: Element.bonus.types.pack, probably: probability.bonuses.pack}
+                ];
+                p.shuffle();
+                p.forEach(function(some) {
+                  if(!found && some.probably > 0) {
+                    if(Random.sharedRandom().probably(some.probably)) {
+                      found = true;
+                      element = some.type;
+                    }
                   }
-                }
-              });
-            }
+                });
+              }
 
-            this.setBonus(element);
+              this.setBonus(element);
+            }
           }
         }
       }
@@ -571,11 +607,11 @@ Element = TiledEntity.extend({
       } else {
         this.m_Id = Random.sharedRandom().random(0, this.getHorizontalFramesCount() - 3, true);
 
-        if(MatrixManager.sharedManager().hasMatches(this)) {
+        if(MatrixManager.sharedManager().hasMatches(this, false, true)) {
           this.chooseId();
+        } else {
+          this.setCurrentFrameIndex(this.m_Id);
         }
-
-        this.setCurrentFrameIndex(this.m_Id);
       }
     }
   },

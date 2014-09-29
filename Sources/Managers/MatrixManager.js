@@ -34,8 +34,24 @@ MatrixManager = cc.Node.extend({
     x: 10,
     y: 7
   },
+  m_CurrentSize: {
+    x: {
+      start: 0,
+      finish: 0
+    },
+    y: {
+      start: 0,
+      finish: 0
+    }
+  },
+  m_Types: {
+    war: 0,
+    dirty: 1
+  },
+  m_Type: 0,
   m_zIndex: 100,
   m_Matrix: false,
+  m_BubbleMatrix: false,
   m_CurrentElement1: false,
   m_CurrentElement2: false,
   m_Combinations: false,
@@ -45,8 +61,6 @@ MatrixManager = cc.Node.extend({
     this._super();
 
     MatrixManager.instance = this;
-
-    this.createMatrix();
   },
   disable: function() {
     this.m_Active = false;
@@ -62,6 +76,9 @@ MatrixManager = cc.Node.extend({
   },
   unbusy: function() {
     this.m_Busy = false;
+  },
+  createBubble: function(element, x, y) {
+    this.m_BubbleMatrix[x][y] = element;
   },
   set: function(element, x, y, created, probably) {
     if(element === etypes.empty || element === etypes.block) {
@@ -80,7 +97,9 @@ MatrixManager = cc.Node.extend({
   },
   get: function(x, y) {
     if(x >= 0 && y >= 0 && x < this.getSize().x && y < this.getSize().y * 2) {
-      return this.m_Matrix[x][y];
+      if(this.m_Matrix[x]) {
+        return this.m_Matrix[x][y];
+      }
     }
 
     return false;
@@ -179,8 +198,8 @@ MatrixManager = cc.Node.extend({
   getRandomElement: function() {
     var elements = [];
 
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         var element = this.get(i, j);
 
         if(element instanceof Element) {
@@ -194,8 +213,8 @@ MatrixManager = cc.Node.extend({
   getFreeRandomElement: function() {
     var elements = [];
 
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         var element = this.get(i, j);
 
         if(element instanceof Element) {
@@ -215,8 +234,8 @@ MatrixManager = cc.Node.extend({
 
     this.m_Combinations = [];
 
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         var element = this.m_Matrix[i][j];
 
         if(!element || element === etypes.empty || element === etypes.block) continue;
@@ -226,20 +245,22 @@ MatrixManager = cc.Node.extend({
           }
         }
 
+        var positions = this.verify(element.getIndex());
+
         var neighbor = false;
         for(var k = 0; k < 4; k++) {
           switch(k) {
             case 0:
-            if(element.getIndex().y < this.getSize().y - 1) neighbor = this.get(element.getIndex().x, element.getIndex().y + 1);
+            if(positions.top) neighbor = this.get(element.getIndex().x, element.getIndex().y + 1)
             break;
             case 1:
-            neighbor = this.get(element.getIndex().x, element.getIndex().y - 1);
+            if(positions.down) neighbor = this.get(element.getIndex().x, element.getIndex().y - 1);
             break;
             case 2:
-            neighbor = this.get(element.getIndex().x - 1, element.getIndex().y);
+            if(positions.left) neighbor = this.get(element.getIndex().x - 1, element.getIndex().y);
             break;
             case 3:
-            neighbor = this.get(element.getIndex().x + 1, element.getIndex().y);
+            if(positions.right) neighbor = this.get(element.getIndex().x + 1, element.getIndex().y);
             break;
           }
 
@@ -340,6 +361,23 @@ MatrixManager = cc.Node.extend({
 
     return false;
   },
+  verify: function(index, full) {
+    if(full) {
+      return {
+        top: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y + 1) >= 0 && (index.y + 1) <= this.getSize().y) && this.get(index.x, index.y + 1) && !this.soe(this.get(index.x, index.y + 1)),
+        down: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y - 1) >= 0 && (index.y - 1) <= this.getSize().y) && this.get(index.x, index.y - 1) && !this.soe(this.get(index.x, index.y - 1)),
+        left: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x - 1) >= 0 && (index.x - 1) <= this.getSize().x) && this.get(index.x - 1, index.y) && !this.soe(this.get(index.x - 1, index.y)),
+        right: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x + 1) >= 0 && (index.x + 1) <= this.getSize().x) && this.get(index.x + 1, index.y) && !this.soe(this.get(index.x + 1, index.y))
+      };
+    } else {
+      return {
+        top: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y + 1) <= this.getCurrentSize().y.finish && (index.y + 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y + 1) && !this.soe(this.get(index.x, index.y + 1)),
+        down: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y - 1) <= this.getCurrentSize().y.finish && (index.y - 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y - 1) && !this.soe(this.get(index.x, index.y - 1)),
+        left: (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x - 1) <= this.getCurrentSize().x.finish && (index.x - 1) >= this.getCurrentSize().x.start) && this.get(index.x - 1, index.y) && !this.soe(this.get(index.x - 1, index.y)),
+        right: (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x + 1) <= this.getCurrentSize().x.finish && (index.x + 1) >= this.getCurrentSize().x.start) && this.get(index.x + 1, index.y) && !this.soe(this.get(index.x + 1, index.y))
+      };
+    }
+  },
   replace: function(element, neighbor, back, network, force) {
     if(this.soe(element)) return false;
 
@@ -412,12 +450,7 @@ MatrixManager = cc.Node.extend({
       var neighbor;
       var index = element.getIndex();
 
-      var positions = {
-        top: index.y < this.getSize().y && this.get(index.x, index.y + 1) && !this.soe(this.get(index.x, index.y + 1)),
-        down: index.y > 0 && this.get(index.x, index.y - 1) && !this.soe(this.get(index.x, index.y - 1)),
-        left: index.x > 0 && this.get(index.x - 1, index.y) && !this.soe(this.get(index.x - 1, index.y)),
-        right: index.x < this.getSize().x && this.get(index.x + 1, index.y) && !this.soe(this.get(index.x + 1, index.y))
-      };
+      var positions = this.verify(index);
 
       if(Game.tutorial) {
         switch(Game.sharedScreen().m_TutorialState) {
@@ -457,13 +490,18 @@ MatrixManager = cc.Node.extend({
   },
   createMatrix: function() {
     this.m_Matrix = Array(this.getSize().x + 1);
+    this.m_BubbleMatrix = Array(this.getSize().x + 1);
 
     for(var i = 0; i < this.getSize().x + 1; i++) {
       this.m_Matrix[i] = Array(this.getSize().y * 2);
+      this.m_BubbleMatrix[i] = Array(this.getSize().y * 2);
     }
   },
   getSize: function() {
     return this.m_Size;
+  },
+  getCurrentSize: function() {
+    return this.m_CurrentSize;
   },
   clear: function() {
     this.m_PauseTime = Array();
@@ -565,7 +603,11 @@ MatrixManager = cc.Node.extend({
               var bomb = MatrixManager.sharedManager().hasBonus(Element.bonus.types.bomb);
 
               if(!pack && !bomb) {
-                ActionsManager.sharedManager().run();
+                if(ElementsManager.instance.m_CurrentRow > 0) {
+                  MatrixManager.sharedManager().enable();
+                } else {
+                  ActionsManager.sharedManager().run();
+                }
               } else {
                 if(pack) {
                   MatrixManager.sharedManager().removeSquare(pack.getIndex().x, pack.getIndex().y, pack);
@@ -623,7 +665,7 @@ MatrixManager = cc.Node.extend({
       return result;
     }
   },
-  hasMatches: function(element, data) {
+  hasMatches: function(element, data, full) {
     if(!element || this.soe(element, true)) return false;
     if(element.getId() === Element.types.star) return false;
     if(element.special()) return false;
@@ -646,12 +688,7 @@ MatrixManager = cc.Node.extend({
       right: this.get(index.x + 1, index.y)
     };
 
-    var positions = {
-      top: index.y < (this.getSize().y - 1) && frames.top && !this.soe(frames.top, true),
-      down: index.y > 0 && frames.down && !this.soe(frames.down, true),
-      left: index.x > 0 && frames.left && !this.soe(frames.left, true),
-      right: index.x < this.getSize().x && frames.right && !this.soe(frames.right, true)
-    };
+    var positions = this.verify(index, full);
 
     if(data) {
       if(positions.top) positions.top = data.matches.top;
@@ -929,14 +966,15 @@ MatrixManager = cc.Node.extend({
       }
     }
 
-    for(var i = 0; i < this.getSize().x; i++) {
+    // TODO: Fix position based on matrix size.
+    /*for(var i = 0; i < this.getSize().x; i++) {
       for(var j = 0; j < this.getSize().y * 2; j++) {
         var frame = this.m_Matrix[i][j];
         if(frame && frame != etypes.empty && frame != etypes.block) {
           frame.setCenterPosition(ElementsManager.sharedManager().getParent().getWidth() / 4 + frame.getWidth() * frame.getIndex().x - frame.getWidth() / 4 + Camera.sharedCamera().coord(4), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
         }
       }
-    }
+    }*/
   },
   findAll: function() {
     MatrixManager.pools = [];
@@ -944,8 +982,8 @@ MatrixManager = cc.Node.extend({
     this.fillAll();
 
     var combinations = 0;
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         if(this.hasMatches(this.m_Matrix[i][j])) {
           combinations++;
         }
@@ -959,8 +997,8 @@ MatrixManager = cc.Node.extend({
     return combinations > 0;
   },
   findStars: function() {
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         if(this.m_Matrix[i][j] instanceof Element) {
           if(this.m_Matrix[i][j].starred()) {
             return true;
@@ -1010,15 +1048,15 @@ MatrixManager = cc.Node.extend({
 
     this.m_PauseTime[index.x] += 0.1;
 
-    if(index.y - data.down < this.getSize().y) {
+    if(index.y - data.down <= this.m_CurrentSize.y.finish) {
       MatrixManager.pause = Math.max(MatrixManager.pause, sequence.getDuration() + this.m_PauseTime.max());
     }
   },
   shuffle: function() {
     var inc = 0;
     var counter = 0;
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         var frame = this.m_Matrix[i][j];
 
         if(frame && frame != etypes.empty && frame != etypes.block) {
@@ -1227,7 +1265,7 @@ MatrixManager = cc.Node.extend({
     var time;
 
     time = 0.05;
-    for(var i = y - 1; i >= 0; i--) {
+    for(var i = y - 1; i >= this.m_CurrentSize.y.start; i--) {
       var current = this.get(x, i);
 
       if(current && current != etypes.empty && current != etypes.block) {
@@ -1250,7 +1288,7 @@ MatrixManager = cc.Node.extend({
     }
 
     time = 0.05;
-    for(var i = y + 1; i < this.getSize().y; i++) {
+    for(var i = y + 1; i <=  this.m_CurrentSize.y.finish; i++) {
       var current = this.get(x, i);
 
       if(current && current != etypes.empty && current != etypes.block) {
@@ -1319,8 +1357,8 @@ MatrixManager = cc.Node.extend({
   removeSimilar: function(x, y, element) {
     var speed = 0.5;
 
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         var current = this.get(i, j);
 
         if(current && current != etypes.empty && current != etypes.block) {
@@ -1366,8 +1404,8 @@ MatrixManager = cc.Node.extend({
     }.bind(this));
   },
   hasBonus: function(type) {
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         var current = this.get(i, j);
 
         if(current && current != etypes.empty && current != etypes.block) {
@@ -1384,8 +1422,8 @@ MatrixManager = cc.Node.extend({
     if(!this.m_ClearBox) {
       var elements = [];
 
-      for(var i = 0; i < this.getSize().x; i++) {
-        for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
           var current = this.get(i, j);
 
           if(current instanceof Element) {
@@ -1436,8 +1474,8 @@ MatrixManager = cc.Node.extend({
   addChange: function() {
     var elements = [];
 
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y; j++) {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         var current = this.get(i, j);
 
         if(current instanceof Element) {
