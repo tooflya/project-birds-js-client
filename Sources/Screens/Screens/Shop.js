@@ -241,7 +241,7 @@ Shop = Screen.extend({
           element.dock.text = Text.create(false, element.dock);
 
           element.dock.create().setCenterPosition(element.getWidth() / 2, Camera.sharedCamera().coord(15));
-          element.dock.text.create().setCenterPosition(element.dock.getWidth() / 2, element.dock.getHeight() / 2 + Camera.sharedCamera().coord(5));
+          element.dock.text.create().setCenterPosition(element.dock.getWidth() / 2, element.dock.getHeight() / 2);
           element.dock.text.ccsf([unlock.items[element.number].price]);
 
           element.lock = Entity.create(s_Lock, element);

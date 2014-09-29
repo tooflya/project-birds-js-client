@@ -146,6 +146,33 @@ var points = DataManager.sharedManager().get(false, references.levels.points[Gam
 
     this.m_Text[5].setColor(cc.c3(204.0, 102.0, 51.0));
 
+    /** TUTORIAL */
+
+    DataManager.sharedManager().get(false, references.tutorial.any1, {
+      success: function(value) {
+        if(!value) {
+          this.m_TutorialFinger = Entity.create(s_TutorialFinger, this);
+
+          this.m_TutorialFinger.create().setCenterPosition(this.m_ElementsBackgrounds[2].getCenterX() + this.m_ElementsBackgrounds[2].getWidth() / 2 - Camera.sharedCamera().coord(15), this.m_ElementsBackgrounds[2].getCenterY() - this.m_TutorialFinger.getHeight() / 2 + Camera.sharedCamera().coord(15));
+          this.m_TutorialFinger.setOpacity(0);
+          this.m_TutorialFinger.runAction(
+            cc.RepeatForever.create(
+              cc.Sequence.create(
+                cc.FadeTo.create(0.5, 255),
+                cc.DelayTime.create(0.5),
+                cc.ScaleTo.create(0.2, 0.9),
+                cc.ScaleTo.create(0.1, 1.0),
+                cc.DelayTime.create(0.5),
+                cc.FadeTo.create(0.5, 0),
+                cc.DelayTime.create(0.5),
+                false
+              )
+            )
+          ); 
+        }
+      }.bind(this)
+    });
+
     this.m_BackgroundHolder = EntryManager.create(this, {
       update: {
         start: function() {
@@ -266,6 +293,8 @@ var points = DataManager.sharedManager().get(false, references.levels.points[Gam
     var points = DataManager.sharedManager().get(false, references.levels.points[Game.level - 1]);
 
     this.m_Text[1].ccsf([Game.level]);
+    this.m_Text[2].setVisible(true);
+    this.m_Text[3].setVisible(true);
 
     this.m_Text[5] .setText('level-popup-level-' + Game.level);
 
@@ -292,41 +321,6 @@ var points = DataManager.sharedManager().get(false, references.levels.points[Gam
 
       this.m_PointsHolder.stars.setCurrentFrameIndex(DataManager.sharedManager().get(false, references.levels.levels[Game.level - 1]) - 1);
     }
-
-    /** TUTORIAL */
-
-    DataManager.sharedManager().get(false, references.tutorial.any1, {
-      success: function(value) {
-        if(!value) {
-          this.m_TutorialFinger = Entity.create(s_TutorialFinger, this);
-
-          this.m_TutorialFinger.create().setCenterPosition(this.m_ElementsBackgrounds[2].getCenterX() + this.m_ElementsBackgrounds[2].getWidth() / 2 - Camera.sharedCamera().coord(15), this.m_ElementsBackgrounds[2].getCenterY() - this.m_TutorialFinger.getHeight() / 2 + Camera.sharedCamera().coord(15));
-          this.m_TutorialFinger.setOpacity(0);
-          this.m_TutorialFinger.runAction(
-            cc.RepeatForever.create(
-              cc.Sequence.create(
-                cc.FadeTo.create(0.5, 255),
-                cc.DelayTime.create(0.5),
-                cc.ScaleTo.create(0.2, 0.9),
-                cc.ScaleTo.create(0.1, 1.0),
-                cc.DelayTime.create(0.5),
-                cc.FadeTo.create(0.5, 0),
-                cc.DelayTime.create(0.5),
-                false
-              )
-            )
-          ); 
-        }
-      }.bind(this)
-    });
-
-    this.m_Text[1].setCenterPosition(this.getCenterX(), this.getCenterY() + Camera.sharedCamera().coord(300));
-    this.m_Text[5].setCenterPosition(this.getCenterX(), this.m_Text[1].getCenterY() - this.m_Text[1].getHeight() / 2 - this.m_Text[5].getHeight() / 2 - Camera.sharedCamera().coord(points ? 250 : 140));
-    this.m_Text[2].setCenterPosition(this.getCenterX(), this.m_Text[5].getCenterY() - this.m_Text[5].getHeight() / 2 - this.m_Text[2].getHeight() / 2 - Camera.sharedCamera().coord(50));
-    this.m_Text[3].setCenterPosition(this.getCenterX(), this.m_Text[2].getCenterY() - this.m_Text[2].getHeight() / 2 - this.m_Text[2].getHeight() / 2 - Camera.sharedCamera().coord(150));
-
-    this.m_Text[2].setVisible(true);
-    this.m_Text[3].setVisible(true);
   },
   onExit: function() {
     this._super();
