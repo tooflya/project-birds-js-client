@@ -183,7 +183,6 @@ Game = Screen.extend({
 
     this.m_Background = Entity.create(backgrounds[Random.sharedRandom().random(0, backgrounds.length, true)], this, true);
 
-
     this.m_LevelBackground = Background.create(this);
     this.m_PreviewBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this.m_LevelBackground);
     this.m_SplashBackground = BackgroundColor.create(cc.c4(255, 255, 255, 0), this.m_LevelBackground);

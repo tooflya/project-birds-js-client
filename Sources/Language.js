@@ -350,6 +350,16 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'RiiPopkk-R', size: 36, dimensions: false}//
     ],
+  'update': [
+    {title: 'Updating data...', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Обновление данных...', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'サーバーに接続している...', font: 'RiiPopkk-R', size: 36, dimensions: false}//
+    ],
   'connect': [
     {title: 'Connecting to the server...', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: 'Подключение к серверу...', font: 'Comic Sans MS', size: 36, dimensions: false},
