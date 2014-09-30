@@ -34,7 +34,7 @@ Game.prototype.createTutorialElements = function() {
   this.m_TutorialRunning = true;
   this.m_PlayerTurn = true;
 
-  this.m_TutorialBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
+  this.m_TutorialBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this.m_LevelBackground);
   this.m_TutorialBackgroundSplash = BackgroundColor.create(cc.c4(0, 0, 0, 200), this.m_TutorialBackground, Camera.sharedCamera().width, Camera.sharedCamera().coord(200));
 
   this.m_TutorialFinger = Entity.create(s_TutorialFinger, this.m_TutorialBackground);
