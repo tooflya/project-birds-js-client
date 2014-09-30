@@ -234,40 +234,99 @@ MultiplayerList = PatternList.extend({
                         }.bind(this)
                       });
                     } else {
-                      var messages = [
-                        LanguagesManager.sharedManager().get('friends-notification-vk-21').title,
-                        LanguagesManager.sharedManager().get('friends-notification-vk-22').title,
-                        LanguagesManager.sharedManager().get('friends-notification-vk-23').title,
-                        LanguagesManager.sharedManager().get('friends-notification-vk-24').title
-                      ];
+                      var handlers = {
+                        vk: {
+                          original: function() {
+                            var messages = [
+                              LanguagesManager.sharedManager().get('friends-notification-vk-21').title,
+                              LanguagesManager.sharedManager().get('friends-notification-vk-22').title,
+                              LanguagesManager.sharedManager().get('friends-notification-vk-23').title,
+                              LanguagesManager.sharedManager().get('friends-notification-vk-24').title
+                            ];
 
-                      Tooflya.VK.api.call('friends.request', {
-                        id: this.data.uid,
-                        message: messages.random()
-                      }, {
+                            Tooflya.VK.api.call('friends.request', {
+                              id: this.data.uid,
+                              message: messages.random()
+                            }, {
+                              success: function() {
+                                Tooflya.api.call('request.send', {
+                                  type: 'play.send',
+                                  uid: this.data.uid
+                                }, {
+                                  success: function() {
+                                    handlers.success();
+                                  }.bind(this)
+                                });
+                              }.bind(this)
+                            });
+                          }.bind(this),
+                          playtest:function() {
+                            var messages = [
+                              LanguagesManager.sharedManager().get('friends-notification-vk-21').title,
+                              LanguagesManager.sharedManager().get('friends-notification-vk-22').title,
+                              LanguagesManager.sharedManager().get('friends-notification-vk-23').title,
+                              LanguagesManager.sharedManager().get('friends-notification-vk-24').title
+                            ];
+
+                            VK.api("wall.post", {
+                              owner_id: this.data.uid,
+                              message: messages.random(),
+                              attachments: 'photo-43129938_340443444,http://vk.com/app4165575',
+                              test_mode: 1
+                            }, function(e) {
+                              handlers.success();
+                            });
+                          }.bind(this),
+                        },
+                        fb: {
+                          original: function() {
+                            var messages = [
+                              LanguagesManager.sharedManager().get('friends-notification-fb-21').title,
+                              LanguagesManager.sharedManager().get('friends-notification-fb-22').title,
+                              LanguagesManager.sharedManager().get('friends-notification-fb-23').title,
+                              LanguagesManager.sharedManager().get('friends-notification-fb-24').title
+                            ];
+
+                            // TODO: Add Facebook original handler.
+                          }.bind(this),
+                          playtest:function() {
+                            // TODO: Add Facebook playtest handler.
+                          }.bind(this),
+                        },
+
                         success: function() {
-                          Tooflya.api.call('request.send', {
-                            type: 'play.send',
-                            uid: this.data.uid
-                          }, {
-                            success: function() {
-                              this.elements.button.registerTouchable(false);
-                              this.elements.button.text.setText(this.elements.button.text.texts.complete);
-                              this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(45) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
-                              this.elements.button.text.runAction(
-                                cc.Sequence.create(
-                                  cc.DelayTime.create(0.2),
-                                  cc.EaseBounceOut.create(
-                                    cc.MoveTo.create(0.5, cc.p(this.elements.button.text.getCenterX() - Camera.sharedCamera().coord(10), this.elements.button.text.getCenterY()))
-                                  ),
-                                  false
-                                )
-                              );
-                              this.close();
-                            }.bind(this)
-                          });
+                          this.elements.button.registerTouchable(false);
+                          this.elements.button.text.setText(this.elements.button.text.texts.complete);
+                          this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(45) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
+                          this.elements.button.text.runAction(
+                            cc.Sequence.create(
+                              cc.DelayTime.create(0.2),
+                              cc.EaseBounceOut.create(
+                                cc.MoveTo.create(0.5, cc.p(this.elements.button.text.getCenterX() - Camera.sharedCamera().coord(10), this.elements.button.text.getCenterY()))
+                              ),
+                              false
+                            )
+                          );
+                          this.close();
                         }.bind(this)
-                      });
+                      };
+
+                      switch(this.config.params.platform) {
+                        case 'vk':
+                        if(!this.config.params.playtest) {
+                          handlers.vk.original();
+                        } else {
+                          handlers.vk.playtest();
+                        }
+                        break;
+                        case 'fb':
+                        if(!this.config.params.playtest) {
+                          handlers.fb.original();
+                        } else {
+                          handlers.fb.playtest();
+                        }
+                        break;
+                      }
                     }
                   }
                 }
@@ -280,24 +339,66 @@ MultiplayerList = PatternList.extend({
                 },
                 handlers: {
                   create: function() {
-                    this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(65), this.elements.button.getHeight() / 2);
+                    this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(35), this.elements.button.getHeight() / 2);
                   },
                   touch: function() {
-                    var messages = [
-                      LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
-                      LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
-                      LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
-                      LanguagesManager.sharedManager().get('friends-notification-vk-4').title
-                    ];
+                    var handlers = {
+                      vk: {
+                        original: function() {
+                          var messages = [
+                            LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
+                            LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
+                            LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
+                            LanguagesManager.sharedManager().get('friends-notification-vk-4').title
+                          ];
 
-                    Tooflya.VK.api.call('friends.request', {
-                      id: this.data.uid,
-                      message: messages.random()
-                    }, {
+                          Tooflya.VK.api.call('friends.request', {
+                            id: this.data.uid,
+                            message: messages.random()
+                          }, {
+                            success: function() {
+                              handlers.success();
+                            }.bind(this)
+                          });
+                        }.bind(this),
+                        playtest:function() {
+                          var messages = [
+                            LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
+                            LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
+                            LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
+                            LanguagesManager.sharedManager().get('friends-notification-vk-4').title
+                          ];
+
+                          VK.api("wall.post", {
+                            owner_id: this.data.uid,
+                            message: messages.random(),
+                            attachments: 'photo-43129938_340443444,http://vk.com/app4165575',
+                            test_mode: 1
+                          }, function(e) {
+                            handlers.success();
+                          });
+                        }.bind(this),
+                      },
+                      fb: {
+                        original: function() {
+                          var messages = [
+                            LanguagesManager.sharedManager().get('friends-notification-fb-1').title,
+                            LanguagesManager.sharedManager().get('friends-notification-fb-2').title,
+                            LanguagesManager.sharedManager().get('friends-notification-fb-3').title,
+                            LanguagesManager.sharedManager().get('friends-notification-fb-4').title
+                          ];
+
+                          // TODO: Add Facebook original handler.
+                        }.bind(this),
+                        playtest:function() {
+                          // TODO: Add Facebook playtest handler.
+                        }.bind(this),
+                      },
+
                       success: function() {
                         this.elements.button.registerTouchable(false);
                         this.elements.button.text.setText(this.elements.button.text.texts.complete);
-                        this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(30) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
+                        this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(40) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
                         this.elements.button.text.runAction(
                           cc.Sequence.create(
                             cc.DelayTime.create(0.2),
@@ -309,7 +410,24 @@ MultiplayerList = PatternList.extend({
                         );
                         this.close();
                       }.bind(this)
-                    });
+                    };
+
+                    switch(this.config.params.platform) {
+                      case 'vk':
+                      if(!this.config.params.playtest) {
+                        handlers.vk.original();
+                      } else {
+                        handlers.vk.playtest();
+                      }
+                      break;
+                      case 'fb':
+                      if(!this.config.params.playtest) {
+                        handlers.fb.original();
+                      } else {
+                        handlers.fb.playtest();
+                      }
+                      break;
+                    }
                   }
                 }
               });

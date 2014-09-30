@@ -300,6 +300,16 @@ var g_language  = {
     {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}//
     ],
+  'fb-price-text': [
+    {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 32, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}//
+    ],
   'lives-counter': [
     {title: '$1', font: 'Comic Sans MS', size: 48, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 48, dimensions: false},
@@ -2554,6 +2564,139 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-31': [
+    {title: 'I accept your challenge! Go back to the game to play with me!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Я принимаю твой вызов! Возвращайся в игру чтобы сыграть со мной!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+
+  'friends-notification-fb-1': [
+    {title: 'Hey there! I invite you to play with me! Here too many villains - your help won\'t be superfluous!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Привет! Приглашаю тебя поиграть со мной! Здесь слишком много злодеев - твоя помощь не будет лишней!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-2': [
+    {title: 'Oh, God I can\'t handle one! Help me out!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'О, черт! Мне не справиться одному! Выручай!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-3': [
+    {title: 'I invite you to the amazing world of birds! Don\'t miss the main battle!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Приглашаю тебя в клевый мир пернатых! Не пропусти главную битву!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-4': [
+    {title: 'I know that you like challenging games because you\'re smart!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Знаю, что тебе нравятся сложные игры ведь ты же умён!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+
+  'friends-notification-fb-11': [
+    {title: 'Hello! I give you a gold heart! Use it wisely.', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Привет! Дарю тебе золотое сердце! Воспользуйся им с умом.', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-12': [
+    {title: 'Here\'s my gift - a golden heart! Their number is limited!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Вот тебе мой подарок - золотое сердце! Их число ограничено!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-13': [
+    {title: '$Get your gold heart! ;)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Хватай золотое сердце! ;)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-14': [
+    {title: 'I know gold hearts now in short supply, but I have found one for you!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Знаю, золотые сердца сейчас в дефиците, но у меня нашлось одно для тебя!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+
+  'friends-notification-fb-21': [
+    {title: 'Hi! I invite you to fight with me! Take the challenge if you are not afraid!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Привет! Приглашаю тебя сразиться со мной! Принимай вызов если не боишься!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-22': [
+    {title: 'Сhallenge you!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Бросаю тебе вызов!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-23': [
+    {title: 'You can\'t defeat me! Even don\'t try...', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Тебе меня не одолеть! Можешь даже не пытаться...', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-24': [
+    {title: 'Have a minute? I want to play with you 1x1 :)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Есть минутка? Хочу сыграть с тобой один на один :)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
+    ],
+  'friends-notification-fb-31': [
     {title: 'I accept your challenge! Go back to the game to play with me!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: 'Я принимаю твой вызов! Возвращайся в игру чтобы сыграть со мной!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},

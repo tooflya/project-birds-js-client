@@ -162,18 +162,67 @@ FriendsButton = Button.extend({
 
     if(this.user.app) {
 
-    } else {
-      var messages = [
-        LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
-        LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
-        LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
-        LanguagesManager.sharedManager().get('friends-notification-vk-4').title
-      ];
+    } else {                      
+      var handlers = {
+        vk: {
+          original: function() {
+            var messages = [
+              LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-4').title
+            ];
 
-      Tooflya.VK.api.call('friends.request', {
-        id: this.user.uid,
-        message: messages.random()
-      }, {
+            Tooflya.VK.api.call('friends.request', {
+              id: this.user.uid,
+              message: messages.random()
+            }, {
+              success: function() {
+                handlers.success();
+              }.bind(this)
+            });
+          }.bind(this),
+          playtest:function() {
+            var messages = [
+              LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-3').title,
+              LanguagesManager.sharedManager().get('friends-notification-vk-4').title
+            ];
+
+            VK.api("wall.post", {
+              owner_id: this.data.uid,
+              message: messages.random(),
+              attachments: 'photo-43129938_340443444,http://vk.com/app4165575',
+              test_mode: 1
+            }, function(e) {
+              handlers.success();
+            });
+          }.bind(this),
+        },
+        fb: {
+          original: function() {
+            var messages = [
+              LanguagesManager.sharedManager().get('friends-notification-fb-1').title,
+              LanguagesManager.sharedManager().get('friends-notification-fb-2').title,
+              LanguagesManager.sharedManager().get('friends-notification-fb-3').title,
+              LanguagesManager.sharedManager().get('friends-notification-fb-4').title
+            ];
+
+            // TODO: Add Facebook original handler.
+          }.bind(this),
+          playtest:function() {
+            var messages = [
+              LanguagesManager.sharedManager().get('friends-notification-fb-1').title,
+              LanguagesManager.sharedManager().get('friends-notification-fb-2').title,
+              LanguagesManager.sharedManager().get('friends-notification-fb-3').title,
+              LanguagesManager.sharedManager().get('friends-notification-fb-4').title
+            ];
+
+            // TODO: Add Facebook playtest handler.
+          }.bind(this),
+        },
+
         success: function() {
           this.runAction(
             cc.Sequence.create(
@@ -229,7 +278,24 @@ FriendsButton = Button.extend({
             FriendsList.instance.m_LastIndex++;
           }
         }.bind(this)
-      });
+      };
+
+      switch(this.config.params.platform) {
+        case 'vk':
+        if(!this.config.params.playtest) {
+          handlers.vk.original();
+        } else {
+          handlers.vk.bind();
+        }
+        break;
+        case 'fb':
+        if(!this.config.params.playtest) {
+          handlers.fb.original();
+        } else {
+          handlers.fb.bind();
+        }
+        break;
+      }
     }
   },
   onEnter: function() {
