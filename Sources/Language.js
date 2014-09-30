@@ -341,7 +341,7 @@ var g_language  = {
     {title: 'リソース読み込んでいます... $1%', font: 'RiiPopkk-R', size: 36, dimensions: false}//
     ],
   'connect-api': [
-    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Updating...', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: 'Обновление информации...', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
@@ -371,7 +371,7 @@ var g_language  = {
     {title: '接続エラー', font: 'RiiPopkk-R', size: 36, dimensions: false}//
     ],
   'login': [
-    {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Waiting for authorization...', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: 'Ожидание авторизации...', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
@@ -991,7 +991,7 @@ var g_language  = {
     {title: "このモードのロックを解除するには：", font: "RiiPopkk-R", size: 42, dimensions: [450, 0]}
     ],
   'multiplayer-popup-1': [
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Mode selection", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "Выбор режима", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -1001,8 +1001,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
     ],
   'multiplayer-popup-2': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "Проходите компанию и станьте лучше ваших друзей!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Raise up your progress in game and become a better of your friends!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Проходите компанию и станьте лучше среди ваших друзей!", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
@@ -1021,7 +1021,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'multiplayer-popup-4': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Or choose a friend", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Или выберите друга", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1031,7 +1031,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'multiplayer-popup-5': [
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Waiting...", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "Ожидание...", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -1041,7 +1041,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
     ],
   'multiplayer-popup-6': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "$1 received the notice. Expect confirmation of participation.", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "$1 получил уведомление. Ожидаем подтверждения участия.", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
@@ -1051,7 +1051,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
     ],
   'multiplayer-popup-7': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Remaining $1", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Осталось: $1", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1061,7 +1061,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'multiplayer-popup-8': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "Waiting for the search of a random player.\nPlease wait.", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "Ожидание поиска случайного игрока.\nПожалуйста подождите.", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
@@ -1071,7 +1071,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
     ],
   'multiplayer-popup-9': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "Status", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "Статус: $1", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
@@ -1081,7 +1081,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
     ],
   'multiplayer-popup-10': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Play company", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Играть компанию", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -1091,7 +1091,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'multiplayer-popup-11': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Random opponent", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Случайный соперник", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -1141,7 +1141,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 52, dimensions: false}
     ],
   'network-5': [
-    {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
+    {title: "awaiting the player", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "ожидание игрока", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 52, dimensions: false},
@@ -1231,7 +1231,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
     ],
   'events-popup-2': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Events list is empty", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Список событий пуст", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1241,7 +1241,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'events-popup-3': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "Here displays a list of events, that happened recently.", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "Здесь отображается список событий, которые произошли недавно.", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
@@ -1251,7 +1251,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
     ],
   'events-popup-4': [
-    {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
+    {title: "Take a lifes", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "Принять жизни", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 48, dimensions: [450, 0]},
@@ -1261,7 +1261,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}
     ],
   'events-popup-5': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "Your friends helped you. Take advantage of their gifts!", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "Ваши друзья помогли вам. Воспользуйтесь их подарками!", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
@@ -1271,7 +1271,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
     ],
   'events-popup-6': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "You can ask for more lives!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Вы можете попросить больше жизней!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1341,7 +1341,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 28, dimensions: false}
     ],
   'level-popup-5': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "The list of players is empty", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Список игроков пуст", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1351,7 +1351,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'level-popup-6': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "This level still has not passed anyone\nBe the first!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Этот уровень еще никто не проходил\nБудь первым!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1821,7 +1821,7 @@ var g_language  = {
     {title: "プレイヤーランキング", font: "RiiPopkk-R", size: 48, dimensions: [450, 0]}//
     ],
   'leaderboard-popup-2': [
-    {title: "Ваша позиция в рейтинге: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "Your rank position: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
     {title: "Ваша позиция в рейтинге: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
@@ -1831,7 +1831,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 30, dimensions: [450, 0]}
     ],
   'leaderboard-popup-3': [
-    {title: "Всего игроков: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
+    {title: "Total players: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
     {title: "Всего игроков: $1", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 30, dimensions: [450, 0]},
@@ -1881,8 +1881,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}//
     ],
   'friends-lives-popup-2': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "У некоторых ваших друзей закончились золотые сердечки! Подарите им сердечки!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Some of your friends ended gold hearts! Give them hearts!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "У некоторых ваших друзей закончились золотые сердца! Подарите им сердца!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1891,8 +1891,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}//
     ],
   'friends-lives-popup-2': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
-    {title: "У некоторых ваших друзей закончились золотые сердечки! Подарите им сердечки!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Some of your friends ended gold hearts! Give them hearts!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "У некоторых ваших друзей закончились золотые сердца! Подарите им сердца!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -1901,7 +1901,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}//
     ],
   'friends-lives-popup-3': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
+    {title: "Help your friends defeat enemies, by gifting them lives! \ N (your lives remain the same)", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "Помогите вашим друзьям одолеть врагов, подарив им жизнь!\n(ваши жизни не отнимутся)", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [500, 0]},
@@ -1911,7 +1911,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
     ],
   'friends-lives-popup-4': [
-    {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
+    {title: "Your friends are sure to help you as well!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "Ваши друзья обязательно помогут и вам!", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
@@ -2022,7 +2022,7 @@ var g_language  = {
     ],
 
   'friends-notification-vk-1': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Hey there! I invite you to play with me! Here too many villains - your help won\'t be superfluous!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: 'Привет! Приглашаю тебя поиграть со мной! Здесь слишком много злодеев - твоя помощь не будет лишней!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2032,7 +2032,7 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-2': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Oh, God I can\'t handle one! Help me out!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: 'О, черт! Мне не справится одному! Выручай!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2042,8 +2042,8 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-3': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
-    {title: 'Приглашаю тебя в клевый мир пернатых! Не пропусти главную битву! :)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'I invite you to the amazing world of birds! Don\'t miss the main battle!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Приглашаю тебя в клевый мир пернатых! Не пропусти главную битву!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2052,8 +2052,8 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-4': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
-    {title: 'Знаю, что тебе нравятся сложные игры ведь ты же умён! :D', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'I know that you like challenging games because you\'re smart!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Знаю, что тебе нравятся сложные игры ведь ты же умён!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2063,8 +2063,8 @@ var g_language  = {
     ],
 
   'friends-notification-vk-11': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
-    {title: 'Привет! Дарю тебе золотое сердечко! Воспользуйся им с умом.', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Hello! I give you a gold heart! Use it wisely.', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Привет! Дарю тебе золотое сердце! Воспользуйся им с умом.', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2073,8 +2073,8 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-12': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
-    {title: 'Вот тебе мой подарок - золотое сердечко! Их число ограничено!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Here\'s my gift - a golden heart! Their number is limited!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Вот тебе мой подарок - золотое сердце! Их число ограничено!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2083,8 +2083,8 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-13': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
-    {title: 'Хватай золотое сердечко! ;)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: '$Get your gold heart! ;)', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Хватай золотое сердце! ;)', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2093,8 +2093,8 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-14': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
-    {title: 'Знаю, золотые сердца сейчас в дифиците, но у меня нашлось одно для тебя! :D', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'I know gold hearts now in short supply, but I have found one for you!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Знаю, золотые сердца сейчас в дефиците, но у меня нашлось одно для тебя!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2104,7 +2104,7 @@ var g_language  = {
     ],
 
   'friends-notification-vk-21': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Hi! I invite you to fight with me! Take the challenge if you are not afraid!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: 'Привет! Приглашаю тебя сразиться со мной! Принимай вызов если не боишься!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2114,7 +2114,7 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-22': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Сhallenge you!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: 'Бросаю тебе вызов!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2124,7 +2124,7 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-23': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'You can\'t defeat me! Even don\'t try...', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: 'Тебе меня не одолеть! Можешь даже не пытаться...', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2134,7 +2134,7 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-24': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'Have a minute? I want to play with you 1x1 :)', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: 'Есть минутка? Хочу сыграть с тобой один на один :)', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -2144,7 +2144,7 @@ var g_language  = {
     {title: '$1', font: 'RiiPopkk-R', size: 0, dimensions: false}
     ],
   'friends-notification-vk-31': [
-    {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'I accept your challenge! Go back to the game to play with me!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: 'Я принимаю твой вызов! Возвращайся в игру чтобы сыграть со мной!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
@@ -4287,7 +4287,7 @@ var g_language  = {
     {title: "$1", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'friends-live-present-1': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Give lives", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Подарить жизнь", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -4307,7 +4307,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'friends-live-present-3': [
-    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: 'You gave lives', font: 'Times New Roman', size: 32, dimensions: false},
     {title: 'Вам подарили жизнь', font: 'Times New Roman', size: 32, dimensions: false},
     {title: '', font: 'Times New Roman', size: 32, dimensions: false},
     {title: '', font: 'Times New Roman', size: 32, dimensions: false},
@@ -4317,7 +4317,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
   'friends-live-present-4': [
-    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '$1 $2 gave you lives!', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
     {title: '$1 $2 подарил вам жизнь!', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
     {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
     {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
@@ -4327,7 +4327,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 24, dimensions: [500, 0]}
     ],
   'friends-live-present-5': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Accept lives", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Принять жизнь", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -4337,7 +4337,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'friends-live-present-6': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Remaining $ 1", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Осталось: $1", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -4347,7 +4347,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'friends-live-present-7': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Lives has received!", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Жизнь получена!", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -4357,7 +4357,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'friends-live-present-8': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Take the challenge", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Принять вызов", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -4367,7 +4367,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'friends-live-present-9': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Challenge accepted!", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Вызов принят!", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -4377,7 +4377,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'friends-live-present-10': [
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Full lives", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Жизни полные", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
@@ -4387,7 +4387,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: false}
     ],
   'friends-multiplayer-present-1': [
-    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: 'Invocation to fight', font: 'Times New Roman', size: 24, dimensions: false},
     {title: 'Вызвать на бой', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
@@ -4397,7 +4397,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
     ],
   'friends-multiplayer-present-2': [
-    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: 'Invite to game', font: 'Times New Roman', size: 24, dimensions: false},
     {title: 'Пригласить в игру', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
@@ -4407,7 +4407,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
     ],
   'friends-multiplayer-present-3': [
-    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: 'A friend invited!', font: 'Times New Roman', size: 24, dimensions: false},
     {title: 'Друг приглашен!', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
@@ -4417,7 +4417,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
     ],
   'friends-multiplayer-present-4': [
-    {title: '', font: 'Times New Roman', size: 24, dimensions: false},
+    {title: 'Cancel', font: 'Times New Roman', size: 24, dimensions: false},
     {title: 'Отмена', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
     {title: '', font: 'Times New Roman', size: 24, dimensions: false},
@@ -4427,7 +4427,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
     ],
   'friends-multiplayer-present-5': [
-    {title: '', font: 'Times New Roman', size: 32, dimensions: false},
+    {title: 'You are being caused to battle', font: 'Times New Roman', size: 32, dimensions: false},
     {title: 'Вас вызывают на битву', font: 'Times New Roman', size: 32, dimensions: false},
     {title: '', font: 'Times New Roman', size: 32, dimensions: false},
     {title: '', font: 'Times New Roman', size: 32, dimensions: false},
@@ -4437,7 +4437,7 @@ var g_language  = {
     {title: '', font: 'RiiPopkk-R', size: 32, dimensions: false}//
     ],
   'friends-multiplayer-present-6': [
-    {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
+    {title: '$1 $2 causes to battle!', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
     {title: '$1 $2 вызывает вас на битву!', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
     {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
     {title: '', font: 'Times New Roman', size: 24, dimensions: [500, 0]},
