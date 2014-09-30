@@ -97,6 +97,8 @@ Moves = ExtendedPopup.extend({
       cc.ScaleTo.create(0.1, 1.0, 1.0)
       )
     );
+
+    this.m_GetButton.action = false;
   },
   onHide: function(callback, prepare) {
     this._super(callback, prepare);

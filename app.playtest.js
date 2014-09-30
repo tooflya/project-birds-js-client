@@ -397,7 +397,9 @@
     });
 
     if(callback) {
-      callback();
+      setTimeout(function() {
+        callback();
+      }, 3000);
     }
   };
 })();

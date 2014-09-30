@@ -44,11 +44,11 @@ ElementsManager = EntityManager.extend({
     ElementsManager.instance = this;
 
     this.m_ElementsSplashes = EntityManager.create(10, ElementSplash.create(), this.m_Stencil, 110, true);
-    this.m_ElementsIcons = EntityManager.create(10, ElementIcon.create(), this.m_Stencil, 110, true);
-    this.m_ElementsParts = EntityManager.create(100, ElementPart.create(), Game.sharedScreen(), 110, true);
+    this.m_ElementsIcons = EntityManager.create(150, ElementIcon.create(), this.m_Stencil, 110, true);
+    this.m_ElementsParts = EntityManager.create(300, ElementPart.create(), Game.sharedScreen(), 110, true);
     this.m_ElementsSickles = EntityManager.create(10, Entity.create(s_ElementsSickles), Game.sharedScreen(), 110, true);
     this.m_ElementsGlows = EntityManager.create(10, ElementGlow.create(), this.m_Stencil, 110, true);
-    this.m_ElementsBubbles = EntityManager.create(10, Bubble.create(), this.m_Stencil, 111, true);
+    this.m_ElementsBubbles = EntityManager.create(150, Bubble.create(), this.m_Stencil, 111, true);
     this.m_ElementsBubblesPoping = EntityManager.create(10, BubblePoping.create(), this.m_Stencil, 111, true);
 
     this.m_MatrixArrows2 = EntityManager.create(30, Entity.create(s_MatrixArrow2), Game.sharedScreen().m_LevelBackground, 110, true);
@@ -170,6 +170,10 @@ ElementsManager = EntityManager.extend({
         var x = origin.x + padding * j;
 
         var bubble = false;
+        var bonuses = {
+          horizontal: false,
+          vertical: false
+        };
 
         if(Game.network && !Game.server) { // TODO: Adjust third-party types such as block or empty but not a star.
           var id = matrix[counter.x][counter.y];
@@ -182,6 +186,16 @@ ElementsManager = EntityManager.extend({
           this.m_MatrixManager.set(this.last(), counter.x, counter.y);
         } else {
           var type = matrix[counter.y][counter.x];
+
+          if(type < -4000) {
+            bonuses.vertical = true;
+
+            type += 4000;
+          } else if(type < -2000) {
+            bonuses.horizontal = true;
+
+            type += 2000;
+          }
 
           if(Math.abs(type) >= 1000) {
             type = type > 0 ? (type - 1000) : (type + 1000);
@@ -250,6 +264,9 @@ ElementsManager = EntityManager.extend({
             }
 
             this.last().setCenterPosition(x, y);
+
+            if(bonuses.vertical) this.last().setBonus(Element.bonus.types.vertical);
+            if(bonuses.horizontal) this.last().setBonus(Element.bonus.types.horizontal);
 
             if(type == etypes.chain) this.last().chain();
 

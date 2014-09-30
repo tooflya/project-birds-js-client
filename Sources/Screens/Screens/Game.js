@@ -208,7 +208,7 @@ Game = Screen.extend({
       this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this.m_LevelBackground, 305);
 
       this.m_Feathers = EntityManager.create(500, Feather.create(false, this.getPhysicsWorld()), this.m_LevelBackground, 304);
-      this.m_Explosions = EntityManager.create(50, Explosion.create(), this.m_LevelBackground, 306);
+      this.m_Explosions = EntityManager.create(50, Explosion.create(), this, 306);
 
       this.m_Ground = PhysicsEntity.create(s_Ground, 1, 1, this.m_LevelBackground, this.getPhysicsWorld(), 0.1, 1.0, 0.1, 2.0, 8.0);
       this.m_Target = Target.create(this.m_LevelBackground);

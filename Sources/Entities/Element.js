@@ -499,9 +499,17 @@ Element = TiledEntity.extend({
     return this.m_Chained;
   },
   starred: function() {
+    var bottom = MatrixManager.sharedManager().getSize().y * 2;
+
+    for(var i = bottom; i >= 0; i--) {
+      if(MatrixManager.sharedManager().get(this.getIndex().x, i) != etypes.empty) {
+        bottom = i;
+      }
+    }
+
     switch(this.getId()) {
       case Element.types.star:
-      if(this.getIndex().y == 0) { // TODO: Replace to the last bottom available point.
+      if(this.getIndex().y == bottom) {
         this.remove();
 
         return true;
@@ -708,7 +716,7 @@ Element = TiledEntity.extend({
           var toper = false;
           var stop = false;
 
-          for(var t = index.y; t < manager.getSize().y; t++) {
+          for(var t = index.y; t < manager.getSize().y*2; t++) {
             var element = manager.get(index.x - 1, t);
 
             if(!stop) {
@@ -749,7 +757,7 @@ Element = TiledEntity.extend({
           toper = false;
           stop = false;
 
-          for(var t = index.y; t < manager.getSize().y; t++) {
+          for(var t = index.y; t < manager.getSize().y*2; t++) {
             var element = manager.get(index.x + 1, t);
 
             if(!stop) {

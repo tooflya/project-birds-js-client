@@ -142,6 +142,8 @@ Lives = ExtendedPopup.extend({
         )
       );
     }
+
+    this.m_GetButton.action = false;
   },
   onHide: function(callback, prepare) {
     this._super(callback, prepare);

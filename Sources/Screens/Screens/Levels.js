@@ -292,6 +292,8 @@ Levels = Screen.extend({
   },
   onExit: function() {
     this._super();
+
+    Levels.instance = false;
   },
   /*onTouch: function(e) {
     if(!this.m_WasDraged) {

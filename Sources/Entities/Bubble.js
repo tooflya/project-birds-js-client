@@ -34,8 +34,8 @@ Bubble = Entity.extend({
     this._super(s_ElementsBubbles);
 
     this.m_Index = {
-      x: 0,
-      y: 0
+      x: -1,
+      y: -1
     };
   },
   onCreate: function() {

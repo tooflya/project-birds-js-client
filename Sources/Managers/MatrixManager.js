@@ -650,7 +650,7 @@ MatrixManager = cc.Node.extend({
             }
           }
         }, MatrixManager.pause * 1000);
-      }, this.getType() == MatrixManager.types.war ? 1000 : 300);
+      }, this.getType() == MatrixManager.types.war ? 1000 : Math.max(300, MatrixManager.pause * 1000));
     }
   },
   hasMatchesWith: function(element, neighbor) {
@@ -893,7 +893,9 @@ MatrixManager = cc.Node.extend({
         if(this.m_CurrentElement1.m_Bonus) this.m_CurrentElement1.remove();
         if(this.m_CurrentElement2.m_Bonus) this.m_CurrentElement2.remove();
 
-        this.clear();
+        MatrixManager.timeout = new PausableTimeout(function() {
+          MatrixManager.sharedManager().clear();
+        }, 1000);
       } else {
         this.replace(this.m_CurrentElement2, this.m_CurrentElement1, true, network);
       }
