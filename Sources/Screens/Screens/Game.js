@@ -183,9 +183,11 @@ Game = Screen.extend({
 
     this.m_Background = Entity.create(backgrounds[Random.sharedRandom().random(0, backgrounds.length, true)], this, true);
 
-    this.m_PreviewBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this);
-    this.m_SplashBackground = BackgroundColor.create(cc.c4(255, 255, 255, 0), this);
-    this.m_SplashEffect1 = Entity.create(s_ScreenEffect1, this);
+
+    this.m_LevelBackground = Background.create(this);
+    this.m_PreviewBackground = BackgroundColor.create(cc.c4(0, 0, 0, 0), this.m_LevelBackground);
+    this.m_SplashBackground = BackgroundColor.create(cc.c4(255, 255, 255, 0), this.m_LevelBackground);
+    this.m_SplashEffect1 = Entity.create(s_ScreenEffect1, this.m_LevelBackground);
 
     this.m_PreviewBackground.setZOrder(200);
     this.m_SplashBackground.setZOrder(200);
@@ -202,8 +204,6 @@ Game = Screen.extend({
 
     switch(this.m_Type) {
       case this.m_Types.progress:
-      this.m_LevelBackground = Background.create(this);
-
       this.m_WeaponParticles1 = EntityManager.create(100, WeaponParticle1.create(), this.m_LevelBackground, 305);
       this.m_WeaponParticles2 = EntityManager.create(100, WeaponParticle2.create(), this.m_LevelBackground, 305);
 
@@ -652,6 +652,9 @@ Game = Screen.extend({
         this.m_NetworkDecorations.create();
       }
     }
+
+    this.m_PreviewBackground.setPosition({x: this.m_PreviewBackground.getPosition().x, y: -this.m_LevelBackground.getPosition().y + Camera.sharedCamera().center.y});
+    this.m_SplashBackground.setPosition({x: this.m_SplashBackground.getPosition().x, y: -this.m_LevelBackground.getPosition().y + Camera.sharedCamera().center.y});
   },
   onKeyDown: function(e) {
     switch(e) {

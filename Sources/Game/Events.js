@@ -325,6 +325,8 @@ Game.prototype.onFinishShow = function() {
     this.stopAllActions();
     this.m_CombinationsNotification.stopAllActions();
     this.m_PreviewBackground.stopAllActions();
+    this.m_LevelBackground.stopAllActions();
+    this.m_KeysPanel.stopAllActions();
 
     ElementsManager.instance.clear();
     MatrixManager.instance.clear();
@@ -333,7 +335,10 @@ Game.prototype.onFinishShow = function() {
     MatrixManager.instance = false;
     ActionsManager.instance = false;
 
+    this.m_LevelBackground.setCenterPosition(0, 0);
     this.m_ElementsExplanationTexts.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200));
+    this.m_KeysPanel.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200));
+    this.m_Cloud.setOpacity(0);
     this.m_PreviewBackground.setOpacity(0);
 
     this.m_Ground.setZOrder(301);
@@ -343,6 +348,7 @@ Game.prototype.onFinishShow = function() {
     this.m_PreviewBackground.setZOrder(200, 200)
 
     this.m_Target.destroy();
+    this.m_BubbleTarget.destroy();
     this.m_Catapults.onLevelFinish();
 
     if(Game.tutorial) {

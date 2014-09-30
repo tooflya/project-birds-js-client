@@ -42,7 +42,6 @@ BubbleTarget = Entity.extend({
     this._super();
 
     this.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().coord(18));
-    this.setCurrentFrameIndex(0);
 
     this.setScale(0.0);
     this.setAnchorPoint(cc.p(0.5, 0.1));
@@ -71,6 +70,7 @@ BubbleTarget = Entity.extend({
       this.m_Decorations[i] = Entity.create(s_PopupDecoration1, this.getParent());
 
       this.m_Decorations[i].create().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
+      this.m_Decorations[i].setColor(cc.c4(200, 255, 255, 255));
       this.m_Decorations[i].setScale(0.0);
       this.m_Decorations[i].setZOrder(300);
       this.m_Decorations[i].runAction(
@@ -85,7 +85,6 @@ BubbleTarget = Entity.extend({
     }
 
     this.m_Text.create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2 + Camera.sharedCamera().coord(5));
-    this.m_Text.score = 0;
   },
   onDestroy: function() {
     this._super();
@@ -95,16 +94,17 @@ BubbleTarget = Entity.extend({
     }
   },
   onTouch: function() {
-    if(this.getNumberOfRunningActions() <= 0) {
+    if(this.getNumberOfRunningActions() <= 1) {
       this.runAction(
         cc.Sequence.create(
+          cc.ScaleTo.create(0.1, 1.0),
           cc.ScaleTo.create(0.1, 0.9),
           cc.ScaleTo.create(0.2, 1.1),
           cc.ScaleTo.create(0.3, 0.8),
           cc.ScaleTo.create(0.2, 1.0),
           false
-          )
-        );
+        )
+      );
     }
 
     if(!Game.network) {
@@ -125,14 +125,11 @@ BubbleTarget = Entity.extend({
     this.m_Decorations[0].setCenterPosition(this.getCenterX(), this.getCenterY() + (this.m_Finish ? 0 : this.getHeight() / 2));
     this.m_Decorations[1].setCenterPosition(this.getCenterX(), this.getCenterY() + (this.m_Finish ? Camera.sharedCamera().coord(50) : this.getHeight() / 2));
 
-    if(this.m_Text.score != Game.score) {
-      if(Game.score - this.m_Text.score > 1111) this.m_Text.score += 1111;
-      else if(Game.score - this.m_Text.score > 111) this.m_Text.score += 111;
-      else if(Game.score - this.m_Text.score > 11) this.m_Text.score += 11;
-      else this.m_Text.score++;
-    }
+    this.m_Text.ccsf([MatrixManager.instance.getBubblesCount()]);
 
-    this.m_Text.ccsf([this.m_Text.score]);
+    if(MatrixManager.instance.getBubblesCount() <= 0) {
+      this.destroy();
+    }
   }
 });
 

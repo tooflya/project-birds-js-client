@@ -78,7 +78,7 @@ FriendsList = List.extend({
     this.m_BackgroundPicture = Entity.create(s_FriendsCover, parent);
 
     this.setCenterPosition(0, this.m_BackgroundPicture.getHeight() / 2 - Camera.sharedCamera().height / 2 + Camera.sharedCamera().coord(5));
-    this.m_BackgroundPicture.create().setCenterPosition(Camera.sharedCamera().center.x, -this.m_BackgroundPicture.getHeight() / 2 + Camera.sharedCamera().coord(5));
+    this.m_BackgroundPicture.create().setCenterPosition(Camera.sharedCamera().center.x, -this.m_BackgroundPicture.getHeight() / 2);
     this.m_BackgroundPicture.setZOrder(-1);
     this.setZOrder(100);
 

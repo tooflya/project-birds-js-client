@@ -32,6 +32,11 @@
 Bubble = Entity.extend({
   ctor: function() {
     this._super(s_ElementsBubbles);
+
+    this.m_Index = {
+      x: 0,
+      y: 0
+    };
   },
   onCreate: function() {
     this._super();
@@ -39,7 +44,16 @@ Bubble = Entity.extend({
   onDestroy: function() {
     this._super();
 
-    ElementsManager.instance.m_ElementsBubblesPoping.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+    ElementsManager.sharedManager().m_ElementsBubblesPoping.create().setCenterPosition(this.getCenterX(), this.getCenterY());
+
+    MatrixManager.sharedManager().m_BubbleMatrix[this.getIndex().x][this.getIndex().y] = false;
+  },
+  setIndex: function(x, y) {
+    this.m_Index.x = x;
+    this.m_Index.y = y;
+  },
+  getIndex: function() {
+    return this.m_Index;
   },
   update: function(time) {
     this._super(time);

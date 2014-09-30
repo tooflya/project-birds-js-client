@@ -115,6 +115,40 @@ Game.prototype.onTurnChangeFinish = function() {
   }
 };
 
+Game.prototype.onSimpleTurnChange = function() {
+  if(ElementsManager.sharedManager().m_CurrentRow > 0) {
+    if(Game.instance.m_CurrentBlows <= 0) {
+      Moves.sharedScreen(this).show();
+
+      return true;
+    }
+
+    if(MatrixManager.sharedManager().getVisibleBubblesCount() < 1) {
+      ElementsManager.instance.moveDown();
+    }
+
+    MatrixManager.sharedManager().enable();
+
+    if(MatrixManager.sharedManager().getBubblesCount() < 1) {
+      if(MatrixManager.sharedManager().getType() == MatrixManager.types.bubbles) {
+        ActionsManager.sharedManager().clear();
+
+        MatrixManager.sharedManager().setType(MatrixManager.types.war);
+
+        this.m_PlayerTurn = false;
+
+        this.onTurnChange();
+
+        return true;
+      }
+    }
+
+    return true;
+  }
+
+  return false;
+};
+
 Game.prototype.onExtraMove = function() {
   if(!this.m_GameRunning) return false;
 

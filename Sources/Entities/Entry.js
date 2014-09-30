@@ -50,7 +50,6 @@ Entry = Entity.extend({
     this.setContentSize(cc.size(Camera.sharedCamera().coord(450), Camera.sharedCamera().coord(100)));
     this.setAnchorPoint(cc.p(0.5, 0.5));
     this.setCenterPosition(this.position.x, this.position.y);
-    this.registerTouchable(true);
   },
   onStart: function() {
     this.stopAllActions();
@@ -95,6 +94,8 @@ Entry = Entity.extend({
         this.elements.hidder.create().setCenterPosition(Camera.sharedCamera().coord(380), this.elements.name.getCenterY());
 
         if(this.supports.close) {
+          this.registerTouchable(true);
+
           this.elements.close = Button.create(s_ListElementClose, 1, 1, this);
           this.elements.close.create().setCenterPosition(Camera.sharedCamera().coord(420), Camera.sharedCamera().coord(100) - this.elements.close.getHeight() / 2);
           this.elements.close.setOpacity(0);

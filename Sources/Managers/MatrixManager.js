@@ -44,10 +44,6 @@ MatrixManager = cc.Node.extend({
       finish: 0
     }
   },
-  m_Types: {
-    war: 0,
-    dirty: 1
-  },
   m_Type: 0,
   m_zIndex: 100,
   m_Matrix: false,
@@ -79,6 +75,30 @@ MatrixManager = cc.Node.extend({
   },
   createBubble: function(element, x, y) {
     this.m_BubbleMatrix[x][y] = element;
+
+    element.setIndex(x, y);
+  },
+  getBubble: function(x, y) {
+    if(this.m_BubbleMatrix[x]) {
+      return this.m_BubbleMatrix[x][y];
+    }
+
+    return false;
+  },
+  getBubblesCount: function() {
+    return ElementsManager.instance.m_ElementsBubbles.getCount();
+  },
+  getVisibleBubblesCount: function() {
+    var count = 0;
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
+        if(this.m_BubbleMatrix[i][j]) {
+          count++;
+        }
+      }
+    }
+
+    return count;
   },
   set: function(element, x, y, created, probably) {
     if(element === etypes.empty || element === etypes.block) {
@@ -361,20 +381,20 @@ MatrixManager = cc.Node.extend({
 
     return false;
   },
-  verify: function(index, full) {
+  verify: function(index, full, soft) {
     if(full) {
       return {
-        top: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y + 1) >= 0 && (index.y + 1) <= this.getSize().y) && this.get(index.x, index.y + 1) && !this.soe(this.get(index.x, index.y + 1)),
-        down: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y - 1) >= 0 && (index.y - 1) <= this.getSize().y) && this.get(index.x, index.y - 1) && !this.soe(this.get(index.x, index.y - 1)),
-        left: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x - 1) >= 0 && (index.x - 1) <= this.getSize().x) && this.get(index.x - 1, index.y) && !this.soe(this.get(index.x - 1, index.y)),
-        right: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x + 1) >= 0 && (index.x + 1) <= this.getSize().x) && this.get(index.x + 1, index.y) && !this.soe(this.get(index.x + 1, index.y))
+        top: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y + 1) >= 0 && (index.y + 1) <= this.getSize().y) && this.get(index.x, index.y + 1) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x, index.y + 1))),
+        down: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y - 1) >= 0 && (index.y - 1) <= this.getSize().y) && this.get(index.x, index.y - 1) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x, index.y - 1))),
+        left: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x - 1) >= 0 && (index.x - 1) <= this.getSize().x) && this.get(index.x - 1, index.y) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x - 1, index.y))),
+        right: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x + 1) >= 0 && (index.x + 1) <= this.getSize().x) && this.get(index.x + 1, index.y) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x + 1, index.y)))
       };
     } else {
       return {
-        top: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y + 1) <= this.getCurrentSize().y.finish && (index.y + 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y + 1) && !this.soe(this.get(index.x, index.y + 1)),
-        down: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y - 1) <= this.getCurrentSize().y.finish && (index.y - 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y - 1) && !this.soe(this.get(index.x, index.y - 1)),
-        left: (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x - 1) <= this.getCurrentSize().x.finish && (index.x - 1) >= this.getCurrentSize().x.start) && this.get(index.x - 1, index.y) && !this.soe(this.get(index.x - 1, index.y)),
-        right: (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x + 1) <= this.getCurrentSize().x.finish && (index.x + 1) >= this.getCurrentSize().x.start) && this.get(index.x + 1, index.y) && !this.soe(this.get(index.x + 1, index.y))
+        top: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y + 1) <= this.getCurrentSize().y.finish && (index.y + 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y + 1) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x, index.y + 1))),
+        down: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y - 1) <= this.getCurrentSize().y.finish && (index.y - 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y - 1) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x, index.y - 1))),
+        left: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x - 1) <= this.getCurrentSize().x.finish && (index.x - 1) >= this.getCurrentSize().x.start) && this.get(index.x - 1, index.y) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x - 1, index.y))),
+        right: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x + 1) <= this.getCurrentSize().x.finish && (index.x + 1) >= this.getCurrentSize().x.start) && this.get(index.x + 1, index.y) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x + 1, index.y)))
       };
     }
   },
@@ -496,6 +516,12 @@ MatrixManager = cc.Node.extend({
       this.m_Matrix[i] = Array(this.getSize().y * 2);
       this.m_BubbleMatrix[i] = Array(this.getSize().y * 2);
     }
+
+    if(this.getSize().y > 7) {
+      this.setType(MatrixManager.types.bubbles);
+    } else {
+      this.setType(MatrixManager.types.war);
+    }
   },
   getSize: function() {
     return this.m_Size;
@@ -603,9 +629,7 @@ MatrixManager = cc.Node.extend({
               var bomb = MatrixManager.sharedManager().hasBonus(Element.bonus.types.bomb);
 
               if(!pack && !bomb) {
-                if(ElementsManager.instance.m_CurrentRow > 0) {
-                  MatrixManager.sharedManager().enable();
-                } else {
+                if(!Game.instance.onSimpleTurnChange()) {
                   ActionsManager.sharedManager().run();
                 }
               } else {
@@ -618,13 +642,15 @@ MatrixManager = cc.Node.extend({
                 } else if(bomb && MatrixManager.sharedManager().m_ExtaMove) {
                   Game.instance.onExtraMove();
                 } else {
-                  ActionsManager.sharedManager().run();
+                  if(!Game.instance.onSimpleTurnChange()) {
+                    ActionsManager.sharedManager().run();
+                  }
                 }
               }
             }
           }
         }, MatrixManager.pause * 1000);
-      }, 1000);
+      }, this.getType() == MatrixManager.types.war ? 1000 : 300);
     }
   },
   hasMatchesWith: function(element, neighbor) {
@@ -688,7 +714,7 @@ MatrixManager = cc.Node.extend({
       right: this.get(index.x + 1, index.y)
     };
 
-    var positions = this.verify(index, full);
+    var positions = this.verify(index, full, true);
 
     if(data) {
       if(positions.top) positions.top = data.matches.top;
@@ -774,7 +800,7 @@ MatrixManager = cc.Node.extend({
                 left: false,
                 right: false
               }
-            }));
+            }, full));
           }
         }
       }
@@ -798,7 +824,7 @@ MatrixManager = cc.Node.extend({
                 left: false,
                 right: false
               }
-            }));
+            }, full));
           }
         }
       }
@@ -822,7 +848,7 @@ MatrixManager = cc.Node.extend({
                 left: true,
                 right: false
               }
-            }));
+            }, full));
           }
         }
       }
@@ -846,7 +872,7 @@ MatrixManager = cc.Node.extend({
                 left: false,
                 right: true
               }
-            }));
+            }, full));
           }
         }
       }
@@ -902,6 +928,8 @@ MatrixManager = cc.Node.extend({
     this.m_CurrentElement2 = false;
   },
   fillAll: function(matrix) {
+    if(!this.m_Matrix) return false;
+
     if(!Game.network || Game.server) {
       matrix = [];
 
@@ -915,7 +943,7 @@ MatrixManager = cc.Node.extend({
 
             matrix.push(element.getId());
 
-            var down = this.m_Matrix[i][j - 1];
+            var down = this.m_Matrix[i][j - 1]; // TODO: What id down is null?
 
             if(down && down != etypes.empty && down != etypes.block) {
               var x = down.getCenterX();
@@ -967,16 +995,18 @@ MatrixManager = cc.Node.extend({
     }
 
     // TODO: Fix position based on matrix size.
-    /*for(var i = 0; i < this.getSize().x; i++) {
+    for(var i = 0; i < this.getSize().x; i++) {
       for(var j = 0; j < this.getSize().y * 2; j++) {
         var frame = this.m_Matrix[i][j];
         if(frame && frame != etypes.empty && frame != etypes.block) {
           frame.setCenterPosition(ElementsManager.sharedManager().getParent().getWidth() / 4 + frame.getWidth() * frame.getIndex().x - frame.getWidth() / 4 + Camera.sharedCamera().coord(4), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
         }
       }
-    }*/
+    }
   },
   findAll: function() {
+    if(!this.m_Matrix) return false;
+
     MatrixManager.pools = [];
 
     this.fillAll();
@@ -997,6 +1027,8 @@ MatrixManager = cc.Node.extend({
     return combinations > 0;
   },
   findStars: function() {
+    if(!this.m_Matrix) return false;
+
     for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
       for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
         if(this.m_Matrix[i][j] instanceof Element) {
@@ -1010,11 +1042,15 @@ MatrixManager = cc.Node.extend({
     return false;
   },
   lookDown: function(clear) {
+    if(!this.m_Matrix) return false;
+
     if(!Game.sharedScreen().m_TutorialRunning) {
       for(var j = 0; j < this.getSize().y * 2; j++) {
         for(var i = 0; i < this.getSize().x; i++) {
           var frame = this.m_Matrix[i][j];
-          if(frame && !this.soe(frame)) this.m_Matrix[i][j].lookDown(true);
+          if(frame && !this.soe(frame)) {
+            this.m_Matrix[i][j].lookDown(true);
+          }
         }
       }
     }
@@ -1049,7 +1085,7 @@ MatrixManager = cc.Node.extend({
     this.m_PauseTime[index.x] += 0.1;
 
     if(index.y - data.down <= this.m_CurrentSize.y.finish) {
-      MatrixManager.pause = Math.max(MatrixManager.pause, sequence.getDuration() + this.m_PauseTime.max());
+      MatrixManager.pause = Math.max(MatrixManager.pause, sequence.getDuration());
     }
   },
   shuffle: function() {
@@ -1096,10 +1132,10 @@ MatrixManager = cc.Node.extend({
         var finger = Game.instance.m_HelpFinger;
 
         var x1 = element.convertToWorldSpace(cc.p(0, 0)).x + element.getWidth() / 2 + finger.getWidth() / 4;
-        var y1 = element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2 - finger.getHeight() / 2;
+        var y1 = element.convertToWorldSpace(cc.p(0, 0)).y + element.getHeight() / 2 - finger.getHeight() / 2 - Game.sharedScreen().m_LevelBackground.getPosition().y;
 
         var x2 = neighbor.convertToWorldSpace(cc.p(0, 0)).x + neighbor.getWidth() / 2 + finger.getWidth() / 4;
-        var y2 = neighbor.convertToWorldSpace(cc.p(0, 0)).y + neighbor.getHeight() / 2 - finger.getHeight() / 2;
+        var y2 = neighbor.convertToWorldSpace(cc.p(0, 0)).y + neighbor.getHeight() / 2 - finger.getHeight() / 2 - Game.sharedScreen().m_LevelBackground.getPosition().y;
 
         finger.create().setCenterPosition(x1, y1);
         finger.setOpacity(0);
@@ -1188,9 +1224,9 @@ MatrixManager = cc.Node.extend({
             )
           );
         }
-      }
 
-      time += 0.05;
+        time += 0.05;
+      }
 
       if(!this.m_PauseTime[i]) {
         this.m_PauseTime[i] = time;
@@ -1198,6 +1234,8 @@ MatrixManager = cc.Node.extend({
         this.m_PauseTime[i] += time;
       }
     }
+
+    MatrixManager.pause += time;
 
     time = 0.05;
     for(var i = x + 1; i < this.getSize().x; i++) {
@@ -1217,9 +1255,9 @@ MatrixManager = cc.Node.extend({
             )
           );
         }
-      }
 
-      time += 0.05;
+        time += 0.05;
+      }
 
       if(!this.m_PauseTime[i]) {
         this.m_PauseTime[i] = time;
@@ -1228,7 +1266,7 @@ MatrixManager = cc.Node.extend({
       }
     }
 
-    MatrixManager.pause += 1.0;
+    MatrixManager.pause += time;
 
     Sound.sharedSound().play(s_SoundLine);
   },
@@ -1287,6 +1325,8 @@ MatrixManager = cc.Node.extend({
       time += 0.05;
     }
 
+    MatrixManager.pause += time;
+
     time = 0.05;
     for(var i = y + 1; i <=  this.m_CurrentSize.y.finish; i++) {
       var current = this.get(x, i);
@@ -1315,6 +1355,8 @@ MatrixManager = cc.Node.extend({
     } else {
       this.m_PauseTime[x] += time;
     }
+
+    MatrixManager.pause += time;
 
     Sound.sharedSound().play(s_SoundLine);
   },
@@ -1515,9 +1557,19 @@ MatrixManager = cc.Node.extend({
         }
       }.bind(this));
     }.bind(this));
+  },
+  setType: function(type) {
+    this.m_Type = type;
+  },
+  getType: function() {
+    return this.m_Type;
   }
 });
 
+MatrixManager.types = {
+  war: 0,
+  bubbles: 1
+};
 MatrixManager.pause = 0;
 MatrixManager.pools = [];
 MatrixManager.pool = function () {

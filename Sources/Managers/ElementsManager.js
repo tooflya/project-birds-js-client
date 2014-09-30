@@ -125,6 +125,9 @@ ElementsManager = EntityManager.extend({
       }
     }
 
+    this.m_MovesDown = m.scrolls;
+    this.m_MoveDown = 0;
+
     var padding = this.get(0).getWidth();
 
     var origin = {
@@ -360,6 +363,10 @@ ElementsManager = EntityManager.extend({
         }
       }
     }
+
+    if(this.m_ElementsBubbles.getCount() > 0) {
+      Game.instance.m_BubbleTarget.create();
+    }
   },
   scheduleUpdate: function() {
     this._super();
@@ -384,6 +391,8 @@ ElementsManager = EntityManager.extend({
     }
   },
   clear: function() {
+    this.m_ElementsBubbles.removeFromParent();
+    this.m_ElementsBubblesPoping.removeFromParent();
     this.m_MatrixArrows1.removeFromParent();
     this.m_MatrixArrows2.removeFromParent();
     this.m_Clipper.removeFromParent();
@@ -439,7 +448,7 @@ ElementsManager = EntityManager.extend({
           false
         )
       );
-    }.bind(this), 990);
+    }.bind(this), (MatrixManager.sharedManager().getType() == MatrixManager.types.war ? 990 : 0));
   },
   getMatrix: function() {
     return this.m_Matrix;
@@ -501,6 +510,9 @@ ElementsManager = EntityManager.extend({
         element.onChangePosition();
       }
     });
+  },
+  moveDown: function() {
+    this.slideToRow(this.m_CurrentRow - this.m_MovesDown[this.m_MoveDown++]);
   }
 });
 
