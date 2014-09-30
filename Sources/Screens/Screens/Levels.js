@@ -267,6 +267,7 @@ Levels = Screen.extend({
         element.m_Text.setVisible(false);
         element.setCurrentFrameIndex(5);
       } else {
+        element.m_Text.setVisible(true);
         if(!element.isRegisterTouchable()) {
           element.registerTouchable(true);
         }

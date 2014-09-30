@@ -440,12 +440,16 @@ Finish = Background.extend({
     }
   },
   onMenuEvent: function() {
+    Camera.sharedCamera().setDesignResolutionSize();
+
     this.setBottomScreen(Menu);
 
     this.hide(function() {
     });
   },
   onShopEvent: function() {
+    Camera.sharedCamera().setDesignResolutionSize();
+
     this.setBottomScreen(Shop);
 
     this.hide(function() {
@@ -457,6 +461,8 @@ Finish = Background.extend({
     });
   },
   onContinueEvent: function() {
+    Camera.sharedCamera().setDesignResolutionSize();
+
     if(Game.tutorial) {
       this.setBottomScreen(Levels);
 

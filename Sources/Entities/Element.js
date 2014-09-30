@@ -668,7 +668,16 @@ Element = TiledEntity.extend({
 
             down++;
 
-            actions.push(cc.MoveTo.create(0.1, cc.p(x, y - h)));
+            if(actions.last()) {
+              if(actions.last()._endPosition.x == x) {
+                actions.last()._duration += 0.1;
+                actions.last()._endPosition.y = (y - h);
+              } else {
+                actions.push(cc.MoveTo.create(0.1, cc.p(x, y - h)));
+              }
+            } else {
+              actions.push(cc.MoveTo.create(0.1, cc.p(x, y - h)));
+            }
 
             y -= h;
           } else {
@@ -722,7 +731,7 @@ Element = TiledEntity.extend({
           var toper = false;
           var stop = false;
 
-          for(var t = index.y; t < manager.getSize().y*2; t++) {
+          for(var t = index.y; t < manager.getSize().y * 2; t++) {
             var element = manager.get(index.x - 1, t);
 
             if(!stop) {
