@@ -274,7 +274,9 @@ MultiplayerList = PatternList.extend({
                               attachments: 'photo-43129938_340443444,http://vk.com/app4165575',
                               test_mode: 1
                             }, function(e) {
-                              handlers.success();
+                              if(!e.error) {
+                                handlers.success();
+                              }
                             });
                           }.bind(this),
                         },
@@ -375,7 +377,9 @@ MultiplayerList = PatternList.extend({
                             attachments: 'photo-43129938_340443444,http://vk.com/app4165575',
                             test_mode: 1
                           }, function(e) {
-                            handlers.success();
+                            if(!e.error) {
+                              handlers.success();
+                            }
                           });
                         }.bind(this),
                       },
