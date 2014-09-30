@@ -743,7 +743,7 @@ var resources = [
   {src: s_Levels[69]},
   {src: s_Levels[70]},
 
-  /*{src: s_Music1},
+  {src: s_Music1},
   {src: s_Music2},
   {src: s_SoundButtonTouch},
   {src: s_SoundEquipUnlock},
@@ -776,5 +776,5 @@ var resources = [
   {src: s_SoundChew[2]},
   {src: s_SoundDrop[0]},
   {src: s_SoundDrop[1]},
-  {src: s_SoundDrop[2]}*/
+  {src: s_SoundDrop[2]}
 ];
