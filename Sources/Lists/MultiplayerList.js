@@ -271,7 +271,7 @@ MultiplayerList = PatternList.extend({
                             VK.api("wall.post", {
                               owner_id: this.data.uid,
                               message: messages.random(),
-                              attachments: 'photo-43129938_340443444,http://vk.com/app4165575',
+                              attachments: 'photo-43129938_340443444,http://play.tooflya.com',
                               test_mode: 1
                             }, function(e) {
                               if(!e.error) {
