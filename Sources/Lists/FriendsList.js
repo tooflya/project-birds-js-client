@@ -182,7 +182,7 @@ FriendsButton = Button.extend({
               }.bind(this)
             });
           }.bind(this),
-          playtest:function() {
+          playtest: function() {
             var messages = [
               LanguagesManager.sharedManager().get('friends-notification-vk-1').title,
               LanguagesManager.sharedManager().get('friends-notification-vk-2').title,
@@ -191,7 +191,7 @@ FriendsButton = Button.extend({
             ];
 
             VK.api("wall.post", {
-              owner_id: this.data.uid,
+              owner_id: this.user.uid,
               message: messages.random(),
               attachments: 'photo-43129938_340443444,http://vk.com/app4165575',
               test_mode: 1
