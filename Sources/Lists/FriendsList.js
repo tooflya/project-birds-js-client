@@ -287,14 +287,14 @@ FriendsButton = Button.extend({
         if(!this.config.params.playtest) {
           handlers.vk.original();
         } else {
-          handlers.vk.bind();
+          handlers.vk.playtest();
         }
         break;
         case 'fb':
         if(!this.config.params.playtest) {
           handlers.fb.original();
         } else {
-          handlers.fb.bind();
+          handlers.fb.playtest();
         }
         break;
       }
