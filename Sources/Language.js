@@ -352,13 +352,13 @@ var g_language  = {
     ],
   'update': [
     {title: 'Updating data...', font: 'Comic Sans MS', size: 36, dimensions: false},
-    {title: 'Обновление данных...', font: 'Comic Sans MS', size: 36, dimensions: false},
+    {title: 'Обновление информации...', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
     {title: '', font: 'Comic Sans MS', size: 36, dimensions: false},
-    {title: 'サーバーに接続している...', font: 'RiiPopkk-R', size: 36, dimensions: false}//
+    {title: '?...', font: 'RiiPopkk-R', size: 36, dimensions: false}//
     ],
   'connect': [
     {title: 'Connecting to the server...', font: 'Comic Sans MS', size: 36, dimensions: false},
@@ -1670,6 +1670,406 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
+  'level-popup-level-31': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-32': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-33': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-34': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-35': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-36': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-37': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-38': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-39': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-40': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-41': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-42': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-43': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-44': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-45': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-46': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-47': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-48': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-49': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-50': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-51': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-52': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-53': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-54': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-55': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-56': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-57': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-58': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-59': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-60': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-61': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-62': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-63': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-64': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-65': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-66': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-67': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-68': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-69': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
+  'level-popup-level-70': [
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
+    ],
   'tip-0': [
     {title: "Each of the bonus birds has unique abilities in different game modes - let's check what they can do!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
     {title: "Каждая бонусная птица обладает уникальными способностями в каждом из режимов игры - посмотрите на что они способны!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
@@ -2043,7 +2443,7 @@ var g_language  = {
     ],
   'friends-notification-vk-2': [
     {title: 'Oh, God I can\'t handle one! Help me out!', font: 'Comic Sans MS', size: 0, dimensions: false},
-    {title: 'О, черт! Мне не справится одному! Выручай!', font: 'Comic Sans MS', size: 0, dimensions: false},
+    {title: 'О, черт! Мне не справиться одному! Выручай!', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
     {title: '$1', font: 'Comic Sans MS', size: 0, dimensions: false},
