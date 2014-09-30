@@ -186,7 +186,7 @@ MultiplayerList = PatternList.extend({
 
               callback.finish();
 
-              if(data.uids.length > 0) {
+              if(friends.length > 0) {
                 callback.create(friends);
               } else {
                 callback.empty();
@@ -200,7 +200,6 @@ MultiplayerList = PatternList.extend({
       },
       events: {
         enter: function() {
-          this.m_BackgroundHolder.clear();
         }
       },
       empty: function() {
@@ -222,7 +221,7 @@ MultiplayerList = PatternList.extend({
                 },
                 handlers: {
                   create: function() {
-                    this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(65), this.elements.button.getHeight() / 2);
+                    this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(35), this.elements.button.getHeight() / 2);
                   },
                   touch: function() {
                     if(this.data.online) {
@@ -254,7 +253,7 @@ MultiplayerList = PatternList.extend({
                             success: function() {
                               this.elements.button.registerTouchable(false);
                               this.elements.button.text.setText(this.elements.button.text.texts.complete);
-                              this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(30) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
+                              this.elements.button.text.setCenterPosition(Camera.sharedCamera().coord(45) + this.elements.button.text.getWidth() / 2, this.elements.button.getHeight() / 2);
                               this.elements.button.text.runAction(
                                 cc.Sequence.create(
                                   cc.DelayTime.create(0.2),
@@ -322,13 +321,9 @@ MultiplayerList = PatternList.extend({
       x: this.getCenterX(),
       y: this.m_Text[4].getCenterY() - Camera.sharedCamera().coord(100)
     });
-    this.m_BackgroundHolder.removeFromParent();
-    this.m_Backgrounds[0].addChild(this.m_BackgroundHolder);
 
     this.m_Mode1Button.setTouchHandler('onMode1Event', Multiplayer);
     this.m_Mode2Button.setTouchHandler('onMode2Event', Multiplayer);
-
-    this.showMainView();
   },
   onEnter: function() {
     this._super();
@@ -355,6 +350,8 @@ MultiplayerList = PatternList.extend({
   onViewChanged: function() {
     this.setCenterPosition(-Camera.sharedCamera().margin.x / 2, -Camera.sharedCamera().margin.y / 2);
     this.onMouseUp(false, true);
+
+    this.m_BackgroundHolder.clear();
   },
   showMainView: function(data) {
     this.addChild(this.m_Backgrounds[0]);

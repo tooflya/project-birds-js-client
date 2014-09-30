@@ -50,6 +50,8 @@ Button.prototype.onCancel = function(callback) {
 };
 
 Button.prototype.onTouch = function() {
+  cc.canvas.focus();
+
   Sound.sharedSound().play(s_SoundButtonTouch);
 
   this.onCancel(cc.CallFunc.create(this.onFinish, this, this));

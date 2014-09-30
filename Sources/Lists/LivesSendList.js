@@ -212,6 +212,9 @@ LivesSendList = PatternList.extend({
   },
   onExit: function() {
     this._super();
+
+    this.m_Decoration1.destroy();
+    this.m_Decoration2.destroy();
   }
 });
 

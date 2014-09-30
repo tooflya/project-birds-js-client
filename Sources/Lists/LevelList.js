@@ -146,33 +146,6 @@ var points = DataManager.sharedManager().get(false, references.levels.points[Gam
 
     this.m_Text[5].setColor(cc.c3(204.0, 102.0, 51.0));
 
-    /** TUTORIAL */
-
-    DataManager.sharedManager().get(false, references.tutorial.any1, {
-      success: function(value) {
-        if(!value) {
-          this.m_TutorialFinger = Entity.create(s_TutorialFinger, this);
-
-          this.m_TutorialFinger.create().setCenterPosition(this.m_ElementsBackgrounds[2].getCenterX() + this.m_ElementsBackgrounds[2].getWidth() / 2 - Camera.sharedCamera().coord(15), this.m_ElementsBackgrounds[2].getCenterY() - this.m_TutorialFinger.getHeight() / 2 + Camera.sharedCamera().coord(15));
-          this.m_TutorialFinger.setOpacity(0);
-          this.m_TutorialFinger.runAction(
-            cc.RepeatForever.create(
-              cc.Sequence.create(
-                cc.FadeTo.create(0.5, 255),
-                cc.DelayTime.create(0.5),
-                cc.ScaleTo.create(0.2, 0.9),
-                cc.ScaleTo.create(0.1, 1.0),
-                cc.DelayTime.create(0.5),
-                cc.FadeTo.create(0.5, 0),
-                cc.DelayTime.create(0.5),
-                false
-              )
-            )
-          ); 
-        }
-      }.bind(this)
-    });
-
     this.m_BackgroundHolder = EntryManager.create(this, {
       update: {
         start: function() {
@@ -286,6 +259,14 @@ var points = DataManager.sharedManager().get(false, references.levels.points[Gam
       x: this.getCenterX(),
       y: this.m_Text[2].getCenterY() - Camera.sharedCamera().coord(210)
     });
+
+    DataManager.sharedManager().get(false, references.tutorial.any1, {
+      success: function(value) {
+        if(!value) {
+          this.m_TutorialFinger = Entity.create(s_TutorialFinger, this);
+        }
+      }.bind(this)
+    });
   },
   onEnter: function() {
     this._super();
@@ -321,9 +302,43 @@ var points = DataManager.sharedManager().get(false, references.levels.points[Gam
 
       this.m_PointsHolder.stars.setCurrentFrameIndex(DataManager.sharedManager().get(false, references.levels.levels[Game.level - 1]) - 1);
     }
+
+    /** TUTORIAL */
+
+    DataManager.sharedManager().get(false, references.tutorial.any1, {
+      success: function(value) {
+        if(!value) {
+          if(this.m_TutorialFinger) {
+            this.m_TutorialFinger.create().setCenterPosition(this.m_ElementsBackgrounds[2].getCenterX() + this.m_ElementsBackgrounds[2].getWidth() / 2 - Camera.sharedCamera().coord(15), this.m_ElementsBackgrounds[2].getCenterY() - this.m_TutorialFinger.getHeight() / 2 + Camera.sharedCamera().coord(15));
+            this.m_TutorialFinger.setOpacity(0);
+            this.m_TutorialFinger.runAction(
+              cc.RepeatForever.create(
+                cc.Sequence.create(
+                  cc.FadeTo.create(0.5, 255),
+                  cc.DelayTime.create(0.5),
+                  cc.ScaleTo.create(0.2, 0.9),
+                  cc.ScaleTo.create(0.1, 1.0),
+                  cc.DelayTime.create(0.5),
+                  cc.FadeTo.create(0.5, 0),
+                  cc.DelayTime.create(0.5),
+                  false
+                )
+              )
+            );
+          }
+        }
+      }.bind(this)
+    });
   },
   onExit: function() {
     this._super();
+
+    if(this.m_TutorialFinger) {
+      this.m_TutorialFinger.destroy();
+    }
+
+    this.m_Loading[0].destroy();
+    this.m_Loading[1].destroy();
   }
 });
 

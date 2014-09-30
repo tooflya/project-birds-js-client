@@ -176,16 +176,16 @@ Levels = Screen.extend({
     this.name = "Levels screen";
 
     this.m_List = List.create(1920, 1080, 0, 1080 * 3, this);
-    this.m_Background1 = Entity.create(s_MapBackground10, this.m_List);
-    this.m_Background2 = Entity.create(s_MapBackground9, this.m_List);
-    this.m_Background3 = Entity.create(s_MapBackground8, this.m_List);
-    this.m_Background4 = Entity.create(s_MapBackground7, this.m_List);
-    this.m_Background5 = Entity.create(s_MapBackground6, this.m_List);
-    this.m_Background6 = Entity.create(s_MapBackground5, this.m_List);
-    this.m_Background7 = Entity.create(s_MapBackground4, this.m_List);
-    this.m_Background8 = Entity.create(s_MapBackground3, this.m_List);
-    this.m_Background9 = Entity.create(s_MapBackground2, this.m_List);
-    this.m_Background10 = Entity.create(s_MapBackground1, this.m_List);
+    this.m_Background1 = MapBackground.create(s_MapBackground10, this.m_List);
+    this.m_Background2 = MapBackground.create(s_MapBackground9, this.m_List);
+    this.m_Background3 = MapBackground.create(s_MapBackground8, this.m_List);
+    this.m_Background4 = MapBackground.create(s_MapBackground7, this.m_List);
+    this.m_Background5 = MapBackground.create(s_MapBackground6, this.m_List);
+    this.m_Background6 = MapBackground.create(s_MapBackground5, this.m_List);
+    this.m_Background7 = MapBackground.create(s_MapBackground4, this.m_List);
+    this.m_Background8 = MapBackground.create(s_MapBackground3, this.m_List);
+    this.m_Background9 = MapBackground.create(s_MapBackground2, this.m_List);
+    this.m_Background10 = MapBackground.create(s_MapBackground1, this.m_List);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
 
     this.m_Icons = EntityManager.create(this.m_IconsCoordinates.length, MapIcon.create(), this.m_List, 101);
@@ -225,55 +225,6 @@ Levels = Screen.extend({
     this.m_List.fixed = true;
     this.m_List.strict = true;
 
-    for(var i = 0; i < this.m_IconsCoordinates.length; i++) {
-      var element = this.m_Icons.create();
-
-      element.setCenterPosition(Camera.sharedCamera().coord(this.m_IconsCoordinates[i].x), Camera.sharedCamera().coord(this.m_IconsCoordinates[i].y));
-      element.registerTouchable(false);
-
-      if(!DataManager.sharedManager().get(false, references.levels.levels[i])) {
-        element.locked = true;
-
-        element.decorations = [];
-        for(var h = 0; h < 2; h++) {
-          element.decorations[h] = Entity.create(s_PopupDecoration1, this.m_List);
-
-          element.decorations[h].create().setCenterPosition(element.getCenterX(), element.getCenterY());
-          element.decorations[h].setScale(0.6);
-          element.decorations[h].setOpacity(100.0);
-          element.decorations[h].setZOrder(99);
-          element.decorations[h].runAction(
-            cc.RepeatForever.create(
-              cc.RotateTo.create(30.0, h == 0 ? 720 : -720),
-              false
-              )
-            );
-        }
-
-        element.m_Text.removeFromParent();
-        element.setCurrentFrameIndex(5);
-      } else {
-        element.registerTouchable(true);
-
-        element.decorations = [];
-        for(var h = 0; h < 2; h++) {
-          element.decorations[h] = Entity.create(s_PopupDecoration1, this.m_List);
-
-          element.decorations[h].create().setCenterPosition(element.getCenterX(), element.getCenterY());
-          element.decorations[h].setZOrder(99);
-          element.decorations[h].setScale(0);
-          element.decorations[h].runAction(
-            cc.RepeatForever.create(
-              cc.RotateTo.create(30.0, h == 0 ? 720 : -720),
-              false
-            )
-          );
-        }
-
-        element.setCurrentFrameIndex(DataManager.sharedManager().get(false, references.levels.levels[i]) - 1);
-      }
-    }
-
     this.m_BackButton.setTouchHandler('onBackEvent', Levels);
   },
   onBackEvent: function() {
@@ -289,11 +240,56 @@ Levels = Screen.extend({
   },
   onEnter: function() {
     this._super();
+
+    for(var i = 0; i < this.m_IconsCoordinates.length; i++) {
+      var element = this.m_Icons.create();
+
+      element.setCenterPosition(Camera.sharedCamera().coord(this.m_IconsCoordinates[i].x), Camera.sharedCamera().coord(this.m_IconsCoordinates[i].y));
+      if(element.isRegisterTouchable()) {
+        element.registerTouchable(false);
+      }
+
+      if(!DataManager.sharedManager().get(false, references.levels.levels[i])) {
+        element.locked = true;
+
+        for(var h = 0; h < 2; h++) {
+          element.decorations[h].create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2);
+          element.decorations[h].setScale(0.6);
+          element.decorations[h].setOpacity(100.0);
+          element.decorations[h].runAction(
+            cc.RepeatForever.create(
+              cc.RotateTo.create(30.0, h == 0 ? 720 : -720),
+              false
+              )
+            );
+        }
+
+        element.m_Text.setVisible(false);
+        element.setCurrentFrameIndex(5);
+      } else {
+        if(!element.isRegisterTouchable()) {
+          element.registerTouchable(true);
+        }
+
+        for(var h = 0; h < 2; h++) {
+          element.decorations[h].create().setCenterPosition(element.getWidth() / 2, element.getHeight() / 2);
+          element.decorations[h].setScale(0);
+          element.decorations[h].runAction(
+            cc.RepeatForever.create(
+              cc.RotateTo.create(30.0, h == 0 ? 720 : -720),
+              false
+            )
+          );
+        }
+
+        element.setCurrentFrameIndex(DataManager.sharedManager().get(false, references.levels.levels[i]) - 1);
+      }
+    }
   },
   onExit: function() {
     this._super();
 
-    Levels.instance = false;
+    this.m_Icons.clear();
   },
   /*onTouch: function(e) {
     if(!this.m_WasDraged) {
@@ -389,12 +385,25 @@ MapIcon = Button.extend({
     this.m_Text.setText('level');
 
     this.registerTouchable(true);
+
+    this.decorations = [];
+    for(var h = 0; h < 2; h++) {
+      this.decorations[h] = Entity.create(s_PopupDecoration1, this);
+      this.decorations[h].setZOrder(-1);
+    }
   },
   onCreate: function() {
     this._super();
 
     this.m_Text.setCenterPosition(this.getWidth() / 2, this.getHeight() / 2 + Camera.sharedCamera().coord(8));
     this.m_Text.ccsf([this.getID() + 1]);
+  },
+  onDestroy: function() {
+    this._super();
+
+    for(var h = 0; h < 2; h++) {
+      this.decorations[h].destroy();
+    }
   },
   onHover: function() {
   },
@@ -425,13 +434,31 @@ MapIcon = Button.extend({
   update: function(time) {
     this._super();
   },
+  visit: function() {
+    if(cc.rectIntersectsRect(this.getBoundingBoxToWorld(), cc.rect(-Camera.sharedCamera().margin.x, -Camera.sharedCamera().margin.y, Camera.sharedCamera().width + Camera.sharedCamera().margin.x, Camera.sharedCamera().height + Camera.sharedCamera().margin.y))) {
+      this._super();
+    }
+  },
   deepCopy: function() {
     return MapIcon.create();
   }
 });
 
-MapIcon.create = function() {
-  var entity = new MapIcon();
+MapBackground = Entity.extend({
+  ctor: function(filename, parent) {
+    this._super(filename, parent);
+  },
+  visit: function() {
+    if(cc.rectIntersectsRect(this.getBoundingBoxToWorld(), cc.rect(-Camera.sharedCamera().margin.x, -Camera.sharedCamera().margin.y, Camera.sharedCamera().width + Camera.sharedCamera().margin.x, Camera.sharedCamera().height + Camera.sharedCamera().margin.y))) {
+      this._super();
+    }
+  }
+});
 
-  return entity;
+MapIcon.create = function() {
+  return new MapIcon();
+};
+
+MapBackground.create = function(filename, parent) {
+  return new MapBackground(filename, parent);
 };

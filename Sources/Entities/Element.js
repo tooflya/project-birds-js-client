@@ -266,6 +266,7 @@ Element = TiledEntity.extend({
   onHover: function() {
     if(!this.isRegisterTouchable()) return false;
     if(!MatrixManager.sharedManager().active()) return false;
+    if(MatrixManager.sharedManager().busy()) return false;
     if(MatrixManager.sharedManager().s(this)) return false;
 
     switch(this.m_Bonus) {
@@ -328,6 +329,7 @@ Element = TiledEntity.extend({
   onTouch: function() {
     if(!this.isRegisterTouchable()) return false;
     if(!MatrixManager.sharedManager().active()) return false;
+    if(MatrixManager.sharedManager().busy()) return false;
     if(MatrixManager.sharedManager().s(this)) return false;
 
     if(this.special() == Element.types.box) return false;
@@ -365,6 +367,10 @@ Element = TiledEntity.extend({
     MatrixManager.sharedManager().replace(this, 'right');
   },
   onMouseDragged: function(e) {
+    if(!this.isRegisterTouchable()) return false;
+    if(!MatrixManager.sharedManager().active()) return false;
+    if(MatrixManager.sharedManager().busy()) return false;
+    if(MatrixManager.sharedManager().s(this)) return false;
     if(this.getNumberOfRunningActions() > 0) return false;
 
     if(this.getId() == Element.types.block) return false;
