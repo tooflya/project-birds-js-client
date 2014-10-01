@@ -705,9 +705,14 @@ Element = TiledEntity.extend({
           down -= empty;
 
           for(var i = 0; i < empty; i++) {
-            actions.pop();
-
             y += h;
+          }
+
+          actions.last()._duration -= 0.1 * empty;
+          actions.last()._endPosition.y = y;
+
+          if(actions.last()._duration <= 0) {
+            actions.pop();
           }
         }
 

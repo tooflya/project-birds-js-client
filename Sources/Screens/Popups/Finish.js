@@ -456,6 +456,8 @@ Finish = Background.extend({
     });
   },
   onRestartEvent: function() {
+    Camera.sharedCamera().setDesignResolutionSize();
+
     this.hide(function() {
       Game.sharedScreen().onShow();
     });
