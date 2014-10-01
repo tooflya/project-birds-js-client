@@ -60,6 +60,8 @@ Level = ExtendedPopup.extend({
           if(value <= 0) {
             Lives.sharedScreen(Levels.instance).show();
           } else {
+            Camera.sharedCamera().setDesignResolutionSize();
+
             Game.sharedScreen(0);
             ScreenManager.sharedManager().replace(Loading);
           }

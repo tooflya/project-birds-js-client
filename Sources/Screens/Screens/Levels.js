@@ -335,10 +335,9 @@ Levels = Screen.extend({
           );
         }
 
-        var y = -element.getCenterY() + Camera.sharedCamera().center.x / 2;
-        y = y > (this.m_List.m_ListMaxHeight - Camera.sharedCamera().margin.y) ? (this.m_List.m_ListMaxHeight - Camera.sharedCamera().margin.y) : y;
+        this.element = element;
 
-        this.m_List.setCenterPosition(0, y);
+        this.updateListPosition();
       }.bind(this)
     });
 
@@ -355,11 +354,21 @@ Levels = Screen.extend({
     MenuPanel.sharedScreen(this).hide();
 
     this._super();
-
-    Camera.sharedCamera().setDesignResolutionSize();
   },
   onEnterTransitionDidFinish: function() {
     this._super();
+  },
+  onCameraSizeChanged: function() {
+    this.updateListPosition();
+  },
+  updateListPosition: function() {
+    if(!this.element) return false;
+
+    var y = -this.element.getCenterY() + Camera.sharedCamera().center.x / 2;
+    y = y > (this.m_List.m_ListMaxHeight - Camera.sharedCamera().margin.y) ? (this.m_List.m_ListMaxHeight - Camera.sharedCamera().margin.y) : y;
+
+    this.m_List.updateSize();
+    this.m_List.setCenterPosition(0, y);
   },
   update: function(time) {
     this._super(time);
