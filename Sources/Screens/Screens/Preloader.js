@@ -50,9 +50,9 @@ Preloader = Screen.extend({
     this.m_LoadingBar.showPercentage(0);
   },
   initWithResources: function(resources, selector, target) {
-    resources.forEach(function(resource, index, array) {
+    /*resources.forEach(function(resource, index, array) {
       array[index].src += "?" + this.config.params.version;
-    }.bind(this));
+    }.bind(this));console.log(resources);*/
 
     this.resources = resources;
     this.selector = selector;
