@@ -45,6 +45,14 @@ Multiplayer = ExtendedPopup.extend({
 
     this.m_CloseButton.setTouchHandler('onCloseEvent', Multiplayer);
   },
+  show: function(params) {
+    this._super(params);
+  },
+  hide: function(params) {
+    this._super(params);
+
+    this.m_List.m_BackgroundHolder.cancel();
+  },
   onShow: function() {
     this._super();
   },

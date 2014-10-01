@@ -385,16 +385,16 @@ MatrixManager = cc.Node.extend({
     if(full) {
       return {
         top: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y + 1) >= 0 && (index.y + 1) <= this.getSize().y) && this.get(index.x, index.y + 1) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x, index.y + 1))),
-        down: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y - 1) >= 0 && (index.y - 1) <= this.getSize().y) && this.get(index.x, index.y - 1) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x, index.y - 1))),
-        left: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x - 1) >= 0 && (index.x - 1) <= this.getSize().x) && this.get(index.x - 1, index.y) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x - 1, index.y))),
-        right: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x + 1) >= 0 && (index.x + 1) <= this.getSize().x) && this.get(index.x + 1, index.y) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x + 1, index.y)))
+        down: (index.y >= 0 && index.y <= this.getSize().y) && ((index.y - 1) >= 0 && (index.y - 1) <= this.getSize().y) && this.get(index.x, index.y - 1) && (soft ? !this.e(this.get(index.x, index.y - 1)) : !this.soe(this.get(index.x, index.y - 1))),
+        left: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x - 1) >= 0 && (index.x - 1) <= this.getSize().x) && this.get(index.x - 1, index.y) && (soft ? !this.e(this.get(index.x - 1, index.y)) : !this.soe(this.get(index.x - 1, index.y))),
+        right: (index.x >= 0 && index.x <= this.getSize().x) && ((index.x + 1) >= 0 && (index.x + 1) <= this.getSize().x) && this.get(index.x + 1, index.y) && (soft ? !this.e(this.get(index.x + 1, index.y)) : !this.soe(this.get(index.x + 1, index.y)))
       };
     } else {
       return {
         top: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y + 1) <= this.getCurrentSize().y.finish && (index.y + 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y + 1) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x, index.y + 1))),
-        down: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y - 1) <= this.getCurrentSize().y.finish && (index.y - 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y - 1) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x, index.y - 1))),
-        left: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x - 1) <= this.getCurrentSize().x.finish && (index.x - 1) >= this.getCurrentSize().x.start) && this.get(index.x - 1, index.y) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x - 1, index.y))),
-        right: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x + 1) <= this.getCurrentSize().x.finish && (index.x + 1) >= this.getCurrentSize().x.start) && this.get(index.x + 1, index.y) && (soft ? !this.e(this.get(index.x, index.y + 1)) : !this.soe(this.get(index.x + 1, index.y)))
+        down: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && ((index.y - 1) <= this.getCurrentSize().y.finish && (index.y - 1) >= this.getCurrentSize().y.start) && this.get(index.x, index.y - 1) && (soft ? !this.e(this.get(index.x, index.y - 1)) : !this.soe(this.get(index.x, index.y - 1))),
+        left: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x - 1) <= this.getCurrentSize().x.finish && (index.x - 1) >= this.getCurrentSize().x.start) && this.get(index.x - 1, index.y) && (soft ? !this.e(this.get(index.x - 1, index.y)) : !this.soe(this.get(index.x - 1, index.y))),
+        right: (index.y <= this.getCurrentSize().y.finish && index.y >= this.getCurrentSize().y.start) && (index.x <= this.getCurrentSize().x.finish && index.x >= this.getCurrentSize().x.start) && ((index.x + 1) <= this.getCurrentSize().x.finish && (index.x + 1) >= this.getCurrentSize().x.start) && this.get(index.x + 1, index.y) && (soft ? !this.e(this.get(index.x + 1, index.y)) : !this.soe(this.get(index.x + 1, index.y)))
       };
     }
   },
@@ -1184,10 +1184,10 @@ MatrixManager = cc.Node.extend({
     sickle1.setOpacity(255);
     sickle1.setRotation(0);
     sickle1.setFlippedHorizontally(true);
-    sickle1.runAction(cc.MoveTo.create(1.0, cc.p(sickle1.getCenterX() - Camera.sharedCamera().width, sickle1.getCenterY())));
+    sickle1.runAction(cc.MoveTo.create(0.5, cc.p(sickle1.getCenterX() - Camera.sharedCamera().width, sickle1.getCenterY())));
     sickle1.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.9),
+        cc.DelayTime.create(0.5),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1197,10 +1197,10 @@ MatrixManager = cc.Node.extend({
     sickle2.setOpacity(255);
     sickle2.setRotation(0);
     sickle2.setFlippedHorizontally(false);
-    sickle2.runAction(cc.MoveTo.create(1.0, cc.p(sickle2.getCenterX() + Camera.sharedCamera().width, sickle2.getCenterY())));
+    sickle2.runAction(cc.MoveTo.create(0.5, cc.p(sickle2.getCenterX() + Camera.sharedCamera().width, sickle2.getCenterY())));
     sickle2.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.9),
+        cc.DelayTime.create(0.5),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1280,10 +1280,10 @@ MatrixManager = cc.Node.extend({
     sickle1.setOpacity(255);
     sickle1.setRotation(-90);
     sickle1.setFlippedHorizontally(false);
-    sickle1.runAction(cc.MoveTo.create(1.0, cc.p(sickle1.getCenterX(), sickle1.getCenterY() + Camera.sharedCamera().height)));
+    sickle1.runAction(cc.MoveTo.create(0.5, cc.p(sickle1.getCenterX(), sickle1.getCenterY() + Camera.sharedCamera().height)));
     sickle1.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.9),
+        cc.DelayTime.create(0.5),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1293,10 +1293,10 @@ MatrixManager = cc.Node.extend({
     sickle2.setOpacity(255);
     sickle2.setRotation(90);
     sickle2.setFlippedHorizontally(false);
-    sickle2.runAction(cc.MoveTo.create(1.0, cc.p(sickle2.getCenterX(), sickle2.getCenterY() - Camera.sharedCamera().height)));
+    sickle2.runAction(cc.MoveTo.create(0.5, cc.p(sickle2.getCenterX(), sickle2.getCenterY() - Camera.sharedCamera().height)));
     sickle2.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.9),
+        cc.DelayTime.create(0.5),
         cc.FadeTo.create(0.1, 0.0),
         false
       )

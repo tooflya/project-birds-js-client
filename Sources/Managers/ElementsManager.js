@@ -416,7 +416,10 @@ ElementsManager = EntityManager.extend({
     this.removeFromParent();
   },
   createBlock: function() {
-    this.create().setCurrentFrameIndex(7);
+    this.create();
+
+    this.last().setId(7);
+    this.last().setCurrentFrameIndex(7);
 
     return this.last();
   },

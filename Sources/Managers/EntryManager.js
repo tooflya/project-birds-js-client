@@ -142,14 +142,17 @@ EntryManager = Background.extend({
 
     this.onUpdate();
   },
+  cancel: function() {
+    if(this.timeout) {
+      this.timeout.pause();
+    }
+  },
   clear: function() {
     this.m_Margin = 0;
     this.m_Elements = [];
     this.removeAllChildrenWithCleanup(true);
 
-    if(this.timeout) {
-      this.timeout.pause();
-    }
+    this.cancel();
   },
   onCreate: function(element) {
     this.m_Elements.push(element);

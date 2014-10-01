@@ -157,6 +157,15 @@ Catapult = AnimatedEntity.extend({
         false
       )
     );
+
+    Game.instance.m_ElementsExplanationTexts.runAction(
+      cc.Sequence.create(
+        cc.EaseExponentialIn.create(
+          cc.MoveTo.create(0.5, cc.p(Camera.sharedCamera().center.x, Camera.sharedCamera().height + Camera.sharedCamera().coord(200)))
+        ),
+        false
+      )
+    );
   },
   onStop: function() {
   },

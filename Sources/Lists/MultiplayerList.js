@@ -187,7 +187,7 @@ MultiplayerList = PatternList.extend({
               callback.finish();
 
               if(friends.length > 0) {
-                callback.create(friends);
+                callback.create(friends.slice(0, 20));
               } else {
                 callback.empty();
               }

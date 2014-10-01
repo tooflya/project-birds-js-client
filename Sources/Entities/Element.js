@@ -83,141 +83,141 @@ Element = TiledEntity.extend({
 
     if(MatrixManager.instance.getBubble(this.getIndex().x, this.getIndex().y)) {
       MatrixManager.instance.getBubble(this.getIndex().x, this.getIndex().y).destroy();
-    }
-
-    if(this.chained()) {
-      this.unchain();
-      for(var i = 0; i < 2; i++) {
-        ElementsManager.sharedManager().m_ElementsParts.create({
-          element: this,
-          index: i,
-          force: 5
-        });
-      }
-
-      Game.instance.updateScore(1);
-
-      Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
-    } else if(this.special()) {
-      switch(this.special()) {
-        case Element.types.box:
-        this.m_Removed = true;
-
-        MatrixManager.sharedManager().remove(this);
-
-        this.destroy();
-
+    } else {
+      if(this.chained()) {
+        this.unchain();
         for(var i = 0; i < 2; i++) {
           ElementsManager.sharedManager().m_ElementsParts.create({
             element: this,
             index: i,
-            force: 6
+            force: 5
           });
         }
 
         Game.instance.updateScore(1);
 
         Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
-        break;
-      }
-    } else {
-      this.m_Removed = true;
+      } else if(this.special()) {
+        switch(this.special()) {
+          case Element.types.box:
+          this.m_Removed = true;
 
-      switch(this.getId()) {
-        default:
-        MatrixManager.sharedManager().removeBoxes(this.getIndex().x, this.getIndex().y, this);
-        MatrixManager.sharedManager().remove(this);
+          MatrixManager.sharedManager().remove(this);
 
-        this.destroy();
+          this.destroy();
 
-        if(this.m_Id >= 0) {
-          if(MatrixManager.sharedManager().getType() == MatrixManager.types.war) {
-            icons.push(ElementsManager.sharedManager().m_ElementsIcons.create(this));
-          }
-
-          ElementsManager.sharedManager().m_ElementsSplashes.create(this);
           for(var i = 0; i < 2; i++) {
             ElementsManager.sharedManager().m_ElementsParts.create({
               element: this,
-              index: i
+              index: i,
+              force: 6
             });
           }
+
+          Game.instance.updateScore(1);
+
+          Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
+          break;
         }
+      } else {
+        this.m_Removed = true;
 
-        Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
-
-        Game.instance.updateScore(1);
-        break;
-        case Element.types.star:
-        if(MatrixManager.timeout) {
-          MatrixManager.timeout.pause();
-        }
-
-        new PausableTimeout(function() {
+        switch(this.getId()) {
+          default:
           MatrixManager.sharedManager().removeBoxes(this.getIndex().x, this.getIndex().y, this);
           MatrixManager.sharedManager().remove(this);
-          MatrixManager.instance.clear();
-        }.bind(this), 1.2);
 
-        this.runAction(
-          cc.Sequence.create(
-            cc.Repeat.create(
-              cc.Sequence.create(
-                cc.RotateTo.create(0.25, 10.0),
-                cc.RotateTo.create(0.25, -10),
-                false
-              ),
-            2),
-            cc.ScaleTo.create(0.2, 0.0),
-            cc.CallFunc.create(this.destroy, this),
-            cc.CallFunc.create(MatrixManager.instance.lookDown, MatrixManager.instance),
-            false
-          )
-        );
+          this.destroy();
 
-        Sound.sharedSound().play(s_SoundStar);
+          if(this.m_Id >= 0) {
+            if(MatrixManager.sharedManager().getType() == MatrixManager.types.war) {
+              icons.push(ElementsManager.sharedManager().m_ElementsIcons.create(this));
+            }
 
-        Game.instance.updateScore(1000);
-        break;
-      }
-
-      switch(this.m_Bonus) {
-        case Element.bonus.types.horizontal:
-        MatrixManager.sharedManager().removeHorizontalLine(this.getIndex().x, this.getIndex().y, this);
-
-        Game.instance.updateScore(180);
-        break;
-        case Element.bonus.types.vertical:
-        MatrixManager.sharedManager().removeVerticalLine(this.getIndex().x, this.getIndex().y, this);
-
-        Game.instance.updateScore(180);
-        break;
-        case Element.bonus.types.pack:
-        // MatrixManager.sharedManager().removeSquare(this.getIndex().x, this.getIndex().y, this); // Temporarity remove.
-
-        Game.instance.updateScore(250);
-        break;
-        case Element.bonus.types.bomb:
-        var element;
-
-        if(MatrixManager.sharedManager().m_CurrentElement1 === this) {
-          element = MatrixManager.sharedManager().m_CurrentElement2;
-        } else {
-          element = MatrixManager.sharedManager().m_CurrentElement1;
-        }
-
-        if(!element) {
-          element = MatrixManager.sharedManager().getFreeRandomElement();
-        } else {
-          if(element == Element.types.star) {
-            element = MatrixManager.sharedManager().getFreeRandomElement();
+            ElementsManager.sharedManager().m_ElementsSplashes.create(this);
+            for(var i = 0; i < 2; i++) {
+              ElementsManager.sharedManager().m_ElementsParts.create({
+                element: this,
+                index: i
+              });
+            }
           }
+
+          Sound.sharedSound().play(s_SoundChew[Random.sharedRandom().random(0, 3, true)]);
+
+          Game.instance.updateScore(1);
+          break;
+          case Element.types.star:
+          if(MatrixManager.timeout) {
+            MatrixManager.timeout.pause();
+          }
+
+          new PausableTimeout(function() {
+            MatrixManager.sharedManager().removeBoxes(this.getIndex().x, this.getIndex().y, this);
+            MatrixManager.sharedManager().remove(this);
+            MatrixManager.instance.clear();
+          }.bind(this), 1.2);
+
+          this.runAction(
+            cc.Sequence.create(
+              cc.Repeat.create(
+                cc.Sequence.create(
+                  cc.RotateTo.create(0.25, 10.0),
+                  cc.RotateTo.create(0.25, -10),
+                  false
+                ),
+              2),
+              cc.ScaleTo.create(0.2, 0.0),
+              cc.CallFunc.create(this.destroy, this),
+              cc.CallFunc.create(MatrixManager.instance.lookDown, MatrixManager.instance),
+              false
+            )
+          );
+
+          Sound.sharedSound().play(s_SoundStar);
+
+          Game.instance.updateScore(1000);
+          break;
         }
 
-        MatrixManager.sharedManager().removeSimilar(element.getIndex().x, element.getIndex().y, element);
+        switch(this.m_Bonus) {
+          case Element.bonus.types.horizontal:
+          MatrixManager.sharedManager().removeHorizontalLine(this.getIndex().x, this.getIndex().y, this);
 
-        Game.instance.updateScore(500);
-        break;
+          Game.instance.updateScore(180);
+          break;
+          case Element.bonus.types.vertical:
+          MatrixManager.sharedManager().removeVerticalLine(this.getIndex().x, this.getIndex().y, this);
+
+          Game.instance.updateScore(180);
+          break;
+          case Element.bonus.types.pack:
+          // MatrixManager.sharedManager().removeSquare(this.getIndex().x, this.getIndex().y, this); // Temporarity remove.
+
+          Game.instance.updateScore(250);
+          break;
+          case Element.bonus.types.bomb:
+          var element;
+
+          if(MatrixManager.sharedManager().m_CurrentElement1 === this) {
+            element = MatrixManager.sharedManager().m_CurrentElement2;
+          } else {
+            element = MatrixManager.sharedManager().m_CurrentElement1;
+          }
+
+          if(!element) {
+            element = MatrixManager.sharedManager().getFreeRandomElement();
+          } else {
+            if(element == Element.types.star) {
+              element = MatrixManager.sharedManager().getFreeRandomElement();
+            }
+          }
+
+          MatrixManager.sharedManager().removeSimilar(element.getIndex().x, element.getIndex().y, element);
+
+          Game.instance.updateScore(500);
+          break;
+        }
       }
     }
 
