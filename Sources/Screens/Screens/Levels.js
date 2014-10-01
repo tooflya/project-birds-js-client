@@ -335,9 +335,7 @@ Levels = Screen.extend({
           );
         }
 
-        this.element = element;
-
-        this.updateListPosition();
+        this.m_List.setCenterPosition(0, -element.getCenterY() + Camera.sharedCamera().center.x / 2 - Camera.sharedCamera().margin.y / 2);
       }.bind(this)
     });
 
@@ -358,17 +356,11 @@ Levels = Screen.extend({
   onEnterTransitionDidFinish: function() {
     this._super();
   },
-  onCameraSizeChanged: function() {
-    this.updateListPosition();
+  onCameraSizeChanged: function(e, x, y) {
+    this.updateListPosition(x, y);
   },
-  updateListPosition: function() {
-    if(!this.element) return false;
-
-    var y = -this.element.getCenterY() + Camera.sharedCamera().center.x / 2;
-    y = y > (this.m_List.m_ListMaxHeight - Camera.sharedCamera().margin.y) ? (this.m_List.m_ListMaxHeight - Camera.sharedCamera().margin.y) : y;
-
-    this.m_List.updateSize();
-    this.m_List.setCenterPosition(0, y);
+  updateListPosition: function(x, y) {
+    Entity.prototype.setCenterPosition.call(this.m_List, Entity.prototype.getCenterX.call(this.m_List) - x / 2, Entity.prototype.getCenterY.call(this.m_List) - y / 2);
   },
   update: function(time) {
     this._super(time);

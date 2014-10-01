@@ -78,7 +78,9 @@ Element = TiledEntity.extend({
       break;
     }
   },
-  onRemove: function() {
+  onRemove: function(instructions) {
+    instructions = instructions || {};
+
     var icons = [];
 
     if(MatrixManager.instance.getBubble(this.getIndex().x, this.getIndex().y)) {
@@ -130,7 +132,7 @@ Element = TiledEntity.extend({
           this.destroy();
 
           if(this.m_Id >= 0) {
-            if(MatrixManager.sharedManager().getType() == MatrixManager.types.war) {
+            if(MatrixManager.sharedManager().getType() == MatrixManager.types.war && instructions.icons != Element.instructions.icons.skip) {
               icons.push(ElementsManager.sharedManager().m_ElementsIcons.create(this));
             }
 
@@ -379,8 +381,11 @@ Element = TiledEntity.extend({
 
     return this._super(e);
   },
-  remove: function() {
-    return this.onRemove();
+  remove: function(data) {
+    return this.onRemove(data);
+  },
+  removeActions: function(selector, data) {
+    return this.onRemove(data);
   },
   setIndex: function(x, y) {
     this.m_Index.x = x;
@@ -941,6 +946,11 @@ Element.bonus = {
     vertical: 2,
     pack: 3,
     bomb: 4
+  }
+};
+Element.instructions = {
+  icons: {
+    skip: 0
   }
 };
 Element.create = function() {

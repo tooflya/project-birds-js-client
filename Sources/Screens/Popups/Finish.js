@@ -50,8 +50,6 @@ Finish = Background.extend({
     this.m_ContinueButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
     this.m_ShopButton = Button.create(s_FinishButtons, 4, 1, this.m_BackgroundSquare);
 
-    this.m_SplashStars = EntityManager.create(20, SplashStar.create(false, Game.sharedScreen().getPhysicsWorld()), this.m_BackgroundSquare);
-
     this.m_Background1 = TiledEntity.create(Orientation.parse(s_FinishBackground), 1, 2, this.m_Background);
     this.m_Background2 = TiledEntity.create(Orientation.parse(s_FinishBackground), 1, 2, this.m_Background);
 
@@ -402,6 +400,8 @@ Finish = Background.extend({
 
     MenuPanel.sharedScreen(this).show();
 
+    this.m_SplashStars = EntityManager.create(20, SplashStar.create(false, Game.sharedScreen().getPhysicsWorld()), this.m_BackgroundSquare);
+
     switch(type) {
       case types.progress:
       if(Game.instance.m_GameState) {
@@ -438,6 +438,9 @@ Finish = Background.extend({
     if(this.m_HideCallback) {
       this.m_HideCallback();
     }
+
+    this.m_SplashStars.clear();
+    this.m_SplashStars = false;
   },
   onMenuEvent: function() {
     Camera.sharedCamera().setDesignResolutionSize();

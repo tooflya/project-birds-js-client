@@ -880,7 +880,7 @@ MatrixManager = cc.Node.extend({
 
     return data ? matches : matches.result();
   },
-  find: function(_selector, network) {
+  find: function(selector, network) {
     this.disable();
 
     MatrixManager.pools = [];
@@ -893,9 +893,7 @@ MatrixManager = cc.Node.extend({
         if(this.m_CurrentElement1.m_Bonus) this.m_CurrentElement1.remove();
         if(this.m_CurrentElement2.m_Bonus) this.m_CurrentElement2.remove();
 
-        MatrixManager.timeout = new PausableTimeout(function() {
-          MatrixManager.sharedManager().clear();
-        }, 1000);
+        MatrixManager.sharedManager().clear();
       } else {
         this.replace(this.m_CurrentElement2, this.m_CurrentElement1, true, network);
       }
@@ -1221,7 +1219,9 @@ MatrixManager = cc.Node.extend({
           current.runAction(
             cc.Sequence.create(
               cc.DelayTime.create(time),
-              cc.CallFunc.create(current.remove, current, current),
+              cc.CallFunc.create(current.removeActions, current, {
+                icons: Element.instructions.icons.skip
+              }),
               false
             )
           );
@@ -1236,8 +1236,6 @@ MatrixManager = cc.Node.extend({
         this.m_PauseTime[i] += time;
       }
     }
-
-    MatrixManager.pause += time;
 
     time = 0.05;
     for(var i = x + 1; i < this.getSize().x; i++) {
@@ -1252,7 +1250,9 @@ MatrixManager = cc.Node.extend({
           current.runAction(
             cc.Sequence.create(
               cc.DelayTime.create(time),
-              cc.CallFunc.create(current.remove, current, current),
+              cc.CallFunc.create(current.removeActions, current, {
+                icons: Element.instructions.icons.skip
+              }),
               false
             )
           );
@@ -1267,8 +1267,6 @@ MatrixManager = cc.Node.extend({
         this.m_PauseTime[i] += time;
       }
     }
-
-    MatrixManager.pause += time;
 
     Sound.sharedSound().play(s_SoundLine);
   },
@@ -1317,7 +1315,9 @@ MatrixManager = cc.Node.extend({
           current.runAction(
             cc.Sequence.create(
               cc.DelayTime.create(time),
-              cc.CallFunc.create(current.remove, current, current),
+              cc.CallFunc.create(current.removeActions, current, {
+                icons: Element.instructions.icons.skip
+              }),
               false
             )
           );
@@ -1326,8 +1326,6 @@ MatrixManager = cc.Node.extend({
 
       time += 0.05;
     }
-
-    MatrixManager.pause += time;
 
     time = 0.05;
     for(var i = y + 1; i <=  this.m_CurrentSize.y.finish; i++) {
@@ -1342,7 +1340,9 @@ MatrixManager = cc.Node.extend({
           current.runAction(
             cc.Sequence.create(
               cc.DelayTime.create(time),
-              cc.CallFunc.create(current.remove, current, current),
+              cc.CallFunc.create(current.removeActions, current, {
+                icons: Element.instructions.icons.skip
+              }),
               false
             )
           );
@@ -1357,8 +1357,6 @@ MatrixManager = cc.Node.extend({
     } else {
       this.m_PauseTime[x] += time;
     }
-
-    MatrixManager.pause += time;
 
     Sound.sharedSound().play(s_SoundLine);
   },
@@ -1383,15 +1381,15 @@ MatrixManager = cc.Node.extend({
           current.runAction(
             cc.Sequence.create(
               cc.DelayTime.create(speed),
-              cc.CallFunc.create(current.remove, current, current),
+              cc.CallFunc.create(current.removeActions, current, {
+                icons: Element.instructions.icons.skip
+              }),
               false
             )
           );
         }
       }
     });
-
-    MatrixManager.pause += 1.0;
 
     Game.instance.m_BombBirds.create().run({
       speed: speed,
@@ -1415,7 +1413,9 @@ MatrixManager = cc.Node.extend({
               current.runAction(
                 cc.Sequence.create(
                   cc.DelayTime.create(speed),
-                  cc.CallFunc.create(current.remove, current, current),
+                  cc.CallFunc.create(current.removeActions, current, {
+                    icons: Element.instructions.icons.skip
+                  }),
                   false
                 )
               );

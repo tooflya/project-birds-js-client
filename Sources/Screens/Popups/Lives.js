@@ -84,13 +84,13 @@ Lives = ExtendedPopup.extend({
           });
           break;
           case purchase.lives:
-          EnergyManager.sharedManager().restoreAll();
-
-          if(Game.instance) {
-            if(!Game.sharedScreen().m_GameRunning) {
-              Game.sharedScreen().onShow();
+          EnergyManager.sharedManager().restoreAll(function() {
+            if(Game.instance) {
+              if(!Game.sharedScreen().m_GameRunning) {
+                Game.sharedScreen().onShow();
+              }
             }
-          }
+          });
           break;
         }
       });
