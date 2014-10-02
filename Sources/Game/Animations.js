@@ -102,17 +102,19 @@ Game.prototype.onTurnChangeFinish = function() {
     )
   );
 
-  if(!MatrixManager.sharedManager().computer(false, true)) {
-    this.onNoMoreCombinations();
-  } else {
-    if(Game.tutorial) {
-      this.onTurnChangeFinishTutorial();
+  setTimeout(function() {
+    if(!MatrixManager.sharedManager().computer(false, true)) {
+      this.onNoMoreCombinations();
+    } else {
+      if(Game.tutorial) {
+        this.onTurnChangeFinishTutorial();
+      }
+
+      MatrixManager.sharedManager().unbusy();
+
+      Game.instance.m_LastActionTime = Date.now();
     }
-
-    MatrixManager.sharedManager().unbusy();
-
-    Game.instance.m_LastActionTime = Date.now();
-  }
+  }.bind(this), 500);
 };
 
 Game.prototype.onSimpleTurnChange = function() {
@@ -292,6 +294,8 @@ Game.prototype.onActionAnimationFinish = function() {
 };
 
 Game.prototype.onNoMoreCombinations = function() {
+  this.stopAllActions();
+
   this.m_CombinationsNotification.runAction(
     cc.Sequence.create(
       cc.DelayTime.create(0.5),

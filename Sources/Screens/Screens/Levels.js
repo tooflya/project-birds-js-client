@@ -286,29 +286,6 @@ Levels = Screen.extend({
         element.setCurrentFrameIndex(DataManager.sharedManager().get(false, references.levels.levels[i]) - 1);
       }
     }
-  },
-  onExit: function() {
-    this._super();
-
-    this.m_Icons.clear();
-  },
-  /*onTouch: function(e) {
-    if(!this.m_WasDraged) {
-      this._super(e);
-      var element = this.m_Icons.create();
-
-      element.setCenterPosition(e._point.x, e._point.y - Levels.instance.m_List.m_Background.getPosition().y);
-      element.registerTouchable(true);
-    } else {
-      this.m_WasDraged = false;
-    }
-  },*/
-  onShow: function() {
-    this._super();
-
-    MenuPanel.sharedScreen(this).show();
-
-    Camera.sharedCamera().setDesignResolutionSize(false, false, false, false, true);
 
     Tooflya.api.call('level.get', false, {
       success: function(data) {
@@ -344,6 +321,29 @@ Levels = Screen.extend({
         Levels.instance.m_StarsCounterArea.text.ccsf([data.count, 90]);
       }
     });
+  },
+  onExit: function() {
+    this._super();
+
+    this.m_Icons.clear();
+  },
+  /*onTouch: function(e) {
+    if(!this.m_WasDraged) {
+      this._super(e);
+      var element = this.m_Icons.create();
+
+      element.setCenterPosition(e._point.x, e._point.y - Levels.instance.m_List.m_Background.getPosition().y);
+      element.registerTouchable(true);
+    } else {
+      this.m_WasDraged = false;
+    }
+  },*/
+  onShow: function() {
+    this._super();
+
+    MenuPanel.sharedScreen(this).show();
+
+    Camera.sharedCamera().setDesignResolutionSize(false, false, false, false, true);
   },
   onHide: function() {
     this._super();

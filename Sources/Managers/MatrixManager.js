@@ -377,6 +377,12 @@ MatrixManager = cc.Node.extend({
       }
 
       this.replace(combination.element, combination.neighbor);
+    } else {
+      if(automatic) {
+        return false;
+      }
+
+      Game.instance.onNoMoreCombinations();
     }
 
     return false;
@@ -995,12 +1001,10 @@ MatrixManager = cc.Node.extend({
     }
 
     // TODO: Fix position based on matrix size.
-    for(var i = 0; i < this.getSize().x; i++) {
-      for(var j = 0; j < this.getSize().y * 2; j++) {
-        var frame = this.m_Matrix[i][j];
-        if(frame && frame != etypes.empty && frame != etypes.block) {
-          frame.setCenterPosition(ElementsManager.sharedManager().getParent().getWidth() / 4 + frame.getWidth() * frame.getIndex().x - frame.getWidth() / 4 + Camera.sharedCamera().coord(4), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
-        }
+    for(var i = 0; i < ElementsManager.sharedManager().getCount(); i++) {
+      var frame = ElementsManager.sharedManager().get(i);
+      if(frame && frame != etypes.empty && frame != etypes.block) {
+        frame.setCenterPosition(ElementsManager.sharedManager().getParent().getWidth() / 4 + frame.getWidth() * frame.getIndex().x - frame.getWidth() / 4 + Camera.sharedCamera().coord(4), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
       }
     }
   },

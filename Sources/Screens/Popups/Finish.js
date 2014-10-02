@@ -71,14 +71,6 @@ Finish = Background.extend({
     this.m_TextValue1.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 - Camera.sharedCamera().coord(20));
     this.m_TextValue2.setCenterPosition(this.m_BackgroundSquare.getWidth() / 2, this.m_BackgroundSquare.getHeight() / 2 - Camera.sharedCamera().coord(120));
 
-    this.m_Stars[0].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(170), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
-    this.m_Stars[1].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(0), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
-    this.m_Stars[2].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(170), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
-
-    this.m_Stars[0].setCurrentFrameIndex(3);
-    this.m_Stars[1].setCurrentFrameIndex(4);
-    this.m_Stars[2].setCurrentFrameIndex(5);
-
     this.m_TextValue1.ccsf([0]);
     this.m_TextValue2.ccsf([0]);
 
@@ -99,6 +91,14 @@ Finish = Background.extend({
     this.assert(this.getParent(), "This popup window is already showed.");
 
     this.m_Parent.addChild(this, this.m_zIndex);
+
+    this.m_Stars[0].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 - Camera.sharedCamera().coord(170), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
+    this.m_Stars[1].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(0), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
+    this.m_Stars[2].setCenterPosition(this.m_BackgroundSquare.getWidth() / 2 + Camera.sharedCamera().coord(170), this.m_BackgroundSquare.getHeight() / 2 + Camera.sharedCamera().coord(210));
+
+    this.m_Stars[0].setCurrentFrameIndex(3);
+    this.m_Stars[1].setCurrentFrameIndex(4);
+    this.m_Stars[2].setCurrentFrameIndex(5);
 
     this.m_BackgroundSquare.setScale(3.0);
     this.m_BackgroundSquare.setOpacity(0.0);
@@ -373,9 +373,6 @@ Finish = Background.extend({
 
     this.m_HideCallback = callback;
 
-    MenuPanel.sharedScreen(this).hide();
-    MenuPanel.instance = false;
-
     this.m_BackgroundSquare.runRecognizeAction(cc.CallFunc.create(this.onHide, this, this), {
       name: 'scale',
       time: 0.2,
@@ -466,38 +463,46 @@ Finish = Background.extend({
     });
   },
   onContinueEvent: function() {
-    Camera.sharedCamera().setDesignResolutionSize();
-
-    if(Game.tutorial) {
-      this.setBottomScreen(Levels);
-
-      this.hide(function() {
-        window.setTimeout(function() {
-          Levels.instance.onSelected({
-            id: 1
-          });
-        }, 1500);
-      });
-    } else {
-      if(Game.network) {
-      this.setBottomScreen(Mode);
-
-      this.hide(function() {
-      });
-      } else {
+    MenuPanel.sharedScreen(this).hide(function() {
+      if(Game.tutorial) {
         this.setBottomScreen(Levels);
 
-        this.hide(function() {
-          if(!DataManager.sharedManager().get(false, references.levels.levels[Game.level + 1])) {
+        window.setTimeout(function() {
+          this.hide(function() {
             window.setTimeout(function() {
               Levels.instance.onSelected({
-                id: Game.level
+                id: 1
               });
             }, 1500);
-          }
+          }.bind(this), 500);
         });
+      } else {
+        if(Game.network) {
+          Camera.sharedCamera().setDesignResolutionSize();
+
+          this.setBottomScreen(Mode);
+
+          window.setTimeout(function() {
+            this.hide(function() {
+            });
+          }.bind(this), 500);
+        } else {
+          this.setBottomScreen(Levels);
+   
+          window.setTimeout(function() {
+            this.hide(function() {
+              if(!DataManager.sharedManager().get(false, references.levels.levels[Game.level + 1])) {
+                window.setTimeout(function() {
+                  Levels.instance.onSelected({
+                    id: Game.level
+                  });
+                }, 1500);
+              }
+            });
+          }.bind(this), 500);
+        }
       }
-    }
+    }.bind(this));
   },
   onEnter: function() {
     this._super();

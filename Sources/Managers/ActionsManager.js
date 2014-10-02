@@ -35,6 +35,8 @@ ActionsManager = cc.Node.extend({
     ActionsManager.instance = this;
   },
   add: function(data) {
+    if(data.id < 0) return false;
+
     var exist = false;
 
     for(var i = 0; i < this.m_Pool.length; i++) {
