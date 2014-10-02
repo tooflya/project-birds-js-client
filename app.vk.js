@@ -31,7 +31,7 @@
 
 (function() {
   App.run(false, {
-    version: '090',
+    version: '0.9.0',
     application: 6,
     platform: 'vk',
     auto: true,

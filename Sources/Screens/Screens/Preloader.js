@@ -50,9 +50,9 @@ Preloader = Screen.extend({
     this.m_LoadingBar.showPercentage(0);
   },
   initWithResources: function(resources, selector, target) {
-    /*resources.forEach(function(resource, index, array) {
+    resources.forEach(function(resource, index, array) {
       array[index].src += "?" + this.config.params.version;
-    }.bind(this));console.log(resources);*/
+    }.bind(this));
 
     this.resources = resources;
     this.selector = selector;
@@ -71,7 +71,7 @@ Preloader = Screen.extend({
     this.m_LoadingBar.showPercentage(percent);
     this.m_LoadingBar.setCenterPosition(Camera.sharedCamera().center.x +  this.m_LoadingBar.getTextureRect().getWidth() / 2 - this.m_LoadingBar.getWidth() / 2, Camera.sharedCamera().coord(100));
 
-    if(percent >= 100) {
+    if(percent >= 99) {
       this.unschedule(this.updatePercent);
     }
   },
