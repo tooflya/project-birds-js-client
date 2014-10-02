@@ -71,7 +71,7 @@ ElementsManager = EntityManager.extend({
   clipper: function(file) {
     this.m_Template = Entity.create(file);
 
-    var stencil = cc.Sprite.create(file);
+    var stencil = cc.Sprite.create(this.m_Template.getTextureFileName());
     var clipper = cc.ClippingNode.create(stencil);
 
     stencil.setAnchorPoint(cc.p(0, 0));
