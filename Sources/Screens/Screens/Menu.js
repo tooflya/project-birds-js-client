@@ -149,7 +149,7 @@ Menu = Screen.extend({
       GameCenterNotification.sharedNotification().show();
     }
 
-    DustBackground.sharedInstance();
+    //DustBackground.sharedInstance();
   },
   onHide: function() {
     this._super();

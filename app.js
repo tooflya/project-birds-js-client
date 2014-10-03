@@ -31,7 +31,7 @@
 
 (function() {
   App.run(false, {
-    version: '0.9.0',
+    version: '0.9.2',
     application: 5,
     platform: 'standalone',
     auto: false,

@@ -949,7 +949,7 @@ MatrixManager = cc.Node.extend({
 
             matrix.push(element.getId());
 
-            var down = this.m_Matrix[i][j - 1]; // TODO: What id down is null?
+            var down = this.m_Matrix[i][j - 1]; // TODO: What if down is null?
 
             if(down && down != etypes.empty && down != etypes.block) {
               var x = down.getCenterX();

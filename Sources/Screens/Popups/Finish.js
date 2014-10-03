@@ -450,10 +450,12 @@ Finish = Background.extend({
   onShopEvent: function() {
     Camera.sharedCamera().setDesignResolutionSize();
 
-    this.setBottomScreen(Shop);
+    MenuPanel.sharedScreen(this).hide(function() {
+      this.setBottomScreen(Shop);
 
-    this.hide(function() {
-    });
+      this.hide(function() {
+      });
+    }.bind(this));
   },
   onRestartEvent: function() {
     Camera.sharedCamera().setDesignResolutionSize();

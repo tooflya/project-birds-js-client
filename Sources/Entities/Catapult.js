@@ -209,7 +209,8 @@ Catapult = AnimatedEntity.extend({
 
         this.changeState(this.m_States.fire, {
           fire: false,
-          callback: this.m_StateData.callback
+          callback: this.m_StateData.callback,
+          response: this.m_StateData.response
         });
       } else {
         this.changeState(this.m_States.stop, {
@@ -308,8 +309,6 @@ Catapult = AnimatedEntity.extend({
     this.m_Birds.removeFromParent();
   },
   runGameAction: function(id, data) {
-    var self = this;
-
     data.repeat--;
 
     switch(id) {
@@ -318,9 +317,9 @@ Catapult = AnimatedEntity.extend({
         fire: true,
         callback: function() {
           if(data.repeat > 0) {
-            self.runGameAction(id, data);
+            this.runGameAction(id, data);
           }
-        },
+        }.bind(this),
         response: function() {
           Game.sharedScreen().onTurnFinish(id + 10, data);
         }
@@ -331,11 +330,11 @@ Catapult = AnimatedEntity.extend({
         regeneration: data.regeneration,
         callback: function() {
           if(data.repeat > 0) {
-            self.runGameAction(id, data);
+            this.runGameAction(id, data);
           } else {
             Game.sharedScreen().onTurnFinish(id);
           }
-        }
+        }.bind(this)
       });
       break;
       case 2:
@@ -358,14 +357,14 @@ Catapult = AnimatedEntity.extend({
         pause: data.pause,
         callback: function() {
           if(data.repeat > 0) {
-            self.runGameAction(id, {
+            this.runGameAction(id, {
               distance: data.distance,
               pause: 1.5
             });
           } else {
             Game.sharedScreen().onTurnFinish(id);
           }
-        }
+        }.bind(this)
       });
       break;
       case 10:

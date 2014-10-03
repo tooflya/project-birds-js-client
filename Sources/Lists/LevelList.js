@@ -38,7 +38,7 @@ LevelList = PatternList.extend({
     this.m_ElementsBackgrounds =  [];
     this.m_Elements =  [];
     this.m_ElementsIcons =  [];
-    this.m_Feathers = EntityManager.create(100, Feather.create(false, Levels.instance.getPhysicsWorld()), Levels.instance, 3000);
+    //this.m_Feathers = EntityManager.create(100, Feather.create(false, Levels.instance.getPhysicsWorld()), Levels.instance, 3000);
 
     var self = this;
 
@@ -54,15 +54,15 @@ LevelList = PatternList.extend({
       this.m_ElementsBackgrounds[i + 1].onTouch = function(e) {
         Button.prototype.onTouch.call(this, e);
 
-        if(self.m_Feathers.getCount() > 50) return;
+        //if(self.m_Feathers.getCount() > 50) return;
 
         this.icon.setCurrentFrameIndex(self.m_Elements.getElement());
-        for(var i = 0; i < 100; i++) {
+        /*for(var i = 0; i < 100; i++) {
           var feather = self.m_Feathers.create();
 
           feather.setCenterPosition(this.convertToWorldSpace(cc.p(0, 0)).x + this.getWidth() / 2, this.convertToWorldSpace(cc.p(0, 0)).y);
           feather.setCurrentFrameIndex(this.icon.getCurrentFrameIndex());
-        }
+        }*/
 
         Game.selected.birds[this.id] = this.icon.getCurrentFrameIndex();
 
@@ -302,6 +302,11 @@ var points = DataManager.sharedManager().get(false, references.levels.points[Gam
 
       this.m_PointsHolder.stars.setCurrentFrameIndex(DataManager.sharedManager().get(false, references.levels.levels[Game.level - 1]) - 1);
     }
+
+    this.m_BackgroundHolder.m_Position = {
+      x: this.getCenterX(),
+      y: this.m_Text[2].getCenterY() - Camera.sharedCamera().coord(100)
+    };
 
     /** TUTORIAL */
 
