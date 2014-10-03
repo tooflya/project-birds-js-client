@@ -469,32 +469,32 @@ Finish = Background.extend({
       if(Game.tutorial) {
         this.setBottomScreen(Levels);
 
-        window.setTimeout(function() {
+        setTimeout(function() {
           this.hide(function() {
-            window.setTimeout(function() {
+            setTimeout(function() {
               Levels.instance.onSelected({
                 id: 1
               });
             }, 1500);
           }.bind(this), 500);
-        });
+        }.bind(this), 500);
       } else {
         if(Game.network) {
           Camera.sharedCamera().setDesignResolutionSize();
 
           this.setBottomScreen(Mode);
 
-          window.setTimeout(function() {
+          setTimeout(function() {
             this.hide(function() {
             });
           }.bind(this), 500);
         } else {
           this.setBottomScreen(Levels);
    
-          window.setTimeout(function() {
+          setTimeout(function() {
             this.hide(function() {
               if(!DataManager.sharedManager().get(false, references.levels.levels[Game.level + 1])) {
-                window.setTimeout(function() {
+                setTimeout(function() {
                   Levels.instance.onSelected({
                     id: Game.level
                   });

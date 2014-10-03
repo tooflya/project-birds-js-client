@@ -182,10 +182,12 @@ Game.prototype.onTouchTutorial = function() {
     this.m_TutorialTeamExplanation.runAction(cc.FadeTo.create(0.5, 0));
 
     MatrixManager.sharedManager().enable();
+    MatrixManager.instance.unbusy();
 
     for(var y = 0; y < MatrixManager.sharedManager().getSize().y; y++) {
       for(var x = 0; x < MatrixManager.sharedManager().getSize().x; x++) {
         if(x == 7 && y == 5) {
+          MatrixManager.sharedManager().get(x, y).registerTouchable(true);
           MatrixManager.sharedManager().get(x, y).onTouch();
         } else {
           MatrixManager.sharedManager().get(x, y).registerTouchable(false);
