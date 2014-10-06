@@ -168,6 +168,45 @@ EventsList = PatternList.extend({
                     }
                   }));
                   break;
+                  case 'live.request':
+                  success(function() {
+                    var messages = [
+                      LanguagesManager.sharedManager().get('friends-notification-vk-11').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-12').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-13').title,
+                      LanguagesManager.sharedManager().get('friends-notification-vk-14').title
+                    ];
+
+                    Tooflya.VK.api.call('friends.request', {
+                      id: this.data.uid,
+                      message: messages.random()
+                    }, {
+                      success: function() {
+                        Tooflya.api.call('request.send', {
+                          type: 'live.send',
+                          uid: this.data.uid
+                        }, {
+                          success: function(data) {
+                            this.elements.button.registerTouchable(false);
+                            this.elements.button.text.setText(this.elements.button.text.texts.complete);
+                            this.elements.button.text.runAction(
+                              cc.Sequence.create(
+                                cc.DelayTime.create(0.2),
+                                cc.EaseBounceOut.create(
+                                  cc.MoveTo.create(0.5, cc.p(this.elements.button.text.getCenterX() - Camera.sharedCamera().coord(100), this.elements.button.text.getCenterY()))
+                                ),
+                                false
+                              )
+                            );
+                            this.elements.button.icon.runAction(cc.FadeOut.create(0.2));
+                            this.close();
+                          }.bind(this)
+                        });
+                        this.registerTouchable(false);
+                      }.bind(this)
+                    });
+                  });
+                  break;
                   case 'play.send':
                   if(this.data.online) {
                     success(function() {
@@ -239,6 +278,22 @@ EventsList = PatternList.extend({
               });
               break;
               case 'live.request':
+              this.createButton({
+                texts: {
+                  original: 'friends-live-present-1',
+                  hover: '',
+                  complete: 'friends-live-present-2'
+                },
+                icon: AnimatedEntity.create(s_PanelIcon3, 3, 3),
+                handlers: {
+                  create: function() {
+                    this.elements.button.icon.animate(0.06, 2, {start: 0, end: 7}, {start: 0, end: 5.0});
+                    this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(65), this.elements.button.getHeight() / 2);
+                  },
+                  touch: handlers.touch,
+                  update: handlers.update
+                }
+              });
               break;
               case 'play.send':
               this.createButton({

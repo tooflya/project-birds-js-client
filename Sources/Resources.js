@@ -307,9 +307,8 @@ var s_UsersCrown = "Resources/Graphics/users-crown.png";
 var s_LevelPointsHolder = "Resources/Graphics/level-points-holder.png";
 var s_LevelStars = "Resources/Graphics/level-stars.png";
 var s_LevelStarsCounterArea = "Resources/Graphics/stars-counter-area.png";
-var s_LivesPresentBackground = "Resources/Graphics/lives-present-background.png";
-var s_PopupLongButton1 = "Resources/Graphics/lives-present-background.png";
-var s_PopupLongButton2 = "Resources/Graphics/lives-present-background.png";
+var s_PopupLongButton1 = "Resources/Graphics/lives-present-background-1.png";
+var s_PopupLongButton2 = "Resources/Graphics/lives-present-background-2.png";
 var s_FriendsBackground1 = "Resources/Graphics/friends-background-1.png";
 var s_FriendsBackground2 = "Resources/Graphics/friends-background-2.png";
 var s_FriendsCover = "Resources/Graphics/friends-list-cover.png";
@@ -671,7 +670,6 @@ var resources = [
   {src: s_LevelPointsHolder},
   {src: s_LevelStars},
   {src: s_LevelStarsCounterArea},
-  {src: s_LivesPresentBackground},
   {src: s_PopupLongButton1},
   {src: s_PopupLongButton2},
   {src: s_FriendsBackground1},
