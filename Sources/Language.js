@@ -1101,7 +1101,7 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [500, 0]}
     ],
   'multiplayer-popup-10': [
-    {title: "Play company", font: "Comic Sans MS", size: 25, dimensions: false},
+    {title: "Play campaign", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "Играть компанию", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: false},
