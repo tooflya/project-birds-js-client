@@ -143,41 +143,95 @@ LivesSendList = PatternList.extend({
           this.m_BackgroundHolder.create(user, function() {
             var handlers = {
               touch: function() {
-                var messages = [
-                  LanguagesManager.sharedManager().get('friends-notification-vk-11').title,
-                  LanguagesManager.sharedManager().get('friends-notification-vk-12').title,
-                  LanguagesManager.sharedManager().get('friends-notification-vk-13').title,
-                  LanguagesManager.sharedManager().get('friends-notification-vk-14').title
-                ];
+                var h = {
+                  vk: {
+                    original: function() {
+                      var messages = [
+                        LanguagesManager.sharedManager().get('friends-notification-vk-11').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-12').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-13').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-14').title
+                      ];
 
-                Tooflya.VK.api.call('friends.request', {
-                  id: this.data.uid,
-                  message: messages.random()
-                }, {
+                      Tooflya.VK.api.call('friends.request', {
+                        id: this.data.uid,
+                        message: messages.random()
+                      }, {
+                        success: function() {
+                          Tooflya.api.call('request.send', {
+                            type: 'live.send',
+                            uid: this.data.uid
+                          }, {
+                            success: function(data) {
+                              h.success();
+                            }.bind(this)
+                          });
+                          this.registerTouchable(false);
+                        }.bind(this)
+                      });
+                    }.bind(this),
+                    playtest: function() {
+                      var messages = [
+                        LanguagesManager.sharedManager().get('friends-notification-vk-11').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-12').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-13').title,
+                        LanguagesManager.sharedManager().get('friends-notification-vk-14').title
+                      ];
+
+                      VK.api("wall.post", {
+                        owner_id: this.data.uid,
+                        message: messages.random(),
+                        attachments: 'http://play.tooflya.com',
+                        test_mode: 1
+                      }, function(e) {
+                        if(!e.error) {
+                          h.success();
+                        }
+                      });
+                    }.bind(this),
+                  },
+                  fb: {
+                    original: function() {
+                      // TODO: Add Facebook original handler.
+                    }.bind(this),
+                    playtest:function() {
+                      // TODO: Add Facebook playtest handler.
+                    }.bind(this),
+                  },
+
                   success: function() {
-                    Tooflya.api.call('request.send', {
-                      type: 'live.send',
-                      uid: this.data.uid
-                    }, {
-                      success: function(data) {
-                        this.elements.button.registerTouchable(false);
-                        this.elements.button.text.setText(this.elements.button.text.texts.complete);
-                        this.elements.button.text.runAction(
-                          cc.Sequence.create(
-                            cc.DelayTime.create(0.2),
-                            cc.EaseBounceOut.create(
-                              cc.MoveTo.create(0.5, cc.p(this.elements.button.text.getCenterX() - Camera.sharedCamera().coord(100), this.elements.button.text.getCenterY()))
-                            ),
-                            false
-                          )
-                        );
-                        this.elements.button.icon.runAction(cc.FadeOut.create(0.2));
-                        this.close();
-                      }.bind(this)
-                    });
-                    this.registerTouchable(false);
+                    this.elements.button.registerTouchable(false);
+                    this.elements.button.text.setText(this.elements.button.text.texts.complete);
+                    this.elements.button.text.runAction(
+                      cc.Sequence.create(
+                        cc.DelayTime.create(0.2),
+                        cc.EaseBounceOut.create(
+                          cc.MoveTo.create(0.5, cc.p(this.elements.button.text.getCenterX() - Camera.sharedCamera().coord(100), this.elements.button.text.getCenterY()))
+                        ),
+                        false
+                      )
+                    );
+                    this.elements.button.icon.runAction(cc.FadeOut.create(0.2));
+                    this.close();
                   }.bind(this)
-                });
+                };
+
+                switch(this.config.params.platform) {
+                  case 'vk':
+                  if(!this.config.params.playtest) {
+                    h.vk.original();
+                  } else {
+                    h.vk.playtest();
+                  }
+                  break;
+                  case 'fb':
+                  if(!this.config.params.playtest) {
+                    h.fb.original();
+                  } else {
+                    h.fb.playtest();
+                  }
+                  break;
+                }
               }
             };
 
