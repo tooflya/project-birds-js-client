@@ -553,7 +553,7 @@ MultiplayerList = PatternList.extend({
     this.m_Text[7].setCenterPosition(this.getWidth() / 2, this.m_Text[12].getCenterY() - this.m_Text[7].getHeight() / 2 - Camera.sharedCamera().coord(150));
     this.m_Loading[1].setCenterPosition(this.getWidth() / 2, this.m_Text[7].getCenterY() + Camera.sharedCamera().coord(70));
 
-    var button = Button.create(s_LivesPresentBackground, 1, 1, this.m_BackgroundHolders[1]);
+    var button = Button.create(s_PopupLongButton1, 1, 1, this.m_BackgroundHolders[1]);
     var text = Text.create('friends-multiplayer-present-4', button, cc.TEXT_ALIGNMENT_LEFT);
 
     button.create().setCenterPosition(this.getCenterX(), this.m_Text[7].getCenterY() - Camera.sharedCamera().coord(100));
@@ -627,7 +627,7 @@ MultiplayerList = PatternList.extend({
 
     this.m_Text[10].setVisible(true);
 
-    var button = Button.create(s_LivesPresentBackground, 1, 1, this.m_BackgroundHolders[2]);
+    var button = Button.create(s_PopupLongButton1, 1, 1, this.m_BackgroundHolders[2]);
     var text = Text.create('friends-multiplayer-present-4', button, cc.TEXT_ALIGNMENT_LEFT);
 
     button.create().setCenterPosition(this.getCenterX(), this.m_Text[10].getCenterY() - Camera.sharedCamera().coord(100));

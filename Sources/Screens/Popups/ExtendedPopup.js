@@ -35,6 +35,7 @@ ExtendedPopup = Popup.extend({
   color: cc.c4(0, 0, 0, 0),
   m_ShowTime: 0.2,
   m_HideTime: 0.1,
+  m_Opacity: 255,
   ctor: function(parent) {
     this._super(this.color, parent);
 
@@ -63,7 +64,7 @@ ExtendedPopup = Popup.extend({
     if(this.simple) {
       this.render = true;
 
-      this.setOpacity(255);
+      this.setOpacity(this.m_Opacity);
       this.m_Background.setScale(1.0);
       this.m_Decoration1.setScale(3.0);
       this.m_Decoration2.setScale(3.0);
@@ -80,7 +81,7 @@ ExtendedPopup = Popup.extend({
       this.runRecognizeAction(false, {
         name: 'fade',
         time: this.m_ShowTime,
-        value: 255
+        value: this.m_Opacity
       });
       this.m_Background.runRecognizeAction(cc.CallFunc.create(this.onShow, this), [{
         name: 'scale',

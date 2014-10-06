@@ -272,7 +272,6 @@ Entry = Entity.extend({
 
     if(params.texts) {
       this.elements.button.text = Text.create(params.texts.original, this.elements.button);
-      this.elements.button.text.setCenterPosition();
       this.elements.button.text.setColor(cc.c3(204.0, 102.0, 51.0));
       this.elements.button.text.texts = params.texts;
     }

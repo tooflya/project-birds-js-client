@@ -33,6 +33,8 @@ Bought = ExtendedPopup.extend({
   ctor: function(parent) {
     this._super(parent);
 
+    this.m_Opacity = 200;
+
     this.m_BackgroundIcon = TiledEntity.create(s_ShopItems, 10, 6, this);
 
     this.m_ContinueText = Text.create('tap-to-continue', this);
@@ -55,11 +57,7 @@ Bought = ExtendedPopup.extend({
     this.m_CloseButton.setTouchHandler('onCloseEvent', Bought);
   },
   show: function(params) {
-    if(!this.m_Parent) {
-      this.m_Parent = ScreenManager.sharedManager().getCurrentScreen();
-    }
-
-    Popup.prototype.show.call(this);
+    this._super();
 
     this.reference = params.reference;
 
@@ -69,7 +67,7 @@ Bought = ExtendedPopup.extend({
     this.m_ContinueText.setOpacity(0);
     this.m_ItemText.setOpacity(0);
     this.m_UnlockText.setOpacity(0);
-    this.runRecognizeAction(cc.CallFunc.create(this.onShow, this), {
+    this.m_BackgroundIcon.runRecognizeAction(cc.CallFunc.create(this.onShow, this), {
       name: 'fade',
       time: this.m_ShowTime,
       value: this.m_Opacity
@@ -80,9 +78,9 @@ Bought = ExtendedPopup.extend({
         cc.Sequence.create(
           cc.FadeIn.create(1.0),
           cc.FadeOut.create(1.0)
-          )
         )
-      );
+      )
+    );
 
     this.m_BackgroundIcon.setCurrentFrameIndex(params.reference);
 
@@ -164,9 +162,6 @@ Bought = ExtendedPopup.extend({
     });
 
     ConfettiBackground.sharedScreen(this).show();
-  },
-  onHide: function() {
-    this._super();
   },
   onTouch: function() {
     switch(this.config.params.platform) {
