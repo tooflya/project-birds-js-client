@@ -277,6 +277,8 @@ var s_MapBackground7 = "Resources/Graphics/map-background-7.png";
 var s_MapBackground8 = "Resources/Graphics/map-background-8.png";
 var s_MapBackground9 = "Resources/Graphics/map-background-9.png";
 var s_MapBackground10 = "Resources/Graphics/map-background-10.png";
+var s_MapBackground10English = "Resources/Graphics/map-background-10-0.png";
+var s_MapBackground10Russian = "Resources/Graphics/map-background-10-1.png";
 var s_LevelsMapTrees = "Resources/Graphics/levels-map-trees.png";
 var s_LevelsMapIcons = "Resources/Graphics/levels-map-icons.png";
 var s_LevelsMapPoint = "Resources/Graphics/levels-map-point.png";
@@ -636,6 +638,14 @@ var resources = [
   {src: s_MapBackground1},
   {src: s_MapBackground2},
   {src: s_MapBackground3},
+  {src: s_MapBackground4},
+  {src: s_MapBackground5},
+  {src: s_MapBackground6},
+  {src: s_MapBackground7},
+  {src: s_MapBackground8},
+  {src: s_MapBackground9},
+  {src: s_MapBackground10Russian},
+  {src: s_MapBackground10English},
   {src: s_LevelsMapTrees},
   {src: s_LevelsMapIcons},
   {src: s_LevelsMapPoint},

@@ -31,7 +31,7 @@
 
 BubblePoping = AnimatedEntity.extend({
   ctor: function() {
-    this._super(s_ElementsBubblesPoping, 3, 4);
+    this._super(s_ElementsBubblesPoping, 1, 8);
   },
   onCreate: function() {
     this._super();

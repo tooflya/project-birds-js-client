@@ -279,12 +279,24 @@ Entry = Entity.extend({
 
     params.handlers.create();
   },
-  createText: function(text, callback) {
+  createText: function(text, callbacks) {
     this.elements.text = Text.create(text, this, cc.TEXT_ALIGNMENT_LEFT);
 
-    if(callback) {
-      callback = callback.bind(this);
-      callback();
+    if(callbacks) {
+      if(callbacks.create) {
+        callbacks.create = callbacks.create.bind(this);
+
+        callbacks.create();
+      }
+      if(callbacks.update) {
+        callbacks.update = callbacks.update.bind(this);
+
+        this.elements.text.update = function(time) {
+          Text.prototype.update.call(this, time);
+
+          callbacks.update(time);
+        };
+      }
     }
   },
   update: function(time) {

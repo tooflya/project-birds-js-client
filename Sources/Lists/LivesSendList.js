@@ -85,28 +85,36 @@ LivesSendList = PatternList.extend({
           );
         },
         update: function(callback) {
-          // TODO: Check available time;
-          /*Tooflya.api.call('request.check', {
-            force: true
-            }, {
+          callback.finish();
+
+          var friends = FriendsManager.instance.getAppFriends();
+          var uids = [];
+          friends.forEach(function(friend) {
+            uids.push(friend.uid);
+          });
+
+          Tooflya.api.call('request.check', {
+            uids: uids,
+            type: 'live.send'
+          }, {
             success: function(data) {
               callback.finish();
 
-              if(data.requests.length > 0) {
-                callback.create(data.requests);
+              friends.forEach(function(friend) {
+                data.requests.forEach(function(entry) {
+                  if(friend.uid == entry.uid) {
+                    friend.time = entry.time;
+                  }
+                })
+              });
+
+              if(friends.length > 0) {
+                callback.create(friends);
               } else {
                 callback.empty();
               }
             }
-          });*/
-          callback.finish();
-
-          var friends = FriendsManager.instance.getAppFriends();
-          if(friends.length > 0) {
-            callback.create(friends);
-          } else {
-            callback.empty();
-          }
+          });
         },
         finish: function() {
           this.m_Text[1].setVisible(false);
@@ -173,22 +181,38 @@ LivesSendList = PatternList.extend({
               }
             };
 
-            this.createButton({
-              texts: {
-                original: 'friends-live-present-1',
-                hover: '',
-                complete: 'friends-live-present-2'
-              },
-              icon: AnimatedEntity.create(s_PanelIcon3, 3, 3),
-              handlers: {
-                create: function() {
-                  this.elements.button.icon.animate(0.06, 2, {start: 0, end: 7}, {start: 0, end: 5.0});
-                  this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(65), this.elements.button.getHeight() / 2);
+            if((Date.now() / 1000) - parseInt(user.time) < 24 * 60 * 60) {
+              this.createText('friends-lives-popup-5',
+                {
+                  create: function() {
+                    this.elements.text.create().setColor(cc.c3(204.0, 102.0, 51.0));
+                  },
+                  update: function(time) {
+                    this.elements.text.setCenterPosition(this.elements.text.getWidth() / 2 + Camera.sharedCamera().coord(130), Camera.sharedCamera().coord(40));
+                    if(this.elements.text.timeLeft(Date.now() / 1000 - this.data.time, 24 * 60 * 60) <= 0) {
+                      // TODO: Destroy text and create new button.
+                    }
+                  }
+                }
+              );
+            } else {
+              this.createButton({
+                texts: {
+                  original: 'friends-live-present-1',
+                  hover: '',
+                  complete: 'friends-live-present-2'
                 },
-                touch: handlers.touch,
-                update: handlers.update
-              }
-            });
+                icon: AnimatedEntity.create(s_PanelIcon3, 3, 3),
+                handlers: {
+                  create: function() {
+                    this.elements.button.icon.animate(0.06, 2, {start: 0, end: 7}, {start: 0, end: 5.0});
+                    this.elements.button.text.setCenterPosition(this.elements.button.text.getWidth() / 2 + Camera.sharedCamera().coord(65), this.elements.button.getHeight() / 2);
+                  },
+                  touch: handlers.touch,
+                  update: handlers.update
+                }
+              });
+            }
           });
         }.bind(this));
       }

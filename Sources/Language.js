@@ -2340,6 +2340,16 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 36, dimensions: [450, 0]},
     {title: "", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
+  'friends-lives-popup-5': [
+    {title: "Remaining $1", font: "Comic Sans MS", size: 32, dimensions: [450, 0]},
+    {title: "Осталось: $1", font: "Comic Sans MS", size: 32, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 32, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 32, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 32, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 32, dimensions: [450, 0]},
+    {title: "", font: "Comic Sans MS", size: 32, dimensions: [450, 0]},
+    {title: "", font: "RiiPopkk-R", size: 32, dimensions: [450, 0]}
+    ],
   'request-battle': [
     {title: 'Request', font: 'Comic Sans MS', size: 48, dimensions: false},
     {title: 'Пригласить', font: 'Comic Sans MS', size: 38, dimensions: false},

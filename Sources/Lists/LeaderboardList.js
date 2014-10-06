@@ -152,10 +152,13 @@ LeaderboardList = PatternList.extend({
           }
 
           this.m_BackgroundHolder.create(user, function() {
-            this.createText('leaderboard-score', function() {
-              this.elements.text.ccsf([this.data.rating, '']);
-              this.elements.text.create().setCenterPosition(this.elements.text.getWidth() / 2 + Camera.sharedCamera().coord(130), Camera.sharedCamera().coord(50));
-              this.elements.text.setColor(cc.c3(204.0, 102.0, 51.0));
+            this.createText('leaderboard-score',
+            {
+              create: function() {
+                this.elements.text.ccsf([this.data.rating, '']);
+                this.elements.text.create().setCenterPosition(this.elements.text.getWidth() / 2 + Camera.sharedCamera().coord(130), Camera.sharedCamera().coord(50));
+                this.elements.text.setColor(cc.c3(204.0, 102.0, 51.0));
+              }
             });
           });
 
