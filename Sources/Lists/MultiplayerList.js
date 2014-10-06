@@ -260,7 +260,7 @@ MultiplayerList = PatternList.extend({
                               }.bind(this)
                             });
                           }.bind(this),
-                          playtest:function() {
+                          playtest: function() {
                             var messages = [
                               LanguagesManager.sharedManager().get('friends-notification-vk-21').title,
                               LanguagesManager.sharedManager().get('friends-notification-vk-22').title,
