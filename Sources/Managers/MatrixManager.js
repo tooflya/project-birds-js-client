@@ -560,7 +560,7 @@ MatrixManager = cc.Node.extend({
       for(var i = 0; i < pool.horizontal.length; i++) {
         if(pool.horizontal[i]) {
           if(!pool.horizontal[i].m_Removed) {
-            if(!pool.horizontal[i].chained()) {
+            if(!pool.horizontal[i].chained() && !pool.horizontal[i].bubbled()) {
               bonus.horizontal++;
             }
 
@@ -575,7 +575,7 @@ MatrixManager = cc.Node.extend({
       for(var i = 0; i < pool.vertical.length; i++) {
         if(pool.vertical[i]) {
           if(!pool.vertical[i].m_Removed) {
-            if(!pool.vertical[i].chained()) {
+            if(!pool.vertical[i].chained() && !pool.vertical[i].bubbled()) {
               bonus.vertical++;
             }
 
@@ -589,7 +589,7 @@ MatrixManager = cc.Node.extend({
 
       if(pool.element) {
         if(!pool.element.m_Removed) {
-          if(!pool.element.chained()) {
+          if(!pool.element.chained() && !pool.element.bubbled()) {
             bonus.element = pool.element;
           }
 
@@ -1000,11 +1000,11 @@ MatrixManager = cc.Node.extend({
       }
     }
 
-    // TODO: Fix position based on matrix size.
+    var width = (Camera.sharedCamera().width - ElementsManager.sharedManager().m_Clipper.getStencil().getContentSize().width) / 2;
     for(var i = 0; i < ElementsManager.sharedManager().getCount(); i++) {
       var frame = ElementsManager.sharedManager().get(i);
       if(frame && frame != etypes.empty && frame != etypes.block) {
-        frame.setCenterPosition(ElementsManager.sharedManager().getParent().getWidth() / 4 + frame.getWidth() * frame.getIndex().x - frame.getWidth() / 4 + Camera.sharedCamera().coord(4), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
+        frame.setCenterPosition(width + frame.getWidth() * (frame.getIndex().x + 0.5), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
       }
     }
   },
