@@ -325,6 +325,12 @@ ElementsManager = EntityManager.extend({
   onStartAnimationStart: function() {
     this.m_CurrentRow = 0;
 
+    if(this.m_ElementsBubbles.getCount() > 0) {
+      MatrixManager.sharedManager().setType(MatrixManager.types.bubbles);
+    } else {
+      MatrixManager.sharedManager().setType(MatrixManager.types.war);
+    }
+
     if(Game.tutorial) {
       Game.sharedScreen().onStartAnimationStartTutorial();
     } else {
@@ -408,6 +414,7 @@ ElementsManager = EntityManager.extend({
     }
   },
   clear: function() {
+    this.m_ElementsParts.removeFromParent();
     this.m_ElementsBubbles.removeFromParent();
     this.m_ElementsBubblesPoping.removeFromParent();
     this.m_MatrixArrows1.removeFromParent();
@@ -438,6 +445,7 @@ ElementsManager = EntityManager.extend({
   },
   createBonus: function(data, type) {
     var bonus = data.element || data.elements[0];
+    var index = bonus.getIndex();
 
     for(var i = 0; i < data.icons.length; i++) {
       data.icons[i].runAction(
@@ -454,7 +462,7 @@ ElementsManager = EntityManager.extend({
 
       var element = this.create();
 
-      MatrixManager.sharedManager().set(element, bonus.getIndex().x, bonus.getIndex().y);
+      MatrixManager.sharedManager().set(element, index.x, index.y);
 
       element.m_Removed = true;
       element.setId(bonus.getId());

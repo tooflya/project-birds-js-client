@@ -38,32 +38,35 @@ Element = TiledEntity.extend({
   m_Bonus: false,
   m_Special: false,
   m_Chained: false,
-  m_Bubbled: false,
   ctor: function() {
     this._super(s_Elements, 8, 6);
 
+    this.setAnchorPoint(cc.p(0.5, 0.0));
     this.m_Index = {
       x: -1,
       y: -1
     };
-
-    this.setAnchorPoint(cc.p(0.5, 0.0));
+    /*this.m_Text = Text.create(false, this);
+    this.m_Text.create().setCenterPosition(this.getWidth() / 2, this.getHeight() / 2);
+    this.m_Text.setColor(cc.c3(0, 0, 0));*/
   },
   onCreate: function() {
     this._super();
 
     this.m_Bonus = false;
     this.m_Chained = false;
-    this.m_Bubbled = false;
     this.m_Special = false;
     this._custom = false;
 
     this.setRotation(0);
+    this.stopAllActions();
+    this.m_Index = {
+      x: -1,
+      y: -1
+    };
   },
   onDestroy: function() {
     this._super();
-
-    this.stopAllActions();
 
     if(this.m_Icon) {
       this.m_Icon.destroy();
@@ -79,6 +82,30 @@ Element = TiledEntity.extend({
       GamePanel.sharedScreen().starred();
       break;
     }
+
+    this.stopAllActions();
+  },
+  onFastRemove: function() {
+    {
+      if(this.chained()) {
+      } else if(this.special()) {
+        switch(this.special()) {
+          case Element.types.box:
+          MatrixManager.sharedManager().remove(this);
+
+          break;
+        }
+      } else {
+        switch(this.getId()) {
+          default:
+          MatrixManager.sharedManager().remove(this);
+
+          break;
+          case Element.types.star:
+          break;
+        }
+      }
+    }
   },
   onRemove: function(instructions) {
     instructions = instructions || {};
@@ -87,9 +114,7 @@ Element = TiledEntity.extend({
 
     if(MatrixManager.instance.getBubble(this.getIndex().x, this.getIndex().y)) {
       MatrixManager.instance.getBubble(this.getIndex().x, this.getIndex().y).destroy();
-
-      this.m_Bubbled = false;
-    }
+    } 
 
     {
       if(this.chained()) {
@@ -234,12 +259,6 @@ Element = TiledEntity.extend({
   onChangePosition: function(target, data) {
     if(this.getId() == Element.types.block) return false;
 
-    if(MatrixManager.instance.getBubble(this.getIndex().x, this.getIndex().y)) {
-      this.m_Bubbled = true;
-    } else {
-      this.m_Bubbled = false;
-    }
-
     if(!this.getIndex() || (this.getIndex().y >= MatrixManager.sharedManager().getCurrentSize().y.start && this.getIndex().y <= MatrixManager.sharedManager().getCurrentSize().y.finish) || ElementsManager.instance.effectsEnabled) {
       this.setVisible(true);
       this.setOpacity(255);
@@ -252,7 +271,8 @@ Element = TiledEntity.extend({
     } else {
       if(this.getIndex().y >= (MatrixManager.sharedManager().getCurrentSize().y.start - 1) && this.getIndex().y <= (MatrixManager.sharedManager().getCurrentSize().y.finish + 1)) {
         this.setVisible(true);
-        this.runAction(cc.FadeTo.create(0.5, 100));
+        //this.runAction(cc.FadeTo.create(0.5, 100));
+        this.setOpacity(100);
       } else {
         this.setVisible(false);
       }
@@ -396,6 +416,9 @@ Element = TiledEntity.extend({
   remove: function(data) {
     return this.onRemove(data);
   },
+  fastRemove: function() {
+    return this.onFastRemove();
+  },
   removeActions: function(selector, data) {
     return this.onRemove(data);
   },
@@ -520,9 +543,6 @@ Element = TiledEntity.extend({
   },
   chained: function() {
     return this.m_Chained;
-  },
-  bubbled: function() {
-    return this.m_Bubbled;
   },
   starred: function() {
     var bottom = MatrixManager.sharedManager().getSize().y * 2;
@@ -867,6 +887,8 @@ Element = TiledEntity.extend({
     this._super(time);
 
     this.updateBonusAnimation();
+
+    //this.m_Text.ccsf(["" + this.getIndex().x + ", " + this.getIndex().y + ""]);
   },
   deepCopy: function() {
     return Element.create();

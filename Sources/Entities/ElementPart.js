@@ -59,7 +59,7 @@ ElementPart = TiledEntity.extend({
   onCreate: function() {
     this._super();
 
-    this.m_Status = 0;
+    this.m_Status = MatrixManager.sharedManager().getType() == MatrixManager.types.war ? 0 : 1;
   },
   onDestroy: function() {
     this._super();
@@ -85,7 +85,7 @@ ElementPart = TiledEntity.extend({
       this.setCenterPosition(this.getCenterX() + this.m_SpeedX * time, this.getCenterY() + this.m_SpeedY * time);
       this.setRotation(this.getRotation() + this.m_RotationSpeed);
 
-      if(this.getCenterY() < 0 && this.m_SpeedY < 0) {
+      if(this.getCenterY() < -this.getHeight() / 2 && this.m_SpeedY < 0) {
         this.m_Status++;
       }
       break;

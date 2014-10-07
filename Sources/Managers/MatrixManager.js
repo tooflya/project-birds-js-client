@@ -53,6 +53,7 @@ MatrixManager = cc.Node.extend({
   m_Combinations: false,
   m_ClearBox: true,
   m_ExtaMove: false,
+  m_PauseTime: [],
   ctor: function() {
     this._super();
 
@@ -101,6 +102,8 @@ MatrixManager = cc.Node.extend({
     return count;
   },
   set: function(element, x, y, created, probably) {
+    if(x < 0 || y < 0) return false;
+
     if(element === etypes.empty || element === etypes.block) {
       this.m_Matrix[x][y] = element;
     } else {
@@ -522,12 +525,6 @@ MatrixManager = cc.Node.extend({
       this.m_Matrix[i] = Array(this.getSize().y * 2);
       this.m_BubbleMatrix[i] = Array(this.getSize().y * 2);
     }
-
-    if(this.getSize().y > 7) {
-      this.setType(MatrixManager.types.bubbles);
-    } else {
-      this.setType(MatrixManager.types.war);
-    }
   },
   getSize: function() {
     return this.m_Size;
@@ -539,8 +536,7 @@ MatrixManager = cc.Node.extend({
     this.m_PauseTime = Array();
 
     if(MatrixManager.timeout) {
-      window.clearTimeout(MatrixManager.timeout);
-
+      MatrixManager.timeout.pause();
       MatrixManager.timeout = false;
     }
 
@@ -560,7 +556,7 @@ MatrixManager = cc.Node.extend({
       for(var i = 0; i < pool.horizontal.length; i++) {
         if(pool.horizontal[i]) {
           if(!pool.horizontal[i].m_Removed) {
-            if(!pool.horizontal[i].chained() && !pool.horizontal[i].bubbled()) {
+            if(!pool.horizontal[i].chained()) {
               bonus.horizontal++;
             }
 
@@ -575,7 +571,7 @@ MatrixManager = cc.Node.extend({
       for(var i = 0; i < pool.vertical.length; i++) {
         if(pool.vertical[i]) {
           if(!pool.vertical[i].m_Removed) {
-            if(!pool.vertical[i].chained() && !pool.vertical[i].bubbled()) {
+            if(!pool.vertical[i].chained()) {
               bonus.vertical++;
             }
 
@@ -589,7 +585,7 @@ MatrixManager = cc.Node.extend({
 
       if(pool.element) {
         if(!pool.element.m_Removed) {
-          if(!pool.element.chained() && !pool.element.bubbled()) {
+          if(!pool.element.chained()) {
             bonus.element = pool.element;
           }
 
@@ -656,7 +652,7 @@ MatrixManager = cc.Node.extend({
             }
           }
         }, MatrixManager.pause * 1000);
-      }, this.getType() == MatrixManager.types.war ? 1000 : Math.max(300, MatrixManager.pause * 1000));
+      }, this.getType() == MatrixManager.types.war ? 1000 : 300);
     }
   },
   hasMatchesWith: function(element, neighbor) {
@@ -1000,11 +996,20 @@ MatrixManager = cc.Node.extend({
       }
     }
 
+    this.fixAll();
+  },
+  fixAll: function() {
     var width = (Camera.sharedCamera().width - ElementsManager.sharedManager().m_Clipper.getStencil().getContentSize().width) / 2;
     for(var i = 0; i < ElementsManager.sharedManager().getCount(); i++) {
       var frame = ElementsManager.sharedManager().get(i);
-      if(frame && frame != etypes.empty && frame != etypes.block) {
-        frame.setCenterPosition(width + frame.getWidth() * (frame.getIndex().x + 0.5), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
+      if(frame && frame.getId() != Element.types.block) {
+        if(frame.getIndex().x < 0 || frame.getIndex().y < 0) {
+          frame.destroy();
+        } else if(frame.__instanceId != this.get(frame.getIndex().x, frame.getIndex().y).__instanceId) {
+          frame.destroy();
+        } else {
+          frame.setCenterPosition(width + frame.getWidth() * (frame.getIndex().x + 0.5) + Camera.sharedCamera().coord(3), frame.getHeight() * frame.getIndex().y + Camera.sharedCamera().coord(3));
+        }
       }
     }
   },
@@ -1048,6 +1053,8 @@ MatrixManager = cc.Node.extend({
   lookDown: function(clear) {
     if(!this.m_Matrix) return false;
 
+    this.fixAll();
+
     if(!Game.sharedScreen().m_TutorialRunning) {
       for(var j = 0; j < this.getSize().y * 2; j++) {
         for(var i = 0; i < this.getSize().x; i++) {
@@ -1084,6 +1091,7 @@ MatrixManager = cc.Node.extend({
 
     var sequence = cc.Sequence.create(actions);
 
+    element.stopAllActions();
     element.runAction(sequence);
 
     this.m_PauseTime[index.x] += 0.1;
@@ -1186,10 +1194,10 @@ MatrixManager = cc.Node.extend({
     sickle1.setOpacity(255);
     sickle1.setRotation(0);
     sickle1.setFlippedHorizontally(true);
-    sickle1.runAction(cc.MoveTo.create(0.5, cc.p(sickle1.getCenterX() - Camera.sharedCamera().width, sickle1.getCenterY())));
+    sickle1.runAction(cc.MoveTo.create(0.7, cc.p(sickle1.getCenterX() - Camera.sharedCamera().width, sickle1.getCenterY())));
     sickle1.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.5),
+        cc.DelayTime.create(0.7),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1199,10 +1207,10 @@ MatrixManager = cc.Node.extend({
     sickle2.setOpacity(255);
     sickle2.setRotation(0);
     sickle2.setFlippedHorizontally(false);
-    sickle2.runAction(cc.MoveTo.create(0.5, cc.p(sickle2.getCenterX() + Camera.sharedCamera().width, sickle2.getCenterY())));
+    sickle2.runAction(cc.MoveTo.create(0.7, cc.p(sickle2.getCenterX() + Camera.sharedCamera().width, sickle2.getCenterY())));
     sickle2.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.5),
+        cc.DelayTime.create(0.7),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1222,6 +1230,7 @@ MatrixManager = cc.Node.extend({
 
           current.runAction(
             cc.Sequence.create(
+              cc.CallFunc.create(current.fastRemove, current),
               cc.DelayTime.create(time),
               cc.CallFunc.create(current.removeActions, current, {
                 icons: Element.instructions.icons.skip
@@ -1253,6 +1262,7 @@ MatrixManager = cc.Node.extend({
 
           current.runAction(
             cc.Sequence.create(
+              cc.CallFunc.create(current.fastRemove, current),
               cc.DelayTime.create(time),
               cc.CallFunc.create(current.removeActions, current, {
                 icons: Element.instructions.icons.skip
@@ -1282,10 +1292,10 @@ MatrixManager = cc.Node.extend({
     sickle1.setOpacity(255);
     sickle1.setRotation(-90);
     sickle1.setFlippedHorizontally(false);
-    sickle1.runAction(cc.MoveTo.create(0.5, cc.p(sickle1.getCenterX(), sickle1.getCenterY() + Camera.sharedCamera().height)));
+    sickle1.runAction(cc.MoveTo.create(0.7, cc.p(sickle1.getCenterX(), sickle1.getCenterY() + Camera.sharedCamera().height)));
     sickle1.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.5),
+        cc.DelayTime.create(0.7),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1295,10 +1305,10 @@ MatrixManager = cc.Node.extend({
     sickle2.setOpacity(255);
     sickle2.setRotation(90);
     sickle2.setFlippedHorizontally(false);
-    sickle2.runAction(cc.MoveTo.create(0.5, cc.p(sickle2.getCenterX(), sickle2.getCenterY() - Camera.sharedCamera().height)));
+    sickle2.runAction(cc.MoveTo.create(0.7, cc.p(sickle2.getCenterX(), sickle2.getCenterY() - Camera.sharedCamera().height)));
     sickle2.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.5),
+        cc.DelayTime.create(0.7),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1318,6 +1328,7 @@ MatrixManager = cc.Node.extend({
 
           current.runAction(
             cc.Sequence.create(
+              cc.CallFunc.create(current.fastRemove, current),
               cc.DelayTime.create(time),
               cc.CallFunc.create(current.removeActions, current, {
                 icons: Element.instructions.icons.skip
@@ -1329,6 +1340,12 @@ MatrixManager = cc.Node.extend({
       }
 
       time += 0.05;
+    }
+
+    if(!this.m_PauseTime[x]) {
+      this.m_PauseTime[x] = time;
+    } else {
+      this.m_PauseTime[x] += time;
     }
 
     time = 0.05;
@@ -1343,6 +1360,7 @@ MatrixManager = cc.Node.extend({
 
           current.runAction(
             cc.Sequence.create(
+              cc.CallFunc.create(current.fastRemove, current),
               cc.DelayTime.create(time),
               cc.CallFunc.create(current.removeActions, current, {
                 icons: Element.instructions.icons.skip
@@ -1566,6 +1584,13 @@ MatrixManager = cc.Node.extend({
   },
   setType: function(type) {
     this.m_Type = type;
+
+    switch(this.m_Type) {
+      case MatrixManager.types.war:
+      break;
+      case MatrixManager.types.bubbles:
+      break;
+    }
   },
   getType: function() {
     return this.m_Type;
