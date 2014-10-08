@@ -159,7 +159,6 @@ var s_StarsPanel = "Resources/Graphics/stars-panel.png";
 var s_Star = "Resources/Graphics/star.png";
 var s_StarSmall = "Resources/Graphics/star-small.png";
 var s_Mark = "Resources/Graphics/mark.png";
-var s_Lamp = "Resources/Graphics/lamp.png";
 var s_Birds = "Resources/Graphics/birds.png";
 var s_Explosion = "Resources/Graphics/explosion-1.png";
 var s_ExplosionBackground = "Resources/Graphics/explosion-2.png";
@@ -279,10 +278,9 @@ var s_MapBackground9 = "Resources/Graphics/map-background-9.png";
 var s_MapBackground10 = "Resources/Graphics/map-background-10.png";
 var s_MapBackground10English = "Resources/Graphics/map-background-10-0.png";
 var s_MapBackground10Russian = "Resources/Graphics/map-background-10-1.png";
-var s_LevelsMapTrees = "Resources/Graphics/levels-map-trees.png";
+var s_MapUserBackground = "Resources/Graphics/map-user-background.png";
 var s_LevelsMapIcons = "Resources/Graphics/levels-map-icons.png";
 var s_LevelsMapPoint = "Resources/Graphics/levels-map-point.png";
-var s_Cloud1 = "Resources/Graphics/cloud-1.png";
 var s_Cloud2 = "Resources/Graphics/cloud-2.png";
 var s_PlayerHealth = "Resources/Graphics/player-health.png";
 var s_PlayerHealthBar = "Resources/Graphics/player-health-bar.png";
@@ -547,7 +545,6 @@ var resources = [
   {src: s_StarsPanel},
   {src: s_Star},
   {src: s_StarSmall},
-  {src: s_Lamp},
   {src: s_Mark},
   {src: s_Birds},
   {src: s_FinishBackgroundPortrait},
@@ -664,10 +661,9 @@ var resources = [
   {src: s_MapBackground9},
   {src: s_MapBackground10Russian},
   {src: s_MapBackground10English},
-  {src: s_LevelsMapTrees},
+  {src: s_MapUserBackground},
   {src: s_LevelsMapIcons},
   {src: s_LevelsMapPoint},
-  {src: s_Cloud1},
   {src: s_Cloud2},
   {src: s_TutorialFinger},
   {src: s_TutorialTargetExplanation},

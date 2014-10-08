@@ -118,32 +118,48 @@ Game.prototype.onTurnChangeFinish = function() {
 };
 
 Game.prototype.onSimpleTurnChange = function() {
-  if(ElementsManager.sharedManager().m_CurrentRow > 0) {
+  if(MatrixManager.sharedManager().getType() == MatrixManager.types.bubbles) {
     if(Game.instance.m_CurrentBlows <= 0) {
       Moves.sharedScreen(this).show();
 
       return true;
     }
 
-    if(MatrixManager.sharedManager().getVisibleBubblesCount() < 1) {
-      ElementsManager.instance.moveDown();
-    }
-
     MatrixManager.sharedManager().enable();
 
     if(MatrixManager.sharedManager().getBubblesCount() < 1) {
-      if(MatrixManager.sharedManager().getType() == MatrixManager.types.bubbles) {
-        ActionsManager.sharedManager().clear();
+      ActionsManager.sharedManager().clear();
 
-        MatrixManager.sharedManager().setType(MatrixManager.types.war);
+      MatrixManager.sharedManager().setType(MatrixManager.types.war);
 
-        this.m_PlayerTurn = false;
+      this.m_PlayerTurn = false;
 
-        this.onTurnChange();
+      this.onTurnChange();
 
-        return true;
+      return true;
+    } else {
+      if(MatrixManager.sharedManager().getVisibleBubblesCount() < 1) {
+        ElementsManager.sharedManager().moveDown();
       }
     }
+
+    this.runAction(
+      cc.Sequence.create(
+        cc.CallFunc.create(MatrixManager.instance.addBoxes, MatrixManager.instance),
+        cc.CallFunc.create(MatrixManager.instance.addChange, MatrixManager.instance),
+        false
+      )
+    );
+
+    setTimeout(function() {
+      if(!MatrixManager.sharedManager().computer(false, true)) {
+        this.onNoMoreCombinations();
+      } else {
+        MatrixManager.sharedManager().unbusy();
+
+        Game.instance.m_LastActionTime = Date.now();
+      }
+    }.bind(this), 500);
 
     return true;
   }

@@ -142,20 +142,22 @@ Levels = Screen.extend({
     this.m_Background9 = MapBackground.create(s_MapBackground2, this.m_List);
     this.m_Background10 = MapBackground.create(s_MapBackground1, this.m_List);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
+    this.m_UserBackground = Entity.create(s_MapUserBackground, this.m_List);
 
     this.m_Icons = EntityManager.create(this.m_IconsCoordinates.length, MapIcon.create(), this.m_List, 101);
 
     this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-    this.m_Background10.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 9);
-    this.m_Background9.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 8);
-    this.m_Background8.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 7);
-    this.m_Background7.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 6);
-    this.m_Background6.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 5);
-    this.m_Background5.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 4);
-    this.m_Background4.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 3);
-    this.m_Background3.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 2);
-    this.m_Background2.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 1);
-    this.m_Background1.create().setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - this.m_Background1.getHeight() / 2);
+    this.m_Background10.create();
+    this.m_Background9.create();
+    this.m_Background8.create();
+    this.m_Background7.create();
+    this.m_Background6.create();
+    this.m_Background5.create();
+    this.m_Background4.create();
+    this.m_Background3.create();
+    this.m_Background2.create();
+    this.m_Background1.create();
+    this.m_UserBackground.create().setZOrder(200);
     this.m_StarsCounterArea = Entity.create(s_LevelStarsCounterArea, this);
     this.m_StarsCounterArea.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(160), Camera.sharedCamera().coord(70));
     this.m_StarsCounterArea.text = Text.create('total-stars', this.m_StarsCounterArea);
@@ -169,6 +171,12 @@ Levels = Screen.extend({
 
     this.m_List.fixed = true;
     this.m_List.strict = true;
+
+    InternetEntity.create(DataManager.instance.get(false, references.info.personal.photo), this.m_UserBackground, function(entity) {
+      entity.create().setCenterPosition(Camera.sharedCamera().coord(50), Camera.sharedCamera().coord(40));
+      entity.setScale(0.75);
+      entity.setZOrder(-1);
+    });
 
     this.m_BackButton.setTouchHandler('onBackEvent', Levels);
   },
@@ -188,10 +196,23 @@ Levels = Screen.extend({
   onEnter: function() {
     this._super();
 
+    Camera.sharedCamera().setDesignResolutionSize(false, false, false, false, true);
+
+    this.m_Background10.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 9 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background9.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 8 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background8.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 7 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background7.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 6 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background6.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 5 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background5.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 4 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background4.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 3 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background3.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 2 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background2.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - Camera.sharedCamera().height * 1 - Camera.sharedCamera().margin.y / 2);
+    this.m_Background1.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().height - this.m_Background1.getHeight() / 2 - Camera.sharedCamera().margin.y / 2);
+
     for(var i = 0; i < this.m_IconsCoordinates.length; i++) {
       var element = this.m_Icons.create();
 
-      element.setCenterPosition(Camera.sharedCamera().coord(this.m_IconsCoordinates[i].x), Camera.sharedCamera().coord(this.m_IconsCoordinates[i].y) + this.m_Background1.getHeight());
+      element.setCenterPosition(Camera.sharedCamera().coord(this.m_IconsCoordinates[i].x), Camera.sharedCamera().coord(this.m_IconsCoordinates[i].y) + this.m_Background1.getHeight() - Camera.sharedCamera().margin.y / 2);
       if(element.isRegisterTouchable()) {
         element.registerTouchable(false);
       }
@@ -259,6 +280,7 @@ Levels = Screen.extend({
           );
         }
 
+        this.m_UserBackground.setCenterPosition(element.getCenterX() - Camera.sharedCamera().coord(130), element.getCenterY());
         this.m_List.setCenterPosition(0, -element.getCenterY() + Camera.sharedCamera().center.x / 2 - Camera.sharedCamera().margin.y / 2);
       }.bind(this)
     });
@@ -268,6 +290,8 @@ Levels = Screen.extend({
         Levels.instance.m_StarsCounterArea.text.ccsf([data.count, 90]);
       }
     });
+
+
   },
   onExit: function() {
     this._super();
@@ -289,8 +313,6 @@ Levels = Screen.extend({
     this._super();
 
     MenuPanel.sharedScreen(this).show();
-
-    Camera.sharedCamera().setDesignResolutionSize(false, false, false, false, true);
   },
   onHide: function() {
     this._super();

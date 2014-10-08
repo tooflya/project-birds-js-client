@@ -1450,6 +1450,10 @@ MatrixManager = cc.Node.extend({
         }
       }
     }
+
+    setTimeout(function() {
+      this.clear();
+    }.bind(this), 600);
   },
   removeBoxes: function(x, y, element) {
     var elements = [];
