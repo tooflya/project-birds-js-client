@@ -137,14 +137,14 @@ Mode = Screen.extend({
         var lives = values[1];
 
         if(lock) {
-          Game.sharedScreen(1);
-          ScreenManager.sharedManager().replace(Loading);
-        } else {
           if(lives > 0) {
-            Lock.sharedScreen(Mode.instance).show(0, 'mode');
+            Game.sharedScreen(1);
+            ScreenManager.sharedManager().replace(Loading);
           } else {
             Lives.sharedScreen(Mode.instance).show();
           }
+        } else {
+          Lock.sharedScreen(Mode.instance).show(0, 'mode');
         }
       }
     });
@@ -159,14 +159,14 @@ Mode = Screen.extend({
         var lives = values[1];
 
         if(lock) {
-          Game.sharedScreen(2);
-          ScreenManager.sharedManager().replace(Loading);
-        } else {
           if(lives > 0) {
-            Lock.sharedScreen(Mode.instance).show(1, 'mode');
+            Game.sharedScreen(2);
+            ScreenManager.sharedManager().replace(Loading);
           } else {
             Lives.sharedScreen(Mode.instance).show();
           }
+        } else {
+          Lock.sharedScreen(Mode.instance).show(1, 'mode');
         }
       }
     });

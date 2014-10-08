@@ -131,6 +131,8 @@ BubbleTarget = Entity.extend({
 
     if(MatrixManager.instance.getBubblesCount() <= 0) {
       this.destroy();
+
+      Game.instance.m_Target.create();
     }
   }
 });

@@ -182,7 +182,6 @@ Game.prototype.onLevelStart = function(matrix) {
   ElementsManager.sharedManager().onLevelStart(matrix);
 
   this.m_Catapults.onLevelStart();
-  this.m_Target.create();
 
   if(!Game.network) {
     if(Game.tutorial) {

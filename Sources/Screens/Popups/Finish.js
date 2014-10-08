@@ -460,9 +460,11 @@ Finish = Background.extend({
   onRestartEvent: function() {
     Camera.sharedCamera().setDesignResolutionSize();
 
-    this.hide(function() {
-      Game.sharedScreen().onShow();
-    });
+    MenuPanel.sharedScreen(this).hide(function() {
+      this.hide(function() {
+        Game.sharedScreen().onShow();
+      });
+    }.bind(this));
   },
   onContinueEvent: function() {
     MenuPanel.sharedScreen(this).hide(function() {

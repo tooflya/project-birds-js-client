@@ -387,8 +387,13 @@ ElementsManager = EntityManager.extend({
       }
     }
 
-    if(this.m_ElementsBubbles.getCount() > 0) {
+    switch(MatrixManager.sharedManager().m_Type) {
+      case MatrixManager.types.war:
+      Game.instance.m_Target.create();
+      break;
+      case MatrixManager.types.bubbles:
       Game.instance.m_BubbleTarget.create();
+      break;
     }
   },
   scheduleUpdate: function() {
