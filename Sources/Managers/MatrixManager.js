@@ -605,9 +605,9 @@ MatrixManager = cc.Node.extend({
           } else if(bonus.horizontal >= 2 && bonus.vertical >= 2) {
             ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.pack);
           } else if(bonus.horizontal >= 3) {
-            ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.vertical);
-          } else if(bonus.vertical >= 3) {
             ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.horizontal);
+          } else if(bonus.vertical >= 3) {
+            ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.vertical);
           }
 
           Game.sharedScreen().onBlow(pool.element);
@@ -1228,6 +1228,10 @@ MatrixManager = cc.Node.extend({
             id: current.getId()
           });
 
+          if(current.m_Bonus == Element.bonus.types.horizontal) {
+            current.setBonus(Element.bonus.types.vertical);
+          }
+
           current.runAction(
             cc.Sequence.create(
               cc.CallFunc.create(current.fastRemove, current),
@@ -1259,6 +1263,10 @@ MatrixManager = cc.Node.extend({
           ActionsManager.sharedManager().add({
             id: current.getId()
           });
+
+          if(current.m_Bonus == Element.bonus.types.horizontal) {
+            current.setBonus(Element.bonus.types.vertical);
+          }
 
           current.runAction(
             cc.Sequence.create(
@@ -1326,6 +1334,10 @@ MatrixManager = cc.Node.extend({
             id: current.getId()
           });
 
+          if(current.m_Bonus == Element.bonus.types.vertical) {
+            current.setBonus(Element.bonus.types.horizontal);
+          }
+
           current.runAction(
             cc.Sequence.create(
               cc.CallFunc.create(current.fastRemove, current),
@@ -1357,6 +1369,10 @@ MatrixManager = cc.Node.extend({
           ActionsManager.sharedManager().add({
             id: current.getId()
           });
+
+          if(current.m_Bonus == Element.bonus.types.vertical) {
+            current.setBonus(Element.bonus.types.horizontal);
+          }
 
           current.runAction(
             cc.Sequence.create(
