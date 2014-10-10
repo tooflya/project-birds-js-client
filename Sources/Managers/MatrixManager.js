@@ -731,10 +731,12 @@ MatrixManager = cc.Node.extend({
       left: 0,
       right: 0,
       add: function(matches) {
-        this.top += matches.top;
-        this.down += matches.down;
-        this.left += matches.left;
-        this.right += matches.right;
+        if(matches instanceof Object) {
+          this.top += matches.top;
+          this.down += matches.down;
+          this.left += matches.left;
+          this.right += matches.right;
+        }
       },
       result: function() {
         var horizontal = 1 + this.left + this.right;
@@ -1091,8 +1093,8 @@ MatrixManager = cc.Node.extend({
 
     var sequence = cc.Sequence.create(actions);
 
-    element.stopAllActions();
-    element.runAction(sequence);
+    //element.stopAllActions(); // TODO: Check is it need.
+    element.runAction(sequence);console.log(this.getNumberOfRunningActions()); // TODO: Check it.
 
     this.m_PauseTime[index.x] += 0.1;
 
@@ -1590,7 +1592,7 @@ MatrixManager = cc.Node.extend({
       els.forEach(function(el) {
         if(!build) {
           if(el instanceof Element) {
-            if(!this.s(el) && el.getId() != Element.types.star) {
+            if(!this.s(el) && el.getId() != Element.types.star && el.special() != Element.types.change) {
               if(!this.hasMatchesWith(el, element) && !this.hasMatchesWith(element, el)) {
                 this.replace(element, el, false, false, true);
 

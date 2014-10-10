@@ -75,8 +75,6 @@ Loading = Screen.extend({
   },
   onComplete: function() {
     ScreenManager.sharedManager().replace(Game);
-
-    Music.sharedMusic().play(s_Music2, true);
   },
   update: function(time) {
     this._super(time);

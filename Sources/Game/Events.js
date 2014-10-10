@@ -146,6 +146,33 @@ Game.prototype.onGameStart = function() {
     if(!Game.network || Game.server) {
       this.onLevelStart();
     }
+
+    var notification = this.m_Notifications.m_Notification5;
+
+    notification.create();
+    notification.setOpacity(255.0);
+    notification.setScale(0.0);
+    notification.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(2.7),
+        cc.FadeOut.create(0.5)
+      )
+    );
+    notification.runAction(
+      cc.Sequence.create(
+        cc.EaseElasticOut.create(
+          cc.ScaleTo.create(0.5, 1.0)
+        ),
+        cc.ScaleTo.create(2.2, 1.2),
+        cc.EaseExponentialIn.create(
+          cc.ScaleTo.create(0.5, 10.0)
+        ),
+        cc.CallFunc.create(notification.destroy, notification),
+        false
+      )
+    );
+
+    Sound.sharedSound().play(s_SoundSwitch);
     break;
     case this.m_Types.classic:
     break;
@@ -307,6 +334,8 @@ Game.prototype.onShow = function() {
       }
     }
   });
+
+  Music.sharedMusic().play(s_Music2, true);
 };
 
 Game.prototype.onHide = function() {
@@ -316,6 +345,8 @@ Game.prototype.onHide = function() {
   GamePanel.instance = false;
   ElementsManager.instance = false;
   MatrixManager.instance = false;
+
+  Music.sharedMusic().play(s_Music1, true);
 };
 
 Game.prototype.onFinishShow = function() {
@@ -344,6 +375,9 @@ Game.prototype.onFinishShow = function() {
     this.m_Target.setZOrder(302);
     this.m_Notifications.m_Notification1.setZOrder(500);
     this.m_Notifications.m_Notification2.setZOrder(500);
+    this.m_Notifications.m_Notification3.setZOrder(500);
+    this.m_Notifications.m_Notification4.setZOrder(500);
+    this.m_Notifications.m_Notification5.setZOrder(500);
     this.m_PreviewBackground.setZOrder(200, 200)
 
     this.m_Target.destroy();

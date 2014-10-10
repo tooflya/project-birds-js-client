@@ -259,13 +259,19 @@ var s_CatapultBirdsShield = "Resources/Graphics/catapult-birds-shield.png";
 var s_Target = "Resources/Graphics/game-target.png";
 var s_Notification1 = "Resources/Graphics/notification-1.png";
 var s_Notification2 = "Resources/Graphics/notification-2.png";
-var s_Notification3 = "Resources/Graphics/extra-move-texts.png";
+var s_Notification3 = "Resources/Graphics/notification-3.png";
+var s_Notification4 = "Resources/Graphics/notification-4.png";
+var s_Notification5 = "Resources/Graphics/notification-5.png";
 var s_Notification1English = "Resources/Graphics/notification-1-0.png";
 var s_Notification2English = "Resources/Graphics/notification-2-0.png";
-var s_Notification3English = "Resources/Graphics/extra-move-texts-0.png";
+var s_Notification3English = "Resources/Graphics/notification-3-0.png";
+var s_Notification4English = "Resources/Graphics/notification-4-0.png";
+var s_Notification5English = "Resources/Graphics/notification-5-0.png";
 var s_Notification1Russian = "Resources/Graphics/notification-1-1.png";
 var s_Notification2Russian = "Resources/Graphics/notification-2-1.png";
-var s_Notification3Russian = "Resources/Graphics/extra-move-texts-1.png";
+var s_Notification3Russian = "Resources/Graphics/notification-3-1.png";
+var s_Notification4Russian = "Resources/Graphics/notification-4-1.png";
+var s_Notification5Russian = "Resources/Graphics/notification-5-1.png";
 var s_MapBackground1 = "Resources/Graphics/map-background-1.png";
 var s_MapBackground2 = "Resources/Graphics/map-background-2.png";
 var s_MapBackground3 = "Resources/Graphics/map-background-3.png";
@@ -648,6 +654,10 @@ var resources = [
   {src: s_Notification2English},
   {src: s_Notification3Russian},
   {src: s_Notification3English},
+  {src: s_Notification4Russian},
+  {src: s_Notification4English},
+  {src: s_Notification5Russian},
+  {src: s_Notification5English},
   {src: s_PlayerHealth},
   {src: s_PlayerHealthBar},
   {src: s_MapBackground1},

@@ -44,10 +44,17 @@ Game.prototype.onTurnChange = function() {
 
   var notification;
 
-  if(this.m_PlayerTurn) {
-    notification = this.m_Notifications.m_Notification2;
-  } else {
-    notification = this.m_Notifications.m_Notification1;
+  switch(MatrixManager.sharedManager().getType()) {
+    case MatrixManager.types.bubbles:
+    notification = this.m_Notifications.m_Notification4;
+    break;
+    case MatrixManager.types.war:
+    if(this.m_PlayerTurn) {
+      notification = this.m_Notifications.m_Notification2;
+    } else {
+      notification = this.m_Notifications.m_Notification1;
+    }
+    break;
   }
 
   notification.create();
@@ -102,7 +109,7 @@ Game.prototype.onTurnChangeFinish = function() {
     )
   );
 
-  setTimeout(function() {
+  new PausableTimeout(function() {
     if(!MatrixManager.sharedManager().computer(false, true)) {
       this.onNoMoreCombinations();
     } else {
@@ -124,8 +131,6 @@ Game.prototype.onSimpleTurnChange = function() {
 
       return true;
     }
-
-    MatrixManager.sharedManager().enable();
 
     if(MatrixManager.sharedManager().getBubblesCount() < 1) {
       ActionsManager.sharedManager().clear();
@@ -151,10 +156,11 @@ Game.prototype.onSimpleTurnChange = function() {
       )
     );
 
-    setTimeout(function() {
+    new PausableTimeout(function() {
       if(!MatrixManager.sharedManager().computer(false, true)) {
         this.onNoMoreCombinations();
       } else {
+        MatrixManager.sharedManager().enable();
         MatrixManager.sharedManager().unbusy();
 
         Game.instance.m_LastActionTime = Date.now();

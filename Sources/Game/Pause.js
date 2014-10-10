@@ -62,4 +62,5 @@ switch(this.m_Type) {
   }
 
   pause ? this.pauseSchedulerAndActions() : this.resumeSchedulerAndActions();
+  pause ? MatrixManager.sharedManager().busy() : MatrixManager.sharedManager().unbusy();
 };

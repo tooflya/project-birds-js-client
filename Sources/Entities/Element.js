@@ -413,6 +413,13 @@ Element = TiledEntity.extend({
 
     return this._super(e);
   },
+  onMouseMoved: function(e) {
+    this._super(e);
+
+    if(this.containsTouchLocation(e)) {
+      this.onHover();
+    }
+  },
   remove: function(data) {
     return this.onRemove(data);
   },
@@ -512,6 +519,7 @@ Element = TiledEntity.extend({
   },
   setSpecial: function(type) {
     this.m_Special = type;
+    this.m_Id = -1;
 
     switch(this.m_Special) {
       case Element.types.box:
@@ -537,7 +545,7 @@ Element = TiledEntity.extend({
 
     this.m_Icon.destroy();
 
-    setTimeout(function() {
+    new PausableTimeout(function() {
       this.m_Removed = false;
     }.bind(this), 500);
   },
@@ -774,29 +782,18 @@ Element = TiledEntity.extend({
           };
 
           var toper = false;
-          var stop = false;
 
           for(var t = index.y; t < manager.getSize().y * 2; t++) {
             var element = manager.get(index.x - 1, t);
 
-            if(!stop) {
-              if(!toper) {
-                if(manager.s(element)) {
-                  toper = true;
-
-                  if(manager.s(element)) {
-                    stop = true;
-                  }
-                }
-              } else {
-                if(!manager.soe(element)) {
-                  toper = false;
-                }
+            if(!toper) {
+              if(manager.s(element)) {
+                toper = true;
               }
             }
           }
 
-          if((!frames.left || manager.soe(frames.left)) && data.right <= 0 && toper) {
+          if((!frames.left || manager.soe(frames.left)) && right <= 0 && toper) {
             if(!frames.down.left) {
               if(index.x - 1 >= 0 && index.y - 1 >= 0) {
                 data.left++;
@@ -815,29 +812,18 @@ Element = TiledEntity.extend({
           }
 
           toper = false;
-          stop = false;
 
-          for(var t = index.y; t < manager.getSize().y*2; t++) {
+          for(var t = index.y; t < manager.getSize().y * 2; t++) {
             var element = manager.get(index.x + 1, t);
 
-            if(!stop) {
-              if(!toper) {
-                if(manager.s(element)) {
-                  toper = true;
-
-                  if(manager.s(element)) {
-                    stop = true;
-                  }
-                }
-              } else {
-                if(!manager.soe(element)) {
-                  toper = false;
-                }
+            if(!toper) {
+              if(manager.s(element)) {
+                toper = true;
               }
             }
           }
 
-          if((!frames.right || manager.soe(frames.right)) && data.left <= 0 && toper) {
+          if((!frames.right || manager.soe(frames.right)) && left <= 0 && toper) {
             if(!frames.down.right) {
               if(index.x + 1 <= manager.getSize().x && index.y - 1 >= 0) {
                 data.right++;

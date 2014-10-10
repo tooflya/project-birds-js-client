@@ -115,10 +115,16 @@ Pause = ExtendedPopup.extend({
   },
   onShow: function() {
     this._super();
+  },
+  onHide: function() {
+    this._super();
+  },
+  onEnter: function() {
+    this._super();
 
     this.updateSoundButtonsState();
   },
-  onHide: function() {
+  onExit: function() {
     this._super();
   }
 });
