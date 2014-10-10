@@ -83,7 +83,9 @@ Target = TiledEntity.extend({
     this._super();
 
     for(var i = 0; i < 2; i++) {
-      this.m_Decorations[i].removeFromParent();
+      if(this.m_Decorations[i]) {
+        this.m_Decorations[i].removeFromParent();
+      }
     }
   },
   onTouch: function() {

@@ -605,9 +605,9 @@ MatrixManager = cc.Node.extend({
           } else if(bonus.horizontal >= 2 && bonus.vertical >= 2) {
             ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.pack);
           } else if(bonus.horizontal >= 3) {
-            ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.horizontal);
-          } else if(bonus.vertical >= 3) {
             ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.vertical);
+          } else if(bonus.vertical >= 3) {
+            ElementsManager.sharedManager().createBonus(bonus, Element.bonus.types.horizontal);
           }
 
           Game.sharedScreen().onBlow(pool.element);

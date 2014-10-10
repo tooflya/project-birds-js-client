@@ -1530,11 +1530,11 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #31 */
   {
-    moves: 10,
+    moves: 20,
     opponent: {
       weapon: 5,
       health: 100,
-      speed: 0
+      speed: 1
     },
     size: {
       x: 10,
@@ -1579,11 +1579,11 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #32 */
   {
-    moves: 10,
+    moves: 20,
     opponent: {
       weapon: 5,
       health: 250,
-      speed: 0
+      speed: 1
     },
     size: {
       x: 10,
@@ -1627,11 +1627,11 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #33 */
   {
-    moves: 15,
+    moves: 30,
     opponent: {
       weapon: 5,
       health: 250,
-      speed: 0
+      speed: 1
     },
     size: {
       x: 11,
@@ -1679,7 +1679,7 @@ Game.prototype.m_LevelsMatrixes = [
     opponent: {
       weapon: 5,
       health: 250,
-      speed: 0
+      speed: 1
     },
     size: {
       x: 11,
@@ -1727,7 +1727,7 @@ Game.prototype.m_LevelsMatrixes = [
     opponent: {
       weapon: 5,
       health: 250,
-      speed: 0
+      speed: 1
     },
     size: {
       x: 11,
@@ -1775,7 +1775,7 @@ Game.prototype.m_LevelsMatrixes = [
     opponent: {
       weapon: 5,
       health: 250,
-      speed: 0
+      speed: 1
     },
     size: {
       x: 11,
@@ -1823,16 +1823,15 @@ Game.prototype.m_LevelsMatrixes = [
     opponent: {
       weapon: 5,
       health: 250,
-      speed: 0
+      speed: 1
     },
     size: {
       x: 11,
       y: 10
     },
-    scrolls: [],
+    scrolls: [3],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1, 1],
       [1, 1, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1, 1],
       [1, 1, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -1842,6 +1841,7 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, -3, 1001, 1, -1, 1, 1001, -3, 1, 1],
       [1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, -3, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -2359,7 +2359,7 @@ Game.prototype.m_LevelsMatrixes = [
     },
     scrolls: [3],
     matrix: [
-      [1001, 1001, 1001, 1001, -1, -1, -1, 1001, 1001, 1001, 1001],
+      [1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1],
       [1001, 1001, 1001, 1001, -1, -1, -1, 1001, 1001, 1001, 1001],
       [1001, 1001, 1001, 1001, -1, -1, -1, 1001, -1005, 1001, 1001],
       [1001, 1001, 1001, 1001, -1, -1, -1, 1001, 1001, 1001, 1001],
@@ -2491,7 +2491,7 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #51 */
   {
-    moves: 30,
+    moves: 15,
     opponent: {
       weapon: 5,
       health: 250,
@@ -2539,7 +2539,7 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #52 */
   {
-    moves: 30,
+    moves: 15,
     opponent: {
       weapon: 5,
       health: 250,
@@ -2587,7 +2587,7 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #53 */
   {
-    moves: 30,
+    moves: 15,
     opponent: {
       weapon: 5,
       health: 250,
@@ -2875,7 +2875,7 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #59 */
   {
-    moves: 30,
+    moves: 15,
     opponent: {
       weapon: 5,
       health: 250,
@@ -3067,17 +3067,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #63 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [2,5],
     matrix: [
       [-1, -1, -1, -5, -1, -1, -1, -5, 1, 1, 1],
       [-1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1],
@@ -3086,7 +3086,7 @@ Game.prototype.m_LevelsMatrixes = [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1001, 1001, 1001, 1001, 1001, -6, 1001, 1001, 1001, 1001, 1001],
       [-1, 1001, 1001, 1001, 1001, -1, 1001, 1001, 1001, 1001, -1],
-      [-1, -1, 1001, 1001, -1, -1, -1, 1001, 1001, -1, -1],
+      [-1, -1, 1, 1, -1, -1, -1, 1, 1, -1, -1],
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
       [1, 1, -1, -1, 1001, 1001, 1001, -1, -1, 1, 1],
       [1, 1, -1, -1, 1001, 1001, 1001, -1, -1, 1, 1],
@@ -3119,17 +3119,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #64 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [5,2],
     matrix: [
       [-5, -1, -1, -1, -5, -5, -5, -1, -1, -1, -5],
       [1, 1, -1, 1, 1, 1, 1, 1, -1, 1, 1],
@@ -3167,17 +3167,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #65 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [5,2],
     matrix: [
       [-1, -1, -5, -5, -5, -5, -5, -5, -5, -1, -1],
       [-1, -1, -4, 1, 1, 1, 1, 1, -4, -1, -1],
@@ -3215,17 +3215,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #66 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [4,3],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -3263,10 +3263,10 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #67 */
   {
-    moves: 10,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
@@ -3311,10 +3311,10 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #68 */
   {
-    moves: 10,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
@@ -3359,10 +3359,10 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #69 */
   {
-    moves: 10,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
@@ -3407,10 +3407,10 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #70 */
   {
-    moves: 10,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
@@ -3455,10 +3455,10 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #71 */
   {
-    moves: 10,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
@@ -3503,10 +3503,10 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #72 */
   {
-    moves: 10,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
@@ -3551,10 +3551,10 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #73 */
   {
-    moves: 10,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
@@ -3599,10 +3599,10 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #74 */
   {
-    moves: 10,
+    moves: 15,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
@@ -3647,17 +3647,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #75 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [3,4],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -3695,17 +3695,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #76 */
   {
-    moves: 25,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [7],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -3743,17 +3743,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #77 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [7],
     matrix: [
       [1, 1, 1, -1, 1, 1, 1, 1, 1, -1, -11],
       [1, 1, 1, -1, 1, 1, 1, 1, 1, -1, -12],
@@ -3791,17 +3791,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #78 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [7],
     matrix: [
       [1, -1, -1, -1, -1, 1, -1, -1, -1, -1, 1],
       [1, -1, -1, -1, 1, 1, 1, -1, -1, -1, 1],
@@ -3839,17 +3839,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #79 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [2,5],
     matrix: [
       [-5, -5, 1, 1, -5, -5, -5, 1, 1, -5, -5],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -3887,17 +3887,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #80 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [2,5],
     matrix: [
       [-5, 1, 1, 1, 1, -5, -1, -5, 1, 1, -5],
       [1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1],
@@ -3935,17 +3935,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #81 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [4,3],
     matrix: [
       [1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1],
       [1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1],
@@ -3983,17 +3983,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #82 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [3,4],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -4031,17 +4031,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #83 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [4,3],
     matrix: [
       [1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1],
@@ -4079,17 +4079,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #84 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [4,3],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -4127,17 +4127,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #85 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [4,3],
     matrix: [
       [-1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1],
       [-1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1],
@@ -4175,17 +4175,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #86 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [4,3],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -4223,17 +4223,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #87 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [4,3],
     matrix: [
       [1, -1, -5, 1, 1, -5, 1, 1, -5, -1, 1],
       [1, -1, 1, 1, 1, 1, 1, 1, 1, -1, 1],
@@ -4271,17 +4271,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #88 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [7],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -4319,17 +4319,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #89 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [3,4],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -4367,17 +4367,17 @@ Game.prototype.m_LevelsMatrixes = [
   },
   /** Matrix of level #90 */
   {
-    moves: 10,
+    moves: 45,
     opponent: {
-      weapon: 0,
-      health: 100,
+      weapon: 5,
+      health: 250,
       speed: 0
     },
     size: {
       x: 11,
       y: 14
     },
-    scrolls: [],
+    scrolls: [7],
     matrix: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
