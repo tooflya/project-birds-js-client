@@ -666,9 +666,9 @@ MultiplayerList = PatternList.extend({
         InternetEntity.create(data.user.photo, this.m_BackgroundHolders[2], function(entity) {
           entity.create().setCenterPosition(Camera.sharedCamera().coord(100), this.getCenterY() + Camera.sharedCamera().coord(190));
 
-          var name = Text.create('leaderboard-name', this.m_BackgroundHolders[2]);
+          var name = Text.create('list-name', this.m_BackgroundHolders[2]);
 
-          name.ccsf([data.user.name + " " + data.user.surname]);
+          name.ccsf([data.user.name, data.user.surname]);
 
           name.setCenterPosition(name.getWidth() / 2 + Camera.sharedCamera().coord(160), this.getCenterY() + Camera.sharedCamera().coord(190) + Camera.sharedCamera().coord(60) - name.getHeight() / 2);
 

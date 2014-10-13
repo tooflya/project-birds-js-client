@@ -260,6 +260,16 @@ var g_language  = {
     {title: '$1', font: 'Comic Sans MS', size: 32, dimensions: false},
     {title: '$1', font: 'RiiPopkk-R', size: 32, dimensions: false}
     ],
+  'you': [
+    {title: 'You', font: 'Comic Sans MS', size: 24, dimensions: false},
+    {title: 'Вы', font: 'Comic Sans MS', size: 24, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 24, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 24, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 24, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 24, dimensions: false},
+    {title: '', font: 'Comic Sans MS', size: 24, dimensions: false},
+    {title: '', font: 'RiiPopkk-R', size: 24, dimensions: false}
+    ],
   'bonus-keys': [
     {title: {string: '$1 ', nom: 'key', gen: 'keys', plu: 'keys'}, font: 'Comic Sans MS Bold', size: 36, dimensions: false},
     {title: {string: '$1 ', nom: 'ключ', gen: 'ключа', plu: 'ключей'}, font: 'Comic Sans MS Bold', size: 36, dimensions: false},

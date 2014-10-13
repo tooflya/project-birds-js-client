@@ -352,7 +352,8 @@ Finish = Background.extend({
     if(Game.instance.m_GameState) {
       Sound.sharedSound().play(s_SoundWin);
 
-      DataManager.sharedManager().update(true, [references.coins.lives, references.levels.current], [1, Game.level]);
+      DataManager.sharedManager().update(true, references.coins.lives, 1);
+      DataManager.sharedManager().set(true, references.levels.current, Game.level);
       if(Game.network) {
         DataManager.sharedManager().update(true, references.coins.keys, Game.sharedScreen().m_BonusKeys);
         DataManager.sharedManager().update(true, references.coins.gold, Math.floor(this.m_ResultReferences.sum() / 100));

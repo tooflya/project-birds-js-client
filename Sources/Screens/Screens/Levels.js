@@ -144,6 +144,10 @@ Levels = Screen.extend({
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_UserBackground = Entity.create(s_MapUserBackground1, this.m_List);
 
+    this.m_UserBackground.text = Text.create('you', this.m_UserBackground);
+    this.m_UserBackground.text.create().setCenterPosition(this.m_UserBackground.getWidth() / 2, -Camera.sharedCamera().coord(20));
+    this.m_UserBackground.text.setColor(cc.c3(255, 50, 50));
+
     this.m_Icons = EntityManager.create(this.m_IconsCoordinates.length, MapIcon.create(), this.m_List, 101);
 
     this.m_BackButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
@@ -245,9 +249,13 @@ Levels = Screen.extend({
         FriendsManager.sharedInstance().getAppFriends().forEach(function(friend) {
           if(friend.level > 0) {
             var holder = Holder.create(this.m_BackgroundHolder);
+            var text = Text.create(false, holder);
             var element = this.m_Icons.get(friend.level - 1);
 
             holder.create().setCenterPosition(element.getCenterX() - Camera.sharedCamera().coord(130), element.getCenterY());
+            text.create().setCenterPosition(holder.getWidth() / 2, -Camera.sharedCamera().coord(20));
+            text.ccsf([friend.first_name]);
+            text.setFontSize(Camera.sharedCamera().coord(24))
 
             InternetEntity.create(friend.photo_medium, holder, function(entity) {
               entity.create().setCenterPosition(holder.getWidth() / 2 - Camera.sharedCamera().coord(5), holder.getHeight() / 2 - Camera.sharedCamera().coord(1));
