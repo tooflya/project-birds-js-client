@@ -262,6 +262,7 @@ var s_Notification2 = "Resources/Graphics/notification-2.png";
 var s_Notification3 = "Resources/Graphics/notification-3.png";
 var s_Notification4 = "Resources/Graphics/notification-4.png";
 var s_Notification5 = "Resources/Graphics/notification-5.png";
+var s_Notification6 = "Resources/Graphics/notification-6.png";
 var s_Notification1English = "Resources/Graphics/notification-1-0.png";
 var s_Notification2English = "Resources/Graphics/notification-2-0.png";
 var s_Notification3English = "Resources/Graphics/notification-3-0.png";
@@ -284,7 +285,8 @@ var s_MapBackground9 = "Resources/Graphics/map-background-9.png";
 var s_MapBackground10 = "Resources/Graphics/map-background-10.png";
 var s_MapBackground10English = "Resources/Graphics/map-background-10-0.png";
 var s_MapBackground10Russian = "Resources/Graphics/map-background-10-1.png";
-var s_MapUserBackground = "Resources/Graphics/map-user-background.png";
+var s_MapUserBackground1 = "Resources/Graphics/map-user-background-1.png";
+var s_MapUserBackground2 = "Resources/Graphics/map-user-background-2.png";
 var s_LevelsMapIcons = "Resources/Graphics/levels-map-icons.png";
 var s_LevelsMapPoint = "Resources/Graphics/levels-map-point.png";
 var s_Cloud2 = "Resources/Graphics/cloud-2.png";
@@ -658,6 +660,7 @@ var resources = [
   {src: s_Notification4English},
   {src: s_Notification5Russian},
   {src: s_Notification5English},
+  {src: s_Notification6},
   {src: s_PlayerHealth},
   {src: s_PlayerHealthBar},
   {src: s_MapBackground1},
@@ -671,7 +674,8 @@ var resources = [
   {src: s_MapBackground9},
   {src: s_MapBackground10Russian},
   {src: s_MapBackground10English},
-  {src: s_MapUserBackground},
+  {src: s_MapUserBackground1},
+  {src: s_MapUserBackground2},
   {src: s_LevelsMapIcons},
   {src: s_LevelsMapPoint},
   {src: s_Cloud2},

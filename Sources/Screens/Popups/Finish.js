@@ -235,7 +235,7 @@ Finish = Background.extend({
         if(Game.instance.m_GameState) {
           Finish.instance.current = 0;
           for(var i = 0; i < (Game.network ? 3 : Game.instance.m_StarsPoints); i++) {
-            setTimeout(function() {
+            new PausableTimeout(function() {
               if(Finish.instance) {
                 var current = Finish.instance.current;
 
@@ -352,7 +352,7 @@ Finish = Background.extend({
     if(Game.instance.m_GameState) {
       Sound.sharedSound().play(s_SoundWin);
 
-      DataManager.sharedManager().update(true, references.coins.lives, 1);
+      DataManager.sharedManager().update(true, [references.coins.lives, references.levels.current], [1, Game.level]);
       if(Game.network) {
         DataManager.sharedManager().update(true, references.coins.keys, Game.sharedScreen().m_BonusKeys);
         DataManager.sharedManager().update(true, references.coins.gold, Math.floor(this.m_ResultReferences.sum() / 100));
@@ -473,9 +473,9 @@ Finish = Background.extend({
       if(Game.tutorial) {
         this.setBottomScreen(Levels);
 
-        setTimeout(function() {
+        new PausableTimeout(function() {
           this.hide(function() {
-            setTimeout(function() {
+            new PausableTimeout(function() {
               Levels.instance.onSelected({
                 id: 1
               });
@@ -488,22 +488,24 @@ Finish = Background.extend({
 
           this.setBottomScreen(Mode);
 
-          setTimeout(function() {
+          new PausableTimeout(function() {
             this.hide(function() {
             });
           }.bind(this), 500);
         } else {
           this.setBottomScreen(Levels);
-   
-          setTimeout(function() {
-            this.hide(function() {
+
+          Levels.sharedScreen().addCallback({
+            type: 'onscreenready',
+            func: function() {
               if(!DataManager.sharedManager().get(false, references.levels.levels[Game.level + 1])) {
-                setTimeout(function() {
-                  Levels.instance.onSelected({
-                    id: Game.level
-                  });
-                }, 1500);
+                this.onLevelBack();
               }
+            }
+          });
+   
+          new PausableTimeout(function() {
+            this.hide(function() {
             });
           }.bind(this), 500);
         }

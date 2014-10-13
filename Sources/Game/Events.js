@@ -147,18 +147,26 @@ Game.prototype.onGameStart = function() {
       this.onLevelStart();
     }
 
-    var notification = this.m_Notifications.m_Notification5;
+    var notification1 = this.m_Notifications.m_Notification5;
+    var notification2 = this.m_Notifications.m_Notification6;
 
-    notification.create();
-    notification.setOpacity(255.0);
-    notification.setScale(0.0);
-    notification.runAction(
+    notification2.set(Game.level);
+
+    notification1.create();
+    notification1.setOpacity(255.0);
+    notification1.setScale(0.0);
+
+    notification2.create();
+    notification2.setOpacity(255.0);
+    notification2.setScale(1.0);
+
+    notification1.runAction(
       cc.Sequence.create(
         cc.DelayTime.create(2.7),
         cc.FadeOut.create(0.5)
       )
     );
-    notification.runAction(
+    notification1.runAction(
       cc.Sequence.create(
         cc.EaseElasticOut.create(
           cc.ScaleTo.create(0.5, 1.0)
@@ -167,10 +175,14 @@ Game.prototype.onGameStart = function() {
         cc.EaseExponentialIn.create(
           cc.ScaleTo.create(0.5, 10.0)
         ),
-        cc.CallFunc.create(notification.destroy, notification),
+        cc.CallFunc.create(notification1.destroy, notification1),
         false
       )
     );
+
+    notification1.setAnchorPoint(cc.p(0.5 + (1.0 - notification1.getWidth() / (notification1.getWidth() + notification2.getWidth() / 2)), 0.5));
+    notification1.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+    notification2.setCenterPosition(notification1.getWidth() + notification2.getWidth() / 2, notification1.getHeight() / 2);
 
     Sound.sharedSound().play(s_SoundSwitch);
     break;

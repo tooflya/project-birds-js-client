@@ -142,7 +142,7 @@ Levels = Screen.extend({
     this.m_Background9 = MapBackground.create(s_MapBackground2, this.m_List);
     this.m_Background10 = MapBackground.create(s_MapBackground1, this.m_List);
     this.m_BackButton = Button.create(s_ButtonsSprite, 3, 4, this);
-    this.m_UserBackground = Entity.create(s_MapUserBackground, this.m_List);
+    this.m_UserBackground = Entity.create(s_MapUserBackground1, this.m_List);
 
     this.m_Icons = EntityManager.create(this.m_IconsCoordinates.length, MapIcon.create(), this.m_List, 101);
 
@@ -173,12 +173,90 @@ Levels = Screen.extend({
     this.m_List.strict = true;
 
     InternetEntity.create(DataManager.instance.get(false, references.info.personal.photo), this.m_UserBackground, function(entity) {
-      entity.create().setCenterPosition(Camera.sharedCamera().coord(50), Camera.sharedCamera().coord(40));
-      entity.setScale(0.75);
-      entity.setZOrder(-1);
-    });
+      entity.create().setCenterPosition(this.m_UserBackground.getWidth() / 2 - Camera.sharedCamera().coord(5), this.m_UserBackground.getHeight() / 2 - Camera.sharedCamera().coord(1));
+      entity.setScale(0.8);
+    }.bind(this));
+
+    this.m_BackgroundHolder = Background.create(this.m_List);
 
     this.m_BackButton.setTouchHandler('onBackEvent', Levels);
+  },
+  placeLevel: function() {
+    Tooflya.api.call('level.get', false, {
+      success: function(data) {
+        Game.level = data.level;
+
+        var element = this.m_Icons.get(data.level - 1);
+
+        element.setCurrentFrameIndex(4);
+
+        for(var h = 0; h < 2; h++) {
+          element.decorations[h].runAction(
+            cc.Sequence.create(
+              cc.DelayTime.create(1.5),
+              cc.FadeIn.create(0.4),
+              false
+            )
+          );
+          element.decorations[h].runAction(
+            cc.Sequence.create(
+              cc.DelayTime.create(1.5),
+              cc.ScaleTo.create(0.2, 1.2),
+              cc.ScaleTo.create(0.1, 0.8),
+              cc.ScaleTo.create(0.1, 1.0),
+              false
+            )
+          );
+        }
+
+        this.m_UserBackground.setCenterPosition(element.getCenterX() - Camera.sharedCamera().coord(130), element.getCenterY());
+        this.m_List.setCenterPosition(0, -element.getCenterY() + Camera.sharedCamera().center.x / 2 - Camera.sharedCamera().margin.y / 2);
+      }.bind(this)
+    });
+  },
+  placeStars: function() {
+    Tooflya.api.call('level.stars', false, {
+      success: function(data) {
+        this.m_StarsCounterArea.text.ccsf([data.count, 90]);
+
+        this.useCallbacks('onscreenready');
+      }.bind(this)
+    });
+  },
+  placeFriends: function() {
+    var uids = [];
+    FriendsManager.sharedInstance().getAppFriends().forEach(function(friend) {
+      uids.push(friend.uid);
+    });
+
+    Tooflya.api.call('storage.get', {
+      uids: uids,
+      key: references.levels.current
+    }, {
+      success: function(data) {
+        data.forEach(function(d) {
+          FriendsManager.sharedInstance().getAppFriends().forEach(function(friend) {
+            if(friend.uid == d.uid) {
+              friend.level = d.storage[0];
+            }
+          });
+        });
+
+        FriendsManager.sharedInstance().getAppFriends().forEach(function(friend) {
+          if(friend.level > 0) {
+            var holder = Holder.create(this.m_BackgroundHolder);
+            var element = this.m_Icons.get(friend.level - 1);
+
+            holder.create().setCenterPosition(element.getCenterX() - Camera.sharedCamera().coord(130), element.getCenterY());
+
+            InternetEntity.create(friend.photo_medium, holder, function(entity) {
+              entity.create().setCenterPosition(holder.getWidth() / 2 - Camera.sharedCamera().coord(5), holder.getHeight() / 2 - Camera.sharedCamera().coord(1));
+              entity.setScale(0.8);
+            });
+          }
+        }.bind(this));
+      }.bind(this)
+    });
   },
   onBackEvent: function() {
     Camera.sharedCamera().setDesignResolutionSize();
@@ -192,6 +270,72 @@ Levels = Screen.extend({
   onShowStarsInfo: function() {
   },
   onLevelItemChanged: function() {
+  },
+  onLevelBack: function() {
+    var elements = {
+      previous: false,
+      current: false
+    };
+
+    elements.current = this.m_Icons.get(Game.level - 1);
+    elements.previous = this.m_Icons.get(Game.level - 2);
+
+    elements.current.locked = true;
+
+    for(var h = 0; h < 2; h++) {
+      elements.current.decorations[h].create().setCenterPosition(elements.current.getWidth() / 2, elements.current.getHeight() / 2);
+      elements.current.decorations[h].setScale(0.6);
+      elements.current.decorations[h].setOpacity(100.0);
+      elements.current.decorations[h].runAction(
+        cc.RepeatForever.create(
+          cc.RotateTo.create(30.0, h == 0 ? 720 : -720),
+          false
+          )
+        );
+    }
+
+    elements.current.m_Text.setVisible(false);
+    elements.current.setCurrentFrameIndex(5);
+
+    this.m_UserBackground.setCenterPosition(elements.previous.getCenterX() - Camera.sharedCamera().coord(130), elements.previous.getCenterY());
+    this.m_UserBackground.runAction(
+      cc.Sequence.create(
+        cc.DelayTime.create(0.5),
+        cc.MoveTo.create(0.5, cc.p(elements.current.getCenterX() - Camera.sharedCamera().coord(130), elements.current.getCenterY())),
+        cc.CallFunc.create(this.onLevelForward, this, elements),
+        false
+      )
+    );
+
+    new PausableTimeout(function() {
+      this.onSelected({
+        id: Game.level
+      });
+    }.bind(this), 1500);
+  },
+  onLevelForward: function(selector, elements) {
+    elements.current.setCurrentFrameIndex(4);
+    elements.current.m_Text.setVisible(true);
+    if(!elements.current.isRegisterTouchable()) {
+      elements.current.registerTouchable(true);
+    }
+
+    for(var h = 0; h < 2; h++) {
+      elements.current.decorations[h].runAction(
+        cc.Sequence.create(
+          cc.FadeIn.create(0.4),
+          false
+        )
+      );
+      elements.current.decorations[h].runAction(
+        cc.Sequence.create(
+          cc.ScaleTo.create(0.2, 1.2),
+          cc.ScaleTo.create(0.1, 0.8),
+          cc.ScaleTo.create(0.1, 1.0),
+          false
+        )
+      );
+    }
   },
   onEnter: function() {
     this._super();
@@ -255,48 +399,15 @@ Levels = Screen.extend({
       }
     }
 
-    Tooflya.api.call('level.get', false, {
-      success: function(data) {
-        var element = this.m_Icons.get(data.level - 1);
-
-        element.setCurrentFrameIndex(4);
-
-        for(var h = 0; h < 2; h++) {
-          element.decorations[h].runAction(
-            cc.Sequence.create(
-              cc.DelayTime.create(1.5),
-              cc.FadeIn.create(0.4),
-              false
-            )
-          );
-          element.decorations[h].runAction(
-            cc.Sequence.create(
-              cc.DelayTime.create(1.5),
-              cc.ScaleTo.create(0.2, 1.2),
-              cc.ScaleTo.create(0.1, 0.8),
-              cc.ScaleTo.create(0.1, 1.0),
-              false
-            )
-          );
-        }
-
-        this.m_UserBackground.setCenterPosition(element.getCenterX() - Camera.sharedCamera().coord(130), element.getCenterY());
-        this.m_List.setCenterPosition(0, -element.getCenterY() + Camera.sharedCamera().center.x / 2 - Camera.sharedCamera().margin.y / 2);
-      }.bind(this)
-    });
-
-    Tooflya.api.call('level.stars', false, {
-      success: function(data) {
-        Levels.instance.m_StarsCounterArea.text.ccsf([data.count, 90]);
-      }
-    });
-
-
+    this.placeLevel();
+    this.placeStars();
+    this.placeFriends();
   },
   onExit: function() {
     this._super();
 
     this.m_Icons.clear();
+    this.m_BackgroundHolder.removeAllChildren();
   },
   /*onTouch: function(e) {
     if(!this.m_WasDraged) {
@@ -410,6 +521,50 @@ MapIcon = Button.extend({
   }
 });
 
+Holder = Entity.extend({
+  current: 0,
+  max: 0,
+  time: 2.0,
+  ctor: function(parent) {
+    this._super(s_MapUserBackground2, parent);
+  },
+  addChild: function(child, zindex) {
+    this._super(child, zindex);
+
+    this.max++;
+
+    if(this.max > 1) {
+      child.setOpacity(0);
+    }
+  },
+  removeChild: function(child) {
+    this._super(child);
+
+    this.max--;
+  },
+  update: function(time) {
+    this._super();
+
+    if(this.max > 1) {
+      this.time += time;
+
+      if(this.time >= 5.0) {
+        this.time = 0;
+
+        this.getChildren()[this.current].runAction(cc.FadeOut.create(0.5));
+        this.current = this.current >= this.max ? 0 : (this.current + 1);
+        this.getChildren()[this.current].runAction(
+          cc.Sequence.create(
+            cc.DelayTime.create(0.5),
+            cc.FadeIn.create(0.5),
+            false
+          )
+        );
+      }
+    }
+  }
+});
+
 MapBackground = Entity.extend({
   ctor: function(filename, parent) {
     this._super(filename, parent);
@@ -418,6 +573,10 @@ MapBackground = Entity.extend({
 
 MapIcon.create = function() {
   return new MapIcon();
+};
+
+Holder.create = function(parent) {
+  return new Holder(parent);
 };
 
 MapBackground.create = function(filename, parent) {

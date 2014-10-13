@@ -602,7 +602,7 @@ MultiplayerList = PatternList.extend({
           ScreenManager.sharedManager().replace(Game);
         });
 
-        setTimeout(function() {
+        new PausableTimeout(function() {
           Music.sharedMusic().play(s_Music2, true);
         }, 1000);
       }.bind(this),
@@ -688,7 +688,7 @@ MultiplayerList = PatternList.extend({
           ScreenManager.sharedManager().replace(Game);
         });
 
-        setTimeout(function() {
+        new PausableTimeout(function() {
           Music.sharedMusic().play(s_Music2, true);
         }, 1000);
       }.bind(this),

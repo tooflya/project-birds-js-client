@@ -31,7 +31,7 @@
 
 (function() {
   App.run(false, {
-    version: '0.9.81',
+    version: '0.9.84',
     application: 6,
     platform: 'vk',
     auto: true,
@@ -466,7 +466,7 @@
     });
 
     if(callback) {
-      setTimeout(function() {
+      new PausableTimeout(function() {
         callback();
       }, 3000);
     }

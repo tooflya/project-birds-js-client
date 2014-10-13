@@ -31,7 +31,7 @@
 
 (function() {
   App.run(false, {
-    version: '0.9.81',
+    version: '0.9.84',
     application: 5,
     platform: 'standalone',
     auto: false,
@@ -465,7 +465,7 @@
     });
 
     if(callback) {
-      setTimeout(function() {
+      new PausableTimeout(function() {
         callback();
       }, 3000);
     }

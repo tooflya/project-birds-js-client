@@ -258,23 +258,28 @@ Game = Screen.extend({
         m_Notification1: false,
         m_Notification2: false,
         m_Notification3: false,
-        m_Notification4: false
+        m_Notification4: false,
+        m_Notification5: false,
+        m_Notification6: false
       };
       this.m_Notifications.m_Notification1 = Entity.create(LanguagesManager.sharedManager().parse(s_Notification1), this);
       this.m_Notifications.m_Notification2 = Entity.create(LanguagesManager.sharedManager().parse(s_Notification2), this);
       this.m_Notifications.m_Notification3 = Entity.create(LanguagesManager.sharedManager().parse(s_Notification3), this);
       this.m_Notifications.m_Notification4 = Entity.create(LanguagesManager.sharedManager().parse(s_Notification4), this);
       this.m_Notifications.m_Notification5 = Entity.create(LanguagesManager.sharedManager().parse(s_Notification5), this);
+      this.m_Notifications.m_Notification6 = Counter.create(s_Notification6, this.m_Notifications.m_Notification5, Counter.align.center);
       this.m_Notifications.m_Notification1.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
       this.m_Notifications.m_Notification2.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
       this.m_Notifications.m_Notification3.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
       this.m_Notifications.m_Notification4.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
       this.m_Notifications.m_Notification5.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
+      this.m_Notifications.m_Notification6.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y);
       this.m_Notifications.m_Notification1.setZOrder(500);
       this.m_Notifications.m_Notification2.setZOrder(500);
       this.m_Notifications.m_Notification3.setZOrder(500);
       this.m_Notifications.m_Notification4.setZOrder(500);
       this.m_Notifications.m_Notification5.setZOrder(500);
+      this.m_Notifications.m_Notification6.setZOrder(500);
 
       this.m_SplashStars = EntityManager.create(10, SplashStar.create(false, Game.sharedScreen().getPhysicsWorld()), this, 500);
 
@@ -533,7 +538,7 @@ Game = Screen.extend({
       )
     );
 
-    setTimeout(function() {
+    new PausableTimeout(function() {
       Game.instance.finishGame(true, true);
     }, 10000);
   },

@@ -1094,7 +1094,7 @@ MatrixManager = cc.Node.extend({
     var sequence = cc.Sequence.create(actions);
 
     //element.stopAllActions(); // TODO: Check is it need.
-    element.runAction(sequence);console.log(this.getNumberOfRunningActions()); // TODO: Check it.
+    element.runAction(sequence);
 
     this.m_PauseTime[index.x] += 0.1;
 
@@ -1469,7 +1469,7 @@ MatrixManager = cc.Node.extend({
       }
     }
 
-    setTimeout(function() {
+    new PausableTimeout(function() {
       this.clear();
     }.bind(this), 600);
   },
