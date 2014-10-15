@@ -240,15 +240,68 @@ var unlock = {
     }
   ],
   items: [
+    //weapons
     {
       price: 0
     },
     {
-      price: 100
+      price: 200
     },
     {
-      price: 0
+      price: 400
     },
+    {
+      price: 600
+    },
+    {
+      price: 800
+    },
+    {
+      price: 1000
+    },
+    {
+      price: 1200
+    },
+    {
+      price: 1400
+    },
+    {
+      price: 1600
+    },
+    {
+      price: 1800
+    },
+    {
+      price: 2000
+    },
+    {
+      price: 2200
+    },
+    {
+      price: 2400
+    },
+    {
+      price: 2600
+    },
+    {
+      price: 2800
+    },
+    {
+      price: 3000
+    },
+    {
+      price: 3200
+    },
+    {
+      price: 3400
+    },
+    {
+      price: 25
+    },
+    {
+      price: 25
+    },
+// BIRDS!
     {
       price: 25
     },
@@ -300,7 +353,6 @@ var unlock = {
     {
       price: 25
     },
-
     {
       price: 25
     },
@@ -310,58 +362,7 @@ var unlock = {
     {
       price: 25
     },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-    {
-      price: 25
-    },
-
+//Bonuses
     {
       price: 25
     },
@@ -451,7 +452,7 @@ var properties = {
       properties: '22',
       price: {
         gold: 0,
-        silver: 200
+        silver: 3000
       },
       share: {
         vk: {
@@ -470,7 +471,7 @@ var properties = {
       properties: '31',
       price: {
         gold: 0,
-        silver: 300
+        silver: 8000
       },
       share: {
         vk: {
@@ -488,8 +489,8 @@ var properties = {
       popularity: 0,
       properties: '36',
       price: {
-        gold: 25,
-        silver: 400
+        gold: 0,
+        silver: 15000
       },
       share: {
         vk: {
@@ -507,8 +508,8 @@ var properties = {
       popularity: 0,
       properties: '42',
       price: {
-        gold: 35,
-        silver: 500
+        gold: 0,
+        silver: 20000
       },
       share: {
         vk: {
