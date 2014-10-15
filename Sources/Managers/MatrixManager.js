@@ -532,6 +532,9 @@ MatrixManager = cc.Node.extend({
   getCurrentSize: function() {
     return this.m_CurrentSize;
   },
+  findIntersections: function() {
+    // TODO: Find basic figures.
+  },
   clear: function() {
     this.m_PauseTime = Array();
 
@@ -539,6 +542,8 @@ MatrixManager = cc.Node.extend({
       MatrixManager.timeout.pause();
       MatrixManager.timeout = false;
     }
+
+    this.findIntersections();
 
     for(var a = 0; a < MatrixManager.pools.length; a++) {
       var bonus = {
@@ -893,7 +898,7 @@ MatrixManager = cc.Node.extend({
     var result2 = this.hasMatches(this.m_CurrentElement2);
 
     if(!result1 && !result2) {
-      if(this.m_CurrentElement1.m_Bonus == Element.bonus.types.bomb || this.m_CurrentElement2.m_Bonus == Element.bonus.types.bomb) {
+      if((this.m_CurrentElement1.m_Bonus == Element.bonus.types.bomb || this.m_CurrentElement2.m_Bonus == Element.bonus.types.bomb) && (this.m_CurrentElement1.getId() != Element.types.star && this.m_CurrentElement2.getId() != Element.types.star)) {
         if(this.m_CurrentElement1.m_Bonus) this.m_CurrentElement1.remove();
         if(this.m_CurrentElement2.m_Bonus) this.m_CurrentElement2.remove();
 

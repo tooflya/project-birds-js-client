@@ -4250,36 +4250,6 @@ var g_language  = {
     {title: "インディアンバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
     ],
   'achievement-name-5': [
-    {title: "Mexican bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "Мексиканец", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "メキシカンバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
-    ],
-  'achievement-name-6': [
-    {title: "Samurai bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "Самурай", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "サムライバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
-    ],
-  'achievement-name-7': [
-    {title: "Pirate bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "Пират", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
-    {title: "パイレーツバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
-    ],
-  'achievement-name-8': [
     {title: "Robo bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "Робооптица", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
@@ -4289,7 +4259,27 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "ロボバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
     ],
-  'achievement-name-9': [
+  'achievement-name-6': [
+    {title: "Pirate bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Пират", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "パイレーツバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-7': [
+    {title: "Mexican bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Мексиканец", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "メキシカンバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-8': [
     {title: "Comando bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "Командос", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
@@ -4299,7 +4289,7 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "コマンドーバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
     ],
-  'achievement-name-10': [
+  'achievement-name-9': [
     {title: "Zombie bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "Зомби", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
@@ -4308,6 +4298,16 @@ var g_language  = {
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
     {title: "ゾンビバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
+    ],
+  'achievement-name-10': [
+    {title: "Samurai bird", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "Самурай", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},
+    {title: "サムライバード", font: "RiiPopkk-R", size: 25, dimensions: [280, 0]}
     ],
   'achievement-name-11': [
     {title: "Junior", font: "Comic Sans MS", size: 25, dimensions: [280, 0]},

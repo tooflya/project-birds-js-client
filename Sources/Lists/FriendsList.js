@@ -117,6 +117,56 @@ FriendsList = List.extend({
     }
 
     this._super();
+  },
+  showPlayersScore: function(callback) {
+    var uids = [];
+    FriendsManager.sharedInstance().getAppFriends().forEach(function(user) {
+      uids.push(user.uid);
+    });
+
+    Tooflya.api.call('storage.get', {
+      uids: uids,
+      key: references.levels.points[Game.level - 1]
+    }, {
+      success: function(data) {
+        var max = false;
+        data.forEach(function(user) {
+          this.m_Elements.forEach(function(background) {
+            if(user.uid == background.user.uid) {
+              background.user.score = {
+                point: user.storage[0],
+                max: false
+              };
+
+              if(max) {
+                if(user.storage[0] > max.user.score.point) {
+                  max = background;
+                  max.user.score.max = false;
+                  background.user.score.max = true;
+                }
+              } else {
+                max = background;
+                background.user.score.max = true;
+              }
+            }
+          }.bind(this))
+        }.bind(this));
+
+        var index = 0;
+        this.m_Elements.forEach(function(background) {
+          background.showScore(index++);
+        }.bind(this));
+
+        if(callback) {
+          callback(max.user);
+        }
+      }.bind(this)
+    })
+  },
+  hidePlayersScore: function() {
+    this.m_Elements.forEach(function(background) {
+      background.hideScore();
+    }.bind(this))
   }
 });
 
@@ -125,6 +175,8 @@ FriendsButton = Button.extend({
     this._super(s_FriendsListBackground, 2, 1, parent);
 
     this.user = user;
+    this.m_ScoreText = Text.create(false, this);
+    this.m_ScoreText.setVisible(false);
   },
   onCreate: function() {
     this._super();
@@ -311,6 +363,36 @@ FriendsButton = Button.extend({
     this.registerTouchable(false);
   },
   stopAllActions: function() {
+  },
+  showScore: function(index) {
+    if(!this.user.score) return false;
+
+    if(this.user.score.point > 0) {
+      this.m_ScoreText.ccsf([this.user.score.point]);
+      this.m_ScoreText.setVisible(true);
+      this.m_ScoreText.setCenterPosition(this.getWidth() / 2, -this.getHeight() / 2);
+
+      if(this.user.score.max) {
+        this.m_ScoreText.setColor(cc.c3(255, 50, 50));
+      } else {
+        this.m_ScoreText.setColor(cc.c3(255, 255, 255));
+      }
+
+      this.m_ScoreText.runAction(
+        cc.Sequence.create(
+          cc.DelayTime.create(index * 0.5),
+          cc.EaseBounceOut.create(
+            cc.MoveTo.create(1.5, cc.p(this.getWidth() / 2, this.getHeight() / 2 - Camera.sharedCamera().coord(30)))
+          ),
+          false
+        )
+      );
+    }
+  },
+  hideScore: function() {
+    this.user.score = false;
+
+    this.m_ScoreText.setVisible(false);
   }
 });
 

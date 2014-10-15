@@ -367,7 +367,39 @@ Finish = Background.extend({
       this.m_TextValue1.setText('finish-text-4');
     }
 
-    Camera.sharedCamera().setDesignResolutionSize(false, false, false, false, true);
+    FriendsList.sharedScreen().showPlayersScore(function(user) {
+      Camera.sharedCamera().setDesignResolutionSize(false, false, false, false, true);
+
+      if(user.score) {
+        if(Game.score > user.score.point && user.score.point > 0) {
+          switch(this.config.params.platform) {
+            case 'vk':
+            VK.api("wall.post", {
+              owner_id: user.uid,
+              message: 'Я оказался лучше тебя на уровне ' + (Game.level - 1) + '! Можешь заработать больше очков?',
+              attachments: 'photo-43129938_340443444,http://vk.com/app416557',
+              test_mode: 1
+            }, function(e) {
+              if(!e.error) {
+              }
+            });
+            break;
+            case 'fb':
+            break;
+          }
+        }
+      }
+    }.bind(this));
+
+    switch(this.config.params.platform) {
+      case 'standalone':
+      case 'vk':
+      case 'fb':
+      break;
+      case 'arkadium':
+      Arkadium.api.call('pause_ready');
+      break;
+    }
   },
   hide: function(callback) {
     this.assert(!this.getParent(), "This popup window isn't showed.");
@@ -439,6 +471,8 @@ Finish = Background.extend({
 
     this.m_SplashStars.clear();
     this.m_SplashStars = false;
+
+    FriendsList.sharedScreen().hidePlayersScore();
   },
   onMenuEvent: function() {
     Camera.sharedCamera().setDesignResolutionSize();

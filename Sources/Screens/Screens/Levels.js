@@ -238,6 +238,7 @@ Levels = Screen.extend({
       key: references.levels.current
     }, {
       success: function(data) {
+        var holders = [];
         data.forEach(function(d) {
           FriendsManager.sharedInstance().getAppFriends().forEach(function(friend) {
             if(friend.uid == d.uid) {
@@ -248,18 +249,32 @@ Levels = Screen.extend({
 
         FriendsManager.sharedInstance().getAppFriends().forEach(function(friend) {
           if(friend.level > 0) {
-            var holder = Holder.create(this.m_BackgroundHolder);
-            var text = Text.create(false, holder);
+            var opacity = false;
+            var holder = holders[friend.level - 1] || Holder.create(this.m_BackgroundHolder);
             var element = this.m_Icons.get(friend.level - 1);
 
             holder.create().setCenterPosition(element.getCenterX() - Camera.sharedCamera().coord(130), element.getCenterY());
-            text.create().setCenterPosition(holder.getWidth() / 2, -Camera.sharedCamera().coord(20));
-            text.ccsf([friend.first_name]);
-            text.setFontSize(Camera.sharedCamera().coord(24))
+
+            if(!holders[friend.level - 1]) {
+              holders[friend.level - 1] = holder;
+            } else {
+              opacity = true;
+            }
 
             InternetEntity.create(friend.photo_medium, holder, function(entity) {
               entity.create().setCenterPosition(holder.getWidth() / 2 - Camera.sharedCamera().coord(5), holder.getHeight() / 2 - Camera.sharedCamera().coord(1));
               entity.setScale(0.8);
+              entity.setCascadeOpacityEnabled(true);
+
+              var text = Text.create(false, entity);
+              text.create().setCenterPosition(holder.getWidth() / 2, -Camera.sharedCamera().coord(30));
+              text.ccsf([friend.first_name]);
+              text.setFontSize(Camera.sharedCamera().coord(24));
+              text.setScale(1.2);
+
+              if(opacity) {
+                entity.setOpacity(0);
+              }
             });
           }
         }.bind(this));
@@ -309,7 +324,7 @@ Levels = Screen.extend({
     this.m_UserBackground.runAction(
       cc.Sequence.create(
         cc.DelayTime.create(0.5),
-        cc.MoveTo.create(0.5, cc.p(elements.current.getCenterX() - Camera.sharedCamera().coord(130), elements.current.getCenterY())),
+        cc.MoveTo.create(1.0, cc.p(elements.current.getCenterX() - Camera.sharedCamera().coord(130), elements.current.getCenterY())),
         cc.CallFunc.create(this.onLevelForward, this, elements),
         false
       )
@@ -319,7 +334,7 @@ Levels = Screen.extend({
       this.onSelected({
         id: Game.level
       });
-    }.bind(this), 1500);
+    }.bind(this), 2000);
   },
   onLevelForward: function(selector, elements) {
     elements.current.setCurrentFrameIndex(4);
@@ -522,54 +537,10 @@ MapIcon = Button.extend({
     this.m_WasTouched = false;
   },*/
   update: function(time) {
-    this._super();
+    this._super(time);
   },
   deepCopy: function() {
     return MapIcon.create();
-  }
-});
-
-Holder = Entity.extend({
-  current: 0,
-  max: 0,
-  time: 2.0,
-  ctor: function(parent) {
-    this._super(s_MapUserBackground2, parent);
-  },
-  addChild: function(child, zindex) {
-    this._super(child, zindex);
-
-    this.max++;
-
-    if(this.max > 1) {
-      child.setOpacity(0);
-    }
-  },
-  removeChild: function(child) {
-    this._super(child);
-
-    this.max--;
-  },
-  update: function(time) {
-    this._super();
-
-    if(this.max > 1) {
-      this.time += time;
-
-      if(this.time >= 5.0) {
-        this.time = 0;
-
-        this.getChildren()[this.current].runAction(cc.FadeOut.create(0.5));
-        this.current = this.current >= this.max ? 0 : (this.current + 1);
-        this.getChildren()[this.current].runAction(
-          cc.Sequence.create(
-            cc.DelayTime.create(0.5),
-            cc.FadeIn.create(0.5),
-            false
-          )
-        );
-      }
-    }
   }
 });
 
@@ -581,10 +552,6 @@ MapBackground = Entity.extend({
 
 MapIcon.create = function() {
   return new MapIcon();
-};
-
-Holder.create = function(parent) {
-  return new Holder(parent);
 };
 
 MapBackground.create = function(filename, parent) {

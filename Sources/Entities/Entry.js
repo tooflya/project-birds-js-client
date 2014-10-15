@@ -82,7 +82,7 @@ Entry = Entity.extend({
     if(this.data) {
       InternetEntity.create((this.data.photo || this.data.photo_medium), this, function(entity) {
         this.elements.photo = entity;
-        this.elements.photo.create().setCenterPosition(this.elements.photo.getWidth() / 2 + Camera.sharedCamera().coord(20), this.elements.photo.getHeight() / 2);
+        this.elements.photo.create().setCenterPosition(this.elements.photo.getWidthScaled() / 2 + Camera.sharedCamera().coord(20), this.elements.photo.getHeightScaled() / 2);
         this.elements.photo.setCascadeOpacityEnabled(true);
 
         this.elements.name = Text.create('list-name', this, cc.TEXT_ALIGNMENT_LEFT);

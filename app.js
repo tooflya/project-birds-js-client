@@ -29,43 +29,8 @@
  *
  */
 
-(function() {
-  App.run(false, {
-    version: '0.9.86',
-    application: 5,
-    platform: 'standalone',
-    auto: false,
-    language: 0,
-    designed: {
-      size: {
-        width: 980,
-        height: 551,
-        margin: {
-          x: 0,
-          y: 0
-        }
-      },
-      graphics: {
-        width: 1920,
-        height: 1080
-      },
-      margin: {
-        x: 0,
-        y: 0
-      }
-    },
-    orientations: {
-      portrait: false,
-      landscape: true
-    },
-    analytics: 0,
-    purchases: true,
-    vendor: 'tooflya',
-    server: {
-      url: 'http://www.tooflya.com',
-      port: 8082
-    }
-  }, [
+AppInitialization = function(params, files) {
+  App.run(false, params, files.concat([
     'Sources/Entities/Button.js',
     'Sources/Entities/CircleDecoration1.js',
     'Sources/Entities/CircleDecoration2.js',
@@ -109,6 +74,7 @@
     'Sources/Entities/Entry.js',
     'Sources/Entities/Bubble.js',
     'Sources/Entities/BubblePoping.js',
+    'Sources/Entities/Holder.js',
     'Sources/Screens/Screens/Preloader.js',
     'Sources/Screens/Screens/Menu.js',
     'Sources/Screens/Screens/Settings.js',
@@ -183,7 +149,7 @@
     'Sources/Layers/DustBackground.js',
     'Sources/Layers/PurchasesBackground.js',
     'Sources/Maps/Promotion.js'
-  ], function() {
+  ]), function() {
     Preloader.preload(resources, function() {
       cc.canvas.style.cursor = "url('Resources/Graphics/cursor.png'), -moz-zoom-in";
 
@@ -470,15 +436,4 @@
       }, 3000);
     }
   };
-})();
-
-window.onmousemove = function(e) {
-  if(!App.launched()) {
-    var x = e.clientX;
-    var y = e.clientY;
-    var center = ((screen.width / 2) - 700);
-
-    document.body.style.backgroundPosition = -(center + x / 100) + "px bottom, " + (center + x / 100) + "px bottom, " + (center + x / 100) + "px " + (70 - (y / 100)) + "px";
-    document.getElementsByTagName("html")[0].style.backgroundPosition = "center " + (70 - (y / 100)) + "px";
-  }
 };

@@ -46,12 +46,30 @@ Menu = Screen.extend({
     this.m_SettingsButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_EventsButton = Button.create(s_ButtonsSprite, 3, 4, this);
     this.m_ShopButton = Button.create(s_ButtonsSprite, 3, 4, this);
-
     if(this.config.params.vendor == 'ubi-nuri') {
     } else {
       this.m_TwitterButton = Button.create(s_ButtonsSprite, 3, 4, this);
-      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 4, this);
-      if(this.config.params.platform == 'vk') this.m_VkontakteButton = Button.create(s_VkontakteButton, 1, 1, this);
+      this.m_TwitterButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(270), Camera.sharedCamera().coord(100));
+      this.m_TwitterButton.setCurrentFrameIndex(0);
+      this.m_TwitterButton.setTouchHandler('onTwitterEvent', Menu);
+
+      switch(this.config.params.platform) {
+        case 'fb':
+        case 'arkadium':
+        case 'standalone':
+        this.m_FacebookButton = Button.create(s_ButtonsSprite, 3, 4, this);
+        this.m_FacebookButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+        this.m_FacebookButton.setCurrentFrameIndex(3);
+
+        this.m_FacebookButton.setTouchHandler('onFacebookEvent', Menu);
+        break;
+        case 'vk':
+        this.m_VkontakteButton = Button.create(s_VkontakteButton, 1, 1, this);
+        this.m_VkontakteButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
+
+        this.m_VkontakteButton.setTouchHandler('onVkontakteEvent', Menu);
+        break;
+      }
     }
 
     this.m_SettingsButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
@@ -61,22 +79,9 @@ Menu = Screen.extend({
     this.m_EventsButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(270));
     this.m_ShopButton.create().setCenterPosition(Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(440));
 
-    if(this.config.params.vendor == 'ubi-nuri') {
-    } else {
-      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-      if(this.config.params.platform == 'vk') this.m_VkontakteButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(100), Camera.sharedCamera().coord(100));
-      this.m_TwitterButton.create().setCenterPosition(Camera.sharedCamera().width - Camera.sharedCamera().coord(270), Camera.sharedCamera().coord(100));
-    }
-
     this.m_SettingsButton.setCurrentFrameIndex(6);
     this.m_ShopButton.setCurrentFrameIndex(2);
     this.m_EventsButton.setCurrentFrameIndex(9);
-
-    if(this.config.params.vendor == 'ubi-nuri') {
-    } else {
-      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.setCurrentFrameIndex(3);
-      this.m_TwitterButton.setCurrentFrameIndex(0);
-    }
 
     this.m_PlayButtonDecorations[0].setColor(cc.RED);
     this.m_PlayButtonDecorations[1].setColor(cc.RED);
@@ -102,13 +107,6 @@ Menu = Screen.extend({
     this.m_SettingsButton.setTouchHandler('onSettingsEvent', Menu);
     this.m_EventsButton.setTouchHandler('onEventsEvent', Menu);
     this.m_ShopButton.setTouchHandler('onShopEvent', Menu);
-
-    if(this.config.params.vendor == 'ubi-nuri') {
-    } else {
-      if(this.config.params.platform == 'fb' || this.config.params.platform == 'standalone') this.m_FacebookButton.setTouchHandler('onFacebookEvent', Menu);
-      if(this.config.params.platform == 'vk') this.m_VkontakteButton.setTouchHandler('onVkontakteEvent', Menu);
-      this.m_TwitterButton.setTouchHandler('onTwitterEvent', Menu);
-    }
   },
   onPlayEvent: function() {
     ScreenManager.sharedManager().replace(Mode);
