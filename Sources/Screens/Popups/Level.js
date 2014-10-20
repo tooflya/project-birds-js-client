@@ -63,7 +63,7 @@ Level = ExtendedPopup.extend({
             Camera.sharedCamera().setDesignResolutionSize();
 
             Game.sharedScreen(0);
-            ScreenManager.sharedManager().replace(Loading);
+            ScreenManager.sharedManager().push(Loading);
           }
         }
       });

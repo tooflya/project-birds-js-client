@@ -46,7 +46,7 @@ Loading = Screen.extend({
     this.m_BackgroundWaves = EntityManager.create(15, CircleDecoration1.create(), this.m_Background);
 
     this.m_TipText = Text.create(false, this);
-    this.m_LoadingText = Text.create('loading', this);
+    //this.m_LoadingText = Text.create('loading', this);
 
     this.m_BackgroundDecoration.runAction(
       cc.RepeatForever.create(
@@ -57,21 +57,30 @@ Loading = Screen.extend({
         )
       )
     );
+
+    this.m_Background.runAction(cc.FadeIn.create(0.5));
+    this.m_BackgroundDecoration.runAction(cc.ScaleTo.create(0.2, 1.0));
   },
   onShow: function() {
     this._super();
 
     this.m_LoadingTimeElapsed = 0;
 
-    this.m_TipText.setText('tip-' + Random.sharedRandom().random(0, 10, true));
+    this.m_TipText.setText('tip-' + Random.sharedRandom().random(0, 5, true));
     this.m_TipText.setCenterPosition(Camera.sharedCamera().center.x, Camera.sharedCamera().center.y - Camera.sharedCamera().coord(300) - this.m_TipText.getHeight() / 2);
 
     this.m_BackgroundWaves.clear();
 
     Music.sharedMusic().stop();
+
+    this.m_Background.runAction(cc.FadeIn.create(0.5));
+    this.m_BackgroundDecoration.runAction(cc.ScaleTo.create(0.2, 1.0));
   },
   onHide: function() {
     this._super();
+
+    this.m_Background.setOpacity(0);
+    this.m_BackgroundDecoration.setScale(0);
   },
   onComplete: function() {
     ScreenManager.sharedManager().replace(Game);
@@ -92,10 +101,10 @@ Loading = Screen.extend({
       this.onComplete();
     }
 
-    var percent = Math.floor(this.m_LoadingTimeElapsed / this.m_LoadingTime * 100);
+    //var percent = Math.floor(this.m_LoadingTimeElapsed / this.m_LoadingTime * 100);
 
-    this.m_LoadingText.ccsf([percent <= 100 ? percent : 100]);
-    this.m_LoadingText.setCenterPosition(Camera.sharedCamera().width - this.m_LoadingText.getWidth() / 2 - Camera.sharedCamera().coord(32), Camera.sharedCamera().coord(50));
+    //this.m_LoadingText.ccsf([percent <= 100 ? percent : 100]);
+    //this.m_LoadingText.setCenterPosition(Camera.sharedCamera().width - this.m_LoadingText.getWidth() / 2 - Camera.sharedCamera().coord(32), Camera.sharedCamera().coord(50));
   }
 });
 

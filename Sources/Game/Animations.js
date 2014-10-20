@@ -351,6 +351,7 @@ Game.prototype.onNoMoreCombinationsCheck = function() {
           cc.MoveTo.create(1.0, cc.p(Camera.sharedCamera().center.x, -this.m_CombinationsNotification.getHeight()))
         ),
         cc.CallFunc.create(MatrixManager.sharedManager().unbusy, MatrixManager.sharedManager()),
+        this.m_PlayerTurn ? cc.CallFunc.create(MatrixManager.sharedManager().enable, MatrixManager.sharedManager()) : false,
         false
       )
     );

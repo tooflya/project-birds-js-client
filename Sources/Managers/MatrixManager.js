@@ -642,10 +642,6 @@ MatrixManager = cc.Node.extend({
               } else {
                 if(pack) {
                   MatrixManager.sharedManager().removeSquare(pack.getIndex().x, pack.getIndex().y, pack);
-
-                  MatrixManager.timeout = new PausableTimeout(function() {
-                    MatrixManager.sharedManager().clear();
-                  }, 600);
                 } else if(bomb && MatrixManager.sharedManager().m_ExtaMove) {
                   Game.instance.onExtraMove();
                 } else {
@@ -1201,10 +1197,10 @@ MatrixManager = cc.Node.extend({
     sickle1.setOpacity(255);
     sickle1.setRotation(0);
     sickle1.setFlippedHorizontally(true);
-    sickle1.runAction(cc.MoveTo.create(0.7, cc.p(sickle1.getCenterX() - Camera.sharedCamera().width, sickle1.getCenterY())));
+    sickle1.runAction(cc.MoveTo.create(0.5, cc.p(sickle1.getCenterX() - Camera.sharedCamera().width, sickle1.getCenterY())));
     sickle1.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.7),
+        cc.DelayTime.create(0.5),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1214,10 +1210,10 @@ MatrixManager = cc.Node.extend({
     sickle2.setOpacity(255);
     sickle2.setRotation(0);
     sickle2.setFlippedHorizontally(false);
-    sickle2.runAction(cc.MoveTo.create(0.7, cc.p(sickle2.getCenterX() + Camera.sharedCamera().width, sickle2.getCenterY())));
+    sickle2.runAction(cc.MoveTo.create(0.5, cc.p(sickle2.getCenterX() + Camera.sharedCamera().width, sickle2.getCenterY())));
     sickle2.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.7),
+        cc.DelayTime.create(0.5),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1307,10 +1303,10 @@ MatrixManager = cc.Node.extend({
     sickle1.setOpacity(255);
     sickle1.setRotation(-90);
     sickle1.setFlippedHorizontally(false);
-    sickle1.runAction(cc.MoveTo.create(0.7, cc.p(sickle1.getCenterX(), sickle1.getCenterY() + Camera.sharedCamera().height)));
+    sickle1.runAction(cc.MoveTo.create(0.5, cc.p(sickle1.getCenterX(), sickle1.getCenterY() + Camera.sharedCamera().height)));
     sickle1.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.7),
+        cc.DelayTime.create(0.5),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1320,10 +1316,10 @@ MatrixManager = cc.Node.extend({
     sickle2.setOpacity(255);
     sickle2.setRotation(90);
     sickle2.setFlippedHorizontally(false);
-    sickle2.runAction(cc.MoveTo.create(0.7, cc.p(sickle2.getCenterX(), sickle2.getCenterY() - Camera.sharedCamera().height)));
+    sickle2.runAction(cc.MoveTo.create(0.5, cc.p(sickle2.getCenterX(), sickle2.getCenterY() - Camera.sharedCamera().height)));
     sickle2.runAction(
       cc.Sequence.create(
-        cc.DelayTime.create(0.7),
+        cc.DelayTime.create(0.5),
         cc.FadeTo.create(0.1, 0.0),
         false
       )
@@ -1425,7 +1421,7 @@ MatrixManager = cc.Node.extend({
         if(current.getId() != Element.types.star) {
           current.runAction(
             cc.Sequence.create(
-              cc.DelayTime.create(speed),
+              cc.DelayTime.create(speed * 3),
               cc.CallFunc.create(current.removeActions, current, {
                 icons: Element.instructions.icons.skip
               }),
@@ -1440,6 +1436,44 @@ MatrixManager = cc.Node.extend({
       speed: speed,
       element: element
     });
+
+    // Decorations
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
+        var current = this.get(i, j);
+
+        if(current instanceof Element) {
+          var index = current.getIndex();
+
+          if(element.getIndex().x != index.x && element.getIndex().y != index.y) {
+            var vector = {
+              x: element.getCenterX() - current.getCenterX(),
+              y: element.getCenterY() - current.getCenterY()
+            };
+            var length = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+            vector.x /= length;
+            vector.y /= length;
+            vector.x *= Camera.sharedCamera().coord(10);
+            vector.y *= Camera.sharedCamera().coord(10);
+
+            current.runAction(
+              cc.Sequence.create(
+                cc.EaseSineInOut.create(
+                  cc.MoveTo.create(1.5, cc.p(current.getCenterX() + vector.x, current.getCenterY() + vector.y))
+                ),
+                cc.MoveTo.create(0.2, cc.p(current.getCenterX(), current.getCenterY())),
+                cc.CallFunc.create(MatrixManager.sharedManager().shake, MatrixManager.sharedManager()),
+                false
+              )
+            );
+          }
+        }
+      }
+    }
+
+    MatrixManager.timeout = new PausableTimeout(function() {
+      this.clear();
+    }.bind(this), 2000);
   },
   removeSimilar: function(x, y, element) {
     var speed = 0.5;
@@ -1474,7 +1508,7 @@ MatrixManager = cc.Node.extend({
       }
     }
 
-    new PausableTimeout(function() {
+    MatrixManager.timeout = new PausableTimeout(function() {
       this.clear();
     }.bind(this), 600);
   },
@@ -1585,10 +1619,10 @@ MatrixManager = cc.Node.extend({
 
       var els = [];
 
-      if((x - 1) >= 0) els.push(this.get(x - 1, y));
-      if((y + 1) < this.getSize().y) els.push(this.get(x, y + 1));
-      if((x + 1) < this.getSize().x) els.push(this.get(x + 1, y));
-      if((y - 1) >= 0) els.push(this.get(x, y - 1));
+      if((x - 1) >= this.m_CurrentSize.x.start) els.push(this.get(x - 1, y));
+      if((y + 1) <= this.m_CurrentSize.y.finish) els.push(this.get(x, y + 1));
+      if((x + 1) <= this.m_CurrentSize.x.finish) els.push(this.get(x + 1, y));
+      if((y - 1) >= this.m_CurrentSize.y.start) els.push(this.get(x, y - 1));
 
       els.shuffle();
 
@@ -1621,6 +1655,17 @@ MatrixManager = cc.Node.extend({
   },
   getType: function() {
     return this.m_Type;
+  },
+  shake: function() {
+    for(var i = this.m_CurrentSize.x.start; i <= this.m_CurrentSize.x.finish; i++) {
+      for(var j = this.m_CurrentSize.y.start; j <= this.m_CurrentSize.y.finish; j++) {
+        var current = this.get(i, j);
+
+        if(current instanceof Element) {
+          current.shake();
+        }
+      }
+    }
   }
 });
 

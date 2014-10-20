@@ -80,6 +80,10 @@ Bird = PhysicsEntity.extend({
 
     this.m_Hitted = false;
     this.m_Bonus1 = false;
+
+    this.setScale(1);
+    this.setOpacity(255);
+    this.setRotation(0);
   },
   onDestroy: function() {
     this._super();

@@ -50,6 +50,20 @@ LivesRequest = ExtendedPopup.extend({
   },
   onHide: function() {
     this._super();
+
+    if(DataManager.sharedManager().get(false, references.coins.lives) <= 0) {
+      if(Game.instance) {
+        if(!Game.sharedScreen().m_GameRunning) {
+          ScreenManager.sharedManager().replace(Menu);
+        }
+      }
+    } else {
+      if(Game.instance) {
+        if(!Game.sharedScreen().m_GameRunning && !Game.sharedScreen().m_GamePreviewRunning) {
+          Game.sharedScreen().onShow();
+        }
+      }
+    }
   }
 });
 

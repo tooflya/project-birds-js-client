@@ -1221,8 +1221,8 @@ var g_language  = {
     {title: "アーケードモード", font: "RiiPopkk-R", size: 36, dimensions: [450, 0]}
     ],
   'help-popup-5': [
-    {title: "Progress mode - a special mode. Available to you 30 levels (update soon) with a variety of tasks. As you progress through levels you will unlock new opportunities that you can get to use in other game modes.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
-    {title: "Прохождение - это особый режим. Вам доступно 30 уровней (обновления совсем скоро) с различными заданиями. По мере прохождения уровней вам будут открываться новые возможности, которые вы можте использовать в других режимах игры.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Progress mode - a special mode. Available to you 90 levels (update soon) with a variety of tasks. As you progress through levels you will unlock new opportunities that you can get to use in other game modes.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
+    {title: "Прохождение - это особый режим. Вам доступно 90 уровней (обновления совсем скоро) с различными заданиями. По мере прохождения уровней вам будут открываться новые возможности, которые вы можте использовать в других режимах игры.", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
     {title: "", font: "Comic Sans MS", size: 25, dimensions: [450, 0]},
@@ -2321,8 +2321,8 @@ var g_language  = {
     {title: "", font: "RiiPopkk-R", size: 25, dimensions: [450, 0]}
     ],
   'tip-0': [
-    {title: "Each of the bonus birds has unique abilities in different game modes - let's check what they can do!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
-    {title: "Каждая бонусная птица обладает уникальными способностями в каждом из режимов игры - посмотрите на что они способны!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Each of the bonus birds has unique abilities - let's check what they can do!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Каждая бонусная птица обладает уникальными способностями - посмотрите на что они способны!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
     {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
@@ -2331,54 +2331,54 @@ var g_language  = {
     {title: "各ボーナスの鳥は、ゲームモードのそれぞれにユニークな能力を持っている - 彼らは何ができるかを参照してください！", font: "RiiPopkk-R", size: 42, dimensions: [1200, 0]}//
     ],
   'tip-1': [
-    {title: "Buy new weapon to beat your opponent. New weapons will inflicts more damage to opponent, will restore more hit points, and will be giving you more defence.", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
-    {title: "Покупайте новое оружие, чтоб победить соперника! Крутая пушка будет наносить больше урона противнику, будет восстанавливать больше жизней, а также, даст вам больше защиты.", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
+    {title: "Buy new weapon to beat your opponent!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Покупайте новое оружие, чтоб победить соперника!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [1200, 0]}//
     ],
   'tip-2': [
-    {title: "Collect keys, with their help, you can open the locked position in the shop.", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "Собирайте ключи, с их помощью вы сможете открыть заблокированные позиции в магазине.", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
+    {title: "Collect keys! With their help you can open the locked items.", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Собирайте ключи. C их помощью вы сможете открыть заблокированные артефакты.", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [1200, 0]}//
     ],
   'tip-3': [
-    {title: "Play in game every day to get a daily reward. The more days in a row you play - the more reward.", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "Заходите в игру каждый день и получайте ежедневное вознаграждение. Чем больше дней подряд вы играете - тем больше вознаграждение.", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
+    {title: "Play in game every day to get a daily reward.", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Заходите в игру каждый день и получайте ежедневное вознаграждение.", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [1200, 0]}//
     ],
   'tip-4': [
-    {title: "To earn gold coins - play online mode!", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "Чтобы заработать золотых монет - играйте в онлайн режим!", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
+    {title: "To earn gold coins - play online mode!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Чтобы заработать золотых монет - играйте в онлайн режим!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [1200, 0]}//
     ],
   'tip-5': [
-    {title: "Collect 5 identical tiles in a row to get an extra move!", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "Собирайте 5 одинаковый плиток в ряд, чтобы получить дополнительный ход!", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},
-    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [800, 0]}//
+    {title: "Collect 5 identical tiles in a row to get an extra move!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "Собирайте 5 одинаковый плиток в ряд, чтобы получить дополнительный ход!", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "", font: "Comic Sans MS", size: 42, dimensions: [1200, 0]},
+    {title: "ヒント", font: "RiiPopkk-R", size: 42, dimensions: [1200, 0]}//
     ],
   'tip-6': [
     {title: "Tip 6", font: "Comic Sans MS", size: 42, dimensions: [800, 0]},

@@ -38,7 +38,6 @@ LevelList = PatternList.extend({
     this.m_ElementsBackgrounds =  [];
     this.m_Elements =  [];
     this.m_ElementsIcons =  [];
-    //this.m_Feathers = EntityManager.create(100, Feather.create(false, Levels.instance.getPhysicsWorld()), Levels.instance, 3000);
 
     var self = this;
 
@@ -54,15 +53,11 @@ LevelList = PatternList.extend({
       this.m_ElementsBackgrounds[i + 1].onTouch = function(e) {
         Button.prototype.onTouch.call(this, e);
 
-        //if(self.m_Feathers.getCount() > 50) return;
-
-        this.icon.setCurrentFrameIndex(self.m_Elements.getElement());
-        /*for(var i = 0; i < 100; i++) {
-          var feather = self.m_Feathers.create();
-
-          feather.setCenterPosition(this.convertToWorldSpace(cc.p(0, 0)).x + this.getWidth() / 2, this.convertToWorldSpace(cc.p(0, 0)).y);
-          feather.setCurrentFrameIndex(this.icon.getCurrentFrameIndex());
-        }*/
+        if(self.m_Elements.specialElementsCount > 0 && i == 2) {
+          this.icon.setCurrentFrameIndex(self.m_Elements.getSpecialElement());
+        } else {
+          this.icon.setCurrentFrameIndex(self.m_Elements.getElement());
+        }
 
         Game.selected.birds[this.id] = this.icon.getCurrentFrameIndex();
 
@@ -94,6 +89,7 @@ LevelList = PatternList.extend({
     };
 
     this.m_Elements.elementId = 0;
+    this.m_Elements.specialelementId = 0;
     this.m_Elements.specialElementsCount = 0;
     this.m_Elements.getElement = function() {
       this.elementId = this.elementId == 6 ? 0 : ++this.elementId;
@@ -101,7 +97,9 @@ LevelList = PatternList.extend({
       return this[this.elementId];
     };
     this.m_Elements.getSpecialElement = function() {
-      return this[8];
+      this.specialelementId = this.specialelementId == (this.specialElementsCount - 1) ? 0 : ++this.specialelementId;
+
+      return this[this.specialelementId];
     };
     this.m_Elements.push(0);
     this.m_Elements.push(1);

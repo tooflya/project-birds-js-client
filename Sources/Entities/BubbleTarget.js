@@ -70,6 +70,7 @@ BubbleTarget = Entity.extend({
       this.m_Decorations[i] = Entity.create(s_PopupDecoration1, this.getParent());
 
       this.m_Decorations[i].create().setCenterPosition(this.getCenterX(), this.getCenterY() + this.getHeight() / 2);
+      this.m_Decorations[i].create().setOpacity(150);
       this.m_Decorations[i].setColor(cc.c4(200, 255, 255, 255));
       this.m_Decorations[i].setScale(0.0);
       this.m_Decorations[i].setZOrder(300);

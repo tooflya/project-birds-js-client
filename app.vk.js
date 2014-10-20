@@ -30,7 +30,7 @@
  */
 
 AppInitialization({
-    version: '0.9.87',
+    version: '0.9.88',
     application: 6,
     platform: 'vk',
     auto: true,

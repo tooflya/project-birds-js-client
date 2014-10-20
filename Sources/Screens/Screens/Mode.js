@@ -116,7 +116,7 @@ Mode = Screen.extend({
         if(tutorial) {
           Game.level = 0;
           Game.sharedScreen(0);
-          ScreenManager.sharedManager().replace(Loading);
+          ScreenManager.sharedManager().push(Loading);
         } else {
           if(lives > 0) {
             Multiplayer.sharedScreen(Mode.instance).show();
@@ -139,7 +139,7 @@ Mode = Screen.extend({
         if(lock) {
           if(lives > 0) {
             Game.sharedScreen(1);
-            ScreenManager.sharedManager().replace(Loading);
+            ScreenManager.sharedManager().push(Loading);
           } else {
             Lives.sharedScreen(Mode.instance).show();
           }
@@ -161,7 +161,7 @@ Mode = Screen.extend({
         if(lock) {
           if(lives > 0) {
             Game.sharedScreen(2);
-            ScreenManager.sharedManager().replace(Loading);
+            ScreenManager.sharedManager().push(Loading);
           } else {
             Lives.sharedScreen(Mode.instance).show();
           }

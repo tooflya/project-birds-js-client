@@ -99,6 +99,8 @@ Lives = ExtendedPopup.extend({
     });
   },
   onFriendsEvent: function() {
+    this.m_Button1.action = true;
+
     this.hide(function() {
       LivesRequest.sharedScreen().show();
     });
@@ -141,7 +143,7 @@ Lives = ExtendedPopup.extend({
   onHide: function(callback, prepare) {
     this._super(callback, prepare);
 
-    if(!prepare && !this.m_Button2.action) {
+    if(!prepare && !this.m_Button1.action && !this.m_Button2.action) {
       if(DataManager.sharedManager().get(false, references.coins.lives) <= 0) {
         if(Game.instance) {
           if(!Game.sharedScreen().m_GameRunning) {

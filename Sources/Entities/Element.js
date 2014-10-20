@@ -86,24 +86,26 @@ Element = TiledEntity.extend({
     this.stopAllActions();
   },
   onFastRemove: function() {
-    {
-      if(this.chained()) {
-      } else if(this.special()) {
-        switch(this.special()) {
-          case Element.types.box:
-          MatrixManager.sharedManager().remove(this);
+    if(MatrixManager.instance.getBubble(this.getIndex().x, this.getIndex().y)) {
+      MatrixManager.instance.getBubble(this.getIndex().x, this.getIndex().y).destroy();
+    }
 
-          break;
-        }
-      } else {
-        switch(this.getId()) {
-          default:
-          MatrixManager.sharedManager().remove(this);
+    if(this.chained()) {
+    } else if(this.special()) {
+      switch(this.special()) {
+        case Element.types.box:
+        MatrixManager.sharedManager().remove(this);
 
-          break;
-          case Element.types.star:
-          break;
-        }
+        break;
+      }
+    } else {
+      switch(this.getId()) {
+        default:
+        MatrixManager.sharedManager().remove(this);
+
+        break;
+        case Element.types.star:
+        break;
       }
     }
   },

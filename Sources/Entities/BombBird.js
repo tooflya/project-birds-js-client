@@ -88,11 +88,17 @@ BombBird = Bird.extend({
       this.setCenterPosition(data.element.convertToWorldSpace(cc.p(0, 0)).x + data.element.getWidth() / 2, -this.getHeight() / 2);
       this.runAction(
         cc.Sequence.create(
-          cc.MoveTo.create(data.speed, cc.p(data.element.convertToWorldSpace(cc.p(0, 0)).x + data.element.getWidth() / 2, data.element.convertToWorldSpace(cc.p(0, 0)).y + data.element.getHeight() / 2)),
+          cc.EaseSineOut.create(
+            cc.MoveTo.create(data.speed * 2, cc.p(data.element.convertToWorldSpace(cc.p(0, 0)).x + data.element.getWidth() / 2, data.element.convertToWorldSpace(cc.p(0, 0)).y + data.element.getHeight() / 2 * 6))
+          ),
+          cc.EaseSineIn.create(
+            cc.MoveTo.create(data.speed, cc.p(data.element.convertToWorldSpace(cc.p(0, 0)).x + data.element.getWidth() / 2, data.element.convertToWorldSpace(cc.p(0, 0)).y + data.element.getHeight() / 2))
+          ),
           cc.CallFunc.create(this.destroy, this, this),
           false
         )
       );
+      this.runAction(cc.RotateTo.create(data.speed * 3, 720));
       break;
       case game.m_Types.classic:
       case game.m_Types.arcade:
