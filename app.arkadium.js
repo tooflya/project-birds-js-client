@@ -33,7 +33,7 @@ AppInitialization({
     version: '0.9.87',
     application: 9,
     platform: 'arkadium',
-    auto: false,
+    auto: true,
     playtest: false,
     language: 0,
     designed: {
